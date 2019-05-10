@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Citywide Spectacular Lights Up Hollywood</title>
+    <meta content="Y01HOL$07" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165112"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE NATION"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9803E0DE1038F932A35752C0A9669C8B63" item-length="630" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Citywide Spectacular Lights Up Hollywood</hl1>
+      </hedline>
+      <byline class="print_byline">By TODD S. PURDUM</byline>
+      <dateline>HOLLYWOOD, Dec. 31</dateline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Hollywood, the semi-real place that helped the 20th century  shape so much of its own image, bid it farewell tonight with a citywide spectacular of song and showmanship, kitsch and multiculturalism grandly intended to herald the emerging Los Angeles of the next millennium.</p>
+        <p>Perhaps inevitably, the icon of choice was not a microchip, a container ship, a freeway or even a digital video camera, but the hoariest symbol of local self-promotion: the HOLLYWOOD sign.</p>
+      </block>
+      <block class="full_text">
+        <p>Hollywood, the semi-real place that helped the 20th century  shape so much of its own image, bid it farewell tonight with a citywide spectacular of song and showmanship, kitsch and multiculturalism grandly intended to herald the emerging Los Angeles of the next millennium.</p>
+        <p>Perhaps inevitably, the icon of choice was not a microchip, a container ship, a freeway or even a digital video camera, but the hoariest symbol of local self-promotion: the HOLLYWOOD sign.</p>
+        <p>At the edge of midnight, Mayor Richard J. Riordan of Los Angeles and Jay Leno, the host of the ''Tonight'' show, were scheduled  to flip a switch to light each letter of the sign in a sequential countdown, to be shown on local and world television and beamed to five separate parties from the urban Crenshaw district to the suburban San Fernando Valley.</p>
+        <p>In the end, the lighting was still scheduled, but had been scaled back. A laser-light show and a drop by synchronized skydivers were  canceled in deference to dry weather that had created fire hazards in the hills below the sign (though it rained off and on today).</p>
+        <p>Another impediment came from homeowners, who had opposed lighting the sign, which was originally built to advertise a residential housing development called Hollywoodland in the 1920's and was last lighted during the 1984 Olympics in Los Angeles.</p>
+        <p>Only residents and their guests were allowed to drive into the neighborhood tonight, in hopes of holding down parking and traffic chaos.</p>
+        <p>''We're in a very dry season,'' said Noelia Rodriguez, the deputy mayor of Los Angeles and Mr. Riordan's chief spokeswoman. ''The fire hazards certainly played into it. The last thing we need is to torch the Hollywood sign.''</p>
+        <p>The festivities began this afternoon with a musical celebration dubbed Opus 21, in which churches, choirs and other groups began a simultaneous sounding of bells, cymbals, gongs and shofar.</p>
+        <p>By midafternoon, pouring rain and minor street flooding had scattered a crowd of several hundred people from Grand Avenue in downtown Los Angeles, where the theme was ''The Global Village.'' A street fair on Grand Avenue featured face painters, a Ferris wheel and considerably fewer than the 2,000 marching band members that had been promised.</p>
+        <p>''So far, so good,'' said Linda Miller, who came from nearby Torrance, Calif., with her husband, Dave, to watch their daughter march in the band.</p>
+        <p>''I kind of wish it didn't have to rain.'' Surveying the crowd, Mrs. Miller added: ''It's a little thin. I think they were a little light on the advertising.''</p>
+        <p>A few blocks away, on Olvera Street, the site of the city's original Spanish settlement, crowds were thicker.</p>
+        <p>This being Los Angeles, there had to be at least one glitzy event, and a private party on a lot at Paramount Studios was the A-ticket tonight, a benefit dinner for 560 people intended to raise $1 million for the Los Angeles Public Library.</p>
+        <p>With tables costing $25,000, food by Wolfgang Puck, music by Frank Sinatra Jr. and a backyard view of the Hollywood sign, the event was also to honor Lew Wasserman, the founder of MCA, as Hollywood's ''Man of the Century.''</p>
+        <p>Giant video screens linked this exclusive party to the more populist ones around the city, which were also to get a special treat: excerpts of a concert at the new Staples Center arena featuring the Eagles and Jackson Browne.</p>
+        <p>''I consider myself to be working tonight,'' said Janet Karatz, the chairwoman of the charity dinner. ''And I can't imagine wanting to do anything else.''</p>
+        <p>1/1/00: AROUND THE NATION</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

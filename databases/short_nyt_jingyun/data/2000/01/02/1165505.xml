@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Business to Business, Now an Internet Play</title>
+    <meta content="02PENT$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Technology; Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165505"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="INVESTING"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Company and Organization Profiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Trade Shows and Fairs</classifier>
+        <org class="indexing_service">Penton Media Inc</org>
+        <person class="indexing_service">Legomsky, Joanne</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Markets</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Company and Organization Profiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Corporations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Trade Shows and Fairs</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D06E6DD1238F931A35752C0A9669C8B63" item-length="650" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Business to Business, Now an Internet Play</hl1>
+      </hedline>
+      <byline class="print_byline">By JOANNE LEGOMSKY</byline>
+      <byline class="normalized_byline">Legomsky, Joanne</byline>
+      <abstract>
+        <p>Article on rise in stock of Penton, old-line publisher of business-to-business trade publications (B2B) whose cachet benefited from success of Internet after it began operating popular Web sites and producing major B2B industry trade shows; stock price graph (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>BUSINESS-TO-BUSINESS, the sale of goods and services to other companies rather than to the public, has flourished for centuries. But the Internet has lent the sector, known as B2B, a cachet that has sent some of these companies' stocks soaring.</p>
+        <p>So when Penton Media, the old-line publisher of IndustryWeek and other B2B trade journals like Machine Design and Hydraulics &amp; Pneumatics, began operating popular Web sites and producing major industry trade shows in the last year or so, it was bound to catch the eyes of investors.</p>
+      </block>
+      <block class="full_text">
+        <p>BUSINESS-TO-BUSINESS, the sale of goods and services to other companies rather than to the public, has flourished for centuries. But the Internet has lent the sector, known as B2B, a cachet that has sent some of these companies' stocks soaring.</p>
+        <p>So when Penton Media, the old-line publisher of IndustryWeek and other B2B trade journals like Machine Design and Hydraulics &amp; Pneumatics, began operating popular Web sites and producing major industry trade shows in the last year or so, it was bound to catch the eyes of investors.</p>
+        <p>Despite an erratic stock price, it has attracted holders like Gabelli Funds and Baron Capital. Now at $24.25 a share, the stock is cheap, many analysts say.</p>
+        <p>Penton, based in Cleveland, is a product of corporate restructurings. It was spun off to shareholders of the Pittway Corporation, a maker of alarms, in August 1998, starting trading at $16.25 a share. In November 1998, Penton acquired the Mecklermedia Corporation of Westport, Conn., becoming a big force in the trade show business and increasing its Internet presence. Mecklermedia produced InternetWorld, a big trade show, and held a 27 percent stake in Internet.com, an online company that brings together vendors and buyers in technology businesses.</p>
+        <p>Trade magazines, trade shows and the Internet have solid growth prospects, analysts say, but they believe that the combination of the three  constitutes Penton's biggest asset. ''Magazines publicize the trade shows and vice versa, and both drive  eyeballs to the Web sites,'' said Karl Choi, an analyst at Merrill Lynch.</p>
+        <p>Starting 1999 at $20.25, shares of Penton peaked at $29.625 on April 19.  They then began to fall, hitting a low of $12.625 on Sept. 21, a slide that  analysts attributed to a secondary stock offering last May and modestly disappointing second-quarter earnings. Although the stock has rallied  since, William G. Bird, an analyst at  Salomon Smith Barney, is still bullish, saying that Penton would ''have ample opportunities to continue to complete acquisitions that are accretive to earnings and cash flow.''</p>
+        <p>Analysts credit management, led by Thomas L. Kemp,  the chief executive,  with steering Penton toward the highly profitable trade show business. Mr. Choi estimated that 29 percent of the company's $324 million in revenues in 1999 would come from trade shows, versus just 5  percent in 1997. And Mr. Kemp said in an interview that Penton should post Internet revenues of $35 million by 2002, although it plans to sell about half its Internet.com stake.</p>
+        <p>Penton is relatively small, with a stock market value of just $759.4 million, and only 54 percent of the shares trade publicly. Analysts say the company will have to take on debt to make acquisitions. But Mr. Bird pointed out that current cash flow is a comfortable 3.4 times annual interest expense.</p>
+        <p>Cliff Greenberg, manager of the Baron Small Cap fund, whose portfolio is 3 percent invested in Penton, called its consumer-oriented Web site, Healthwell.com, geared to health issues, ''hidden assets'' that should add to Penton's value.</p>
+        <p>Mr. Greenberg says the stock will trade at 12 times next year's estimated cash flow, or $30 a share, within the next 12 months.</p>
+        <p>Gamco Investors, a money management firm, owns 18 percent of  Penton's shares. Mario Gabelli, chief executive of Gamco, thinks that Penton is an acquisition target.</p>
+        <p>Mr. Bird said strong revenues from trade shows in the fourth quarter or acquisitions could light a fire under the shares.</p>
+        <p>INVESTING</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

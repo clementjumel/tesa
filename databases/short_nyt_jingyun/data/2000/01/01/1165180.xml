@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Left the Light on, But Nobody Came</title>
+    <meta content="01BLIF$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165180"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: COME OUT, COME OUT, WHEREVER YOU ARE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Space</classifier>
+        <classifier class="indexing_service" type="descriptor">Life, Extraterrestrial</classifier>
+        <person class="indexing_service">Browne, Malcolm W</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Science/Space and Cosmos</classifier>
+        <classifier class="online_producer" type="general_descriptor">Life, Extraterrestrial</classifier>
+        <classifier class="online_producer" type="general_descriptor">Space</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C02E2D81430F932A35752C0A9669C8B63" item-length="574" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Left the Light on, But Nobody Came</hl1>
+      </hedline>
+      <byline class="print_byline">By MALCOLM W. BROWNE</byline>
+      <byline class="normalized_byline">Browne, Malcolm W</byline>
+      <abstract>
+        <p>Malcolm W Browne article says simplest explanation for man's failure to detect extraterrestrial life is that there is nothing out there to find; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IN 1939, the physicist Enrico Fermi posed his famous paradox: If life is common in our galaxy, why have we never seen extraterrestrial visitors on Earth?</p>
+        <p>Since then, and particularly since 1960, scientists have searched the cosmic radio spectrum for signals of intelligence, landed robotic laboratories on Mars to look for hints of biological activity, probed meteorite fragments for chemical or geological evidence of life and tried to invent chemical pathways analogous to those from which life arises.</p>
+      </block>
+      <block class="full_text">
+        <p>IN 1939, the physicist Enrico Fermi posed his famous paradox: If life is common in our galaxy, why have we never seen extraterrestrial visitors on Earth?</p>
+        <p>Since then, and particularly since 1960, scientists have searched the cosmic radio spectrum for signals of intelligence, landed robotic laboratories on Mars to look for hints of biological activity, probed meteorite fragments for chemical or geological evidence of life and tried to invent chemical pathways analogous to those from which life arises.</p>
+        <p>So far, all efforts have failed to show the existence of life anywhere except on Earth.</p>
+        <p>To find just one extraterrestrial microorganism (or better, a bug-eyed Martian humanoid) would be sensational. But I think the human race must reconcile itself to the strong possibility that it is alone in the galaxy -- perhaps even in the universe. I would bet that the 21st century will pass without anyone finding conclusive evidence of extraterrestrial life, intelligent or not.</p>
+        <p>There have been many false alarms in the past, like the discovery of ''canals'' on Mars, which proved to be illusions imagined by the American astronomer Percival Lowell. There will be many more. And many investigators will take comfort from the Copernican Principle, the assumption that no particular place or time is likely to be special and that inhabited planets like Earth must therefore be common.</p>
+        <p>But one of the faults of statistical estimates of extraterrestrial life is that it is impossible to extrapolate anything from a single data point. And that's all we have: Earth.</p>
+        <p>The environmental conditions favoring the creation of life may not be nearly as common as was postulated in 1961 by Frank Drake, one of the main instigators of SETI, the search for extraterrestrial intelligence. The Drake Equation, as it came to be known, incorporated estimates of the rate at which stars are born in the galaxy, the fraction of stars with planets, the fraction of those planets on which life originates and so forth. By that calculation, there should be about 10,000 civilizations in our galaxy capable of interstellar communication.</p>
+        <p>But in the 39 years since radio telescopes began searching, nothing has turned up.</p>
+        <p>Certainly, sending signals across tens, hundreds or thousands of light years poses staggering difficulties. But a more fundamental reason for our failure to find extraterrestrial life could be that we are, indeed, alone.</p>
+        <p>Many astronomers have suggested that the conditions for life can exist only on a rocky planet with lots of liquid water and other possibly rare assets like a reliable sun producing steady radiation over a long period; a Jupiter-size planet in the outer solar system to sweep up asteroids and other objects that would otherwise continuously bombard an Earthlike planet; and an exceptionally large moon like ours, to cushion the disruptive gravitational influences of other planets. These and other conditions may be so unlikely as to rule out all life except that inhabiting a unique fluke -- Earth.</p>
+        <p>We have already searched for signals from nearby stars like Alpha Centauri and found nothing.</p>
+        <p>Lots of reasons can be adduced to explain these failures, but the simplest explanation -- and so the one favored by Occam's razor -- is that there is nothing out there to find. In any case, I'm not holding my breath.</p>
+        <p>VISIONS: COME OUT, COME OUT, WHEREVER YOU ARE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

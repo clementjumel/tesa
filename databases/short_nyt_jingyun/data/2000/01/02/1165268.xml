@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>No Terror, Please, We're American</title>
+    <meta content="02BROOKT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165268"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Brookhiser, Richard</person>
+        <person class="indexing_service">Dunn, Susan</person>
+        <object.title class="indexing_service">Sister Revolutions (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07E7DC1E39F931A35752C0A9669C8B63" item-length="1027" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>No Terror, Please, We're American</hl1>
+      </hedline>
+      <byline class="print_byline">By Richard Brookhiser</byline>
+      <byline class="normalized_byline">Brookhiser, Richard</byline>
+      <abstract>
+        <p>Richard Brookhiser reviews book Sister Revolutions. French Lightning, American Light by Susan Dunn; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>SISTER REVOLUTIONS</p>
+        <p>French Lightning, American Light.</p>
+        <p>By Susan Dunn.</p>
+        <p>Illustrated. 258 pp. New York:</p>
+        <p>Faber &amp; Faber/</p>
+        <p>Farrar, Straus &amp; Giroux. $26.</p>
+      </block>
+      <block class="full_text">
+        <p>SISTER REVOLUTIONS</p>
+        <p>French Lightning, American Light.</p>
+        <p>By Susan Dunn.</p>
+        <p>Illustrated. 258 pp. New York:</p>
+        <p>Faber &amp; Faber/</p>
+        <p>Farrar, Straus &amp; Giroux. $26.</p>
+        <p>ABOUT 10 weeks after America's first presidential inauguration in New York City in April 1789, the Bastille fell. The Marquis de Lafayette, a hero of the American Revolution, sent the prison's key as a trophy to George Washington. Thomas Paine, who conveyed it, and who would shortly be offered a seat in the French National Assembly, exclaimed that ''a share in two revolutions is living to some purpose.'' Together, the United States and France seemed to be leading the world to a new birth of freedom.</p>
+        <p>The two revolutions soon took different paths, as Lafayette (who was forced into exile) and Paine (who narrowly escaped the guillotine) discovered. Many have tried to understand the divergence, beginning with the revolutionaries themselves. In ''Sister Revolutions: French Lightning, American Light'' Susan Dunn, a professor of French literature and the history of ideas at Williams College and the author of books on Gerard de Nerval and the execution of Louis XVI, finds some fresh things to say about this old but rich topic.</p>
+        <p>The American and French revolutions did not share a level historical playing field. Following Tocqueville, Dunn emphasizes the practical political experience America's elites had acquired in local government or the lower houses of colonial legislatures. In France's ancien regime, by contrast, authority flowed from the court, so that when French revolutionaries came to power, they had only their own speculations to guide them. ''I dread the reveries of your Philosophic politicians,'' Alexander Hamilton wrote prophetically to Lafayette as early as October 1789.</p>
+        <p>The key ideological difference between the veterans and the beginners, Dunn believes, was the value they placed on national unity. The new American state was able to accommodate conflict because Americans were already familiar with multiple, contentious branches of government. After experimenting with the one-house Continental Congress, they built divided government into the Constitution. Although the party system was something none of the American founders planned, the 1790's found them dividing into Federalists and Republicans, and after initial alarm over the trend they saw the usefulness of partisanship. ''Opposition,'' Gouverneur Morris wrote, after his own Federalist party was thrown out of office, ''will act as an outward conscience, and prevent the abuse of power.''</p>
+        <p>The French, less sure of themselves, wanted a unitary state and community of feeling. ''What is the Third Estate?'' the Abbe Sieyes asked in a pre-revolutionary pamphlet of the same name, referring to the secular commoners of the ancien regime. ''Everything,'' he answered, yet ''nothing'' politically. Though he added that they wished only to become ''something,'' the new National Assembly that grew out of the Third Estate came to see itself as the voice of the nation's will. Those who disputed the resolutions of the Assembly were banished to outer darkness. Robespierre declared that there could be ''only two parties, the party of good citizens and the party of evil ones.'' This childish simplicity would be amusing if he and his fellow Jacobins had not had the army and the guillotine to back it up.</p>
+        <p>Dunn writes most vividly about the different styles of rhetoric and deportment that the two revolutions encouraged. The Americans saw themselves as gentlemen who were obliged to behave with modesty and reserve. Their model was the First Gentleman himself, George Washington. In one letter of advice to a nephew, Washington devoted three lines to the importance of education, morality and thrift, 12 lines to the importance of friendship and 34 lines to the importance of clothes. Dressing like a gentleman, Washington believed, would habituate a young man to behaving well.</p>
+        <p>The French, on the other hand, valued authenticity -- what Rousseau, in ''La Nouvelle Helose,'' had called ''the plain and emotive effusions of an honest soul.'' They demonstrated the honesty of their souls by the ardor of their rhetoric, praising virtue, pitying the weak and denouncing treachery in uncompromising, if monotonous, terms. Language suffered as a result. ''No masterpieces of French literature were produced during the years of the revolution,'' Dunn complains. ''No gripping novels, no witty plays, no insightful essays, no great poetry.'' Bad style had bad consequences. ''Inflammatory, hyperbolic, polarizing political discourse took on a life of its own and propelled events toward violence.'' In an aside that should be blast-faxed to Francophiles everywhere, Dunn wonders ''whether the French Revolution's impoverished political language . . . was simply the product of its leaders' abysmal intellectual mediocrity.'' Aux armes, professeurs! Formez vos bataillons!</p>
+        <p>Lest she seem too pro-American, Dunn notes that the gentlemanly compromises of the Constitution on slavery helped set the stage for the Civil War, which was bloodier by an order of magnitude than the Terror. This is true enough, though a correct accounting also shows that the French Revolution led to a century and a half of internecine bitterness and violence, including the June Days, the Paris Commune and Vichy. Dunn ends ''Sister Revolutions'' by worrying that both contemporary America and France have lost energy and vigor, seduced ''from participation in self-government'' and ''a dynamic political community'' by an ''obsession with acquisition and accumulation.'' ''Consumers have replaced active citizens,'' she writes. Dunn's model for regenerating the sense of citizenship, Englishmen may be surprised to learn, is Britain. If the Jacobins were intellectual mediocrities, what is Tony Blair's New Labor?</p>
+        <p>Do the sister revolutions have anything to offer the world today? This is no idle question. The last 10 years have seen revolutions in Russia, Eastern Europe and South Africa, and China may have one sooner rather than later. Unfortunately, it is a question that has no easy answer. People should be civil in their interactions with each other, and it would be nice if they had political training. But culture and history deal their blessings capriciously.</p>
+        <p>Richard Brookhiser, a senior editor at National Review, is the author of ''Alexander Hamilton, American.''</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Richard Brookhiser, a senior editor at National Review, is the author of ''Alexander Hamilton, American.''</tagline>
+    </body.end>
+  </body>
+</nitf>

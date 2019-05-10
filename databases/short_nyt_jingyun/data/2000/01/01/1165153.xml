@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Brisk Race in the Park At the Midnight Hour</title>
+    <meta content="MB022017" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165153"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: A PEACEFUL PARTY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <location class="indexing_service">Central Park (NYC)</location>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Martin, Douglas</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C03E4DA1038F932A35752C0A9669C8B63" item-length="382" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Brisk Race in the Park At the Midnight Hour</hl1>
+      </hedline>
+      <byline class="print_byline">By DOUGLAS MARTIN</byline>
+      <byline class="normalized_byline">Martin, Douglas</byline>
+      <abstract>
+        <p>Central Park's many New Year's Eve celebrations include a five kilometer footrace (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Some came in tuxedos, others dressed as dragons, Santa Claus or Father Time. There were butterflies, famous buildings, and -- for reasons not entirely obvious -- make-believe waiters. They came to the annual Midnight Run at Central Park to race, jog and, in some cases, stumble into a new year.</p>
+        <p>''What a wonderful thing to tell your great-grandchildren years from now,'' said Ann Buttenwieser, who indulged in Chinese food and caviar in a Fifth Avenue apartment before the five kilometers she was to run. ''A little bit of nuttiness never hurts.''</p>
+      </block>
+      <block class="full_text">
+        <p>Some came in tuxedos, others dressed as dragons, Santa Claus or Father Time. There were butterflies, famous buildings, and -- for reasons not entirely obvious -- make-believe waiters. They came to the annual Midnight Run at Central Park to race, jog and, in some cases, stumble into a new year.</p>
+        <p>''What a wonderful thing to tell your great-grandchildren years from now,'' said Ann Buttenwieser, who indulged in Chinese food and caviar in a Fifth Avenue apartment before the five kilometers she was to run. ''A little bit of nuttiness never hurts.''</p>
+        <p>Amanda Estrine, a Barnard College student, said, ''My dad told me they give free Champagne while you run.''</p>
+        <p>Her father had been right, but the Champagne was the nonalcoholic variety.</p>
+        <p>The run, first organized in 1979, was the centerpiece of Central Park's New Year's Eve celebration, which spilled northward.</p>
+        <p>For New Year's Eve and its transformation into New Year's Day, there was skating at Wolman Rink, a $999 dinner at Tavern on the Green and fireworks at midnight. The fireworks signaled the start of the five-kilometer race through the park. As the sky lighted up, 7,500 runners lurched into motion, and the crowd sang Auld Lang Syne. The fireworks lasted for about 14 minutes; in that time, the fastest runners could begin and finish the run.</p>
+        <p>Mike Kennedy, an artist sitting by the pond at Fifth Avenue and Central Park South, said he felt the park's peculiar tugs of time. Changes had spun wildly onward, he said: the jet airplane, television. ''Things just got faster and faster,'' he said.</p>
+        <p>''The only problem is I don't have the viability to celebrate'' said Mr. Kennedy, 57. '' When you're 20, you can celebrate, but you don't understand what any of the fuss is about. But when you're older and having more than two beers and a hot dog, it'll kill you.''</p>
+        <p>DOUGLAS MARTIN</p>
+        <p>1/1/00: A PEACEFUL PARTY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

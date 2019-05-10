@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>PLAYING IN THE NEIGHBORHOOD</title>
+    <meta content="02PLAY$10" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="12" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165464"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Delbanco, Andrea</person>
+        <classifier class="online_producer" type="types_of_material">Schedule</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9806E7D91538F931A35752C0A9669C8B63" item-length="736" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>PLAYING IN THE NEIGHBORHOOD</hl1>
+      </hedline>
+      <byline class="print_byline">By ANDREA DELBANCO</byline>
+      <byline class="normalized_byline">Delbanco, Andrea</byline>
+      <abstract>
+        <p>Roundup of events of interest going on in New York City neighborhoods</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>MIDTOWN  Top Hats, Lots of Legs And White Grand Pianos</p>
+        <p>A turning point in the history of Hollywood is illustrated this month in the film series ''Sing Out! The Hollywood Musical During the 1930's,'' beginning Wednesday at the Donnell Library.</p>
+      </block>
+      <block class="full_text">
+        <p>MIDTOWN  Top Hats, Lots of Legs And White Grand Pianos</p>
+        <p>A turning point in the history of Hollywood is illustrated this month in the film series ''Sing Out! The Hollywood Musical During the 1930's,'' beginning Wednesday at the Donnell Library.</p>
+        <p>The movie musical is said to be the only film genre to emerge after the coming of sound, and many mediocre musicals were rushed into production in 1928 and 1929. But in the 1930's, a second cycle of musicals emerged, which had greater diversity in theme and won long-term popularity. Four of this new breed can be seen each Wednesday afternoon throughout January.</p>
+        <p>This week's feature is from 1932, ''Blondie of the Follies,'' a look at the backstage lives of two Broadway chorus girls, played by two members of the Ziegfeld Follies. ''Naughty Marietta'' will follow on Jan. 12, ''Gold Diggers of 1935'' on Jan. 19, and ''Varsity Show'' on Jan. 26.</p>
+        <p>''Blondie of the Follies,'' Wednesday 2:30 p.m.; Donnell Library Center Auditorium, 20 West 53rd Street; free; (212) 621-0609.</p>
+        <p>UPPER  WEST  SIDE  Times Square's Century:  Horses to Cheese to Mouse</p>
+        <p>It once was Longacre Square, the site of William H. Vanderbilt's American Horse Exchange, and its evolution to the Times Square of today is captured in the show ''Times Square in Pictures: A Century of Images'' at the New-York Historical Society.</p>
+        <p>The square has been the site of New Year's Eve celebrations since 1906; by World War I, the area had become a center of entertainment, with theaters, vaudeville houses, burlesques, arcades and movie houses. After World War II, adult films and live sex shows gradually moved in. Now family entertainment is back, and the famous billboards are more plentiful than ever. It is all shown in the 20 images in this show. The photo at left, taken by Irving Browning around 1930, shows a tour bus that promised a Coney Island excursion for 50 cents (note the Disney sign on the building). The exhibition coincides with the publication of a calendar, ''Times Square 2000,'' by the historical society.</p>
+        <p>''Times Square in Pictures''; through June, Tuesday through Sunday, 11 a.m. to 5 p.m.; New-York Historical Society, 2 West 77th Street; free with regular museum admission: adults, $5; students and people over 65, $3; children under 12 free; (212) 873-3400.</p>
+        <p>RIVERDALE  Mysteries of Creativity:  Artists in Their Studios</p>
+        <p>Art of artists -- not just by artists -- is the subject of an exhibition of photography by Richard Leslie Schulman now showing at the Hebrew Home for the Aged in Riverdale, the Bronx. Since 1982 Mr. Schulman has been photographing painters and sculptors, including Leon Golub (shown below), Raphael Soyer, Lee Krasner, Roy Lichtenstein, Louise Nevelson, Alex Katz, David Salle and Ross Bleckner.</p>
+        <p>Mr. Schulman often photographed the artists in their studios, surrounded by their own work, and he sought in these photos to underscore the idea that the creative process is lonely and mysterious.</p>
+        <p>''Generations of Artists,'' through Jan. 31, 10 a.m. to 4 p.m.; Hebrew Home for the Aged at Riverdale, 5901 Palisade Avenue, at 261st Street,  Riverdale, the Bronx; free; (718) 549-8700.</p>
+        <p>ALSO AROUND TOWN</p>
+        <p>HURRICANE SIGNS -- Rubin (Hurricane) Carter, whose murder trial led to a 21-year legal battle, is the subject of a new film, ''The Hurricane,'' and an authorized biography, ''Hurricane''; on Tuesday Mr. Carter and the book's author, James S. Hirsch, will host a discussion and book signing at the Union Square Barnes &amp; Noble; Tuesday, 7:30 p.m.; 33 East 17th Street; free; (212) 253-0819.</p>
+        <p>JAPANESE STEPS -- ''Emerging Dance from Japan: A New Generation'' will showcase four dance groups, including a young male group, the Condors; Saturday 8 p.m.; Japan Society, 333 East 47th Street, near Second Avenue; $12, people over 65 and students $8; (212) 752-3015.</p>
+        <p>INNOCENCE AND EVIL -- Contemporary dance performances will be combined with a discussion series at the Brooklyn Arts Exchange, formerly the Gowanus Arts Exchange; the shows this weekend are ''These Were the Times to Remember,'' a reflection on childhood innocence, and ''It Starts With an Evil Stepmother,''  based on the Grimms' fairy tales; Friday and Saturday 8 p.m.; 421 Fifth Avenue, at Eighth Street, Park Slope, Brooklyn; $12; (718) 832-0018.</p>
+        <p>ANDREA DELBANCO</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

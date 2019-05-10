@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Quiet, Gentle Passage On the Illinois Prairie</title>
+    <meta content="Y01SYC$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165122"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE NATION"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9502E5DC1038F932A35752C0A9669C8B63" item-length="583" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Quiet, Gentle Passage On the Illinois Prairie</hl1>
+      </hedline>
+      <byline class="print_byline">By DIRK JOHNSON</byline>
+      <dateline>SYCAMORE, Ill., Dec. 31</dateline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>As darkness shrouded the fields, Bill Lenschow milked the cows and finished his chores, then sat down with his wife, Kathy, to a special dinner of steak and shrimp.</p>
+        <p>With lights blazing in their house on Washington Place, the Newquist children played bingo and card games with their parents, Tammy and Howard.</p>
+      </block>
+      <block class="full_text">
+        <p>As darkness shrouded the fields, Bill Lenschow milked the cows and finished his chores, then sat down with his wife, Kathy, to a special dinner of steak and shrimp.</p>
+        <p>With lights blazing in their house on Washington Place, the Newquist children played bingo and card games with their parents, Tammy and Howard.</p>
+        <p>In a hospital on Edward Street, Jeri Delaney clasped the hand of her husband, Patrick, who is recovering from a stroke, gave him a kiss and told him that she loved him.</p>
+        <p>In this small town on the prairie, people tended to mark the passing of the 20th century in gentle, personal ways.</p>
+        <p>It was a time to be grateful, said John Garman, 62, who went to Mass and then settled in to watch college football on television.</p>
+        <p>''It's a wonderful time,'' said Mr. Garman, who lives in a five-story housing development for the elderly, known here as ''the high-rise.'' ''There is peace on earth.''</p>
+        <p>Lillie Jackson, 73, Mr. Garman's neighbor, remembered a New Year's Eve from her childhood when she played with a doll that she had made of a corn cob, with string pulled from a burlap sack for the hair.</p>
+        <p>''That was a time,'' Ms. Jackson said, ''when people didn't expect so much.''</p>
+        <p>Mary Kate Diedrich, 9, and her brother, Ryan, 8, readied their noisemakers for the  celebration in the living room of the farmhouse -- they were doing a countdown at 10 p.m. -- and tried to imagine life 100 years ago. Their great-grandmother, Ruth Logan, had explained just the other day how different things had been.</p>
+        <p>Told that women could not vote and were expected to stay home, Mary Kate said she had other plans. ''I want to be president,'' she said.</p>
+        <p>There was no celebration on State Street, the main avenue through town. But some people, like Debbie Saalfeld, a 52-year-old teacher, danced to the music of a disc jockey at the Stratford Inn.</p>
+        <p>Steve and Nony Roush went to dinner at Johnny's Char House, the new place out on ''the four-lane,'' as people still called the highway that leads to the neighboring town, DeKalb. George and Trish Diedrich, the parents of Mary Kate and Ryan, slipped away for a toast at the Hinks, a neighborhood tavern.</p>
+        <p>But for Mr. and Mrs. Lenschow, whose cows need to be milked before dawn, millennium or not, the year would pass without much thunder.</p>
+        <p>''When you get up at 4 a.m.,'' Mr. Lenschow said. ''You don't stay out too late.''</p>
+        <p>Almost everyone remembered dreaming about the year 2000 as children.</p>
+        <p>''I remember thinking, 'Boy, I'm going to be old,' '' said Mr. Roush, 50, with a chuckle. ''And, well, I guess I am.''</p>
+        <p>Bishop Joseph Thomas, the leader of the Israel of God Church on North Avenue, who was born in 1903, planned to stay on the straight and narrow. He walked around the corner to the house of a friend, Lessie, who was having a party.</p>
+        <p>Despite the revelry, Bishop Thomas was staying away from vices -- alcohol and cigars -- just as always.</p>
+        <p>''That's how I got to be 97 years old,'' he said.</p>
+        <p>1/1/00: AROUND THE NATION</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

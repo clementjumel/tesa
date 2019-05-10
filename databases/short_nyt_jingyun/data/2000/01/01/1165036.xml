@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Manifestoes To Give City A New Edge</title>
+    <meta content="MB120939" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="28" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165036"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: CITIES"/>
+      <identified-content>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Kuntz, Tom</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C05E2DC1E39F932A35752C0A9669C8B63" item-length="180" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Manifestoes To Give City A New Edge</hl1>
+      </hedline>
+      <byline class="print_byline">By Tom Kuntz</byline>
+      <byline class="normalized_byline">Kuntz, Tom</byline>
+      <abstract>
+        <p>Range of influential experts offer ideas on kinds of institutions that ought to be established in New York City in 21st century (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>For anyone who thinks New York City institutions never die, there is one word: vaudeville. Vaudeville bombed  with the advent of radio and television, proving that even dancing girls and the old soft shoe can't save an institution whose time has passed.</p>
+        <p>On the other hand, it is only in the last 100 years that the city got the New York Public Library, the Ford Foundation, the Guggenheim and the subway.</p>
+      </block>
+      <block class="full_text">
+        <p>For anyone who thinks New York City institutions never die, there is one word: vaudeville. Vaudeville bombed  with the advent of radio and television, proving that even dancing girls and the old soft shoe can't save an institution whose time has passed.</p>
+        <p>On the other hand, it is only in the last 100 years that the city got the New York Public Library, the Ford Foundation, the Guggenheim and the subway.</p>
+        <p>Institutions come and go in New York, a city long emblematic of humanity's perpetual reinvention. It stands to reason: as social needs and aspirations change, so do the public and private entities set up to handle them.</p>
+        <p>With that in mind, a range of influential New Yorkers were asked about the institutions that ought to be established in the 21st century.</p>
+        <p>TOM KUNTZ</p>
+        <p>VISIONS: CITIES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Mets Cast a Longing Eye Toward Guzman or Others</title>
+    <meta content="01METS" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="D" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165063"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="BASEBALL"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Baseball</classifier>
+        <org class="indexing_service">New York Mets</org>
+        <person class="indexing_service">Olney, Buster</person>
+        <person class="indexing_service">Guzman, Juan</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Baseball/Major League/New York Mets</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Baseball</classifier>
+        <classifier class="online_producer" type="general_descriptor">Baseball</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D04E3DA1338F932A35752C0A9669C8B63" item-length="708" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Mets Cast a Longing Eye Toward Guzman or Others</hl1>
+      </hedline>
+      <byline class="print_byline">By BUSTER OLNEY</byline>
+      <byline class="normalized_byline">Olney, Buster</byline>
+      <abstract>
+        <p>New York Mets want to sign free-agent pitcher Juan Guzman; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Next summer will provide either the best of times for the Mets, or the worst. Manager Bobby Valentine has one year left on his contract, as does General Manager Steve Phillips, and the team has mortgaged much of its farm system in an attempt to win in 2000. Either the Mets will contend for a championship, or many of them will be looking for jobs.</p>
+        <p>So Phillips continues to search for ways to improve the Mets, who already are in a position to challenge the Atlanta Braves for National League supremacy. Phillips would like to improve the back end of the team's pitching rotation, other baseball executives say, and he has a longing eye for some of the free-agent pitchers still available.</p>
+      </block>
+      <block class="full_text">
+        <p>Next summer will provide either the best of times for the Mets, or the worst. Manager Bobby Valentine has one year left on his contract, as does General Manager Steve Phillips, and the team has mortgaged much of its farm system in an attempt to win in 2000. Either the Mets will contend for a championship, or many of them will be looking for jobs.</p>
+        <p>So Phillips continues to search for ways to improve the Mets, who already are in a position to challenge the Atlanta Braves for National League supremacy. Phillips would like to improve the back end of the team's pitching rotation, other baseball executives say, and he has a longing eye for some of the free-agent pitchers still available.</p>
+        <p>But Phillips's flexibility is restricted by the Mets' huge payroll. Already, the Mets owe about $75 million to 17 players under contract, and they face possible arbitration cases with Armando Benitez, Rick Reed and Rey Ordonez. By the time the season starts, the Mets' payroll could reach $90 million.</p>
+        <p>So if the Mets take a run at an attractive free-agent pitcher, such as Juan Guzman, Phillips would very likely have to offset the cost of the signing with a trade. To that end, the Mets have apparently made it known to other teams that they are willing to deal the pitchers Masato Yoshii, Dennis Cook and Jesse Orosco -- only recently reacquired from the Orioles -- and others.</p>
+        <p>The Mets have had at least cursory discussions with a number of free-agent pitchers, including Aaron Sele, who is considered the best of the lot. But Sele is seeking a four-year deal worth about $32 million, meaning that if Phillips tries to maintain his current budget, Sele won't fit.</p>
+        <p>Others might come cheaper, such as Andy Benes (formerly of Arizona) and Steve Trachsel (the Cubs). Guzman might be the best fit. Coming off a year in which he went 11-12 with a 3.74 earned run average for the Baltimore Orioles and the Cincinnati Reds, he still has the ability to dominate opposing teams, but the questions about his consistency will diminish his asking price. Guzman made $5.25 million last season.</p>
+        <p>The left-handers Mike Hampton and Al Leiter will occupy the No. 1 and No. 2 spots in the Mets' rotation. Reed, eligible for arbitration after earning about $1.7 million last season, is in the No. 3 spot, but injuries gnawed at the 34-year-old right-hander last season, when he allowed 1.4 base runners an inning -- about a 30 percent increase over the previous season.</p>
+        <p>Yoshii, set to earn $3 million this year, went 6-1 with a 3.65 e.r.a. after the All-Star Game break last season, but he has not been a strong and consistent contributor. He is 5-8 with a 4.68 e.r.a. pitching on four days' rest since joining the Mets, and 13-8 with a 3.80 e.r.a. when he has more than four days' rest. He has averaged less than six innings a start.</p>
+        <p>Bobby Jones, currently the No. 5 starter, will make $5.4 million this season, and he is coming off a year in which injuries limited him to just 59 1/3 innings, all of which makes him very tough to trade.</p>
+        <p>Yoshii might be Phillips's most tradable commodity in the rotation, and if he could move Cook or Orosco and another player, then the Mets' general manager might have the cash to woo one of the free-agent starting pitchers.</p>
+        <p>INSIDE PITCH</p>
+        <p>The Yankees currently have four major league outfielders on their roster: BERNIE WILLIAMS, PAUL O'NEILL, RICKY LEDEE and SHANE SPENCER. They could use a spare, and to that end they have signed two veterans to minor league contracts and invited them to spring training: RYAN THOMPSON, who played parts of four seasons with the Mets from 1992 to '95, and FELIX JOSE, once considered an up-and-coming star with St. Louis.  BASEBALL</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

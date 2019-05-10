@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Cyclists Want a Ramp And So Does the City</title>
+    <meta content="02BIKE$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165494"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: UPPER EAST SIDE"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C02EEDF1238F931A35752C0A9669C8B63" item-length="475" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Cyclists Want a Ramp And So Does the City</hl1>
+      </hedline>
+      <byline class="print_byline">By DAVID KIRBY</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>For years, advocates for bicycle riders have urged the city to build a special ''fly-over'' ramp on the Manhattan side of the Queensboro Bridge to give cyclists and pedestrians easy access between the bridge and Second Avenue and points south. Now the city, which rejected the idea four years ago, plans to seek money for the $500,000 project.</p>
+        <p>In the fall, the Department of Transportation applied for money from the federal government to build the ramp, while the bridge is being renovated. But the financing was denied.</p>
+      </block>
+      <block class="full_text">
+        <p>For years, advocates for bicycle riders have urged the city to build a special ''fly-over'' ramp on the Manhattan side of the Queensboro Bridge to give cyclists and pedestrians easy access between the bridge and Second Avenue and points south. Now the city, which rejected the idea four years ago, plans to seek money for the $500,000 project.</p>
+        <p>In the fall, the Department of Transportation applied for money from the federal government to build the ramp, while the bridge is being renovated. But the financing was denied.</p>
+        <p>''It's our full intention to reapply for the funds'' during the next round of requests in July, said Peter Pennica, assistant commissioner of traffic planning. The ramp, Mr. Pennica said, would improve safety. ''We're always looking for ways to encourage people to come out of their automobiles,'' he added.</p>
+        <p>That is good news to Transportation Alternatives, a probicycle nonprofit group that has sought such a ramp for five years.</p>
+        <p>''It seems the wheels finally got spinning over at D.O.T.,'' said Susan Boyle, bike program coordinator for the advocacy group. ''There is a realization that what exists now is not ideal by any means.''</p>
+        <p>Currently the outer roadway designated for bicycles and pedestrians, on the north side of the bridge, provides access to East 60th Street near Second Avenue during nonrush hours. When cyclists ride off the bridge, however, they must head east, to First Avenue, which in turn heads north. (On weekdays from 2:30 p.m. to 7:30 p.m. until the renovation is finished this spring, the roadway is closed and a shuttle bus ferries bicyclists and pedestrians across.)</p>
+        <p>The problem is that most cyclists are heading south and west, according to the Transportation Department. That means they must make a loop east on 60th Street and then head north on First Avenue before turning west on 61st Street to Second Avenue, where they can go south. The ramp would give cyclists a direct connection to First and Second Avenues.</p>
+        <p>But M. Barry Schneider, the chairman of Community Board 8 in Manhattan, complained that the Transportation Department had not consulted the board about the plan. ''I'm concerned they are not doing justice to the process,'' he said. ''We know very little about it. Is this really happening or is it a figment? If it's being considered, we should be part of the team.''</p>
+        <p>DAVID KIRBY</p>
+        <p>NEIGHBORHOOD REPORT: UPPER EAST SIDE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

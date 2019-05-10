@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Forerunner of the Piano Explained</title>
+    <meta content="02MUSI$13" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Connecticut Weekly Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="14CN" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165392"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MUSIC"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <classifier class="indexing_service" type="descriptor">Jazz</classifier>
+        <person class="indexing_service">Sherman, Robert</person>
+        <person class="indexing_service">Parker, Jann</person>
+        <person class="indexing_service">Kipnis, Igor</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Connecticut</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Jazz</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F0CE0D91738F931A35752C0A9669C8B63" item-length="915" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Forerunner of the Piano Explained</hl1>
+      </hedline>
+      <byline class="print_byline">By ROBERT SHERMAN</byline>
+      <byline class="normalized_byline">Sherman, Robert</byline>
+      <abstract>
+        <p>Robert Sherman previews some upcoming concerts in Connecticut, involving pianist/harpsichordist Igor Kipnis, jazz vocalist Jann Parker and others; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IGOR KIPNIS is well-known to Connecticut audiences in a number of guises: as a noted performer on piano, fortepiano and harpsichord, concert host for the Silvermine Guild and other presenting groups, and as the artistic director of Friends of Music of Fairfield County. In a Saturday evening concert on Jan. 15, Mr. Kipnis will play the harpsichord at the Rich Forum in the Stamford Center for the Arts.</p>
+        <p>''We'll run the gamut from Bach to Brubeck,'' he said of the program, which actually is an evening of shared musical anecdotes, reminiscences and demonstrations rather than simply a concert. ''I hope to provide a light-hearted explanation of everything you ever wanted to know about the forerunner of the piano, divided into such chapters as 'Greatest Hits of the 16th Century,' 'the Baroque's Top 40' and 'Resurrection: the Past Meets the Present.' I've selected some of the best-known classics for the harpsichord in a run of hits from the 16th through the 18th centuries, then added a taste of modern times, even some boogie-woogie for good measure.''</p>
+      </block>
+      <block class="full_text">
+        <p>IGOR KIPNIS is well-known to Connecticut audiences in a number of guises: as a noted performer on piano, fortepiano and harpsichord, concert host for the Silvermine Guild and other presenting groups, and as the artistic director of Friends of Music of Fairfield County. In a Saturday evening concert on Jan. 15, Mr. Kipnis will play the harpsichord at the Rich Forum in the Stamford Center for the Arts.</p>
+        <p>''We'll run the gamut from Bach to Brubeck,'' he said of the program, which actually is an evening of shared musical anecdotes, reminiscences and demonstrations rather than simply a concert. ''I hope to provide a light-hearted explanation of everything you ever wanted to know about the forerunner of the piano, divided into such chapters as 'Greatest Hits of the 16th Century,' 'the Baroque's Top 40' and 'Resurrection: the Past Meets the Present.' I've selected some of the best-known classics for the harpsichord in a run of hits from the 16th through the 18th centuries, then added a taste of modern times, even some boogie-woogie for good measure.''</p>
+        <p>On March 4, Mr. Kipnis will be back at the Rich Forum to present a program of Bach sonatas with the flutist David Shostac.</p>
+        <p>For the rest of January, however, the Rich Forum forsakes the classics in favor of folk, jazz and ethnic presentations. On Saturday evening at 8, Rex Fowler and Neal Shukman, better known collectively as Aztec Two-Step, reprise highlights from their nearly 30 years of fusing what the Denver Post has called their ''rapid-paced harmonies, a strong folk feel and equally strong contemporary messages.''</p>
+        <p>From Jan. 22 through Jan. 29, audiences can hear ''Thunder Knocking on the Door,'' subtitled ''a bluesical tale of rhythm and the blues,'' which is trying out its program at Rich Forum before a projected Broadway run. ''The heart of theater stems from the imagination of the playwright,'' said Richard Pheneger, media manager of the Stamford Center for the Arts. ''Keith Glover's remarkable new show is filled with heart, humor and extraordinary blues music. Firmly planted in black culture, but big enough to embrace every kind of audience, it's about love of music, love of family, love of tradition, love between man and woman, father and son, mother and daughter.'' Performances are Tuesday through Saturday evenings at 8, or Sunday evening, Jan. 23, at 7:30. There are also Saturday and Sunday matinees at 2.</p>
+        <p>At 5:30 p.m. on Jan. 23, the vocalist Jann Parker headlines the Sunday Jazz Bath and Buffet at the Rich Forum, recalling ballads and jazz standards made famous by such vocalists as Billie Holiday, Sarah Vaughan and Ella Fitzgerald. ''As a performer, she is warm, confident, relaxed and always in control,'' said Mr. Pheneger. ''The musical rapport between Ms. Parker and her quartet is magical, and she never fails to uplift the spirit, putting a grin on your face and a song in your heart.''  Admission includes the concert, a three-course supper and an opportunity to socialize with the performers.</p>
+        <p>Bethany Yarrow would seem to arrive naturally at her love for contemporary folk music -- her dad is Peter Yarrow of Peter, Paul and Mary. An audience favorite when she appeared in the Forum's acoustic series last year, the singer-songwriter returns for an encore evening Jan. 28 at 8. The number to call for Stamford Center ticket information is (203) 325-4466.</p>
+        <p>Down the block at the Palace Theater, the Stamford Symphony and Greenwich Choral Society offer a performance of Mendelssohn's dramatic cantata ''Die Erste Walpurgisnacht'' (''The First Witches' Sabbath''). ''This is a rare opportunity to hear this riveting work for soloists, choir and orchestra,'' saidthe orchestra's music director, Roger Nierenberg. ''Based on a ballad by Goethe, the text tells of the origin of an ancient German ritual welcoming the spring, with Druids and various other pagans trying to preserve the sanctity of their rituals while uncompromising Christians attempt to put an end to the proceedings.''</p>
+        <p>Mr. Nierenberg added that ''the music invokes images of nature, magic and intrigue, since Mendelssohn preferred to exploit the spooky qualities of the poetry rather than the conflict of religious principles.'' Another work based on Goethe is the curtain-raiser, Beethoven's ''Egmont'' Overture. The soprano Joan Krause is the soloist in the Beethoven work; featured in the Mendelssohn are Desiree Halac, Nils Brown and William Andrew Stuckey. Concert times are 8:30 p.m. Jan. 22, and 3 p.m. Jan. 23, with free pre-concert lectures by the conductor at 7:15 and 1:45. (203-325-4466).</p>
+        <p>While the Yale School of Music prepares for its mid-month rush of concerts, three faculty artists and a Yale alumnus will be heading for Taiwan, contributing their services at benefit concerts for victims of the earthquake there. (The first free recitals at Sprague Hall will be given by New Music New Haven on Jan. 20 and the pianist Sara Laimon on Jan. 21.)</p>
+        <p>The violinist Erick Friedman, the conductor Aldo Parisot, the pianist Elizabeth Sawyer Parisot and the cellist Kenneth Kuo, a native of Taiwan who received his master's degree last May, make up the Yale contingent. Yale's concert office can be reached at (203) 432-4158.</p>
+        <p>MUSIC</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Vidal vs. Kaplan</title>
+    <meta content="LTR093630" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Arts; Books; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165263"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Vidal, Gore</person>
+        <person class="indexing_service">Kaplan, Fred</person>
+        <person class="indexing_service">Weyr, Rhoda</person>
+        <object.title class="indexing_service">Gore Vidal: A Biography (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901EEDD1E39F931A35752C0A9669C8B63" item-length="431" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Vidal vs. Kaplan</hl1>
+      </hedline>
+      <abstract>
+        <p>Rhoda Weyr letter holds Gore Vidal's Dec 5, 1999 letter misrepresented facts concerning his role in origins of book Gore Vidal: A Biography by Fred Kaplan (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>As The New York Times prints daily corrections of previous articles, I trust the Book Review will also print a correction of disinformation it was inadvertently party to by publishing the letter from Gore Vidal on Dec. 5.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>As The New York Times prints daily corrections of previous articles, I trust the Book Review will also print a correction of disinformation it was inadvertently party to by publishing the letter from Gore Vidal on Dec. 5.</p>
+        <p>Whether by design or wishful thinking, Vidal has misrepresented the facts concerning his role in the origins of ''Gore Vidal: A Biography,'' by Fred Kaplan. Vidal's literary executor suggested Fred Kaplan to Vidal, as no one else was writing the biography Vidal wanted published in his lifetime, and Vidal instructed him to contact Kaplan, whose biography of Henry James he said he admired.</p>
+        <p>Vidal agreed in writing to all the conditions Kaplan requested: full access to the subject and any documents he controlled, to friends, relatives and professional contacts insofar as they were willing to cooperate, guaranteed permission to quote from his published and unpublished writings and confirmation that Vidal himself would not see the manuscript until it was published and available to the public. Although I cannot quote Vidal's words without his permission, unlikely to be forthcoming, this document can be seen by anyone interested -- as it was seen by Vidal's publishing attorney, agent and publisher when Vidal tried to retract that agreement. It is, of course, impossible to know the truth as to whether he ever read any of Kaplan's previous biographies or other works; however, he frequently spoke to interviewers, friends (of his), his own agent, in public forums and to me about his admiration for Kaplan's biography of James. One or the other position is false.</p>
+        <p>In the interests of full disclosure: I am Fred Kaplan's wife. However, I am also a literary agent with over 30 years in publishing, experienced in matters pertaining to contracts and the danger to authors undertaking biographies of living subjects without such agreements, and I worked closely with Fred, his agent and his publisher in making sure he would not be in such a position down the line. Hence I am thoroughly familiar with the negotiations, conversations and written agreement that took place.</p>
+        <p>Vidal's ability to forget, confuse or spin is documented in the biography; it can happen to anyone who survives long enough or has an agenda. But it cannot be allowed to stand as the last word.</p>
+        <p>Rhoda Weyr  Brooklyn</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

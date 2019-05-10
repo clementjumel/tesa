@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Memorable Trail, and a Tale to Match</title>
+    <meta content="02OUTD$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="10" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165624"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="OUTDOORS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Hunting and Trapping</classifier>
+        <classifier class="indexing_service" type="descriptor">Birds</classifier>
+        <classifier class="indexing_service" type="descriptor">Woodcocks (Birds)</classifier>
+        <location class="indexing_service">Kingston (NY)</location>
+        <person class="indexing_service">Bodo, Pete</person>
+        <person class="indexing_service">de Nemeskeri-Kiss, Paul</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Birds</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Wildlife</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hunting and Trapping</classifier>
+        <classifier class="online_producer" type="general_descriptor">Birds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Animals</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07EFDA1138F931A35752C0A9669C8B63" item-length="952" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Memorable Trail, and a Tale to Match</hl1>
+      </hedline>
+      <dateline>KINGSTON, N.Y.</dateline>
+      <abstract>
+        <p>Pete Bodo Ou</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>By the time we crested the grassy knoll and started down the logging road, Bianca, an 8-year-old German shorthair retriever, looked thoroughly disgusted. She waited patiently on the trail, ready to dive into the brush and search for that singular and elusive game bird, woodcock. Her knitted brows and tensed legs conveyed the question: what on earth is taking you so long?</p>
+        <p>A satisfying answer to that question has never been rendered. Still, it was not a day for doing anything hastily. The air was simultaneously crisp and warm, and so still that the yellow leaves, no longer able to cling to the boughs of the maple tree, fell as slowly as snow. It was that perfect, unforgettable day that comes along every now and then, even on the brink of a new century.</p>
+      </block>
+      <block class="full_text">
+        <p>By the time we crested the grassy knoll and started down the logging road, Bianca, an 8-year-old German shorthair retriever, looked thoroughly disgusted. She waited patiently on the trail, ready to dive into the brush and search for that singular and elusive game bird, woodcock. Her knitted brows and tensed legs conveyed the question: what on earth is taking you so long?</p>
+        <p>A satisfying answer to that question has never been rendered. Still, it was not a day for doing anything hastily. The air was simultaneously crisp and warm, and so still that the yellow leaves, no longer able to cling to the boughs of the maple tree, fell as slowly as snow. It was that perfect, unforgettable day that comes along every now and then, even on the brink of a new century.</p>
+        <p>It was a day filled with wonder and color, in which intimations of mortality and acute well-being were equally mixed. And I had the pleasure of sharing it with one of the very few great woodsmen and hunters I know, Paul de Nemeskeri-Kiss, who had the grace to give his dog a more user friendly name than his own.</p>
+        <p>Paul is 78 now, and in dog years I suppose Bianca is no spring chicken, either. In fact, these days Paul can keep Bianca in hunting form during the off-season only with the help of his wife, Sophie. The three of them go to a park daily near their home in the Riverdale section of the Bronx. Paul and Sophie take up stations on park benches a few hundred yards apart, and Bianca runs between them, collecting a tiny biscuit each time.</p>
+        <p>But it's different when Paul pulls on his wool tweed hunting knickers, and knots the tie that he still insists on wearing in this age of Thinsulate, Gore-Tex and casual Fridays. Then, the years fall away from Paul.</p>
+        <p>''Get the bird, Bianca,'' Paul called out. ''Where's the bird?''</p>
+        <p>Bianca's radio collar began to beep, signaling that she was on point. Using our shotguns like kayak paddles, we pushed through the thicket of porcelain berry and wild rose that created perfect woodcock cover.</p>
+        <p>The woodcock feeds exclusively on earthworms, digging them out with a long, curved beak. The mottled brown bird blends perfectly with the habitat in which it forages -- moist, damp bottom land carpeted with twigs and leaves and free of grass. The woodcock loves cover as dense and impenetrable as a ball of twine.</p>
+        <p>Unlike grouse or pheasant, woodcock won't flush, or fly off to avoid danger, until the very last moment. They hold tight, trusting their fate to the density of the cover, and their perfect camouflage. On the wing, the birds fly like bottle rockets. So even when you can swing a gun in all the thick scrub, your chances of actually killing the bird are slim.</p>
+        <p>Paul and I approached Bianca, who was so torn between pointing the bird (her job) and jumping on it (her desire) that she was trembling. The woodcock burst into the air, right in front of my nose, and I almost fell over as I twisted, turned, got the gun up in plenty of time to realize I had no shot. Bianca gave me a look of admonition. Paul merely chuckled.</p>
+        <p>''Let's stop here for a little rest,'' Paul said, shortly before noon. We sat down on the stone wall of a long-abandoned farmstead. Paul pushed back his long, silver hair and carefully unfolded a paper napkin that contained a partly smoked cigarette. His watery blue eyes twinkled as he smoked, and in his thick Hungarian accent relived days of splendor and majesty in the great woods, the Carpathian mountains of his native land.</p>
+        <p>Once, as a youth, he saw an enormous wolf in a high meadow. Judging the distance as 300 yards, he compensated for the bullet drop by holding his sights on a yellow flower about a foot above the back of the wolf. His subsequent shot missed the wolf but blew apart the flower. The wolf was so big, and Paul was so excited that he had misjudged the distance by half. As hunting stories go, it was a good one.</p>
+        <p>We continued our hunt. We had slowed down some, but Paul's exhortations were undiminished: ''Bianca! Where's the bird? . . . Go in there Bianca, you haven't been there yet. . . . Get the bird. . . . Oh, Bianca, come on, there -- over there.''</p>
+        <p>We put up half a dozen woodcock, and missed every blessed one. I finally managed to shoot a pheasant, a plump, stocked bird that had none of the guile of a wild woodcock. But Bianca didn't mind that at all. She had been working very hard for us without much compensation.</p>
+        <p>We emerged into a rolling meadow, not far from where we left the car. Bianca nosed around the edge of the field. ''She's not really tired, she can keep going,'' Paul said. ''But me, I think I've had enough.''</p>
+        <p>Suddenly, Bianca plunged into a patch of brush along the dirt road, and went to point. ''Bianca,'' Paul called out. ''What are you expecting to find there? There's no bird. There's no bird in there anymore.''</p>
+        <p>We emptied our guns. The serene afternoon light was diminishing. Reluctantly, Bianca came off point and a curious stillness descended on our perfect day.</p>
+        <p>OUTDOORS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Lives They Lived: Kim Perrot, b. 1967; Her Shot</title>
+    <meta content="MB103757" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Magazine Desk" name="dsk"/>
+    <meta content="43" name="print_page_number"/>
+    <meta content="6" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Magazine" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165314"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Basketball</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Ivry, Sara</person>
+        <person class="indexing_service">Weatherspoon, Teresa</person>
+        <person class="indexing_service">Perrot, Kim (1967-99)</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Magazine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Basketball</classifier>
+        <classifier class="online_producer" type="general_descriptor">Basketball</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C00E0D91F39F931A35752C0A9669C8B63" item-length="172" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Lives They Lived: Kim Perrot, b. 1967; Her Shot</hl1>
+      </hedline>
+      <byline class="print_byline">By Sara Ivry</byline>
+      <byline class="normalized_byline">Ivry, Sara</byline>
+      <abstract>
+        <p>Interview with Teresa Weathersp</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Sara Ivry talked with Teresa Weatherspoon of the New York Liberty about Perrot, who died of cancer shortly before her team, the Houston Comets, won its third consecutive W.N.B.A. title.</p>
+        <p>''My nephew passed away in May, and the Liberty happened to be playing in Houston. I really didn't want to be playing, my heart was so heavy. After that game, the person waiting for me, before I even got to the locker room, was Kim. She wasn't playing anymore, and I know she was feeling so bad, but she said: 'Spoon, if I can come back, the only reason I will is to play against you. Every time I watch you play, that makes me want to come back. But today, you didn't even play. You owe it to yourself, you owe it to your family. Do it for your brother, and please, do it for me.'''</p>
+      </block>
+      <block class="full_text">
+        <p>Sara Ivry talked with Teresa Weatherspoon of the New York Liberty about Perrot, who died of cancer shortly before her team, the Houston Comets, won its third consecutive W.N.B.A. title.</p>
+        <p>''My nephew passed away in May, and the Liberty happened to be playing in Houston. I really didn't want to be playing, my heart was so heavy. After that game, the person waiting for me, before I even got to the locker room, was Kim. She wasn't playing anymore, and I know she was feeling so bad, but she said: 'Spoon, if I can come back, the only reason I will is to play against you. Every time I watch you play, that makes me want to come back. But today, you didn't even play. You owe it to yourself, you owe it to your family. Do it for your brother, and please, do it for me.'''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

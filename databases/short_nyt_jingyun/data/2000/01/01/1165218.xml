@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>It Shouldn't Happen To a Dog</title>
+    <meta content="01DOGS$05" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165218"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: BIOLOGY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Dogs</classifier>
+        <classifier class="indexing_service" type="descriptor">Breeding of Animals</classifier>
+        <classifier class="indexing_service" type="descriptor">Genetic Engineering</classifier>
+        <person class="indexing_service">Finn, Robin</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Wildlife</classifier>
+        <classifier class="online_producer" type="general_descriptor">Breeding of Animals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Genetic Engineering</classifier>
+        <classifier class="online_producer" type="general_descriptor">Dogs</classifier>
+        <classifier class="online_producer" type="general_descriptor">Genetics and Heredity</classifier>
+        <classifier class="online_producer" type="general_descriptor">Animals</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901EEDD1030F932A35752C0A9669C8B63" item-length="671" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>It Shouldn't Happen To a Dog</hl1>
+      </hedline>
+      <byline class="print_byline">By Robin Finn</byline>
+      <byline class="normalized_byline">Finn, Robin</byline>
+      <abstract>
+        <p>Robin Finn article says physical malformations and other ill effects of dog breeding should serve as warning to those eager to improve human species through genetic engineering; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>FOR those who wonder where genetic engineering may take man in the future, it might be instructive to look at what man has already wrought on his supposed best friend. In the $2 billion canine industry, designer dogs rule.</p>
+        <p>Unfortunately, the process of engineering blue-ribbon perfection has left some breeds, like toy poodles, Lhasa apsos and Shih Tzus, as authentic as vanity license plates.</p>
+        <p>It's the less popular, less manipulated breeds like Brittany spaniels, otter hounds and Chesapeake Bay retrievers that are the lucky ones: they have not suffered the physical malformations that arise when inbreeding and overrefinement backfire. In dogs, as in humans, when there is a doubling up on genes, it is not just the desirable qualities that are repeated.</p>
+      </block>
+      <block class="full_text">
+        <p>FOR those who wonder where genetic engineering may take man in the future, it might be instructive to look at what man has already wrought on his supposed best friend. In the $2 billion canine industry, designer dogs rule.</p>
+        <p>Unfortunately, the process of engineering blue-ribbon perfection has left some breeds, like toy poodles, Lhasa apsos and Shih Tzus, as authentic as vanity license plates.</p>
+        <p>It's the less popular, less manipulated breeds like Brittany spaniels, otter hounds and Chesapeake Bay retrievers that are the lucky ones: they have not suffered the physical malformations that arise when inbreeding and overrefinement backfire. In dogs, as in humans, when there is a doubling up on genes, it is not just the desirable qualities that are repeated.</p>
+        <p>Presumably, the perfect dog for a future in which the microchip is mightier than any mastiff won't bark, won't bite, won't shed and will be color coordinated to its decor. Hypoallergenic? Naturally (well, not quite naturally). Resourceful as Rin Tin Tin and reliable as Lassie, it will possess the flair of Pongo the Disney Dalmatian and the wit of Dinky, the Taco Bell chihuahua.</p>
+        <p>But purveyors and purchasers of perfect dogs have to hope that their animals won't inherit hip dysplasia (German shepherds), vision problems (poodles) or a decided lack of intelligence (collies) because too much matter has been crammed into too small a space.</p>
+        <p>After Disney's live-action version of ''101 Dalmatians'' created a craze several years ago, the rush to supply Dalmatians might have had something to do with the fact that many of them went deaf in at least one ear. Slaves to miniaturization, toy dogs, like the latest mass-media sensation, the chihuahua, tend toward disproportionate dental and skin troubles.</p>
+        <p>Even the shar-pei, the novelty dog whose skin hangs from its frame with the artful drape of a window treatment, has fallen victim to vanity breeding: the more wrinkles, the more expensive the dog. But more wrinkles mean more skin irritation, and wrinkles that sag into the eyes can portend eye surgery.</p>
+        <p>Veterinarians like Dr. Elliot Katz, the founder of the animal rights group In Defense of Animals, have called for a moratorium on the breeding and selling of purebreds and consider the American Kennel Club, which recognizes 141 breeds and registers more than a million dogs annually, an enemy.</p>
+        <p>''The A.K.C. is promoting dogs almost as an accessory,'' Dr. Katz contends. ''When it comes to objectification and exploitation, they could be put side by side with the people who promote baby beauty contests.''</p>
+        <p>These dogs are turned into ''toys and caricatures,'' he said, adding: ''The process has been speeded up via genetic engineering, and the bottom line is that somebody's making money.''</p>
+        <p>Not us, say the breeders, the American Kennel Club and officials of the Westminster Kennel Club Dog Show, dogdom's own Miss Universe pageant. They say they are out to preserve perfect dogs, not invent them. They acknowledge a measure of breeder ignorance before a screening test was developed to detect rogue genes in dogs about to be mated. But with this test, which costs about $1,200, responsible breeders are producing healthier dogs. Not so with the puppy mills, the bane of every popular purebred. ''With popularity comes bastardization,'' said Thomas Bradley, a spokesman for the Westminster club.</p>
+        <p>Gene Zaphiris, the founder and editor of Dog News, added, ''Let's face it, every breed was man-made. Whether bred for pretty or bred for a reason, with inbreeding comes problems. But a moratorium on breeding won't stop the problems. What's really too bad is that you can't breed human ethics.''</p>
+        <p>VISIONS: BIOLOGY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

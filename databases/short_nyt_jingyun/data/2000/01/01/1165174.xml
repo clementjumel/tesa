@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Power Shift Is Not Viewed As a Threat To U.S. Ties</title>
+    <meta content="Y01CAP$05" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="19" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165174"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="YELTSIN RESIGNS: IN WASHINGTON"/>
+      <identified-content>
+        <classifier class="online_producer" type="types_of_material">Chronology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9500EFDA1038F932A35752C0A9669C8B63" item-length="1127" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Power Shift Is Not Viewed As a Threat To U.S. Ties</hl1>
+      </hedline>
+      <byline class="print_byline">By ERIC SCHMITT</byline>
+      <dateline>WASHINGTON, Dec. 31</dateline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Clinton administration officials said today that President Boris N. Yeltsin's surprise resignation would not dramatically alter relations with Russia and could improve the chances that Moscow and Washington will break a stalemate over a major arms control treaty.</p>
+        <p>By advancing Russia's presidential elections by three months, to late March, Mr. Yeltsin's decision might allow the newly elected Russian leader to negotiate with authority Washington's proposal to modify the 1972 Anti-Ballistic Missile Treaty, administration officials said.</p>
+      </block>
+      <block class="full_text">
+        <p>Clinton administration officials said today that President Boris N. Yeltsin's surprise resignation would not dramatically alter relations with Russia and could improve the chances that Moscow and Washington will break a stalemate over a major arms control treaty.</p>
+        <p>By advancing Russia's presidential elections by three months, to late March, Mr. Yeltsin's decision might allow the newly elected Russian leader to negotiate with authority Washington's proposal to modify the 1972 Anti-Ballistic Missile Treaty, administration officials said.</p>
+        <p>Russia has objected to changes that the United States wants to allow both nations to field national defenses against limited long-range missile attacks. Moving up the election could buy both sides three more months to resolve the dispute before next summer, when President Clinton is to decide whether to begin building a missile defense.</p>
+        <p>''Don't misunderstand me, this isn't going to be easy,'' said an administration official. ''But this gives us a little more cushion before the President's decision.''</p>
+        <p>Officials cited no evidence that Acting President Vladimir V. Putin would take a different view of the missile treaty than Mr. Yeltsin, and conceded that their hopes were based mainly on the notion that his early election would simplify negotiations by taking them out of the realm of electoral politics in Russia. (However, the issue could remain entangled in the American presidential election.)</p>
+        <p>''If Putin emerges, he'd have the authority to make a deal that might not otherwise be available, but it's still a very tough issue,'' said Coit Blacker, a Russia specialist in Mr. Clinton's first administration.</p>
+        <p>In wistful tones, Mr. Clinton praised Mr. Yeltsin for ''dismantling the Communist system'' in Russia and replacing it with a fledgling democracy, largely glossing over major differences that have strained relations between the two countries, including the lingering tensions over NATO's air campaign in Kosovo, allegations of Russian corruption and the grinding war in Chechnya.</p>
+        <p>''Under his leadership since 1991, the Russian people have faced the unprecedented challenge of creating new institutions and building a new life after decades of corrosive Communist rule,'' Mr. Clinton said in remarks at the White House.</p>
+        <p>''His lasting achievement has been dismantling that Communist system and building new political institutions under democratically elected leaders within a constitutional framework,'' he said.</p>
+        <p>When asked by reporters why he admired the Russian president, whom he has met with 19 times since 1993, Mr. Clinton struck a more personal note. ''I liked him because he was always very forthright with me,'' he said. ''He always did exactly what he said he would do. And he was willing to take chances to try to improve our relationship, to try to improve democracy in Russia.''</p>
+        <p>Earlier in the day, Mr. Yeltsin told Mr. Clinton in a 20-minute telephone call that Russia would remain committed to democracy, open markets and arms control, said Joe Lockhart, the White House spokesman.</p>
+        <p>The relationship with Moscow has soured in recent months, largely over Chechnya. Visiting Moscow just eight days ago, the deputy secretary of state, Strobe Talbott, accused Russia of ''indiscriminate killing'' in the breakaway republic.</p>
+        <p>The president's national security adviser, Samuel R. Berger, knows Mr. Putin from his days as deputy mayor of St. Petersburg and when he was the rough equivalent of a national security adviser to Mr. Yeltsin.</p>
+        <p>''His first test, and a fundamental test of Russian democracy,'' Mr. Berger said in an interview, ''is whether power is passed freely and fairly from one democratic president to another in March.''</p>
+        <p>--------------------</p>
+        <p>World Leaders Praise Yeltsin</p>
+        <p>By Reuters</p>
+        <p>Chancellor Gerhard Schroder of Germany, Russia's biggest creditor, praised Boris N. Yeltsin's contribution to democracy and economic reform and promised to support the interim president, Vladimir V. Putin.</p>
+        <p>''President Yeltsin led Russia out of its Soviet past during this decade and played a crucial role in helping the country develop democracy and a free market economy,'' Mr. Schroder said in a statement.</p>
+        <p>Italy acclaimed Mr. Yeltsin's ''extraordinary role'' in transforming Russia, saying it was sure that Acting President Putin would pursue the path of reform.</p>
+        <p>In Japan, Prime Minister Keizo Obuchi said, ''I am sorry that President Yeltsin decided to resign, and would like to offer my heartfelt praise toward his achievements.''</p>
+        <p>YELTSIN RESIGNS: IN WASHINGTON</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

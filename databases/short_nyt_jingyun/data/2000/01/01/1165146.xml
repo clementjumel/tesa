@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Brooklyn Throws a Party Just for the Locals</title>
+    <meta content="01BROO$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165146"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: A CITY CELEBRATES"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F07E6DA1038F932A35752C0A9669C8B63" item-length="737" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Brooklyn Throws a Party Just for the Locals</hl1>
+      </hedline>
+      <byline class="print_byline">By DAVID BARSTOW</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>''Gee, I guess we're the first,'' said Karen Minott, a Brooklyn resident who showed up at Grand Army Plaza about 5 p.m. with her cousin and a friend.</p>
+        <p>Ms. Minott cradled her sleeping 18-month-old daughter and looked about with that slightly embarrassed look people get when they suddenly realize they're early for a party. ''Where is everybody?'' she asked.</p>
+      </block>
+      <block class="full_text">
+        <p>''Gee, I guess we're the first,'' said Karen Minott, a Brooklyn resident who showed up at Grand Army Plaza about 5 p.m. with her cousin and a friend.</p>
+        <p>Ms. Minott cradled her sleeping 18-month-old daughter and looked about with that slightly embarrassed look people get when they suddenly realize they're early for a party. ''Where is everybody?'' she asked.</p>
+        <p>In recent weeks several news organizations reported that as many as one million people might attend the Brooklyn celebration. But that estimate stemmed from a hyperbolic boast made at a press conference by Charles J. Hamm, the chairman and chief operating officer of Independence Community Bank and a chairman of Brooklyn 2000, the week of events that culminated with New Year's Eve.</p>
+        <p>For most of the evening, the crowd was sparse, perhaps a few thousand people. But after 11 p.m., the crowd grew rapidly, to some 20,000 people, according to police estimates.</p>
+        <p>Tupper Thomas, the cheerful impresario of the New Year's Eve celebration in Brooklyn, had not been concerned with size: Let the tourists and Peter Jennings have Times Square, she said with typical Brooklyn moxie. This, she said, was a modest millennium bash for ''true'' New Yorkers -- just a ''really great shoot'em-up'' for hardy Brooklynites who traditionally come to Prospect Park each New Year's Eve for a few friendly minutes of fireworks.</p>
+        <p>''This is the real thing,'' said Ms. Thomas, president of the Prospect Park Alliance. ''We're not trying to get the tourists. We're just trying to get people from Brooklyn.''</p>
+        <p>Still, Mr. Hamm's bit of exaggeration led to some awkward moments. Throughout the afternoon, dozens of people wandered toward the stage looking a bit confused. Several said they had come early thinking it was the only way to get a good seat, or expecting to see a scene rivaling the nonstop entertainment and confetti showers of Times Square. Instead, they saw stacks of barricades and a few technicians. The entertainment did not begin until 10 p.m.</p>
+        <p>Indeed, many of those who attended last night's celebration said that they came because wanted a little pomp without the circumstance of Times Square. ''I love it,'' said Orit Friedman, a physician from Brooklyn. ''It is Times Square without the fear of 2.5 million people.''</p>
+        <p>As the countdown began - some 22 seconds behind the Times Square countdown - the crowd chanted along, dancing and swaying. ''I didn't expect a big crowd,'' said Julie M. Ostrowski, 27, a copy editor for Newsday who lives in Park Slope. ''But I'm happy I'm surrounded by a lot of people I like.''</p>
+        <p>Ms. Thomas was asked whether the arrest in Brooklyn on Thursday of an Algerian man accused of participating in a sophisticated terrorism plot might scare families away. She smiled and shook her head. ''We've got great cops,'' she said. ''People are doing what they're supposed to be do. I'm not giving in to this, and that's always been the Brooklyn way. We are not about to let something like that affect us.''</p>
+        <p>This stubbornly proud, slightly quirky, thoroughly Brooklyn ethic was evident in all aspects of yesterday's festivities, which were centered around the massive arched monument to the Union army looming at the entrance to Prospect Park. Forget celebrity entertainers, clouds of confetti, a dropping crystal ball. The Brooklyn party featured a fire eater from Coney Island and Albert Sanchez, a large man who sings in tight dresses.</p>
+        <p>''He's got a new gown made for tonight,'' said Carolyn Greer, producer of the event. ''We're a hard working borough and we have a hard working stage,'' she added. ''We don't have the big celebrities.''</p>
+        <p>The fireworks, however, were a special point of pride. Ms. Thomas, who began organizing New Year's Eve fireworks displays in Prospect Park 25 years ago, said most years the shows were supposed to last about five minutes - although, she said, ''the fireworks guy would always throw in a few extra minutes.'' But this year, thanks to generous contributions from several corporations and city taxpayers, there was a 15-minute display, with the same rockets fired at the same time from two locations.</p>
+        <p>''All of it double!'' said Ms. Thomas. Take that Times Square.</p>
+        <p>1/1/00: A CITY CELEBRATES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

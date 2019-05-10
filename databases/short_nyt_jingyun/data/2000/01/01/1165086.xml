@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Party? What Party? We're Going Shopping</title>
+    <meta content="Y01BEI$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165086"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE WORLD"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C04EFD71338F932A35752C0A9669C8B63" item-length="481" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Party? What Party? We're Going Shopping</hl1>
+      </hedline>
+      <byline class="print_byline">By ELISABETH ROSENTHAL</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>President Jiang Zemin spoke here of China's glorious future and a few adventurous souls ventured to the Great Wall, but most Beijingers spent the ticking over of the calendar doing what average folks here do when given half a chance: they went shopping.</p>
+        <p>This week, dozens of shopping centers and department stores across Beijing announced that they would stay open for much of New Year's Eve to honor the event, with a number not closing until 2 a.m. and some not at all.</p>
+      </block>
+      <block class="full_text">
+        <p>President Jiang Zemin spoke here of China's glorious future and a few adventurous souls ventured to the Great Wall, but most Beijingers spent the ticking over of the calendar doing what average folks here do when given half a chance: they went shopping.</p>
+        <p>This week, dozens of shopping centers and department stores across Beijing announced that they would stay open for much of New Year's Eve to honor the event, with a number not closing until 2 a.m. and some not at all.</p>
+        <p>So at midnight and beyond, stores across the city overflowed with parties of families and friends. And thousands of Beijinger's did their countdown to the end of the 1900's while comparing CD players or in line for the cash register.</p>
+        <p>''It's a good way to spend New Year's Eve for families with children,'' said Hu Duanglin, a 63-year-old teacher, who was strolling at the Xidan Shopping Center with his children and grandchild.</p>
+        <p>''It's much better than going to a restaurant or a bar,'' he said.</p>
+        <p>New Year's Eve presented a quandary for people in China, a country where the observance of nonpolitical Western celebrations -- like New Years, Christmas and Valentines Day -- is a relatively recent phenomenon.</p>
+        <p>Most homes in Beijing are far too small for private parties. And the celebrations organized for Dec. 31 by virtually every fancy hotel and restaurant were far too expensive for the average family, with tickets often costing over $100.</p>
+        <p>Department stores seem to have filled a void. Many organized entertainment, including fashion shows, lotteries and sales that began after normal closing hours.</p>
+        <p>At 10:30 p.m., the sidewalk outside the Guiyou Department Store on Jianguonenwai Street was packed with customers waiting for a chance at a ''lucky draw.''</p>
+        <p>It was not clear if the stores will profit for their sponsorship, since there seemed to be far more lookers than buyers.</p>
+        <p>''I bought a new hat,'' said Sun Li, a 22-year-old student, as she waited for the McDonald's on Wangfujing Street to reopen for the night at 12:30 a.m. ''It's a New Year's present. But I'm mostly here to have fun and look around.''</p>
+        <p>And many seemed to head for the stores by default, falling back on an old familiar place when there is nowhere else to go.</p>
+        <p>When asked why he and his wife had come to a store to celebrate, a worker who would only give his surname, Su, replied: ''It beats staying home and watching TV -- so we came. Have you got any better ideas?''</p>
+        <p>1/1/00: AROUND THE WORLD</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

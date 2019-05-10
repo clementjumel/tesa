@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Woman Is Raped in Stairwell After Returning From a Party</title>
+    <meta content="02RAPE$06" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="33" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165638"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Sex Crimes</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Rashbaum, William K</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Sex Crimes</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">Crime and Criminals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F06E6D91138F931A35752C0A9669C8B63" item-length="424" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Woman Is Raped in Stairwell After Returning From a Party</hl1>
+      </hedline>
+      <byline class="print_byline">By WILLIAM K. RASHBAUM</byline>
+      <byline class="normalized_byline">Rashbaum, William K</byline>
+      <abstract>
+        <p>Police say woman returning home from New Year's Eve party was raped in stairwell of her apartment building near City Hall (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A 21-year-old Manhattan woman returning home from a New Year's Eve party was raped early yesterday in the stairwell of her apartment building near City Hall, the authorities said.</p>
+        <p>Several hours later, in an apparently unrelated incident, another  woman was confronted by a knife-wielding man who forced his way into her car, the police said. But she jumped out of the car, and the man was arrested a few minutes later.</p>
+      </block>
+      <block class="full_text">
+        <p>A 21-year-old Manhattan woman returning home from a New Year's Eve party was raped early yesterday in the stairwell of her apartment building near City Hall, the authorities said.</p>
+        <p>Several hours later, in an apparently unrelated incident, another  woman was confronted by a knife-wielding man who forced his way into her car, the police said. But she jumped out of the car, and the man was arrested a few minutes later.</p>
+        <p>The police do not believe either incident is related to a rape and robbery in Midtown Manhattan in the early hours of Dec. 21, said Lt. Sean M. Crowley, a police spokesman.</p>
+        <p>In that attack, a 25-year-old employee of WNBC television news who had just left work at 30 Rockefeller Plaza was dragged from the street and assaulted in a stairwell off Avenue of the Americas between West 52nd and West 53rd Streets.</p>
+        <p>The name of the 21-year-old rape victim was withheld by the police because of the nature of the crime. Officials said she was assaulted about 6 a.m., shortly after she returned home to her apartment building on Murray Street near West Broadway, two blocks from City Hall.</p>
+        <p>''She was returning home and she got out of a taxicab and he followed her inside,'' said Lieutenant Crowley.</p>
+        <p>The police described the assailant as a black man between 26 and 27 years old, about five feet 9 inches tall, with a slim build and a slight mustache.</p>
+        <p>He was neatly dressed, wearing khaki pants and a blue fleece shirt, the police said.</p>
+        <p>In the incident later in the morning, a woman was parking her car in front of 150 Hudson Street when a man threatened her with a knife and ordered her to slide across the car's seat to the passenger side, the police said.</p>
+        <p>The man climbed into the car, drove north on Hudson Street and ordered the woman to take off her pants, the police said.</p>
+        <p>As the man drove past the First  Precinct station house, the woman saw officers walking from the building and jumped out of the car, the police said.</p>
+        <p>The suspect, whom the police identified as Aureo Torres, 41, drove away in the woman's car, but was caught by officers and arrested a few minutes later.</p>
+        <p>Mr. Torres, of 12 Temple Court on Staten Island, was charged with first-degree attempted rape, second-degree kidnapping, second-degree robbery and weapons possession, the police said.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Just Another Friday in the Wards</title>
+    <meta content="02HOSP" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="32" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Health; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165578"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THE YEAR 2000: THE HOSPITALS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">Medicine and Health</classifier>
+        <classifier class="indexing_service" type="descriptor">Hospitals</classifier>
+        <classifier class="indexing_service" type="descriptor">Emergency Medical Treatment</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <classifier class="indexing_service" type="descriptor">Births</classifier>
+        <location class="indexing_service">New York City</location>
+        <org class="indexing_service">Sisters of Charity Medical Center (Staten Island)</org>
+        <person class="indexing_service">Yi, Chan</person>
+        <person class="indexing_service">Yi, Rebekah</person>
+        <person class="indexing_service">Steinhauer, Jennifer</person>
+        <person class="indexing_service">Yi, Yunhee</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Healthcare</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Medicine and Health</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Hospitals</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Transplants</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Births</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hospitals</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Pregnancy and Obstetrics</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C01E4D61038F931A35752C0A9669C8B63" item-length="379" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Just Another Friday in the Wards</hl1>
+      </hedline>
+      <byline class="print_byline">By JENNIFER STEINHAUER</byline>
+      <byline class="normalized_byline">Steinhauer, Jennifer</byline>
+      <abstract>
+        <p>New York City hospitals brace for every conceivable medical emergency on New Year's Eve, but most end year with emergency rooms that are in many cases even quieter than normal; Sisters of Charity Medical Center in Staten Island reports first birth in region; says Rebekah Yi was born to Yunhee and Chan Yi one second after midnight (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>New York City hospitals braced for every conceivable medical emergency New Year's Eve -- terrorist attacks, stampede victims, out-of-control drunks -- but most ended the year with emergency rooms that were in many cases even quieter than normal, hospital officials said.</p>
+        <p>Although most hospitals started to admit several patients for drug overdoses and injuries resulting from too much drink early yesterday morning, few saw any more trauma cases than on a normal Friday night. And technical flaws related to the Year 2000 problem, which consumed hospital administrators for the last few years, appeared to be nonexistent.</p>
+      </block>
+      <block class="full_text">
+        <p>New York City hospitals braced for every conceivable medical emergency New Year's Eve -- terrorist attacks, stampede victims, out-of-control drunks -- but most ended the year with emergency rooms that were in many cases even quieter than normal, hospital officials said.</p>
+        <p>Although most hospitals started to admit several patients for drug overdoses and injuries resulting from too much drink early yesterday morning, few saw any more trauma cases than on a normal Friday night. And technical flaws related to the Year 2000 problem, which consumed hospital administrators for the last few years, appeared to be nonexistent.</p>
+        <p>The only computer problem that the Brooklyn Hospital Center ran into was in the emergency room, where a punch clock used to record admissions stamped the first card of the year December 32, 1999, said a spokesman, Clifford F. Ohle, who seemed to be happy to have something irregular to report.</p>
+        <p>''They readjusted it right away,'' Mr. Ohle said. ''But we wanted to save the record.''</p>
+        <p>Hospitals around the region, like those all over the world, were vying for the first baby of 2000. The winner of this contest, which drew a bit of sniping by other hospital administrators who seemed to think it was all just another bit of millennial promotion -- was the Sisters of Charity Medical Center in Staten Island.</p>
+        <p>It was there that Yunhee and Chan Yi welcomed Rebekah Yi, one second after midnight. ''It was not planned that way,'' said Kip Jackson, the hospital's spokesman. ''That is when God intended it to happen.'' At Elmhurst Hospital Center in Queens, Erna Sobovic was born two seconds after the hour, to Remziga Sobovic and Duljko Kandic, refugees from Bosnia, said a spokesman there. (When do doctors start counting? When the entire baby has emerged, but before the cord is cut.)</p>
+        <p>At Mount Sinai Medical Center on the Upper East Side, the floors were quieter than usual, said a hospital spokesman, Mel Granick, although the hospital did perform two liver transplants that evening.</p>
+        <p>One of the surgeries ended right around 10 p.m. There was almost a third procedure, he said, but the liver proved unsuitable. ''There were no babies born here,'' said Mr. Granick. ''But there were two lives saved.''</p>
+        <p>THE YEAR 2000: THE HOSPITALS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

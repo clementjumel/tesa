@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Pressure on Unions</title>
+    <meta content="LTR012133" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="16" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Business; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165562"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Labor</classifier>
+        <classifier class="indexing_service" type="descriptor">Labor Unions</classifier>
+        <person class="indexing_service">chaison, gary n (prof)</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Labor</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0DE6DA1038F931A35752C0A9669C8B63" item-length="274" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Pressure on Unions</hl1>
+      </hedline>
+      <abstract>
+        <p>Letter by Prof Gary N Chaison agrees with Dec 5 article that labor unions have to expand repertoire of services they offer and find ways to energize emerging work force and globalization</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>In a broad critique of American's unions (''A New Idea for Unions: Forget the Past,'' On the Contrary, Dec. 5) Daniel Akst was right when he said that labor unions, to be truly progressive and relevant, have to expand the repertoire of services they offer to prospective members and find ways to adjust to the emerging new work force and globalization.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>In a broad critique of American's unions (''A New Idea for Unions: Forget the Past,'' On the Contrary, Dec. 5) Daniel Akst was right when he said that labor unions, to be truly progressive and relevant, have to expand the repertoire of services they offer to prospective members and find ways to adjust to the emerging new work force and globalization.</p>
+        <p>But he was wrong to suggest that workers have lost interest in unions. Though only one in seven workers is a union member, surveys have  shown that roughly one-third of all nonunion workers want to be represented by unions in dealing with employers.</p>
+        <p>The problem is that they are not often given that choice. Most unions have been reluctant to use their resources to organize new members (and still are, despite their leaders' rhetoric). The typical employer fights union organizing campaigns with tactics like legal delays and intimidation of union supporters.  And labor laws make organizing difficult, time-consuming and expensive because they require elections, not membership cards, to prove union support.</p>
+        <p>GARY N. CHAISON  Worcester, Mass., Dec. 5</p>
+        <p>The writer is a professor of industrial relations at Clark University.</p>
+        <p>Money &amp; Business welcomes letters from readers. Letters must include the writer's name, address and telephone number and may be sent to Letters, Money &amp; Business, The New York Times, 229 West 43rd Street, New York, N.Y. 10036, or by e-mail to sunbiz@nytimes.com. Letters selected for publication may be abridged.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

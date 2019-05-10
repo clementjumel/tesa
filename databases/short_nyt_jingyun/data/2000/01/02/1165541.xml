@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Power of Electronic Commerce</title>
+    <meta content="02SUN3$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165541"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Retail Stores and Trade</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Editorials</classifier>
+        <classifier class="online_producer" type="types_of_material">Editorial</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Editorials</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Shopping</classifier>
+        <classifier class="online_producer" type="general_descriptor">Retail Stores and Trade</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=950DE2D81338F931A35752C0A9669C8B63" item-length="462" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Power of Electronic Commerce</hl1>
+      </hedline>
+      <abstract>
+        <p>Editorial on huge potential of electronic commerce, which is already reshaping retail markets</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>At first glance, sales over the Internet do not look impressive, accounting for between 0.3 and 3 percent of retail sales. But a survey released last week by the Boston Consulting Group and Shop.org, the trade association of online retailers, shows that e-commerce during the holiday season has quadrupled since last year, the first Christmas season for which Internet sales were important. E-commerce looks poised to transform entire sectors of the economy.</p>
+        <p>Internet sales have soared in apparel, books, music, specialty foods, electronics, financial services and travel. The rapid growth has created headaches. It turns out that designing a spiffy Web site for customers to click and order from is a lot easier than coordinating the mundane tasks of stocking popular items, pulling them off the shelves and shipping them on time to meet customer demands.</p>
+      </block>
+      <block class="full_text">
+        <p>At first glance, sales over the Internet do not look impressive, accounting for between 0.3 and 3 percent of retail sales. But a survey released last week by the Boston Consulting Group and Shop.org, the trade association of online retailers, shows that e-commerce during the holiday season has quadrupled since last year, the first Christmas season for which Internet sales were important. E-commerce looks poised to transform entire sectors of the economy.</p>
+        <p>Internet sales have soared in apparel, books, music, specialty foods, electronics, financial services and travel. The rapid growth has created headaches. It turns out that designing a spiffy Web site for customers to click and order from is a lot easier than coordinating the mundane tasks of stocking popular items, pulling them off the shelves and shipping them on time to meet customer demands.</p>
+        <p>Despite its small size, electronic commerce is already reshaping markets. Take term life insurance. Although few sales are completed over the Internet, premiums plummeted over the past two years, says Prof. Austan Goolsbee of the University of Chicago, as customers searched the Web for the best prices. Comparison shopping is one of the key ways in which the Internet is shifting market power from producers and distributors to ordinary consumers. Customers are also finding novel uses of the Web. Many are selling unwanted holiday gifts on eBay, the large online auctioneer.</p>
+        <p>Mr. Goolsbee makes a more subtle point about the impact of e-commerce. Brokers -- by which he means people in any industry who gather small pieces of information and sell services to consumers -- are vulnerable. Travel agents, stockbrokers, insurance agents and even car dealers fit this category. The Internet can replace brokers because it provides a fast, low-cost substitute way to sort information.</p>
+        <p>The Internet could also do for retailing and information services what the cable industry has done for television -- provide niche services. The bricks-and-mortar way of doing business imposes huge distribution costs that make it unprofitable for sellers to cater to small groups. By directly connecting consumers and producers, the Internet drastically cuts distribution costs and makes it potentially profitable to sell specialty music recordings and other such items, especially to higher-income families.</p>
+        <p>It is possible that Internet sales will turn out to be a fad. But markets powerfully drive businesses toward low-cost, convenient practices. There will be problems along the way, but the Internet will likely change the way America does business far beyond the habits of holiday shoppers.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

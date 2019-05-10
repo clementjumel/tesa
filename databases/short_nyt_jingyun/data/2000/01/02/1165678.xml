@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  HSIEH, JUI SHENG, PH.D.</title>
+    <meta content="DN010200" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165678"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">HSIEH, JUI SHENG, PH.D.</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A00E6D81138F931A35752C0A9669C8B63" item-length="209" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  HSIEH, JUI SHENG, PH.D.</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>HSIEH-Jui Sheng, Ph.D.. Age 78, of Southport, CT, beloved husband of Mary Wang Hsieh, died on Thursday, December 30, 1999 in Bridgeport, CT. Born in China, he came to the U.S. in 1948 and had lived in Belle Mead, NJ for 22 years before moving to CT in 1998. Dr. Hsieh graduated from Wuhan University in China in 1943, and earned his Masters Degree in Mechanical Engineering from the University of Kentucky in 1950 and his Ph.D. from Ohio State in 1955. He taught at the University of Bridgeport, then at New Jersey Institute of Technology for 31 years until his retirement in 1991. He authored 3 text books, ''Principles of Thermodynamics'' (McGraw-Hill), ''Solar Energy Engineering'' (PrenticeHall), and ''Engineering Thermodynamics'' (Prentice-Hall), and was listed in the World and America editions of ''Who's Who.'' In addition to his devoted wife of 38 years, he is survived by a son Lawrence and his wife Janice; two daughters, Esther and her husband William, Vivian and her husband Tad; four grandchildren;, one brother, Chi Sheng Hsieh; a stepbrother, Dong Sheng Hsieh; a stepsister, Zhou Ru Hsieh; many nieces and nephews. Private services will be held in CT. Memorials can be made to: The Bridgeport Hospital's Medical I.C.U., 267 Grant St, Bridgeport, CT 06610.</p>
+      </block>
+      <block class="full_text">
+        <p>HSIEH-Jui Sheng, Ph.D.. Age 78, of Southport, CT, beloved husband of Mary Wang Hsieh, died on Thursday, December 30, 1999 in Bridgeport, CT. Born in China, he came to the U.S. in 1948 and had lived in Belle Mead, NJ for 22 years before moving to CT in 1998. Dr. Hsieh graduated from Wuhan University in China in 1943, and earned his Masters Degree in Mechanical Engineering from the University of Kentucky in 1950 and his Ph.D. from Ohio State in 1955. He taught at the University of Bridgeport, then at New Jersey Institute of Technology for 31 years until his retirement in 1991. He authored 3 text books, ''Principles of Thermodynamics'' (McGraw-Hill), ''Solar Energy Engineering'' (PrenticeHall), and ''Engineering Thermodynamics'' (Prentice-Hall), and was listed in the World and America editions of ''Who's Who.'' In addition to his devoted wife of 38 years, he is survived by a son Lawrence and his wife Janice; two daughters, Esther and her husband William, Vivian and her husband Tad; four grandchildren;, one brother, Chi Sheng Hsieh; a stepbrother, Dong Sheng Hsieh; a stepsister, Zhou Ru Hsieh; many nieces and nephews. Private services will be held in CT. Memorials can be made to: The Bridgeport Hospital's Medical I.C.U., 267 Grant St, Bridgeport, CT 06610.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

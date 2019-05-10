@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>With No Doom and Gloom Web Users Must Celebrate</title>
+    <meta content="02CYBE$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="13" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Technology; U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165617"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THE YEAR 2000: THE INTERNET"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Computer Software</classifier>
+        <person class="indexing_service">Harmon, Amy</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computer Software</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A03EFDB1138F931A35752C0A9669C8B63" item-length="999" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>With No Doom and Gloom Web Users Must Celebrate</hl1>
+      </hedline>
+      <byline class="print_byline">By AMY HARMON</byline>
+      <byline class="normalized_byline">Harmon, Amy</byline>
+      <abstract>
+        <p>World's computers' success in making change from 1999 to 2000 is greeted with relief by Internet users, their sense of anticlimax tempered by a new sense of faith not so much in technology but in humanity's ability to harness it (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>By the time midnight struck in Maui, even the Internet's most dedicated harbingers of millennium doom had to concede that things had turned out better than they had expected.</p>
+        <p>''Does anyone still think TEOTWAWKI will happen??'' typed one presumably sleep-deprived Y2K watcher, using the favorite chat room shorthand for ''the end of the world as we know it.'' Her virtual comrades on Timebomb2000.com were remarkably silent.</p>
+      </block>
+      <block class="full_text">
+        <p>By the time midnight struck in Maui, even the Internet's most dedicated harbingers of millennium doom had to concede that things had turned out better than they had expected.</p>
+        <p>''Does anyone still think TEOTWAWKI will happen??'' typed one presumably sleep-deprived Y2K watcher, using the favorite chat room shorthand for ''the end of the world as we know it.'' Her virtual comrades on Timebomb2000.com were remarkably silent.</p>
+        <p>But as the year 2000 dawned in cyberspace, the sense of anticlimax was tempered by a new sense of faith not so much in technology but in humanity's ability to harness it.</p>
+        <p>''Noticed that a sense of global community was one of the take-away messages of the past 24 hours,'' said another posting, signed Diana. ''Whatever our challenges, and there will be many (not necessarily computer-related), these images of shared experience will be fixed in people's minds. It has the potential to make us stronger and more resilient.''</p>
+        <p>Whether it was because people stayed home to avoid technological disaster or because they logged on to make sure it had not happened, millions wove the Internet into their New Year's Eves. By midnight on the East Coast, the EarthCam site, which showed pictures of celebrations in every time zone, was receiving thousands of visitors a minute. America Online reported that its traffic dropped just before midnight and surged again immediately after.</p>
+        <p>As friends and families zapped e-mail updates across time zones, and the more ambitious broadcast their parties on the World Wide Web, many said the computer network made for a more intimate sense of world celebration than what they could watch on television.</p>
+        <p>Ross Himona, an educator in Wellington, New Zealand, wrote to a list of dozens of correspondents as his country slipped into the year 2000.</p>
+        <p>''I'm still here!!'' Mr. Himona said. ''The world didn't come to an end, the Universe seems intact, and the dreaded apocalyptic y2k bug didn't devour us all, I think. And the thousands of kids down at the Wellington waterfront couldn't care less. They're having a party. Are you all still out there? Or is New Zealand the only country to survive? Am I the only person left in the Universe? Speak to me someone!!''</p>
+        <p>Mr. Himona said he heard back from friends and relatives from Wales to Seattle as the night circled the globe. ''The Internet is person to person,'' he wrote in an e-mail message, ''like the small family celebration we had last night.''</p>
+        <p>At midnight in Bosnia, Elizabeth Sweeney, 26, a United States Army  captain stationed at Eagle Base in Tuzla, wrote to her boyfriend at Fort Knox, Ky. ''Happy yes i am,'' she said, ''and happy new year too, you make me happy. It is almost 1 am here. Fun little party. Lots of fake champagne spraying everywhere and lots of noise. I am sooo sleepy I am going now, before I REALLY fall asleep at the computer.''</p>
+        <p>Not all New Year's connections on Internet were quite so poignant. At midnight in Louisville, Colo., Shane Bower, 28, and his eight friends took a break from their computers to drink some Champagne. Mr. Bower's ''clan'' had been playing Quake, a computer game, both with each other and over the Internet with players around the world.</p>
+        <p>Every once in a while, Mr. Bower said, someone in some other time zone would type ''happy new year'' in the game's chat box and he would realize that something momentous was going on outside his game.</p>
+        <p>''Time is kind of meaningless when I turn on the computer,'' said Mr. Bower, a chemical engineer. ''All of a sudden it's six hours later, and this time, it was like, all of a sudden it's the new millennium.''</p>
+        <p>Several Web sites served as gathering places for engineers and novices alike to post observations of computer-related problems in their corner of the world, or lack thereof. At 1:23 a.m. in Dusseldorf, Germany, Udo Remmes, a radiologist, wrote to a site called Zone2000: ''No breakdowns or other problems. River Rhine still flowing. Dog and daughter sleeping. Bit more of fireworks tonight. Nearly same procedure as last year -- sorry -- as every year. However, happy New Year.''</p>
+        <p>From Manama, Bahrain, David Hyams, a retired businessman, also gave assurances to the world. ''All is well,'' Mr. Hyams, 74, wrote. ''Computer is working, the net is up, there is a dial tone, and lights are on. Best wishes to all.''</p>
+        <p>Mr. Hyams said he had talked with his daughter, Amy, in San Francisco earlier in the evening using Yahoo Messenger, a program that allows voice chat over the Internet.</p>
+        <p>On the online auction site eBay, some people's concerns were more prosaic. Bidding continued through the night, except for two periods when the company took its servers offline for Y2K-related maintenance.</p>
+        <p>''Looking for small grandfather clocks that stand anywhere from 10 inches to 2 feet in height,'' one bidder with an America Online e-mail address said in a posting shortly after midnight. ''Can anyone help?</p>
+        <p>In the eBay online cafe, another person was offering ''100 batteries, 200 gallons bottled water, 300 hundred rounds 30/06, etc. -- cheap!!!''</p>
+        <p>Of course, some of those who had actually collected such supplies were not yet ready to laugh about it on New Year's Day.</p>
+        <p>''We always knew this wasn't a one-day event,'' one defiant doomsayer wrote on a Year 2000 preparedness site. ''We have to wait and see what happens.''</p>
+        <p>''Well, Happy New Year anyway,'' responded someone who signed himself Yawn2K. ''Better luck next apocalypse, survivalists.''</p>
+        <p>THE YEAR 2000: THE INTERNET</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Foreign Affairs; Boston E-Party</title>
+    <meta content="01FRIE" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="31" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165171"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Presidential Election of 2000</classifier>
+        <classifier class="indexing_service" type="descriptor">Taxation</classifier>
+        <classifier class="indexing_service" type="descriptor">Privacy</classifier>
+        <classifier class="indexing_service" type="descriptor">Freedom of Speech and Expression</classifier>
+        <classifier class="indexing_service" type="descriptor">Sales Tax</classifier>
+        <classifier class="indexing_service" type="descriptor">Retail Stores and Trade</classifier>
+        <classifier class="indexing_service" type="descriptor">United States Politics and Government</classifier>
+        <classifier class="indexing_service" type="descriptor">Libel and Slander</classifier>
+        <person class="indexing_service">Friedman, Thomas L</person>
+        <classifier class="online_producer" type="types_of_material">Op-Ed</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed/Columnists</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed/Columnists/Thomas L Friedman</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Shopping</classifier>
+        <classifier class="online_producer" type="general_descriptor">Libel and Slander</classifier>
+        <classifier class="online_producer" type="general_descriptor">Retail Stores and Trade</classifier>
+        <classifier class="online_producer" type="general_descriptor">Privacy</classifier>
+        <classifier class="online_producer" type="general_descriptor">Speech</classifier>
+        <classifier class="online_producer" type="general_descriptor">Freedom of Speech and Expression</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Sales</classifier>
+        <classifier class="online_producer" type="general_descriptor">Sales Tax</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Taxation</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Elections</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidents and Presidency (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">United States Politics and Government</classifier>
+        <classifier class="online_producer" type="general_descriptor">Politics and Government</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9402E0DA1038F932A35752C0A9669C8B63" item-length="935" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Foreign Affairs; Boston E-Party</hl1>
+      </hedline>
+      <byline class="print_byline">By THOMAS L. FRIEDMAN</byline>
+      <byline class="normalized_byline">Friedman, Thomas L</byline>
+      <abstract>
+        <p>Thomas L Friedman column marvels that none of the candidates running for president are talking about the Internet, even though it is transforming the world in which we live; says that in coming years Internet is going to bring on a national sales tax, change relations between cities, states and federal government and require a rethinking of issues like free speech, libel and privacy (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Last summer I was changing planes at Singapore's swank new airport, which has lounges spread all over, at which transit passengers can watch satellite TV. As I walked through the airport, I bought a snack and sat down in one of these lounges. There I found two elderly Indian women, in traditional sari robes, watching American professional wrestling. These two petite Indian ladies were sitting transfixed, gazing at huge wrestlers in Tarzan suits body-slamming one another. All I could think was: ''What in the world are they making of this?''</p>
+        <p>I've thought back on that scene often, because it captured an essential truth about the world we are about to enter -- a world increasingly without walls in which countries, cultures and economies are going to meet, and wrestle with, each other so much more directly -- for better and for worse. For months Cisco Systems, makers of the Internet, have been running an ad showing young people from all corners of the earth asking: ''Are you ready?''</p>
+        <p>I'm afraid we're not. There's an old adage in the computer business that the hardware always runs ahead of the software. That is, the computer and chip makers are always building faster machines that the software writers have to catch up with. It's true of people, too. As we enter the new millennium the agents of change in our lives -- the technologies and networks that are tearing down walls, weaving us together and forcing us all to speed up, downsize, download, integrate and streamline -- are running ahead of the human capacity to adjust and absorb. Our computers and robots may be Y2K ready, but our bodies and our politics are not.</p>
+      </block>
+      <block class="full_text">
+        <p>Last summer I was changing planes at Singapore's swank new airport, which has lounges spread all over, at which transit passengers can watch satellite TV. As I walked through the airport, I bought a snack and sat down in one of these lounges. There I found two elderly Indian women, in traditional sari robes, watching American professional wrestling. These two petite Indian ladies were sitting transfixed, gazing at huge wrestlers in Tarzan suits body-slamming one another. All I could think was: ''What in the world are they making of this?''</p>
+        <p>I've thought back on that scene often, because it captured an essential truth about the world we are about to enter -- a world increasingly without walls in which countries, cultures and economies are going to meet, and wrestle with, each other so much more directly -- for better and for worse. For months Cisco Systems, makers of the Internet, have been running an ad showing young people from all corners of the earth asking: ''Are you ready?''</p>
+        <p>I'm afraid we're not. There's an old adage in the computer business that the hardware always runs ahead of the software. That is, the computer and chip makers are always building faster machines that the software writers have to catch up with. It's true of people, too. As we enter the new millennium the agents of change in our lives -- the technologies and networks that are tearing down walls, weaving us together and forcing us all to speed up, downsize, download, integrate and streamline -- are running ahead of the human capacity to adjust and absorb. Our computers and robots may be Y2K ready, but our bodies and our politics are not.</p>
+        <p>Well then, some people say, let's put the walls back up, put some sand in the gears and slow down the world -- not so I can get off, but so I can stay on! Not so easy. Every time you try to rebuild a wall, some new technology comes along and erases it. We have no choice but to adjust.</p>
+        <p>You'd never know that, though, listening to the presidential candidates. We have candidates out in Iowa debating ethanol while the Internet is transforming the world, and it doesn't even get a mention. That's because, for the moment, the Internet is primarily ripping apart, and radically restructuring, business and shopping. But in the next decade its creative destruction will hit education and government with full force.</p>
+        <p>''None of the candidates are talking about this at all,'' remarked one Internet exec, ''but then I guess if any of them really understood the magnitude of the changes that are coming in the next eight years they'd never run for office.''</p>
+        <p>Steve Case, the head of America Online, put it to me best: ''I think we need to reconvene the Founding Fathers.'' I agree, because the next decade is going to be as revolutionary and creative a period in American politics as was the period between the Declaration of Independence in 1776 and the Constitutional Convention in 1787.</p>
+        <p>The fuse will be e-commerce and a new Boston Tea Party, led by governors and mayors throwing computers overboard. Because as they discover that their tax base is being lost to untaxed Internet commerce, we will have to move to a national sales tax. This will require a restructuring of relations between cities, states and the federal government. Issues such as freedom of speech and libel are going to have to be rethought as the Internet makes everyone a potential publisher in cyberspace -- but with no censor or editor in charge. Privacy protection is going to have to be rethought in a world where for $39 Web sites will search out anyone's assets and home address for you. And our safety nets are going to have to be rethought in a world in which access to the Internet is going to be viewed as a human right, essential for basic survival -- especially as governments move more services to the Web. (Are you going to wait in line for hours at city hall to get a license renewed when you can now buy your whole car with one click on the Web?)</p>
+        <p>Getting through this transition is going to require the best of America, and for America to be at its best and help others. The best of America was that unique blend of wisdom and fresh, youthful thinking of the Founding Fathers. To re-engineer our society and country we're going to have to revive that youthful, radically creative spirit. This may be the millennium, but it's no time for us to get old.</p>
+        <p>I was once asked what I wished Israel on its 50th birthday, and I said I hoped it would always remain true to the last lines of Bob Dylan's ballad ''Forever Young.'' I wish that even more for America today: ''May your hands always be busy / May your feet always be swift / May you have a strong foundation when the winds of changes shift / May your heart always be joyful / May your song always be sung / May you stay forever young.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

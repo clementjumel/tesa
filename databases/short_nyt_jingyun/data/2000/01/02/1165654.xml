@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Reducing Hospital Error</title>
+    <meta content="LTR010409" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165654"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Medicine and Health</classifier>
+        <classifier class="indexing_service" type="descriptor">Standards and Standardization</classifier>
+        <classifier class="indexing_service" type="descriptor">Hospitals</classifier>
+        <person class="indexing_service">Mortman, Irwin</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Standards and Standardization</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hospitals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B07E3D91138F931A35752C0A9669C8B63" item-length="194" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Reducing Hospital Error</hl1>
+      </hedline>
+      <abstract>
+        <p>Irwin Mortman letter on pitfalls of accepting '99 percent' perfection by hospitals (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>Re ''Ambitious Effort to Cut Mistakes in U.S. Hospitals'' (front page, Dec. 26): One needs the proper perspective when trying to improve quality. Most of us would think 99 percent perfection would be adequate, and that 99.9 percent would be even better.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>Re ''Ambitious Effort to Cut Mistakes in U.S. Hospitals'' (front page, Dec. 26): One needs the proper perspective when trying to improve quality. Most of us would think 99 percent perfection would be adequate, and that 99.9 percent would be even better.</p>
+        <p>But according to an article in INC magazine, 99.9 percent quality means one hour of unsafe drinking water every month; two unsafe landings a day at O'Hare Airport, and 16,000 pieces of mail lost by the Post Office every hour.</p>
+        <p>It also means 20,000 incorrect drug prescriptions a year; 500 incorrect surgical operations a week; 50 newborn babies dropped at birth every day; 22,000 checks deducted from the wrong bank account every hour, and 32,000 missed heartbeats a person every year.</p>
+        <p>IRWIN MORTMAN  Cincinnati, Dec. 27, 1999</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

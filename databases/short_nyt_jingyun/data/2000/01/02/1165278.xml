@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Residential Sales</title>
+    <meta content="02RESA$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Real Estate Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="11" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Real Estate" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165278"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="online_producer" type="types_of_material">List</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9807E5DC1E39F931A35752C0A9669C8B63" item-length="1276" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Residential Sales</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>In the following reports, the "listed at" price is the asking price when negotiations began that ended in the sale. Time on market is from the most recent listing to contract.</p>
+        <p>MANHATTAN</p>
+        <p>EAST MIDTOWN</p>
+        <p>$775,000  721 Fifth Avenue (56th St.)  (Trump Tower)  1-bedroom, 1 1/2-bath, 1,100-sq.-ft. condo in a postwar building; 24-hr. doormen, concierge, h/w floors, c/a, 3 exposures, Central Park view; common charges $1,230, taxes $10,992, listed at $775,000, 24 weeks on market (Broker: Halstead Property Co.)</p>
+      </block>
+      <block class="full_text">
+        <p>In the following reports, the "listed at" price is the asking price when negotiations began that ended in the sale. Time on market is from the most recent listing to contract.</p>
+        <p>MANHATTAN</p>
+        <p>EAST MIDTOWN</p>
+        <p>$775,000  721 Fifth Avenue (56th St.)  (Trump Tower)  1-bedroom, 1 1/2-bath, 1,100-sq.-ft. condo in a postwar building; 24-hr. doormen, concierge, h/w floors, c/a, 3 exposures, Central Park view; common charges $1,230, taxes $10,992, listed at $775,000, 24 weeks on market (Broker: Halstead Property Co.)</p>
+        <p>MURRAY HILL</p>
+        <p>$725,000  140 East 28th Street  1-bedroom, 1-bath, 1,000-sq.-ft. penthouse co-op in a prewar building; renovated kitchen, marble bath, gas fireplace, greenhouse, 2 terraces, 2 exposures; maintenance $1,291, 52% tax-deductible, listed at $725,000, 2 weeks on market (Broker: Coldwell Banker/Hunt Kennedy)</p>
+        <p>UPPER EAST SIDE</p>
+        <p>$850,000  404 East 66th Street  (Hardenbrook House)  2-bedroom, 2 1/2-bath, 1,265-sq.-ft. condo in a postwar building; 24-hr. doormen, concierge, marble baths, fireplace, corner unit with wraparound terrace, washer/dryer in unit; common charges $745, taxes $8,136, listed at $875,000, 2 weeks on market (Broker: Douglas Elliman)</p>
+        <p>UPPER EAST SIDE</p>
+        <p>$600,000  425 East 86th Street  2-bedroom, 2-bath, 1,200-sq.-ft. co-op in a prewar building; manned elevator, dining room, windowed kitchen, high beamed ceilings, fireplace, 2 exposures, original molding and detail; maintenance $1,360, 52% tax-deductible, listed at $625,000, 10 weeks on market (Broker: Corcoran Group)</p>
+        <p>UPPER WEST SIDE</p>
+        <p>$338,000  60 Riverside Drive (76th St.)  1-bedroom, 1-bath, 750-sq.-ft. co-op in a prewar building; 24-hr. doormen, high ceilings, h/w floors, terrace, west exposure, Hudson River view; maintenance $774, 45% tax-deductible, listed at $338,000, 13 weeks on market (Broker: Bellmarc)</p>
+        <p>BRONX  CITY ISLAND</p>
+        <p>$200,000  670 Minneford Avenue  1-bedroom, 1-bath, 60-year-old bungalow; eat-in kitchen, den, front porch, full basement, 25-  by 100-ft. lot; taxes $1,150, listed at $210,000, 1 week on market (Broker: City Island Real Estate)</p>
+        <p>MONTEFIORE HOSP. AREA</p>
+        <p>$44,000  3520 Tryon Avenue  2-bedroom, 1-bath, 825-sq.-ft. co-op in a postwar building; elevator, dining foyer, h/w floors; maintenance $474, 50% tax-deductible, listed at $46,500, 17 weeks on market (Broker: Jeskill)</p>
+        <p>BROOKLYN</p>
+        <p>EAST WILLIAMSBURG</p>
+        <p>$193,000  229 Frost Street  2-family, 70-year-old attached house; 3 bedrooms in primary unit; 1 bedroom in other; 1 bath in each; full basement, needs renovation; taxes $700, listed at $210,000, 2 weeks on market (Broker: Kline)</p>
+        <p>PARK SLOPE</p>
+        <p>$525,000  47 Plaza Street  2-bedroom, 2-bath, 1,700-sq.-ft. co-op in a prewar building; 24-hr. doormen, manned elevator, dining room, renovated kitchen and bath, Manhattan skyline view; maintenance $1,473, 30% tax-deductible, listed at $529,000, 17 weeks on market (Brokers: Coldwell Banker/Hunt Kennedy Cranford; Aguayo &amp; Huebener)</p>
+        <p>WINDSOR TERRACE</p>
+        <p>$189,000  261 Prospect Park West  1-bedroom, 1-bath, 800-sq.-ft. condo in a prewar limestone building; renovated kitchen and bath, oak floors, patio and garden; common charges $244, taxes $347, listed at $189,000, 1 week on market (Broker: Brooklyn Properties of 7th Avenue)</p>
+        <p>QUEENS</p>
+        <p>FLUSHING</p>
+        <p>$425,000  159-09 32nd Street  4-bedroom, 1 1/2-bath, 70-year-old detached house; dining room, eat-in kitchen, den, fireplace, new windows, 1-car garage, 55-  by 100-ft. lot; taxes $2,170, listed at $445,000, 8 weeks on market (Broker: ReMax/Millennium)</p>
+        <p>FOREST HILLS</p>
+        <p>$277,000  67-129 Dartmouth Street  3-bedroom, 1-bath, 55-year-old attached town house; dining room, eat-in kitchen, finished basement, 1-car garage, 18-  by 100-ft. lot; taxes $1,700, listed at $285,000, 6 weeks on market (Broker: Kingdom)</p>
+        <p>STATEN ISLAND</p>
+        <p>ELTINGVILLE</p>
+        <p>$215,000  381 Lyndale Avenue  3-bedroom, 1-bath, 44-year-old ranch; eat-in kitchen, 1-car garage, 65-  by 90-ft. lot; taxes $1,482, listed at $215,000, 1 week on market (Broker: Salmon)</p>
+        <p>WESTCHESTER</p>
+        <p>BRONXVILLE</p>
+        <p>$420,000  41 Sagamore Road  4-bedroom, 2-bath, 86-year-old town house; front and back terraces, entry hall, fireplace, dining room, family room, 2 parking spaces; taxes $10,200, listed at $450,000, 16 weeks on market (Brokers: Houlihan/Lawrence; Prudential Ragette)</p>
+        <p>IRVINGTON</p>
+        <p>$700,000  9 Janet Terrace  4-bedroom, 3 1/2-bath, 34-year-old colonial; modern eat-in kitchen, family room, sauna, patio, attached 2-car garage, full finished basement, .62 acres; taxes $14,665, listed at $719,000, 29 weeks on market (Brokers: Peter J. Riolo; Houlihan/Lawrence)</p>
+        <p>EASTCHESTER</p>
+        <p>$257,500  75 Joyce Road  3-bedroom, 1 1/2-bath, 49-year-old Cape Cod; entry hall, fireplace, dining room, eat-in kitchen, powder room, attached garage, fenced yard; taxes $6,575, listed at $279,000, 14 weeks on market (Brokers: Claire D. Leone Associates; Prudential Ragette)</p>
+        <p>SCARSDALE</p>
+        <p>$682,500  2 Rectory Lane  4-bedroom, 3 1/2-bath, 62-year-old colonial; 1,000-sq.-ft. wraparound patio, modern eat-in kitchen, family room, office, playroom, .40 acre; taxes $14,300, listed at $699,000, 27 weeks on market (Brokers: Prudential Ragette; Prudential Centennial)</p>
+        <p>CONNECTICUT</p>
+        <p>COS COB</p>
+        <p>$250,000  9 River Road  (Palmer Point)  1-bedroom, 1-bath, 960-sq.-ft. condo in a 20-year-old building; dining area, fireplace, terrace, 1-car garage; common charges $290, taxes $3,785, listed at $259,000, 21 weeks on market (Brokers: Ogilvy &amp; Associates; Coldwell Banker/Greenwich)</p>
+        <p>ORANGE</p>
+        <p>$525,000  402 Northwood Drive  4-bedroom, 3 1/2-bath, 6-year-old colonial; 2-story entry foyer, dining room, family room, study, library, 2-car garage, 1.6-acre lot; taxes $6,668, listed at $525,000, 2 weeks on market (Broker: William Orange)</p>
+        <p>WESTON</p>
+        <p>$450,000  24 Deepwood Road  3-bedroom, 3-bath, 15-year-old contemporary; great room w/fireplace, dining area, h/w floors, c/a, Jacuzzi, 1-car garage, 2.28-acre lot; taxes $7,164, listed at $465,000, 45 weeks on market (Brokers: William Pitt; William Raveis)</p>
+        <p>LONG ISLAND</p>
+        <p>GREAT NECK ESTATES</p>
+        <p>$520,000  24 Elm Street  5-bedroom, 5-bath, 60-year-old colonial; eat-in kitchen, finished basement, patio, 1-car garage; taxes $5,100, listed at $599,999, 7 weeks on market (Broker: Great Neck Realty, Better Homes and Gardens)</p>
+        <p>OYSTER BAY</p>
+        <p>$250,000  27 Irving Place  4-bedroom, 2-bath, 75-year-old colonial; eat-in kitchen, basement, attic, 2 porches; taxes $2,800, listed at $245,000 (multiple bids), 1 week on market (Broker: Douglas Elliman-Jane Hayes)</p>
+        <p>SYOSSET</p>
+        <p>$277,000  54 Fieldstone Drive  4-bedroom, 2-bath, 49-year-old Cape Cod; finished basement, deck, 1-car garage; taxes $4,600, listed at $319,000, 5 weeks on market (Brokers: ERA Gatewood; Century 21 Benjamin Birch Tree)</p>
+        <p>NEW JERSEY</p>
+        <p>GLEN ROCK</p>
+        <p>$330,000  26 Bradford Street  4-bedroom, 2-bath, 50-year-old Cape Cod; porch, fireplace, den, eat-in kitchen, dining room; taxes $7,978, listed at $330,000, 1 week on market (Brokers: Atlantic Real Estate Better Homes &amp; Gardens; Weichert)</p>
+        <p>HOWELL</p>
+        <p>$176,000  38 New Friendship Road  3-bedroom, 2 1/2-bath, 11-year-old colonial; 2-car garage, eat-in kitchen, fireplace; taxes $4,005, listed at $179,900, 5 months on market (Broker: Prudential New Jersey)</p>
+        <p>RAMSEY</p>
+        <p>$250,000  893 Somerset Court  2-bedroom, 2-bath, 9-year-old town house condo; c/a, 1-car garage, cathedral ceilings; common charges $205, taxes $4,342, listed at $254,900, 1 day on market (Broker: Coldwell Banker)</p>
+        <p>TRENTON</p>
+        <p>$175,000  116 Buckingham Avenue  5-bedroom, 2 1/2-bath, 72-year-old Tudor; 2-car garage, family room, full basement, eat-in kitchen, fireplace, library; taxes $5,677, listed at $179,900, 3 months on market (Broker: Weidel)</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

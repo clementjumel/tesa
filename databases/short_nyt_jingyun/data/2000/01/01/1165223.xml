@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A New Meaning For Automatic</title>
+    <meta content="01CLAB$07" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Technology" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165223"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: TECHNOLOGY: QUANTUM COMPUTERS AND CARS SMARTER THAN YOU ARE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Automobiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Research</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <org class="indexing_service">Daimlerchrysler Ag</org>
+        <person class="indexing_service">Metzler, Hans-Georg</person>
+        <person class="indexing_service">Andrews, Edmund L</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Road Trips</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Automobiles/Topics/Automobile Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Research</classifier>
+        <classifier class="online_producer" type="general_descriptor">Automobiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901E7D91030F932A35752C0A9669C8B63" item-length="931" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A New Meaning For Automatic</hl1>
+      </hedline>
+      <byline class="print_byline">By Edmund L. Andrews</byline>
+      <byline class="normalized_byline">Andrews, Edmund L</byline>
+      <dateline>STUTTGART, Germany</dateline>
+      <abstract>
+        <p>Hans-Georg Metzler, who heads research on 'machine understanding' at DaimlerChrysler in Stuttgart, Germany, says a car will one day be able to take information from its surroundings and put it to use much as the human brain does; foresees 'drive-by-wire' systems that would fundamentally change the relationship between driver and car (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>HANS-GEORG METZLER envisions the day when he has conversations with his car.</p>
+        <p>It will tell him about traffic jams and predict where new ones probably will develop. It will watch for jaywalkers and warn him if he seems not to have noticed a stop sign ahead. It will listen for unusual engine noises, run diagnostic tests and report any problems. And if he gets caught in slow-moving highway traffic, his car can take over the controls, keeping a safe distance behind the vehicle ahead.</p>
+      </block>
+      <block class="full_text">
+        <p>HANS-GEORG METZLER envisions the day when he has conversations with his car.</p>
+        <p>It will tell him about traffic jams and predict where new ones probably will develop. It will watch for jaywalkers and warn him if he seems not to have noticed a stop sign ahead. It will listen for unusual engine noises, run diagnostic tests and report any problems. And if he gets caught in slow-moving highway traffic, his car can take over the controls, keeping a safe distance behind the vehicle ahead.</p>
+        <p>''It will be a dialogue,'' said Mr. Metzler, who heads research on ''machine understanding'' at DaimlerChrysler here. ''The car will be taking information from its surroundings and putting it to use. That is the function of a brain.''</p>
+        <p>Mr. Metzler is at the crossroad of automobiles and computing. It is a clash of different traditions: one, a neo-Newtonian world grounded in heavy metal and seemingly immutable laws of motion, inertia and gravity; the other, a quicksilver world of molecular electronics and algorithms in which the speed limits constantly double.</p>
+        <p>Cars have been getting smarter for years. On-board navigation systems can map the best route to a destination and tell drivers if they make a wrong turn. Some top-of-the-line Mercedes-Benz models can warn drivers when they get too close to other cars.</p>
+        <p>But for people like Mr. Metzler, that is just a start. He is convinced that the future of cars is in ''drive-by-wire'' systems that would fundamentally change the relationship between driver and car.</p>
+        <p>Consider Daimler's somewhat bizarre ''side-stick'' car, a sporty yellow Mercedes coupe that has no steering wheel and no pedals for either braking or accelerating. Instead, all controls are on joysticks to the right and left of the driver.</p>
+        <p>Press forward on either one or both of the joysticks and the car accelerates. Pull backward and the car brakes. Push to the right or left and the car turns accordingly.</p>
+        <p>Why do it? Daimler engineers say the joystick car is much simpler to control than traditional vehicles because everything can be done in one fluid move of the hand. Moreover, the on-board electronic systems simulate a feeling of the road conditions in the joystick, which moves more freely if the wheels are spinning on ice and more slowly if the car is starting up a steep incline.</p>
+        <p>''You have the feeling you have full control right in the grip of your hand,'' said Lutz Eckstein, 31, an engineer who wrote some of the algorithms and has tested the car.</p>
+        <p>In tests, Mr. Metzler said, 17-year-old novice drivers seemed to handle the car well. But people accustomed to conventional vehicles had a much harder time.</p>
+        <p>Daimler executives do not know whether they will ever try to market such a car. The idea, they say, is mainly to show that advanced electronics make it possible to think about car design in entirely new ways.</p>
+        <p>Social and political acceptance will also affect the future of ever more intelligent vehicles. Klaus-Dieter Vohringer, DaimlerChrysler's managing director in charge of research, is convinced that technology makes it possible to have accident-free traffic in the next 10 or 20 years.</p>
+        <p>B UT it may take much longer before drivers or regulators accept it. Cars could see and hear the world around them. They would not only warn drivers about trouble but would be allowed to take partial control.</p>
+        <p>One glimpse of the future is Daimler's experimental ''urban transit assistant.'' Video cameras produce three-dimensional images of the road. An on-board computer matches the stream of incoming images with a library of images of pedestrians, traffic signs and potential barriers. It then highlights important images of things to stop for and pay attention to in blue or red.</p>
+        <p>Many Daimler engineers think it would be dangerous in practice to flash such images in front of drivers. But the system could warn drivers with alarms or spoken words.</p>
+        <p>The bigger issues are about control and trust in technology. Should cars of the future simply do more to warn drivers or should they sometimes take over the controls?</p>
+        <p>Daimler is already campaigning for governments to approve what it calls an electronic tow bar, a system that would regulate the speed and distance between trucks in a convoy. The technology would enable trucks to reduce wind resistance and save fuel by bunching together, Daimler engineers say.</p>
+        <p>Looking further ahead, engineers here are convinced that cars will be able to anticipate collisions. Cars would also continuously monitor road conditions and surrounding traffic. They would beam a constant stream of reports over wireless networks to regional traffic authorities.</p>
+        <p>Drivers might give up some control. On highways, they could leave it to the cars to keep a safe distance from one another. In a possible collision, cars might even communicate on their avoidance strategy.</p>
+        <p>All this could detract from the thrill of  being in full command of a high-performance car. But it may happen anyway.</p>
+        <p>''Driving is fun, and customer preferences must always be on the agenda,'' Mr. Vohringer said. ''But if there is a situation where the human being is not capable of reacting, then the technology should be able to react to dangers.''</p>
+        <p>VISIONS: TECHNOLOGY: QUANTUM COMPUTERS AND CARS SMARTER THAN YOU ARE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

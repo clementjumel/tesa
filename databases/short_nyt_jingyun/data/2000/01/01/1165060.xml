@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Elite Survivors Race Toward Cup</title>
+    <meta content="01BOAT" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="D" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165060"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="YACHT RACING"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Boats and Boating</classifier>
+        <classifier class="indexing_service" type="descriptor">America's Cup</classifier>
+        <location class="indexing_service">New Zealand</location>
+        <person class="indexing_service">Mccormick, Herb</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/New Zealand</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Asia Pacific</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Boating</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Australia and Pacific</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Australia and Pacific/New Zealand</classifier>
+        <classifier class="online_producer" type="general_descriptor">America's Cup</classifier>
+        <classifier class="online_producer" type="general_descriptor">Boats and Boating</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E07EFDB1338F932A35752C0A9669C8B63" item-length="962" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Elite Survivors Race Toward Cup</hl1>
+      </hedline>
+      <byline class="print_byline">By HERB McCORMICK</byline>
+      <byline class="normalized_byline">Mccormick, Herb</byline>
+      <abstract>
+        <p>Cruising World exec editor Herb McCormick article notes that victor in Louis Vuitton challengers series will challenge Team New Zealand for America's Cup; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>It has already been a nautical war of attrition, but the truly critical battles in the run-up to decide who will challenge Team New Zealand for the America's Cup have yet to be engaged. What amounts to the regular season of the Cup tournament is over, however, and, as the Nippon Challenge skipper Peter Gilmour says, the ''real regatta'' is now at hand.</p>
+        <p>Tomorrow, off Auckland, New Zealand, the six remaining syndicates from the original field of 11 will pair off in the opening races of the semifinals of the Louis Vuitton challengers series. The format is simple: the semifinals are a double round robin in which each boat will sail against its opponents twice. Points accumulated during the three previous rounds have been discarded, so each boat begins with a clean slate.</p>
+      </block>
+      <block class="full_text">
+        <p>It has already been a nautical war of attrition, but the truly critical battles in the run-up to decide who will challenge Team New Zealand for the America's Cup have yet to be engaged. What amounts to the regular season of the Cup tournament is over, however, and, as the Nippon Challenge skipper Peter Gilmour says, the ''real regatta'' is now at hand.</p>
+        <p>Tomorrow, off Auckland, New Zealand, the six remaining syndicates from the original field of 11 will pair off in the opening races of the semifinals of the Louis Vuitton challengers series. The format is simple: the semifinals are a double round robin in which each boat will sail against its opponents twice. Points accumulated during the three previous rounds have been discarded, so each boat begins with a clean slate.</p>
+        <p>Each victory in the semifinals is worth a point. The top two scoring boats will advance to the best-of-nine-race challengers finals, which begin on Jan. 25. The victor earns a shot at the Kiwis in the America's Cup match in February.</p>
+        <p>In the opening match-ups, Italy's Prada Challenge faces Dawn Riley's San Francisco-based America True; Japan's Nippon Challenge meets Team Dennis Conner's Stars &amp; Stripes, and another San Francisco entry, Paul Cayard's America One, races France's Le Defi.</p>
+        <p>Coincidentally, the initial pairings are a clean split between the seeming haves and the have-nots: Prada, Nippon and America One are all well-funded, two-boat teams that fully expected to make the semifinals; America True, Stars &amp; Stripes, and Le Defi are one-boat programs that, to one degree or another, have been something of a surprise.</p>
+        <p>Surprise was a recurring theme in Cup circles last week. On Thursday, Nippon's Gilmour and the Prada skipper Francesco de Angelis disclosed that they would sail the semifinals aboard boats they had used in the opening two rounds of the event before putting them up in favor of newer boats. Both of the earlier designs were assumed to have been retired from further competition. Though neither sailor would mention specifics, clearly each yacht must have undergone significant revisions in the intervening weeks.</p>
+        <p>Still, those announcements were nothing compared to the bomb Gilmour dropped Wednesday, when he broke ranks from an informal pact made among all the challengers and spent four hours in a rigorous training session with Team New Zealand.</p>
+        <p>''It's pretty clear that the Japanese didn't make any friends yesterday,'' the Stars &amp; Stripes helmsman Kenny Read said in a telephone interview from Auckland.</p>
+        <p>Gilmour defended his actions. ''I do realize a lot of people are annoyed and upset and think that it's not a good thing to be doing,'' he said. ''I think the perspective to put on it is: this is a sporting event for friendly competition. Whether you are a challenger or defender, ultimately there is only going to one winner and through all of sport you have to let that winner come through and show the goods.''</p>
+        <p>The actual amount of useful information gleaned by either camp is impossible to gauge. In fact, if anyone holds a trump card, it may be America One. Yesterday, Cayard revealed that he would sail his second boat, USA 61, in the semifinal round. It is the lone boat in Auckland yet to be tested in competition, and thus its potential is unknown.</p>
+        <p>''Our first boat, USA 49, has seen every other boat here,'' Cayard said in a recent interview. ''It's a very good benchmark against the competition. The only boat that hasn't been seen by the others is USA 61. So the plan is to optimize 61 so that she can beat 49 in every single condition.''</p>
+        <p>Cayard, who by all accounts is oozing confidence, has spent the past several weeks working to implement that plan. The question many have is: will it make a difference?</p>
+        <p>''If it's a similar boat to 49, no,'' Read said. ''But if there's something radical that they've tripped over or figured out scientifically, then, yes, it could be a huge advantage.''</p>
+        <p>However, Read also feels that, in the Hauraki Gulf's fluky winds and challenging currents, the sailors play as big a role as the boats. ''Match racing here is different than anywhere else in the world,'' he said. ''You have to sail your own race because it's so streaky and puffy. You can go from well ahead to well behind in a heartbeat.''</p>
+        <p>Even so, Read believes Stars &amp; Stripes and the other single-boat squads are still firm underdogs entering the semifinals, a matter his team has addressed by hooking up with America True and Le Defi for some unofficial scrimmaging over the past two weeks. ''It's one way to try and quantify the little changes we've made to the boat,'' he said.</p>
+        <p>Handicapping the others, he said: ''Prada seems to sail very well on their own, they have a fleet-race mentality and worry about their own race. The Nippon guys are more like street fighters. Cayard's group is kind of in between.''</p>
+        <p>Read seems to relish his team's underdog role. ''There was serious pressure leading up to this round, people who expected to be here have gone home,'' he said. ''Now the pressure's off. We started late but, you know, we're still sticking around.''  YACHT RACING</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

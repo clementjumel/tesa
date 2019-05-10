@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Do-It-Yourself Coat</title>
+    <meta content="02COAT$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Style Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165436"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="PULSE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Apparel</classifier>
+        <person class="indexing_service">Powers, Bill</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Fashion, Beauty and Fitness</classifier>
+        <classifier class="online_producer" type="general_descriptor">Apparel</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07E2DB1538F931A35752C0A9669C8B63" item-length="251" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Do-It-Yourself Coat</hl1>
+      </hedline>
+      <byline class="print_byline">By BILL POWERS</byline>
+      <byline class="normalized_byline">Powers, Bill</byline>
+      <abstract>
+        <p>Photos of sleeping bags turned into party costumes (Pulse column) (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>At the last VH1 Fashion Awards, Andy Dick did a comedy sketch posing as a caustic clothing designer wearing a Pokemon sleeping bag styled into a sleeved cape (above right). The outfit was worn to poke fun at designers like Donna Karan, Jean-Paul Gaultier and Jean-Charles de Castelbajac, who all promoted blanketlike outerwear this fall.</p>
+        <p>I, too, laughed but then thought, ''Why not?'' Anything handcrafted is revered these days, and surely it would be better than donning my ''Drugstore Cowboy'' leather jacket for yet another winter. Besides, Martin Margiela's goose-down duvet ($1,200) would put a deep freeze on my bank account.</p>
+      </block>
+      <block class="full_text">
+        <p>At the last VH1 Fashion Awards, Andy Dick did a comedy sketch posing as a caustic clothing designer wearing a Pokemon sleeping bag styled into a sleeved cape (above right). The outfit was worn to poke fun at designers like Donna Karan, Jean-Paul Gaultier and Jean-Charles de Castelbajac, who all promoted blanketlike outerwear this fall.</p>
+        <p>I, too, laughed but then thought, ''Why not?'' Anything handcrafted is revered these days, and surely it would be better than donning my ''Drugstore Cowboy'' leather jacket for yet another winter. Besides, Martin Margiela's goose-down duvet ($1,200) would put a deep freeze on my bank account.</p>
+        <p>I found my ''Star Wars'' children's indoor sleeping bag at Bradlees department store in Union Square, although Toys ''R'' Us stocks a fine variety as well ($30 and under) often featuring colorful graphics from movies like ''Tarzan'' or ''Toy Story.''</p>
+        <p>An altruistic friend with a sewing machine helped me make my dream jacket, above left, but a neighborhood tailor can do the same for roughly one-tenth of the price designers command. Ramon Diaz, a tailor at 306 Mott Street, will cut armholes and add three Velcro straps to any polyester fiberfill cover for $90. The finished product skews toward Japanese club kid chic, but the coats are machine washable and, as the tag on one sleeping bag says, ''They're great for slumber parties, nap time and travel.''</p>
+        <p>BILL POWERS</p>
+        <p>PULSE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Absence of 'Midnight' Doesn't Darken Spirits</title>
+    <meta content="Y01POL$03" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165130"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE WORLD"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=940DEEDC1038F932A35752C0A9669C8B63" item-length="463" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Absence of 'Midnight' Doesn't Darken Spirits</hl1>
+      </hedline>
+      <byline class="print_byline">By MALCOLM W. BROWNE</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>With the midsummer sun standing high over the South Pole, painting its vast featureless snow fields with light so intense it hurt the eyes, scientists and support staff began celebrating the new year along with a planeload of tourists and seven intrepid  skiers.</p>
+        <p>Midnight itself was almost meaningless; at this time of year, the sun shines 24 hours a day.</p>
+      </block>
+      <block class="full_text">
+        <p>With the midsummer sun standing high over the South Pole, painting its vast featureless snow fields with light so intense it hurt the eyes, scientists and support staff began celebrating the new year along with a planeload of tourists and seven intrepid  skiers.</p>
+        <p>Midnight itself was almost meaningless; at this time of year, the sun shines 24 hours a day.</p>
+        <p>A New Year's Eve party began at 8 p.m. New Zealand time (America's Antarcticans set their clocks to Christchurch) in a garage at the Amundsen-Scott South Pole Station, which is in one of the tunnels leading to the cavernous, snow-covered dome that shelters many of the station's activities.</p>
+        <p>''There were quite a few colorful costumes,'' said Ed Blain, the area manager for the station. ''There was a live band and drinks and champagne for all. The New Year's struck with quite a wild crowd.''</p>
+        <p>The tourists, who flew in on a specially equipped Twin Otter aircraft, left later for a campsite in central Antarctica. The skiers, four from Singapore and three from Britain, are camping near the polar station.</p>
+        <p>And staff members began the annual placing of the stake marking the latest position of the true geographic South Pole.</p>
+        <p>Although the South Pole itself is stationary, the two-mile-thick ice sheet covering the rocky continent slips gradually, moving generally seaward about 30 feet a year.</p>
+        <p>So each year, on New Year's Day, a new stake is driven into the ice over the latest South Pole position. Affixed to the stake is an ornamental medallion designed and made by shop workers during the three-month-long winter night at the Pole.</p>
+        <p>The holidays, which come just about halfway through the South Pole summer research season, are typically an occasion for play.</p>
+        <p>In past seasons, artists have used chain saws and other tools to create vast ice sculpture menageries, and scientists and support staff who normally work virtually nonstop on astrophysics research, astronomy, climate studies and other projects, take time out for silly games and contests, like chili cook-offs held outdoors in temperatures of 20 below. This year there was a pool championship, with 27 station personnel playing.</p>
+        <p>Some years, casualties or even deaths in the previous winter have dampened spirits. But this year, except for the station's doctor, who had to be evacuated several months ago after she discovered she had breast cancer, there have been few problems.</p>
+        <p>Now that the New Year festivities are over, Mr. Blain said, ''We are hoping for a quiet restful season. We have 45 days left.''</p>
+        <p>1/1/00: AROUND THE WORLD</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

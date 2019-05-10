@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Gay White Way</title>
+    <meta content="02GOLDSTT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="16" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165255"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Goldstein, Bill</person>
+        <person class="indexing_service">Clum, John M</person>
+        <object.title class="indexing_service">Something for the Boys (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D00EFDB1539F931A35752C0A9669C8B63" item-length="1135" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Gay White Way</hl1>
+      </hedline>
+      <byline class="print_byline">By Bill Goldstein</byline>
+      <byline class="normalized_byline">Goldstein, Bill</byline>
+      <abstract>
+        <p>Bill Goldstein reviews book Something for the Boys: Musical Theater and Gay Culture by John M Clum (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Something for the Boys</p>
+        <p>Musical Theater and Gay Culture.</p>
+        <p>By John M. Clum.</p>
+        <p>Illustrated. 317 pp. New York:</p>
+        <p>St. Martin's Press. $26.95.</p>
+      </block>
+      <block class="full_text">
+        <p>Something for the Boys</p>
+        <p>Musical Theater and Gay Culture.</p>
+        <p>By John M. Clum.</p>
+        <p>Illustrated. 317 pp. New York:</p>
+        <p>St. Martin's Press. $26.95.</p>
+        <p>John M. Clum is angry. He doesn't like the sitcom ''Will and Grace,'' and he scolds gay men who enjoy country and western line dancing, which ''seems to contain the most specific political message . . . 'I'm gay, but I'm no sissy.' ''He's annoyed that the countertenor David Daniels, an opera singer with a growing reputation, was coy about his homosexuality in a New York magazine interview -- and he doesn't let the writer of the piece off the hook, either.</p>
+        <p>Closer to home is his distress that at Duke University, where he is a professor of English and the practice of drama, the lesbian-gay-bisexual e-mail list contained a thread on which ''gay fraternity boys spoke of how it was all right to be openly gay in a fraternity as long as you played by the rules of gender-appropriate behavior.''</p>
+        <p>All this -- and more scores to settle -- in the first 10 pages of Chapter 1! What about the scores you hum? Isn't this a book about the Broadway musical?</p>
+        <p>''Something for the Boys'' begins with an ''Overture,'' in which Clum announces a work that is ''part exploration, part history and always, I hope, celebration: of musical theater itself, but particularly of the gayness that circulates through the best and worst of musical theater.'' But then comes Chapter 1 -- the ''Opening Chorus'' -- and you wonder when Clum's Auntie Mame-like impulse to ''open a new window'' on the musical became a ''Rose's Turn'' determination to get ''what I been holding down inside of me'' ferociously off his chest. (If you don't know about Mama Rose and her 11 o'clock number from ''Gypsy,'' ''Something for the Boys'' isn't the book for you.)</p>
+        <p>Disavowing straightforward theater history, Clum expends his most passionate rhetorical energies on analyzing both popular and obscure musicals for gay subtext. He is at his most successful when examining the lyrics of Noel Coward, Lorenz Hart and Cole Porter for clues to their ''queer'' inner lives -- he takes his double-entendre title from a 1942 Porter musical starring Ethel Merman, in which the boys were military men -- and his discussion of Porter's penchant for love songs with vague titles (like ''You Do Something to Me'') is quite subtle. So is much of his chapter on Stephen Sondheim, where he focuses a laser beam on the ''unrequited love'' between two male friends at the heart of Sondheim's ''Merrily We Roll Along.'' Though many critics have made gay readings of Sondheim's bleak view of marriage in ''Company'' and ''Follies,'' few have dissected with such dedication the gay intricacies of ''Passion'' and ''A Little Night Music.''</p>
+        <p>Clum is laudably refreshing when rejoicing in the stereotype of the show queen, a stereotype he proudly ''aspired to,'' and a relic, he believes, of the pre-Stonewall era in which he himself first came out. It is a time he recalls with relish -- and ahistorical abandon -- as one in which ''my generation of gay men . . . found our self-expression through culture and art. We were the heirs of Oscar Wilde.''</p>
+        <p>This kind of substitution of autobiography for context is where the failure of Clum's approach becomes apparent, for he is a far better theater reviewer than cultural historian (though he is particularly useful in documenting the rise, since AIDS, of a regional musical theater created by gays and for gays). He persuades you that he has seen virtually every show and that he knows exactly which performer was best in which number. You believe in his conviction whether you agree with him or not. Still, assertions like ''Now . . . the boundaries between 'straight looking and acting' gay men and queens are much more definite'' and ''Porter and Hart were replaced by jet-setting superstar Elton John sitting with the late Princess Diana at Versace's funeral'' make you distrust his acuity. In the one case, he evinces little meaningful understanding of the complexities of gay self-identity; in the other, he has perhaps forgotten just how many photographs there are of Cole Porter with Elsa Maxwell and the Duke and Duchess of Windsor.</p>
+        <p>THE numbing flaw in Clum's ability as a critic, however, is that he himself is the only audience he can imagine. Eager to explain how ''the gay audience member . . . queers the musical,'' he neglects to account for the mainstream popularity of many of the shows he dissects. But if he had analyzed how the gay elements he identifies in ''Oklahoma!,'' ''Hello, Dolly,'' ''Gypsy,'' ''Annie Get Your Gun'' and ''Mame'' contributed to making them the hits they were with straight audiences, he would have produced a far more subversive and important work.</p>
+        <p>Clum writes, he says, partly in reaction to studies like Mark Steyn's ''Broadway Babies Say Goodnight,'' an ''extremely homophobic'' book in his estimation (it's one more thing he's angry about). But he fails to acknowledge that insights central to his own avowedly ''gay'' reading echo Steyn's ''very straight book.''</p>
+        <p>In fact, it might be Clum writing when Steyn concludes, ''We still joke about Broadway being boy-meets-girl but, in fact, hardly any musicals are concerned with conventional heterosexual romance.'' Clum's arguments about theater's most famous divas are succinctly summarized by Steyn as well: ''It's all either Principal Boys -- Mary Martin as Peter Pan and Nellie Forbush, two of the great trouser roles -- or Pantomime Dames: Carol Channing as Lorelei Lee and Dolly Levi, or Angela Lansbury as Mame, or Ethel Merman as the hostess with the mostes'.'' And Clum and Steyn both criticize ''La Cage aux Folles'' for the compromises its gay creators made to attract straight audiences.</p>
+        <p>Clum is not a felicitous enough writer, or a compelling enough thinker, to shape the essays here into the grand synthesis of history, cultural criticism and queer theory that he attempts. Taking him at his word -- My more theoretical colleagues would rightly call the book a performance'' -- one finds oneself responding to his frequent star turns, his reckless belting, his often maddening comic asides, without feeling satisfied that what's on show is either as original or as entertaining as he believes.</p>
+        <p>''Something for the Boys'' is an enterprising vaudeville, but as with so many musicals, its book is a mess. It's one thing to overlook the book in a musical; it's another thing entirely when the book is a book.</p>
+        <p>Bill Goldstein is the books editor of The New York Times on the Web.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Bill Goldstein is the books editor of The New York Times on the Web.</tagline>
+    </body.end>
+  </body>
+</nitf>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Rights of the Newborn And H.I.V. Testing</title>
+    <meta content="LTR145245" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Connecticut Weekly Desk" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="14CN" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165475"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Acquired Immune Deficiency Syndrome</classifier>
+        <classifier class="indexing_service" type="descriptor">Tests and Testing</classifier>
+        <classifier class="indexing_service" type="descriptor">Pregnancy and Obstetrics</classifier>
+        <classifier class="indexing_service" type="descriptor">Babies</classifier>
+        <classifier class="indexing_service" type="descriptor">Law and Legislation</classifier>
+        <person class="indexing_service">Fong, S C (Dr)</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Connecticut</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Babies</classifier>
+        <classifier class="online_producer" type="general_descriptor">Acquired Immune Deficiency Syndrome</classifier>
+        <classifier class="online_producer" type="general_descriptor">Acquired Immune Deficiency Syndrome</classifier>
+        <classifier class="online_producer" type="general_descriptor">Pregnancy and Obstetrics</classifier>
+        <classifier class="online_producer" type="general_descriptor">Tests and Testing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Viruses</classifier>
+        <classifier class="online_producer" type="general_descriptor">Law and Legislation</classifier>
+        <classifier class="online_producer" type="general_descriptor">Diseases and Conditions</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B06E2D81538F931A35752C0A9669C8B63" item-length="229" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Rights of the Newborn And H.I.V. Testing</hl1>
+      </hedline>
+      <abstract>
+        <p>Dr S C Fong letter comments on December 12 article on challenges to new HIV testing law; says testing can save approximately 1,000 newborns annually from scourge of infection (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>I read your Dec. 12 article on the subject of H.I.V. testing (''Groups Challenge New H.I.V. Testing Law).</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>I read your Dec. 12 article on the subject of H.I.V. testing (''Groups Challenge New H.I.V. Testing Law).</p>
+        <p>H.I.V. infection is a tragic illness of this century. For many years the illness was associated with despair, frustration and certain death. It is quite different now, almost two decades later, because we have an excellent knowledge of the disease process and availability of effective treatment. Details of these advances, however, are not common knowledge. It is for this reason, through ignorance, that we decide to take no action in saving about 1,000 newborns annually in this country from the scourge of H.I.V. infection.</p>
+        <p>Connecticut, like New York State, chooses a political approach to the issue. This approach goes too far for the American Civil Liberties Union but not far enough for the newborns. This brings up my view that very little of the discussion pays attention to the rights of the newborns.</p>
+        <p>S. C. FONG M.D.  Chairman, Pediatrics Department  Danbury Hospital</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

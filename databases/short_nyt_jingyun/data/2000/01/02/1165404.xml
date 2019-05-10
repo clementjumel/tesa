@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Taking a 'Cure'</title>
+    <meta content="LTR114125" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165404"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <location class="indexing_service">Italy</location>
+        <location class="indexing_service">Albano Terme (Italy)</location>
+        <person class="indexing_service">conti, john v</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Italy</classifier>
+        <classifier class="online_producer" type="general_descriptor">Travel and Vacations</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=980CEED81738F931A35752C0A9669C8B63" item-length="180" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Taking a 'Cure'</hl1>
+      </hedline>
+      <abstract>
+        <p>John V Conti letter recommends visit to Albano Terme, Italy (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor: Yes, Padua is well worth the trip from Venice, as Dais ann McLane concluded in ''Soaking Up All That Padua Has to Offer'' (Nov. 28). She, however, made too hasty a conclusion about Abano, based on a glance from her seat in the bus.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor: Yes, Padua is well worth the trip from Venice, as Dais ann McLane concluded in ''Soaking Up All That Padua Has to Offer'' (Nov. 28). She, however, made too hasty a conclusion about Abano, based on a glance from her seat in the bus.</p>
+        <p>Abano Terme is a charming and welcoming town that people have been visiting for 2,500 years, primarily for ''the cure.'' The mud baths, first discovered by Roman soldiers and considered a curative of a variety of aches and pains, was what drew me to this small country town in the Euganean hillside. But in addition to the special mud, a visitor who gets off the bus can find wonderful food and an oddly captivating night life in Abano as well. I was distracted from my back pain by the nightly passeggiata, sitting at a cafe for a small espresso or digestivo, the frequent entertainment in the piazza and the interesting mixture of visitors from all over the globe.</p>
+        <p>JOHN V. CONTI  New Hyde Park, N.Y.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Food for Thought, Zero Calories</title>
+    <meta content="02COLU$02" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Health; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165332"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="JERSEY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Weight</classifier>
+        <classifier class="indexing_service" type="descriptor">Diet and Nutrition</classifier>
+        <org class="indexing_service">Weight Watchers</org>
+        <person class="indexing_service">Galant, Debra</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Diet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health</classifier>
+        <classifier class="online_producer" type="general_descriptor">Weight</classifier>
+        <classifier class="online_producer" type="general_descriptor">Diet and Nutrition</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=990CE6DC1638F931A35752C0A9669C8B63" item-length="823" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Food for Thought, Zero Calories</hl1>
+      </hedline>
+      <byline class="print_byline">By Debra Galant</byline>
+      <byline class="normalized_byline">Galant, Debra</byline>
+      <abstract>
+        <p>Debra Galant article on her decision to join Weight Watchers; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>I have a scale that subtracts five pounds from my actual weight, a husband who constantly tells me that I am adorable, and all my jeans contain Lycra.</p>
+        <p>Even so, my powers of self-delusion will only go so far.</p>
+      </block>
+      <block class="full_text">
+        <p>I have a scale that subtracts five pounds from my actual weight, a husband who constantly tells me that I am adorable, and all my jeans contain Lycra.</p>
+        <p>Even so, my powers of self-delusion will only go so far.</p>
+        <p>So when the scale ticked up toward the Number That Cannot Be Named a few weeks ago, I could no longer deny that the season of annual weight gain had begun. Sure, I could still zip my pants, but I couldn't help noticing that my belly preceded me by an inch or two. I looked O.K. if I dressed all in black, but there was that awful fat woman jiggling around in the bathroom mirror whenever I got out of the shower.</p>
+        <p>I could do the natural thing, and continue to eat every homemade gingerbread cookie, candied pecan and sweet-and-sour meatball pushed at me in the name of holiday mirth. Or I could plunge headfirst into the chilly waters of self-restraint. I could rediscover vegetables, climb the Stairmaster and diligently chisel away enough adipose tissue to once again find my Inner Thighs.</p>
+        <p>Which would be as much fun as having Alan Greenspan as my stockbroker.</p>
+        <p>So I did what any columnist with five pounds to lose would do. I decided to infiltrate that coven of calorie counters known by the two W's. At the height of the holiday season, no less. I didn't really expect to lose weight -- diets make me obsess about food so much that I usually end up gaining it instead -- but at least I could spy on the people who spend every holiday party sipping seltzer and crunching on raw vegetables while I pig out on the melted Brie.</p>
+        <p>I have always had this fantasy that I would walk into Weight Watchers and that they would take one look at me, laugh uproariously and say, ''You?'' Fat chance. They took my $30 without blinking and then coolly, dispassionately and without so much as an apology, put me on a ruthlessly honest  scale and actually wrote down the Number That Cannot Be Named in my membership book. Then they told me I had not 5 but 14 pounds to lose.</p>
+        <p>Feeling like a C.I.A. operative, I perused the materials, waiting for the meeting to begin. Then I discovered the recipe for Garden Vegetable Soup, accompanied by the miraculous words ''0 points per serving.'' It wouldn't be right to give away Weight Watchers' point system, but everybody knows what the number ''0'' means. Here, disguised as a mere recipe, was the Holy Grail of dieting, the caloric equivalent of a perpetual motion machine, a food you could actually eat without limit. And it was real food. With the right tablecloth, you could imagine yourself in the heart of Tuscany.</p>
+        <p>I peeled, I chopped, I simmered, I souped. I believed. But by the third day, I began to crave sugar. Nothing but handfuls of sweetened breakfast cereal straight from the box would do. I waddled into Weight Watchers the next week, sure I had blown my cover. Yet I had lost 1.6 pounds, and they congratulated me as if I were a returning war hero.</p>
+        <p>I'll spare you every calorie that's happened since. The 100 I actually burned at the Montclair Y the week before Christmas, the hundreds more I consumed eating Christmas cookies. I prefer instead to embrace the New Math suggested by my Weight Watchers leader, Charlanne Lamberto, who inspires the fat and the pudgy in Livingston every Wednesday morning. Since most Americans gain 6 to 10 pounds between Thanksgiving and New Year's, she says, any weight gain of less than 6 pounds over the holidays actually counts as a minus.</p>
+        <p>By this reckoning, I'm almost ready to pose for the Sports Illustrated swimsuit issue.</p>
+        <p>I tried to get some needed perspective about all this from the National Association to Advance Fat Acceptance, which has not one but two New Jersey chapters, but all I got were some answering machines announcing their holiday parties. I have to admit that their Web site is refreshing, though, with a FAQ that includes such questions as ''But isn't it unhealthy to be fat?'' and ''Why do we use the word 'fat' so freely?''</p>
+        <p>In the end, I decided I was no more screwed up about food than anyone else. And to prove it, I picked up the most recent issue of Women's Day. There, on the January cover, was the perfect image of our societal obsession with food: a 449-calorie-a-slice Millenium Rose Cake, along with a ''can't fail'' diet for the year 2000.</p>
+        <p>Poor Sigmund Freud. If only he lived now, instead of the last time the century turned, he could have learned a thing or two about repression.</p>
+        <p>JERSEY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

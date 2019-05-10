@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Tenants for Office Space Grow In New Westchester Prosperity</title>
+    <meta content="02ECON$02" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Westchester Weekly Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="14WC" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165371"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Office Buildings</classifier>
+        <classifier class="indexing_service" type="descriptor">Housing</classifier>
+        <classifier class="indexing_service" type="descriptor">Economic Conditions and Trends</classifier>
+        <location class="indexing_service">Westchester County (NY)</location>
+        <org class="indexing_service">International Business Machines Corp</org>
+        <person class="indexing_service">Brenner, Elsa</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Westchester</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/New York/Westchester</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/Regions</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+        <classifier class="online_producer" type="general_descriptor">Housing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Office Buildings and Commercial Properties</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9801EFD91638F931A35752C0A9669C8B63" item-length="1709" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Tenants for Office Space Grow In New Westchester Prosperity</hl1>
+      </hedline>
+      <byline class="print_byline">By ELSA BRENNER</byline>
+      <byline class="normalized_byline">Brenner, Elsa</byline>
+      <dateline>WHITE PLAINS</dateline>
+      <abstract>
+        <p>Office building activity, including renovation of former IBM building, and new housing reflect economic resurgence in Westchester County, New York; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>FOR more than a decade, the vacant International Business Machines building here served as a harsh reminder of not only this city's persistent economic tribulations but also of the weak economy of the entire county.</p>
+        <p>Now the building's renaissance -- thanks to a facelift that includes a new lobby, a health club and renovated office suites -- confirms what many have been hoping for: that Westchester has entered a new period of prosperity.</p>
+      </block>
+      <block class="full_text">
+        <p>FOR more than a decade, the vacant International Business Machines building here served as a harsh reminder of not only this city's persistent economic tribulations but also of the weak economy of the entire county.</p>
+        <p>Now the building's renaissance -- thanks to a facelift that includes a new lobby, a health club and renovated office suites -- confirms what many have been hoping for: that Westchester has entered a new period of prosperity.</p>
+        <p>In many respects during the last 10 years, the former I.B.M. office building was a bellwether for Westchester's economic health.</p>
+        <p>During much of the 1990's, when the 381,000-square-foot building at 360 Hamilton Avenue sat empty with no suitors, the rest of the county was also struggling.</p>
+        <p>Throughout Westchester, large companies had moved away, and others like I.B.M. had downsized and consolidated, leaving large tracts of office space empty.</p>
+        <p>White Plains, the center of corporate activity in the 1980's and the hardest-hit area during downsizing, became ''the poster child for the malaise of the market,'' observed Dean J. Shapiro, the executive director for Insignia/ESG, a commercial real estate concern.</p>
+        <p>Commercial vacancy rates in White Plains soared above 30 percent as recently as the fourth quarter of 1998, with buildings, like the one formerly occupied by I.B.M. here, standing empty.</p>
+        <p>But about a year ago, after Reckson Associates, a real estate investment trust in Valhalla, spied a rebound in the offing, it poured $15 million into renovating the structure in White Plains and sought new tenants. They were right to do so, because by the end of 1999, the vacancy rate for White Plains had dropped to 22.35 percent, and the rate for the county was also falling.</p>
+        <p>Merrill Lynch further confirmed Reckson's optimism by signing a lease for part of the Hamilton Avenue property, and many other deals are pending for space in the building, said Mr. Shapiro, whose real estate concern has offices in Manhattan, Stamford and Elmsford.</p>
+        <p>From the point of view of Salvatore J. Carrera, the county's Director of Economic Development and Real Estate, at least part of the  economic success in Westchester can be attributed to the fact that for the second year in a row, property taxes are down.</p>
+        <p>As a result, most property owners are looking forward to a 1.8 percent or more decrease in their tax bills this year.</p>
+        <p>''Tax decreases are the kind of news that individuals and businesses like to hear,'' said Larry S. Schwartz, the chief adviser to County Executive Andrew J. Spano.</p>
+        <p>But contrary to the trends of the 1980's when corporate giants like I.B.M. ruled, the majority of business growth for 2000 and beyond is likely to take place among moderate-size companies, both Mr. Schwartz and Mr. Carrera predicted.</p>
+        <p>''We're focusing on the small companies rather than waiting for the big players, the full-building tenants,'' Mr. Carrera said, ''because it just might turn out to be a long wait for the latter group.''</p>
+        <p>Looking ahead this year, the county plans to announce the opening of a high-speed fiber optics network -- a 125-mile above-ground loop around Westchester that will enable small and medium-size companies to hook up to the Internet and thereby expand.</p>
+        <p>The private real estate sector, however, is not enjoying such optimism about the future -- even though sales of luxury homes in Westchester as last year drew to a close topped similar sales figures for the previous year. The picture is worrisome -- paradoxically the result of too much success, it seems.</p>
+        <p>P. Gilbert Mercurio, the executive vice president of the Westchester County Board of Realtors, said that home sales fell off in the last three months ''by double-digit amounts.''</p>
+        <p>The reason was a daunting lack of inventory, which is ''putting a terrible brake on the market,'' Mr. Mercurio said.</p>
+        <p>He continued: ''In a sense, we have been victims of our success, of too much of a good thing. If we don't rebuild inventory quickly, the sad fact is that the market won't stay good.''</p>
+        <p>New construction, he said, is failing to keep up with demand, with the biggest lack being condominiums,  followed by single-family homes.</p>
+        <p>The median sale price of a single-family dwelling in Westchester was $365,000 last year, 7 percent higher than for the third quarter of 1998, ''the highest median price ever,'' Mr. Mercurio said.</p>
+        <p>Of 306 properties being sold for $1 million or more in Westchester, Dutchess and Rockland Counties in the first nine months of last year, 301 were in Westchester. Moreover, 74 properties sold for $2 million or more as of Sept. 30, with the highest reported sale being a $7.75 million transaction for a home in Larchmont.</p>
+        <p>Most of the luxury homes sold and built are in Bedford, Pound Ridge, Katonah, Chappaqua, Armonk, Somers, North Salem, South Salem and Mount Kisco.</p>
+        <p>But there were also seven sales for $1 million-plus in Pelham Manor and New Rochelle during the period, compared with only three for all of last year in those two municipalities.</p>
+        <p>New businesses, meanwhile, continued to flock to the county. Atlas Air, the third largest air cargo carrier in the United States, said this fall that it would lease 120,000 square feet of space at Texaco's Corporate Center in Harrison beginning in the spring.</p>
+        <p>The company, which is listed on the New York Stock Exchange as CGO, is planning to invest $8 million in Westchester on construction and new equipment and add jobs over the next five years as part of an expansion plan.</p>
+        <p>Initially, 295 employees will be moved from a division at Kennedy International Airport, and an additional 55 will come from its headquarters in Golden, Colo.</p>
+        <p>Its fleet of 18 Boeing 747's will continue to operate out of Kennedy. Atlas is a United States-certified air carrier for some of the world's leading international carriers, operating scheduled flights on behalf of its customer airlines to 101 cities in 46 countries.</p>
+        <p>Michael Chowdry, chairman, chief executive officer and president of Atlas, said that new contracts and customers had produced a 42 percent increase in the company's revenues last year, prompting staff increases.</p>
+        <p>''We had outgrown our facilities in Golden and at JFK, and the lease on the JFK facility was set to expire in June of next year,'' Mr. Chowdry said.</p>
+        <p>In Yonkers, after much planning and debate, a large shopping center finally opened in September with  Stew Leonard's, a Disneyesque supermarket featuring animated dancing cows and singing milk cartons.</p>
+        <p>The 135,000-square-foot market is part of a retail complex with a 103,000-square-foot Home Depot -- scheduled to open on Thursday -- and a 135,000-square-foot Costco, which opened on Oct. 28. Edward A. Sheeran, executive director of economic development for Yonkers,  said that the complex would be responsible for ''the largest influx of jobs in a six-month period in Yonkers' history.''</p>
+        <p>Several more projects are expected to add even more jobs.</p>
+        <p>The Marriot and Hilton hotel chains have each signed contracts to build at the new shopping center in Yonkers, and discussions are under way for a convention center, to be built across the highway from Stew Leonard's by the Philadelphia-based Fort Washington Expo Center.</p>
+        <p>Also, the Yonkers City Council last month approved plans for a 75,500-square-foot Super Stop &amp; Shop supermarket at the Cross County Shopping Center despite vocal and persistent opposition from neighbors.</p>
+        <p>Still undecided is the future of the 100-acre Yonkers Raceway, ''the best piece of commercial property going,'' Mr. Sheeran said. The raceway has been for sale for more than a year.</p>
+        <p>Another southern Westchester city, New Rochelle, also experienced an economically robust year in 1999 with the opening of the New Roc City entertainment center, built by New Roc Associates in White Plains. Capelli also built a 220-foot-high replica of the 984-foot Eiffel Tower at the family entertainment center on the site of the former New Rochelle Mall.</p>
+        <p>In Mount Vernon, city officials have just announced the hiring of Hospitality Valuation Services International of Mineola on Long Island to conduct a feasibility study for a proposed $110 million hotel and sports complex.</p>
+        <p>And in White Plains after several delays, the city is finally ''close to wrapping up negotiations'' on a proposal by Tishman Speyer Properties for a $175 million mega-movie theater and shopping center in the former Macy's building on Mamaroneck Avenue, said George Gretsas, a spokesman for Mayor Joseph M. Delfino. The project will include a 24-screen, 5,200-seat theater and a garage for 2,000 cars.</p>
+        <p>Also, the Westchester division of New York Presbyterian Hospital last month released its master plan for a 300,000-square-foot shopping center, 450 single-family homes and a 61-acre park, which would be open to the public. ''All that, and building permits are exploding off the charts,'' Mr. Gretsas said.</p>
+        <p>As a result of all the economic activity, the number of jobs in the county in November was 414,300, which is the best for that month since 1988, when it was 415,000 jobs, said Frank M. Surdey, a regional economist for the State Department of Labor. ''Just over the last year, the economy has expanded by 9,900, which represents a job growth rate of 2.4 percent,'' Mr. Surdey said. ''That's extremely encouraging.''</p>
+        <p>Manufacturing jobs in the county grew by 900 or 2.4 percent -- ''which bucks national trends,'' Mr. Surdey also observed, explaining that the nation's manufacturing sector actually contracted by 1.5 percent.</p>
+        <p>The jobs most in demand in Westchester employ the skills of computer programmers and software developers, he said. The average annual pay in the county for such jobs is $71,548.</p>
+        <p>Growth is also being seen in both the goods producing sector, which includes construction and manufacturing, and in the service industries.</p>
+        <p>During 1999, construction jobs were up by 1,800 or 8.3 percent to 23,500 in November -- the healthiest for that month in the county since 1989.</p>
+        <p>Adding to the economic glow, the average work week in manufacturing in November was 42.7 hours -- almost three hours overtime -- which matches February 1995 for the busiest work week in Westchester.</p>
+        <p>Not only were workers putting in overtime but full-time hiring also increased, which was ''a double positive,'' Mr. Surdey said.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

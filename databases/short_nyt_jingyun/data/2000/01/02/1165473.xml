@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Military Jobs Program?</title>
+    <meta content="L02HAG" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="6" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165473"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">United States Armament and Defense</classifier>
+        <classifier class="indexing_service" type="descriptor">Military Strategy and Tactics</classifier>
+        <person class="indexing_service">Hagel, Chuck (Sen)</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Military Strategy and Tactics</classifier>
+        <classifier class="online_producer" type="general_descriptor">United States Armament and Defense</classifier>
+        <classifier class="online_producer" type="general_descriptor">Armament, Defense and Military Forces</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B03E4D81538F931A35752C0A9669C8B63" item-length="220" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Military Jobs Program?</hl1>
+      </hedline>
+      <abstract>
+        <p>Sen Chuck Hagel letter says issue with US armed forces is military effectiveness, not what is socially right (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>A Dec. 29 letter writer is correct to say the military is not a jobs program in responding to my comment that the armed forces are not a social experiment. The issue is not what is socially right but military effectiveness. The armed forces exist to protect this country's security. To do anything that would jeopardize this responsibility would be irresponsible and dangerous.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>A Dec. 29 letter writer is correct to say the military is not a jobs program in responding to my comment that the armed forces are not a social experiment. The issue is not what is socially right but military effectiveness. The armed forces exist to protect this country's security. To do anything that would jeopardize this responsibility would be irresponsible and dangerous.</p>
+        <p>Many of my Republican colleagues and I have been critical of Congressional financing for unnecessary military projects. And we have publicly supported additional rounds of base closings in the next administration. Our national security budget must not be used as an economic engine.</p>
+        <p>Whether determining a personnel policy, appropriating money for defense projects or authorizing a new round of base closings, national security must be the only consideration in determining military policy.</p>
+        <p>CHUCK HAGEL  U.S. Senator from Nebraska  Washington, Dec. 29, 1999</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Wharton on Fez</title>
+    <meta content="LTR114117" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165403"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <location class="indexing_service">Morocco</location>
+        <person class="indexing_service">Wharton, Edith (1862-1937)</person>
+        <person class="indexing_service">Porter, David H</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Africa</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Africa/Morocco</classifier>
+        <classifier class="online_producer" type="general_descriptor">Travel and Vacations</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9402EED81738F931A35752C0A9669C8B63" item-length="243" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Wharton on Fez</hl1>
+      </hedline>
+      <abstract>
+        <p>David H Porter letter recalls Edith Wharton's description of 1917 trip to Morocco; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor: The two fine articles on Morocco, ''A Madcap Day in Marrakesh'' and ''Fez Reveals Morocco's Soul'' (Nov. 28), reminded me of Edith Wharton's ''In Morocco,'' an account of a trip she made in 1917.</p>
+        <p>Wharton traveled to Rabat, Fez, Marrakesh and several desert sites -- even visiting the Sultan's harem -- soon after Morocco opened up to Westerners, a heady time for such a trip. As she comments, ''To step on board a steamer in a Spanish port, and three hours later to land in a country without a guide-book, is a sensation to rouse the hunger of the repletest sight-seer.''</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor: The two fine articles on Morocco, ''A Madcap Day in Marrakesh'' and ''Fez Reveals Morocco's Soul'' (Nov. 28), reminded me of Edith Wharton's ''In Morocco,'' an account of a trip she made in 1917.</p>
+        <p>Wharton traveled to Rabat, Fez, Marrakesh and several desert sites -- even visiting the Sultan's harem -- soon after Morocco opened up to Westerners, a heady time for such a trip. As she comments, ''To step on board a steamer in a Spanish port, and three hours later to land in a country without a guide-book, is a sensation to rouse the hunger of the repletest sight-seer.''</p>
+        <p>''In Morocco'' will whet any reader's appetite. Who would not wish to visit Fez after reading Wharton's description? ''There it lies, outspread in golden light, roofs, terraces, and towers sliding over the plain's edge in a rush dammed here and there by barriers of cypress and ilex, but growing more precipitous as the ravine of the Fez narrows downward with the fall of the river. It is as though some powerful enchanter, after decreeing that the city should be hurled into the depths, had been moved by its beauty, and with a wave of his wand held it suspended above destruction.''</p>
+        <p>DAVID H. PORTER  Saratoga Springs, N.Y.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

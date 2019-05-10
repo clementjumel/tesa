@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Who Pays the Political Piper When Police Are Policed?</title>
+    <meta content="02POL" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165425"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="ON POLITICS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Police</classifier>
+        <classifier class="indexing_service" type="descriptor">Police Brutality and Misconduct</classifier>
+        <classifier class="indexing_service" type="descriptor">Blacks</classifier>
+        <classifier class="indexing_service" type="descriptor">Minorities (US)</classifier>
+        <classifier class="indexing_service" type="descriptor">Discrimination</classifier>
+        <location class="indexing_service">New Jersey</location>
+        <person class="indexing_service">Kocieniewski, David</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Law Enforcement and Security</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New Jersey</classifier>
+        <classifier class="online_producer" type="general_descriptor">Minorities (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Blacks</classifier>
+        <classifier class="online_producer" type="general_descriptor">Police Brutality and Misconduct</classifier>
+        <classifier class="online_producer" type="general_descriptor">Discrimination</classifier>
+        <classifier class="online_producer" type="general_descriptor">Police</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9407E2DC1438F931A35752C0A9669C8B63" item-length="894" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Who Pays the Political Piper When Police Are Policed?</hl1>
+      </hedline>
+      <byline class="print_byline">By David Kocieniewski</byline>
+      <byline class="normalized_byline">Kocieniewski, David</byline>
+      <dateline>TRENTON</dateline>
+      <abstract>
+        <p>David Kocieniewski's On Politics column on political ramifications of agreement between US Justice Department and state of New Jersey under which state police will be have federal monitor to ensure that it takes aggressive steps to prevent racial profiling; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>One day early this year, the New Jersey State Police will officially earn the unenviable distinction of becoming the first law-enforcement agency in the nation to have a federal monitor appointed to ensure that it takes aggressive steps to prevent racial profiling.</p>
+        <p>That development, announced Dec. 22 after years of complaints by minority motorists and months of negotiations between the state and the United States Justice Department, has set off a fervent debate about the significance of the outside oversight and the amount of power the monitor will ultimately wield.</p>
+      </block>
+      <block class="full_text">
+        <p>One day early this year, the New Jersey State Police will officially earn the unenviable distinction of becoming the first law-enforcement agency in the nation to have a federal monitor appointed to ensure that it takes aggressive steps to prevent racial profiling.</p>
+        <p>That development, announced Dec. 22 after years of complaints by minority motorists and months of negotiations between the state and the United States Justice Department, has set off a fervent debate about the significance of the outside oversight and the amount of power the monitor will ultimately wield.</p>
+        <p>Governor Whitman has characterized the settlement with the Justice Department as little more than a formal endorsement of the state police reform plan she proposed early this year. The governor said that New Jersey is the first state to call for  comprehensive changes to prevent racial discrimination by officers, and the consent decree with the Justice Department will make her proposal a model for others to follow. Attorney General John J. Farmer Jr. depicts the appointment of a monitor as a mere formality, and said it would do little to diminish the state's autonomy in dealing with the troopers.</p>
+        <p>But civil rights advocates say the Justice Department's insistence on an outside monitor is a slap at Whitman Administration for responding too slowly to charges that troopers illegally singled out blacks and Latinos. In 1996, when a Gloucester County judge ruled that there was convincing evidence of racial profiling by troopers, the Justice Department began investigating the force. However, the state continued to deny any discrimination until early this year.</p>
+        <p>''The state didn't propose anything until they had the federal government breathing down their neck,'' said William Buckman, the lawyer who won the 1996 Gloucester County case. ''So the monitor is a complete rejection of their attempt to use spin control in place of real reform.''</p>
+        <p>In announcing the agreement, Justice Department officials were careful not to gloat about the terms of the settlement. Bill Lann Lee, head of the Justice Department civil rights division, appeared at a news conference with Mr. Farmer and other state officials and praised New Jersey's efforts. Steve Rosenbaum, head of the Justice Department's litigation department, even made the point that one reason for appointing the monitor was to ensure that the reforms continue after Governor Whitman leaves office.</p>
+        <p>Left unsaid -- at least publicly -- was the fact that Justice Department investigators found that the force had much more extensive racial problems than the Attorney General's office described in its two reports. Federal officials were also too magnanimous to mention that the Whitman Administration had unsuccessfully argued against the need for an outside monitor.</p>
+        <p>Among many elected officials and law-enforcement executives, such oversight is considered a political embarrassment. William Bratton, who took over the New York Police Department in 1994, said he was glad that Mayor Rudolph Giuliani resisted calls for the city to appoint its own outside monitor because it would have undercut his credibility as police commissioner. When the federal government demands outside oversight, it raises disturbing questions about a police department's resolve to police itself, Mr. Bratton said.</p>
+        <p>''It's a significant black eye for any police organization to have a federal monitor,'' said Mr. Bratton said, ''because it is used so infrequently and it entails the idea that you don't have the ability to administer the organization without running afoul of civil rights issues.''</p>
+        <p>The good news for the Whitman Administration is that by agreeing to a monitor, who will report to a federal judge, the state ended the Justice Department's threat to press for  direct federal supervision of the force. And in many respects, New Jersey officials can also limit the power of the federal monitor by enacting policies to supervise officers more closely, train them better and  revamp the department's secretive Internal Affairs system.</p>
+        <p>Already, Col. Carson Dunbar, who began serving as State Police Superintendent in November, has taken several significant steps to discourage profiling. If the state wavers in its efforts, however, the monitor can ask the federal judge to order changes or impose sanctions.</p>
+        <p>In Pittsburgh, where a monitor was appointed to oversee the police department in 1997, that mechanism has reportedly been a powerful impetus for change on a force that had long been charged with brutality and lax discipline.</p>
+        <p>''It's almost impossible to overstate how important the monitor has been as a tool for enforcing the reforms,'' said Witold Walczak, executive director of Pittsburgh office of the American Civil Liberties Union, whose class-action suit led to the Justice Department investigation. ''It's the only way we can verify that any changes are really taking place. And because our monitor has been independent, he's also forced the police to take steps they were reluctant to take.''</p>
+        <p>But even if the New Jersey does overhaul the state police without further prodding, the very existence of the monitor may limit the Whitman Administration's ability to claim credit for changing the culture of the force.</p>
+        <p>''In a way, I feel bad for the new commander taking charge of the department,'' Mr. Bratton said, ''because any changes he makes now, even if he was going to make them himself, will be viewed as something forced on him by the outside monitor.''</p>
+        <p>ON POLITICS David Kocieniewski reports from Trenton for The New York Times.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">David Kocieniewski reports from Trenton for The New York Times.</tagline>
+    </body.end>
+  </body>
+</nitf>

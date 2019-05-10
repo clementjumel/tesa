@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Bitter Music</title>
+    <meta content="02ROBINST" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="21" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165259"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Robinson, Harlow</person>
+        <person class="indexing_service">Fay, Laurel E</person>
+        <person class="indexing_service">Shostakovich, Dmitri (1906-75)</person>
+        <object.title class="indexing_service">Shostakovich: A Life (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9405EEDB1539F931A35752C0A9669C8B63" item-length="1070" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Bitter Music</hl1>
+      </hedline>
+      <byline class="print_byline">By Harlow Robinson</byline>
+      <byline class="normalized_byline">Robinson, Harlow</byline>
+      <abstract>
+        <p>Harlow Robinson reviews book Shostakovich: A Life by Laurel E Fay (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>SHOSTAKOVICH</p>
+        <p>A Life.</p>
+        <p>By Laurel E. Fay.</p>
+        <p>Illustrated. 458 pp. New York:</p>
+        <p>Oxford University Press. $35.</p>
+      </block>
+      <block class="full_text">
+        <p>SHOSTAKOVICH</p>
+        <p>A Life.</p>
+        <p>By Laurel E. Fay.</p>
+        <p>Illustrated. 458 pp. New York:</p>
+        <p>Oxford University Press. $35.</p>
+        <p>Dmitri Shostakovich is the kind of subject biographers dream about. Now generally recognized as one of the greatest composers of the modern era, Shostakovich (1906-75) not only produced a vast body of popular and influential work but was also one of the few prominent creative artists to survive -- with psyche and talent more or less intact -- the nightmare of the Soviet ''experiment.''</p>
+        <p>Born in czarist St. Petersburg on the eve of the Russian Revolution and pushed by fate to the ramparts of history, Shostakovich witnessed many of the defining events of the 20th century: Lenin's rise, Stalin's terror, Hitler's invasion of Russia, the cold war, Khrushchev's aborted thaw, Brezhnev's era of stagnation. Even more important, he wrote these experiences into his music, an abstract and evanescent medium that invites subjective responses and widely divergent political and psychological interpretations. As numerous writers, filmmakers and playwrights have already discovered, Shostakovich's strenuous, contradictory and very public career contains no less dramatic pageantry than ''Dr. Zhivago,'' as much soul-searching as ''The Idiot'' and enough intrigue to rival ''The Spy Who Came In From the Cold.''</p>
+        <p>Alas, little of this tumult and conflict comes across in ''Shostakovich: A Life,'' Laurel E. Fay's mostly lifeless attempt to produce the definitive biography of the composer. Insistent on sticking only to the facts and avoiding even a hint of the sometimes fanciful speculation that has characterized much of what has been published and broadcast about Shostakovich both in Russia and in the West, Fay has squeezed her provocative subject dry. Cautious, dutiful and choked with details, her book reads more like an extended encyclopedia entry than a biography. Nor do its meticulously gathered piles of information challenge the interpretation presented elsewhere of the composer as a cowardly, embittered, Chekhovian figure profoundly uncomfortable with his role as the Kremlin's official composer but lacking the moral strength to rebel.</p>
+        <p>A musicologist by training, Fay has been researching the music and career of Shostakovich for more than 20 years. It shows. Like many scholars who attempt to write biographies, she seems to have fallen so deeply in love with her research that she became incapable of distinguishing between the trivial and the essential. (Only 287 of the book's 458 pages are text; the remainder are devoted to notes, an index, a glossary, a list of works and an admirably definitive bibliography.) True, Fay was given access in Russia to archival collections opened since glasnost, but her exhaustive examination of all the available documents has failed to uncover any startling revelations. She does excel, however, at rectifying mistakes about dates and chronology. While some may find her precision about such matters a useful corrective, the general reader seeking a deeper understanding of Shostakovich's Delphic personality or a vivid sense of the often cosmically tragic times in which he lived may well be left frustrated. Reading ''Shostakovich'' is a bit like hearing only the second violin part of an epic symphony. Something is definitely missing.</p>
+        <p>In her introduction, Fay expresses distrust of the ''treacherous resource'' of the many interviews and memoirs offering personal reminiscences of Shostakovich that have appeared in recent years. Such caution is understandable and even commendable in a work of pure scholarship. But facts alone do not a biography make, especially in the case of a creative artist so encrusted in myth. For the last two decades, the Shostakovich legend has been propelled by the contents of a highly publicized volume, published in 1979, called ''Testimony: The Memoirs of Dmitri Shostakovich as Related to and Edited by Solomon Volkov.'' Based on what Volkov maintains were interviews he conducted with the composer during his last infirm and often inebriated years, ''Testimony'' paints a harrowing picture of a bitter man profoundly alienated from the Soviet system that alternately punished and rewarded him. This image of a ''closet dissident'' led many to rethink the prevailing view of Shostakovich as a loyal and obedient Soviet artist.</p>
+        <p>Almost immediately, some reviewers questioned the memoir's authenticity. The most aggressive of these was Fay, who charged that Volkov had misrepresented his sources. Even today, the controversy over authenticity and authorship continues to rage, with plenty of indignant feelings on both sides. Meanwhile, ''Testimony'' has become a basic text in Shostakovich studies and its contents have been accepted by many musicians and scholars.</p>
+        <p>In ''Shostakovich,'' Fay retreats a bit from her earlier position on ''Testimony,'' admitting that ''there can be little doubt that it was a major factor in 'cracking the facade' of Shostakovich's public image and that it helped to reinvigorate interest in Shostakovich's music.'' Even more important, her characterization of Shostakovich -- which draws heavily on letters published in Russia since the appearance of ''Testimony,'' especially those to Isaak Glikman -- generally conforms with that in Volkov's book. In Fay's portrait, the composer seems somewhat more courteous but no less cynical about the elaborate cat-and-mouse game he was forced to play with several generations of Soviet bureaucrats. Those who have wanted to idealize Shostakovich's behavior may be dismayed by what she describes as his ''apparently unresisting acquiescence to manipulation by the party and state.''</p>
+        <p>Just how Shostakovich dealt with the cultural commissars would interest us not at all, of course, if he hadn't written so much brilliant and enduring music. Sad to say, ''Shostakovich'' disappoints most keenly in its discussion of this aspect of its subject's life. Dates of composition, dates of premieres and quotations from reviews flow by in a constant and impressive stream, but the ability to analyze, contextualize or convey the mysterious essence of this miraculous and disturbing music apparently lies beyond Fay's descriptive powers. In a 1980 article in the journal Russian Review that questions the authenticity of ''Testimony,'' she suggests that the memoirs are at least in part a product of ''Volkov's fertile imagination.'' On the basis of ''Shostakovich: A Life,'' no one can accuse Laurel E. Fay of having an imagination, fertile or otherwise.</p>
+        <p>Harlow Robinson is the author of biographies of Sergei Prokofiev and Sol Hurok and the editor and translator of ''Selected Letters of Sergei Prokofiev.''</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Harlow Robinson is the author of biographies of Sergei Prokofiev and Sol Hurok and the editor and translator of ''Selected Letters of Sergei Prokofiev.''</tagline>
+    </body.end>
+  </body>
+</nitf>

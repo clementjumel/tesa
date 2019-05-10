@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Weedy Slice of Riverfront Pits Enclave Against the City</title>
+    <meta content="02PLAN$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165485"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: HUNTS POINT"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Parks and Other Recreation Areas</classifier>
+        <classifier class="indexing_service" type="descriptor">Waste Materials and Disposal</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Weir, Richard</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Leisure</classifier>
+        <classifier class="online_producer" type="general_descriptor">Parks and Other Recreation Areas</classifier>
+        <classifier class="online_producer" type="general_descriptor">Waste Materials and Disposal</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9800E5D61538F931A35752C0A9669C8B63" item-length="561" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Weedy Slice of Riverfront Pits Enclave Against the City</hl1>
+      </hedline>
+      <byline class="print_byline">By RICHARD WEIR</byline>
+      <byline class="normalized_byline">Weir, Richard</byline>
+      <abstract>
+        <p>New York City seeks to create five-acre park on weedy grounds of demolished asphalt and gravel plant along Hunts Point shoreline in Bronx, but community advocates want the plant's entire 13 acres used for parkland; city would reserve most of land so that it could upgrade an adjacent sewage treatment plant at some point in the future; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>As the city sees it, a new five-acre park on the weedy grounds of a demolished asphalt and gravel plant along the Hunts Point shoreline would significantly benefit a neighborhood long neglected when it comes to greenswards.</p>
+        <p>''The administration is trying very hard to accommodate the community's need for a waterfront park,'' said Annette M. Barbaccia, director of the Mayor's Office of Environmental Coordination and an author of a report titled ''A Diamond in the Rust,'' outlining a proposed $7 million park near Tiffany Pier.</p>
+      </block>
+      <block class="full_text">
+        <p>As the city sees it, a new five-acre park on the weedy grounds of a demolished asphalt and gravel plant along the Hunts Point shoreline would significantly benefit a neighborhood long neglected when it comes to greenswards.</p>
+        <p>''The administration is trying very hard to accommodate the community's need for a waterfront park,'' said Annette M. Barbaccia, director of the Mayor's Office of Environmental Coordination and an author of a report titled ''A Diamond in the Rust,'' outlining a proposed $7 million park near Tiffany Pier.</p>
+        <p>But community advocates are pushing for a plan under which the entire 13-acre tract would be used for parkland. Under the current proposal, most of the land would be reserved so the city could upgrade an adjacent sewage treatment plant at some point in the future.</p>
+        <p>''New York City is balancing the books of its waste handling on the back of Hunts Point,'' said Paul Lipson, executive director of the Point Community Development Corporation, a neighborhood group that is also battling a large waste transfer station planned for the area.</p>
+        <p>Hunts Point is home to some 10,000 residents who live in an enclave surrounded by two dozen waste-hauling depots, scrap and freight yards, a cement plant, a factory that turns sewage into fertilizer and the Hunts Point Market.</p>
+        <p>Until earlier this year, when the department opened a small boat launch at what had become an illegal dumping ground at the end of Lafayette Avenue, the neighborhood's only other parks were a playground on Spofford Avenue and Faile Street, a 2.5-acre park surrounding Joseph Rodman Drake's grave and the Manida Ballfields on Manida Street and Lafayette Avenue.</p>
+        <p>''We have been traditionally deprived of park space,'' said Majora Carter, an associate director of the community development corporation. Last week, she and Mr. Lipson led local leaders, environmentalists and an official from the city's Department of Environmental Protection on a tour of the site.</p>
+        <p>With its sandy strand and nearby fishing pier, the land attracts scores of residents on summer nights who roast pigs and dance to live music.</p>
+        <p>''You have a lot of island people who live here,'' Ms. Carter said, describing the area around the property, which was once a beach club and is now known as Barretto Point. ''They are starved to be near the water.''</p>
+        <p>If the city goes forward with its expansion of the sewage treatment plant, that sliver of beach would no longer be accessible to the public, said Ms. Carter, who is among those trying to persuade the city to enlarge the plant on land along its eastern edge rather than its western edge.</p>
+        <p>Ms. Barbaccia said that the state had designated that land for future development of the Hunts Point Market. Barretto Point, she added, has been labeled a ''brown field'' -- land known or suspected to contain pollutants -- and the city originally planned to sell it for redevelopment. The city is currently conducting an environmental investigation of the parcel.</p>
+        <p>RICHARD WEIR</p>
+        <p>NEIGHBORHOOD REPORT: HUNTS POINT</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

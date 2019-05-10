@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Nurses Unionize</title>
+    <meta content="MB101553" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Westchester Weekly Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="14WC" name="print_section"/>
+    <meta content="6" name="print_column"/>
+    <meta content="Health; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165523"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="IN BRIEF"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Medicine and Health</classifier>
+        <classifier class="indexing_service" type="descriptor">Unionization</classifier>
+        <classifier class="indexing_service" type="descriptor">Labor</classifier>
+        <classifier class="indexing_service" type="descriptor">Hospitals</classifier>
+        <classifier class="indexing_service" type="descriptor">Nursing and Nurses</classifier>
+        <org class="indexing_service">Yonkers General Hospital (NY)</org>
+        <org class="indexing_service">Service Employees International Union</org>
+        <person class="indexing_service">Brenner, Elsa</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Westchester</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Healthcare</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Nursing and Nurses</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Medicine and Health</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Hospitals</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Human Resources</classifier>
+        <classifier class="online_producer" type="general_descriptor">Nursing and Nurses</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hospitals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Unionization</classifier>
+        <classifier class="online_producer" type="general_descriptor">Labor</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9802E4DD1338F931A35752C0A9669C8B63" item-length="223" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Nurses Unionize</hl1>
+      </hedline>
+      <byline class="print_byline">By Elsa Brenner</byline>
+      <byline class="normalized_byline">Brenner, Elsa</byline>
+      <abstract>
+        <p>Nurses and other employees at Yonke�</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>In a vote of 404 to 93, nurses, technicians, clerical workers and skilled maintenance and service workers at the 190-bed Yonkers General Hospital have voted to unionize, Pamela LaFrance, the hospital's vice president for human resources, said. The workers will become part of Local 1199 of the Service Employees International, which is based in Manhattan.</p>
+        <p>Although no specific union requests have been received yet, Ms. LaFrance said that in the future ''the hospital will be going into collective bargaining in good faith to work toward an equitable agreement on whatever issues come up.''</p>
+      </block>
+      <block class="full_text">
+        <p>In a vote of 404 to 93, nurses, technicians, clerical workers and skilled maintenance and service workers at the 190-bed Yonkers General Hospital have voted to unionize, Pamela LaFrance, the hospital's vice president for human resources, said. The workers will become part of Local 1199 of the Service Employees International, which is based in Manhattan.</p>
+        <p>Although no specific union requests have been received yet, Ms. LaFrance said that in the future ''the hospital will be going into collective bargaining in good faith to work toward an equitable agreement on whatever issues come up.''</p>
+        <p>The vote on Dec. 22 came less than a month after nurses at an affiliated hospital, St. John's Riverside Hospital, voted to join the New York State Nurses Association.</p>
+        <p>The technical and service workers at St. John's will decide whether to join Local 1199 on Thursday, Ms. LaFrance said.</p>
+        <p>Workers at St. Joseph's Medical Center in Yonkers are scheduled to  vote on Feb. 3, after successful union drives at St. Agnes Hospital in White Plains and Sound Shore Medical Center of Westchester in New Rochelle.</p>
+        <p>ELSA BRENNER</p>
+        <p>IN BRIEF</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

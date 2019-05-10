@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Gore's Latest Attack on Bradley Tells Only Part of Story</title>
+    <meta content="Y01PHA$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="22" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Health; U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165082"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Drugs (Pharmaceuticals)</classifier>
+        <classifier class="indexing_service" type="descriptor">Law and Legislation</classifier>
+        <classifier class="indexing_service" type="descriptor">Finances</classifier>
+        <classifier class="indexing_service" type="descriptor">Election Issues</classifier>
+        <classifier class="indexing_service" type="descriptor">Presidential Election of 2000</classifier>
+        <classifier class="indexing_service" type="descriptor">Consumer Protection</classifier>
+        <location class="indexing_service">United States</location>
+        <person class="indexing_service">Broder, John M</person>
+        <person class="indexing_service">Bradley, Bill</person>
+        <person class="indexing_service">Gore, Al (Vice Pres)</person>
+        <person class="indexing_service">Clinton, Bill (Pres)</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Legal</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Pharmaceutical, Biotechnology and Science</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="general_descriptor">Consumer Protection</classifier>
+        <classifier class="online_producer" type="general_descriptor">Election Issues</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Drugs (Pharmaceuticals)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Law and Legislation</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+        <classifier class="online_producer" type="general_descriptor">Elections</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidents and Presidency (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Medicine and Health</classifier>
+        <classifier class="online_producer" type="general_descriptor">United States Politics and Government</classifier>
+        <classifier class="online_producer" type="general_descriptor">Politics and Government</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9802E1D71338F932A35752C0A9669C8B63" item-length="1488" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Gore's Latest Attack on Bradley Tells Only Part of Story</hl1>
+      </hedline>
+      <byline class="print_byline">By JOHN M. BRODER</byline>
+      <byline class="normalized_byline">Broder, John M</byline>
+      <dateline>WASHINGTON, Dec. 31</dateline>
+      <abstract>
+        <p>Vice Pres Al Gore plays up some facts and ignores others when he accuses Bill Bradley, his challenger for Democratic Presidential nomination, of taking large amounts of campaign cash from drug companies and doing their bidding during his 18 years in Senate, while painting himself as the consumer's advocate in Washington against predatory drug manufacturers; Bradley has championed some legislation favored by pharmaceutical companies, many of the based in New Jersey, his home, but Clinton-Gore administration has also helped pharmaceutical companies on certain issues, and Clinton-Gore ticket took plenty of money from drug companies, too (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Vice President Gore has denounced former Senator Bill Bradley for taking large amounts of campaign cash from drug companies and, Mr. Gore says, doing their bidding during his 18 years in the Senate.</p>
+        <p>In speeches, debates, advertisements and campaign literature, the vice president has accused Mr. Bradley of repeatedly siding with the pharmaceutical industry -- many of whose leading companies are based in New Jersey, his home state -- while Mr. Gore portrays himself as the consumer's advocate in Washington against predatory drug manufacturers.</p>
+      </block>
+      <block class="full_text">
+        <p>Vice President Gore has denounced former Senator Bill Bradley for taking large amounts of campaign cash from drug companies and, Mr. Gore says, doing their bidding during his 18 years in the Senate.</p>
+        <p>In speeches, debates, advertisements and campaign literature, the vice president has accused Mr. Bradley of repeatedly siding with the pharmaceutical industry -- many of whose leading companies are based in New Jersey, his home state -- while Mr. Gore portrays himself as the consumer's advocate in Washington against predatory drug manufacturers.</p>
+        <p>It is true that Mr. Bradley has championed some legislation favored by the drug industry, but the Clinton-Gore administration has also helped pharmaceutical companies on certain issues, and the Clinton-Gore ticket has raked in plenty of their money, too.</p>
+        <p>During the Bradley-Gore debate on the NBC program ''Meet the Press'' two weekends ago, Mr. Gore, trying to paint Mr. Bradley as hypocritical on the issue of campaign finance reform, noted that Mr. Bradley had received campaign contributions from ''all the C.E.O.'s of the major pharmaceutical companies.''</p>
+        <p>Mr. Bradley tried to respond, but the vice president abruptly cut him off to press his attack.</p>
+        <p>In fact, eight chief executives of drug companies -- including the heads of Pfizer, Bristol-Myers Squibb, Eli Lilly &amp; Company, Johnson &amp; Johnson and American Home Products -- have contributed $1,000 each to Mr. Bradley's campaign, as have dozens of other industry officials. Mr. Bradley's presidential campaign had received about $65,000 from employees of drug concerns as of Nov. 1, according to the Center for Responsive Politics, an independent watchdog group in Washington.</p>
+        <p>But that is a small fraction of the $27 million the former senator has raised this year for his presidential bid. The drug industry does not rank among the top industry groups contributing to his campaign (his top contributors include individuals tied to investment banks and law firms). None of Mr. Bradley's 30 top fund-raisers is affiliated with a drug company or a health care concern -- while several of Mr. Gore's closest advisers are paid lobbyists for major drug companies.</p>
+        <p>Still, Mr. Bradley was widely considered one of the industry's most effective defenders in Congress. He supported an array of measures backed by the drug industry, including bills that would extend patent protection for popular drugs and a large tax break for manufacturing pharmaceuticals in Puerto Rico. He sponsored tariff reductions for raw materials needed in drug manufacturing that would benefit home-state pharmaceutical companies, and he voted to kill a 1992 amendment that would have imposed cost controls on medicines.</p>
+        <p>Mr. Gore, in campaign literature, also notes that Mr. Bradley received $96,160 from employees of major pharmaceutical companies in his three campaigns for the Senate from 1978 to 1990. Again, that is a small percentage of his overall Senate fund-raising total of more than $20 million.</p>
+        <p>Nonetheless, Mr. Gore has made Mr. Bradley's ties to the pharmaceutical industry a central point of attack and a defining distinction between the two Democrats.</p>
+        <p>''For voters looking for a clear difference between the two candidates, they don't need to look any farther than the prescription drug issue,'' said Chris Lehane, Mr. Gore's spokesman. ''Al Gore has devoted a good portion of his career to making prescription drugs more accessible and more affordable while Senator Bradley has taken a lot of money from the New Jersey pharmaceutical companies and represented their interests.''</p>
+        <p>It is true that Mr. Gore's stand on prescription drugs has pitted him against the pharmaceutical industry. But that did not stop the industry from showering money on the Clinton-Gore campaigns in 1992 and 1996, as well as the Democratic Party. That money, in fact, far eclipses the amounts that have gone to Mr. Bradley.</p>
+        <p>In the 1996 presidential election alone, drug company employees donated $94,325 to the Clinton-Gore committee -- almost as much as Mr. Gore says Mr. Bradley received in his three Senate campaigns. Pharmaceutical employees donated $36,000 to the 1992 Clinton-Gore campaign.</p>
+        <p>Mr. Gore also accepted $50,200 in donations from the political action committees of major pharmaceutical companies for his House and Senate races from 1983 to 1990 and for his political action committee in 1998, according to a review of Federal Election Commission reports by the Bradley campaign.</p>
+        <p>In addition, election commission records show that pharmaceutical manufacturers gave the Democratic Party $2.3 million in unrestricted soft money donations for the 1996 campaign and $829,000 for the 1992 campaign, some of which almost certainly benefited the Clinton-Gore ticket by paying for political advertising, polling and get-out-the-vote efforts. Mr. Gore's presidential campaign has received a trickle of donations from individuals affiliated with drug firms.</p>
+        <p>Mr. Lehane did not deny that Mr. Gore had received donations from the drug industry over the years, but said that Mr. Gore had consistently opposed their interests by supporting price controls on prescription drugs.</p>
+        <p>On other issues, however, the Clinton-Gore administration has been an industry ally. For example, the administration supported dozens of patent extensions sought by name-brand drug makers to protect their products from competition from cheaper generic drugs.</p>
+        <p>In 1996, the president signed into law a two-year extension of the patent on Zantac, a popular ulcer medicine, that independent analysts said provided a $1 billion windfall for its manufacturer, Glaxo Wellcome Inc., which has contributed more than $200,000 to the Democratic Party during the Clinton administration.</p>
+        <p>Mr. Bradley voted against the Zantac patent extension, arguing that generic substitutes for the medication would be cheaper for consumers.</p>
+        <p>Officials in the pharmaceutical industry said Mr. Bradley had been responsive to their concerns, but they dismissed Mr. Gore's attacks as campaign posturing. They said that Mr. Bradley had not consulted them before announcing his health care plan and expressed concern that it could lead to price controls on prescription drugs -- a move they consider the greatest threat government poses to their industry.</p>
+        <p>''There are very serious issues at stake for the pharmaceutical industry'' in this election, said Alan F. Holmer, president of the Pharmaceutical Research and Manufacturers of America, the trade association for the big drug companies. ''Reducing these issues to politics doesn't help anyone, least of all patients who are waiting for new cures and treatments.''</p>
+        <p>Another top drug industry official, John Doorley, director of corporate communications at Merck &amp; Company, said Mr. Bradley had listened to drug makers' concerns -- and occasionally had supported their positions in Congress.</p>
+        <p>Mr. Doorley added, however, that Mr. Bradley did no more than would be expected of a senator whose state was home to several large pharmaceutical companies. Merck, the world's largest drug manufacturer, is based in Whitehouse Station, N.J., in the northwest part of the state.</p>
+        <p>''He was one of our two senators, and therefore he was important to us and us to him,'' Mr. Doorley said. ''However, the pharmaceutical industry is the largest manufacturing-based industry in the state and a very important constituency to every member of the congressional delegation. So there would be a relationship there, and that's all we would have to say.''</p>
+        <p>In 1993, Mr. Bradley introduced legislation that would have saved Merck $10 million in import duties on three chemicals used in the manufacture of drugs. The measure was one of a series of bills Mr. Bradley proposed that year to lift tariffs on materials used by New Jersey companies, including one to benefit Warner-Lambert, another big drug company with headquarters in the state.</p>
+        <p>Executives from Merck and Warner-Lambert have contributed about $25,000 to Mr. Bradley's campaigns for the senate and the presidency, according to Federal Election Commission reports.</p>
+        <p>Eric Hauser, the chief spokesman for Mr. Bradley, said the bills -- which never came up for a vote -- would have cost the Treasury a small amount in lost revenue while saving consumers millions of dollars in lower prices on prescription drugs.</p>
+        <p>But Mr. Hauser said the Clinton administration had also taken pro-industry stands by extending patents on dozens of brand-name drugs, costing consumers billions in higher prices by stalling the introduction of cheaper generics.</p>
+        <p>Mr. Lehane said the vice president had recently proposed changes in American patent law that would speed introduction of generic medicines.</p>
+        <p>Mr. Hauser strongly denied that Mr. Bradley was, for financial or geographical reasons, beholden to the drug industry.</p>
+        <p>''He was well known for his independence in the Senate and that reputation came from his view that you decided things on the merits and that influence from those with vested interests was never a determining factor for him,'' Mr. Hauser said. ''There is plenty of evidence to suggest that his record was balanced between the right decisions for New Jersey and the right decisions for consumers.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

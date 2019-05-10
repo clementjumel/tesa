@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Beloved, in a Way, And Immortalized By Composers</title>
+    <meta content="02GRIF" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="41" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165316"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MUSIC"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <org class="indexing_service">New York Philharmonic</org>
+        <person class="indexing_service">Mutter, Anne-Sophie</person>
+        <person class="indexing_service">Griffiths, Paul</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A02E0D91F39F931A35752C0A9669C8B63" item-length="1105" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Beloved, in a Way, And Immortalized By Composers</hl1>
+      </hedline>
+      <byline class="print_byline">By PAUL GRIFFITHS</byline>
+      <byline class="normalized_byline">Griffiths, Paul</byline>
+      <abstract>
+        <p>Paul Griffiths comment on violinist Anne-Sophie Mutter, who will perform with New York Philharmonic, playing works written for her by threecomposers; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THERE are ways other than recording for musicians to make sure that something of their personalities survives them: they can get themselves written into solo pieces or concertos. During a two-week stay with the New York Philharmonic beginning on Thursday at Avery Fisher Hall, the violinist Anne-Sophie Mutter will play works written for her by Witold Lutoslawski, Wolfgang Rihm and Krzysztof Penderecki, as well as more familiar 20th-century concertos by Sibelius, Berg and Bernstein. So here is a chance to hear how three prominent composers have created their own images of this extraordinarily dynamic, technically superb and expressive artist.</p>
+        <p>In earlier times, Chopin and Paganini made self-portraits, and anyone who plays their music now is bound to project a little of what it was like to hear them perform. Mozart was a genius of a character painter, providing in his music vivid likenesses of such friends as the coloratura soprano Aloysia Weber and the clarinetist Anton Stadler. We also know Joseph Joachim from Brahms's Violin Concerto and other works, Peter Pears from Britten's tenor roles, and Cathy Berberian from the music Luciano Berio wrote for her to sing.</p>
+      </block>
+      <block class="full_text">
+        <p>THERE are ways other than recording for musicians to make sure that something of their personalities survives them: they can get themselves written into solo pieces or concertos. During a two-week stay with the New York Philharmonic beginning on Thursday at Avery Fisher Hall, the violinist Anne-Sophie Mutter will play works written for her by Witold Lutoslawski, Wolfgang Rihm and Krzysztof Penderecki, as well as more familiar 20th-century concertos by Sibelius, Berg and Bernstein. So here is a chance to hear how three prominent composers have created their own images of this extraordinarily dynamic, technically superb and expressive artist.</p>
+        <p>In earlier times, Chopin and Paganini made self-portraits, and anyone who plays their music now is bound to project a little of what it was like to hear them perform. Mozart was a genius of a character painter, providing in his music vivid likenesses of such friends as the coloratura soprano Aloysia Weber and the clarinetist Anton Stadler. We also know Joseph Joachim from Brahms's Violin Concerto and other works, Peter Pears from Britten's tenor roles, and Cathy Berberian from the music Luciano Berio wrote for her to sing.</p>
+        <p>Of outstanding contemporary performers, though, rather few have so far sought out composers to give them this immortality. Some include a lot of new music in their diverse repertories. But among those who are more selective -- and who thus give composers the greatest honor and challenge, placing their works alongside the classics -- perhaps only Maurizio Pollini, whose individual piano style has been captured by Luigi Nono and Salvatore Sciarrino in pieces designed for him, bears comparison with Ms. Mutter.</p>
+        <p>Her three Philharmonic programs, with a stamina-testing two or three concertos in each, will be interspersed with two Carnegie Hall recitals (on Jan. 10 and 17), in which she will present sonatas and other chamber pieces with Lambert Orkis to round out a little history of the violin in 20th-century music. It is a history that includes the 20th-century violin's many personae, as the instrument of Romantic passion (in Webern's short pieces as much as the Sibelius Concerto); the fiddle of outsiders and underdogs, whether Central European peasants (Bartok's Second Sonata) or Gypsies (Ravel's ''Tzigane''); the rememberer of the Baroque age, in which the modern violin had its origins (Stravinsky's ''Suite Italienne'' and Lutoslawski's Partita); or all of these in turn (Bernstein's ''Serenade'').</p>
+        <p>But whatever else the violin has been, it has sung. Fingers and a bowing arm, on strings and a wooden volume, produce the effect of song without words, and of a voice that can cover a greater range than that of any human singer: greater in terms not only of pitch but also of speed, both faster than vocal enunciation can manage and slower than breath can sustain.</p>
+        <p>Mr. Rihm has written of this quality in connection with the violin concerto he wrote for Ms. Mutter, ''Time Chant,'' mentioning how he loves in string instruments ''the drawn-out vocal timbre, the vibrating of the ray of time, the energy which collects in the note in order to generate the next note.'' Hence the violin's chanting of time in his work, of the instant present lengthened out in sound, often in long high notes that Ms. Mutter's particular qualities emboldened him to imagine. When he was commissioned by Paul Sacher to compose a work for her, even while Sacher was speaking, ''I remembered in a flash high notes that I had heard her play with uncommon energy and animation,'' Mr. Rihm wrote. ''Precisely in remoteness her playing is richest and most alive.''</p>
+        <p>Using this ability of Ms. Mutter's to make high notes at once soft and intense, even piercing, and also immediately present, with the sense of a person, a body, singing, Mr. Rihm's work is likely to be the big discovery of this residency. It is a soliloquy, almost unbroken for 25 minutes and mostly slow, with the orchestra, lightly scored in the main, extending and amplifying the violin's tones -- though sometimes extending and amplifying them so much as to threaten the solo line's ability to persist. Yet when the crisis is past, the violin will generally be revealed still singing.</p>
+        <p>''Time Chant,'' composed in 1991-92, was the third concerto Sacher had commissioned for Ms. Mutter, following Lutoslawski's ''Chain 2'' (1984-85), and ''En Reve'' (1988) by the Swiss composer Norbert Moret. Ms. Mutter will include the Lutoslawski piece in her first program, along with the Partita the composer arranged for her soon after, in response to the ''very strong impression'' that her performances had made on him.</p>
+        <p>A recent three-CD set of 20th-century concertos performed by Ms. Mutter, ''Mutter Modern'' on Deutsche Grammophon, includes all three of the Sacher commissions and the Lutoslawski Partita as well as the concertos of Stravinsky, Berg and Bartok, and allows one to understand Lutoslawski's reaction. His ''Chain 2'' is dancing and delicate, and has the solo instrument spinning through a variety of violinistic characters: authoritative and fanciful, dreamy and humorous, athletic and morose. Ms. Mutter brings all these characters to life, with, again, an almost vocal immediacy. And the rivaling brilliance and allure in the orchestra throughout should please the Philharmonic.</p>
+        <p>The other concerto Ms. Mutter is bringing with her, Mr. Penderecki's ''Metamorphosen,'' is the most recent, dating from 1992-95. Highly characteristic of the composer in the immense weight it places on the chromatic scale and other rudimentary musical features, and strange in its attempts at glitter and lightheartedness, the piece has the advantage of a big cadenza. It clearly excites Ms. Mutter. ''For me,'' she writes in a note for the Deutsche Grammophon recording, ''this work represents a physical and mental challenge for which I feel profoundly grateful.'' And she has expressed that gratitude in commissioning from Mr. Penderecki a sonata, which, had it been ready, was to have been included in one of her Carnegie Hall recitals.</p>
+        <p>Ms. Mutter's four concertos -- the three she will play with the Philharmonic plus Mr. Moret's excellent and magical piece -- are almost as unalike as could be, yet something of their intended performer's special energy infuses all of them. The tightly blazing high notes that dominate Mr. Rihm's piece are there at the start of Mr. Penderecki's; determination at speed is a feature of Mr. Moret's ''En Reve'' as much as of Lutoslawski's ''Chain 2.'' Ms. Mutter is serious and strong-willed. She must relish the chance to be, in these works, herself.</p>
+        <p>MUSIC</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

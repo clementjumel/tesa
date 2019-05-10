@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Author and Illustrator of Children's Books to Address Tea</title>
+    <meta content="02TEA.$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Westchester Weekly Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="14WC" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Books; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165374"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <location class="indexing_service">Westchester County (NY)</location>
+        <person class="indexing_service">Buckvar, Felice</person>
+        <person class="indexing_service">Pinkney, Jerry</person>
+        <person class="indexing_service">Pinkney, Gloria Jean</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Westchester</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F04EED81638F931A35752C0A9669C8B63" item-length="894" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Author and Illustrator of Children's Books to Address Tea</hl1>
+      </hedline>
+      <byline class="print_byline">By FELICE BUCKVAR</byline>
+      <byline class="normalized_byline">Buckvar, Felice</byline>
+      <abstract>
+        <p>African-American Writers and Readers Literary Tea, annual Westchester County event, will host Gloria Jean Pinkney and Jerry Pinkney, writer and illustrator of children's books; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A WESTCHESTER couple, Gloria Jean Pinkney and Jerry Pinkney, will be addressing an older audience than usual when they speak at the African-American Writers and Readers Literary Tea later this month.</p>
+        <p>It is usually children who are the focus of the Pinkneys' books, with her doing the writing and him doing the illustrations. They couple, who live in Croton-on-Hudson, know children well, having raised four of their own.</p>
+      </block>
+      <block class="full_text">
+        <p>A WESTCHESTER couple, Gloria Jean Pinkney and Jerry Pinkney, will be addressing an older audience than usual when they speak at the African-American Writers and Readers Literary Tea later this month.</p>
+        <p>It is usually children who are the focus of the Pinkneys' books, with her doing the writing and him doing the illustrations. They couple, who live in Croton-on-Hudson, know children well, having raised four of their own.</p>
+        <p>Mrs. Pinkney described herself as a born storyteller whose memories of her North Carolina relatives were rekindled at a family reunion. ''My first published book came in the mail just before my 50th birthday,'' she said. The book was ''Back Home'' (Dial Books for Young Readers).  Two years later ''The Sunday Outing'' was published (Dial Books for Young Readers). A reviewer for The Horn Book wrote, ''Gloria Jean Pinkney's quiet story and Jerry Pinkney's illustrations provide a loving portrait of an African-American family working to make a dream come true.''</p>
+        <p>Mr. Pinkney said he had been fascinated with art for as long as he could remember. ''I always had a pencil in one hand and paper in the other,'' he said. ''I'm dyslexic. I struggled with reading, but I knew I could draw.'' He has illustrated more than 75 books for children and about 12 for adults. Among his other works are Seagram's Black History calendars, for which Mrs. Pinkney wrote the copy, and the illustration of 11 stamps for the United States Postal Service, including portraits of Dr. Martin Luther King Jr., Harriet Tubman and Jackie Robinson.</p>
+        <p>At the tea on Jan. 17, Mrs. Pinkney will discuss her next work, an inspirational nonfiction book, ''In the Forest of Remembrance,'' to be published at the end of the year by Phyllis Fogelman Books. Mr. Pinkney will tell of aspects of his career.</p>
+        <p>Three writers who live outside the county will also speak at the tea.</p>
+        <p>Valerie Wilson Wesley of Montclair, N.J., is an author and a contributing editor for Essence magazine.  She will discuss her latest book, ''Ain't Nobody's Business If I Do'' (Avon Books).</p>
+        <p>The book, a contemporary mainstream love story, represents a change in direction for her since she began the Tamara Hayle series of mysteries. Her sixth mystery in that series will be published in June (Penguin Putnam).</p>
+        <p>Jeffery Renard Allen of Far Rockaway, Queens, an associate professor of creative writing and African-American literature at Queens College in Flushing, will speak about his first novel, ''Rails Under My Back'' (Farrar, Straus &amp; Giroux), which is scheduled for publication next month. The book looks at the migration of African-American families after World War II from the viewpoints of six characters. Kirkus Review has praised Mr. Allen as a ''successor to the legacy of James Baldwin and Ralph Ellison.''</p>
+        <p>Diane McKinney-Whetstone, a novelist from Philadelphia who teaches fiction writing at the University of Pennsylvania, will discuss her work, including her latest novel, ''Blues Dancing'' (William Morrow  &amp; Company).</p>
+        <p>The idea for an annual literary tea began with Toni Cox-Burns of White Plains, president of the White Plains Public Library Foundation, which raises money from private sources to enhance library services, and a trustee of the Westchester Library System, a cooperative public library system serving the 38 libraries in Westchester.</p>
+        <p>Mrs. Cox-Burns observed that ''the library is the most available vehicle not only for learning but for enrichment and entertainment.''</p>
+        <p>She continued, ''It's the one institution that serves the whole population from early childhood to seniors,'' adding that she realized that ''a proliferation of books and reading clubs in the African-American community in Westchester created a good opportunity to have a book and author tea featuring African-American authors.''</p>
+        <p>She took the idea to Maurice J. Freedman, director of the Westchester Library System, who agreed to help organize the tea by advancing money for expenses and providing staff help.</p>
+        <p>''The literary tea is a major event on our calendar,'' he said, ''and we are grateful to Toni for initiating contact with us.''</p>
+        <p>Speakers at the tea last year included Lawrence Otis Graham and his wife, Pamela Thomas-Graham, both of Chappaqua, graduates of Harvard Law School and authors.  Mr. Graham's most recent book is ''Our Kind of People: Inside America's Black Upper Class'' (HarperCollins). Mrs. Thomas-Graham, the president of CNBC.com, a personal-finance site, is the author of the mysteries ''A Darker Shade of Crimson'' and ''Blue Blood'' (Simon &amp; Schuster).</p>
+        <p>The tea will be held from 3:30 to 6 p.m. at Abigail Kirsch's Tappan Hill in Tarrytown. Tickets are $38 and $60  and include beverages, sandwiches and pastries. The higher priced tickets are for a reception at 3 p.m. and a contribution for African-American library materials and programs.</p>
+        <p>Tickets may be ordered only by mail and will be held at the door.  Checks should be made out to the Westchester Library System Tea.  The address of the Westchester Library System is 410 Saw Mill River Road, Ardsley, New York 10502-2605.  For information, call 674-3600, extension 226 or 227.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

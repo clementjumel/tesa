@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Fear of Computer Glitch Grounds Thousands of Air Travelers</title>
+    <meta content="01AIR.$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="10" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165136"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: TECHNOLOGY AND 2000 -- MOMENTOUS RELIEF"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Airlines and Airplanes</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Computer Software</classifier>
+        <classifier class="indexing_service" type="descriptor">Accidents and Safety</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <location class="indexing_service">Europe</location>
+        <location class="indexing_service">Far East, South and Southeast Asia and Pacific Areas</location>
+        <person class="indexing_service">Zuckerman, Laurence</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Asia Pacific</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Manufacturing, Operations and Logistics</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computer Software</classifier>
+        <classifier class="online_producer" type="general_descriptor">Airlines and Airplanes</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Accidents and Safety</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B06E3DB1038F932A35752C0A9669C8B63" item-length="554" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Fear of Computer Glitch Grounds Thousands of Air Travelers</hl1>
+      </hedline>
+      <byline class="print_byline">By LAURENCE ZUCKERMAN</byline>
+      <byline class="normalized_byline">Zuckerman, Laurence</byline>
+      <abstract>
+        <p>Commercial aviation enters the new year without any computer problems as midnight passes in Asia and Europe; about 1,350 commercial jets are in the air at the time, less than half the number of planes that flew last New Year's Eve (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Airports around the world, ordinarily quiet on New Year's Eve, were unusually so yesterday as thousands of potential travelers stayed put while the world's air traffic system rolled over to the year 2000.</p>
+        <p>Yet, despite such fears and recent concerns about terrorism, commercial aviation entered the new year without incident as midnight arrived around the globe.</p>
+      </block>
+      <block class="full_text">
+        <p>Airports around the world, ordinarily quiet on New Year's Eve, were unusually so yesterday as thousands of potential travelers stayed put while the world's air traffic system rolled over to the year 2000.</p>
+        <p>Yet, despite such fears and recent concerns about terrorism, commercial aviation entered the new year without incident as midnight arrived around the globe.</p>
+        <p>The major test for commercial aviation came at midnight in London when the global air traffic control system, which observes Greenwich Mean Time, crossed over into the new year without difficulty.</p>
+        <p>Worldwide, about 1,350 commercial jets were in the air at the time, according to the Air Transport Association, the airline industry's trade group. That was less than half the number of planes that flew last New Year's Eve, as airlines around the world canceled thousands of flights because of low demand.</p>
+        <p>United Airlines and American Airlines, the world's two largest carriers, said they had canceled about one-third of their flights yesterday.</p>
+        <p>As a result, airports across the United States appeared desolate. The three New York airports -- Kennedy International, La Guardia and Newark -- were expecting to handle only 270,000 passengers yesterday, compared with 430,000 on the same day last year.</p>
+        <p>Many airline executives and aviation officials around the world had hoped to reassure the public by being passengers themselves on New Year's Eve. Jane Garvey, chief of the Federal Aviation Administration, booked herself on several flights that were subsequently canceled.</p>
+        <p>Yesterday afternoon, flanked by the head of the F.A.A.'s year 2000 effort, two public affairs officers, Senator Slade Gorton of Washington and a score of journalists, Ms. Garvey boarded an American Airlines flight from Washington to Dallas.</p>
+        <p>With 100 empty seats available on the jetliner, one of a handful of passengers not directly connected to Ms. Garvey's efforts was Janet S. Rhodes of Long Beach, Calif., who said she came to Washington yesterday so that she could greet the new millennium aloft and tell her grandchildren about it.</p>
+        <p>Ms. Rhodes said she had told her four sons, ''Just follow Jane Garvey's progress on television and you'll know where I am.''</p>
+        <p>The world's airlines and air traffic control centers spent an estimated $2.5 billion to assure that their computers could read the year 2000 correctly. But experts did not consider air safety to be particularly vulnerable.</p>
+        <p>The only glitch reported yesterday occurred when printers in Alaska, California and Long Island that are used to relay information to controllers from airplanes flying over the ocean all went on the blink at midnight Greenwich time. The failure lasted only about 30 minutes and had no operational effect, the F.A.A. said, adding that it was not even clear that the problem was caused by the date change.</p>
+        <p>Nevertheless, many passengers said they were not taking any chances by being in the air at the witching hour. ''I think it will probably be O.K., but I'm trying to get home before midnight,'' said Del Turner, who was waiting for a flight at Los Angeles International Airport. ''Something will happen. They haven't fixed everything.''</p>
+        <p>1/1/00: TECHNOLOGY AND 2000 -- MOMENTOUS RELIEF</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

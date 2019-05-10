@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  SHEABER, MYRON</title>
+    <meta content="DN010200" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165694"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">SHEABER, MYRON</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9404E4D81138F931A35752C0A9669C8B63" item-length="137" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  SHEABER, MYRON</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>SHEABER-Myron. The Cystic Fibrosis Association of Greater New York marks with profound sorrow the passing of Mike Sheaber, our distinguished colleague, who served with dedication for so many years as a member of the CFA Board of Directors in support of research and scholarship grant programs to help broaden the horizons and bring the ''breath of life'' to CF children and young adults. Our hearts go out to Maxine, his beloved wife and our very good friend; a long-time advocate for cystic fibrosis children and past Vice President of the CF Association of Greater New York. Our deep felt condolences to his cherished children and grandchildren and to all the family. Mike was a uniquely insightful, caring, giving and extraordinarily fine man and friend. We shall miss him. Phyllis L. Kossoff, Chairman Norton Hight, President and CEO</p>
+      </block>
+      <block class="full_text">
+        <p>SHEABER-Myron. The Cystic Fibrosis Association of Greater New York marks with profound sorrow the passing of Mike Sheaber, our distinguished colleague, who served with dedication for so many years as a member of the CFA Board of Directors in support of research and scholarship grant programs to help broaden the horizons and bring the ''breath of life'' to CF children and young adults. Our hearts go out to Maxine, his beloved wife and our very good friend; a long-time advocate for cystic fibrosis children and past Vice President of the CF Association of Greater New York. Our deep felt condolences to his cherished children and grandchildren and to all the family. Mike was a uniquely insightful, caring, giving and extraordinarily fine man and friend. We shall miss him. Phyllis L. Kossoff, Chairman Norton Hight, President and CEO</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

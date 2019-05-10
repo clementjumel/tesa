@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Pub Has Eye On Dublin: 2 Midnights In Queens</title>
+    <meta content="01NEIG" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="6" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165133"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: A CITY CELEBRATES"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">Irish-Americans</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <location class="indexing_service">New York City</location>
+        <location class="indexing_service">Dublin (Ireland)</location>
+        <person class="indexing_service">Chivers, C J</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Ireland/Dublin</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Ireland</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Culture</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9807E5DB1038F932A35752C0A9669C8B63" item-length="759" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Pub Has Eye On Dublin: 2 Midnights In Queens</hl1>
+      </hedline>
+      <byline class="print_byline">By C. J. CHIVERS</byline>
+      <byline class="normalized_byline">Chivers, C J</byline>
+      <abstract>
+        <p>Revelers at Irish pub in Woodside, Queens, get a jump on New Year by celebrating its arrival in Dublin time (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Sean Cunningham nodded to the television hanging above him in the smoky air of the Starting Gate Pub. It was 5 p.m. in Woodside, Queens, and, by Mr. Cunningham's calculation, two hours to midnight.</p>
+        <p>The Starting Gate is a long way from County Limerick, Ireland, where Mr. Cunningham is from, and it's a longer way still to the international date line, where the new year  had begun rolling westward across the planet earlier in the day.</p>
+      </block>
+      <block class="full_text">
+        <p>Sean Cunningham nodded to the television hanging above him in the smoky air of the Starting Gate Pub. It was 5 p.m. in Woodside, Queens, and, by Mr. Cunningham's calculation, two hours to midnight.</p>
+        <p>The Starting Gate is a long way from County Limerick, Ireland, where Mr. Cunningham is from, and it's a longer way still to the international date line, where the new year  had begun rolling westward across the planet earlier in the day.</p>
+        <p>Mr. Cunningham and his cluster of immigrant friends were using the power of television to overcome the limits of geography and the slowness of the clock. Their math was a cinch. Midnight would come to Dublin at 7 p.m. in Eastern Standard Time, which meant that the patrons of the Starting Gate, who planned to celebrate simultaneously with their relatives overseas, had a head start on the New Year.</p>
+        <p>''Midnight in Dublin and we'll be ready to go,'' Mr. Cunningham said, glancing at the television, where he hoped to see a brief video feed from home. ''Midnight in New York and we'll do it again.''</p>
+        <p>This duplication of celebrations meant a big night for the Irish bars under the No. 7 train in Woodside. At the Starting Gate, a pub that a former construction worker, Dennis O'Sullivan, opened six years ago, the revelers came early and planned to stay late, working through wads of dollar bills as they emptied Mr. O'Sullivan's extra stocks of cider, stout, ale and beer.</p>
+        <p>Midnight in Dublin, midnight in New York. The patrons were experiencing a millennial microcosm of the immigrant's life, in which one eye is always on the homeland and the other on events in America. They said this made New Year's Eve special because two celebrations meant that they had two chances to mull over matters large and small.</p>
+        <p>''I'd like to see peace in the North, and all over the world,'' said Patrick Cotter, 36, from County Clare.</p>
+        <p>Up the bar from Mr. Cotter, matters were less serious, as resolutions, as familiar as they were impossible, were passed from person to person:  no more drinking, no more smoking, no more falling in love.</p>
+        <p>''Everything dirty, I quit,'' said Robby Sloane, 25, from County Armagh.</p>
+        <p>A few stools over, another patron trumped him, having found something even more difficult to do. ''This year I'm going to win a million, or maybe half a million, whatever I can get,'' said Jack Fitzgerald, 31, a carpenter who moved to New York from County Kerry 10 years ago.</p>
+        <p>Nearby sat John Heslin, a young man whose resolution was to swear off resolutions. He sat on his stool in a black leather jacket, wearing a gold Celtic cross. A quarter-size scar was visible through his thin hair. His goatee was slightly wet.</p>
+        <p>''I'm going to get absolutely crooked drunk,'' he said. ''And I won't be able to tell what goes on for the rest of the year. What do I need a resolution for?''</p>
+        <p>At the far end of the bar, two immigrants from long ago -- Martin McMorrow, 71, and Oliver Jake McMahon, 66 -- watched the younger crowd. Both men came to America about 40 years ago. Both found careers at Con Edison.</p>
+        <p>Mr. McMorrow, from County Leitrim, looked up through rich blue eyes and said he was going to have a few more pints of stout and call it a night. He planned to make himself comfortable before the clock struck midnight in either Dublin or Times Square.</p>
+        <p>''I won't even drink all of that,'' he said, nodding toward the $14 sitting on the damp bar. ''Pretty soon you'll be seeing me make my way home.''</p>
+        <p>Mr. McMahon said the beginning of the 2000's would mean the end of some things, the beginning of others. Most of all, he said, he feared it spelled doom for the boilermaker, that once-upon-a-time standby of a shot of whiskey and a glass of beer.</p>
+        <p>''Times are changing,'' he said. ''Nowadays the boys all drink light beer.''</p>
+        <p>As if on cue, a few minutes later, a patron asked the bartender, Ciara Murphy, for one of those old-time specials. ''A boilermaker?'' she said. ''What's that?''</p>
+        <p>Seven o'clock in Dublin, the patrons said, the end of an era.</p>
+        <p>1/1/00: A CITY CELEBRATES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>On Empty Battlefields, the Shadows of Cyberwarriors</title>
+    <meta content="01FITE$12" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Science" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165190"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: POWER"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Armament, Defense and Military Forces</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Science and Technology</classifier>
+        <classifier class="indexing_service" type="descriptor">War and Revolution</classifier>
+        <person class="indexing_service">Myers, Steven Lee</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Science</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Science and Technology</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">War and Revolution</classifier>
+        <classifier class="online_producer" type="general_descriptor">Armament, Defense and Military Forces</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9805E7DF1030F932A35752C0A9669C8B63" item-length="894" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>On Empty Battlefields, the Shadows of Cyberwarriors</hl1>
+      </hedline>
+      <byline class="print_byline">By Steven Lee Myers</byline>
+      <byline class="normalized_byline">Myers, Steven Lee</byline>
+      <dateline>GETTYSBURG, Pa.</dateline>
+      <abstract>
+        <p>Steven Lee Myers article on transformation of warfare by technology in the 21st century; says trends already well set raise question of whether the military may one day be able to dispense with combat troops entirely; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>AS commandant of the Army War College, Maj. Gen. Robert H. Scales Jr. regularly leads students, politicians, foreign officers and other visitors on tours through the landmarks of the battlefield here: Devil's Den, Little Round Top, Cemetery Ridge. Though the Battle of Gettysburg was fought 136 years ago, General Scales thinks it still offers lessons on the art of war. At the same time, it is getting harder and harder to see them.</p>
+        <p>Technology has depersonalized modern warfare, making the brutality and concentrated carnage of Gettysburg -- where 51,000 soldiers were killed, wounded or left missing in action in just three days of head-to-head fighting -- almost unthinkable. Paradoxically, that same technology has made killing easier than ever.</p>
+      </block>
+      <block class="full_text">
+        <p>AS commandant of the Army War College, Maj. Gen. Robert H. Scales Jr. regularly leads students, politicians, foreign officers and other visitors on tours through the landmarks of the battlefield here: Devil's Den, Little Round Top, Cemetery Ridge. Though the Battle of Gettysburg was fought 136 years ago, General Scales thinks it still offers lessons on the art of war. At the same time, it is getting harder and harder to see them.</p>
+        <p>Technology has depersonalized modern warfare, making the brutality and concentrated carnage of Gettysburg -- where 51,000 soldiers were killed, wounded or left missing in action in just three days of head-to-head fighting -- almost unthinkable. Paradoxically, that same technology has made killing easier than ever.</p>
+        <p>Now, the very idea of war, and those who fight it, is being transformed at a pace unfathomable even a few years ago. ''You're trying to conjure up a kind of war we have never fought before,'' said General Scales, who is widely viewed as one of the Army's leading visionaries.</p>
+        <p>With laser-guided missiles and long-range weapons allowing battles to be fought at greater distances with greater firepower, the likelihood of vast armies arrayed against each other has essentially vanished. Most military strategists think that the Persian Gulf war -- in which the United States assembled a coalition of 500,000 troops to repel Iraq's invasion of Kuwait in 1991 -- was a last gasp of the old way, despite all the high-technology weaponry that the war introduced to the world. In the last 18 months, the Clinton administration has struck Sudan and Afghanistan, launched raids against Iraq and, with NATO, waged war over Kosovo, all without putting a single American soldier on the ground.</p>
+        <p>The military lessons of Gettysburg -- protecting your flank, holding the high ground -- will be irrelevant in a future in which front lines no longer exist. With satellites providing instantaneous information and bombs and missiles able to strike from afar, massing troops or seizing high ground simply makes a riper target for jets flying thousands of feet overhead.</p>
+        <p>This is more than the triumph of air power. New technologies are transforming the battlefield of the future on the ground, too. The Marine Corps is already testing small, insectlike robots that can act as sensors on the battlefield, probing deep into the enemy's territory without the risks that reconnaissance squads face. Over the next couple of decades, the Army plans to create ''digitized'' units tied into a global communications network using satellites, unmanned drones and sensors on the ground.</p>
+        <p>Imagine front-line troops able to send and receive orders, target coordinates and intelligence reports through eyepieces and microcomputers built into their belts or buttons. ''If you think of the soldier on the battlefield as a pawn, we can make them all knights,'' said Ellison C. Urban, deputy director of the Army office trying to develop these microsystems.</p>
+        <p>It took 90,000 Union troops to defend the few square miles around Gettysburg. Today, the Army could hold them with 700 to 800 soldiers, maybe even 100. Some analysts envision in the future an ''empty battlefield,'' where armies wrestle for control of territory without ever seeing the enemy.</p>
+        <p>With its vast superiority in weapons, the United States may not be fighting armies at all, but thugs, terrorists and mobs in limited conflicts or ''operations other than war'' like peacekeeping and drug interdiction.</p>
+        <p>Charles C. Moskos, a military sociologist at Northwestern University, says this will blur not only the front lines but also the divisions between society and its military. The American military will rely more heavily on civilian contractors while facing social pressures to integrate women and gay men and lesbians. He calls it the Postmodern Military.</p>
+        <p>Soldiers will need technical prowess more than raw physical strength. They will be older, more mature, infinitely better trained. ''The days of the 18-year-old infantryman are over,'' General Scales said.</p>
+        <p>Instead, soldiers will be a professional cadre -- and an ever-smaller minority in a military dominated by people sitting in front of computer screens.</p>
+        <p>Some see danger in this. ''It has always been seen that the professional military class is antithetical to a free society,'' said John Hillen, a former Army tank commander who is now a military affairs analyst.</p>
+        <p>Taken to an extreme, the trends in technology raise the question of whether the military will need boot-on-the-ground combat troops at all. Is it possible to defend the nation's security without ever having to ask its young people to die for the cause?</p>
+        <p>For politicians, the idea will be enticing, but most military analysts warn against an overreliance on technology. For General Scales, this may be the lasting lesson of Gettysburg: wars are still fought and won by individuals, acting with courage, leadership and initiative. Huva Wass de Czege, a retired brigadier general, put it another way. War, he said, is a moral question, forcing a country to decide whether it is prepared to sacrifice its people for its interests. ''If it's just a machine against a machine,'' he said, ''what's the point?''</p>
+        <p>VISIONS: POWER</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

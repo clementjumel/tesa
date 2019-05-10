@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Parties on the Beach, Then Pious Reflection</title>
+    <meta content="Y01RIO$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165131"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE WORLD"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0CEEDC1038F932A35752C0A9669C8B63" item-length="637" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Parties on the Beach, Then Pious Reflection</hl1>
+      </hedline>
+      <byline class="print_byline">By LARRY ROHTER</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The land that made Carnival and the samba art forms loves nothing more than a party. So the beginning of the 2000's in Rio de Janeiro turned into what authorities proudly called the largest celebration in Brazilian history: an estimated 3.5 million people lining Copacabana, Ipanema and more than 25 miles of other beaches in a tropical spectacle that blended the spiritual and the profane.</p>
+        <p>For believers of Candomble, Brazil's home-grown mixture of Catholicism and African-derived animist beliefs, New Year's Eve is traditionally the feast day of Iemanja, the fair-skinned goddess of the sea who appears in the guise of the Virgin Mary and is considered the mother of all living things. Beaches are always packed with worshipers who come to seek her blessing on that night, but with the celebration of the millennium, everything that has gone on in the past was multiplied.</p>
+      </block>
+      <block class="full_text">
+        <p>The land that made Carnival and the samba art forms loves nothing more than a party. So the beginning of the 2000's in Rio de Janeiro turned into what authorities proudly called the largest celebration in Brazilian history: an estimated 3.5 million people lining Copacabana, Ipanema and more than 25 miles of other beaches in a tropical spectacle that blended the spiritual and the profane.</p>
+        <p>For believers of Candomble, Brazil's home-grown mixture of Catholicism and African-derived animist beliefs, New Year's Eve is traditionally the feast day of Iemanja, the fair-skinned goddess of the sea who appears in the guise of the Virgin Mary and is considered the mother of all living things. Beaches are always packed with worshipers who come to seek her blessing on that night, but with the celebration of the millennium, everything that has gone on in the past was multiplied.</p>
+        <p>The day had been cloudless and sunny; the hottest of the summer so far. Rio's beaches were crowded with sunbathers, surfers and volleyball and paddle ball players.</p>
+        <p>But as the sun dipped over Gavea Peak and sank into the sea, the sportsmen retired, a cooling breeze sprang up, and individuals, couples and entire families began emerging from apartments, restaurants, buses or the subway and streaming to the shore.</p>
+        <p>To turn away from the sea was to glimpse silhouetted figures clinking their glasses, dancing and kissing as they watched the goings-on from the verandas of million-dollar apartments in Ipanema.</p>
+        <p>At the water's edge, though, the scene was largely one of piety, as devotees of Iemanja stood quietly, their heads bowed and arms outstretched, and prayed.</p>
+        <p>Men and women alike were dressed entirely in white in deference to the goddess. Many of the bouquets of roses, lilies, carnations and gladioli they carried also were white, and were ceremoniously thrown into the Atlantic as offerings to her. Other worshipers tossed wads of money or even pieces of jewelry into the sea in her honor, or let the waves wash over them.</p>
+        <p>''A new millennium, a new start,'' said Maria Zenaida Rodrigues Alves as she emerged soaked from the surf. ''I have washed away my sins and the Lady of the Sea has made me a new person.''</p>
+        <p>Delia Correia Costa put it another way: ''If we cleanse ourselves at the start of this new millennium, then maybe the world can also be cleansed and we can usher in an era of universal peace and harmony.''</p>
+        <p>Similar celebrations were going on in other cities along Brazil's 4,000 miles of coastline, but Copacabana was clearly the focal point of the nation's festivities.</p>
+        <p>A half-dozen cruise ships and assorted yachts and sailboats floated just offshore, hundreds of jet-setters and political dignitaries joined President Fernando Henrique Cardoso in a special tent set up at Fort Copacabana, and some of Brazil's most renowned pop music stars performed on stages that had been erected at four points along the beach. To cap things off, an ornate 20-minute fireworks display began promptly at midnight.</p>
+        <p>For some of the working poor, though, the night was primarily a chance to make a little money. They circulated among the revelers, selling coconuts, ears of corn, beer, soft drinks and even bottles of Champagne. ''Whether it is 1999 or 2000, I still have to put food in the mouths of my children,'' said Jose Ovidio Ramos Mendonca, a vendor of grilled meats. ''I can always rest tomorrow.''</p>
+        <p>1/1/00: AROUND THE WORLD</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

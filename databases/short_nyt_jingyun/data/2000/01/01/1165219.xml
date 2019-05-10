@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Small Leap To Designer Babies</title>
+    <meta content="01GENE$14" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165219"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: BIOLOGY: A GENETIC FUTURE BOTH TANTALIZING AND DISTURBING"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Genetics and Heredity</classifier>
+        <classifier class="indexing_service" type="descriptor">Genetic Engineering</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <person class="indexing_service">Stolberg, Sheryl Gay</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Health/Diseases, Conditions, and Health Topics/Genetics and Heredity</classifier>
+        <classifier class="online_producer" type="general_descriptor">Genetic Engineering</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Genetics and Heredity</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F0CE2DC1030F932A35752C0A9669C8B63" item-length="1032" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Small Leap To Designer Babies</hl1>
+      </hedline>
+      <byline class="print_byline">By Sheryl Gay Stolberg</byline>
+      <byline class="normalized_byline">Stolberg, Sheryl Gay</byline>
+      <abstract>
+        <p>Sheryl Gay Stolberg article on how life may be changed for good or ill through biotechnology in the century ahead; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>UNLIKE the sheep named Dolly, the mouse named Lucy has barely made a ripple in the news. Lucy, born on Oct. 26, 1998, is the creation of scientists at Chromos Molecular Systems, a biotechnology company in Vancouver, British Columbia. She has black-brown fur and is not unlike mice bred in laboratories around the world, the company says, with one exception: Lucy has an artificial chromosome that she has passed to her offspring.</p>
+        <p>And so the little mouse's implications may be vast. Her descendants, experts say, represent another critical step in biotechnology's inexorable march toward the day when parents will be able to design their own babies: eliminating genes for undesirable traits, adding genes for desirable ones -- and in the process altering the DNA of generations to come.</p>
+      </block>
+      <block class="full_text">
+        <p>UNLIKE the sheep named Dolly, the mouse named Lucy has barely made a ripple in the news. Lucy, born on Oct. 26, 1998, is the creation of scientists at Chromos Molecular Systems, a biotechnology company in Vancouver, British Columbia. She has black-brown fur and is not unlike mice bred in laboratories around the world, the company says, with one exception: Lucy has an artificial chromosome that she has passed to her offspring.</p>
+        <p>And so the little mouse's implications may be vast. Her descendants, experts say, represent another critical step in biotechnology's inexorable march toward the day when parents will be able to design their own babies: eliminating genes for undesirable traits, adding genes for desirable ones -- and in the process altering the DNA of generations to come.</p>
+        <p>This will not be the work of some mad scientist squirreled away in a dungeon lab. It will flow from legitimate research intended to treat disease and cure infertility. Scientists are already pushing the frontiers of cloning; of the manipulation of embryonic stem cells, which grow indefinitely and can develop into any tissue in the body; of gene therapy, which uses genetic material to treat disease; and of in vitro fertilization.</p>
+        <p>In the next century, experts say, these technologies will merge, enabling doctors to tinker with the genes of eggs and sperm. Thus will ''germline genetic engineering,'' now only a theory, become reality.</p>
+        <p>''There will be enhancements to life span, alterations to personality, like intelligence,'' says Dr. Gregory Stock, the director of the Program on Medicine, Technology and Society at the University of California at Los Angeles. ''In the not-too-distant future, it will be looked at as kind of foolhardy to have a child by normal conception.''</p>
+        <p>Genetic research has always posed vexing social and ethical issues. But there may be no more complicated question than how the fruits of the genetic revolution should be used and, most important, who should have access to them. In the last century, eugenics was about the exercise of power and ideology. In the next, it may be about money.</p>
+        <p>Already, wealthy childless couples routinely spend tens of thousands of dollars trying to conceive babies through science. Already, couples who carry genes for Tay-Sachs disease or sickle cell anemia can have their embryos screened to prevent passing on those genes. Dr. Lee M. Silver, a molecular geneticist at Princeton University, says that someday, a doctor will tell parents:  ''I've got your embryos under a microscope. How about if I add a couple of genes to provide cancer resistance?'' Or genes for stronger muscles? Or musical talent?</p>
+        <p>Dr. Ruth Hubbard, a retired professor of biology at Harvard University, is offended by the thought. She predicts that safety concerns will prevent germline engineering from coming to pass; the risk of creating deformed babies is too great, she says. And, she points out, biology is not destiny: ''What if you have been engineered to be a dancer and you're a total clod? How horrible for those children.''</p>
+        <p>Dr. Silver agrees that genes confer an advantage -- nothing more. But if some children are lucky enough to be born with genes that protect them against cancer or make them musical geniuses, he reasons, what is wrong with using science to give other children the genes those youngsters come by naturally? Is it any different from paying for private school? ''The answer to what's wrong with this,'' Dr. Silver says, ''is that it is people with money who will be able to not only give their child a better environment, but also better genes.''</p>
+        <p>That is a concern others share. ''Have you seen 'Gattaca?' '' asks Dr. W. French Anderson, the geneticist who in 1990 conducted the first gene therapy experiment. In that 1997 science-fiction film, society was divided into ''valids,'' whose genetic profile was corrected before birth, and ''invalids,'' who were conceived naturally. ''That's exactly what will happen in our society if there are no safeguards,'' Dr. Anderson warns.</p>
+        <p>Yet Dr. Anderson is among those pushing the technology forward. He has proposed performing gene therapy on a fetus to try to cure a rare immune deficiency, although the National Institutes of Health has rejected the plan. As to engineering eggs and sperm, he says, enhancement should be forbidden. What would he permit? ''Anything which brings a child from below-normal function back up to normal function.''</p>
+        <p>But the question of what is normal is tricky. Adrianne Asch, a bioethicist at Wellesley College, is blind, a condition she says does not prevent her from functioning normally. Even if germline gene therapy could safely prevent blindness in children, Dr. Asch says, she would be apprehensive. She views Dr. Anderson's standard as problematic.</p>
+        <p>''If you say you are only going to use it for disabilities, but you are not going to use it for character traits, then is schizophrenia a disability but depression a character trait?'' she asks. ''When is dwarfism a disability and when is being short a social problem?''</p>
+        <p>The American Association for the Advancement of Science has spent the last two years wrestling with such thorny questions; it has convened two working groups that are examining ethical and scientific issues surrounding germline gene therapy. A report, intended as a guide for policy makers, should be released early this year.</p>
+        <p>That effort wins praise from Dr. Paul Billings, a geneticist and member of the board of the Council for Responsible Genetics, a nonprofit group that opposes germline engineering. Dr. Billings says he has safety concerns about the technology and warns that altering genes may prove an exercise in hubris. He wants limits placed on germline engineering before it becomes feasible, but doubts that will happen.</p>
+        <p>''We are market driven,'' he says. ''We emphasize the individual freedoms of scientists and others. The cow is out of the barn.''</p>
+        <p>VISIONS: BIOLOGY: A GENETIC FUTURE BOTH TANTALIZING AND DISTURBING</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

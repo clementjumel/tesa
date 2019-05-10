@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Look at the Numbers in Internet Commerce</title>
+    <meta content="02SWEB$04" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165517"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Retail Stores and Trade</classifier>
+        <classifier class="indexing_service" type="descriptor">Sales</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Christmas</classifier>
+        <classifier class="indexing_service" type="descriptor">Advertising</classifier>
+        <classifier class="indexing_service" type="descriptor">Electronics</classifier>
+        <classifier class="indexing_service" type="descriptor">Apparel</classifier>
+        <org class="indexing_service">Toys 'r' US Inc</org>
+        <org class="indexing_service">Gap Inc</org>
+        <person class="indexing_service">Hansell, Saul</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Media and Advertising</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Shopping</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Retail</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Fashion, Beauty and Fitness</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Sales and Business Development</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Marketing, Advertising and PR</classifier>
+        <classifier class="online_producer" type="general_descriptor">Retail Stores and Trade</classifier>
+        <classifier class="online_producer" type="general_descriptor">Sales</classifier>
+        <classifier class="online_producer" type="general_descriptor">Christmas</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Apparel</classifier>
+        <classifier class="online_producer" type="general_descriptor">Electronics</classifier>
+        <classifier class="online_producer" type="general_descriptor">Advertising and Marketing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9406E0DB1238F931A35752C0A9669C8B63" item-length="909" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Look at the Numbers in Internet Commerce</hl1>
+      </hedline>
+      <byline class="print_byline">By SAUL HANSELL</byline>
+      <byline class="normalized_byline">Hansell, Saul</byline>
+      <abstract>
+        <p>Despite oversized advertising spending, almost none of the new Internet companies appear to have gotten any traction this Christmas; rather, it was Internet affiliates of well-known store chains, such as Toys 'R' Us and Gap, that surged to top of ratings; chart on how dot.coms fared in 10 areas, including department stores, electronics and apparel (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THINK of this past Christmas as the New Hampshire primary of electronic commerce. The race is far from over, but it was the first high-stakes match. Now the winners are relishing their momentum and the losers are licking their wounds, rethinking their strategies and considering whether to drop out altogether.</p>
+        <p>The actual returns will dribble in over the next month or two as the key players announce their fourth-quarter earnings. Some Web sites that are private or part of bigger companies will never announce results.</p>
+      </block>
+      <block class="full_text">
+        <p>THINK of this past Christmas as the New Hampshire primary of electronic commerce. The race is far from over, but it was the first high-stakes match. Now the winners are relishing their momentum and the losers are licking their wounds, rethinking their strategies and considering whether to drop out altogether.</p>
+        <p>The actual returns will dribble in over the next month or two as the key players announce their fourth-quarter earnings. Some Web sites that are private or part of bigger companies will never announce results.</p>
+        <p>Assembled below are what amount to exit polls -- early survey data on television advertising, online promotion, site traffic and actual sales -- that indicate who the winners were, if not the exact margin of victory.</p>
+        <p>The results confirm that the leading e-merchants continue to be the early Internet players -- especially Amazon.com, which is pulling away from the pack.</p>
+        <p>But despite the tens of billions of dollars in venture capital invested to start whateveryoucanthinkof.com, almost none of these new Internet companies appeared to get any traction this Christmas, despite their outsized advertising spending. Rather, it was the Internet affiliates of well-known store chains -- especially Toys ''R'' Us, KB Toys, J. C. Penney and the Gap -- that surged toward the top of the ratings.</p>
+        <p>''As more people go online, they don't click on banner ads, they key in www-  .company-name.com or www.brandname.com'' said Stephanie Shern, director of retail practice at Ernst &amp; Young, which provided some of the exit poll data.</p>
+        <p>As in politics, advertising can help a Web site get noticed, but it is not enough to win. The top 10 television advertisers among the online stores averaged four times the traffic of the next 40. Below the top 10, advertising did not correlate with traffic or sales.</p>
+        <p>There is some evidence that Web sites got a return from buying the expensive ''anchor tenant'' promotion on America Online's shopping channel -- placement that is often part of a multimillion-dollar promotion deal. AOL's anchor tenants had an average of 4.8 million visitors, compared with 1.7 million for those that bought the less expensive ''gold'' promotion. Nonetheless, big merchants that did not spend any money on AOL  averaged 2.5 million visitors .</p>
+        <p>Of course, a few debutantes appeared to be attracting business, including 800.com, an electronics store; drugstore.com; and egreetings.com, a gift emporium. But for every winner there were dozens of losers that are unlikely to be around next Christmas.</p>
+        <p>''A few powerful brands are starting to come to the fore,'' Ms. Shern said.</p>
+        <p>The Chart</p>
+        <p>Brought together here is data from a variety of sources about the leading sites in 10 of the most popular e-commerce categories. It includes both the most-visited sites and those that spent the most on advertising. Merchants are ranked by the amount of traffic on their sites.</p>
+        <p>Here is what the headings mean:</p>
+        <p>HAS TRAD. OUTLETS: Means that a Web site is affiliated with a traditional store chain or catalog  company.</p>
+        <p>MILLIONS OF VISITS: A count of how many times people went to each site from Nov. 15 to Dec. 19, as measured by Nielsen Netratings, which monitors the behavior of 38,000 home Internet users. Surfing in the office, where many people shop, is not measured. Rather than the often-used measurement of ''unique visitors,'' this number is the cumulative total of times that individual users visited the sites. Thus, stores that attracted repeat visitors -- and, possibly, repeat sales -- score higher. Any site that did not attract at least 0.1 percent of the audience -- or 125,000 visitors -- in any of the weeks measured is shown with an asterisk.</p>
+        <p>ADVERTISING IMPRESSIONS: A measure of network, cable and local television advertising from Nov. 1 to Dec. 12, compiled by Nielsen Media Research. It shows cumulative impressions, with one impression equaling one person seeing one commercial. Nielsen counted advertisements that mainly featured Internet sites. Ads for store chains like the Gap or Wal-Mart that simply mentioned a Web site address were not counted.</p>
+        <p>AOL STATUS: This is a crude proxy for how much money Web sites spent to promote themselves online. America Online, the biggest Internet advertising medium, offers three tiers of promotion. $$$ indicates the site was an ''anchor tenant,'' the most expensive deal with the most elaborate on-line exposure. $$ stands for a ''gold'' promotion and $ for the least expensive ''silver'' status.</p>
+        <p>BUYERS: A measure of where people did their holiday shopping, based on a survey, commissioned by Ernst &amp; Young, of 1,283 Internet users on Dec. 26 and 27. Seventy percent of those surveyed said they had done some holiday shopping online. These respondents then were asked if they had made purchases at any of 50 top online retailers. The number shown is the percentage of the online shoppers who said they bought from each store. If no number is listed, that means Ernst did not ask about the store.</p>
+        <p>TV EFFICIENCY: A ratio of how many TV advertising impressions a Web site bought for each visitor to its site. Those with the lowest numbers either had very effective commercials or other ways to bring people to their sites. Big numbers, however, may mean the money spent on television was for naught.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

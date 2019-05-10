@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>IN MY . . . BRIEFCASE: THOMAS J. DONOHUE</title>
+    <meta content="02INMY" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165546"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Executives and Management</classifier>
+        <org class="indexing_service">Chamber of Commerce of the United States</org>
+        <person class="indexing_service">Donohue, Thomas J</person>
+        <person class="indexing_service">Hershey, Robert D Jr</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Executive</classifier>
+        <classifier class="online_producer" type="general_descriptor">Executives and Management</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E05EEDC1038F931A35752C0A9669C8B63" item-length="290" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>IN MY . . . BRIEFCASE: THOMAS J. DONOHUE</hl1>
+      </hedline>
+      <byline class="print_byline">By ROBERT D. HERSHEY Jr.</byline>
+      <byline class="normalized_byline">Hershey, Robert D Jr</byline>
+      <abstract>
+        <p>Contents of briefcase carried by Thomas J Donohue, president of United States Chamber of Commerce described; photo of Donohue and briefcase (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE president of the United States Chamber of Commerce, Thomas J. Donohue, visited 140 cities in 1999. And as a former Eagle Scout, he likes to be prepared for the inevitable hitches.</p>
+        <p>His briefcase contains an elaborate array of toiletries and first-aid gear -- ''my travel-everywhere packet'' -- as well as vitamins, a two-year appointment calendar, schedules for basketball and hockey games at Washington's MCI Center, a road atlas, earplugs and a small screwdriver for repairs to eyewear.</p>
+      </block>
+      <block class="full_text">
+        <p>THE president of the United States Chamber of Commerce, Thomas J. Donohue, visited 140 cities in 1999. And as a former Eagle Scout, he likes to be prepared for the inevitable hitches.</p>
+        <p>His briefcase contains an elaborate array of toiletries and first-aid gear -- ''my travel-everywhere packet'' -- as well as vitamins, a two-year appointment calendar, schedules for basketball and hockey games at Washington's MCI Center, a road atlas, earplugs and a small screwdriver for repairs to eyewear.</p>
+        <p>''I could fix your glasses,'' he volunteered.</p>
+        <p>The first-aid supplies also come in handy for Mr. Donohue, who was born in Brooklyn and worked as an emergency-room attendant at St. John's Univeristy. ''He thinks he's Marcus Welby,'' an aide said.</p>
+        <p>ROBERT D. HERSHEY Jr.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Putting a Period on a Dot-Com Year</title>
+    <meta content="02WATC$02" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Business; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165489"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MARKET WATCH"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Corporations</classifier>
+        <classifier class="indexing_service" type="descriptor">Awards, Decorations and Honors</classifier>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <classifier class="indexing_service" type="descriptor">Stocks and Bonds</classifier>
+        <person class="indexing_service">Morgenson, Gretchen</person>
+        <person class="indexing_service">Trollope, Anthony (1815-1882)</person>
+        <object.title class="indexing_service">Way We Live Now, The (Book)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Columns/Gretchen Morgenson</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Markets</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Corporations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Awards, Decorations and Honors</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stocks and Bonds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0DEFD61538F931A35752C0A9669C8B63" item-length="1315" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Putting a Period on a Dot-Com Year</hl1>
+      </hedline>
+      <byline class="print_byline">By GRETCHEN MORGENSON</byline>
+      <byline class="normalized_byline">Morgenson, Gretchen</byline>
+      <abstract>
+        <p>Gretchen Morgenson (Market Watch) column awards what she calls the Agustus Melmotte Memorial Prizes, named for scoundrel at center of book The Way We Live Now, by Anthony Trollope; awards prize to some of most alluring men and women in various businesses, finance- and economic-related fields for various feats and foibles in last year of the century; list of recipients; sketches (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE stock market was the story in 1999.</p>
+        <p>The Nasdaq composite roared, largely on the strength of technology stocks. Initial public offerings soared, especially those of money-losing Internet companies. Investors rewrote the rules of how to make money in stocks. No revenues? No earnings? No problem!</p>
+      </block>
+      <block class="full_text">
+        <p>THE stock market was the story in 1999.</p>
+        <p>The Nasdaq composite roared, largely on the strength of technology stocks. Initial public offerings soared, especially those of money-losing Internet companies. Investors rewrote the rules of how to make money in stocks. No revenues? No earnings? No problem!</p>
+        <p>And so it is time again for the Augustus Melmotte Memorial Prizes, named for the scoundrel of questionable lineage at the center of ''The Way We Live Now,'' by Anthony Trollope. Melmotte's stock manipulation scheme lured some of London's most established families, and the awards go to some of the most alluring men and women of business for various feats and foibles in the last year of the century.</p>
+        <p>THE MR. AMBIDEXTROUS AWARD</p>
+        <p>To Alan Greenspan, chairman of the Federal Reserve Board. Halfway through the year, he began to raise interest rates, hoping to brake the economy before it reached inflation's gate. Then, to forestall Year 2000 problems, he flooded the nation's banking system with money, canceling out the slowdown that he hoped to create with his three rate increases.</p>
+        <p>THE ''WHERE IS MIKE MILKEN WHEN I NEED HIM?'' AWARD</p>
+        <p>To Ronald O. Perelman, chairman of Revlon. Struggling under a crushing debt load, Mr. Perelman put Revlon on the block. Yet he found no one willing to pay his asking price for the company. It's a shame that Mr. Milken can no longer bail him out with a sure-to-sell-out junk bond offering.</p>
+        <p>THE HEDGING HER BETS AWARD</p>
+        <p>To Jill E. Barad, the beleaguered chairman and chief executive of Mattel Inc. Her job is on the line, thanks to a stream of earnings disappointments and the botched $3.8 billion acquisition of the Learning Company in May, which resulted in $105 million in losses four months later. Despite the problems, Ms. Barad announced in November that she had recently bought 65,000 shares of Mattel stock at about $13.75 each. While some investors saw the buys as a sign of her confidence that the stock had bottomed, others surmised that Ms. Barad was simply hedging. If she managed to cling to her job, she would retain her over-the-top compensation ($4.75 million in 1998). But if Mattel's board were to  bounce her, the company's stock would no doubt jump, making her newly bought shares worth much more than she paid for them.</p>
+        <p>THE INGENUITY IN ACCOUNTING AWARD</p>
+        <p>To Donald J. Trump, real estate developer, would-be president of the United States and chairman of Trump Hotels and Casino Resorts. In announcing its third-quarter results on Oct. 25, the company said its net income had more than doubled from the corresponding quarter a year earlier. The stock rose more than 8 percent on the news.</p>
+        <p>Only later, when a fixed-income analyst tried to delve into the numbers, did it emerge that the rise in revenue was really just an example of accounting moxie. Upon the closing of an Official All-Star Cafe in the Trump Taj Mahal casino in Atlantic City, the casino was given use of the restaurant's fixtures and memorabilia for four months. Presto change-o, and Trump added $17.2 million to its revenues.</p>
+        <p>THE LESS IS MORE AWARD</p>
+        <p>To Carly Fiorina, the new chief executive of Hewlett-Packard. Under her leadership, the company -- which had been known as a model for full disclosure of quarterly results -- has significantly reduced the amount of data it gives to investors and analysts in its conference calls. In its fourth-quarter conference call on Nov. 17, the company said it would henceforth provide actual figures on companywide orders only when it thought they were meaningful.</p>
+        <p>''What we want to do is spend time providing accurate, insightful information,'' said Marlene Somsak, manager of media and financial communications for Hewlett-Packard, ''not information that is potentially misleading.'' It was not immediately clear how dispensing more information could be misleading.</p>
+        <p>THE WHAT GOES UP KEEPS GOING UP AWARD</p>
+        <p>To the Nasdaq composite stock index, the highest flier by far of the major indexes in 1999. The Nasdaq, which trounced both the Standard &amp; Poor's 500 and the Dow Jones industrial average, benefited greatly from the mania for initial public offerings of technology stocks. Almost every time a hot new stock came out, it went directly into the stratosphere and the Nasdaq. Because 1999 broke all records for both issuance of initial public offerings and first-day jumps in the prices of the issues, it is little wonder the Nasdaq was up 84 percent as the year was drawing to a close.</p>
+        <p>THE CAN'T BLAME HIM FOR TRYING AWARD</p>
+        <p>To Howard Schultz, chief executive of the Starbucks Corporation. In May, the java-meister told analysts that Starbucks was going Internet and would start a ''destination'' portal to sell furniture, kitchenware and other household gear in time for the Christmas selling season. As happens when any company makes known its e-plans, the stock rose smartly on the news. That is, until late June,  when the company announced that the online plan would hammer earnings. Investors fled the stock. Even a July announcement that the Internet plan had been sharply scaled back didn't help. The shares are still in need of a jolt.</p>
+        <p>THE THROUGH-THE-LOOKING-GLASS AWARD</p>
+        <p>To fledgling Internet companies at the center of an investing mania unlike any other, one that convinced investors to turn traditional stock valuation methods upside down. Before the Internet came along, losses were something investors did not like to see on a company's books. Here and now in wonderland, the greater the losses, the higher the stocks fly.</p>
+        <p>THE MY MARKET'S BETTER THAN YOUR MARKET AWARD</p>
+        <p>To Richard A. Grasso, chairman of the New York Stock Exchange, and Frank G. Zarb, chairman of the National Association of Securities Dealers and the Nasdaq stock market. In the race to build the biggest, best, most global and influential market in the world, both men wanted to be the first to issue stock in their operations to the public. As often happens with ambitious plans, however, the details proved too devilish to work out by year-end. The race was called off. Temporarily, of course.</p>
+        <p>THE DO AS I SAY, NOT AS I DO AWARD</p>
+        <p>To Harvey Houtkin, self-proclaimed father of electronic day trading and proprietor of the All-Tech Investment Group, a brokerage firm that teaches individual investors the joys of trading stocks furiously all day. Anybody with $25,000 and a dream can make a living day-trading stocks, Mr. Houtkin proclaimed on his Web site. Never mind that even the master trader himself lost $392,558 day-trading for All-Tech in 1998.</p>
+        <p>THE ''WHO SAID INSURANCE ISN'T SEXY?'' AWARD</p>
+        <p>To Martin R. Frankel, the nerdy Greenwich, Conn., financier. He is accused of plundering troubled insurance companies to secure the hundreds of millions of dollars that made him the chick-magnet he knew he could be. Mr. Frankel and a female companion were apprehended in Hamburg, Germany, in September, four months after he fled his Greenwich manse, leaving a pile of documents smoldering in the fireplace. While investigators try to sort out Mr. Frankel's financial dealings, he is cooling his heels in a German jail.</p>
+        <p>THE DECADE'S MOST EXPENSIVE HANDSHAKE AWARD</p>
+        <p>When Henry met Walter -- Henry R. Silverman, chairman of HFS, and Walter Forbes, chief executive of CUC International -- neither knew that the encounter would place them firmly in the record books. The two men merged their companies into the Cendant Corporation in late 1997, but the total cost of the deal didn't register until 1999, when Cendant agreed to pay $2.8 billion to settle shareholder lawsuits -- the biggest such settlement ever -- that grew out of accounting irregularities uncovered at the former CUC. And don't forget the $335 million that Ernst &amp; Young, the accounting firm, agreed to pay to settle accusations that it had certified CUC's questionable bookkeeping.</p>
+        <p>MARKET WATCH</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

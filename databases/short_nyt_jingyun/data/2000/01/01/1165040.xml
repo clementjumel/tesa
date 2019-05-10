@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Works In Progress From All Over; Eliot's Sly Revenge Against a Darwinist</title>
+    <meta content="01ELIO$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Arts/Cultural Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="F" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165040"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Evolution</classifier>
+        <person class="indexing_service">Eliot, George (Mary Ann Evans) (1819-1880)</person>
+        <person class="indexing_service">Spencer, Herbert (1820-1903)</person>
+        <person class="indexing_service">Darwin, Charles Robert (1809-82)</person>
+        <person class="indexing_service">Hrdy, Sarah Blaffer</person>
+        <person class="indexing_service">Boxer, Sarah</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Evolution</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C03E6DE1238F932A35752C0A9669C8B63" item-length="746" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Works In Progress From All Over; Eliot's Sly Revenge Against a Darwinist</hl1>
+      </hedline>
+      <byline class="print_byline">By SARAH BOXER</byline>
+      <byline class="normalized_byline">Boxer, Sarah</byline>
+      <abstract>
+        <p>Arts &amp; Ideas look ahead at works-in-progress; social anthropologist Sarah Blaffer Hrdy discusses her view that major themes in George Eliot novels were response to social Darwinism and to Herbert Spencer, who assumed that child gets mental powers from father and beauty from mother; Hrdy says Eliot, who was rejected by Spencer, got her revenge in fiction and also understood that inherited traits are unpredictable (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The centruy's turn has been a time of retrospectives: what was the most important event, who was the most influential thinker? Arts &amp; Ideas decided to take a look ahead at what some of today's researchers are working on. From the most raked-over field, like the history of the ancient world, to the latest medical technology, scholars are coming up with fresh insights. Some ideas may turn into breakthroughs, and others may turn out to be dead-ends, but the journey is rarely boring. Here is a handful of works in progress.</p>
+        <p>Sarah Blaffer Hrdy, the author of ''Mother Nature,'' plans to raise Darwin's consciousness. Never mind that Ms. Hrdy, a social anthropologist, is more than 100 years too late to talk to Darwin and that her ally in re-education, the novelist George Eliot (nee Mary Ann Evans), is dead too.</p>
+      </block>
+      <block class="full_text">
+        <p>The centruy's turn has been a time of retrospectives: what was the most important event, who was the most influential thinker? Arts &amp; Ideas decided to take a look ahead at what some of today's researchers are working on. From the most raked-over field, like the history of the ancient world, to the latest medical technology, scholars are coming up with fresh insights. Some ideas may turn into breakthroughs, and others may turn out to be dead-ends, but the journey is rarely boring. Here is a handful of works in progress.</p>
+        <p>Sarah Blaffer Hrdy, the author of ''Mother Nature,'' plans to raise Darwin's consciousness. Never mind that Ms. Hrdy, a social anthropologist, is more than 100 years too late to talk to Darwin and that her ally in re-education, the novelist George Eliot (nee Mary Ann Evans), is dead too.</p>
+        <p>''It seems to me that all the major themes in the novels of Eliot were written as a response to social Darwinism,'' Ms. Hrdy said, and more specifically as a response to Herbert Spencer, who coined the phrase ''survival of the fittest,'' which Darwin adopted.</p>
+        <p>Eliot met Spencer in 1851 in London. ''He was the first broad-ranging intellectual she met. He knew biology, culture, history. He taught her about Darwin's theory of evolution,'' Ms. Hrdy said, and before long Eliot fell in love with him and ''threw herself at his feet.'' She wrote to Spencer: ''If you become attached to someone else, then I must die, but until then I could gather courage to work and make life valuable if only I had you near me. I do not ask you to sacrifice anything -- I would be very glad and cheerful and never annoy you.'' Spencer rejected her. And the reason he gave was a eugenic one -- that Eliot was not beautiful enough to give him beautiful children. ''He was a pangenesist,'' said Ms. Hrdy, who studies how parents invest in their children. ''Like Darwin, Spencer believed that there are male and female components in the gonads.'' And he assumed that it is  the male who gives the child mental powers and the female who gives the child beauty.</p>
+        <p>Eliot got her revenge in fiction, and unlike her peers ''she got the genetics right'' too, Ms. Hrdy said. She understood that ''physical and mental traits can derive from both parents and sort themselves out in unpredictable ways,'' that ''what you see is not what you beget.''</p>
+        <p>In ''The Mill on the Floss,'' Eliot has poor Mr. Tulliver marry an airhead beauty -- ''I picked the mother because she wasn't o'er 'cute'' (overly acute) -- and the happy couple wind up with a clever daughter and a dull-witted but handsome boy. The father ponders his folly: ''When a man's got brains himself, there's no knowing where they'll run to.''</p>
+        <p>What does Eliot's sly critique of Spencer have to do with Darwin? ''No one disputes the brilliance of Charles Darwin nor the soundness of his basic theories of natural selection, but Darwin had a blind spot where women were concerned,'' Ms. Hrdy said.</p>
+        <p>''Like Spencer, Darwin convinced himself that because females were especially equipped to nurture, males excelled at everything else,'' she writes in her book.</p>
+        <p>Eliot went on the attack by populating ''Middlemarch,'' ''Daniel Deronda'' and ''Adam Bede'' with beautiful heroines who end up being anything but ideal mothers and mates. In ''Middlemarch'' Eliot has Dr. Tertius Lydgate, the character with a ''strictly scientific view of women,'' ruined by his supposedly ideal wife, Rosamond, with her ''lovely little face.'' It is ''a fictional case study against the idea of ideal types,'' Ms. Hrdy said.</p>
+        <p>If you think the Victorian notion of ideal types is dead, consider the concept propounded by evolutionary psychologists today that there is an ideal feminine beauty -- a perfect hip-to-waist ratio -- which males subconsciously use to select the best mothers for their children. Where are you now, George Eliot?</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

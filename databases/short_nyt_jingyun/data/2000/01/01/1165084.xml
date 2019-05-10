@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Slowly, Slowly, Slowly, The Year's First Dawn</title>
+    <meta content="Y01FIJ$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165084"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: AROUND THE WORLD"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07E0D71338F932A35752C0A9669C8B63" item-length="766" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Slowly, Slowly, Slowly, The Year's First Dawn</hl1>
+      </hedline>
+      <byline class="print_byline">By SETH MYDANS</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The first to greet the new day on Taveuni Island were the birds, singing from the treetops at the ocean's edge, skimming along the surf, filling the pale pre-dawn with celebration.</p>
+        <p>As the glittering surface of the ocean turned from black to iron gray to silver, a flock of crimson lorys landed for just a moment on the red fronds of an umbrella tree, then disappeared.</p>
+      </block>
+      <block class="full_text">
+        <p>The first to greet the new day on Taveuni Island were the birds, singing from the treetops at the ocean's edge, skimming along the surf, filling the pale pre-dawn with celebration.</p>
+        <p>As the glittering surface of the ocean turned from black to iron gray to silver, a flock of crimson lorys landed for just a moment on the red fronds of an umbrella tree, then disappeared.</p>
+        <p>Spiky white-and-pink blossoms from an overhanging poison-fish tree plopped into the hissing surf. A family of crabs crawled carefully up the rocky shore. Inevitably, roosters crowed.</p>
+        <p>Silhouetted among the spiky coconut palms, villagers gathered at the shoreline to watch the new year's first dawn, here in the South Pacific. From Tuvalu to Fiji to Tonga to the little islands off the coast of New Zealand, the sun was rising along the international dateline, almost a full day before it would rise in New York.</p>
+        <p>This small island of 12,000 people is one of the few landfalls along the 180-degree meridian, the basis for the international dateline and the farthest point from the 0-degree meridian at Greenwich, England.</p>
+        <p>As they gathered at the island's eastern edge, some of the villagers sat quietly, wrapped in blankets, staring at the horizon. Others were still rowdy from their midnight celebrations, wading out, laughing, into the shallow surf.</p>
+        <p>A young man named Naibuku Petersen blew a whistle and shouted, ''I love the weather!'' A small van raced by in a cloud of dust, its driver honking and whooping. Someone fired a skyrocket into the air.</p>
+        <p>But as dawn approached and the sharp sliver of moon began to fade, the people along the shoreline grew quieter.</p>
+        <p>The sky became pale, with hints of blue and green and pink, suggesting a dazzling sunrise to come. A streak of gold appeared above a cluster of blue-gray clouds on the horizon.</p>
+        <p>''It's coming up now!'' someone shouted.</p>
+        <p>But behind the clouds, the sun seemed to pause, even as the sky around it lightened and the smooth sea sparkled. For a while, it seemed that this would be a day without a sunrise.</p>
+        <p>Without its sharp rays, the world turned dove gray -- the sea, the clouds, the distant island of Qamea. Even the sea breeze had a soft, dove-gray feel.</p>
+        <p>The moment of sunrise had arrived, just before 6:30 a.m. But still there was no sun.</p>
+        <p>''It may be feeling shy to come up because so many people are watching,'' said Elizabeth Pickering, 51, who wore a traditional wraparound skirt and a white gardenia behind her ear.</p>
+        <p>An ornate cluster of clouds huddled closer around the sun, as if to shield it.</p>
+        <p>''The clouds refuse to move,'' Mrs. Pickering said. ''Although the breeze is there -- the wind -- but they are just staying there.''</p>
+        <p>And the watchers also stayed along the rocky shoreline as the rest of the world around them brightened into day, but still without a sunrise.</p>
+        <p>A half hour had passed beyond the appointed moment.</p>
+        <p>''It's teasing us this morning,'' said a woman named Mary Erasito.</p>
+        <p>The sun, it seemed, was preparing a grand entrance, an overpowering debut more elegant than the showiness of a textbook sunrise.</p>
+        <p>First it fringed the sheltering clouds with a rim of light. Then it turned them milky gray.</p>
+        <p>And then, just past 7 a.m., it burst through above them, blinding silver, emperor of a new century. And people began to shout, ''Look at it! Look at it!''</p>
+        <p>Mrs. Pickering shouted too: ''It's laughing at us!''</p>
+        <p>Fra Hill, 57, a local silk-screen artist, kissed her hands and held them out to the sun. She was crying.</p>
+        <p>''It's just looking and twinkling at me,'' she said. ''I've got it. And it's got me. It can't get better than that. It just came out full-blown. It's smiling, it feels so good. I'm so happy.''</p>
+        <p>She stared directly into the bright, white sun.</p>
+        <p>''This is one chance in 1,000, and I've got it, I've captured it,'' she said. ''It's beautiful, an oval shape, and there's a curve underneath and it's bluish. Oh, it's beautiful and you see the whole beautiful face of it, like a mirror, like a diamond, round and beautiful.''</p>
+        <p>1/1/00: AROUND THE WORLD</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

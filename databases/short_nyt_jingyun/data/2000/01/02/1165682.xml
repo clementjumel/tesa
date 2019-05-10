@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  KIRSCHMAN, DOROTHY ''DOTTIE'' FREEMAN</title>
+    <meta content="DN010200" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165682"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">KIRSCHMAN, DOROTHY ''DOTTIE'' FREEMAN</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=950CE6D81138F931A35752C0A9669C8B63" item-length="137" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  KIRSCHMAN, DOROTHY ''DOTTIE'' FREEMAN</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>KIRSCHMAN-Dorothy ''Dottie'' Freeman. Age 93, died peacefully at home on December 27 with her dear friend Betty Brown at her side. She was preceded in death by her husband Lewis Kirschman and her sisters, Irma Bacharach and Julia Bloch. She is survived by her children Richard Kirschman of Dogtown, California, and Dr. Ellen Kirschman of Oakland, CA., and their companions Doris Ober and Steve Johnson; her nephews Burt Bacharach, James Blume, Fritz Blume, and Roger Bloch; her nieces Gloria Jerome, Mary Jo Luxemberg and their families; the Ortega family and many, many friends. She will be remembered for her years of service as a volunteer at New York Hospital, her wit, her humanity, her social grace and her pluckiness. Contributions may be made to the Point Reyes Clinic, Box 862, Point Reyes Station, CA. 94956. No services.</p>
+      </block>
+      <block class="full_text">
+        <p>KIRSCHMAN-Dorothy ''Dottie'' Freeman. Age 93, died peacefully at home on December 27 with her dear friend Betty Brown at her side. She was preceded in death by her husband Lewis Kirschman and her sisters, Irma Bacharach and Julia Bloch. She is survived by her children Richard Kirschman of Dogtown, California, and Dr. Ellen Kirschman of Oakland, CA., and their companions Doris Ober and Steve Johnson; her nephews Burt Bacharach, James Blume, Fritz Blume, and Roger Bloch; her nieces Gloria Jerome, Mary Jo Luxemberg and their families; the Ortega family and many, many friends. She will be remembered for her years of service as a volunteer at New York Hospital, her wit, her humanity, her social grace and her pluckiness. Contributions may be made to the Point Reyes Clinic, Box 862, Point Reyes Station, CA. 94956. No services.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

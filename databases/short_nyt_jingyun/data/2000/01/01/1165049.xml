@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>From an Ancient Calendar, Scenes of Life at the Last Millennium</title>
+    <meta content="01TANK$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Arts/Cultural Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="F" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165049"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THINK TANK"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Calendars</classifier>
+        <classifier class="indexing_service" type="descriptor">History</classifier>
+        <classifier class="indexing_service" type="descriptor">One Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <location class="indexing_service">Great Britain</location>
+        <org class="indexing_service">Roman Catholic Church</org>
+        <person class="indexing_service">Jensen, Joyce</person>
+        <person class="indexing_service">Lacey, Robert</person>
+        <person class="indexing_service">Danziger, Danny</person>
+        <object.title class="indexing_service">Year 1000, the (Book)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/United Kingdom</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Great Britain</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Columns/Think Tank</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/History</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Britain</classifier>
+        <classifier class="online_producer" type="general_descriptor">Time</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9400E6DD1238F932A35752C0A9669C8B63" item-length="1047" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>From an Ancient Calendar, Scenes of Life at the Last Millennium</hl1>
+      </hedline>
+      <byline class="print_byline">By Joyce Jensen</byline>
+      <byline class="normalized_byline">Jensen, Joyce</byline>
+      <abstract>
+        <p>Think Tank column describes drawings for each month in Julius Work Calendar for Year 1000, window on life in England at start of second millennium; drawings for May and July; excerpts are from book The Year 1000 by Robert Lacey and Danny Danziger (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Its appearance, with 12 months represented in 12 pages, is not so different from that of a calendar you might find hanging on a kitchen wall (except for the words in Latin). But the Julius Work Calendar is nearly 1,000 years old. It was probably created by a cleric working in the manuscript studio at Canterbury Cathedral in England. Down the left side of the page are the days of the month in Roman numerals, and on the right the names of saints and religious festivals. Across the bottom runs a delicate drawing illustrating the task of the month. Over all the calendar offers a window on life in England at the start of the second millennium.</p>
+        <p>Here are explanations of the drawings based on excerpts from ''The Year 1000'' by Robert Lacey and Danny Danziger, published by Little, Brown and Company.</p>
+      </block>
+      <block class="full_text">
+        <p>Its appearance, with 12 months represented in 12 pages, is not so different from that of a calendar you might find hanging on a kitchen wall (except for the words in Latin). But the Julius Work Calendar is nearly 1,000 years old. It was probably created by a cleric working in the manuscript studio at Canterbury Cathedral in England. Down the left side of the page are the days of the month in Roman numerals, and on the right the names of saints and religious festivals. Across the bottom runs a delicate drawing illustrating the task of the month. Over all the calendar offers a window on life in England at the start of the second millennium.</p>
+        <p>Here are explanations of the drawings based on excerpts from ''The Year 1000'' by Robert Lacey and Danny Danziger, published by Little, Brown and Company.</p>
+        <p>JANUARY -- ''The ploughman feeds us all,'' declared Aelfric, the Wessex writer and schoolmaster who, in the years 987 to 1002, had his pupils observe and analyze the various economic activities around them. The wheeled plow was the foundation of life for English people in the year 1000. January's drawing shows a man with a plow making furrows of freshly turned earth.</p>
+        <p>FEBRUARY -- February displays a yard of vigorous vines being pruned. As the wheeled plow embodied millennial man's mastery of the soil, the skillful pruning of branches demonstrated his ability to create a working partnership with bushes, vines and trees.</p>
+        <p>MARCH -- The average person was represented by the man with the spade or, in the illustration, the man with the rake, the mattock or pickax, and an apron full of seeds. March 21 was a magical date, with exactly the same number of hours in the day as in the night. At the bottom of the calendar are two notations: NOX HOR XII (Night hours 12); HABET DIES HOR XII (the day has 12 hours).</p>
+        <p>APRIL -- The Roman Catholic Church in England celebrated Easter on the first Sunday after the first full moon after the spring equinox. The holy day, which came at the end of the 40-day Lenten fast, was celebrated with a feast; thus the calendar depicts a group of revelers with their cups raised. Meat was the principal ingredient of an Anglo-Saxon banquet. Poultry was considered a luxury and was also recognized as a therapeutic. addition to the diet of the sick or invalid. Old English recipe and remedy books show that chicken soup was already renowned for its restorative powers.</p>
+        <p>MAY -- In the year 1000 England under King Ethelred II enjoyed a prosperity unmatched in northern Europe. Surviving documents testify to 10th-century trade in wine, furs, fish and slaves, and there is evidence that English woolen cloth was being exported to Europe a couple of centuries before the millennium. Clearly the Anglo-Saxons were sheep-rearing folk: the calendar drawing for May shows a flock cavorting under shepherds' eyes.</p>
+        <p>JUNE -- The word carpenter is said to have come from the Latin word carpentum, the sturdy two-wheeled cart developed by the Celtic woodworkers of ancient Britain, which was much admired by the Romans. That cart, being loaded with tree trunks, is June's illustration. In the year 1000 the forests were a center of life. They provided fuel, building material, a place of refuge from invaders and a larder of last resort.</p>
+        <p>JULY -- Hay month was the first great harvest of the year; the farmers needed the grass cut and dried before the rain could spoil it. The July harvest would provide enough feed to maintain the animals through the winter.</p>
+        <p>AUGUST -- Aug. 1, known as Lammas Day, is one of the oldest English country festivals. It marked the day when the first loaf from the new harvest was consecrated. The drawing for August makes clear that harvesting for this Lammas, or loaf Mass, was an activity that involved the whole community. No less than seven laborers -- more people than in any other drawing in the cycle -- are sweeping their sickles, cutting the wheat, binding it into sheaves and loading it into a Saxon cart.</p>
+        <p>SEPTEMBER -- In this month's drawing two Anglo-Saxon adventurers are heading into the woods in search of big game. In September villagers would hunt the free-range pigs that roamed the woodlands to stock up for the harsh winter ahead.</p>
+        <p>OCTOBER -- October depicts hunters with falcons attached to their wrists. Their quarry is the huge European crane, a common sight in England until it was hunted to extinction in the 16th century. Hunting in 1000 was still a democratic pastime. Every freeborn Anglo-Saxon had the right to enter the forest and bring home game for the pot. Medieval hunting was both a metaphor for war and a preparation for it, as it trained riders and horses and fostered the camaraderie of the warrior band.</p>
+        <p>NOVEMBER -- Theft was not taken lightly in the year 1000: in the drawing for this month, a figure standing beside a pile of wooden planks is suspected of being a thief and is brought to justice. Under the rudimentary codes of the time -- there was no police force or prison -- he would be hanged if found guilty. The risk was most severe for those who could not buy their way out; the rich could pay for their transgressions at the rate of 125 pounds of silver for each human life they had taken.</p>
+        <p>DECEMBER -- December's drawing shows a group of ordinary people flailing, winnowing and carrying away the harvest, which is probably how most people in England prepared for and greeted the beginning of the second millennium. Only the literate were in a position to concern themselves greatly with what would happen when -- as the Anglo-Saxons would have put it in the older Roman numeral style -- the year DCCCCLXXXXVIIIJ became a simple M.</p>
+        <p>THINK TANK</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

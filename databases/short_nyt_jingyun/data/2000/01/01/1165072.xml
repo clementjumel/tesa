@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Toward Dow 3,000,000 and Other Millennial Ruminations</title>
+    <meta content="Y01STO$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Business/Financial Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="C" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165072"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THE MARKETS: STOCKS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Stocks and Bonds</classifier>
+        <person class="indexing_service">Norris, Floyd</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Markets</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stocks and Bonds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9407E5D81338F932A35752C0A9669C8B63" item-length="1615" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Toward Dow 3,000,000 and Other Millennial Ruminations</hl1>
+      </hedline>
+      <byline class="print_byline">By FLOYD NORRIS</byline>
+      <byline class="normalized_byline">Norris, Floyd</byline>
+      <abstract>
+        <p>Floyd Norris column offers review of stock market of last 100 years; says American public fell in and out of love with stock market at least twice during that time, before ending century completely enraptured with possibility of wealth via Wall Street; graphs and charts (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>AS the 20th century began, high-yielding railroad shares were virtually the only blue-chip American stocks that a conservative investor would consider. As it ended, the most popular stocks were being issued by young companies that had never earned a dollar, let alone paid a dividend.</p>
+        <p>Along the way, the American public fell in and out of love with the stock market at least twice, before ending the century completely enraptured with the possibility of wealth via Wall Street.</p>
+      </block>
+      <block class="full_text">
+        <p>AS the 20th century began, high-yielding railroad shares were virtually the only blue-chip American stocks that a conservative investor would consider. As it ended, the most popular stocks were being issued by young companies that had never earned a dollar, let alone paid a dividend.</p>
+        <p>Along the way, the American public fell in and out of love with the stock market at least twice, before ending the century completely enraptured with the possibility of wealth via Wall Street.</p>
+        <p>The Dow Jones industrial average, by far the best-known average to have endured the entire century, rose 44.26, to a record 11,497.12, yesterday. For the decade, the Dow was up 318 percent, by far its best decade ever. For the century, it rose 26,130 percent. (If it does exactly as well in the next 100 years, the Dow will hit three million a few days before the century ends.)</p>
+        <p>The blue-chip railroads of a century ago were not, however, destined to perform as well. Many went bankrupt over the ensuing years, and the Dow Jones railroad average, rechristened the Dow Jones transportation average in 1970, ended the century up 3,730 percent, a gain one-seventh that of the industrials.</p>
+        <p>The stock market was a wild and largely unregulated place when the century began. In 1901, much of the nation watched in befuddlement as the price of Northern Pacific soared without apparent reason, then plunged. The rail line had been the subject of an unannounced takeover war, in which two powerful groups -- one led by J. P. Morgan and the other by Edward Harriman -- tried to secure control by buying shares in the open market. When the battle was over, speculators were ruined as losses on Northern Pacific shares forced the liquidation of other stocks, causing the entire stock market to plunge. ''Disaster and Ruin in Falling Market,'' read the headline in The Times. ''Panic Without A Parallel in Wall Street.''</p>
+        <p>In those days, companies were free to give investors as much, or as little, information as they wished. There were no generally accepted accounting principles, so the profit figures that were issued were of questionable quality. Dividends -- real cash payments to shareholders -- were the principal measure of a company's soundness. That began to change in the late 1920's, as individual investors poured into stocks for the first time, and the lure of capital gains began to take hold. There was still relatively little regulation, and there were plenty of reports of ''pools'' that manipulated stock prices. Many investors concluded that they wanted to make money by trading with the pools, and reports that a pool was involved became a sure way to get a stock moving.</p>
+        <p>The 1929 crash ended that public infatuation with stocks. ''Wall Street was a street of vanished hopes, of curiously silent apprehension and of a sort of paralyzed hypnosis yesterday,'' The Times reported on Oct. 30, 1929, after the worst day of the crash. ''Men and women crowded the brokerage offices, even those who have been long since wiped out, and followed the figures on the tape. Little groups gathered here and there to discuss the falling prices in hushed and awed tones. They were participating in the making of financial history. It was the consensus of bankers and brokers alike that no such scenes will ever again be witnessed by this generation. To most of those who have been in the market it is all the more awe-inspiring because their financial history is limited to bull markets.''</p>
+        <p>In an editorial, The Times was harshly critical of the ''orgy of speculation'' in stocks that preceded the crash and sneered at ''those newly invented conceptions of finance'' that had been used to justify such high stock prices. But it was otherwise sanguine, forecasting that the Federal Reserve would keep the economy on an even keel. It was wrong.</p>
+        <p>During and after the Great Depression that followed, the stock market became an object of scorn. The Securities and Exchange Commission was established with a mandate to prevent market manipulation, and the Fed was given the power to keep investors from borrowing too much money to buy stocks. Not, of course, that anyone wanted to do so. It became accepted wisdom that companies should pay far higher dividends on their stocks than they paid in interest on their bonds. After all, the shareholder needed to be compensated for the risk of another crash.</p>
+        <p>But stocks did gradually recover, and by the 1950's the public was showing a renewed interest. In 1954 the Dow rose above its 1929 high, and around the same time the dividend yield on stocks fell below the bond interest rate. Congress mounted an investigation, and the Senate Banking Committee called for more regulation in a report that saw signs of dangerous speculation. ''When preoccupation with the stock market results in widespread distortion of perspective, the stock market may become a potential threat to the stability of the economy,'' warned the committee majority.</p>
+        <p>In fact, there was no such threat on the horizon. By 1966, the Dow was flirting with 1,000 -- although it could not quite manage a close above that level. (That came in 1972.) But even as the Dow churned in the late 1960's, investors flocked to initial public offerings, many of which doubled during the first day of trading. In a report dated January 1969, Merrill Lynch warned, rightly as it turned out, that there was ''considerable risk'' in buying such issues.</p>
+        <p>One measure of how that boom differed from the current one was reflected in that report, in which Merrill Lynch laid out its requirements for underwriting new issues: ''We require that a company have substantial earnings, that its growth record extend over several years, that the company be important to its industry, and that the price to be paid for the shares be reasonable in relation to actual and projected earnings.''</p>
+        <p>The final gasp of that love affair with stocks came in the early 1970's, with the ''one-decision stocks,'' companies that institutional investors loaded up on because they were growing rapidly. It was held that such stocks need never be sold, because they would keep growing.</p>
+        <p>Then came the brutal bear market of 1973-74, in which the Dow fell 45 percent and many other stocks did worse. Inflation and interest rates were on the rise, and stocks seemed hopeless. ''The Death of Equities'' was proclaimed on the cover of Business Week in 1978. By 1982, the Dow was lower than it had been in 1966.</p>
+        <p>But by then, inflation was coming down and the descent of interest rates from record highs was starting. The stock market began to rise in August 1982, starting a bull market that continues to this day. The 1987 crash, which seemed epochal at the time, is now remembered as a great buying opportunity.</p>
+        <p>In the final year of the century, an initial public offering boom eclipsed anything that had been seen before. The best performers tended to be Internet companies with little in the way of operating history, and a lot in the way of hopes. The best performer of the group was the Internet Capital Group, which invests in other internet companies and has shown little in the way of revenue, and no profits, in its four-year history. Its shares ended the year at $170, or 28 times the price at which they were sold to investors in August. Merrill Lynch was the lead underwriter.</p>
+        <p>The Internet boom was a principal reason that the Nasdaq index rose 85.6 percent in 1999, by far the best annual performance ever for a major American index. For the decade, the Nasdaq was up 795 percent, more than twice as much as the Dow. With capital gains so bountiful, few investors are concerned about dividends.</p>
+        <p>As stock prices rose during the last 17 years, a new investment gospel gradually spread, holding that stocks are always the best long-term investment. If the previous stock market boom produced ''one-decision stocks,'' this one has produced the ''one-decision market,'' in which no long-term investor should ever get out of stocks.</p>
+        <p>The studies supporting that thesis tended to concentrate on American prices -- ignoring the much worse results in some other countries -- and they implicitly assumed that the American economy would continue to grow and prosper as it has in the past. In 1999, books appeared with forecasts that the Dow would soar to 36,000 or higher within a few years.</p>
+        <p>Peter L. Bernstein, a financial historian and author of ''Against the Gods,'' a book exploring how investors and others have dealt with risk through the centuries, dismisses such projections. ''They tell us that we know more about portfolio values 20 or 30 years from now than we know about what values will be tomorrow or next year,'' he said in a recent article. To him, that is ridiculous. To many investors today, it is a sure thing.</p>
+        <p>THE MARKETS: STOCKS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>New &amp; Noteworthy Paperbacks</title>
+    <meta content="02NANDN" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="20" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165277"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D00E6DC1E39F931A35752C0A9669C8B63" item-length="813" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>New &amp; Noteworthy Paperbacks</hl1>
+      </hedline>
+      <byline class="print_byline">By Scott Veale</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Nureyev: His Life</p>
+        <p>By Diane Solway. Morrow, $16.</p>
+        <p>The author draws on extensive interviews and research to provide fresh material on the Russian dancer's life and career, particularly his Soviet years and his defection in 1961. This balanced biography is ''informative and filled with vivid anecdotes,'' Jennifer Dunning wrote here in 1998.</p>
+        <p>The Peculiar Memories of Thomas Penman</p>
+        <p>By Bruce Robinson. HarperPerennial, $13.</p>
+        <p>The hero of this darkly funny first novel by the writer and director of ''Withnail and I'' is a 13-year-old asthmatic schoolboy searching for identity as he copes with his exotically dysfunctional family in working-class England in the grim 1950's. He is an obsessive snooper, and what he's most keen to find is the key to his grandfather's extensive pornography collection. ''Never before has the painful, knotty journey to maturity been depicted with such gusto, and never has the venerable Bildungsroman received such riotously profane treatment,'' Patrick McGrath wrote here last year.</p>
+        <p>Secrecy: The American Experience</p>
+        <p>By Daniel Patrick Moynihan. Yale University, $10.95.</p>
+        <p>In this withering tour of nearly a century of official secrecy, the New York senator argues that the use of classified information and misinformation has caused much more harm than good. ''It is a dismaying tale,'' Sam Tanenhaus wrote here in 1998, though Moynihan tells it ''with uncommon liveliness and a mordant wit.'' In All the Laws but One: Civil Liberties in Wartime, by William H. Rehnquist (Vintage, $14), the chief justice of the United States reviews prominent cases in which civil liberties issues have arisen during times of war, from the 1860's to the internment of Japanese-Americans in World War II. ''Rehnquist presents full and fascinating human profiles'' and conveys ''what it must have been like to grapple with these issues in a time of crisis,'' Jeremy Waldron wrote here last year.</p>
+        <p>Ingratitude</p>
+        <p>By Ying Chen. University of California, $13.95.</p>
+        <p>This compact novel is narrated from the grave by a woman who committed suicide to punish her mother and thus escape the traditional Chinese culture of obedience. The result is ''a sustained philosophical exploration studded with passionate outbursts, a glimpse of a consciousness liberated from family and social expectations,'' Elizabeth Schmidt wrote here in 1998.</p>
+        <p>Ark Baby</p>
+        <p>By Liz Jensen. Overlook, $13.95.</p>
+        <p>This raucous, unruly novel is a satirical jab at Darwinism and the notion of scientific certainty through 150 years of British life, up to the early years of the new millennium, when a fertility crisis threatens the survival of Homo britannicus. '' 'Ark Baby' is written in an exuberantly naughty style that suggests Jensen shares a certain kinship with writers like Peter Carey and Fay Weldon,'' Alida Becker wrote here in 1998.</p>
+        <p>Hip Hop America</p>
+        <p>By Nelson George. Penguin, $13.95.</p>
+        <p>A New York music critic traces the evolution of rap music and its influence on culture and society, in the process chronicling his own intense love-hate relationship with hip-hop. In 1998 our reviewer, Laura Jamison, called this ''an invaluable, entertaining and well-written account.'' In Elevating the Game: Black Men and Basketball (University of Nebraska, $15), George explores the history of basketball and how the integration of black players from colleges around the nation advanced the game. The result is a ''folksy yet scholarly study'' and ''a rich, welcome addition to sports literature,'' Michael E. Ross wrote here in 1992.</p>
+        <p>Meetings With the Archangel: A Comedy of Spirit</p>
+        <p>By Stephen Mitchell. HarperPerennial, $13.</p>
+        <p>The celestial visitor in question stops by to deliver a primer on the afterlife and give the novel's narrator a chance to review his spiritual progress, as well as provide the author with an opportunity to display his religious learning. In 1998 our reviewer, David Guy, called this a ''fascinating and beautifully written'' book.</p>
+        <p>Joy of Man's Desiring</p>
+        <p>By Jean Giono. Counterpoint, $16.</p>
+        <p>This earthy French novel about the loves and toils of a group of peasants in the rugged, isolated hills of Provence is a pagan allegory about the fragile communion between man and nature. ''It is a beautiful story of renewal . . . set in terms of a kind of cosmic faith, and in a lovely and fearless imagery,'' Katherine Woods wrote here in 1940.</p>
+        <p>Canone Inverso</p>
+        <p>By Paolo Maurensig. Owl/Holt, $12.</p>
+        <p>This Italian novel, steeped in musical imagery and themes, revolves around a haunted 17th-century violin and its effect on the friendship of two boys in Central Europe during the 1930's. Last year our reviewer, Jonathan Keates, admired ''the mournful beauty of this sparely proportioned, soberly recounted story.''</p>
+        <p>The Grieving Time: A Year's Account of Recovery From Loss</p>
+        <p>By Anne M. Brooks. Herodias, $11.</p>
+        <p>This slender, heartfelt book is a monthly journal kept by the author after her husband's death from cancer. The ''entries are sometimes startling in their candor,'' one critic wrote in 1985. ''It will linger in the mind and give comfort'' for a long time.</p>
+        <p>Scott Veale</p>
+      </block>
+      <block class="full_text">
+        <p>Nureyev: His Life</p>
+        <p>By Diane Solway. Morrow, $16.</p>
+        <p>The author draws on extensive interviews and research to provide fresh material on the Russian dancer's life and career, particularly his Soviet years and his defection in 1961. This balanced biography is ''informative and filled with vivid anecdotes,'' Jennifer Dunning wrote here in 1998.</p>
+        <p>The Peculiar Memories of Thomas Penman</p>
+        <p>By Bruce Robinson. HarperPerennial, $13.</p>
+        <p>The hero of this darkly funny first novel by the writer and director of ''Withnail and I'' is a 13-year-old asthmatic schoolboy searching for identity as he copes with his exotically dysfunctional family in working-class England in the grim 1950's. He is an obsessive snooper, and what he's most keen to find is the key to his grandfather's extensive pornography collection. ''Never before has the painful, knotty journey to maturity been depicted with such gusto, and never has the venerable Bildungsroman received such riotously profane treatment,'' Patrick McGrath wrote here last year.</p>
+        <p>Secrecy: The American Experience</p>
+        <p>By Daniel Patrick Moynihan. Yale University, $10.95.</p>
+        <p>In this withering tour of nearly a century of official secrecy, the New York senator argues that the use of classified information and misinformation has caused much more harm than good. ''It is a dismaying tale,'' Sam Tanenhaus wrote here in 1998, though Moynihan tells it ''with uncommon liveliness and a mordant wit.'' In All the Laws but One: Civil Liberties in Wartime, by William H. Rehnquist (Vintage, $14), the chief justice of the United States reviews prominent cases in which civil liberties issues have arisen during times of war, from the 1860's to the internment of Japanese-Americans in World War II. ''Rehnquist presents full and fascinating human profiles'' and conveys ''what it must have been like to grapple with these issues in a time of crisis,'' Jeremy Waldron wrote here last year.</p>
+        <p>Ingratitude</p>
+        <p>By Ying Chen. University of California, $13.95.</p>
+        <p>This compact novel is narrated from the grave by a woman who committed suicide to punish her mother and thus escape the traditional Chinese culture of obedience. The result is ''a sustained philosophical exploration studded with passionate outbursts, a glimpse of a consciousness liberated from family and social expectations,'' Elizabeth Schmidt wrote here in 1998.</p>
+        <p>Ark Baby</p>
+        <p>By Liz Jensen. Overlook, $13.95.</p>
+        <p>This raucous, unruly novel is a satirical jab at Darwinism and the notion of scientific certainty through 150 years of British life, up to the early years of the new millennium, when a fertility crisis threatens the survival of Homo britannicus. '' 'Ark Baby' is written in an exuberantly naughty style that suggests Jensen shares a certain kinship with writers like Peter Carey and Fay Weldon,'' Alida Becker wrote here in 1998.</p>
+        <p>Hip Hop America</p>
+        <p>By Nelson George. Penguin, $13.95.</p>
+        <p>A New York music critic traces the evolution of rap music and its influence on culture and society, in the process chronicling his own intense love-hate relationship with hip-hop. In 1998 our reviewer, Laura Jamison, called this ''an invaluable, entertaining and well-written account.'' In Elevating the Game: Black Men and Basketball (University of Nebraska, $15), George explores the history of basketball and how the integration of black players from colleges around the nation advanced the game. The result is a ''folksy yet scholarly study'' and ''a rich, welcome addition to sports literature,'' Michael E. Ross wrote here in 1992.</p>
+        <p>Meetings With the Archangel: A Comedy of Spirit</p>
+        <p>By Stephen Mitchell. HarperPerennial, $13.</p>
+        <p>The celestial visitor in question stops by to deliver a primer on the afterlife and give the novel's narrator a chance to review his spiritual progress, as well as provide the author with an opportunity to display his religious learning. In 1998 our reviewer, David Guy, called this a ''fascinating and beautifully written'' book.</p>
+        <p>Joy of Man's Desiring</p>
+        <p>By Jean Giono. Counterpoint, $16.</p>
+        <p>This earthy French novel about the loves and toils of a group of peasants in the rugged, isolated hills of Provence is a pagan allegory about the fragile communion between man and nature. ''It is a beautiful story of renewal . . . set in terms of a kind of cosmic faith, and in a lovely and fearless imagery,'' Katherine Woods wrote here in 1940.</p>
+        <p>Canone Inverso</p>
+        <p>By Paolo Maurensig. Owl/Holt, $12.</p>
+        <p>This Italian novel, steeped in musical imagery and themes, revolves around a haunted 17th-century violin and its effect on the friendship of two boys in Central Europe during the 1930's. Last year our reviewer, Jonathan Keates, admired ''the mournful beauty of this sparely proportioned, soberly recounted story.''</p>
+        <p>The Grieving Time: A Year's Account of Recovery From Loss</p>
+        <p>By Anne M. Brooks. Herodias, $11.</p>
+        <p>This slender, heartfelt book is a monthly journal kept by the author after her husband's death from cancer. The ''entries are sometimes startling in their candor,'' one critic wrote in 1985. ''It will linger in the mind and give comfort'' for a long time.</p>
+        <p>Scott Veale</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

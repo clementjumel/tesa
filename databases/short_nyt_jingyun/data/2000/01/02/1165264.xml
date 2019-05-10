@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>She Got There First</title>
+    <meta content="LTR093642" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Arts; Books; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165264"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Lindbergh, Anne Morrow</person>
+        <person class="indexing_service">Lindbergh, Charles A (1902-74)</person>
+        <person class="indexing_service">Herrmann, Dorothy</person>
+        <person class="indexing_service">Hertog, Susan</person>
+        <object.title class="indexing_service">Anne Morrow Lindbergh: Her Life (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F00EEDD1E39F931A35752C0A9669C8B63" item-length="168" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>She Got There First</hl1>
+      </hedline>
+      <abstract>
+        <p>Dorothy Herrmann letter holds Dec 12, 1999 review of Susan Hertog's book Anne Morrow Lindbergh: Her Life makes false claim that author has written the first full-length study of wife of Charles Lindbergh; Herrmann says she wrote first full-length biography on Anne Morrow Lindbergh in 1992 (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>The dust jacket copy of Susan Hertog's ''Anne Morrow Lindbergh: Her Life'' makes the false claim that the author has written ''the first full-length study'' of the wife of Charles Lindbergh. Your review (Dec. 12) perpetuates this error by citing a recent biography of the celebrated and controversial aviator and then stating that before the publication of Hertog's biography, his wife remained ''more of a mystery, managing to survive the prying of journalists, the publication of her diaries and letters and entire decades spent a good deal in the public eye.''</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>The dust jacket copy of Susan Hertog's ''Anne Morrow Lindbergh: Her Life'' makes the false claim that the author has written ''the first full-length study'' of the wife of Charles Lindbergh. Your review (Dec. 12) perpetuates this error by citing a recent biography of the celebrated and controversial aviator and then stating that before the publication of Hertog's biography, his wife remained ''more of a mystery, managing to survive the prying of journalists, the publication of her diaries and letters and entire decades spent a good deal in the public eye.''</p>
+        <p>Contrary to Hertog and her publisher's assertion, my biography ''Anne Morrow Lindbergh: A Gift for Life'' (1992) is the first full-length biography of the gifted writer. The Penguin paperback edition is still in print.</p>
+        <p>Dorothy Herrmann  New Hope, Pa.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

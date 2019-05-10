@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Before Stocks Go Public, Some Will Go to Charity</title>
+    <meta content="01STOC" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="B" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165096"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Philanthropy</classifier>
+        <classifier class="indexing_service" type="descriptor">Stocks and Bonds</classifier>
+        <classifier class="indexing_service" type="descriptor">Stock Options and Purchase Plans</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <org class="indexing_service">Mouse (Making Opportunities for Upgrading Schools and Education)</org>
+        <org class="indexing_service">Entrepreneurs' Foundation</org>
+        <person class="indexing_service">Kelley, Tina</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./West</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Government, Philanthropy and NGO</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stock Options and Purchase Plans</classifier>
+        <classifier class="online_producer" type="general_descriptor">Philanthropy</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stocks and Bonds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A04EFD61338F932A35752C0A9669C8B63" item-length="1039" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Before Stocks Go Public, Some Will Go to Charity</hl1>
+      </hedline>
+      <byline class="print_byline">By TINA KELLEY</byline>
+      <byline class="normalized_byline">Kelley, Tina</byline>
+      <abstract>
+        <p>Nonprofit New York group known as Mouse (Making Opportunities for Upgrading Schools and Education) has helped to pioneer fund-raising approach of soliciting stock, or chance to buy it, from startup companies at bargain prices before stocks go public; Mouse is at forefront of practice that not only benefits nonprofit organizations, but gives new companies means to contribute before they become profitable; in California, Entrepreneurs' Foundation asks high-tech companies to encourage giving; participating companies donate stock options to charity before they go public; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>When the newly rich get richer, shouldn't others get richer, too? That is the idea behind a new form of fund-raising that has helped one local nonprofit group raise hundreds of thousands of dollars.</p>
+        <p>Andrew Rasiej, the president of the nonprofit group, known as Mouse, for Making Opportunities for Upgrading Schools and Education, has helped to pioneer a fund-raising approach of soliciting stock, or the chance to buy it, from startup companies at bargain prices before the stocks go public. After he received some of this so-called ''directed stock'' as a personal gift, he wondered if such shares could go to organizations working to improve the community. The answer was yes.</p>
+      </block>
+      <block class="full_text">
+        <p>When the newly rich get richer, shouldn't others get richer, too? That is the idea behind a new form of fund-raising that has helped one local nonprofit group raise hundreds of thousands of dollars.</p>
+        <p>Andrew Rasiej, the president of the nonprofit group, known as Mouse, for Making Opportunities for Upgrading Schools and Education, has helped to pioneer a fund-raising approach of soliciting stock, or the chance to buy it, from startup companies at bargain prices before the stocks go public. After he received some of this so-called ''directed stock'' as a personal gift, he wondered if such shares could go to organizations working to improve the community. The answer was yes.</p>
+        <p>Mr. Rasiej, 41, a former nightclub owner who pursues what he calls ''entrepreneurial philanthropy,'' directs a a group of volunteers who help public schools connect to the Internet and use computer technology. Through contacts with Internet startup companies, Mouse was given an option to buy 20,000 shares of one company's directed stock at a special price, and was given 5,000 shares by another company before its initial public offering.</p>
+        <p>While startup companies have often given employees' relatives and friends an opportunity to buy stock at bargain prices, Mouse has been at the forefront of a practice that not only benefits nonprofit organizations, but gives new companies a means to contribute before they become profitable.</p>
+        <p>Mouse has held on to 10,000 directed shares that it received from Star Media Network, an Internet portal company, on which it has made a profit, on paper, of more than $300,000.</p>
+        <p>Negotiations are under way with four or five other new companies that could donate directed shares.</p>
+        <p>The nonprofit agency's board must approve stock purchases, even at advantageous prices, because of the risk that the stock could drop below its initial offering price. So far, Mouse's board has not lost money on any stock, and it has made enough in profits to create an endowment worth more than $500,000. The earnings of that pool of capital finance the organization's work in schools.</p>
+        <p>Mr. Rasiej believes that granting rights to buy directed stock to organizations like Mouse solves a dilemma for startup companies, which usually need about three years to establish themselves enough to make charitable donations.</p>
+        <p>''It's amazing how, with young people who make a ton of money thinking outside the box,'' he said, ''when you ask them to give money, they default.''</p>
+        <p>Tom Evslin is chairman and chief executive of ITXC, an Internet telephone-service wholesaler in Princeton, N.J., that gave 10,000 shares of directed stock to Mouse before the company went public in September. Mouse quickly sold it, for a profit of $150,000.</p>
+        <p>''It's nice to think that you've got this leverage'' to make contributions, Mr. Evslin said, adding that, traditionally, companies have been reluctant to make charitable donations before they have made a profit.</p>
+        <p>Gifts of directed shares help solve that problem, while supporting Mouse's work in creating a more technologically literate work force, he said.</p>
+        <p>The assignment of restricted shares to charities is a donation because there are a finite number of such shares. Those that are given away reduce the profit employees and owners stand to reap.</p>
+        <p>Gene DeRose, chairman and chief executive of Jupiter Communications, a market research firm, gave 5,000 shares of his stock to Mouse, a gift worth more than $150,000 as of Friday. Jupiter employees have also volunteered to help with Mouse's projects.</p>
+        <p>''It's been incredible for me to watch it unfold and grow,'' Mr. De Rose said of Mouse. ''I've always been fixated on how some of the skills and assets that the new media had can be brought to bear'' to help the community.</p>
+        <p>Other nonprofit agencies are also trying to use the phenomenal growth of Internet companies to finance their operations. The Community Foundation Silicon Valley has been given many directed shares, and the right to buy others at insider prices, by several Internet companies.</p>
+        <p>The online auction service e-Bay donated 107,000 shares to the foundation, which gives grants to improve education, housing and neighborhoods in the area. The foundation kept some of those shares, which it received in June 1998, and sold others. The value of what it kept and the reinvestment of what it sold is now more than $40 million, said Birgit Fink-Jensen, the foundation's communications director.</p>
+        <p>In Menlo Park, Calif., the Entrepreneurs' Foundation asks high-tech companies to encourage giving. Participating companies join the foundation and donate stock options to charity before they go public.</p>
+        <p>Before its initial public offering, one company, Calico Commerce, donated about $40,000 in options to Habitat for Humanity, said Patty Burness, the foundation's executive director. So far, 58 companies have joined the foundation, she added.</p>
+        <p>At Microsoft, where there is no shortage of young people who have newly acquired wealth, the Big Gift Club helps employees create a giving plan that reflects the increasing value of their stock. Members of the club agree to make a donation to their favorite charity each time Microsoft stock goes up 10 points. The co-founder of the club, Aaron Contorer, 32, said Microsoft employees have donated about $1 million to charities since he and his wife, Rachael Contorer, 33, began the club three years ago.</p>
+        <p>Mr. Contorer thought the Mouse  plan was a wise way to tap into the windfalls that are common in a bullish economy through public offerings, stock options and bonuses.</p>
+        <p>''When an event occurs where you earn some extra money, that's a great time to stop and think about giving money to a charity,'' he said. ''When would be better to give some extra money?''</p>
+        <p>Mr. Rasiej plans to make similar stock donations, if his own company, Digitalclubnetwork, goes public.</p>
+        <p>Since the venture capitalists who invested in his firm are also contributors to Mouse, he is sure that ''if and when we go public, I'm not going to have trouble convincing them to use our public offering to create some social benefit.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

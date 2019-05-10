@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Cattle Call</title>
+    <meta content="LTR093654" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Arts; Books; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165265"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Meat</classifier>
+        <classifier class="indexing_service" type="descriptor">World War II (1939-45)</classifier>
+        <person class="indexing_service">Topkis, Jay</person>
+        <person class="indexing_service">Singh, Simon</person>
+        <person class="indexing_service">Shachtman, Tom</person>
+        <object.title class="indexing_service">Absolute Zero and the Conquest of Cold (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Meat</classifier>
+        <classifier class="online_producer" type="general_descriptor">World War II (1939-45)</classifier>
+        <classifier class="online_producer" type="general_descriptor">War and Revolution</classifier>
+        <classifier class="online_producer" type="general_descriptor">Food</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D03EEDD1E39F931A35752C0A9669C8B63" item-length="153" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Cattle Call</hl1>
+      </hedline>
+      <abstract>
+        <p>Jay Topkis letter questions statement made by Simon Singh in his Dec 12, 1999 review of Tom Shachtman's book Absolute Zero and the Conquest of Cold regarding how Chicago meatpackers boned, quick-froze and shipped a million tons of meat to the Pacific in single day, just 24 hours after Pearl Harbor (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>In his review of Tom Shachtman's ''Absolute Zero and the Conquest of Cold'' (Dec. 12), Simon Singh says that ''Chicago meatpackers . . . boned, quick-froze and shipped a million tons of meat to the Pacific in a single day, just 24 hours after Pearl Harbor.''</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>In his review of Tom Shachtman's ''Absolute Zero and the Conquest of Cold'' (Dec. 12), Simon Singh says that ''Chicago meatpackers . . . boned, quick-froze and shipped a million tons of meat to the Pacific in a single day, just 24 hours after Pearl Harbor.''</p>
+        <p>May I express a doubt? Assuming the cattle involved averaged a half-ton of meat each (a very high figure), this would have taken two million head. And on the day before, Pearl Harbor Day, Chicago would have been at least three inches deep in manure. Funny, nobody ever said a word about it.</p>
+        <p>Jay Topkis  New York</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

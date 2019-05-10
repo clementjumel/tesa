@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Between Wall Street and Silicon Valley, a New Lexicon</title>
+    <meta content="Y01GLO$13" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Business/Financial Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="C" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Technology; Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165093"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Stocks and Bonds</classifier>
+        <person class="indexing_service">Kahn, Joseph</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Markets</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stocks and Bonds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D0DE2D61338F932A35752C0A9669C8B63" item-length="1515" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Between Wall Street and Silicon Valley, a New Lexicon</hl1>
+      </hedline>
+      <byline class="print_byline">By JOSEPH KAHN</byline>
+      <byline class="normalized_byline">Kahn, Joseph</byline>
+      <abstract>
+        <p>Trying to keep abreast of new terminology in worlds of finance and high technology is daunting task; listing of basic business, technology and financial terms that any layman might encounter when shopping for a computer, researching stock on Internet, sorting through e-mail or reading about global business; drawings (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>For linguistic purists, the world at the dawn of the 21st century is, well, a mess. Management consultants, marketing experts, lawyers and, especially in recent years, techno-geeks have cluttered American English with shorthand indecipherable to all but insiders.</p>
+        <p>At the Pentagon, acronyms are so popular they are often recycled. Slam, for example, can mean Sea Launch Air Missile, Strategic Low Altitude Missile, Selectable Lightweight Attack Munition, or 10 other things. President Clinton issued an executive order for Federal agencies to use common, everyday words. This promptly became PEI, for Plain English Initiative.</p>
+      </block>
+      <block class="full_text">
+        <p>For linguistic purists, the world at the dawn of the 21st century is, well, a mess. Management consultants, marketing experts, lawyers and, especially in recent years, techno-geeks have cluttered American English with shorthand indecipherable to all but insiders.</p>
+        <p>At the Pentagon, acronyms are so popular they are often recycled. Slam, for example, can mean Sea Launch Air Missile, Strategic Low Altitude Missile, Selectable Lightweight Attack Munition, or 10 other things. President Clinton issued an executive order for Federal agencies to use common, everyday words. This promptly became PEI, for Plain English Initiative.</p>
+        <p>But the prize clearly goes to businesses, especially those in technology. Companies like eBay and CNET use an alphabet soup of official names, thinking more of Internet call signs than linguistic elegance.</p>
+        <p>Trying to keep abreast of new terminology might seem, to use Silicon Valley lingo, to be WOMBAT duty -- a waste of money, brains and time. But those who have never heard of HTML are probably condemned to spend their lives offline, and investors who don't understand EBITDAM might think profits still move stock prices. And if any of that sounds like techno-babble, read on.</p>
+        <p>The following is a crib sheet of basic business, technology and financial terms that any layman might encounter when shopping at Circuit City, researching a stock on the Internet, sorting through e-mail or reading about global business:</p>
+        <p>BANDWIDTH -- The data transfer rate of an electronic communications system. Figuratively, brainpower. As in, he doesn't have the bandwidth for the job.</p>
+        <p>BIOINFORMATICS -- Using computer databases to help unravel the genetic code and develop new drugs.</p>
+        <p>BLUETOOTH -- A computer chip that will start appearing in mobile phones and other devices that will allow you, theoretically, to call your Palm Pilot while riding in a taxi, if you can think of a reason to do so.</p>
+        <p>BROADBAND -- A communications network that has the capacity to receive different kinds of signals, like voice, data or video, at high speeds.</p>
+        <p>B.T.W. -- By the way. Often used as shorthand in e-mail.</p>
+        <p>CAFETERIA OFFICING -- When an employer gives a worker the choice of setting up an office (desk, chair, computer) at home or at a central office.</p>
+        <p>CLOB -- Central Limit Order Book. If stock market regulators in the United States have their way, stock prices will eventually be listed in one place, though they might still be traded on multiple exchanges.</p>
+        <p>DIGERATI -- The elite of the Internet and the digital age.</p>
+        <p>D.J. -- A ''Dear John'' note. What online stock traders call a notification that they did not get any shares of an initial public offering.</p>
+        <p>DOWNTIME -- Refers to time that a system is not functioning properly, but has come to mean a siesta for people, too.</p>
+        <p>D.S.L. -- Digital Subscriber Line. It changes your regular phone line into a high-bandwidth communications network.</p>
+        <p>EBITDAM -- Earnings Before Interest, Taxes, Depreciation, Amortization and (for the Internet age) Marketing expenses. Updates EBITDA, a standard Wall Street measure.</p>
+        <p>E.C.N. -- Electronic Communications Networks. As the New York Stock Exchange and the Nasdaq well know, these new trading networks are stealing trading activity in many of the hottest stocks.</p>
+        <p>FINANCIAL ARCHITECTURE -- Since emerging markets took a plunge and scared the rest of the world two years ago, finance ministers have been trying to come up with a new global early warning system to make sure it never happens again.</p>
+        <p>GB -- Gigabyte, or approximately a billion bytes, or characters. Many new hard drives have at least one gigabyte of storage capacity. Say goodbye to MB, or megabytes.</p>
+        <p>G.M. -- Not the car company, but genetically modified goods, as in corn or beef. The European Union, in particular, is uncomfortable with GM foods.</p>
+        <p>HOTELING -- The practice of moving workers from one office (or cubicle) to the next, depending on the day. It prevents a company from having to keep lots of empty offices when so many people work at home or on flexible schedules.</p>
+        <p>HTML -- Hypertext Markup Language. A formatting language used to create Web pages; some say it is now being edged out by XML, or eXtensible Markup Language.</p>
+        <p>HTTP -- Hypertext Transfer Protocol. Rules that govern how Web pages, including pictures, text and sounds, are transferred over the Internet.</p>
+        <p>INCUBATOR -- A company or organization that nurtures start-up companies by providing them with office space, managerial support and financing.</p>
+        <p>JAVA -- A programming language for software that can run on your computer through the Internet, without loading the program onto the computer hard drive.</p>
+        <p>LEGACY -- As in legacy system, legacy media, legacy bank: The pre-Internet way of doing things.</p>
+        <p>LEO -- Low-Earth Orbiting satellites. They are supposed to change communications by taking geography out of the equation, though early versions have had technical and marketing difficulties.</p>
+        <p>LINUX -- A computer operating system that is free or low cost and constantly evolving, because its underlying source code is available to programmers everywhere.</p>
+        <p>LOCKUP -- The period of time in which insiders cannot sell their shares in a company, especially right after an initial public offering. Frequently leads to nail biting.</p>
+        <p>MULTITASKING -- A computer, or a person, doing more than one thing at once. Frequently leads to crashes.</p>
+        <p>MP3 -- A standard format for compressing sound into small files to be sent over the Internet without losing quality.</p>
+        <p>NANO -- The prefix for a billionth of something, like nano-second or nano-meter. Someday, nano may be a standalone noun to describe microscopic machines that do great things.</p>
+        <p>ONLINE -- On the Internet. When you sign off, you are offline. When you are out of touch, you are offline, too.</p>
+        <p>P.C.S. -- Personal Communications Services. A wireless phone service somewhat similar to cellular telephone service but emphasizing light weight and extended mobility.</p>
+        <p>PHARMACOGENOMICS -- The new science of trying to tailor drugs to patients based on their genetic profiles.</p>
+        <p>P.K.I. -- Public Key Infrastructure. The online version of a signature, this is a step forward in allowing secure transfer of data through the Internet.</p>
+        <p>PRICE-TO-FANTASY -- A way to measure a company's current stock price against its greatest potential in the future and thereby justify paying stratospheric prices for shares.</p>
+        <p>SCALABILITY -- A measure of whether a system can be adapted to changing situations, like higher-than-expected use or a new mission.</p>
+        <p>SERVER -- Either hardware or software that provides a service to clients. Most often used when bad things happen, as in, ''Our server is down, try again later.''</p>
+        <p>S.M.S. -- Short Message Service. Forget pagers. Europeans, who have relied on digital cell phones for years, prefer to send short text messages by tapping on their telephone dialing pads. A distraction for kids in class.</p>
+        <p>SNP -- Single Nucleotide Polymorphism, pronounced snip. It refers to a difference of a single unit in the three-billion-unit genetic code. Such a difference can account for differences in eye color or cause a hereditary disease. Used to tailor drugs for patients.</p>
+        <p>SUNLIGHTING -- When telecommuters take on outside projects while working at home for their own employer.</p>
+        <p>T-1 -- A leased telephone line for connecting to the Internet, often used in offices, that is many times as fast as a traditional modem. But it is nowhere near as fast as T-3, which is needed to transmit full-motion video in real time.</p>
+        <p>TED -- Turtle Excluder Device. Fishermen who use nets that do not have TED's are unpopular with environmentalists. Turtles were the leading symbol of environmentalists protesting trade rules in Seattle recently.</p>
+        <p>TRANSPARENCY -- The more open, the simpler, the less secretive, the better. Everybody talks about this approach as a way of improving things, from stock trading to financial and computer systems.</p>
+        <p>TWAIN -- Technology Without An Interesting Name. A standard protocol for communication between software and devices like scanners.</p>
+        <p>U.R.L. -- Uniform Resource Locator, or an Internet address. You can't get to a Web site without one.</p>
+        <p>USB -- Universal Serial Bus. It goes on a computer and allows the user to plug in digital cameras, joysticks, printers and scanners with ease, or so they promise.</p>
+        <p>VAPORWARE -- Software and hardware that is advertised long before it's available, if it's ever available.</p>
+        <p>WAP -- Wireless Application Protocol. Web pages designed for browsing by mobile phone users. Already in use in some parts of Europe.</p>
+        <p>WEBISODE -- A short entertainment program, usually less than 10 minutes, delivered on the Web. Sitcoms for people with really short attention spans.</p>
+        <p>WORM -- A virus that works its way into a computer network. People can also worm.</p>
+        <p>W.T.O. -- World Trade Organization. It's been around since 1995, but many people first heard of the Geneva-based trade body when the trade talks it sponsored in Seattle late last year collapsed. Now it's the scapegoat for people who hate globalization.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

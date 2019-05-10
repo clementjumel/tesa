@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Yeltsin Resigns; Putin Takes Over; Elections in March</title>
+    <meta content="01RUSS$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="World; Front Page" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165129"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="online_producer" type="types_of_material">Summary</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Front Page</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C05E1DC1038F932A35752C0A9669C8B63" item-length="221" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Yeltsin Resigns; Putin Takes Over; Elections in March</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>President Boris N. Yeltsin stunned his nation with a New Year's Eve resignation, concluding a tempestuous political career on the same note of surprise and high drama that accompanied his entire path from an early convert to perestroika to the erratic master of a free but foundering Russia.</p>
+        <p>Mr. Yeltsin, 68, said he was vacating the presidency to clear the way for ''smart, strong and energetic people.''</p>
+      </block>
+      <block class="full_text">
+        <p>President Boris N. Yeltsin stunned his nation with a New Year's Eve resignation, concluding a tempestuous political career on the same note of surprise and high drama that accompanied his entire path from an early convert to perestroika to the erratic master of a free but foundering Russia.</p>
+        <p>Mr. Yeltsin, 68, said he was vacating the presidency to clear the way for ''smart, strong and energetic people.''</p>
+        <p>That meant Vladimir V. Putin, 47, the most popular of a string of prime ministers Mr. Yeltsin had named in hopes of finding a malleable and viable successor. A former KGB official who has won great popularity for waging the war in Chechnya, Mr. Putin was named acting president with the blessing of the Russian Orthodox Church.</p>
+        <p>One of Mr. Putin's first presidential decrees was to grant Mr. Yeltsin immunity from any future prosecution -- a critical action, given the charges of high corruption swirling around the Kremlin.</p>
+        <p>Beset in recent years by heart problems and purported drinking and assailed for the corruption and the sad state of the Russian economy, Mr. Yeltsin is also certain to be remembered as the man who faced down the Communists from atop a tank.</p>
+        <p>In elections now set for March 26, Mr. Putin is, for now at least, the undisputed front-runner.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>As the Language Turns ('Hoppy' New Year)</title>
+    <meta content="01TALK$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="22" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165185"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: IDENTITY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">English Language</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <person class="indexing_service">Fox, Margalit</person>
+        <classifier class="online_producer" type="general_descriptor">English Language</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Language and Languages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C0DEEDE1230F932A35752C0A9669C8B63" item-length="493" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>As the Language Turns ('Hoppy' New Year)</hl1>
+      </hedline>
+      <byline class="print_byline">By Margalit Fox</byline>
+      <byline class="normalized_byline">Fox, Margalit</byline>
+      <abstract>
+        <p>Scholars of American dialects offer some predictions on how speech patterns will change across the country in the next century; graph (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THESE are the sounds of the future: In Chicago, some people will go fishing for cad. In San Francisco, some will wear hots on their heads. And in Atlanta, some will dream of a watt Christmas.</p>
+        <p>This is an aural snapshot of English as it will appear on the lips of some speakers in the century to come, scholars of American dialects say. And while these sounds may strike present-day ears as peculiar, changes like these, for our ever-shifting language, are simply business as usual. ''Sounds are changing and rotating in these great and majestic patterns, almost like the rotations of the galaxy,'' said William Labov, a linguist at the University of Pennsylvania.</p>
+      </block>
+      <block class="full_text">
+        <p>THESE are the sounds of the future: In Chicago, some people will go fishing for cad. In San Francisco, some will wear hots on their heads. And in Atlanta, some will dream of a watt Christmas.</p>
+        <p>This is an aural snapshot of English as it will appear on the lips of some speakers in the century to come, scholars of American dialects say. And while these sounds may strike present-day ears as peculiar, changes like these, for our ever-shifting language, are simply business as usual. ''Sounds are changing and rotating in these great and majestic patterns, almost like the rotations of the galaxy,'' said William Labov, a linguist at the University of Pennsylvania.</p>
+        <p>And these shifting sounds, which can rotate in different directions in different parts of the country, help ensure that American dialects will continue to sound different from one another well into the 21st century. ''If present trends continue,'' Mr. Labov said, ''the American regional dialects will get stronger and more distinct.''</p>
+        <p>While many smaller dialects are expected to vanish as their elderly speakers die, what will remain, he said, are the ''great regional dialects'' -- Northern, Midland, Southern -- which radiate from the big cities. And in some places, regional speech is asserting itself for the first time: in Northern California, a dialect unique to the area is emerging among younger speakers.</p>
+        <p>All this contradicts predictions that American dialects would be snuffed out in the homogenizing embrace of television.</p>
+        <p>One change, which linguists call the Northern Cities Vowel Shift, affects places like Rochester, Detroit, Chicago and Toledo, Ohio. It probably began, Mr. Labov said, when speakers unconsciously started pronouncing the ''a'' of ''has'' as a diphthong (''HEE-uhz''). Because vowels, as he said, are ''all linked together'' acoustically, this shift led to others. ''Ah,'' for instance, took on the pronunciation that ''a'' used to have, causing ''cod'' to sound more like ''cad.''</p>
+        <p>In Northern California, there is a different shift. ''Ah'' and ''aw'' are edging toward each other, with ''hock'' and ''hawk'' pronounced almost identically, using a vowel sound midway between the two. This in turn has caused younger speakers to shift the vowel sound of ''black'' and ''hat'' closer to that of ''block'' and ''hot.'' ''It really looks like there is this dialect coming together, gelling, in San Francisco,'' said Penelope Eckert, a linguist at Stanford University.</p>
+        <p>VISIONS: IDENTITY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

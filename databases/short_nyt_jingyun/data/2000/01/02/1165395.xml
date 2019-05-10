@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Maybe It's Time for a Diners' Bill of Rights</title>
+    <meta content="02DINE$10" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Connecticut Weekly Desk" name="dsk"/>
+    <meta content="16" name="print_page_number"/>
+    <meta content="14CN" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165395"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="DINING OUT"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Restaurants</classifier>
+        <person class="indexing_service">Brooks, Patricia</person>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Connecticut</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Dining and Wine/Restaurant Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Food and Wine</classifier>
+        <classifier class="online_producer" type="general_descriptor">Restaurants</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C0CE4D81738F931A35752C0A9669C8B63" item-length="967" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Maybe It's Time for a Diners' Bill of Rights</hl1>
+      </hedline>
+      <byline class="print_byline">By PATRICIA BROOKS</byline>
+      <byline class="normalized_byline">Brooks, Patricia</byline>
+      <abstract>
+        <p>Dining Out column by Patricia Brooks arguing for diners' bill of rights; says restaurants should be responsible for providing diners with trained, attentive service, comfortable surroundings and professionally prepared food since patrons are responsible for their success (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WE hear a lot about patients' rights, even smokers' rights. Maybe it's time to consider diners' rights. The diner, the patron, is responsible for a restaurant's success. Thus it isn't expecting too much for a restaurant to provide diners with trained, attentive service, comfortable surroundings and professionally prepared food.</p>
+        <p>Yet that isn't always the way things turn out, as we have learned from numerous dining misadventures. The least of which is having to ask for water, bread and a wine list, because staff members are too busy chatting to take care of these simple necessities.</p>
+      </block>
+      <block class="full_text">
+        <p>WE hear a lot about patients' rights, even smokers' rights. Maybe it's time to consider diners' rights. The diner, the patron, is responsible for a restaurant's success. Thus it isn't expecting too much for a restaurant to provide diners with trained, attentive service, comfortable surroundings and professionally prepared food.</p>
+        <p>Yet that isn't always the way things turn out, as we have learned from numerous dining misadventures. The least of which is having to ask for water, bread and a wine list, because staff members are too busy chatting to take care of these simple necessities.</p>
+        <p>Diners have a right to expect better -- and restaurants have an obligation to provide it. If they don't, it is perfectly proper to complain -- politely. A good restaurant wants legitimate feedback and customer satisfaction. Yet many dissatisfied diners put up with sloppy service if the food is satisfactory.</p>
+        <p>But in our view, it is your right to expect trained service and acceptable food. Each restaurant meal is an unwritten contract between the management and patron. The restaurant shows its wares (atmosphere, staff, menu) and when you place your order, you make a tacit commitment to pay, assuming service and food will be adequate. So herewith, before the new millennium is a day older, a bill of rights for diners, tallying what you might legitimately expect when spending a small fortune at dinner. (Restaurants with well-trained professional staffs need read no further. This column is not directed at you.)</p>
+        <p>As a diner, it is your right:</p>
+        <p>*To be greeted in a cordial fashion when you enter a restaurant. No matter how tired a host or maitre d'hotel may be, his or her job is to provide a gracious welcome when guiding you to your table. A sour face at the front door can set the tone for an entire meal. Like the time we arrived at a pricey, much publicized inn for dinner and were kept waiting to be seated while the hostess continued a personal phone conversation. Finally, as we fumed, she trilled, ''Well, hon, gotta go now,'' and rang off, oblivious to the waiting guests.</p>
+        <p>*To be seated within 10 or 15 minutes of your reservation time, unless the host or maitre d'hotel can explain the reason for delay. Conversely, you should call the restaurant if your plans have changed; no-shows are a big problem for restaurants, especially small ones.</p>
+        <p>*To choose another table, if you do not like the one you are led to (unless there are no alternatives). Even with a reservation and the restaurant half empty, diners are often shown a table by the bathrooms, swinging kitchen door or crammed next to the only other diners in the place. Why, we'll never understand. Be reasonable when requesting a more desirable table; don't demand a table for four if you are a twosome.</p>
+        <p>*To expect certain basic standards of cleanliness, specifically a clean table, utensils, glassware and menu. There's no charm in a grease-specked menu, crusty fork or lipstick-smeared glass.</p>
+        <p>*To expect a trained server and bus staff. Friendliness (''Hi, my name is Roger and I will be your waiter tonight'') alone doesn't meet the standard. Roger should be able to take your order promptly, see that you have water, bread and butter, answer menu-related questions knowledgeably, crumb the table between entree and dessert courses, and keep an eye out for your needs throughout the meal. This requires timing (bringing your second course after the first has been cleared) and organization (knowing which order goes to each guest). In a restaurant there is nothing more amateurish than the ''Who gets what'' game -- ''Who gets the chicken? Who gets the veal?'' It is up to the staff to know where each order belongs.</p>
+        <p>*To be told if a menu-listed ingredient is unavailable. Often, it is the offbeat ingredient that attracts a diner to a dish. For instance, if you order polenta with Gorgonzola and pomegranates, you don't expect either to be missing. If there is a substitute, the kitchen should inform the server immediately, so that you have time to change your order if you wish. After all, you are paying for the promised ingredients.</p>
+        <p>*To receive an answer to menu-related questions. If a server doesn't know whether or not there are raisins in the bread pudding, he or she should find out and tell you. ''Beats me'' is not good enough.</p>
+        <p>*To have the evening specials  written rather than recited. Fortunately, more and more restaurants are aware of Gutenberg, Bill Gates and desktop publishing.</p>
+        <p>*To be served each dish as you expect it. Some things are basic even in a place with limited culinary skills: Hot dishes should not be served cold (and conversely); no dish should be served raw, scorched, burned or over the hill. If you ordered your meat or fish rare and it arrives overcooked (or vice versa), don't hesitate to return it.</p>
+        <p>*To pay for value received and tip accordingly. A way to send a message of displeasure with the service is to tip less than you normally do. We know a few people who have left no tip at all when the service was disastrously bad, but in our view this is too extreme a measure. After all, poor service is usually the result of poor training, a responsibility of management.</p>
+        <p>Finally, while you have all these rights, exercising them quietly and politely usually achieves better results than being arrogant, loud or disdainful.</p>
+        <p>DINING OUT</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

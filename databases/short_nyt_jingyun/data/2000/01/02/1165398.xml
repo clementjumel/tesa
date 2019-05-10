@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Palm Beach to Bahamas By 99-Minute Hydrofoil</title>
+    <meta content="MB105607" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165398"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="TRAVEL ADVISORY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <classifier class="indexing_service" type="descriptor">Ferries</classifier>
+        <classifier class="indexing_service" type="descriptor">Hydrofoils</classifier>
+        <location class="indexing_service">Palm Beach (Fla)</location>
+        <location class="indexing_service">Bahama Islands</location>
+        <org class="indexing_service">Sea Jets (Co)</org>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/Florida</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Hospitality, Restaurant and Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Florida/Palm Beach</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Florida</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Caribbean and Bermuda</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Caribbean and Bermuda/The Bahamas</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Beaches</classifier>
+        <classifier class="online_producer" type="general_descriptor">Ferries</classifier>
+        <classifier class="online_producer" type="general_descriptor">Travel and Vacations</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07E3D81738F931A35752C0A9669C8B63" item-length="173" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Palm Beach to Bahamas By 99-Minute Hydrofoil</hl1>
+      </hedline>
+      <abstract>
+        <p>Sea Jets company begins hydrofoil service between Palm Beach and Grand Bahama Island; 65-mile trip takes 99 minutes (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Sea Jets, a new company based in Riviera Beach, Fla., has started hydrofoil service between Palm Beach, Fla., and Grand Bahama Island. Sea Jets' hydrofoils, called jetfoils and made by Boeing, can skim the surface of the water at more than 50 miles an hour and hold 250 passengers.</p>
+        <p>The boats are entirely enclosed, with seating areas much like an aircraft's. Like air travelers, passengers are served soft drinks and snacks by cabin attendants. Beer, wine and liquor are available at extra cost.</p>
+      </block>
+      <block class="full_text">
+        <p>Sea Jets, a new company based in Riviera Beach, Fla., has started hydrofoil service between Palm Beach, Fla., and Grand Bahama Island. Sea Jets' hydrofoils, called jetfoils and made by Boeing, can skim the surface of the water at more than 50 miles an hour and hold 250 passengers.</p>
+        <p>The boats are entirely enclosed, with seating areas much like an aircraft's. Like air travelers, passengers are served soft drinks and snacks by cabin attendants. Beer, wine and liquor are available at extra cost.</p>
+        <p>The hydrofoils make two round trips between the Port of Palm Beach and Freeport every day except Tuesday and Wednesday, when there are no trips. Departures from Palm Beach for the 65-mile, 99-minute journey are at 9 a.m. and 4:30 p.m.; return trips are at noon and 7 p.m. Round-trip tickets cost $99 to $115, plus $25 tax; $49 to $55, plus tax, for ages 3 to 16. Information and reservations: (877) 273-2538.</p>
+        <p>TRAVEL ADVISORY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

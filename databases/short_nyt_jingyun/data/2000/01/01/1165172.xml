@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Journal; 'Round Midnight</title>
+    <meta content="01RICH" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="31" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165172"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <person class="indexing_service">Rich, Frank</person>
+        <classifier class="online_producer" type="types_of_material">Op-Ed</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed/Columnists</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Op-Ed/Columnists/Frank Rich</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0DE0DA1038F932A35752C0A9669C8B63" item-length="891" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Journal; 'Round Midnight</hl1>
+      </hedline>
+      <byline class="print_byline">By FRANK RICH</byline>
+      <byline class="normalized_byline">Rich, Frank</byline>
+      <abstract>
+        <p>Frank Rich column says the more he heard the word 'millennium' the more his mind turned to things small and personal (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>''It's only a number,'' my mother used to say. It's only a date on a calendar. You're only as old as you feel.</p>
+        <p>But I wonder what she would have made of a date in which all four digits of the calendar year flip over at once, and time is measured only in hundreds and thousands. Certainly I find it daunting.</p>
+      </block>
+      <block class="full_text">
+        <p>''It's only a number,'' my mother used to say. It's only a date on a calendar. You're only as old as you feel.</p>
+        <p>But I wonder what she would have made of a date in which all four digits of the calendar year flip over at once, and time is measured only in hundreds and thousands. Certainly I find it daunting.</p>
+        <p>Born in the middle of this century -- oops, make that last century -- I grew up in an era when the year 1984 loomed as a terrifying marker of future shock that could never actually arrive. When the year 2001 seemed as remote and incomprehensible as the ending of the Stanley Kubrick movie that alighted upon that date for the end of Western civilization as we now know it. When the 19th century -- during which my ancestors still lived in Europe and spoke languages we have now forgotten -- seemed as far off as the Stone Age.</p>
+        <p>Who could have imagined the current exponential leap? If time stretches into infinity both behind and ahead of us, then everything is small. Thinking in thousands reminds us not only of the ephemeral nature of our own existence but that the American experiment is a mere pup.</p>
+        <p>Yet we keep hoping to make sense of the big picture. Someday, perhaps, another civilization will look back at this one and wonder: What were they thinking of? How many millennium books, lists, TV specials and tour packages did these nutty people create to decode the significance in the passing of a year? There isn't a single high school student, college professor, journalist, clergyman or politician who hasn't been drafted into the frenetic effort to add up all the digits, all the names, all the wars into a sum total that somehow might answer the question ''What in God's name does it mean?''</p>
+        <p>Whether this frenzy has added to our understanding isn't at all clear. Perhaps the only correct answer to that question is the one Samuel Beckett came up with in the 20th century: Nothing to be done. But as our fin-de-siecle year of philosophizing, pontification, punditry, fear-mongering and self-congratulation dragged on and on, I found that my own perspective on the world around me had changed. Not because I'd reached some cosmic conclusion about the last or next 1,000 years of history but because the sheer overload forced me to take stock of what matters to me and what does not.</p>
+        <p>The more I heard the word ''millennium'' and the more I tried to wrap my mind around it, the more I found my own thoughts hewing toward the small in scale. Rather than ponder whether the printing press or the microchip was the invention of the millennium, or whether Adolf Hitler or F.D.R. should be marketed as the man of the century, I found myself measuring what was near to me, right now, right at this very minute, right at home.</p>
+        <p>I found myself treasuring my wife and my children and the country in which we have all flourished in ways unimaginable to our impoverished ancestors in the Old World. Instead of contemplating a millennium's worth of music or literature, I listened over and over to the splintery piano of Thelonious Monk, and savored Proust's delicate description of childhood in Combray -- turning, without really realizing it, to artists who slow time down instead of speeding it up, who hold each shard of the passing moment up to the light, out of the conviction that each is precious and beautiful. Like many other Americans, I stopped thinking about spending New Year's Eve at an epic blowout in the company of strangers, but looked forward to keeping it simple, with those I love close at hand.</p>
+        <p>A couple of weeks ago a song popped into my head that I hadn't thought about in years. ''Someone in a Tree'' was written a quarter-century ago by Stephen Sondheim for his show ''Pacific Overtures'' to dramatize a fateful historical event: Commodore Perry and his American warships forcing Japan to end its isolation from the West in 1853. In Sondheim's song, the official meeting of the Japanese and the American landing party, of which there's no surviving indigenous record, is described speculatively by a peasant and a warrior who, Rashomon-style, purport to have eavesdropped on it from hiding places in a tree and beneath the floorboards of the house where the treaty was signed. These ordinary people knew that something big was happening, but they didn't and couldn't know what it meant. They could only describe what it was like to witness an epic event at close range from their own humble, oblique perspective on its periphery.</p>
+        <p>''It's the fragment, not the day,'' they sang. ''It's the pebble, not the stream. It's the ripple, not the sea, that is happening.''</p>
+        <p>Standing here at the dawn of Jan. 1, 2000, I think I know how they felt.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

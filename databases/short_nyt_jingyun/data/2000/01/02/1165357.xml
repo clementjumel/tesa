@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>On the Books, It's Still the 19th Century</title>
+    <meta content="02LAWS$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Long Island Weekly Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="14LI" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165357"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Law and Legislation</classifier>
+        <location class="indexing_service">Long Island (NY)</location>
+        <person class="indexing_service">Richter, Allan</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Long Island</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Legal</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/Long Island</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Law and Legislation</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C04EEDA1638F931A35752C0A9669C8B63" item-length="1220" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>On the Books, It's Still the 19th Century</hl1>
+      </hedline>
+      <byline class="print_byline">By ALLAN RICHTER</byline>
+      <byline class="normalized_byline">Richter, Allan</byline>
+      <abstract>
+        <p>Some laws still on books in many of Long Island's 95 incorporated villages hark back not to 20th century, but 19th; even some ordinances dating only to mid-century evoke pastoral era that had already vanished by time laws were enacted; many of these vestigial laws provide window on early local efforts to preserve Island's bucolic character; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>DON'T think about trotting a horse on a Garden City sidewalk. And if you happen to ride south to Rockville Centre, it would be foolhardy not to slow the steed to a walk. Either transgression could bring a stiff fine and some jail time.</p>
+        <p>Operating a roadhouse is illegal in Flower Hill. Fat-rendering factories are outlawed in New Hyde Park. And you can't keep geese and ducks in Asharoken.</p>
+      </block>
+      <block class="full_text">
+        <p>DON'T think about trotting a horse on a Garden City sidewalk. And if you happen to ride south to Rockville Centre, it would be foolhardy not to slow the steed to a walk. Either transgression could bring a stiff fine and some jail time.</p>
+        <p>Operating a roadhouse is illegal in Flower Hill. Fat-rendering factories are outlawed in New Hyde Park. And you can't keep geese and ducks in Asharoken.</p>
+        <p>It will, of course, take more than the mere dropping of a ball or the turning of a calendar page to banish the 1900's from Long Island. But some of the laws still on the books in many of the Island's 95 incorporated villages hark back not to the 20th century, but the 19th. Even some ordinances dating only to mid-century evoke a pastoral era that had already vanished by the time the laws were enacted.</p>
+        <p>Many of the vestigial laws provide a window on early local efforts to preserve the Island's bucolic character. The codes tried to fend off industries that might have tarnished beachfront communities or marred agrarian and rural landscapes. And the laws had teeth: penalties included jail terms up to 50 days and fines to $250, a tidy sum when inflation is taken into account.</p>
+        <p>Take the anti-rendering ordinance in New Hyde Park, backed by a maximum $100 fine and 50-day prison term. The 70-year-old code prohibits ''obnoxious bone-boiling, fat-rendering'' refineries, where animal fat, waste and scraps were converted into tallow for candles, soap and glue, and carbon for refining sugar.</p>
+        <p>''Bone boiling and rendering of fat was a terrible thing in the neighborhood,'' said Vincent Seyfried, a Long Island and Queens historian. ''It smelled God-awful, and people on a hot day couldn't open their windows because the stench was so bad.''</p>
+        <p>Mr. Seyfried said western Long Island communities such as New Hyde Park probably were protecting themselves from the threat of encroachment by commercial rendering plants in Long Island City. But Long Island's vast farmlands likely sprouted a crop of independent renderers, said Tom Cook, executive director of the National Renderers Association in Alexandria, Va. ''Wherever you saw farmers there was someone out there doing rendering,'' Mr. Cook said.</p>
+        <p>Apparently it's not so easy just to strike obsolescent laws from the books. A thorough recodification can cost villages up to $30,000 and a year's work, said Colleen Wight, managing editor of General Code Publishers Corporation, a Rochester, N.Y., company that publishes many Long Island codes.</p>
+        <p>To keep pace with changes in state and federal laws, General Code and some village attorneys recommends that municipalities overhaul their codes every 10 to 15 years. But villages often simply update their codes piecemeal as needs arise.</p>
+        <p>Martha Krisel, Rockville Centre's village attorney, said her municipality was overhauling its zoning code for the first time in nearly 40 years. But she said Rockville Centre is likely to retain an old ordinance forbidding ''fortune-telling, clairvoyance and phrenology'' as well as a prohibition against ''breeding poultry, pigeons, horses and livestock.''</p>
+        <p>Why? The village's zoning makeover is cumbersome enough, Ms. Krisel said. The village started the process during the summer of 1998 and expects it to continue for another six months, she said.</p>
+        <p>''It's a nightmare,'' she said. ''It's a tremendous amount of work.''</p>
+        <p>In November, the Village of Flower Hill tentatively adopted a revised code for the first time in 30 years, deleting obsolete restrictions on hunting and operating steam whistles. But after three public hearings, Flower Hill officials said they expect to wrestle with the recodification again this month because of some public opposition to new revisions in the village zoning laws.</p>
+        <p>Villages may have other reasons for retaining old laws. ''Courts have ruled that certain code provisions are unconstitutional, but villages may keep them anyway because they serve as a deterrent,'' said A. Thomas Levin, a municipal attorney for seven Nassau County villages. ''People who read them don't understand that they are unenforceable. The ones that come to mind are noise ordinances or loitering. Most of the old coded provisions have been invalidated by the courts.''</p>
+        <p>Some village officials believe old codes supplement their zoning laws and underscore that certain uses are prohibited. The old codes are added protection in an increasingly litigious society where municipalities cannot afford legal ambiguities, they say.</p>
+        <p>In Bayville, bans on slaughterhouses and glue factories have remained intact despite three overhauls of the community's codes since the municipality incorporated as a village in 1919. The most recent recodification was in 1993.</p>
+        <p>''The code says we do not allow glue factories,'' said Victoria Siegel, Bayville's four-term mayor. ''You can laugh at that, but it makes a statement about our village not wanting industry.''</p>
+        <p>But Ms. Wight, of General Code Publishers, cautioned that municipalities could confuse the public as well as their own code enforcers by keeping antiquated codes. And because old laws are generally not enforced, Ms. Wight added, a municipality could find itself accused of selective enforcement.</p>
+        <p>Sometimes, however, a village code's drafters sometimes prove prescient. Eleven years ago, Garden City officials notified 75 homeowners that the basketball backboards mounted on free-standing poles in front of their homes violated a 1924 village code restricting ''accessory structures.'' Although basketball was invented in 1891, the code was more likely aimed at sheds and fences.</p>
+        <p>Garden City officials still cringe at the memory of the international media attention attracted by the basketball enforcement. But the effort, as well as the village's ban on horses on sidewalks, was concordant with the careful planning and passion for esthetics that Alexander T. Stewart, Garden City's founder, brought to the area in 1869, said John Ellis Kordes, the village historian.</p>
+        <p>''He instilled in the village what he might have instilled in a child if he had one,'' Mr. Kordes said of Stewart. ''From the beginning here, zoning and a certain standard of beauty and order set the tone for the village.''</p>
+        <p>A similar application of an old code to a modern offense took place in Asharoken, a Suffolk beach community with a population of about 800. William Kelly, Asharoken's eight-term mayor, said that the village prevented a resident from using an extension cord across a road while building a deck by enforcing a 1926 code that prohibits stringing telegraph wires over streets.</p>
+        <p>Mayor Kelly said he considered citing the village's 1934 ban on keeping fowl to stop another resident from feeding the pigeons. The mayor and neighbors said the feeding has created a nuisance. But any effort to apply the code could be complicated. As written, the code prohibits only ''chickens, geese, ducks and other fowl and domestic birds used for food purposes.''</p>
+        <p>The mayor conceded that he had little recourse. ''They're out on her property, on the roof and she feeds them and they fly all over the place leaving their stuff and then hover back on her property,'' the mayor said. ''It's a 'fowl or domestic bird,' that's for sure, but she doesn't cook them.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

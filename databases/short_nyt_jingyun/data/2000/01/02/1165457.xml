@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Matthew Hennessy, Barbara Weady</title>
+    <meta content="02WEAD$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Society Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165457"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="WEDDINGS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">WEDDINGS AND ENGAGEMENTS</classifier>
+        <person class="indexing_service">WEADY, BARBARA NOEL</person>
+        <person class="indexing_service">HENNESSY, MATTHEW JOHN</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style/Weddings and Celebrations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Weddings and Engagements</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E02E4DA1538F931A35752C0A9669C8B63" item-length="272" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Matthew Hennessy, Barbara Weady</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Barbara Noel Weady, the daughter of Sherry Brown of Hartford and Louis Weady of Guilford, Conn., was married on Friday to Matthew John Hennessy, a son of Mary Frances Hennessy and Judge Francis X. Hennessy of West Hartford, Conn. The Rev. Andrew Giardino performed the ceremony at the Roman Catholic Church of St. Patrick and St. Anthony in Hartford.</p>
+        <p>The bride, 30, will continue to use her name professionally. She is an associate at Shipman &amp; Goodwin, a law firm in Hartford. She graduated magna cum laude from Tufts University and received her law degree with honors from the University of Connecticut. She is a director of the Colonial Theater Renaissance Corporation, which promotes neighborhood revitalization on the west side of Hartford. Her mother works in Hartford as the state director and campaign manager for United States Senator Joseph I. Lieberman. Her father owns the Royal Printing Service in Guilford.</p>
+      </block>
+      <block class="full_text">
+        <p>Barbara Noel Weady, the daughter of Sherry Brown of Hartford and Louis Weady of Guilford, Conn., was married on Friday to Matthew John Hennessy, a son of Mary Frances Hennessy and Judge Francis X. Hennessy of West Hartford, Conn. The Rev. Andrew Giardino performed the ceremony at the Roman Catholic Church of St. Patrick and St. Anthony in Hartford.</p>
+        <p>The bride, 30, will continue to use her name professionally. She is an associate at Shipman &amp; Goodwin, a law firm in Hartford. She graduated magna cum laude from Tufts University and received her law degree with honors from the University of Connecticut. She is a director of the Colonial Theater Renaissance Corporation, which promotes neighborhood revitalization on the west side of Hartford. Her mother works in Hartford as the state director and campaign manager for United States Senator Joseph I. Lieberman. Her father owns the Royal Printing Service in Guilford.</p>
+        <p>The bridegroom, 29, is the special assistant to the president of the Southside Institutions Neighborhood Alliance, a coalition of Hartford organizations working to revitalize neighborhoods on the city's south side. He graduated from the Catholic University of America and is studying for a master's degree in public policy from Trinity College in Hartford. His father is a judge on the Connecticut Appellate Court in Hartford. The bridegroom's mother teaches English at Northwest Catholic High School in West Hartford.</p>
+        <p>WEDDINGS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

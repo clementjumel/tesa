@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>He's Sitting on Top of the, Well, Junk Heap of History</title>
+    <meta content="02DRUK$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Theater" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165335"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THEATER"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Theater</classifier>
+        <person class="indexing_service">Zaloom, Paul</person>
+        <person class="indexing_service">Drukman, Steven</person>
+        <object.title class="indexing_service">Velvetville (Play)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater/News and Features</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater/Plays</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Theater</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901EFDC1638F931A35752C0A9669C8B63" item-length="721" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>He's Sitting on Top of the, Well, Junk Heap of History</hl1>
+      </hedline>
+      <byline class="print_byline">By STEVEN DRUKMAN</byline>
+      <byline class="normalized_byline">Drukman, Steven</byline>
+      <abstract>
+        <p>Steven Drukman comment on Paul Zaloom's tenth solo show, Velvetville, opening at Performance Space 122; Zaloom, often armed with tableful of junk, manipulates castoffs of industrialized world to satirize consumption; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WHILE many people can recall the childhood pleasure of playing in the local junkyard, most of them washed their hands of that sort of thing long ago.</p>
+        <p>But not Paul Zaloom, whose 10th solo show, entitled ''Velvetville,'' opens on Wednesday at Performance Space 122 in the East Village. Since 1978, Mr. Zaloom has not only refused to outgrow rooting among the rubbish; he has recycled a life's career from it. Deemed ''a Paganini of found objects'' by The Los Angeles Times, Mr. Zaloom has forged his own brand of performance art that in his words ''uses the detritus of our civilization against what it was created for -- that is, makes junk into art.''</p>
+      </block>
+      <block class="full_text">
+        <p>WHILE many people can recall the childhood pleasure of playing in the local junkyard, most of them washed their hands of that sort of thing long ago.</p>
+        <p>But not Paul Zaloom, whose 10th solo show, entitled ''Velvetville,'' opens on Wednesday at Performance Space 122 in the East Village. Since 1978, Mr. Zaloom has not only refused to outgrow rooting among the rubbish; he has recycled a life's career from it. Deemed ''a Paganini of found objects'' by The Los Angeles Times, Mr. Zaloom has forged his own brand of performance art that in his words ''uses the detritus of our civilization against what it was created for -- that is, makes junk into art.''</p>
+        <p>Mr. Zaloom, 48, sees himself as part of an avant-garde tradition that includes Marcel Duchamp, Claes Oldenburg and Pop art. His original inspiration was to recreate the Parisian junk circuses of Alexander Calder in the 1920's. ''Calder would play a show in his living room with these cool puppets made out of junk,'' Mr. Zaloom said by telephone from his home in Los Angeles. ''I wanted to create a world that would fit into a suitcase that I could schlep around.''</p>
+        <p>He began his career in 1971 with the Bread and Puppet Theater in Glover, Vt., blending their blunt style of political activism with his zany Zaloomian brand of comedy. ''In the late 70's, I became interested in trying to make people laugh at things that would inevitably kill us all,'' he said. This led to a series of solo shows that resembled the creations of an overgrown boy, home from a day at the dump, making Punch and Judy shows out of toilet brushes and plastic cups.</p>
+        <p>Often armed with just an overhead projector and a tabletop of junk, Mr. Zaloom manipulates the castoffs of the industrialized world to ''satirize,'' as he puts it, ''the hazards of out-of-control consumption.''</p>
+        <p>His Obie Award-winning work ''House of Horror,'' in 1989, told the story of the Smiths, a family of puppets allergic to their toxic house. His ''My Civilization'' (1991) parodied the potentially toxic ''food products'' that pass for nourishment these days. The next year, his ''Sick but True'' called attention to Chernobyl, ocean dumping and other ecological disasters. He and his clutter have filled a number of mainstream stages, including the Kennedy Center, Lincoln Center and the American Repertory Theater.</p>
+        <p>The common denominator of every performance is Mr. Zaloom's madcap persona. Sped up and wide-eyed, he manipulates his primitive puppets like a Mister Rogers on diet pills. In fact, Mr. Zaloom may be best known for playing the crazy scientist Beakman in the children's television show ''Beakman's World,'' now broadcast on the Sci-Fi channel and local stations around the country. Beakman sports a chartreuse lab coat and a dark fright wig and his theatrics are all about making science anything but nerdy.</p>
+        <p>Mr. Zaloom is fond of what he calls ''visual punning'' as a mode of political commentary. In ''My Civilization,'' starving artists were represented by narrow paint brushes; in his new ''Velvetville,'' Mayor Giuliani is ''played'' by a squeegee.</p>
+        <p>''Velvetville,'' Mr. Zaloom said, is a ''three-ring, low-tech multimedia circus'' that uses black velvet paintings to depict ''a cast of characters from the jolly land of American kitsch, including the Smurfs, lawn jockeys, etc.''</p>
+        <p>This intermission-less narrative travels from Los Angeles to the Fresh Kills landfill on Staten Island, ending as a nightmare about the forthcoming Republican National Convention in Philadelphia this summer.</p>
+        <p>As a performance artist -- a job definition, he says, that suits him as much as ''social satirist, puppeteer or schmendrick'' (a Yiddish term for nobody) -- Mr. Zaloom takes trash (if not himself) seriously. ''Velvetville'' represents his latest comedic attempt to put kitsch in sync.</p>
+        <p>THEATER Steven Drukman's most recent article for Arts &amp; Leisure was about David Mamet and the Atlantic Theater Company.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Steven Drukman's most recent article for Arts &amp; Leisure was about David Mamet and the Atlantic Theater Company.</tagline>
+    </body.end>
+  </body>
+</nitf>

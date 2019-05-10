@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Where the Historical Is Political</title>
+    <meta content="02WHEATCT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165261"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Wheatcroft, Geoffrey</person>
+        <person class="indexing_service">Lewis, Bernard</person>
+        <object.title class="indexing_service">Multiple Identities of the Middle East, The (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9807EEDB1539F931A35752C0A9669C8B63" item-length="1439" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Where the Historical Is Political</hl1>
+      </hedline>
+      <byline class="print_byline">By Geoffrey Wheatcroft</byline>
+      <byline class="normalized_byline">Wheatcroft, Geoffrey</byline>
+      <abstract>
+        <p>Geoffrey Wheatcroft reviews book The Multiple Identities of the Middle East by Bernard Lewis; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE MULTIPLE IDENTITIES OF</p>
+        <p>THE MIDDLE EAST</p>
+        <p>By Bernard Lewis.</p>
+        <p>163 pp. New York:</p>
+        <p>Schocken Books. $21.</p>
+      </block>
+      <block class="full_text">
+        <p>THE MULTIPLE IDENTITIES OF</p>
+        <p>THE MIDDLE EAST</p>
+        <p>By Bernard Lewis.</p>
+        <p>163 pp. New York:</p>
+        <p>Schocken Books. $21.</p>
+        <p>Few subjects are so absorbing as names and identity, or so fraught. These are basic tools for the historian, but are agonizingly complex and excruciatingly controversial. Now in his 84th year, the eminent scholar Bernard Lewis has spent his life dealing with history, religion, culture, language and, not least, terminology, in a region where all these are as fraught as anywhere. He has published more than 30 books, has received many academic honors and has held posts at numerous universities, though his two long professorial stints were 25 years at the University of London and another 12 at Princeton University.</p>
+        <p>His chosen field is one where the seemingly simplest analysis and definition can be dangerous. Even the titles of those two professorships -- Near and Middle East'' and ''Near East'' studies -- beg questions, as does the title of his new book. Lewis himself recognizes that the term ''Middle East'' is ''meaningless, colorless, shapeless and for most of the world inaccurate,'' and over the past century has been flexible to the point of emptiness.</p>
+        <p>In 1958 Lord Vansittart wrote that when he was a young diplomat 50 years earlier ''we had none of the sloppy modernism which lumps everything from the Mediterranean to Bengal as Middle East.'' Actually, this was accident as much as sloppiness. In political and journalistic parlance it had made sense of sorts to speak of Near and Far East, with a Middle falling between. Then during World War II the Middle East Command of the British armed forces expanded in all directions for operational reasons, and the Near East vanished.</p>
+        <p>Having grown, the meaning of the term has since drastically shrunk. In a newspaper, ''the Mideast'' will likely as not be euphemistic shorthand for the conflict between Jew and Arab in what used to be called the Holy Land. Or more broadly it may intend the Levant (another antique term which could be usefully revived), the eastern seaboard of the Mediterranean. Even if, as Lewis says, the Middle East has no collective identity like Europe, India or China, it is nevertheless the spiritual and mystical center of the world for much of mankind, and it is no accident that it has so often been a battleground or that its identities are so complex. The nine admirably erudite and illuminating essays in ''The Multiple Identities of the Middle East'' discuss these difficulties.</p>
+        <p>Three primary human identities are acquired at birth, Lewis notes: ''blood,'' +place'' and ''faith,'' though these tend to overlap and intermingle with one another and then with further layers of identity. If anything, he exaggerates the degree to which this is a specifically Middle Eastern phenomenon. He says that only three countries in the region -- Turkey, Arabia and Iran -- conform to what he calls the European convergence of nation, country and language. But to call this European is misleading. Such a convergence may be the Platonic ideal of modern nationalism, but in reality Portugal is unique in Europe as a country whose boundaries haven't changed for several centuries, whose population is completely uniform in religion and whose political territory exactly coincides with language.</p>
+        <p>In the Middle East, language throws fascinating light on the theme of confused identity in a way that takes a man of Lewis's polyglot learning to perceive. Others will have noticed that Asia Minor is dotted with deserted Greek Orthodox churches, sad legacy of the Anatolian Greeks, who are among this century's all too many collective victims and vanished communities. Few but Bernard Lewis would have spotted that the ''Greek'' inscriptions there are actually in Turkish, written in Greek characters. He goes on to discuss a whole range of such transliterated tongues, comparable with the Jewish vernaculars Yiddish and Ladino (in origin German and Spanish dialects respectively, both written in Hebrew script). Other Jews wrote Arabic in Hebrew letters, and Christians wrote Arabic in the Syriac script, while Muslims in reconquered Spain wrote Spanish in Arabic script.</p>
+        <p>As to place names and their implications, Lewis notes correctly that the name Palestine was barely used in the place itself between antiquity and the 20th century. Then 80 years ago, during one of those fits of absence of mind in which the British Empire was said to have been created, a ''government of Palestine'' was established. As Lewis says, events have removed this government, while creating for the first time a Palestinian nation. He muses dryly that ''had the Jews disappeared like most of the peoples of antiquity, the Palestinians might have claimed to be the heirs of ancient Israel, as the Egyptians were of the Pharaohs and the Iraqis of the kings of Babylon.'' But the Jews did not vanish, they even returned; and suddenly we're no longer talking etymology, topography or history, we are talking politics of a most fractious kind.</p>
+        <p>Not that there is ever any clear distinction between past and present. In the Middle East more than most places, ''the historical is political.'' During the appalling Iran-Iraq war of 1980-88, both sides regularly invoked the battle of Qadisiyya, fought ''in 636 or 637'' (as Lewis puts it with a scholar's skeptical touch). And the Egyptian soldier who assassinated President Anwar el-Sadat shouted, ''I have killed Pharaoh.''</p>
+        <p>This interaction between history and politics affects the austere writer. When Lewis began his career nearly 60 years ago, with books like ''The Origins of Ismailism'' and ''Turkey Today,'' he could not have guessed that a lifetime later he would be in the wars himself, much attacked by Edward W. Said. But then Lewis began teaching and writing before the Jewish catastrophe in Europe, and the creation of Israel, which between them changed everything. Not least they have made writing sine ira et studio about Lewis's chosen field very difficult. In a new afterword to his 1986 ''Semites and Anti-Semites'' (Norton, paper, $14), Lewis laments the continuing Arab violence -- verbal if not physical -- toward Israel and toward Jews (''Independence Day'' was released in Lebanon only when all signs of a hero's being Jewish were cut), while offering a partial defense of Israel's rule -- benevolent by the standards of the region'' -- over the Palestinians.</p>
+        <p>And yet, whatever partisanship he may be accused of, or whatever his sympathies may actually be, Lewis is right in his broader analysis. It's very well for Said to complain about ''Orientalism,'' or for others to bemoan ''Eurocentricity.'' The fact is that the world today has been shaped by Europe, or the West, whether the world likes it or not. As Lewis says, the scientific study of the history, religions and languages of his chosen region was in the first place entirely the work of European and then American scholars. The very fact that ''this parochial term,'' the Middle East, has come to be used around the world is, as he points out, striking testimony to the way that European influence persists after the age of imperial rule.</p>
+        <p>He is also correct in saying that two ideas, both of European origin, dominated political thought and action in the Middle East for most of the 20th century, socialism and nationalism -- and that ''by now both have been outdated, the one by its failure, the other by its success.'' Saying that nationalism has succeeded needs to be qualified. The colonial yoke was thrown off more because the colonial powers got bored and went home than because of indigenous efforts at insurrection, and Arab nationalism is factitious almost by definition.</p>
+        <p>Nowhere is the contradiction between two identities, national and religious, more acute than between Arabism and Islam, however much effort has been made to reconcile them. And nowhere does the question of national consciousness become trickier. A hundred years ago, a Palestinian didn't know that he was a Palestinian: a man in Jaffa or Jerusalem, asked what he was, would have give the hallowed answer, ''I am a Muslim from here.'' Lewis quotes Said Halim Pasha, grand vizier of the Ottoman Empire (on its deathbed) saying in 1917 that ''the fatherland of a Muslim is wherever the Shariah prevails.''</p>
+        <p>Then again, the most remarkable and extreme case of nationalism in the region has been Jewish nationalism, or Zionism. This is a movement purely European in origin, and a fascinating example of ''invented tradition,'' not to say of willfully misunderstood identity. Maybe Bernard Lewis, so learned and perspicacious in examining the confused and misleading identities of Islam and Araby, could turn more of his attention to that extraordinary phenomenon.</p>
+        <p>Geoffrey Wheatcroft's books include ''The Randlords'' and ''The Controversy of Zion.''</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Geoffrey Wheatcroft's books include ''The Randlords'' and ''The Controversy of Zion.''</tagline>
+    </body.end>
+  </body>
+</nitf>

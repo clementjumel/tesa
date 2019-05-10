@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>As if It Were 1999</title>
+    <meta content="02PART$14" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Style Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165492"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="EVENING HOURS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Parties (Social)</classifier>
+        <classifier class="indexing_service" type="descriptor">Nineteen Hundred Ninety-Nine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="general_descriptor">Parties (Social)</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B03E0DF1238F931A35752C0A9669C8B63" item-length="796" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>As if It Were 1999</hl1>
+      </hedline>
+      <byline class="print_byline">By Bill Cunningham</byline>
+      <abstract>
+        <p>Photos of some notable parties of 1999</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A year of parties, celebrating dance, art, philanthropy, Central Park, the library and rock 'n' roll fashion.</p>
+      </block>
+      <block class="full_text">
+        <p>A year of parties, celebrating dance, art, philanthropy, Central Park, the library and rock 'n' roll fashion.</p>
+        <p>EVENING HOURS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

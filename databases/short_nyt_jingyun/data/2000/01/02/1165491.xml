@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Not Your Grandmother's Kosher Wine</title>
+    <meta content="02HOWA" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165491"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: WILLIAMSBURG"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Alcoholic Beverages</classifier>
+        <classifier class="indexing_service" type="descriptor">Wines</classifier>
+        <classifier class="indexing_service" type="descriptor">Kosher Foods</classifier>
+        <org class="indexing_service">Royal Wine Corp</org>
+        <person class="indexing_service">Goldberg, Howard G</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Food and Wine</classifier>
+        <classifier class="online_producer" type="general_descriptor">Wines</classifier>
+        <classifier class="online_producer" type="general_descriptor">Kosher Foods</classifier>
+        <classifier class="online_producer" type="general_descriptor">Beverages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Alcoholic Beverages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Food</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9402E1DF1238F931A35752C0A9669C8B63" item-length="307" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Not Your Grandmother's Kosher Wine</hl1>
+      </hedline>
+      <byline class="print_byline">By HOWARD G. GOLDBERG</byline>
+      <byline class="normalized_byline">Goldberg, Howard G</byline>
+      <abstract>
+        <p>Royal Wine Corp produces, imports and distributes kosher wines that are suited to all wallets and to modern and traditional palates; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Sweet Manischewitz, American Jews' seemingly eternal definition of kosher wine, started becoming declasse in 1984, when the Golan Heights Winery's brilliant 1983 Yarden sauvignon blanc arrived in the United States and taught Americans that kosher wines could be bone-dry, subtle and sealed with corks rather than screw tops.</p>
+        <p>Steeped in Western Europe's tradition of kosher wine -- dry, not cloying; for daily use, not just at seders; made from complex cabernet sauvignon and chardonnay, not one-dimensional Concord and Niagara grapes -- Royal's owners were primed to become the dominant force in the American kosher wine business.</p>
+      </block>
+      <block class="full_text">
+        <p>Sweet Manischewitz, American Jews' seemingly eternal definition of kosher wine, started becoming declasse in 1984, when the Golan Heights Winery's brilliant 1983 Yarden sauvignon blanc arrived in the United States and taught Americans that kosher wines could be bone-dry, subtle and sealed with corks rather than screw tops.</p>
+        <p>Steeped in Western Europe's tradition of kosher wine -- dry, not cloying; for daily use, not just at seders; made from complex cabernet sauvignon and chardonnay, not one-dimensional Concord and Niagara grapes -- Royal's owners were primed to become the dominant force in the American kosher wine business.</p>
+        <p>Today, Royal is a producer, importer and distributor, with a portfolio of wines geared to all wallets and to modern and traditional palates. Its marketing clout outstrips that of its biggest competitors, the Golan Heights Winery and the Israeli giant Carmel. The three compete in Europe, but Royal represents the Golan Heights Winery in the Americas.</p>
+        <p>Royal's Baron Herzog label, based in California, has built a sizable following: tasty, far-under-$20 chardonnays, cabernets, chenin blancs, rieslings, merlots and zinfandels that, while kosher, compete in the secular market. Royal owns the admired Weinstock Cellars label, and in New York distributes Gan Eden wines, both from California. In addition, Royal imports kosher wines from Champagne, Bordeaux, Pomerol, St.-Emilion, Burgundy, the Loire, Sauternes and Alsace, as well as Chile, Italy and Hungary.</p>
+        <p>Still, Royal remembers its base: Wines for grandma bearing its Kedem label, made in Marlboro, N.Y., in the Hudson Valley, remain sweet, heavy, creamy -- technically, beautifully made -- and priced from yesteryear. A bottle of Kedem Traditional Malaga costs $3.</p>
+        <p>HOWARD G. GOLDBERG</p>
+        <p>NEIGHBORHOOD REPORT: WILLIAMSBURG</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

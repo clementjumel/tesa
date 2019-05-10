@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>PERSPECTIVES: Global World Series, and a Few Other Guesses; Baseball</title>
+    <meta content="MB025537" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165662"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Baseball</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <person class="indexing_service">Chass, Murray</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Baseball</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Baseball</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D07E1D91138F931A35752C0A9669C8B63" item-length="368" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>PERSPECTIVES: Global World Series, and a Few Other Guesses; Baseball</hl1>
+      </hedline>
+      <byline class="print_byline">By MURRAY CHASS</byline>
+      <byline class="normalized_byline">Chass, Murray</byline>
+      <abstract>
+        <p>Murray Chass article offers global predictions for future of baseball in 21st century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>In its second century, Major League Baseball could experience new developments, and it could be business as usual. After the first or second season of the new century, for example, depending on when the current labor agreement expires, baseball could face its ninth work stoppage in 30 years.</p>
+      </block>
+      <block class="full_text">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>In its second century, Major League Baseball could experience new developments, and it could be business as usual. After the first or second season of the new century, for example, depending on when the current labor agreement expires, baseball could face its ninth work stoppage in 30 years.</p>
+        <p>Salaries and offense will continue to escalate. The owners will try again but fail again to curtail player salaries; the disparity between star salaries and wages for everyone else will continue to grow. Some inroads will be made in dealing with the disparity between high-revenue and low-revenue clubs.</p>
+        <p>When games routinely end with scores like 15-12, officials will grudgingly take steps to help the downtrodden pitchers, raising the mound a few inches from the 10-inch height that was legislated in 1968 and expanding the strike zone by enforcing the borders provided in the rule book. Pitchers will throw fewer called balls, resulting in shorter games.</p>
+        <p>The World Series will become a true World Series when the major leagues add teams in such countries as Mexico, Japan and Australia. But an even more compelling event will be the World Cup of Baseball, involving countries from all over the world, with major league players competing for the countries of their birth.</p>
+        <p>On an individual basis, Ken Griffey Jr. will challenge Hank Aaron's career record of 755 home runs, and later in the century Trey Griffey will pursue his father's total. But no one will approach Cal Ripken's streak of 2,632 consecutive games played. Joe DiMaggio's 56-game hitting streak will also stand.</p>
+        <p>MURRAY CHASS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

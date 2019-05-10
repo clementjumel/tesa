@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Copeland Marks, 78, Author Of Books on Exotic Cuisine</title>
+    <meta content="Y02MARK" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Obituaries; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165545"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="biographical_categories">Books and Magazines</classifier>
+        <classifier class="indexing_service" type="descriptor">Deaths (Obituaries)</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <classifier class="indexing_service" type="descriptor">Cooking and Cookbooks</classifier>
+        <classifier class="indexing_service" type="names">Copeland H. Marks</classifier>
+        <person class="indexing_service">Marks, Copeland H</person>
+        <person class="indexing_service">Asimov, Eric</person>
+        <classifier class="online_producer" type="types_of_material">Obituary (Obit)</classifier>
+        <classifier class="online_producer" type="types_of_material">Biography</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Obituaries</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Food and Wine</classifier>
+        <classifier class="online_producer" type="general_descriptor">Deaths (Obituaries)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Cooking and Cookbooks</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9906E1DC1038F931A35752C0A9669C8B63" item-length="594" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Copeland Marks, 78, Author Of Books on Exotic Cuisine</hl1>
+      </hedline>
+      <byline class="print_byline">By ERIC ASIMOV</byline>
+      <byline class="normalized_byline">Asimov, Eric</byline>
+      <abstract>
+        <p>Copeland H Marks, author of 16 cookbooks, dies at age 78; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Copeland H. Marks, the author of 16 cookbooks who traveled the world in search of remote and exotic cuisines, died last week in his apartment in Brooklyn Heights. He was 78.</p>
+        <p>Mr. Marks had been in the Foreign Service and the import-export business before getting a late start writing about food. He began in 1981 with ''The Indonesian Kitchen'' (Atheneum). His last book was ''The Exotic Kitchens of Peru'' (M. Evans &amp; Company, 1999), and he had recently been working on a book about the foods of the Senegalese coast. In between, he explored the cooking of Sephardic Jews and the Jewish community of Calcutta, offered recipes from Guatemala and the Himalayan rim and brought home the cuisines of Malaysia, Korea, Burma and North Africa.</p>
+      </block>
+      <block class="full_text">
+        <p>Copeland H. Marks, the author of 16 cookbooks who traveled the world in search of remote and exotic cuisines, died last week in his apartment in Brooklyn Heights. He was 78.</p>
+        <p>Mr. Marks had been in the Foreign Service and the import-export business before getting a late start writing about food. He began in 1981 with ''The Indonesian Kitchen'' (Atheneum). His last book was ''The Exotic Kitchens of Peru'' (M. Evans &amp; Company, 1999), and he had recently been working on a book about the foods of the Senegalese coast. In between, he explored the cooking of Sephardic Jews and the Jewish community of Calcutta, offered recipes from Guatemala and the Himalayan rim and brought home the cuisines of Malaysia, Korea, Burma and North Africa.</p>
+        <p>''When everybody else was busy writing safe books on pasta, he was pursuing the exotic and the unusual,'' said Nach Waxman, owner of Kitchen Arts and Letters, a culinary bookshop on the Upper East Side.</p>
+        <p>Copeland Harris Marks was born in Burlington, Vt., in 1921. After getting a degree in agriculture from the University of Vermont, he served in World War II, accompanying supplies over the Burmese hump to Chiang Kai-shek's forces in central China, said Lawrence Kunin, Mr. Marks's cousin. After the war he joined the Foreign Service but left after eight years to go into business, importing and exporting textiles and works of art. He lived for stretches in Mexico, Guatemala, India and South Africa, and developed his passion for remote cuisines and cultures.</p>
+        <p>Later, he settled in Brooklyn Heights and devoted himself to writing, cooking and lecturing about cuisines he regarded as unrecognized and underappreciated.</p>
+        <p>Mr. Marks was never trained as a cook, historian or anthropologist, but he was a quick study. Typically, he would select a region, then spend anywhere from several weeks to several months there, cooking with people in their houses. On returning to New York, he would seek out people from the area he was studying and cook extensively with them. It was a method that raised doubts among many food professionals about the depth of his scholarship.</p>
+        <p>''He did stuff that nobody else did, and that made it valuable,'' said Cara de Silva, a food writer. ''But when you go someplace for a brief period of time and then you're writing about it, it's necessarily going to be somewhat superficial.''</p>
+        <p>Mr. Marks himself was the first one to play down his credentials, said Angela Schuster, a fellow of the Explorers' Club, a New York organization devoted to preserving the spirit of exploration. Mr. Marks was the chef-in-residence for a series of dinners exploring ancient cultures.</p>
+        <p>Mr. Marks never married. Along with his cousin, he leaves two sisters, Doris Becker and Charlotte Raboy, and a brother, Norman Marks, all of Los Angeles.</p>
+        <p>While Mr. Marks's eternal search for the exotic led him around the world, he also hoped that one day it would lead him home, said David Karp, a food writer. ''The joke was always that the next book would be 'The Jewish Cooking of Vermont,' '' Mr. Karp said.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

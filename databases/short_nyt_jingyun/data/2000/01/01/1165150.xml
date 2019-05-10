@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Day in the Spotlight: No Naps on the Agenda</title>
+    <meta content="MB021947" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165150"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="1/1/00: A PEACEFUL PARTY"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A06E4DA1038F932A35752C0A9669C8B63" item-length="263" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Day in the Spotlight: No Naps on the Agenda</hl1>
+      </hedline>
+      <byline class="print_byline">By ELISABETH BUMILLER</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Earlier in the day, the mayor, who gave himself the job of ubiquitous master of ceremonies of the city's new year celebration, said he began his last morning of the 1900's at 5:30 a.m. having trouble getting his lights on. ''I was convinced that it was Y2K,'' the mayor said, but ''actually I was sleepy.''</p>
+        <p>Mr. Giuliani spent much of his day in front of cameras. He started at 6:40 a.m. with a news conference at the All-Star Cafe in Times Square, then had interviews from 7 to 8 a.m. with NBC, ABC, CBS and Fox News. He also had two news conferences at the Office of Emergency Management's Command Center at the World Trade Center.</p>
+      </block>
+      <block class="full_text">
+        <p>Earlier in the day, the mayor, who gave himself the job of ubiquitous master of ceremonies of the city's new year celebration, said he began his last morning of the 1900's at 5:30 a.m. having trouble getting his lights on. ''I was convinced that it was Y2K,'' the mayor said, but ''actually I was sleepy.''</p>
+        <p>Mr. Giuliani spent much of his day in front of cameras. He started at 6:40 a.m. with a news conference at the All-Star Cafe in Times Square, then had interviews from 7 to 8 a.m. with NBC, ABC, CBS and Fox News. He also had two news conferences at the Office of Emergency Management's Command Center at the World Trade Center.</p>
+        <p>But he may have been tired by the time he did his weekly radio call-in show.''Now we're going to go to Carl in Richmond Hill,'' Mr. Giuliani said shortly after 11 a.m. ''Hello?'' said Carl. ''Hillary?'' responded the mayor, causing listeners to think for a brief moment that perhaps the first lady was on the line and that there would be fireworks before the ones over the city at midnight.</p>
+        <p>Mr. Giuliani's spokeswoman, Sunny Mindel, explained later that the mayor had been looking at a computer screen displaying the next caller's name and the subject of the call, which was evidently Hillary Clinton, and had inadvertently switched the names. Ms. Mindel said the mayor had not had a nap, did not plan to have a nap and ''has all the sleep that he needs to have.''</p>
+        <p>ELISABETH BUMILLER</p>
+        <p>1/1/00: A PEACEFUL PARTY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

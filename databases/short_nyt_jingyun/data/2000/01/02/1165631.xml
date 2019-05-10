@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Dec. 26 - Jan. 1; India Hijack Crisis Ends</title>
+    <meta content="MB003430" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Week in Review Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Week in Review" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165631"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Week in Review</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E00E7D91138F931A35752C0A9669C8B63" item-length="142" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Dec. 26 - Jan. 1; India Hijack Crisis Ends</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The hijackers of an Indian Airlines jet ended an eight-day standoff with Indian officials when they released more than 150 hostages at an airport in Afghanistan in exchange for the release of three prominent Muslim militants that had been held by India. Both the hijackers and the Indian officials had been under intense pressure by the ruling Taliban militia in Afghanistan to end the crisis.</p>
+        <p>The Indian Airlines Airbus was seized by the hijackers on a flight from Nepal on Dec. 24. The hostages were flown to New Delhi after their release.</p>
+      </block>
+      <block class="full_text">
+        <p>The hijackers of an Indian Airlines jet ended an eight-day standoff with Indian officials when they released more than 150 hostages at an airport in Afghanistan in exchange for the release of three prominent Muslim militants that had been held by India. Both the hijackers and the Indian officials had been under intense pressure by the ruling Taliban militia in Afghanistan to end the crisis.</p>
+        <p>The Indian Airlines Airbus was seized by the hijackers on a flight from Nepal on Dec. 24. The hostages were flown to New Delhi after their release.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

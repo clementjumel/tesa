@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Stud in Every Tongue, and Logo Tattoos</title>
+    <meta content="01ADOR$04" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="32" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165210"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: CITIES"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Cosmetics and Toiletries</classifier>
+        <classifier class="indexing_service" type="descriptor">Tattoos</classifier>
+        <classifier class="indexing_service" type="descriptor">Body Piercing</classifier>
+        <person class="indexing_service">Steinhauer, Jennifer</person>
+        <classifier class="online_producer" type="general_descriptor">Tattoos</classifier>
+        <classifier class="online_producer" type="general_descriptor">Cosmetics and Toiletries</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C0DE1DE1030F932A35752C0A9669C8B63" item-length="443" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Stud in Every Tongue, and Logo Tattoos</hl1>
+      </hedline>
+      <byline class="print_byline">By Jennifer Steinhauer</byline>
+      <byline class="normalized_byline">Steinhauer, Jennifer</byline>
+      <abstract>
+        <p>Tattoos, body painting and body piercing make great headway among mainstream Americans at end of 20th century, and experts on body adorment agree that new century will bring only more forms of the art; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IT took America almost the entire 20th century to catch up with the rest of the world in its collective interest in body adornment, but in the end the country's beauty industry has embraced its extremes.</p>
+        <p>Only 50 years ago, dark lipstick was considered risque, to say nothing of men in nail polish and women covered in body glitter. Tattoos were for sailors, although by the 1960's, they were adopted by groups who considered themselves on the fringes of society, like motorcycle gangs. Ditto for piercing, beloved by punk rockers.</p>
+      </block>
+      <block class="full_text">
+        <p>IT took America almost the entire 20th century to catch up with the rest of the world in its collective interest in body adornment, but in the end the country's beauty industry has embraced its extremes.</p>
+        <p>Only 50 years ago, dark lipstick was considered risque, to say nothing of men in nail polish and women covered in body glitter. Tattoos were for sailors, although by the 1960's, they were adopted by groups who considered themselves on the fringes of society, like motorcycle gangs. Ditto for piercing, beloved by punk rockers.</p>
+        <p>But class distinctions have all but fallen away in the turn-of-the-century proclivity among Americans to adorn their bodies. Suburban teenagers pierce their tongues, 40-year-old mothers decorate the corners of their eyes with plastic jewels, movie stars take town cars to Queens to get their hands covered with inky henna and mainstream cosmetic giants sell body paint. Indeed it may well be that the explosive Wall Street bull market -- and the materialism that it implies -- ignited this fin-de-siecle trend, much of which finds its roots in places as diverse as India and Papua New Guinea.</p>
+        <p>''There has been interest in the tribal world that in one context has been a critique of Western society,'' said Jeffrey D. Ehrenreich, the chairman of the department of anthropology at the University of New Orleans. ''It is a response to the perception that our culture does not meet very basic and fundamental spiritual needs in spite of the material wealth accomplished through our culture. People don't feel attached. They don't feel special.''</p>
+        <p>Experts on body adornment -- there happens to be no shortage of them -- seem to concur that the new century will bring about only more forms of the art. In some cases, the manifestations will be more extreme, like the inlay of metal into arms, which is already being done. Or perhaps in many ways, more conformist, as in having one's corporate logo of choice, now perhaps just on the back of a jacket, tattooed on the leg.</p>
+        <p>''There probably will be a continuing escalation of body art options available,'' said Daniel Wojcik, an associate professor of English and folklore studies at the University of Oregon. He imagines a combination of past styles, like 60's hippie chic, with, say, a tattoo inspired by TV or film. ''The final result could be an eclectic or ironic mix-up, like Pokemon/biker style, with tribal piercings and bondage wear.''</p>
+        <p>VISIONS: CITIES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

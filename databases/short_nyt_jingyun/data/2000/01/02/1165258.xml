@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Tormented Life</title>
+    <meta content="02MAZOWET" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165258"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Mazower, Mark</person>
+        <person class="indexing_service">Cesarani, David</person>
+        <object.title class="indexing_service">Arthur Koestler. The Homeless Mind (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=980CEFDB1539F931A35752C0A9669C8B63" item-length="1511" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Tormented Life</hl1>
+      </hedline>
+      <byline class="print_byline">By Mark Mazower</byline>
+      <byline class="normalized_byline">Mazower, Mark</byline>
+      <abstract>
+        <p>Mark Mazower reviews book Arthur Koestler: The Homeless Mind by David Cesarani; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>ARTHUR KOESTLER</p>
+        <p>The Homeless Mind.</p>
+        <p>By David Cesarani.</p>
+        <p>Illustrated. 646 pp. New York:</p>
+        <p>The Free Press. $30.</p>
+      </block>
+      <block class="full_text">
+        <p>ARTHUR KOESTLER</p>
+        <p>The Homeless Mind.</p>
+        <p>By David Cesarani.</p>
+        <p>Illustrated. 646 pp. New York:</p>
+        <p>The Free Press. $30.</p>
+        <p>NEVER averse to fisticuffs, Arthur Koestler must be chuckling in his grave. When ''Arthur Koestler: The Homeless Mind'' appeared in England last winter, it provoked a row that shows no signs of dying away. British newspapers serialized its spicy accounts of the subject's sex life. Another Koestler biographer publicly questioned how David Cesarani, a professor of modern Jewish history at Southampton University, obtained access to the writer's papers. The sight of two academics dueling over literary property rights and the intimate details of a dead man's private affairs was a sad commentary on the commercialization of contemporary cultural debate. The figure at the center of all the fuss loved controversy, but in his case it was about things that mattered.</p>
+        <p>Born into an assimilated Jewish family in Budapest in the last years of the Hapsburg Empire, Koestler is chiefly remembered as an outstanding interpreter of the phenomenon of totalitarianism. His extraordinary burst of productivity after 1937 included an eye-witness account of the Spanish Civil War and the anti-Stalinist novel ''Darkness at Noon,'' his best-known work, as well as a searing personal repudiation of Communism in the collection of essays ''The God That Failed.'' Three times incarcerated without trial in European jails, he escaped Nazi-occupied France and became an internationally known intellectual by the end of the 1940's. Later he moved from the barricades of the cold war into areas that seemingly had little to do with politics: he proposed a holistic reconciliation of science, creativity and ethics, and he became interested in telepathy and extrasensory perception. When he and his third wife died in a mutual suicide pact in 1983, he left a bequest for the establishment of a university chair in parapsychology. Ever restless both physically and mentally, he would no sooner set himself up in one home than he was on the move to another. But this deracination fueled a questing compulsion to explain why Europeans were unable to understand, communicate with and ultimately live with each other.</p>
+        <p>As Cesarani points out, Koestler's fans found it hard to keep up with him. His fame was at its height in the middle decades of the century. Only a few devotees still read the late Koestler and wonder what he meant by ''the invisible writing'' of the universe. But 16 years after his death, his reputation endures through the quality of his prose and his vivid exploration, in particular, of the impact of the age of ideologies upon the individual personality.</p>
+        <p>Cesarani's point of departure is an aspect of Koestler -- his Jewishness -- that did not much interest earlier commentators but was bound to speak to an age obsessed, as ours is, with ethnicity and identity. As a ''homeless mind,'' he suggests, Koestler was typical of many central European Jewish intellectuals of our century. The fact that his subject did not make much of his religion is grist to Cesarani's mill, since he believes that ''the attempt to flee Judaism was the quintessential act of the modern Jew.'' Cesarani shows how far Koestler distanced himself from central European Jewry in his autobiography and his novels; the former, he writes in a characteristically hostile comment, was Koestler's ''most stupendous act of deception.''</p>
+        <p>Yet the story, it turns out, is not so simple. Koestler was a committed if unconventional Zionist, who before joining the Communist Party in 1931 had been, at the age of 20, a trusted lieutenant of the revisionist Zionist Vladimir Jabotinsky. He spent at least two periods of his life in Palestine, contemplated settling there and wrote a graphic fictional account of the Final Solution in 1943 that was superior to anything else published in the English-speaking world at that time. All this is scarcely compatible with the profile of a man seeking ''to flee Judaism.'' It is, however, recognizably part of a man who, while happy to be identified as a Zionist, refused to be pigeonholed by ethnic labels, above all as a ''Jewish writer.''</p>
+        <p>For Cesarani, this is not a tenable position; it is, rather, the typical repression of the self-hating Jew -- a consequence of Koestler's internalization of European anti-Semitism. And this takes him straight to Koestler's troubled private life. After all, no good can possibly come of covering up one's roots. His subject's ambivalent Judaism turns out to hold the key to his ''eccentric and even extreme behavior.'' Koestler, even his defenders admit, was a prickly man with an inferiority complex the size of ''a cathedral.'' He drank heavily, got into fights with French intellectuals and American policemen and wrecked a long line of automobiles. Above all, he was a compulsive womanizer, who married three times, had innumerable one-night stands and thought nothing of juggling five members of what he called his ''harem'' simultaneously. Much of the publicity in England surrounding the appearance of this book focused on the stories it tells of Koestler's violence toward women, in particular the allegation that he raped Jill Craigie, the recently deceased wife of the Labor M.P. Michael Foot.</p>
+        <p>Anyone who doubts whether this really happened should turn to the rape scene in Koestler's own novel ''Arrival and Departure,'' where the hero forces himself upon a young woman with whom he is infatuated. This description is almost indistinguishable from Craigie's own story. Koestler, it turns out, was well aware of his own brutal tendencies. But can his aggressiveness really be attributed to a troubled ethnicity? Would he have been less unhealthily interested in women if he had been more interested in ''Jewishness''? A lot of Jewish intellectuals far more tormented than he in their relationship to the ancestral culture have managed to avoid date rape.</p>
+        <p>Violence was an important, perhaps a crucial, element in Koestler's life and writings, but its roots branched out in many directions: Judaism may have been one, but upbringing and parentage were no less important. That he should have felt drawn to the charismatic Jabotinsky, the apostle of an impatient, militant Zionism, is also a clue. From the start, Koestler had a troubled relationship with authority. It was this that brought him under the spell of ideologies and led him to resist them. It was this that allowed him to analyze with such emotional conviction the interaction of politics and psyche. Even those who applaud Cesarani for bringing the rape issue forward may wonder whether his approach is not too one-sided to make for a convincing portrait. Koestler was a domineering man. But he attracted women and many remained close friends after they had slept with him. It is implausible to write them all off as masochists, as Cesarani effectively does. Some broke with him; but then so did many other friends and acquaintances.</p>
+        <p>In one of Koestler's stories, the authorial hero is interviewed by a British official who tells him: ''It often seems to me what you, and people like you, need, is that some elderly person should put you across his knee and give you a sound spanking.'' Cesarani is still fairly young, but in this book a sound spanking is what he seems to be hoping to inflict upon the incorrigibly juvenile Koestler. His disapproval of his subject is almost unremitting, and he chastises Koestler frequently for his irresponsibility and fecklessness, first toward his parents, later toward his lovers. Koestler is even told off for taking holidays in Austria in the 1960's -- something no good Jew should apparently have done. Cesarani's high-minded condemnation of Koestler's antics would carry more weight had not detailed descriptions of his womanizing so obviously helped to sell copies of this book. And after a while, the biographer's evident commitment to the virtues of monogamous parenthood begins to drown out Koestler's own views on women, friendship and human relationships in general.</p>
+        <p>Another Koestler -- smartly dressed, intensely energetic, dedicated to his craft -- makes an occasional appearance in this biography. He was always rubbing up against history and trying to make sense of its twists and turns. In 1933 the poet Langston Hughes met him in, of all places, Turkmenistan (then the Turkmen Soviet Republic), where both men were supposedly reporting on Soviet progress under Stalin. In his autobiography, Hughes portrays his companion's many foibles and shortcomings, but also his directness, his generosity of spirit and his seriousness as a writer. ''Arthur Koestler'' is far more detailed and fully researched but I think I learned more about the essential Koestler from Hughes's few pages than from a book too formed by contemporary prejudices to engage fully with his achievement.</p>
+        <p>Mark Mazower's most recent book is ''Dark Continent: Europe's Twentieth Century.'' He teaches history at Princeton University.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Mark Mazower's most recent book is ''Dark Continent: Europe's Twentieth Century.'' He teaches history at Princeton University.</tagline>
+    </body.end>
+  </body>
+</nitf>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Sports of The Times; Postcards: This Time From a New Century</title>
+    <meta content="Y02VEC$09" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165539"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Athletics and Sports</classifier>
+        <person class="indexing_service">Vecsey, George</person>
+        <object.title class="indexing_service">Sports of the Times (Times Column)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Columns/George Vecsey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Baseball/Major League/New York Yankees</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Baseball/Major League/Cincinnati Reds</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Other Sports</classifier>
+        <classifier class="online_producer" type="general_descriptor">Athletics and Sports</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0DE2D91338F931A35752C0A9669C8B63" item-length="1376" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Sports of The Times; Postcards: This Time From a New Century</hl1>
+      </hedline>
+      <byline class="print_byline">By GEORGE VECSEY</byline>
+      <byline class="normalized_byline">Vecsey, George</byline>
+      <abstract>
+        <p>George Vecsey Sports of The Times column offers humorous glimpses of sports events of future; drawings (M)2</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>NORMALLY, this is a good time to look back at postcards from the past year, but it seems only appropriate to present postcards from the future.</p>
+        <p>SEATTLE, 2000 -- Ken Griffey Jr., unable to get home to his golf enclave in Florida, lives in clubhouse at Safeco Field.</p>
+      </block>
+      <block class="full_text">
+        <p>NORMALLY, this is a good time to look back at postcards from the past year, but it seems only appropriate to present postcards from the future.</p>
+        <p>SEATTLE, 2000 -- Ken Griffey Jr., unable to get home to his golf enclave in Florida, lives in clubhouse at Safeco Field.</p>
+        <p>COLORADO SPRINGS, 2000 -- United States Olympic Committee search comes up with a new president, long known for his fund-raising, Juan Antonio Samaranch.</p>
+        <p>REDMOND, WASH., 2000 -- Bill Gates admits he has been doubling as an invented character named Bud Selig -- ''as a youthful prank.''</p>
+        <p>NEW YORK, 2001 -- New Mayor Mark Green tells George Steinbrenner, ''Sorry, but Senator Giuliani didn't sign any agreements about a new Yankee Stadium, and we'd prefer schools to ballparks.''</p>
+        <p>ORLANDO, FLA., 2001 -- Bud Selig moves Brewers from Milwaukee to Orlando, and signs Ken Griffey Jr.</p>
+        <p>SEATTLE, 2001 -- Amazon.com goes bust after billion-dollar losses. World economy fallout: Pittsburgh Pirates, Ottawa Senators, Los Angeles Clippers and Al Davis's Cucamonga Raiders all default.</p>
+        <p>FLUSHING, 2001 -- With no city or corporate support forthcoming, Fred Wilpon goes ahead and builds new stadium with his own funds, naming it after his father. Good karma leads Mets to world championship in Nathan Wilpon Stadium.</p>
+        <p>PALO ALTO, CALIF., 2002 -- After winning all the majors in one year, Tiger Woods retires from golf (''Too easy'') and returns to Stanford to study medicine and kick extra points.</p>
+        <p>BARCELONA, SPAIN, 2002 -- Juan Antonio Samaranch moves U.S.O.C. base to his villa.</p>
+        <p>BRONX, 2004 -- Donald Trump, now age 52, builds a new Yankee Stadium for Steinbrenner on pontoons in the Harlem River.</p>
+        <p>FLUSHING MEADOWS, 2004 -- Venus Williams and Serena Williams retire from tennis simultaneously while tied, 6-6, in a third-set tie breaker at United States Open final. They join Magic Johnson in building soup kitchens for the poor.</p>
+        <p>SCRANTON, PA., 2004 -- As part of the downsizing of the National Football League, Giants become the Scranton Miners.</p>
+        <p>PASADENA, CALIF., 2005 -- After consulting football ''dietitian,'' Tiger Woods bulks up to a 260-pound linebacker and helps Stanford win national championship.</p>
+        <p>PORTLAND, ORE., 2005 -- Women's Soccer League finishes banner season of sold-out games with Portland defeating Carolina, 3-2, on goals by Brazilian, Nigerian and Michelle (Granny) Akers.</p>
+        <p>HOT SPRINGS, ARK., 2005 -- Because of shrinking attendance, Triple Crown of racing is consolidated in one track under Arkansas Gaming Commissioner W. J. Clinton.</p>
+        <p>CAMPO SERGIO GARCIA, SPAIN, 2005 -- After Tiger Woods moves, Orlando golf enclave is passe. Ken Griffey Jr. moves to new hot spot, demands trade closer to home.</p>
+        <p>BARCELONA, SPAIN, 2006 -- Juan Antonio Samaranch buys Cincinnati Reds and moves them to his town. Ken Griffey, Jr. joins his father, manager of the Reds.</p>
+        <p>HAVANA, 2006 -- Donald Trump, now age 50, purchases Cuba from Fidel Castro, declares blockade over. Trump caught bribing Olympic delegates $1 million each. Olympic Games disbanded.</p>
+        <p>WOODSTOCK, N.Y., 2007 -- First player to jump from junior high school joins Phil Jackson's expansion team, Catskill Hermits. As part of traditional gift-giving, Guru Jackson gives player remedial reader.</p>
+        <p>ST. LOUIS, 2008 -- Mark McGwire retires as manager of Cardinals because of obtrusive second head growing from shoulders. Says he went back on andro in 2000 but nobody asked.</p>
+        <p>WASHINGTON, 2009 -- Newly inaugurated President Jesse Jackson demands to play a series for the Washington football team, now given the politically correct name Rainbow Coalition. The former quarterback says, ''My plays are better than Nixon's.''</p>
+        <p>ATLANTIC CITY, 2009 -- Under cover of night, George Steinbrenner floats Yankee Stadium out of New York harbor to this gambling den. Baseball Commissioner Gates-Selig approves, saying he has always believed in free enterprise.</p>
+        <p>INDIANAPOLIS, 2010 -- With all talented players going directly to the National Basketball Association in midteens, only students play college hoops anymore. Swarthmore defeats Pomona for national title in sold-out dome.</p>
+        <p>MONDO CONDO, FLA., 2012 -- Because of dollar drain, last Canadian hockey team, Maple Leafs, moves here. Canadian snowbirds buy all 20,000 season tickets.</p>
+        <p>SEATTLE, 2013 -- Trey Griffey refuses to be drafted by Mariners, saying the former manager Lou Piniella used to yell at him in Mariners' clubhouse.</p>
+        <p>SAN FRANCISCO, 2014 -- Surgeon Tiger Woods performs world's first arm transplant on a Giants pitcher. Elmo (Bionic Man) Rittenhouse wins 21 games.</p>
+        <p>SYDNEY, AUSTRALIA, 2015 -- Chris Evert and Martina Navratilova begin Old Lady Reunion Tour before gigantic crowd.</p>
+        <p>TOKYO, 2016 -- In first Super Bowl held outside United States, Lake Ronkonkoma Jets defeat Yakima Seahawks, 84-77.</p>
+        <p>NEWARK, 2018 -- First woman in N.B.A. history scores 7 points for Nets. (Don't worry, still in last place.) Charlie Ward comes north to picket this sacrilegious event.</p>
+        <p>HO CHI MINH CITY, VIETNAM, 2022 -- Pele Agassi, son of Andre Agassi and Steffi Graf, is American captain in expanded World Cup of soccer, but Yanks lose three straight. (American cheer: ''We're No. 48!'')</p>
+        <p>LAS VEGAS, 2024 -- Rupert-Dolan-Turner megastation revives former Olympic Games. In new X Games segment, snowboarders race down the face of Hefner Marriott.</p>
+        <p>ATLANTIC CITY, 2024 -- Donald Trump, now age 49, buys Yankees from Steinbrenner family. Hires Ken Griffey Jr. as manager.</p>
+        <p>ATLANTIC CITY, 2025 -- Trey Griffey refuses to play with Yankees. Says Trump once yelled at him from stands.</p>
+        <p>MONTEREY, MEXICO, 2026 -- Surgeon Tiger Woods transplants Mark McGwire's extra head on a baseball player. Given a new life, Antonio (Andro) Gonzalez leads majors in home runs with 87.</p>
+        <p>NEW YORK, 2033 -- Federal Communications Commissioner Wyatt Imus dictates that Americans must listen to three hours a day of fans proposing trades.</p>
+        <p>WAYCROSS, GA., 2036 -- Porker Pembroke of Waycross Falcons becomes first National Football League lineman to weigh 600 pounds.</p>
+        <p>BOSTON, 2038 -- First eight-hour baseball game in nine innings. American League owners debate ending designated hitter rule.</p>
+        <p>COEUR D'ALENE, IDAHO, 2040 -- John Rocker comes out of seclusion and runs for president on Militiamen ticket.</p>
+        <p>WASHINGTON, 2040 -- President Tiger Woods reminds people that everybody has right to free speech, even addled jocks.</p>
+        <p>CHARLOTTE, N.C., 2044 -- Nascar sets world record for attendance for sports event with 1,750,000 fans at King Richard Petty 500 -- including the half a million year-round residents of Luxury Box Towers between the second and third turns.</p>
+        <p>CHICAGO, 2045 -- Cubs win first pennant in exactly 100 years. When entire World Series is scheduled for corporate weasels at warm-weather site at Colangelo Stadium in Arizona, Cubs fans riot, making Mrs. O'Leary's fire look like a weenie roast.</p>
+        <p>ATLANTIC CITY, 2046 -- Donald Trump, now age 47, signs Quattro Griffey to play for Yankees.</p>
+        <p>SAN PEDRO DE MACORIS, DOMINICAN REPUBLIC, 2052 -- Using shortstops at every position, home team captures World Series of Baseball, beating Pyongyang, North Korea, in seventh game.</p>
+        <p>TRUMPOPOLIS, N.J., 2060 -- In new state capital modeled after Brasilia (but with statehouse resembling a slot machine), Summer Games begin at Trump Olympic Stadium. Donald Trump, now age 44, personally carries torch to top of Trump Olympic Tower.</p>
+        <p>PRAGUE, 2070 -- Laboratory clones entire Czech hockey team based on DNA of Jaromir Jagr. They win gold medal.</p>
+        <p>TRUMPOPOLIS, N.J., 2080 -- Donald Trump, now age 42, wanting a World Cup skier in the family, produces daughter from DNA of Martina Navratilova. Experiment goes awry when offspring has Martina's intellect but Donald's athletic ability, and she becomes Nobel Prize-winning nuclear physicist-poet.</p>
+        <p>GROZNY, CHECHNYA, 2098 -- In expanded soccer World Cup, American men finish dead last. (Yank cheer: ''We're No. 64!'')</p>
+        <p>CINCINNATI, 2099 -- Retired slugger Sixto Griffey buys the Reds and moves them back home, saying: ''Let's have a nice normal century one of these days. Everybody should just chill out.''</p>
+        <p>At this fin-de-siecle time (please pardon the fascination with the phrase), I agree with Sixto Griffey. If we start right away, we could even get a jump on it. Happy new century.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Will Entrepreneurs Still Be Heroes?</title>
+    <meta content="01HERO$03" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="32" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165195"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: CITIES"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Executives and Management</classifier>
+        <classifier class="indexing_service" type="descriptor">Entrepreneurship</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <classifier class="indexing_service" type="descriptor">Public Opinion</classifier>
+        <classifier class="indexing_service" type="descriptor">Heroism and Heroes</classifier>
+        <person class="indexing_service">Henriques, Diana B</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Executive</classifier>
+        <classifier class="online_producer" type="general_descriptor">Executives and Management</classifier>
+        <classifier class="online_producer" type="general_descriptor">Entrepreneurship</classifier>
+        <classifier class="online_producer" type="general_descriptor">Heroism and Heroes</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Public Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9905E0DF1030F932A35752C0A9669C8B63" item-length="253" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Will Entrepreneurs Still Be Heroes?</hl1>
+      </hedline>
+      <byline class="print_byline">By Diana B. Henriques</byline>
+      <byline class="normalized_byline">Henriques, Diana B</byline>
+      <abstract>
+        <p>Entrepreneurs and business executives are nation's heroes at dawn of 21st century, but it is uncertain whether they can retain that status for long; photo; cartoon (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WHEN Fortune magazine was introduced in February 1930, its premise,  according to one historian, was ''that the great businessmen were the new supermen of civilization.'' Almost 70 years later, the rest of America is coming around to Fortune's way of thinking.</p>
+        <p>As the new millennium opens, entrepreneurs -- from Warren E. Buffett of Berkshire Hathaway to Jeff Bezos of Amazon.com -- are the Lindberghs and DiMaggios of a wired and bullish generation.</p>
+      </block>
+      <block class="full_text">
+        <p>WHEN Fortune magazine was introduced in February 1930, its premise,  according to one historian, was ''that the great businessmen were the new supermen of civilization.'' Almost 70 years later, the rest of America is coming around to Fortune's way of thinking.</p>
+        <p>As the new millennium opens, entrepreneurs -- from Warren E. Buffett of Berkshire Hathaway to Jeff Bezos of Amazon.com -- are the Lindberghs and DiMaggios of a wired and bullish generation.</p>
+        <p>Will it last? After all, Fortune's ''new supermen'' quickly became the whipping boys of the New Deal; even today, the evil Mr. Burns of ''The Simpsons'' is better known than Ayn Rand's heroic capitalists.</p>
+        <p>''Ultimately, I think the image of businessmen depends on how well the business world does,'' said Richard Sylla, a business-history professor at New York University. If television and the movies continue to denigrate executives and entrepreneurs, a more positive view may be emerging in serious literature.</p>
+        <p>''Today's business heroes are selling something -- technology -- that they themselves created, much like the early Henry Ford,'' said Emily S. Watts, author of ''The Businessman in American Literature.'' She sees a certain ''romance'' with that aspect of business reflected in some novels of Richard Powers and Douglas Coupland.</p>
+        <p>Still, American fame has always had a short shelf life.</p>
+        <p>''Already, the market for business entrepreneurs feels a little overvalued,'' said the cultural historian Thomas Hine. ''We may be near a top.''</p>
+        <p>VISIONS: CITIES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

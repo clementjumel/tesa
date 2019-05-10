@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Final Judgements on the Cetury of the Automobile; In 1999, the Stars Were Still the Cars</title>
+    <meta content="02COBB$06" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Automobiles" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="12" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Automobiles" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165498"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Automobiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Utility Vehicles and Other Light Trucks</classifier>
+        <classifier class="indexing_service" type="descriptor">Nineteen Hundred Ninety-Nine</classifier>
+        <person class="indexing_service">Cobb, James G</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Automobiles</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Road Trips</classifier>
+        <classifier class="online_producer" type="general_descriptor">Utility Vehicles and Other Light Trucks</classifier>
+        <classifier class="online_producer" type="general_descriptor">Automobiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F00E3DE1238F931A35752C0A9669C8B63" item-length="1121" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Final Judgements on the Cetury of the Automobile; In 1999, the Stars Were Still the Cars</hl1>
+      </hedline>
+      <byline class="print_byline">By JAMES G. COBB</byline>
+      <byline class="normalized_byline">Cobb, James G</byline>
+      <abstract>
+        <p>James G Cobb annual review rates some of cars and trucks he tested in 1999; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WHEN 1900 rolled around, the motorcar was a noisy, smelly infant. Oldsmobile, the oldest surviving manufacturer in America today, didn't build its first succcesful car until 1901. The Model T was but a gleam in Henry Ford's 36-year-old eyes. Sport utilities were buckboards pulled by old gray nags.</p>
+        <p>Now, after transforming the century, the passenger car seems endangered itself as trucks threaten to take over. But of the vehicles I drove this year, the ones that stood out were mostly cars.</p>
+      </block>
+      <block class="full_text">
+        <p>WHEN 1900 rolled around, the motorcar was a noisy, smelly infant. Oldsmobile, the oldest surviving manufacturer in America today, didn't build its first succcesful car until 1901. The Model T was but a gleam in Henry Ford's 36-year-old eyes. Sport utilities were buckboards pulled by old gray nags.</p>
+        <p>Now, after transforming the century, the passenger car seems endangered itself as trucks threaten to take over. But of the vehicles I drove this year, the ones that stood out were mostly cars.</p>
+        <p>As in the past, the assessments in the following end-of-the-year report card are thoroughly subjective, representing a personal view on how close some 1999-2000 vehicles came to fulfilling their potential:</p>
+        <p>AUDI S4 -- ($38,425-$43,175) The graceful A4 is one of the great sport sedans. What could go wrong by cramming in a twin-turbo V6 and stiffening the suspension to challenge the BMW M3? Just one thing: The six-speed shifter is vague and rubbery and out of character with this otherwise exhilarating car. B+</p>
+        <p>AUDI TT -- ($31,025-$36,170) After three decades of mostly forgettable styling, auto design may be entering a new golden era. Exhibit A: The stunning Machine Age architecture of the TT, which will turn any garage into a sculpture garden. Inside, you marvel at the attention to detail in the textures, materials and patterns. One quandary: Should you drive it, or just sit and stare at it? A+</p>
+        <p>BMW 750iL -- ($92,670-$97,270) If I were a dot-com zillionaire, what would I drive on the nondigital superhighway? You can't do much better than this V12 supercar; if you took Bill Gates to lunch, even he'd be impressed. A</p>
+        <p>CADILLAC DeVILLE DTS -- ($45,370-$55,390) This old fogy has finally emerged from the 70's. The 2000 DeVille, particularly the semisporty DTS, borrows freely from Mercedes and Lexus, yet it feels distinctly American -- in the best sense. Ride, handling and comfort are first-rate and the controls are the best G.M. has ever offered. A</p>
+        <p>CHEVROLET IMPALA -- ($19,350-$25,143) G.M.'s engineers did their part, giving Chevy's flagship a solid chassis, decent handling and a supple ride. But the designers came up with a half-baked styling exercise in which the pieces seem to belong to different cars, plus an interior that whispers ''Hertz.'' My favorite Impala is still the '65. B</p>
+        <p>FORD FOCUS -- ($12,280-$17,665) Agile and composed, comfortable and spacious, the Focus does nearly everything well -- so well, in fact, that it makes a sensible alternative to bigger cars costing $10,000 more. It is, hands-down, the best small car I've ever driven. A+</p>
+        <p>HONDA INSIGHT -- ($19,295-$20,495) If alternative-fuel vehicles ever find mainstream appeal, they must perform as well as conventional cars at a comparable price. In local commuting, Honda's odd gas-electric hybrid comes close, but it makes one anxious in fast traffic and on steep hills. Still, Honda gets an A for effort. B-</p>
+        <p>HONDA S2000 -- ($32,415) The taped notes I made while driving this racing-bred roadster weren't very useful, consisting mostly of exclamations of glee. The small engine, which revs to an incredible 9,000 r.p.m., is almost impossibly powerful. The crisp six-speed stick is the best I've ever shifted. The handling seems telekinetic. Like a lovesick puppy, I can't get the S2000 out of my mind. A+</p>
+        <p>HYUNDAI ACCENT -- ($10,034-$12,752) For 2000, it's a little bigger, a little faster, a little more substantial. Inside, there's more Toyota and less Yugo. The price is right, and a 100,000-mile warranty offers assurance. B-</p>
+        <p>ISUZU VEHICROSS -- ($29,595) Drive this weird sci-fi module through Deming, N.M., and you might make The Weekly World News. (''Aliens Invade in S.U.V's!'') The back seat is accessible only by Star Trek transporter and the visibility isn't much better than a bomb shelter's. C-</p>
+        <p>JEEP GRAND CHEROKEE -- ($27,105-$37,735) After two Grand Cherokees of my own, an axle failure cooled my ardor; there have been numerous reports of drivetrain problems on new models. Furthermore, the driving position is now oddly uncomfortable. I'll sit this one out. C+</p>
+        <p>LINCOLN LS -- ($31,475-$39,935) This is not Detroit's first attempt to build a luxury touring sedan in the European tradition, but by virtually cloning BMW's 5-Series it is the first to get it right. The LS's road manners are surprisingly good, thanks to a rigid, German-tight chassis. American luxury cars will never be the same. A</p>
+        <p>MERCEDES-BENZ S500 -- ($78,445-$98,050) The ride and handling are perfectly balanced and the big V8 is a dream. But the audio, climate and navigation systems, plus the phone, are controlled by a maddeningly complex video screen. Who wants to spend $90,000 for a car that makes you feel stupid? A</p>
+        <p>MITSUBISHI GALANT -- ($17,792-$23,117) A spirited, stylish alternative to the Accord and Camry, and a relative bargain to boot. No wonder Galants seem to be everywhere around New York, hip young people at the wheel. A-</p>
+        <p>NISSAN MAXIMA -- ($21,569-$30,261) The 2000 Maxima is smooth, polished and powerful, with attention to detail that some luxury cars should imitate. A-</p>
+        <p>NISSAN XTERRA -- ($19,269-$26,392) What was the last Nissan to have buyers lining up? This back-to-basics S.U.V. is stylish and honest, though the cabin is dressed in dollar-store materials, the engines are plodding and the handling is unimpressive even by truck standards. A fair deal at $20,000, but hardly worth the $5,000 premiums that some dealers are charging. B</p>
+        <p>SUZUKI GRAND VITARA -- ($18,749-$23,149) This puppy is eager to please, and it's a nicer pet than the defunct Sidekick. But its V6 is sluggish, its cargo space is minimal and its quirks -- the rear door opens on the wrong side for American streets -- diminish its appeal. C</p>
+        <p>TOYOTA ECHO -- ($10,750-$14,291) Did somebody at Toyota stand up and say, ''Hey, let's build the world's ugliest car!''? Whatever, the Echo is roomy and comfortable, rides smoothly and quietly and performs nicely until challenged. I like this odd duck best from the driver's seat; sitting there, you don't have to look at it. B</p>
+        <p>TOYOTA TUNDRA -- ($15,475-$31,516) The most polished pickup yet, the Tundra feels like a Lexus that can haul logs. Its V8 is a scorcher; its handling is of passenger-car caliber. Unfortunately, the long-cab version can't match the spacious accommodations of G.M. trucks. A-</p>
+        <p>VOLKSWAGEN JETTA -- ($17,225-$26,165) Dom Perignon tastes on a Rolling Rock budget? Here is a solid German sedan with impeccable engineering, supportive seats and great road manners. If it makes you feel better, you can glue a three-pointed star to the hood. A-</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

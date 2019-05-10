@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>On This First Day, a Fanfare for the New Era; English, in 2600</title>
+    <meta content="LTR031034" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="30" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165164"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">English Language</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <person class="indexing_service">Takacs, William</person>
+        <person class="indexing_service">Pinker, Steven (Prof)</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">English Language</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Language and Languages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E03E1DA1038F932A35752C0A9669C8B63" item-length="87" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>On This First Day, a Fanfare for the New Era; English, in 2600</hl1>
+      </hedline>
+      <abstract>
+        <p>William Takacs letter endorses Steven Pinker's view (Op-Ed, Dec 24) that English language will continue to change over next millennium, eventually beyond recognition; drawing</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>''English will continue to change, eventually beyond recognition,'' Prof. Steven Pinker says in ''There Will Always Be an English'' (Op-Ed, Dec. 24).</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>''English will continue to change, eventually beyond recognition,'' Prof. Steven Pinker says in ''There Will Always Be an English'' (Op-Ed, Dec. 24).</p>
+        <p>We can accept that premise right away. With a degree in English, I can affirm that now, you can't tell the 14th-century (English-speaking) Chaucers without a scorecard. Six hundred years from now, without a scorecard, you'll not be able to tell the 20th-century Pinkers.</p>
+        <p>WILLIAM TAKACS  Harrison, N.Y., Dec. 24, 1999</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

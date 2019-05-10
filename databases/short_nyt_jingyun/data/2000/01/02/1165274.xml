@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Books in Brief: Nonfiction</title>
+    <meta content="RV100955" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165274"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Hartley, Christine Schwartz</person>
+        <person class="indexing_service">Brubach, Holly</person>
+        <object.title class="indexing_service">Dedicated Follower of Fashion, A (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C05E6DC1E39F931A35752C0A9669C8B63" item-length="268" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Books in Brief: Nonfiction</hl1>
+      </hedline>
+      <byline class="print_byline">By Christine Schwartz Hartley</byline>
+      <byline class="normalized_byline">Hartley, Christine Schwartz</byline>
+      <abstract>
+        <p>Christine Schwartz Hartley reviews book A Dedicated Follower of Fashion by Holly Brubach (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A Dedicated Follower of Fashion</p>
+        <p>By Holly Brubach.</p>
+        <p>Phaidon, $29.95.</p>
+      </block>
+      <block class="full_text">
+        <p>A Dedicated Follower of Fashion</p>
+        <p>By Holly Brubach.</p>
+        <p>Phaidon, $29.95.</p>
+        <p>There is precious little inside-fashion information in ''A Dedicated Follower of Fashion,'' Holly Brubach's collection of articles spanning nearly two decades, during which she wrote for The Atlantic Monthly, The New Yorker and The New York Times Magazine. In fact, from the very first piece, which combines a brief history of swimsuits with depictions of the types of beachwear in the summer of 1991 (understated WASP chic in East Hampton, ostentatious 1980's brands in New Jersey, a fluorescent effervescence on Jones Beach), it is clear that Brubach defines fashion broadly, as style -- an ever-changing vocabulary expressing ideas and attitudes about life, wealth, class and sex. At their best, her articles are fun-to-read pop-culture pieces, working through an accumulation of telling details, which Brubach sprinkles with a bit of analysis, historical perspective and wit. The vogue for over-the-top, traditional weddings, for instance, has her wondering about ''the atavistic Cinderella streak lurking deep in the heart of career girls.'' Unfortunately, for every entertaining article, this collection also counts many that no longer seem relevant: the furor over Comme des Garcons striped pajamas, for example, or understanding glasses as fashion accessory. In the end, there is enough fluff that the book feels like much of fashion itself: tempting, charming, sexy, but really not necessary.</p>
+        <p>Christine Schwartz Hartley</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

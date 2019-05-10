@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>New Year's Day</title>
+    <meta content="01HOLI$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="B" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165102"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="online_producer" type="types_of_material">List</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E01E4DF1038F932A35752C0A9669C8B63" item-length="233" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>New Year's Day</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>NEW YORK  GOVERNMENT OFFICES  Closed.  POST OFFICE  Closed except for main post office at 33rd Street and Eighth Avenue.  BANKS  Closed.  PARKING  Alternate-side regulations suspended. No-parking zone extends from West 34th Street to West 59th Street between the Avenue of the Americas and Eighth Avenue.  SANITATION  Normal pickups for garbage and recycling. No street cleanings.  TRANSPORTATION  City buses and subways on a Saturday schedule  with additional service. Long Island Rail Road on weekend schedule with additional trains. Metro-North on a holiday schedule with extra trains.</p>
+      </block>
+      <block class="full_text">
+        <p>NEW YORK  GOVERNMENT OFFICES  Closed.  POST OFFICE  Closed except for main post office at 33rd Street and Eighth Avenue.  BANKS  Closed.  PARKING  Alternate-side regulations suspended. No-parking zone extends from West 34th Street to West 59th Street between the Avenue of the Americas and Eighth Avenue.  SANITATION  Normal pickups for garbage and recycling. No street cleanings.  TRANSPORTATION  City buses and subways on a Saturday schedule  with additional service. Long Island Rail Road on weekend schedule with additional trains. Metro-North on a holiday schedule with extra trains.</p>
+        <p>NEW JERSEY  GOVERNMENT OFFICES  Closed.  POST OFFICE</p>
+        <p>Express Mail and special delivery only.  BANKS  Closed.  TRANSPORTATION  PATH trains on regular schedule. New Jersey Transit rail service will operate on a normal schedule with additional service.</p>
+        <p>CONNECTICUT  GOVERNMENT OFFICES  Closed.  POST OFFICE</p>
+        <p>Express Mail and special delivery only.  BANKS  Closed.  TRANSPORTATION  Metro-North on a holiday schedule with extra trains.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

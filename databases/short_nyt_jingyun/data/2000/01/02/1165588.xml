@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>THE YEAR 2000: Speeches, Star Power and a Whole Lot of Noise Ring In the New; Hawaii, Last but Loud, Greets the New Year</title>
+    <meta content="02HAWA" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="6" name="print_column"/>
+    <meta content="U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165588"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9900E0DF1138F931A35752C0A9669C8B63" item-length="657" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>THE YEAR 2000: Speeches, Star Power and a Whole Lot of Noise Ring In the New; Hawaii, Last but Loud, Greets the New Year</hl1>
+      </hedline>
+      <byline class="print_byline">By EVELYN NIEVES</byline>
+      <dateline>HONOLULU, Jan. 1</dateline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>All over the island, noise.</p>
+        <p>The first explosions went off before the sun slid down the horizon in purple-orange ribbons, before the crystal ball dropped in Times Square, before New Zealand's New Year's, even.</p>
+      </block>
+      <block class="full_text">
+        <p>All over the island, noise.</p>
+        <p>The first explosions went off before the sun slid down the horizon in purple-orange ribbons, before the crystal ball dropped in Times Square, before New Zealand's New Year's, even.</p>
+        <p>Then, as night fell, the rockets began flying from the roofs of high-rise buildings off Waikiki Beach, from second-story windows in short, stout houses west of downtown and from the middle of the roads, everywhere. Legally, the fireworks were not supposed to start before 9 p.m. Yet by then, the cacophony was such that conversations had to be shouted or mimed or postponed.</p>
+        <p>No one cared that the New Year was old news around the world by the time it struck midnight here, in the last state in the country, five hours after Times Square, to celebrate the millennium. The later the hour, the louder the celebrations became.</p>
+        <p>Tourists were flabbergasted. ''We didn't think it would be so -- exuberant,'' said Hugh Williams, who comes from Britain and lives in San Diego. He and his wife, Elizabeth, were awaiting the witching hour at the Aloha Tower Marketplace, one of the island's main celebration points. She could not help holding her forefingers in her ears. ''It sounds like an air war,'' she said. ''A person could go deaf after this.''</p>
+        <p>The formal celebrations here looked much like the spectacles staged in cities around the globe. At midnight, streams of fireworks lighted the sky as crowds watched shoulder to shoulder, open-mouthed.</p>
+        <p>But the biggest celebrations were in old neighborhoods where families had stockpiled fireworks as though they might be called upon to fire up the island all by themselves.</p>
+        <p>Kalihi had to be one of the loudest, smokiest neighborhoods of all. The air was thick and gray, with clouds of gunpowder that hit you in the face, clutched your throat and masked your eyes. Residents strung up strands of thousands and thousands of firecrackers on pyramid-shaped trellises created just for the occasion. Families held barbecues in car ports, with several generations, from great-grandmothers to young children, partaking in the fireworks shows.</p>
+        <p>''Every year, it gets louder and louder, bigger and bigger,'' said Gayle Reese. ''Every year, you hear, oh, we're going to ban the fireworks. But if they ban the fireworks, there would be a lot of unhappy people.''</p>
+        <p>Fireworks are a long tradition here, but their use has grown in recent years. Calls for a statewide ban on fireworks use by private citizens have grown too. Last year, there were more people lighting more fireworks than ever, which led city officials to worry what would happen this very big New Year's Eve. When fireworks went on sale Christmas Day, and stores began reporting record sales, officials worried even more. One man was critically injured after getting hit in the back of the head with shrapnel from exploding fireworks on Oahu.</p>
+        <p>To keep the peace, if not the quiet, of Honolulu, the city's police chief, Lee Donohue, stationed 1,100 officers on duty, twice as many as last New Year's Eve and three times as many as on an ordinary Friday night. The Fire Department added reinforcements, much needed, it turned out, to answer the 107 calls that came in through midnight.</p>
+        <p>In Kalihi, where the police had confiscated some of the more than 13 tons of illegal fireworks (aerial fireworks and fireworks that travel more than 12 feet in any direction) they discovered throughout the city since Dec. 21, Mr. Reese said he thought the neighborhood had the best fireworks show in the world.</p>
+        <p>Someone mentioned that the New Year's fireworks display in Greenwich, England, 10 hours ahead of here, was so spectacular it could be seen from space.</p>
+        <p>''Maybe,'' Mr. Reese said. ''But Martians will be able to hear us tonight.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

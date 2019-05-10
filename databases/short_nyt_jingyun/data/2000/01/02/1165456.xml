@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Futuristic</title>
+    <meta content="02STRE$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Style Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165456"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="ON THE STREET"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Apparel</classifier>
+        <classifier class="indexing_service" type="descriptor">Nineteen Hundred Ninety-Nine</classifier>
+        <person class="indexing_service">cunningham, bill</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Fashion, Beauty and Fitness</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Apparel</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C01E5DA1538F931A35752C0A9669C8B63" item-length="146" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Futuristic</hl1>
+      </hedline>
+      <byline class="print_byline">By Bill Cunningham</byline>
+      <byline class="normalized_byline">cunningham, bill</byline>
+      <abstract>
+        <p>On the Street photos of some of 1999's curious fashion ideas (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>With fashion so unpredictable, it's risky to project what the 2000's may have in store. But here are a few of 1999's most provocative styles that may just prove influential. The year had its share of curious ideas (right), from sequined dresses over jeans for day to the mixing of clothes by different designers to the revival of brash color, as in this ensemble of trash bags.</p>
+      </block>
+      <block class="full_text">
+        <p>With fashion so unpredictable, it's risky to project what the 2000's may have in store. But here are a few of 1999's most provocative styles that may just prove influential. The year had its share of curious ideas (right), from sequined dresses over jeans for day to the mixing of clothes by different designers to the revival of brash color, as in this ensemble of trash bags.</p>
+        <p>The year's success was the designer bag (bottom right), with Hermes, Gucci and Fendi the leaders. Architectural clothes (below) gave wearers a shape other than their own, from Junya Watanabe's black coat and suit to Hussein Chalayan's mille-feuille-style dress. And ethnic dressing (left) mixed distinctive patterns and colors, from Chinese to Afrocentric.</p>
+        <p>ON THE STREET</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

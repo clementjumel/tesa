@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Folds of Newspapers Yield Symbols of Peace</title>
+    <meta content="01ORIG" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="B" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165090"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">New Year</classifier>
+        <classifier class="indexing_service" type="descriptor">Origami</classifier>
+        <classifier class="indexing_service" type="descriptor">Newspapers</classifier>
+        <location class="indexing_service">Montclair (NJ)</location>
+        <person class="indexing_service">Newman, Maria</person>
+        <person class="indexing_service">Davis, Joshua</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New Jersey</classifier>
+        <classifier class="online_producer" type="general_descriptor">Newspapers</classifier>
+        <classifier class="online_producer" type="general_descriptor">New Year</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Art</classifier>
+        <classifier class="online_producer" type="general_descriptor">News and News Media</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9505E3D61338F932A35752C0A9669C8B63" item-length="769" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Folds of Newspapers Yield Symbols of Peace</hl1>
+      </hedline>
+      <byline class="print_byline">By MARIA NEWMAN</byline>
+      <byline class="normalized_byline">Newman, Maria</byline>
+      <abstract>
+        <p>Joshua Davis, high school student from Montclair, NJ, has taken front page of newspaper for last 1,000 days of 1900's and created origami cranes for collection that he says will symbolize end of 1,000 years; his plan, after completing 1,000th crane, is to donate them to museum; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Joshua Davis, 17, has been counting down each of the 1900's last 1,000 days by scanning the front page of a daily newspaper.</p>
+        <p>But he does not just digest the news of each day's troubles and triumphs. After a quick read, his hands work each inky front page into a dozen triangular folds, creating an origami crane for a collection that he says will symbolize the end of 1,000 years.</p>
+      </block>
+      <block class="full_text">
+        <p>Joshua Davis, 17, has been counting down each of the 1900's last 1,000 days by scanning the front page of a daily newspaper.</p>
+        <p>But he does not just digest the news of each day's troubles and triumphs. After a quick read, his hands work each inky front page into a dozen triangular folds, creating an origami crane for a collection that he says will symbolize the end of 1,000 years.</p>
+        <p>Of all the gestures and celebrations being staged throughout the New York region, Joshua's is perhaps one of the quietest and most private.</p>
+        <p>Each evening, Joshua, a junior at Montclair High School in New Jersey, sits at his desk in his yellow-walled room and folds an origami crane, which he strings together with the others and stores in a trunk belonging to his grandfather. The cranes are symbols of peace and hope, he said.</p>
+        <p>His plan, after completing the 1,000th yesterday, is to donate the cranes to a museum.</p>
+        <p>''I thought that this would be such a beautiful gesture,'' he said in the dim light of his room. ''There is so much pain printed in this paper. I wanted to turn it into something beautiful, a paper crane that is a symbol of peace.''</p>
+        <p>Joshua discovered the ancient art of origami, which entails folding a square of paper into delicate shapes, in an after-school class he took at Glenfield Middle School three years ago. He learned that the origami crane had become an international symbol of peace in the 1950's when a young girl in Japan struggled with the injuries she suffered in the 1945 bombing of Hiroshima.</p>
+        <p>Joshua read that 10 years after the bombing, the girl, Sadako Sasaki, an athletic 11-year-old, was stricken with leukemia, a result of exposure to radiation as an infant. Until the end, the girl believed she would recover if she folded 1,000 origami cranes, which are symbols of good luck in Japan.</p>
+        <p>When she died on Oct. 25, 1955, Sadako had folded 644 cranes. Her  classmates folded the other 356, so that 1,000 cranes would be buried with her. They also donated money for a memorial to her, the Children's Monument in Hiroshima's Peace Park.</p>
+        <p>Also known as the Tower of a Thousand Cranes, the monument is a statue of a girl, her arms outstretched, holding a golden crane. For years, schoolchildren from all over Japan have made pilgrimages to the monument, carrying with them the cranes they have folded.</p>
+        <p>''It might sound insane, but I thought it was a noble cause,'' Joshua said. ''She has inspired a lot of people, and she inspired me.''</p>
+        <p>Joshua, who also runs track and plays the flute and baritone in the school band, moved to Montclair from Georgia when he was in the seventh grade. His father, Rob Davis, is a representative for Cambridge University Press, and the family has lived throughout the southern United States.</p>
+        <p>Joshua began collecting the daily newspapers for his cranes in 1996, and his collection is not missing a single day's front page. Some days, however, it has been a struggle not to miss a copy of the newspaper, like when his family has been on vacation. The first time, he said, he had neglected to make arrangements for someone to save the newspapers that were delivered to his house, and he had to go scavenging around recycling piles and the public library so his collection did not miss a day.</p>
+        <p>Now, neighbors and friends help him save the newspapers when his family is traveling.</p>
+        <p>His mother, Peggy Davis, said she marveled at her son's dedication to the three-year project.</p>
+        <p>''It's neat to see the stamina and persistence of doing something that long a time in someone of that age,'' she said. ''He's a very interesting guy.''</p>
+        <p>One day recently, Joshua was making his latest delicate crane to add to the collection. His hands moved deftly to form the paper triangles. ''Joseph Heller died,'' he noted as he folded a recent front page. ''That was sad. Oh, well.'' And he kept folding until he had another crane.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

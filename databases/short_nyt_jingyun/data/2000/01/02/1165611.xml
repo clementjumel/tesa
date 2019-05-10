@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Winning Bid to Develop 9 Acres Near U.N.</title>
+    <meta content="02CONE$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Metropolitan Desk" name="dsk"/>
+    <meta content="28" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165611"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Housing</classifier>
+        <classifier class="indexing_service" type="descriptor">Waterside Steam Plant (NYC)</classifier>
+        <classifier class="indexing_service" type="descriptor">Office Buildings</classifier>
+        <location class="indexing_service">New York City</location>
+        <location class="indexing_service">East River (NYC)</location>
+        <org class="indexing_service">United Nations</org>
+        <org class="indexing_service">Consolidated Edison Co of New York Inc</org>
+        <person class="indexing_service">Bagli, Charles V</person>
+        <person class="indexing_service">Fisher Family</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/New York/New York City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Gases</classifier>
+        <classifier class="online_producer" type="general_descriptor">Factories and Industrial Plants</classifier>
+        <classifier class="online_producer" type="general_descriptor">Housing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Office Buildings and Commercial Properties</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0DE4DB1138F931A35752C0A9669C8B63" item-length="417" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Winning Bid to Develop 9 Acres Near U.N.</hl1>
+      </hedline>
+      <byline class="print_byline">By CHARLES V. BAGLI</byline>
+      <byline class="normalized_byline">Bagli, Charles V</byline>
+      <abstract>
+        <p>Development group led by Fisher real estate family wins bidding for nine acres of waterfront land south of United Nations, one of most sought after prizes in New York City real estate; will pay Consolidated Edison about $600 million for property, although exact sum depends on cost of demolishing Waterside Steam Plant and on number and size of apartment buildings and office towers city allows to be built along East River (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A development group led by the Fisher real estate family has won the bidding for one of the most sought after prizes in New York real estate: nine acres of waterfront land south of the United Nations.</p>
+        <p>The Fisher group, which includes the developer Sheldon Solow and Morgan Stanley Dean Witter, would pay Consolidated Edison up to about $600 million for the property, although the exact sum depends on the cost of demolishing the sprawling Waterside Steam Plant, which sits on part of the property, and on the number and size of the apartment buildings and office towers the city allows to be built along the East River.</p>
+      </block>
+      <block class="full_text">
+        <p>A development group led by the Fisher real estate family has won the bidding for one of the most sought after prizes in New York real estate: nine acres of waterfront land south of the United Nations.</p>
+        <p>The Fisher group, which includes the developer Sheldon Solow and Morgan Stanley Dean Witter, would pay Consolidated Edison up to about $600 million for the property, although the exact sum depends on the cost of demolishing the sprawling Waterside Steam Plant, which sits on part of the property, and on the number and size of the apartment buildings and office towers the city allows to be built along the East River.</p>
+        <p>The property consists of four parcels on First Avenue, between 35th and 41st Streets. The developer, like some 20 other bidders for the land, is hoping to build up to five million square feet of residential and commercial buildings, bordered by an esplanade along the river.</p>
+        <p>''It's the only substantial piece of land left in Midtown,'' said Mary Ann Tighe, vice chairman of Insignia/ ESG, a real estate company.</p>
+        <p>The Fisher group overcame an unexpected, last-minute offer from the second-place finisher, Mortimer B. Zuckerman, chairman of Boston Properties, who was joined by the developers Leonard Litwin and Donald Zucker. But after intense negotiating Tuesday, the Fishers were able to hang on to the prize.</p>
+        <p>According to the losing bidders and other real estate executives, the Fisher team is expected to begin formal contract negotiations with Con Ed tomorrow, a process that could go on for weeks. Con Ed is not expected to announce a deal until the agreement is presented to the company's directors later this month. Con Ed is also seeking approval from the Public Service Commission.</p>
+        <p>Even after a contract is signed, it may be more than three years before the developer can begin building on the site. Under an agreement with the state commission, Con Ed must first expand the generating capacity of its steam plant on 14th Street to offset the loss of Waterside.</p>
+        <p>The developer must also go through the city's lengthy environmental and land use review process.</p>
+        <p>A coalition of local apartment owners and civic groups has already said that it wants to see a master plan for the entire nine acres. Richard Kahan, a coalition leader, said the group did not want a densely packed development whose tall towers would loom over the United Nations or the surrounding neighborhood.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

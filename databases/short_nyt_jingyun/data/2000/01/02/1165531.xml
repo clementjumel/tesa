@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Word for Word; The Plain-Language Movement Hacking Through the Thickets Of Corporatespeak</title>
+    <meta content="02WORD$13" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Week in Review Desk" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Week in Review" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165531"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Stocks and Bonds</classifier>
+        <classifier class="indexing_service" type="descriptor">English Language</classifier>
+        <classifier class="indexing_service" type="descriptor">Mutual Funds</classifier>
+        <classifier class="indexing_service" type="descriptor">Writing and Writers</classifier>
+        <org class="indexing_service">Securities and Exchange Commission</org>
+        <person class="indexing_service">Lutz, William (Prof)</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Week in Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Mutual Funds</classifier>
+        <classifier class="online_producer" type="general_descriptor">English Language</classifier>
+        <classifier class="online_producer" type="general_descriptor">Writing and Writers</classifier>
+        <classifier class="online_producer" type="general_descriptor">Stocks and Bonds</classifier>
+        <classifier class="online_producer" type="general_descriptor">Language and Languages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A00E1DC1338F931A35752C0A9669C8B63" item-length="1279" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Word for Word; The Plain-Language Movement Hacking Through the Thickets Of Corporatespeak</hl1>
+      </hedline>
+      <byline class="print_byline">By DAVID LEONHARDT</byline>
+      <abstract>
+        <p>Word for Word column on efforts by plain-language consultants to simplify and clarify convoluted language of public documents; much of work is in mutual fund industry, which is under SEC order to simplify documents; excerpts; Prof William M Lutz comments (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A COTTAGE industry of plain-language consultants has sprung up in recent years. These experts aim to wage war on the business buzzwords, governmental verbosity and turgid legalese that make many public documents impossible to understand.</p>
+        <p>They also seek to instill some of the basics of good writing, like the importance of short, direct sentences. Much of their work has come in the mutual fund industry, which for the past two years has been under an order by the Securities and Exchange Commission to simplify documents.</p>
+      </block>
+      <block class="full_text">
+        <p>A COTTAGE industry of plain-language consultants has sprung up in recent years. These experts aim to wage war on the business buzzwords, governmental verbosity and turgid legalese that make many public documents impossible to understand.</p>
+        <p>They also seek to instill some of the basics of good writing, like the importance of short, direct sentences. Much of their work has come in the mutual fund industry, which for the past two years has been under an order by the Securities and Exchange Commission to simplify documents.</p>
+        <p>Samples of the consultants' work follow.</p>
+        <p>DAVID LEONHARDT</p>
+        <p>Getting off to a good start is crucial. A convoluted beginning, particularly when the subject matter is complicated, can turn off readers in a hurry. Look at the difference between a 1998 mutual fund brochure from American Century Investments and one it sent last year.</p>
+        <p>Before -- All of the funds offered in this Prospectus seek capital growth by investing in securities, primarily common stocks, that meet certain fundamental and technical standards of selection (relating primarily to earnings and revenue acceleration) and have, in the opinion of the funds manager, better-than-average potential for appreciation.</p>
+        <p>After -- The fund managers look for stocks of companies that they believe will increase in value over time, using a growth investment strategy developed by American Century.</p>
+        <p>The S.E.C. urges companies to use personal pronouns and simple language. The Commission offered the following example in a 1998 plain-English handbook it sent to mutual fund companies.</p>
+        <p>Before -- This Summary does not purport to be complete and is qualified in its entirety by the more detailed information contained in the Proxy Statement and the Appendices hereto, all of which should be carefully reviewed.</p>
+        <p>After -- Because this is a summary, it does not contain all the information that may be important to you. You should read the entire proxy statement and its appendices carefully before you decide how to vote.</p>
+        <p>Plain-language doctors like those at the New York consulting firm Siegel &amp; Gale often start by making passive verbs active and stamping out bureaucratese.</p>
+        <p>Before -- Deposits may be made by a minor and withdrawals thereof may be made by the minor without the consent of a parent of guardian, neither of whom, in that capacity, shall have any right to attach or interfere in any manner with such deposits or withdrawals.</p>
+        <p>After -- Minors may make deposits and withdrawals from their accounts without the consent or interference of a parent or guardian.</p>
+        <p>William M. Lutz, an English professor at Rutgers University and a leading plain-language advocate, offers this example of how to make a document easier to read:</p>
+        <p>Before -- Marketing is a creative, analytic and integrative effort. We need to work hand-in-hand with the field to get their perspective and to draw on their experiences. And there are plenty of ideas around the rest of the company, too. Marketing will draw on your cumulative ideas and experiences and integrate them with other business parts into a synergistic whole, which is bigger than the sum of its parts.</p>
+        <p>After -- To do marketing well, we'll have to draw on the ideas and experiences from the field and other departments, determine how these might help us, then integrate them into our marketing plans and practices in a way that increases their effectiveness.</p>
+        <p>Sounds easy, right? But simplifying a document often requires a whole new approach, not just slicing and dicing. Contrast the first sentence of a letter that Texaco's chief executive, Peter I. Bijur, wrote to shareholders in 1996 and the start to his letter in 1998, when the company began using simpler language:</p>
+        <p>Before -- With this, my first report to you as Chairman and Chief Executive Officer of Texaco, I am privileged to review along with Vice Chairman Allen Krowe our strong 1996 performance, highlight our greater ambitions and plan for 1997 and beyond, and discuss our philosophy for sustaining long-term growth for our company.</p>
+        <p>After -- 1998 was the toughest time we have faced in my 33 years with the Company.</p>
+        <p>At times more words, not fewer, are needed to decode particularly turgid passages. Here's one example cited by Professor Lutz, with a suggested revision:</p>
+        <p>Before -- When business processes are automated, employees are careful not to fall into the trap of applying new technology to old, inefficient work procedures. Instead, a needs assessment is completed to identify system requirements, and then automated systems are designed to accomplish these goals.</p>
+        <p>After -- Computers don't improve the way you do business, if you simply do business the same old way using the computers. So, before we installed a new computer system in the Purchasing Department, we asked ourselves  if there were a better way to do what this department does. After talking to the people in Purchasing and to our suppliers, we came up with a completely new way to run this department. Then we asked the computer people to design the computer systems we needed to make our new approach work.</p>
+        <p>And then there are the hopeless causes. Consider this sentence from a financial document provided by Professor Lutz, which comes in at a breathtaking 374 words. He said he still hasn't come up with a revision:</p>
+        <p>A conveyance by the Transferor to a Trust of Receivables in Additional Accounts or Participations is subject to the following conditions, among others (provided, that the following conditions (other than the delivery of a written assignment and computer file or microfiche list as described in clause (ii) and the making of representations and warranties in clause (iii) shall not apply to the transfer to a Trust of Receivables in Automatic Additional Accounts): (i) the Transferor shall give the related Trustee, each Rating Agency and the Servicer written notice that such additional Accounts or Participations will be included, which notice shall specify the approximate aggregate amount of the Receivables or interests therein to be transferred; (ii) the Transferor shall have delivered to such Trustee a written assignment (including an acceptance by such Trustee on behalf of the related Trust for the benefit of the Certificateholders) as provided in the related Agreement relating to such Additional Accounts or Participations (the 'Assignment') and, the Transferor shall have delivered to such Trustee a computer file or microfiche list, dated the date of such Assignment, containing a true and complete list of such Additional Account or Participations; (iii) the Transferor shall represent and warrant that (x) each Additional Account is, as of the Addition Date, an Eligible Account, and each Receivable in such Additional Account is, as of the Addition Date, an Eligible Receivable, (y) no selection procedures believed by the Transferor to be materially adverse to the interests of the related Certificateholders were utilized in selecting the Additional Accounts from the available Eligible Accounts from the Identified Pool, and (z) as of the Addition Date, the Transferor is not insolvent; (iv) the Transferor shall deliver certain opinions of counsel with respect to the transfer of the Receivables in the Additional Accounts or the Participations to such Trust and (v) under certain circumstances with respect to Additional Accounts, and in all cases with respect to Participations, the Transferor shall have received notice from each Rating Agency then rating any Series of Certificates outstanding under such Trust that the addition of such Additional Accounts or Participations will not result in the reduction or withdrawal of its then existing rating of any Series of Certificates outstanding under such Trust.)</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

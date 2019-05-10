@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Lives They Lived: Questions for James B. Maas; Candid Classroom</title>
+    <meta content="WLN090325" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Magazine Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="6" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Magazine" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165304"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Television</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Funt, Allen (1914-99)</person>
+        <person class="indexing_service">Maas, James B (Prof)</person>
+        <person class="indexing_service">Rakoff, David</person>
+        <object.title class="indexing_service">Candid Camera (TV Program)</object.title>
+        <classifier class="online_producer" type="types_of_material">Interview</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Magazine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Television</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C07E2D91F39F931A35752C0A9669C8B63" item-length="699" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Lives They Lived: Questions for James B. Maas; Candid Classroom</hl1>
+      </hedline>
+      <byline class="print_byline">By David Rakoff</byline>
+      <byline class="normalized_byline">Rakoff, David</byline>
+      <abstract>
+        <p>Interview with Prof James B Maas on hidden lessons of Allen Funt's television program Candid Camera in light of Funt's death in 1999; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Q: Since 1968, you have included ''Candid Camera'' episodes in your Introductory Psychology course at Cornell. Why?</p>
+        <p>I was looking for illustrative examples of human behavior that would amplify empirical research findings. Funt never espoused to be a scientist, but he had a marvelous way of doing the same types of situational experiments that professional psychologists do.</p>
+      </block>
+      <block class="full_text">
+        <p>Q: Since 1968, you have included ''Candid Camera'' episodes in your Introductory Psychology course at Cornell. Why?</p>
+        <p>I was looking for illustrative examples of human behavior that would amplify empirical research findings. Funt never espoused to be a scientist, but he had a marvelous way of doing the same types of situational experiments that professional psychologists do.</p>
+        <p>Which episodes have you used? Can you describe a sequence and its larger psychological context?</p>
+        <p>I think ''Face the Rear'' is my very favorite. A nave subject goes into an elevator and faces the front of the car. The next three people who come into the elevator, unbeknownst to the nave subject, are ''Candid Camera'' confederates, and they all face the rear. By the time the third person comes in, these nave subjects feel such pressure that they turn around. They're very uncomfortable, but yet they conform.</p>
+        <p>And what does it illustrate?</p>
+        <p>Conformity behavior, group pressure -- that it often just takes a simple majority of people doing something to have other people fall in line, even though it doesn't make sense.</p>
+        <p>What's another ''Candid Camera'' episode you use?</p>
+        <p>One film I use is called ''Black Squares.'' There are black and white tiles on the floor of a dry cleaner's. A sign on the door says, ''Today is Wednesday, please walk only on the black squares.'' You'll have people coming in the shop and it's like checkers. They just do it!</p>
+        <p>What does that tell us about ourselves?</p>
+        <p>That we blindly follow all kinds of authority. We are conditioned from the moment we begin to speak: obey Mommy, obey Daddy, obey your teacher, get in the Army, do not question authority, you might get shot, you might get killed, don't think, just do it.</p>
+        <p>What accounts, then, for the huge success of the program if it shows us in such an unflattering, cowardly light?</p>
+        <p>Some people are very sadistic, and they say, ''Oh, that's great!'' Other people are uncomfortable or are angry or they dismiss it as: ''That jerk is doing that? I can't believe that jerk!'' So the problem that we're demonstrating here is that too many people, when it comes to analyzing the behavior of others, attribute the reasons to personality variables and not to powerful situational variables. Funt showed -- with or without knowing it -- the power of the situation.</p>
+        <p>Did you tell Funt about your plans to teach this course?</p>
+        <p>I wrote to Funt and I said, ''I have this class, and I want to enliven it and your examples are just perfect.'' And I got back a form letter that said, We're swamped with requests, and we just can't do it. But at the bottom was a note that said, ''In your case I'm going to make an exception because I'm a member of the class of 1934 at Cornell.'' So I went to Funt's office, I'll never forget this, and he said, ''Will 20,000 do?'' I didn't know whether he was talking about minutes, feet of film, I had no idea what he was talking about. So I said yes.</p>
+        <p>It's like a ''Candid Camera'' episode. Why not just ask him?</p>
+        <p>Here I was kind of a new teacher, and he was offering me something. I didn't want to be presumptuous. So I just felt, No matter what he's talking about, I'll say yes. Then, with the ultimate chutzpah, I said, ''Would you consider coming up to Cornell and talking to my class?'' and with that he got his sister on the phone. ''Dorothy, how did you do at Cornell?''</p>
+        <p>I think she said she was Phi Beta Kappa. He said, ''How did I do?'' And she said, ''I'm surprised you got through.''</p>
+        <p>And he said, ''Well, guess which one of us is the first to get invited back for a distinguished lecture!''</p>
+        <p>David Rakoff</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

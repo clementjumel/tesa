@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Q AND A</title>
+    <meta content="02QNA.$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165281"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <classifier class="indexing_service" type="descriptor">Dolphins and Porpoises</classifier>
+        <location class="indexing_service">Alaska</location>
+        <location class="indexing_service">Great Britain</location>
+        <person class="indexing_service">Siano, Joseph</person>
+        <classifier class="online_producer" type="types_of_material">Question</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Columns/Q and A</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Britain</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Alaska</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D02E0DC1E39F931A35752C0A9669C8B63" item-length="1088" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Q AND A</hl1>
+      </hedline>
+      <byline class="print_byline">By Joseph Siano</byline>
+      <byline class="normalized_byline">Siano, Joseph</byline>
+      <abstract>
+        <p>Travel Q&amp;A column, on places to swim with dolphins, walking in Lake District and winter visit to Alaska</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Dolphin Contact</p>
+        <p>Q.  I'd like to take my children, ages 7 and 10, to swim with dolphins. What programs are there? -- Anita Nass, New York, N.Y.</p>
+      </block>
+      <block class="full_text">
+        <p>Dolphin Contact</p>
+        <p>Q.  I'd like to take my children, ages 7 and 10, to swim with dolphins. What programs are there? -- Anita Nass, New York, N.Y.</p>
+        <p>A.  All dolphin-contact programs  in the United States must be approved by the Department of Agriculture, and all require reservations. You should ask how much time is spent in the water with the dolphins (where no time is listed, precise figures were unavailable), whether an adult must accompany one or both of your children and what swimming skills are required. In some cases, participants do not swim with the dolphins. The United States programs closest to you are in Florida:</p>
+        <p>The Dolphin Connection, Hawk's Cay Resort, Duck Key, Fla. 33050; (888) 814-9154. Rate: $90 for a 25-minute encounter. Participants must be 4 feet 6 inches or taller.</p>
+        <p>Dolphin Research Center, Post Office Box 522875, Marathon Shores, Fla. 33052; (305) 289-0002. Rates: 10-minute encounter is $60; 20 to 25 minutes is $110.</p>
+        <p>Dolphins Plus, Post Office Box 2728, Key Largo, Fla. 33037; (305) 451-1993. Cost: $125; children under 13 must be accompanied by an adult.</p>
+        <p>Dolphin Cove Research and Education Center, Post Office Box 870, Key Largo, Fla. 33037; (305) 451-4060. Cost: $125 for about 30 to 35 minutes in the water; good swimmers ages 7 or older only, under 18 requires an adult observer.</p>
+        <p>Gulfarium, 1010 Miracle Strip Parkway SE, Fort Walton Beach, Fla. 32548; (850) 243-9046. Cost: $75 for a 30-minute encounter.</p>
+        <p>The Living Seas, Epcot, Walt Disney World, Post Office Box 10000, Lake Buena Vista, Fla. 32830; (407) 824-4321. Rate: $140; scuba certification required.</p>
+        <p>Miami Seaquarium, 4400 Rickenbacker Causeway, Miami, Fla. 33149; (305) 365-2501. Cost: $125 for at least 30 minutes in the water; must be at least 4 feet 4 inches tall.</p>
+        <p>SeaWorld, 7007 SeaWorld Drive, Orlando, Fla. 32821; (877) 434-7268. Through Feb. 29, the program costs $159; (800) 406-2244. It will resume in summer at the new Discovery Cove for $179, for about 30 minutes in the water; (877) 434-7268. Those under 18 must be accompanied by an adult.</p>
+        <p>Theater of the Sea, 84721 Overseas Highway, Islamorada, Fla. 33036; (305) 664-2431. For anyone under age 10 to participate in the 30-minute swim, a group rate of $570 is charged, with your family or group  the only participants.</p>
+        <p>Lake District Walks</p>
+        <p>Q.  My husband and I wish to join a group walking tour of the Lake  District next summer. Do you know of any tour operators? -- Carol Venanzi, Brooklyn</p>
+        <p>A.  In the United States, you can contact:</p>
+        <p>The Wayfarers, 172 Bellevue Avenue, Newport, R.I. 02840; (800) 249-4620, fax (401) 849-5878. By e-mail, it is wayfare@thewayfarers.com; on the Web, www.thewayfarers.com. It has a six-day Lake District Walk that follows the edge of Lake Windermere and stops at Wordsworth's Dove Cottage. Moderate walks average 10 miles a day. Price: $1,990 a person, double occupancy, with meals, accommodations and bag transfers.</p>
+        <p>English Lakeland Ramblers, 18 Stuyvesant Oval, No. 1A, New York, N.Y. 10009; (800) 724-8801, fax (212) 979-5342; e-mail to BritWalks@aol .com, on the Web: www.ramblers .com. Its Lake District tours average about seven miles a day, with longer routes as an option. Some tours use the same Lakeland hotel for all six nights, with minibus transportation to each site; others are inn to inn. Rate: $1,890 a person, double, with five guided walks, meals, six nights' accommodations; inn-to-inn tours are $2,040 with seven nights' accommodations, meals and six hikes.</p>
+        <p>In the Lake District, try these:</p>
+        <p>Land of the Lakes Tours, 4 Green Moss, Oakthwaite Road, Windermere, Cumbria LA23 2BB, England; telephone (44-15394) 44441, fax (44-15394) 48037; e-mail rachel@land-of-the-lakestours.co.uk, Web address: www.land-of-the-lakestours.co.uk. A Walking With Wordsworth tour follows the poet's footsteps. This five-day package follows easy routes through fields and valleys, at about six miles a day. You can stay in the deluxe Holbeck Ghyll Country House Hotel on Lake Windermere ($2,060 a person, double, with six nights' accommodations and most meals) or a bed and breakfast inn ($1,460).</p>
+        <p>Contours Walking Holidays, Smithy House, Stainton, Cumbria CA11 0ES, England; (44-1768) 867539, fax (44-1768) 892171; e-mail to walkwith@contours.u-net.com, on the Web at www.uk-walkingholidays.co.uk. It offers inn-to-inn tours or day walks from one hotel, at varying degrees of difficulty (a moderate trip features a total of 70 miles of walking). The price: $685 a person (at $1.61 to a pound) for a double.</p>
+        <p>Air fare is not included in any of the trips listed. You can also call the British Tourist Authority at (800) 462-2748 or try www.visitbritain .com/walking.</p>
+        <p>Alaska, Way Off Season</p>
+        <p>Q.</p>
+        <p>We would like to visit Alaska when the Northern Lights are at their most stunning, which we hear is in February. What is there to do in Alaska at this time besides observe the night sky? -- Janet Krendel, Swarthmore, Pa.</p>
+        <p>A.  The Northern Lights are caused by particles from the sun being thrown against the earth by solar wind. When the particles collide with the earth's atmosphere, the energy of the particles becomes light that can be seen near the poles.</p>
+        <p>Fairbanks is a popular destination for Northern Lights viewing, although they are seen in most of the state; November through March offer the best viewing. Winter activities include snowmobile trips, dog-sled tours, cross-country skiing and sightseeing flights. Among the winter festivals is the Anchorage Fur  Rendezvous, Feb. 11 to 20, with art exhibits and snow sculpturing among the festivities. Call (907) 277-8615.</p>
+        <p>The Fairbanks World Ice Art Championships feature ice sculptures on view from 10 a.m. to 10 p.m. daily (they are illuminated at night) until they break up, usually in April. The Single-Block Classic is March 1 to 3, with each block 5 feet by 8 feet by 3 feet, weighing 7,800 pounds, and the Multiblock Classic is March 6 to 11, with each team of sculptors receiving a dozen 3,000-pound blocks. Call (907) 451-8250.</p>
+        <p>The Festival of Native Arts takes place in Fairbanks March 2 to 4, with dancing, singing and storytelling.</p>
+        <p>Contact the Fairbanks Convention and Visitors Bureau, (907) 457-3282, or the Anchorage Convention and Visitors Bureau, (907) 276-4118, for more information on tour operators.</p>
+        <p>For more on Alaska, try (800) 862-5275 or http://apr.travelalaska.com.</p>
+        <p>JOSEPH SIANO</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

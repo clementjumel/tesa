@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>More New Yorkers Take Verbal Aim at Noisy Aircraft</title>
+    <meta content="02FLIG" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165490"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: NEW YORK UP CLOSE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Airlines and Airplanes</classifier>
+        <classifier class="indexing_service" type="descriptor">La Guardia Airport (NYC)</classifier>
+        <classifier class="indexing_service" type="descriptor">Newark International Airport (NJ)</classifier>
+        <classifier class="indexing_service" type="descriptor">Noise</classifier>
+        <classifier class="indexing_service" type="descriptor">Air Pollution</classifier>
+        <location class="indexing_service">New York City</location>
+        <org class="indexing_service">Federal Aviation Administration</org>
+        <person class="indexing_service">Kirby, David</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Manufacturing, Operations and Logistics</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Noise</classifier>
+        <classifier class="online_producer" type="general_descriptor">Environment</classifier>
+        <classifier class="online_producer" type="general_descriptor">Airports</classifier>
+        <classifier class="online_producer" type="general_descriptor">Airlines and Airplanes</classifier>
+        <classifier class="online_producer" type="general_descriptor">Air Pollution</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D06E7DF1238F931A35752C0A9669C8B63" item-length="536" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>More New Yorkers Take Verbal Aim at Noisy Aircraft</hl1>
+      </hedline>
+      <byline class="print_byline">By DAVID KIRBY</byline>
+      <byline class="normalized_byline">Kirby, David</byline>
+      <abstract>
+        <p>Manhattanites join Queens residents in complaining about noise and pollution coming from planes heading to and from La Guardia and Newark International Airports; they will take their concerns to Federation Aviation Administration, which is embarked on six-year master plan to redesign city's air space (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Queens residents have been complaining seemingly forever about airport noise. More recently, some Manhattanites have added their voices to the chorus.</p>
+        <p>Their concern is noise and pollution from planes heading to and from La Guardia and Newark International Airports. And later this month, some of these residents are planning to take their concerns directly to the Federal Aviation Administration, which is embarked on a six-year, $30 million master plan to redesign the city's air space. The agency's aim is to move planes in and out more efficiently while also reducing noise.</p>
+      </block>
+      <block class="full_text">
+        <p>Queens residents have been complaining seemingly forever about airport noise. More recently, some Manhattanites have added their voices to the chorus.</p>
+        <p>Their concern is noise and pollution from planes heading to and from La Guardia and Newark International Airports. And later this month, some of these residents are planning to take their concerns directly to the Federal Aviation Administration, which is embarked on a six-year, $30 million master plan to redesign the city's air space. The agency's aim is to move planes in and out more efficiently while also reducing noise.</p>
+        <p>Elected officials in Manhattan say that in recent years they have received increasing complaints about the noise produced by aircraft flying over residential areas.</p>
+        <p>''It's ruining my life,'' said Deirdre Stanforth, who has lived for 32 years in a brownstone on West 83rd Street. ''Noise was never a problem until one day about three years ago. It just happened, out of the blue.''</p>
+        <p>The noise is so loud, she said, that she can no longer use her garden. ''I close the windows, the storm windows and the lined draperies, and it still doesn't help,'' she said. ''The jets are flying so low, you can practically tell what color the pilot's tie is.''</p>
+        <p>Her neighbor, Diana Schneider, a travel agent, has also complained about air traffic. She is a member of the Manhattan Helicopter Task Force, a watchdog group that has recently taken on the issue of airplane noise. According to Ms. Schneider, passenger jets to La Guardia began flying low over the West Side of Manhattan in 1996, followed by propeller-driven commuter planes and late-night cargo jets.</p>
+        <p>''We are under siege with unbridled growth in air traffic,'' Ms. Schneider said. She added that at a street fair in the fall she had collected hundreds of signatures protesting aircraft noise and calling for greater restrictions on the timing, frequency and altitude of flights over residential areas. ''It's time to take back control of our own skies.''</p>
+        <p>Transportation officials say no major changes have been made in the region's flight patterns in nearly 15 years and that the advent of larger planes had actually reduced the number of flights into La Guardia.</p>
+        <p>''We're somewhat at a loss what to tell people in Manhattan,'' said Ralph Tragale, a spokesman for the Port Authority of New York and New Jersey, which runs Newark, La Guardia and J.F.K. airports.</p>
+        <p>Frank Hatfield, an F.A.A. traffic manager, said weather and crowded skies sometimes caused jets to deviate from a planned approach. Under his agency's proposed airspace redesign, planes might be allowed to fly at higher altitudes before landing and after takeoff. Even a deviation of a quarter of a mile can make a big difference, he added.</p>
+        <p>''You have flights from three of the world's busiest airports stacked up out there,'' he said. ''It's like a big bowl of spaghetti, and it needs to be sorted out.''</p>
+        <p>The agency will hold public meetings on the redesign at the Marriott Marquis Hotel in Manhattan on Jan. 11, at P.S. 182 in Clasons Point, the Bronx, on Jan. 19, and at the Ramada Plaza at J.F.K. on Feb. 3, all from 7 p.m. to 9 p.m.</p>
+        <p>DAVID KIRBY</p>
+        <p>NEIGHBORHOOD REPORT: NEW YORK UP CLOSE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

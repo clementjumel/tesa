@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>MOVIES: CRITIC'S CHOICE</title>
+    <meta content="02TVMT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Television" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="13" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165659"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9405E2D91138F931A35752C0A9669C8B63" item-length="608" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>MOVIES: CRITIC'S CHOICE</hl1>
+      </hedline>
+      <byline class="print_byline">By Lawrence Van Gelder and Howard Thompson</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WAR and romantic passion shape the tumult in the wide spectrum of films that usher in the first full week of the new year.</p>
+      </block>
+      <block class="full_text">
+        <p>WAR and romantic passion shape the tumult in the wide spectrum of films that usher in the first full week of the new year.</p>
+        <p>Powerful and heartwrenching are the two words that best describe BREAKER MORANT (1980), the drama that firmly established the reputation of its Australian-born director, Bruce Beresford, in the United States. The film is based on an obscure incident in the Boer War, when three Australian soliders involved in an execution became scape-goats for the political interest of Britain and for an Australia adjusting to its Commonwealth image. Splendid performances are contributed by Edward Woodward in the title role, Bryan Brown and Lewis Fitz-Gerald as his co-defendants, and Jack Thompson as the lawyer who rises to their cause - Monday at 6 p.m., Tuesday at noon and Saturday at 8 p.m. on IFC.</p>
+        <p>Political unrest and onflict play a significant role in Fernando Trueba's BELLE EPOQUE (1992), but the mood is definitely lighter. Set in 1931, this Spanish romantic comedy, which won the Academy Award for best froeign film tells the story of Fernando (Jorge Sanz), a deserter from the Spanish Army who finds refuge with Manolo(Fernando Fernan Gomez), a droll worldly old painter who happens to have four beautiful daughters. The passions, personalities and politics of all involved are handled with wit and style - Sunday at 2 p.m. on ROM.</p>
+        <p>Politics in the form of espionage concerning a planned assassination at the Albert Hall in London drive Alfred Hitchcock's 1956 Hollywood remake of his 1934 British thriller THE MAN WHO KNEW TOO MUCH. The later version stars James Stewart and Doris Day as the couple vacationing in Morocco with their little boy when a dying Frenchman whispers a cryptic message. Mr. Stewart becomes the man who knows too much, the boy is kidnapped, and the chase, which leads to London, is on. Amid perils and parental love, Ms. Day sings ''Que Seera Sera,'' which won an Oscar - Thursday at 8 p.m. and Thursday/Early Friday at 1:45 a.m on AMC.</p>
+        <p>Love takes a dark turn in John Cromwell's OF HUMAN BONDAGE (1934), the screen adaptation of the popular W. Somerset Maugham novel that catapulted Bette Davis into the Hollywood firmament. In this drama, she plays Mildred Rogers, the vulgar, manipulative London waitress who tortures the infatuated, clubfooted Philip Carey, an artists turned medical student played by Leslie Howard. In an eminently hissable role, Davis establishes herself as a force forever to be reckoned with - Saturday at midnight on Channel 21; Tuesday at 4 p.m. on TCM.</p>
+        <p>Comic relief arrives in the form of Renee Taylor and Joseph Bologna's LOVE IS ALL THERE IS (1996). In this no-holds-barred farce, Shakespeare's ''Romeo and Juliet'' is transplanted from Verona to City Island in the Bronx, where the Capulets and the Montagues become the Cappamezzas (translation: half a head) and the alacicis (bad beans), two rival families in the restaurant business. In a boisterous plot that involves their children and has its merry way with theater, food, sex, superstition, Italian-American life, decor and clothes everythign is fair game. the cast includes not only Ms. Taylor and Mr. Bologna but also Paul Sorvino and Lainie Kazan and, as the young lovers, Nathaniel Marston and Angelina Jolie - Tuesday at 9:30 p.m., Tuesday/Early Wednesday at 2 a.m. and Wednesday at 5:30 p.m. on ROM.</p>
+        <p>Lawrence Van Gelder and Howard Thompson</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

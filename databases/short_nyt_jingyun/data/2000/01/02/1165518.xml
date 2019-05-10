@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Oh, to Live Well, as the Spanish Once Did!</title>
+    <meta content="L02SPA$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Editorial Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165518"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Economic Conditions and Trends</classifier>
+        <classifier class="indexing_service" type="descriptor">Social Conditions and Trends</classifier>
+        <classifier class="indexing_service" type="descriptor">Life Styles</classifier>
+        <location class="indexing_service">Spain</location>
+        <person class="indexing_service">Hooper, Trish</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion/Letters</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Spain</classifier>
+        <classifier class="online_producer" type="general_descriptor">Social Conditions and Trends</classifier>
+        <classifier class="online_producer" type="general_descriptor">Life Styles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E05E7DF1338F931A35752C0A9669C8B63" item-length="185" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Oh, to Live Well, as the Spanish Once Did!</hl1>
+      </hedline>
+      <abstract>
+        <p>Trish Hooper letter suggests Western business world emulate more of Spain's laid-back work ways (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>Now the Western business world is taking on Spain, trying to make the laid-back Spaniards who know how to live learn to live like us sleep-deprived, harried fast-food snackers and road-raged speeders (''Spain Rudely Awakened to Workaday World,'' front page, Dec. 26).</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>Now the Western business world is taking on Spain, trying to make the laid-back Spaniards who know how to live learn to live like us sleep-deprived, harried fast-food snackers and road-raged speeders (''Spain Rudely Awakened to Workaday World,'' front page, Dec. 26).</p>
+        <p>We've ruined life for the French, first spoiling their elegant language with our ''weekends,'' then urging them to eat at McDonald's instead of at home. Now we're taking on the Spanish, urging them to think eight-hour days all in one piece when they discovered that 10-hour days divided into two large hunks worked so much better.</p>
+        <p>Why don't we ever admit that we just don't know it all? That we might learn about how to live better and longer if we copied the Spanish way, took a little time off in the middle of each day with our children, our spouses and our friends next door and stopped to wonder, What's the rush?</p>
+        <p>TRISH HOOPER  Portola Valley, Calif., Dec. 26, 1999</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

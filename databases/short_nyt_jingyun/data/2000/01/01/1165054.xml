@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Digital Artists Draw Support From a New Foundation</title>
+    <meta content="01CYBE" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Arts/Cultural Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="F" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165054"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Culture</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Foundations</classifier>
+        <classifier class="indexing_service" type="descriptor">Grants (Corporate and Foundation)</classifier>
+        <classifier class="indexing_service" type="descriptor">Company and Organization Profiles</classifier>
+        <org class="indexing_service">Creative Capital Foundation</org>
+        <org class="indexing_service">Rockefeller Foundation</org>
+        <org class="indexing_service">Jerome Foundation</org>
+        <org class="indexing_service">Benton Foundation</org>
+        <person class="indexing_service">Mirapaul, Matthew</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Company and Organization Profiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Grants (Corporate and Foundation)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Philanthropy</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Corporations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Culture</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9800E6DC1238F932A35752C0A9669C8B63" item-length="757" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Digital Artists Draw Support From a New Foundation</hl1>
+      </hedline>
+      <byline class="print_byline">By MATTHEW MIRAPAUL</byline>
+      <byline class="normalized_byline">Mirapaul, Matthew</byline>
+      <abstract>
+        <p>Creative Capital Foundation, set up last January to support experimental arts, will give nearly $100,000 to support several digital-arts projects; grant recipients listed; foundation contributors include Benton, Jerome and Rockefeller foundations (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>In another sign that the Internet is gaining acceptance as a creative medium, a new arts foundation will give nearly $100,000 to support a dozen digital-arts projects.</p>
+        <p>The Creative Capital Foundation has earmarked $91,000 of its initial grants for 12 projects in the ''emerging fields'' category, which includes Web sites, computer games and CD-ROMs.</p>
+      </block>
+      <block class="full_text">
+        <p>In another sign that the Internet is gaining acceptance as a creative medium, a new arts foundation will give nearly $100,000 to support a dozen digital-arts projects.</p>
+        <p>The Creative Capital Foundation has earmarked $91,000 of its initial grants for 12 projects in the ''emerging fields'' category, which includes Web sites, computer games and CD-ROMs.</p>
+        <p>The grants were described in mailings to the artists. An announcement of the full list of 75 grants, totaling $563,000, will probably be made early next year. Creative Capital's offices in New York are closed for the holidays and its executive director, Ruby Lerner, could not be reached for comment.</p>
+        <p>Creative Capital, which began operations last January, was set up to support artists pursuing experimental approaches in the visual, performing and media arts. Its creation was partly a response to a decision by the National Endowment of the Arts to rein in grants to individual  artists after a series of run-ins with Congress over the federal agency's sponsorship of disputed works.</p>
+        <p>The Creative Capital grants to digital-art projects account for 16 percent of the total amount being given out by the foundation. They come after several other recent acknowledgments of the emerging medium, including an announcement by the Whitney Museum that for the first time it will feature online works in its next Biennial survey of American art.</p>
+        <p>And the National Endowment of the Arts itself is starting to sponsor creative digital projects. In its latest round of grants, announced on Dec. 15, the agency awarded $25,000 for a computer-animation project, $25,000 for an interactive film work and $6,000 for a theater piece with an interactive musical set.</p>
+        <p>According to Creative Capital documents provided by some of the artists who are receiving money, the emerging-fields grant recipients are: Betty Beaumont of New York ($15,000 for a Web site); Natalie Bookchin of Los Angeles ($12,000 for a computer-arcade game); Josely Carvalho of New York ($8,000 for a Web site and digital-video installation); Maya Sara Churi of New York ($5,000 for a Web site and video); and Patrick Clancy of Kansas City, Mo. ($7,000 for a Web site and installation).</p>
+        <p>Also receiving grants are Alison Cornyn of New York ($5,000 for a Web site); Leah Gilliam of Tivoli, N.Y. ($5,000 for a Web site and CD-ROM); Jessica Irish of Los Angeles ($5,000 for a Web site); Prema Murthy of Brooklyn ($7,000 for a Web site); John Simon Jr. ($12,000 for a software-based work); ''Ray Thomas,'' a pseudonym for an artist in Loudonville, N.Y. ($5,000 for a Web site, RTMark.com); and Helen Thorington of Staten Island ($5,000 for an online performance event).</p>
+        <p>Recipients in other categories included well-established artists and performers like the composer Meredith Monk, the choreographer Elizabeth Streb, the playwright Lisa Kron, the jazz musician Jon Jang and the puppeteer Basil Twist.</p>
+        <p>The grant recipients were selected from a pool of 220 finalists culled from 1,810 proposals submitted to Creative Capital earlier this year. The 20 judges included several people involved on a regular basis with cyberart: Carl Goodman of the American Museum of the Moving Image, Carol Stakenas of the Creative Time arts group and Mark Tribe of Rhizome.org, an online arts resource.</p>
+        <p>As anticipated, many of the nondigital projects that received grants deal with provocative topics that touch on gender, racial and political issues. For example, Zhi Lin of Springfield, Mo., was awarded a $6,000 grant to complete a series of paintings about brutal torture methods used in China.</p>
+        <p>Creative Capital officials have said they hope to raise $40 million over 20 years and had planned to hand out $1 million in the first year of grants. Contributors to Creative Capital include the Benton, Jerome and Rockefeller foundations, all of which have sponsored digital-art programs and projects in the past.</p>
+        <p>As a condition of the grants, the artists are required to work with marketing and other experts to build  audiences for their work. If the projects end up making money, , the artists must share the proceeds with Creative Capital, an unusual arrangement that may mean some grants are delayed until individual contracts can be negotiated.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

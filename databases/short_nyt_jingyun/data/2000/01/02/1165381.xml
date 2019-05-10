@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Grandiosity</title>
+    <meta content="LTR091858" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Arts; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165381"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="LAND ART"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Art</classifier>
+        <classifier class="indexing_service" type="descriptor">Deserts</classifier>
+        <location class="indexing_service">Nevada</location>
+        <person class="indexing_service">Boettger, Suzaan</person>
+        <person class="indexing_service">Heizer, Michael</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Art and Design</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Art</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Nevada</classifier>
+        <classifier class="online_producer" type="general_descriptor">Deserts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Art</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D0CE3D91738F931A35752C0A9669C8B63" item-length="253" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Grandiosity</hl1>
+      </hedline>
+      <abstract>
+        <p>Suzaan Boettger letter mocks Michael Heizer's claims of contributions to early contemporary Land Art, in Dec 12 (1999) article; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>Michael Heizer was a major contributor to the earliest contemporary Land Art, but not for the reasons he offered Michael Kimmelman [''A Sculptor's Colossus of the Desert,'' Dec. 12]. Yes, Mr. Heizer went to Western deserts with Walter De Maria and Robert Smithson, but he hardly ''brought them west,'' as Mr. Kimmelman writes. Smithson had traveled the West as a child and as a young man, and Mr. De Maria grew up in California.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>Michael Heizer was a major contributor to the earliest contemporary Land Art, but not for the reasons he offered Michael Kimmelman [''A Sculptor's Colossus of the Desert,'' Dec. 12]. Yes, Mr. Heizer went to Western deserts with Walter De Maria and Robert Smithson, but he hardly ''brought them west,'' as Mr. Kimmelman writes. Smithson had traveled the West as a child and as a young man, and Mr. De Maria grew up in California.</p>
+        <p>As with so many of Mr. Heizer's claims, his reference to Smithson and others associated with Earthworks as ''high-speed hustlers'' and ''academics who did not do a good historical job'' serves as both a mirror of this artist's own actions and a window onto his worldview.</p>
+        <p>It's too bad Mr. Heizer believes that there is so little recognition to go around that he must slander others to promote himself, and it's too bad there are critics quite willing to authorize Mr. Heizer's fantasies of not-only-sculptural grandeur.</p>
+        <p>SUZAAN BOETTGER  Queens</p>
+        <p>The writer is the author of ''Earthworks: Art and the Landscape of the Late 60's,'' to be published by the University of California Press.</p>
+        <p>LAND ART</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

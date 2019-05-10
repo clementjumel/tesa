@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Only Naval Engagement Ever Won at the Card Table</title>
+    <meta content="01CARD$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Arts/Cultural Desk" name="dsk"/>
+    <meta content="12" name="print_page_number"/>
+    <meta content="F" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165045"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="BRIDGE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">World War I (1914-18)</classifier>
+        <classifier class="indexing_service" type="descriptor">Bridge (Card Game)</classifier>
+        <classifier class="indexing_service" type="descriptor">Navies</classifier>
+        <classifier class="indexing_service" type="descriptor">Scorpion (USS)</classifier>
+        <location class="indexing_service">Istanbul (Turkey)</location>
+        <location class="indexing_service">Turkey</location>
+        <location class="indexing_service">Germany</location>
+        <location class="indexing_service">Constantinople (Istanbul) (Turkey)</location>
+        <person class="indexing_service">Babbitt, Herbert (Lt Comdr)</person>
+        <person class="indexing_service">Pasha, Talat (Min)</person>
+        <person class="indexing_service">Truscott, Alan</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Germany</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Turkey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Crossword and Games/Bridge</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Middle East</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Germany</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Turkey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Turkey/Istanbul</classifier>
+        <classifier class="online_producer" type="general_descriptor">Navies</classifier>
+        <classifier class="online_producer" type="general_descriptor">Bridge (Card Game)</classifier>
+        <classifier class="online_producer" type="general_descriptor">World War I (1914-18)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Ships and Shipping</classifier>
+        <classifier class="online_producer" type="general_descriptor">War and Revolution</classifier>
+        <classifier class="online_producer" type="general_descriptor">Armament, Defense and Military Forces</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0DE1DE1238F932A35752C0A9669C8B63" item-length="527" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Only Naval Engagement Ever Won at the Card Table</hl1>
+      </hedline>
+      <byline class="print_byline">By Alan Truscott</byline>
+      <byline class="normalized_byline">Truscott, Alan</byline>
+      <abstract>
+        <p>Bridge column recalls remarkable bridge game played in 1917 in Constantinople harbor, to determine whether crew of US gunboat Scorpion would be interned by Turks or their German allies; captain, Herbert Babbitt, challenged Turkish minister, Talat Pasha, to rubber, with ship as stake; Babbitt won, and crew got its wish to remain in Turkish waters until end of war (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The most remarkable bridge game of the past century, or indeed the millennium, occurred in 1917 in the Turkish harbor of Constantinople, now Istanbul. An American gunboat, the Scorpion, was attached to the American Embassy there, and it was boarded by the Turks, who were German allies, when the United States entered World War I.</p>
+        <p>The German Navy, present in force, wanted the Scorpion as a decoy, but the crew much preferred to be interned under Turkish control. The ship's fate was to be determined by Talat Pasha, the powerful minister of the interior, who happened to be an acquaintance of the ship's captain, Lt. Cmdr. Herbert Babbitt.</p>
+      </block>
+      <block class="full_text">
+        <p>The most remarkable bridge game of the past century, or indeed the millennium, occurred in 1917 in the Turkish harbor of Constantinople, now Istanbul. An American gunboat, the Scorpion, was attached to the American Embassy there, and it was boarded by the Turks, who were German allies, when the United States entered World War I.</p>
+        <p>The German Navy, present in force, wanted the Scorpion as a decoy, but the crew much preferred to be interned under Turkish control. The ship's fate was to be determined by Talat Pasha, the powerful minister of the interior, who happened to be an acquaintance of the ship's captain, Lt. Cmdr. Herbert Babbitt.</p>
+        <p>Bridge was almost certainly born in the Ottoman Empire, and many Turks were enthusiasts. Captain Babbitt had a happy thought. He challenged Talat to a rubber, with the ship as the stake. If he lost, the Scorpion would go to the Germans. If he won, the vessel would be interned where it was.</p>
+        <p>Talat accepted this creative suggestion, and play began. Everything hinged on the final deal, perhaps the one shown in the diagram. (Only the final contract is on record.) This was auction bridge, and nobody was vulnerable. Indeed, nobody would be vulnerable for another eight years. But both sides had scored a game at this point.</p>
+        <p>Talat opened the East hand with one heart, and his partner persevered to the four-level. Four hearts could have been doubled effectively, but that would not have won the rubber and saved the ship. North bid four no-trump, relying on Captain Babbitt's reputation as the best player in the United States Navy.</p>
+        <p>He had to play four no-trump, a rare contract in the auction game. Slam bonuses were scored whether or not the slam was bid, so a slam exploration that stopped short did not exist. He began with the knowledge that nearly all the missing high-card strength was on his right.</p>
+        <p>Talat tried a small deception by winning the heart lead with the ace and returning the five. Babbitt was not fooled. He put up the queen, and when this won he could count nine tricks, since the diamond queen was a sure winner. For his 10th, he could have pinned his hopes on finding East with the diamond jack as well as the king, but it seemed likely that one of the black suits would break favorably.</p>
+        <p>He cashed his spade winners, finding that East was guarding the suit. He then cashed two club winners, reaching this ending:  [Diagram]</p>
+        <p>Babbitt could have survived by risking a finesse of the diamond 10, but he cashed the club ace, hoping for a split. Talat should have unblocked his heart king, but he fell from grace by throwing the eight. Now Babbitt finessed the diamond 10 and led a heart, scoring two diamond tricks at the finish to make his contract and save the ship.</p>
+        <p>Talat kept his word, and the Scorpion and its crew remained in Turkish waters till the war was over. For the rest of his naval career, its captain was known as Four No-Trump Babbitt.</p>
+        <p>BRIDGE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Habitats/Upper West Side; 30-Year-Old With a Lease On Real Estate Karma</title>
+    <meta content="02HABI$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Real Estate Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="11" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Real Estate" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165389"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Housing</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <classifier class="indexing_service" type="descriptor">Renting and Leasing</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Hall, Trish</person>
+        <person class="indexing_service">Sandstrom, Nathanael</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Locations/New York/New York City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Columns/Habitats</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Renting and Leasing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Housing</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D03E1D91738F931A35752C0A9669C8B63" item-length="967" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Habitats/Upper West Side; 30-Year-Old With a Lease On Real Estate Karma</hl1>
+      </hedline>
+      <byline class="print_byline">By TRISH HALL</byline>
+      <byline class="normalized_byline">Hall, Trish</byline>
+      <abstract>
+        <p>Interview with Nathanael Sandstrom, who is living in one-bedroom legal sublet on West 76th Street in Manhattan near Central Park for $1,190 a month, which is considered inexpensive; Sandstrom says sister-in-law of woman he had worked with in Seattle offered him place for a year; photo (Habitats column) (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>EVEN people with faith in nothing, people who barely believe in their mothers, know that certain inexplicable powers do exist in this world.</p>
+        <p>Like real estate karma.</p>
+      </block>
+      <block class="full_text">
+        <p>EVEN people with faith in nothing, people who barely believe in their mothers, know that certain inexplicable powers do exist in this world.</p>
+        <p>Like real estate karma.</p>
+        <p>Nathanael Sandstrom is proof of that, although fortunately, he is completely modest, the kind of person so grateful for his good luck that he has started doing charity work to be sure he continues to deserve his fate.</p>
+        <p>At the moment, Mr. Sandstrom, 30, is living in a legal sublet on the Upper West Side, a spacious one-bedroom apartment with a very large terrace on West 76th Street, not far from Central Park. Although a walkup, this is the kind of place that newcomers to New York imagine but rarely find: convenient, pleasingly old, in an exciting neighborhood.</p>
+        <p>His rent is $1,190 a month, ''practically free,'' he says, with the irony of someone who knows that on the open market that amount of money in this neighborhood would get him an apartment the size of a jail cell. The rent is low, he says, because the regular tenant has lived there for 15 years, and the apartment is rent-stabilized.</p>
+        <p>NATURALLY, having real estate karma, he never actually looked for the apartment. He was living in the West 50's in an apartment that he found, also without looking, shortly before he arrived in New York last January. He had been working as a technical writer in Seattle since graduating from college with a major in English. Mr. Sandstrom, who grew up in a small town in Kansas, had been wanting to live in New York, and each time he visited, found it harder to leave.</p>
+        <p>''I was sick of Seattle because of the rain,'' he says. The moisture never seemed to begin or end, but just hung there, he says, for eight or nine months a year. In fact last week, he bought his first umbrella, because in New York, ''when it rains, it really rains.''</p>
+        <p>In Seattle, he lived in a huge 1920's stone house with a view of Lake Washington, owned by his aunt and uncle. He shared it with several others, paying $350 a month for his room. As he was considering his options, and his frustration with the weather, a friend in New York said he was planning to move to Denver and give up his apartment. Mr. Sandstrom's job contract and lease in Seattle were about to end, so he jumped at the place in New York, asking if he could sublet it.</p>
+        <p>That sublet, unfortunately, did not have the owner's approval, and so when the management company discovered his presence, he had to find another place. A friend in the Williamsburg section of Brooklyn was moving out and urged him to take over his two-bedroom apartment, with a rent of $1,200 a month. He considered it, but then decided he didn't want to live outside Manhattan.</p>
+        <p>Just before he had to leave his illegal sublet, the sister-in-law of a woman he had worked with in Seattle called and said she was moving away for a year and offered him her place essentially unfurnished on the Upper West Side. The rent is so low because a stabilized tenant cannot charge more than the legal rent to sublet the apartment unfurnished; if it's furnished, the tenant can charge 10 percent more. The sublet requires the landlord's consent, which the law says cannot be unreasonably withheld.</p>
+        <p>And so he moved in October, furnishing the apartment with some new purchases and some things he had brought from Seattle. As in the past, he is working on contract as a technical consultant, writing user guides and online help. He takes contracts that last for three, six or nine months, but preferably not longer. ''After a year,'' he says, ''they start to treat you like an employee.''</p>
+        <p>Freelancing gives him the option to pick up and leave. Before he moved to New York, he took seven months off, including two that he spent driving around the United States, recording his journey on his Web site, www.hotnate.com.</p>
+        <p>ALTHOUGH he keeps himself free of a regular job commitment, he says he has no plans to leave New York. ''I really like the activity, the hustle and bustle,'' he says. ''There's always something going on. It's easy to feed off of that.'' And so he goes out a lot, he says, although ''less since I bought the couch.''</p>
+        <p>Still, he has tickets to concerts at Carnegie Hall, and he has found interesting bars in almost every neighborhood. And of course, he has started that charity work with New York Cares -- a nonprofit organization that recruits volunteers to help with community projects -- to keep the karma going.</p>
+        <p>Not that everything falls into his lap. His relationship with cars, and parking, is quite different. In six years, he says, ''I don't think I ever successfully parked in downtown Seattle.''</p>
+        <p>His inability to find a space, almost like a jinx, was so well known and obvious, he says, that if he was driving with some friends and they couldn't find a space, ''my friends would make me get out of the car.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

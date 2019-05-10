@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>World Briefing</title>
+    <meta content="Y01BRI$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165070"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C04E0D91338F932A35752C0A9669C8B63" item-length="809" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>World Briefing</hl1>
+      </hedline>
+      <byline class="print_byline">Compiled by Terence Neilan</byline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>EUROPE</p>
+        <p>FRANCE: MORE EXPLOSIVES LINKED TO BASQUES  The French police have seized a ton of explosives they said belonged to the Spanish Basque separatist guerrilla group E.T.A., a week after two powerful van bombs were found and defused in Spain. The explosives were found in an unused garage outside the city of Pau near the Spanish border.</p>
+        <p>Suzanne Daley (NYT)</p>
+        <p>BRITAIN: HONORS FOR ACTORS  Elizabeth Taylor, Julie Andrews and Sean Connery have new titles: Dame Elizabeth, Dame Julie and Sir Sean. The three actors were among 2,000 people honored in the annual New Year's list drawn up by the government and bestowed by the queen. Also honored were sports heroes, milkmen, crossing guards and the multimillionaire head of the Virgin Group, now Sir Richard Branson.</p>
+        <p>(AP)</p>
+        <p>AFRICA</p>
+        <p>SUDAN: CABINET QUITS  Three weeks after declaring a state of emergency, President Omar el-Bashir said he had accepted his cabinet's resignation, paving the way for him to consolidate his power. In a speech marking Sudan's 44th anniversary of independence, Mr. Bashir said ministers and state governors had expressed their desire to resign and he had accepted their resignations. However, he asked them to stay on as caretakers until he could reform the cabinet.</p>
+        <p>(AP)</p>
+        <p>NIGER: PREMIER AGAIN  A former prime minister, Hama Amadou, 49, was reappointed to the position by President Mamadou Tandja, who was sworn in on Dec. 22. Mr. Amadou also held the title in 1995, under President Mahamane Ousmane, who is now parliamentary speaker.</p>
+        <p>(Agence France-Presse)</p>
+        <p>CONGO: REBELS TELL OF AMBUSH  Rebels killed about 80 government soldiers in an ambush, a rebel leader said, a day after Congolese representatives held an unsuccessful meeting with a rebel envoy. Jean-Pierre Bemba, whose Congolese Liberation Movement is fighting to topple President Laurent Kabila with Ugandan backing, said government troops had been ambushed along the Congo River.</p>
+        <p>(AP)</p>
+        <p>ASIA</p>
+        <p>SRI LANKA: REBELS REPULSED  Troops repulsed Tamil Tiger rebels trying to overrun defenses at a key northern military base, the defense ministry said. The ministry said 9 soldiers and 9 rebels had been killed and 41 soldiers hurt, although independent confirmation of the figures was not possible.</p>
+        <p>(Reuters)</p>
+        <p>EAST TIMOR: U.N. AIDE APOLOGIZES  The United Nations administrator in East Timor apologized for its failure to predict and prevent a wave of violence after the territory's overwhelming vote for independence from Indonesia. Sergio Vieira de Mello, who is overseeing East Timor's transition to independence, made the apology during a visit to the coffee-growing area of Ermera, said the United Nations spokesman Fred Eckhard.</p>
+        <p>(AP)</p>
+        <p>EAST TIMOR: GUSMAO RULES HIMSELF OUT  Jose Alexandre Gusmao said he foresaw full independence for East Timor in at most two years but that he did not plan to become its first president. Mr. Gusmao had been widely expected to become an independent East Timor's first leader, but said he intended to signal that leaders of the independence struggle did not have an automatic right to power.</p>
+        <p>(Agence France-Presse)</p>
+        <p>THE AMERICAS</p>
+        <p>HONDURAS, NICARAGUA: MILITARY PACT  Honduras and Nicaragua have agreed to freeze ground troop deployments and withdraw naval forces from the Caribbean Sea to avert military conflict pending resolution of a border dispute, an official with the Organization of American States said. Relations soured in November when the Honduran Congress ratified an accord that claimed for Honduras and Colombia 52,000 square miles of Caribbean coastal waters, parts of which are also claimed by Nicaragua.</p>
+        <p>(Reuters)</p>
+        <p>PARAGUAY: CABINET MINISTER QUITS  Agriculture Minister Oscar Denis quit after his Liberal Party voted to abandon the coalition government of President Luis Gonzalez Macchi. The party's leadership voted to pull out after talks to obtain more government posts failed. The decision faces ratification by party members at a convention in February.</p>
+        <p>(Reuters)</p>
+        <p>COLOMBIA: LEADER VETOES GENOCIDE BILL  In an unex-pected reversal, President Andres Pastrana vetoed a bill that would have made genocide and forced disappearance criminal acts. His administration shifted course after the armed forces complained that such a law would leave soldiers open to prosecution, in civilian rather than military courts, for deaths inflicted in combat with leftist guerrillas.</p>
+        <p>Larry Rohter (NYT)</p>
+        <p>MIDDLE EAST</p>
+        <p>IRAN: CALL TO DESTROY ISRAEL  Ayatollah Ali Khamenei, the supreme leader, called for the destruction of Israel, saying it was the only way to solve the Middle East's problems. His remarks came as millions of people rallied across Iran to protest Israel's control of Jerusalem, where Muslims believe Muhammad began his journey to heaven.</p>
+        <p>(AP)</p>
+        <p>LEBANON: HEZBOLLAH'S VOW  The Hezbollah movement said it intended to keep up its attacks on Israeli troops in south Lebanon, a day after a suicide bombing narrowly missed an Israeli patrol near the village of Qlaia, wounding 12 Lebanese civilians and an Israeli soldier. ''Hezbollah operations will not stop before or after the negotiations'' between Israel and Syria, a Hezbollah press official said.</p>
+        <p>(Agence France-Presse)</p>
+      </block>
+      <block class="full_text">
+        <p>EUROPE</p>
+        <p>FRANCE: MORE EXPLOSIVES LINKED TO BASQUES  The French police have seized a ton of explosives they said belonged to the Spanish Basque separatist guerrilla group E.T.A., a week after two powerful van bombs were found and defused in Spain. The explosives were found in an unused garage outside the city of Pau near the Spanish border.</p>
+        <p>Suzanne Daley (NYT)</p>
+        <p>BRITAIN: HONORS FOR ACTORS  Elizabeth Taylor, Julie Andrews and Sean Connery have new titles: Dame Elizabeth, Dame Julie and Sir Sean. The three actors were among 2,000 people honored in the annual New Year's list drawn up by the government and bestowed by the queen. Also honored were sports heroes, milkmen, crossing guards and the multimillionaire head of the Virgin Group, now Sir Richard Branson.</p>
+        <p>(AP)</p>
+        <p>AFRICA</p>
+        <p>SUDAN: CABINET QUITS  Three weeks after declaring a state of emergency, President Omar el-Bashir said he had accepted his cabinet's resignation, paving the way for him to consolidate his power. In a speech marking Sudan's 44th anniversary of independence, Mr. Bashir said ministers and state governors had expressed their desire to resign and he had accepted their resignations. However, he asked them to stay on as caretakers until he could reform the cabinet.</p>
+        <p>(AP)</p>
+        <p>NIGER: PREMIER AGAIN  A former prime minister, Hama Amadou, 49, was reappointed to the position by President Mamadou Tandja, who was sworn in on Dec. 22. Mr. Amadou also held the title in 1995, under President Mahamane Ousmane, who is now parliamentary speaker.</p>
+        <p>(Agence France-Presse)</p>
+        <p>CONGO: REBELS TELL OF AMBUSH  Rebels killed about 80 government soldiers in an ambush, a rebel leader said, a day after Congolese representatives held an unsuccessful meeting with a rebel envoy. Jean-Pierre Bemba, whose Congolese Liberation Movement is fighting to topple President Laurent Kabila with Ugandan backing, said government troops had been ambushed along the Congo River.</p>
+        <p>(AP)</p>
+        <p>ASIA</p>
+        <p>SRI LANKA: REBELS REPULSED  Troops repulsed Tamil Tiger rebels trying to overrun defenses at a key northern military base, the defense ministry said. The ministry said 9 soldiers and 9 rebels had been killed and 41 soldiers hurt, although independent confirmation of the figures was not possible.</p>
+        <p>(Reuters)</p>
+        <p>EAST TIMOR: U.N. AIDE APOLOGIZES  The United Nations administrator in East Timor apologized for its failure to predict and prevent a wave of violence after the territory's overwhelming vote for independence from Indonesia. Sergio Vieira de Mello, who is overseeing East Timor's transition to independence, made the apology during a visit to the coffee-growing area of Ermera, said the United Nations spokesman Fred Eckhard.</p>
+        <p>(AP)</p>
+        <p>EAST TIMOR: GUSMAO RULES HIMSELF OUT  Jose Alexandre Gusmao said he foresaw full independence for East Timor in at most two years but that he did not plan to become its first president. Mr. Gusmao had been widely expected to become an independent East Timor's first leader, but said he intended to signal that leaders of the independence struggle did not have an automatic right to power.</p>
+        <p>(Agence France-Presse)</p>
+        <p>THE AMERICAS</p>
+        <p>HONDURAS, NICARAGUA: MILITARY PACT  Honduras and Nicaragua have agreed to freeze ground troop deployments and withdraw naval forces from the Caribbean Sea to avert military conflict pending resolution of a border dispute, an official with the Organization of American States said. Relations soured in November when the Honduran Congress ratified an accord that claimed for Honduras and Colombia 52,000 square miles of Caribbean coastal waters, parts of which are also claimed by Nicaragua.</p>
+        <p>(Reuters)</p>
+        <p>PARAGUAY: CABINET MINISTER QUITS  Agriculture Minister Oscar Denis quit after his Liberal Party voted to abandon the coalition government of President Luis Gonzalez Macchi. The party's leadership voted to pull out after talks to obtain more government posts failed. The decision faces ratification by party members at a convention in February.</p>
+        <p>(Reuters)</p>
+        <p>COLOMBIA: LEADER VETOES GENOCIDE BILL  In an unex-pected reversal, President Andres Pastrana vetoed a bill that would have made genocide and forced disappearance criminal acts. His administration shifted course after the armed forces complained that such a law would leave soldiers open to prosecution, in civilian rather than military courts, for deaths inflicted in combat with leftist guerrillas.</p>
+        <p>Larry Rohter (NYT)</p>
+        <p>MIDDLE EAST</p>
+        <p>IRAN: CALL TO DESTROY ISRAEL  Ayatollah Ali Khamenei, the supreme leader, called for the destruction of Israel, saying it was the only way to solve the Middle East's problems. His remarks came as millions of people rallied across Iran to protest Israel's control of Jerusalem, where Muslims believe Muhammad began his journey to heaven.</p>
+        <p>(AP)</p>
+        <p>LEBANON: HEZBOLLAH'S VOW  The Hezbollah movement said it intended to keep up its attacks on Israeli troops in south Lebanon, a day after a suicide bombing narrowly missed an Israeli patrol near the village of Qlaia, wounding 12 Lebanese civilians and an Israeli soldier. ''Hezbollah operations will not stop before or after the negotiations'' between Israel and Syria, a Hezbollah press official said.</p>
+        <p>(Agence France-Presse)</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

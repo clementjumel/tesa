@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Feel Squished? Funny, Some Seats Are Expanding</title>
+    <meta content="02SQUI$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Movies; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165487"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: NEW YORK UP CLOSE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Transit Systems</classifier>
+        <classifier class="indexing_service" type="descriptor">Theaters (Buildings)</classifier>
+        <classifier class="indexing_service" type="descriptor">Motion Pictures</classifier>
+        <classifier class="indexing_service" type="descriptor">Subways</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Copage, Eric V</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Movies</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Movies/News and Features</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Manufacturing, Operations and Logistics</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Subways</classifier>
+        <classifier class="online_producer" type="general_descriptor">Motion Pictures</classifier>
+        <classifier class="online_producer" type="general_descriptor">Transit Systems</classifier>
+        <classifier class="online_producer" type="general_descriptor">Theater</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901E1D61538F931A35752C0A9669C8B63" item-length="719" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Feel Squished? Funny, Some Seats Are Expanding</hl1>
+      </hedline>
+      <byline class="print_byline">By ERIC V. COPAGE</byline>
+      <byline class="normalized_byline">Copage, Eric V</byline>
+      <abstract>
+        <p>New York City subway cars and movie theaters are providing more seat room per person; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>As New Yorkers and visitors streamed cheek by jowl through the holiday festivities in the city, many found themselves sitting cheek to cheek. All year round, in fact, in a city full of riches, seating space may be among the most precious of commodities.</p>
+        <p>But there are some signs of relief. Fifteen years ago, subway riders complained that the molded plastic seats, new at the time, were far too narrow at 17.5 inches wide including the scooping of the seat. Early this year, however, the Metropolitan Transportation Authority will introduce new subway cars. The cars will have 6 to 10 fewer seats than the current 42 to 45, alloting 18.6 inches per person, on average.</p>
+      </block>
+      <block class="full_text">
+        <p>As New Yorkers and visitors streamed cheek by jowl through the holiday festivities in the city, many found themselves sitting cheek to cheek. All year round, in fact, in a city full of riches, seating space may be among the most precious of commodities.</p>
+        <p>But there are some signs of relief. Fifteen years ago, subway riders complained that the molded plastic seats, new at the time, were far too narrow at 17.5 inches wide including the scooping of the seat. Early this year, however, the Metropolitan Transportation Authority will introduce new subway cars. The cars will have 6 to 10 fewer seats than the current 42 to 45, alloting 18.6 inches per person, on average.</p>
+        <p>The seats may work better not only because they have an extra inch or so but also because they are flat.</p>
+        <p>''People like to sit down and align themselves for comfort rather than fit into a predesigned space,'' said Robert E. Slovak, an M.T.A. spokesman. He said 1,080 such cars, costing a total of $330 million, would soon join the system.</p>
+        <p>In movie theaters, too, the traditional small, hard seats are giving way to roomier ones, especially in the stadium-style theaters that have been built in Manhattan recently. At the Loews E-Walk theaters on West 42nd Street, for example, the seats are thick-cushioned and high-backed.</p>
+        <p>Michael P. Norris, executive vice president of Loews Cineplex Entertainment, said the old seats were about 19 inches wide and had a back height of 24 to 30 inches, with very little padding. The new seat is 22 to 24 inches wide, 38 to 44 inches high, depending on its location in the theater.</p>
+        <p>He said the reason for these seats, which he called ''expensive,'' was ''competition for the out-of-home entertainment dollar.''</p>
+        <p>The new style is ''way past trend,'' Mr. Norris said. Two other stadium-style theaters built in Manhattan recently are the United Artists theater on 13th Street off Union Square and the Loews Kips Bay, on 32nd Street and Second Avenue.</p>
+        <p>Competition can be good for sitting in stage theaters, too. In those built from 1900 to 1920, the seats were as narrow as 18 inches, while theaters built in the last 20 years have seats 20 to 24 inches wide.</p>
+        <p>Older theaters ''were less focused on comfort than volume,'' said Richard Blinder, founding partner of Beyer Blinder Belle, the Manhattan firm that designed the Ford Center on 43rd Street. ''Those theater owners didn't have to compete with other forms of entertainment, the way we do now.''</p>
+        <p>But even if some tight seats are getting  looser, money still talks when it comes to sitting down.</p>
+        <p>Mr. Blinder said that in theaters with seats 20 to 24 inches wide, the actual width depends on the seats' location with respect to the the aisle. Designers try to minimize the number of 20-inch seats, he said. But added: ''You try to get the larger seats in the more expensive sections.''</p>
+        <p>Similarly, said David Schefer, a restaurant designer, lower-priced restaurants have chairs that are 15 inches wide and made of wood. In high-end restaurants, he said, the chairs are 18 inches across -- and padded.</p>
+        <p>ERIC V. COPAGE</p>
+        <p>NEIGHBORHOOD REPORT: NEW YORK UP CLOSE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

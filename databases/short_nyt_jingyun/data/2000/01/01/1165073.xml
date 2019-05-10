@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Sam Shapiro, 68, Pioneer in Use of Mammograms</title>
+    <meta content="Y01SHAP" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="B" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="U.S.; Obituaries" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165073"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="biographical_categories">Medicine and Health</classifier>
+        <classifier class="indexing_service" type="descriptor">Deaths (Obituaries)</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <classifier class="indexing_service" type="names">Sam Shapiro</classifier>
+        <person class="indexing_service">Shapiro, Sam (Prof)</person>
+        <person class="indexing_service">Saxon, Wolfgang</person>
+        <classifier class="online_producer" type="types_of_material">Obituary (Obit)</classifier>
+        <classifier class="online_producer" type="types_of_material">Biography</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Obituaries</classifier>
+        <classifier class="online_producer" type="general_descriptor">Deaths (Obituaries)</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9501E3D81338F932A35752C0A9669C8B63" item-length="384" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Sam Shapiro, 68, Pioneer in Use of Mammograms</hl1>
+      </hedline>
+      <byline class="print_byline">By WOLFGANG SAXON</byline>
+      <byline class="normalized_byline">Saxon, Wolfgang</byline>
+      <abstract>
+        <p>Prof Sam Shapiro, health care analyst and biostatistician whose studies proved that mammograms save women's lives, dies at age of 85; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Sam Shapiro, a health care analyst and biostatistician whose studies in the 1960's proved that mammograms saved women's lives by catching breast cancers at an early, treatable stage, died on Thursday at his home in Baltimore. He was 85.</p>
+        <p>Professor Shapiro, working with Dr. Philip Strax, used his statistical expertise to persuade a skeptical medical establishment of the value of mammography. At the time such screenings were rarely used and little was known of their effects.</p>
+      </block>
+      <block class="full_text">
+        <p>Sam Shapiro, a health care analyst and biostatistician whose studies in the 1960's proved that mammograms saved women's lives by catching breast cancers at an early, treatable stage, died on Thursday at his home in Baltimore. He was 85.</p>
+        <p>Professor Shapiro, working with Dr. Philip Strax, used his statistical expertise to persuade a skeptical medical establishment of the value of mammography. At the time such screenings were rarely used and little was known of their effects.</p>
+        <p>Dr. Strax, a family doctor in Manhattan, began the work when he lost his 39-year-old wife to breast cancer in 1947. But it was not until the 1960's that he and Professor Shapiro established that early detection significantly reduced the mortality rate of breast cancer.</p>
+        <p>They based their finding on a study involving nearly 62,000 women in New York. The results led to the opening of clinics devoted to breast-cancer screenings and the deployment of mobile units that often conducted the tests without charge.</p>
+        <p>Professor Shapiro and Dr. Strax, who died last March, shared many honors. One, a prize from the General Motors Cancer Research Foundation in 1988, said their study ''almost unilaterally changed medical thinking about early detection.''</p>
+        <p>Sam Shapiro, a native of New York, graduated with a bachelor's degree in mathematics from Brooklyn College in 1933. He undertook further studies in mathematics and statistics at Columbia University and George Washington University.</p>
+        <p>In the 1950's he worked as a senior analyst at the National Office of Vital Statistics in the United States Public Health Service and at the Health Insurance Plan of Greater New York. In 1973 he was named director of the Health Services Research and Development Center in Baltimore and professor of health policy and management at Johns Hopkins School of Hygiene and Public Health.</p>
+        <p>He received emeritus status in 1985 but in 1992 became acting chairman of the Johns Hopkins department of health policy and management. He retired last year but continued his work at Johns Hopkins until a few months ago.</p>
+        <p>Professor Shapiro is survived by his wife of 61 years, Selma Deitch Shapiro; a son, Dr. Robert, of Upton, Mass.; a daughter, Dr. Ellen Shapiro Fried of Chapel Hill, N.C.; two grandchildren and two great-grandsons.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

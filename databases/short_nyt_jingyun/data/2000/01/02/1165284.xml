@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Co-op Unit Used for A Business</title>
+    <meta content="02QAQA" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Real Estate Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="11" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Real Estate" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165284"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="Q AND A"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="online_producer" type="types_of_material">Question</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Real Estate/Columns/Q and A</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A07E7DB1E39F931A35752C0A9669C8B63" item-length="642" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Co-op Unit Used for A Business</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Q. I rented out my Manhattan co-op apartment to two men for use as a home business. At the interview, the men told the board that all that was needed for the business was a desk, a phone and a fax, and that only rarely would clients come to the office. The board approved the lease and the men paid me one month's rent and two months' security. Twenty-one days after the lease began the men had still not moved into the unit.  Then, after one of them told the chairman of the co-op board that he intended to open a Holistic Medical Center, which would require major renovations and would serve hundreds of clients, the board rescinded its approval. I have refused to return the rent and security deposit on the ground that the tenants had broken the lease. Now I am being sued. What is the law in such a matter? . . . Wayne Martens, Manhattan.</p>
+        <p>A.  Felix Nihamin, a Manhattan real estate lawyer, said that while the co-op may not be a party to the lease agreement between the letter-writer and the tenants, it appears that the board's approval of the sublet was required. It also appears that the approval was granted based upon representations made by the tenants. Accordingly, Mr. Nihamin said, if the tenants later changed their plans -- thereby prompting the board to withdraw its approval -- it would be the tenants' own actions that resulted in their inability to move into the apartment.</p>
+      </block>
+      <block class="full_text">
+        <p>Q. I rented out my Manhattan co-op apartment to two men for use as a home business. At the interview, the men told the board that all that was needed for the business was a desk, a phone and a fax, and that only rarely would clients come to the office. The board approved the lease and the men paid me one month's rent and two months' security. Twenty-one days after the lease began the men had still not moved into the unit.  Then, after one of them told the chairman of the co-op board that he intended to open a Holistic Medical Center, which would require major renovations and would serve hundreds of clients, the board rescinded its approval. I have refused to return the rent and security deposit on the ground that the tenants had broken the lease. Now I am being sued. What is the law in such a matter? . . . Wayne Martens, Manhattan.</p>
+        <p>A.  Felix Nihamin, a Manhattan real estate lawyer, said that while the co-op may not be a party to the lease agreement between the letter-writer and the tenants, it appears that the board's approval of the sublet was required. It also appears that the approval was granted based upon representations made by the tenants. Accordingly, Mr. Nihamin said, if the tenants later changed their plans -- thereby prompting the board to withdraw its approval -- it would be the tenants' own actions that resulted in their inability to move into the apartment.</p>
+        <p>As a result, he said, the letter-writer would be entitled to the rent due under the lease agreement. Mr. Nihamin added, however, that notwithstanding the tenants' breach, the letter-writer has a duty to mitigate -- or minimize -- his damages by attempting to re-rent the apartment. He said that the letter-writer would be entitled to keep as much of the security deposit as is necessary to offset those damages.</p>
+        <p>Who's Responsible For the Repairs?</p>
+        <p>Q.  I live in a rent-stabilized apartment on Manhattan's East Side. The previous tenant installed large closets in the hallway. The doors, which are eight feet high and weigh about 50 pounds each, are gradually becoming unhinged. As they do, I am removing them and placing them in the bedroom. I have asked the owner to re-hang them, but he refuses to do so. He said that all problems relating to hardware or cabinetry are the responsibility of the tenant. Is he correct? . . . Tom Sullivan, Manhattan.</p>
+        <p>A.  Daphna Zekaria, a Manhattan landlord-tenant lawyer, said that the question of whether it is the landlord's or the tenant's responsibility to fix the doors depends on what arrangements were made when the current tenant took occupancy of the apartment.</p>
+        <p>For example, Ms. Zekaria said, if the landlord offered to remove the closet before the new tenant moved in, and the new tenant said, ''No, I'll keep the closet,'' then it would be the tenant's responsibility to repair the doors. On the other hand, she said, if the landlord offered the apartment to the tenant with the closets as part of the deal -- much like the way an apartment usually comes with a refrigerator -- then it would be the landlord's responsibility to repair the doors. If that is the case, Ms. Zekaria said, the tenant could file a complaint with the Division of Housing and Community Renewal charging a reduction in services, for whatever equipment or services are part of the original rental agreement must be maintained by the landlord for the remainder of the tenancy.</p>
+        <p>Q AND A</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

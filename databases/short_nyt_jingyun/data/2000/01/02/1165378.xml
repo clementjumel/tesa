@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Sign of The Times</title>
+    <meta content="LTR091831" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165378"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="TRUMP'S TASTE"/>
+      <identified-content>
+        <org class="indexing_service">New York Times</org>
+        <person class="indexing_service">Trump, Donald</person>
+        <person class="indexing_service">Briglia, Dick</person>
+        <person class="indexing_service">Muschamp, Herbert</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B03E3D91738F931A35752C0A9669C8B63" item-length="171" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Sign of The Times</hl1>
+      </hedline>
+      <abstract>
+        <p>Dick Briglia letter on Herbert Muschamp's Dec 19 (1999) article about Donald Trump as sign that The Times does not embarrass anymore, that anything goes and there is no gatekeeper to curb self-aggrandizing, self-indulgent scribes when they rush off to produce some incomprehensible piece of 'writing' (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>The New York Times does not embarrass anymore. Rushing headlong into more, bigger, longer everything -- sections, articles -- The Times is about to implode. Case in point: When a friend called and asked if I had read Herbert Muschamp's article about Donald Trump in the Sunday Times [''Trump, His Gilded Taste, and Me,'' Dec. 19], I was compelled, like a witness to an accident, to read it.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>The New York Times does not embarrass anymore. Rushing headlong into more, bigger, longer everything -- sections, articles -- The Times is about to implode. Case in point: When a friend called and asked if I had read Herbert Muschamp's article about Donald Trump in the Sunday Times [''Trump, His Gilded Taste, and Me,'' Dec. 19], I was compelled, like a witness to an accident, to read it.</p>
+        <p>What is astonishing about The Times nowadays is that anything goes; there are no more gatekeepers. Still, it would seem to me that when one of its scribes is off on some self-aggrandizing, self-indulgent, incomprehensible piece of -- and I hesitate to use the word -- writing, someone on 43rd Street would say: ''O.K., you had your fun, now sit down and write your Sunday article.''</p>
+        <p>DICK BRIGLIA  New York</p>
+        <p>TRUMP'S TASTE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

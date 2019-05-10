@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>In a Speedy World, Software's a Snail</title>
+    <meta content="01SOFT$06" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="20" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165197"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: TECHNOLOGY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Computer Software</classifier>
+        <person class="indexing_service">Lohr, Steve</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computer Software</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C06E0DF1030F932A35752C0A9669C8B63" item-length="551" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>In a Speedy World, Software's a Snail</hl1>
+      </hedline>
+      <byline class="print_byline">By Steve Lohr</byline>
+      <byline class="normalized_byline">Lohr, Steve</byline>
+      <abstract>
+        <p>Steve Lohr article says making computer software remains a remarkable painstaking and time-consuming process; says inability to produce faster, cheaper, better software will become a drag on progress in many fields but especially on the development of electronic commerce as an engine of economic growth in the coming century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>SOFTWARE is the DNA of the high-technology age, the mediator between man and machine, conveying our questions or orders to the computers that surround us. No small irony, then, that the task of making software remains a remarkably painstaking endeavor of step-by-step iteration, more handcraftsmanship than machine magic.</p>
+        <p>Everything else in the digital realm seems to race ahead at dizzying speeds. Faster, cheaper and better is the way of computing for the most part, as microchips double in power every 18 months, disks for storing data improve even more rapidly and high-speed Internet links quickly become more available and affordable.</p>
+      </block>
+      <block class="full_text">
+        <p>SOFTWARE is the DNA of the high-technology age, the mediator between man and machine, conveying our questions or orders to the computers that surround us. No small irony, then, that the task of making software remains a remarkably painstaking endeavor of step-by-step iteration, more handcraftsmanship than machine magic.</p>
+        <p>Everything else in the digital realm seems to race ahead at dizzying speeds. Faster, cheaper and better is the way of computing for the most part, as microchips double in power every 18 months, disks for storing data improve even more rapidly and high-speed Internet links quickly become more available and affordable.</p>
+        <p>Software has not made such strides. Instead, says Jim Gray, a database pioneer, it is ''the only thing in cyberspace that is getting more expensive and less reliable.''</p>
+        <p>This productivity paradox threatens to become a drag on progress in many fields but especially on the development of electronic commerce as an engine of economic growth. Each feature or function in a software program can take twice as much programming time today as it did in 1992, says Howard Rubin, a computer scientist at Hunter College. The Internet adds to the difficulty because each piece of software must run smoothly with an ever wider variety of software. The interaction of lines of software code multiplies the problem, especially as programs become larger.</p>
+        <p>Over the years, new tools and techniques like object-oriented programming, which divides code into reusable modules -- think Lego blocks -- have brought steady progress in software engineering. But the advances pale next to those in hardware.</p>
+        <p>Experts split into two camps over bridging the divide. The ''evolutionaries'' say incremental improvements are the best that programmers can hope for; the revolutionaries stalk Big Bang-style breakthroughs.</p>
+        <p>In the evolutionary camp, the leading voice is Frederick P. Brooks Jr., who headed the team that built the operating system for I.B.M.'s 360 mainframe in the 1960's. There is ''no silver bullet'' to the software productivity problem, Mr. Brooks insists. ''Complexity is the business we are in, and complexity is what limits us.''</p>
+        <p>Charles Simonyi, a senior researcher at Microsoft regarded as ''the father of Word,'' the most-used word-processing program, is a Big Bang hunter. For five years, he has been working on what he calls ''intentional programming,'' and his goal is to transform the craft of code writing.</p>
+        <p>Mr. Simonyi is working on a programming supertool for capturing the mental shorthand of abstraction -- what people want the computer to do -- in modules of code that can used with any programming language.</p>
+        <p>''I want to liberate the abstractions from these closed programming languages and let programmers put their cleverness in an independent delivery vehicle,'' he said.</p>
+        <p>With the advent of the personal computer industry, software and hardware became separate markets for the first time, increasing supply and spurring innovation. Mr. Simonyi wants to do the same thing for the brainiest bits of software: separate the abstract intentions, the innovation, from the repetitive drudge work of programming.</p>
+        <p>If the revolutionaries fail, expect more problems of the Year 2000 type, as the intentions of human programmers are lost in translation on literal-minded computers. But if they succeed, computers will suddenly become more like humans, for better or worse.</p>
+        <p>VISIONS: TECHNOLOGY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

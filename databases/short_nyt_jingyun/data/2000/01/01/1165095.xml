@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Sports of The Times; For Some, End of Season Is End of Line</title>
+    <meta content="01GEOR$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="D" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165095"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Football</classifier>
+        <classifier class="indexing_service" type="descriptor">Coaches and Managers</classifier>
+        <classifier class="indexing_service" type="descriptor">Suspensions, Dismissals and Resignations</classifier>
+        <org class="indexing_service">New Orleans Saints</org>
+        <org class="indexing_service">New England Patriots</org>
+        <person class="indexing_service">George, Thomas</person>
+        <person class="indexing_service">Ditka, Mike</person>
+        <person class="indexing_service">Carroll, Pete</person>
+        <object.title class="indexing_service">Sports of the Times (Times Column)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Football/National Football League/New England Patriots</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Football/National Football League/New Orleans Saints</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Football</classifier>
+        <classifier class="online_producer" type="general_descriptor">Suspensions, Dismissals and Resignations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Coaches and Managers</classifier>
+        <classifier class="online_producer" type="general_descriptor">Football</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0DE0D61338F932A35752C0A9669C8B63" item-length="1101" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Sports of The Times; For Some, End of Season Is End of Line</hl1>
+      </hedline>
+      <byline class="print_byline">By THOMAS GEORGE</byline>
+      <byline class="normalized_byline">George, Thomas</byline>
+      <abstract>
+        <p>Thomas George, in Sports of The Times column, predicts that Mike Ditka of New Orleans Saints, Pete Carroll of New England Patriots and several other NFL coaches who failed to lead their teams into playoffs will be dismissed; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE 2000 National Football League playoff field becomes crystalline late tomorrow afternoon. Then we learn which 12 teams will compete for a chance at Super Bowl XXXIV on Jan. 30 at the Georgia Dome in Atlanta.</p>
+        <p>It took 17 weeks and 248 games and included highlights (the rise of the previously forlorn Rams and Colts), catastrophe (the Rae Carruth murder charge), death (the loss of Walter Payton), happy returns (the Browns), lost faces (the retirement of Barry Sanders and John Elway), new faces (Kurt Warner's stunning play), concussions (Steve Young) and the re-emergence of instant replay.</p>
+      </block>
+      <block class="full_text">
+        <p>THE 2000 National Football League playoff field becomes crystalline late tomorrow afternoon. Then we learn which 12 teams will compete for a chance at Super Bowl XXXIV on Jan. 30 at the Georgia Dome in Atlanta.</p>
+        <p>It took 17 weeks and 248 games and included highlights (the rise of the previously forlorn Rams and Colts), catastrophe (the Rae Carruth murder charge), death (the loss of Walter Payton), happy returns (the Browns), lost faces (the retirement of Barry Sanders and John Elway), new faces (Kurt Warner's stunning play), concussions (Steve Young) and the re-emergence of instant replay.</p>
+        <p>Enough.</p>
+        <p>Now for dessert.</p>
+        <p>Goodbye, regular season. Hello, playoffs.</p>
+        <p>Goodbye. Hello. That will be a familiar refrain in the coming weeks as several head coaches who failed to push their teams into the playoffs pay the ultimate price with dismissal. They will be tossed out the door headfirst. There are a bevy of N.F.L. owners and players who cannot wait for this to happen. It will make their day because they believe these coaches helped ruin their seasons.</p>
+        <p>Sharpen that ax. Tighten that noose. Wax that plank.</p>
+        <p>These guys are as good as gone: Mike Ditka in New Orleans and Pete Carroll in New England.</p>
+        <p>It will be an upset if Bill Cowher remains in Pittsburgh.</p>
+        <p>Jimmy Johnson contemplates quitting in Miami. Bill Parcells does the same with the Jets. Dan Reeves in Atlanta, too, mulls the thought.</p>
+        <p>Vince Tobin in Arizona is in trouble. Steve Mariucci in San Francisco is shaky. Jim Fassel with the Giants, Chan Gailey in Dallas and Ray Rhodes in Green Bay badly need a playoff berth to solidify increasingly murky ground.</p>
+        <p>That is a possible 11 head-coaching changes. No doubt, some will survive, but, for certain, Ditka and Carroll will not.</p>
+        <p>Ditka arrived in New Orleans full of bluster and will leave three years later like a mild breeze. The Saints were warned that he was more image than substance, more commercial than a winning, captivating coach. In part, that is what the dull Saints wanted -- a touch of celebrity. Now the owner, Tom Benson, and the Saints players -- weighed down by a 3-12 season -- are counting the seconds until it's all over so they can be rid of Ditka.</p>
+        <p>Carroll tried replacing a legend (Parcells) and never quite got it right. He was always looking over his shoulder, around the corner, down the hall, hoping to distance himself from Parcells and attempting a softer approach with the Patriots. Too many of his players never got it. Too many simply ignored him.</p>
+        <p>Cowher, after eight seasons in Pittsburgh, appears worn and torn. Johnson appears fed up in Miami. Parcells looks as if he will take another swing, though. Reeves, too.</p>
+        <p>Tobin gets one more shot. Mariucci is 50-50.</p>
+        <p>And the final threesome is an intriguing group.</p>
+        <p>The Giants, Dallas and Green Bay all compete tomorrow -- along with Carolina -- for the National Football Conference's final playoff spot. Each team is 7-8. But the first three feature coaches whose clubs must put up an impressive fight on the regular season's last day in order to secure their jobs.</p>
+        <p>Fassel's team has been burdened by an offense that has shriveled continuously, showing sporadic life. Now his defense has begun to falter, too. Gailey was in little jeopardy just two weeks ago, with the Cowboys controlling their playoff destiny. But then came a funky loss in New Orleans, to Ditka. The Cowboys will still be guaranteed a playoff spot if they beat the Giants tomorrow, but what if they lose, 42-0? Gailey would be in trouble of surviving something like that.</p>
+        <p>Among the most curious of the crew is Rhodes.</p>
+        <p>He went to Green Bay this season to replace a legend -- Mike Holmgren -- and his team has fizzled. The Green Bay fans are irate. They see holes in his leadership and in his decision-making. So do some of his players.</p>
+        <p>What happened to Rhodes in his four years as the coach of the Philadelphia Eagles? He is not the same coach now. He is too timid, too gun-shy, his peers say. Some of his players say that he started the season by easing Holmgren's rigid methods and dominating discipline, but in turn, Rhodes has never been able to gain full command. For the Packers to make the playoffs, Green Bay must beat Arizona and the Giants must beat Dallas.</p>
+        <p>''It's easy to blame the coaches, the players, but start by blaming me,'' said Ron Wolf, the Packers' general manager. ''Maybe I didn't get the right players, not the right mix. Maybe I thought there wasn't as much to do to get this thing running smoothly.</p>
+        <p>''Now, after that, there has to be other accountability. This has been an extremely frustrating year, and it's carrying on down here to the end. We started 3-1, were 4-2 and then won only three of our last nine games. We've had two three-game losing streaks. You can blame it on injuries, newness, whatever. But at some point people have got to really stand up and play, and we unfortunately have been unable to do that.</p>
+        <p>''Here we are in the 20th week of the season, counting preseason, and when an offense moves, there is confusion on our defense. We can't score enough points. Those things aren't good. People want to blame it on Brett Favre's thumb. O.K. But enough of that. Somebody around here, me included, should have done more to offset these things. Everyone is accountable.''</p>
+        <p>Wolf's frustration is matched around the league.</p>
+        <p>Twelve teams march into the playoffs.</p>
+        <p>Nineteen will not. There is a price to pay.</p>
+        <p>We will see, tomorrow, the last of some coaches in their current spots. Ringing out the old, bringing in the new.</p>
+        <p>The refrain goes this way: Goodbye, we hardly knew you, but we have seen enough.</p>
+        <p>And hello, N.F.L. 2000.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

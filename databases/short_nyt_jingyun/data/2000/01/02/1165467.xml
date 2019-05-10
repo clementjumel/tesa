@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Never Seen a Ruder Pesht</title>
+    <meta content="MB132551" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="10" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Theater; New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165467"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="JERSEY FOOTLIGHTS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Theater</classifier>
+        <classifier class="indexing_service" type="descriptor">Language and Languages</classifier>
+        <classifier class="indexing_service" type="descriptor">Hungarian Language</classifier>
+        <person class="indexing_service">Molnar, Ferenc (1878-1952)</person>
+        <person class="indexing_service">Klein, Alvin</person>
+        <object.title class="indexing_service">Play's the Thing, The (Play)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater/News and Features</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Theater/Plays</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="general_descriptor">Language and Languages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Theater</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F0CE7D91538F931A35752C0A9669C8B63" item-length="229" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Never Seen a Ruder Pesht</hl1>
+      </hedline>
+      <byline class="print_byline">By Alvin Klein</byline>
+      <byline class="normalized_byline">Klein, Alvin</byline>
+      <abstract>
+        <p>Comment on The Play's the Thing, Ferenc Molnar play which will be staged by New Jersey Rep at Lumia Theater in Long Branch, NJ, beginning January 7; cast getting instruction on pronunciation of Hungarian words in play (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>How do you say the name Sandor Turai like a Hungarian? Remember to click the r.</p>
+        <p>''And the ai is like oy,'' said Anne  Vaughan, director of developement at New Jersey Rep in Long Branch. So much for Turai. As for Sandor, just say Shandor. Mrs. Vaughan, whose husband, Stuart Vaughan, is staging ''The Play's the Thing,'' which opens Friday at the company's Lumia Theater, was overhearing such pointers on pronunciation, freshly imparted by the executive producer, Gabor Barabas, who was born in Budapest. Budapesht, that is.</p>
+      </block>
+      <block class="full_text">
+        <p>How do you say the name Sandor Turai like a Hungarian? Remember to click the r.</p>
+        <p>''And the ai is like oy,'' said Anne  Vaughan, director of developement at New Jersey Rep in Long Branch. So much for Turai. As for Sandor, just say Shandor. Mrs. Vaughan, whose husband, Stuart Vaughan, is staging ''The Play's the Thing,'' which opens Friday at the company's Lumia Theater, was overhearing such pointers on pronunciation, freshly imparted by the executive producer, Gabor Barabas, who was born in Budapest. Budapesht, that is.</p>
+        <p>Indeed, ''The Play's the Thing'' is all about the overheard. In Ferenc Molnar's ever-popular trifle of l926, a composer gets an earful of ardent words, spoken to his fiancee, Ilona. The composer goes bonkers. A wise playwright -- that's Turai, played by  Mr. Vaughan -- knows that ingenious deception is the cuckold's best curative. So he incorporates the seductive scene into the play in which Ilona stars.</p>
+        <p>Mr. Vaughan directed ''The Play's the Thing'' in the mid-l980's, when he ran a theater company at the Tarrytown Music Hall in Westchester. ''But this is the first time he's playing it,'' Mrs. Vaughan said. ''And Gabor is helping. We weren't sure of all those pronunciations before. We have a very good teacher. Now we know what's in a name.''</p>
+        <p>ALVIN KLEIN</p>
+        <p>JERSEY FOOTLIGHTS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

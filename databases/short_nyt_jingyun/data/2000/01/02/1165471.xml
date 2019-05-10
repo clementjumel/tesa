@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>All in the Presentation? Odes to the Little Blue Box</title>
+    <meta content="02BUZZ" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165471"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: MIDTOWN -- BUZZ"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Bridges and Tunnels</classifier>
+        <classifier class="indexing_service" type="descriptor">Queensboro Bridge (NYC)</classifier>
+        <classifier class="indexing_service" type="descriptor">Bicycles and Bicycling</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Kirby, David</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Biking</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Bicycles and Bicycling</classifier>
+        <classifier class="online_producer" type="general_descriptor">Bridges and Tunnels</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C02E1D91538F931A35752C0A9669C8B63" item-length="453" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>All in the Presentation? Odes to the Little Blue Box</hl1>
+      </hedline>
+      <byline class="print_byline">By KIMBERLY STEVENS</byline>
+      <abstract>
+        <p>New York City seeks federal money to build a 'fly-over' ramp on Manhattan side of Queensboro Bridge to give cyclists and pedestrians easy access between bridge and Second Avenue and points south; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE SETTING -- Bundled and wrapped to fend off the biting air, Tuesday morning shoppers moved quickly through the glass doors at Tiffany &amp; Company on Fifth Avenue. The famous ''Tiffany blue'' boxes peeked out of shopping bags and coat pockets.</p>
+        <p>Two women entering the store clutched their identical blue boxes and discussed how much money their boyfriends had spent on their Christmas gifts. One, giggling, said she had called to price the ring she had received.</p>
+      </block>
+      <block class="full_text">
+        <p>THE SETTING -- Bundled and wrapped to fend off the biting air, Tuesday morning shoppers moved quickly through the glass doors at Tiffany &amp; Company on Fifth Avenue. The famous ''Tiffany blue'' boxes peeked out of shopping bags and coat pockets.</p>
+        <p>Two women entering the store clutched their identical blue boxes and discussed how much money their boyfriends had spent on their Christmas gifts. One, giggling, said she had called to price the ring she had received.</p>
+        <p>THE BUZZ -- ''I don't know what it is about that little blue box, but it means something,'' said Harriet McDonald, who had come to the store to have a silver bracelet enlarged for her daughter. ''When you're 22, it's everything.''</p>
+        <p>''I told my husband to forget Tiffany's for me and head to Fortunoff,'' she added. ''The markup here is crazy, and I've been married far too long to care about the little blue box.''</p>
+        <p>But for some, presentation was everything, even if the gift itself hadn't come from Tiffany. Ms. McDonald mentioned a relative who kept the Tiffany boxes and bags after the Christmas gifts had been opened. ''We all knew what she was doing,'' she said. ''Who knows what we're going to end up getting next year in those boxes?''</p>
+        <p>As Caroline Balavander told the tale of the mystery earrings, other shoppers nearby slowed down to listen. ''Just this Christmas,'' said Ms. Balavander, who is deeply familiar with Tiffany's offering, ''my mother received a pair of earrings in a Tiffany box.''</p>
+        <p>''I remember thinking to myself, 'Gee, I've never seen those before,' '' she said. ''She doesn't have pierced ears, and you should have seen the look on their faces when she said she would return them for clip-ons.''</p>
+        <p>Ms. Balavander was at the store, though, for another reason. ''My husband actually gave me the ring I really wanted,'' she said. ''I wasn't sure that he would, so I bought it for myself before the holiday just in case. This is a happy return.''</p>
+        <p>Others had more than a Tiffany box on their minds. Julia Isfort and Christian Hullmann, two 20-something visitors from Germany, walked arm in arm out of the store. ''I know it's such a cliche but ever since I saw 'Breakfast at Tiffany's' I knew I had to get a ring here,'' Ms. Isfort said. ''We just put two gold wedding bands on hold.''</p>
+        <p>Mr. Hullmann added, with a smile:  ''We're going to get married before we really get married over in Germany. It's something just for us. Wish us luck finding a place to do it, though.''</p>
+        <p>KIMBERLY STEVENS</p>
+        <p>NEIGHBORHOOD REPORT: MIDTOWN -- BUZZ</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

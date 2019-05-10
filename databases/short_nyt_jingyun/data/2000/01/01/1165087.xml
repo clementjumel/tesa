@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Sugar Adds the Spice To the Bowl Season</title>
+    <meta content="01BOWL" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="D" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165087"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="COLLEGE FOOTBALL"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Football</classifier>
+        <classifier class="indexing_service" type="descriptor">Sugar Bowl</classifier>
+        <org class="indexing_service">Florida State University</org>
+        <org class="indexing_service">Virginia Polytechnic Institute &amp; State University</org>
+        <person class="indexing_service">Drape, Joe</person>
+        <person class="indexing_service">Beamer, Frank</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./South</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Football</classifier>
+        <classifier class="online_producer" type="general_descriptor">Football</classifier>
+        <classifier class="online_producer" type="general_descriptor">Food</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0CEED71338F932A35752C0A9669C8B63" item-length="845" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Sugar Adds the Spice To the Bowl Season</hl1>
+      </hedline>
+      <byline class="print_byline">By JOE DRAPE</byline>
+      <byline class="normalized_byline">Drape, Joe</byline>
+      <dateline>NEW ORLEANS, Dec. 31</dateline>
+      <abstract>
+        <p>Article on upcoming bowl games notes that Sugar Bowl between Florida State and Virginia Tech will decide national title; Virginia Tech Coach Frank Beamer photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>They are the first college football matchups of the 21st century, these eight remaining bowl games. All of them promise to be entertaining, but only one will decide the national title: the Sugar Bowl on Tuesday night.</p>
+        <p>Virginia Tech defensive end Corey Moore has already predicted the upset of top-ranked Florida State by his No. 2-ranked Hokies in the Bowl Championship Series title game.</p>
+      </block>
+      <block class="full_text">
+        <p>They are the first college football matchups of the 21st century, these eight remaining bowl games. All of them promise to be entertaining, but only one will decide the national title: the Sugar Bowl on Tuesday night.</p>
+        <p>Virginia Tech defensive end Corey Moore has already predicted the upset of top-ranked Florida State by his No. 2-ranked Hokies in the Bowl Championship Series title game.</p>
+        <p>''I have no doubt we will win,'' said Moore, this season's Lombardi Award winner as the nation's best lineman. ''It's been a dream season. It's going to be even better after we win and burn down New Orleans.''</p>
+        <p>But before those 11-0 teams match up, 12 teams square off Saturday and two more Sunday for big bowl payouts and with the hopes of moving up in the final polls. The best game of the first day of 2000 should be the last one, when Alabama (10-2) meets Michigan (9-2) in the Orange Bowl.</p>
+        <p>The Crimson Tide overcame a preseason sexual harassment controversy involving Coach Mike DuBose and an early loss to Louisiana Tech to win the Southeastern Conference and a berth in one of the coveted B.C.S. games.</p>
+        <p>Not only is Alabama guaranteed $11 million to $13 million (the per-team payout in the B.C.S. bowls), but reaching the Orange Bowl demonstrates that the Crimson Tide is back among the elite after coming off probation imposed by the National Collegiate Athletic Association. Michigan quarterback Tom Brady, coming off his second consecutive 2,000-yard passing season, will have help from running back Anthony Thomas, who has gained more than 100 yards in each of his last five games.</p>
+        <p>But whether Michigan wins will depend on how it handles Alabama running back Shaun Alexander, who gained 1,383 yards in 1999.</p>
+        <p>''We know Shaun Alexander very well,'' Michigan Coach Lloyd Carr said. ''We recruited him at Michigan, and I've had a number of people tell me that he is the best back in the country.''</p>
+        <p>The other big-money game Saturday is the Rose Bowl, where the Heisman Trophy winner, Ron Dayne, and Wisconsin (9-2) take on Stanford (8-3). The Badgers are trying to become the first Big Ten team to win consecutive Rose Bowls -- they beat U.C.L.A. last January, 38-31, behind Dayne's 246 rushing yards.</p>
+        <p>''He's just one of the best backs to play in a long time,'' Stanford Coach Tyrone Willingham said. ''He has the size, speed and ability to anticipate running lanes. That's what really separated him from the rest.''</p>
+        <p>As if stopping the 253-pound Dayne is not enough of a challenge, the Cardinal apparently lost an integral part of its offense when the all-American wide receiver Troy Walters dislocated his wrist earlier this week.</p>
+        <p>On Sunday night, Nebraska (11-1) plays Tennessee (9-2) in the Fiesta Bowl, the same game in which the Volunteers capped an undefeated 1998 season by beating Florida State for the national championship.</p>
+        <p>This time around, Tee Martin, Tennessee's senior quarterback, will try to finish his career with a 22-2 record. Coach Frank Solich will try to recall the Huskers' winning tradition. After being picked by the legendary Tom Osborne to replace him as Nebraska coach in 1998, Solich led his first team to an unsatisfying 9-4 record. Big Red fans were not happy.</p>
+        <p>''It's tough but that's also why you go to Nebraska, because there are those expectations,'' tight end Tracey Wistrom said. ''There'd be a lot of schools out there that would be happy with a 9-4 record. They'd think of it as a pretty successful season. But in Nebraska, you're going to be looked upon as not very successful.''</p>
+        <p>The early matchups, Purdue (7-4) versus Georgia (7-4) in the Outback and Georgia Tech (8-3) against Miami (8-4) in the Gator, feature intriguing quarterback duels.</p>
+        <p>In the Outback, Purdue's Drew Brees will face off against one of his probable challengers for the 2000 Heisman Trophy in Quincy Carter. In the Gator, Joe Hamilton of Georgia Tech, the runner-up to Dayne in the Heisman voting, might face the heralded freshman Ken Dorsey, who is 3-0 after replacing the injured Kenny Kelly.</p>
+        <p>In the Citrus Bowl, Florida (9-3) will try to snap a two-game losing streak and calm its volatile coach, Steve Spurrier, while Michigan State (9-2) seeks its first victory for a new coach. Bobby Williams replaced Nick Saban in December after Saban took the head job at Louisiana State.</p>
+        <p>And finally, in the Cotton Bowl, Texas (9-4) takes on a former rival from the defunct Southwest Conference, Arkansas (7-4). The Longhorns had a major disruption in their preparation when Coach Mack Brown suspended four players for the game late Thursday for violating team rules, including the senior defensive lineman Aaron Humphrey and the junior wide receiver Kwame Cavil.  COLLEGE FOOTBALL</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

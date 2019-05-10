@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>What Makes Bernie Run?</title>
+    <meta content="02MARINT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="22" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165257"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Marin, Rick</person>
+        <person class="indexing_service">Brillstein, Bernie</person>
+        <person class="indexing_service">Rensin, David</person>
+        <object.title class="indexing_service">Where Did I Go Right? (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0DEFDB1539F931A35752C0A9669C8B63" item-length="1134" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>What Makes Bernie Run?</hl1>
+      </hedline>
+      <byline class="print_byline">By Rick Marin</byline>
+      <byline class="normalized_byline">Marin, Rick</byline>
+      <abstract>
+        <p>Rick Marin reviews book Where Did I Go Right? You're No One in Hollywood Unless Someone Wants You Dead by Bernie Brillstein with David Rensin (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Where Did I Go Right?</p>
+        <p>You're No One in Hollywood Unless</p>
+        <p>Someone Wants You Dead.</p>
+        <p>By Bernie Brillstein with David Rensin.</p>
+        <p>Illustrated. 389 pp. New York:</p>
+        <p>Little, Brown &amp; Company. $24.95.</p>
+      </block>
+      <block class="full_text">
+        <p>Where Did I Go Right?</p>
+        <p>You're No One in Hollywood Unless</p>
+        <p>Someone Wants You Dead.</p>
+        <p>By Bernie Brillstein with David Rensin.</p>
+        <p>Illustrated. 389 pp. New York:</p>
+        <p>Little, Brown &amp; Company. $24.95.</p>
+        <p>In ''Where Did I Go Right?'' Bernie Brillstein says he has been likened to both a ''fat Kenny Rogers'' and Santa Claus. A talent manager and old-time show-business character, Brillstein is indeed a big man, and his addictively candid and funny memoir is filled with big loves and big hates.</p>
+        <p>Clients he has loved include Dan Aykroyd, Lorne Michaels, Jim Henson and John Belushi. Former clients he's not so crazy about are mostly Richard Dreyfuss -- who dumped Brillstein after the man saved his career, thank you very much! -- and Garry Shandling, who sued Brillstein-Grey Entertainment for $100 million, then settled out of court. But Mike Ovitz wins. He rates 37 index entries and one Hitler analogy and is the inspiration for Brillstein's catchy subtitle: ''You're No One in Hollywood Unless Someone Wants You Dead.''</p>
+        <p>The book was written ''with'' (one suspects ''by'') David Rensin, who has also channeled the comedy stylings of Tim Allen, Chris Rock and, ironically, Shandling. But the voice is unmistakably Brillstein: loud, astute, crude, alternately self-aggrandizing and self-deprecating and full of stories from the old days. How old? One goes: ''Later, Senor Wences, a client and friend, also let me use his apartment while he and his wife were in Spain. He was a 's-aright guy.'' That old.</p>
+        <p>Brillstein was born into the business, in 1931. His father, Moe, made a nice living in the garment center. His uncle, Jack Pearl, was a famous comedian of the day who introduced his nephew to all the big shots at Toots Shor's. Young Bernie grew up in the ''swanky Eldorado'' on Central Park West, a streetwise fat kid who knew his way around. ''My father, a respected temple elder, also showed me the world of strippers and hookers,'' he writes. Moe was a 's-aright guy too.</p>
+        <p>The teenage Brillstein saw Jerry Lewis perform so many times he memorized the cut of Lewis's sapphire pinky ring. Strings were pulled and employment secured in the William Morris Agency's mail room. He recalls his hungry if not exactly lean younger self as ''a much nicer version of Sammy Glick.'' If he had to steam a few envelopes open to get out of the mail room, so be it.</p>
+        <p>After a few years in the publicity department and a few more agenting such luminaries as Patty Duke and Chuck McCann, he quit William Morris to enter the personal management game. Talent managers are supposed to advise their clients, take the long view of their careers, coddle, anything but solicit work for them -- a rule just waiting to be broken. Henson, whose Muppets Brillstein had hawked at William Morris, signed on. Then Norm Crosby and the comedy team Burns and Schreiber, they of the immortal cabdriver routine.</p>
+        <p>He was dispatched to the Coast in 1967, and within a year his client roster had grown sufficiently for Brillstein to hang his own shingle on Beverly Drive. Over time, he developed and refined the management philosophy: ''Have lots of clients.'' He got into producing, even ran a studio (Lorimar) briefly and helped birth everything from ''Love Connection'' to ''Saturday Night Live.'' His tombstone, Brillstein fantasizes, would read: ''Bernie Brillstein: From 'Hee Haw' to 'Dangerous Liaisons.' ''Some might say these diverse entertainments had nothing in common. But their progenitor modestly points out that they did: ''They were all hits.''</p>
+        <p>Unallergic to schlock, he also had taste -- and an affinity for cutting-edge comedy. Through Lorne Michaels, he came to represent two generations of ''Saturday Night Live'' stars, who dug this silver-haired old guy because he wore track suits to the office, and because he was funny. And as a vintage swell who loved the ''big life'' (degenerate gambling, broads with great legs), he was catnip to a doomed party animal like Belushi.</p>
+        <p>The Belushi chapter begins with the sobering image of Brillstein flying to Martha's Vineyard next to Belushi ''stretched out across two cramped seats in the tiny jet, wrapped up in a body bag,'' then descends into eulogy mode. ''Everybody loved John Belushi. The problem was that he didn't love himself enough.'' More revealing on the pernicious effects of fame is Brillstein's own confession of spiraling into self-destructive egomania.</p>
+        <p>''When John and Danny filmed 'The Blues Brothers' in Chicago, I couldn't get enough of being with the boys,'' he writes. ''God forbid I shouldn't pose in a picture with them. There was also no merchandising item we sold that I didn't wear.'' As he remembers it: ''I was Mr. Hot. I couldn't get enough of myself.'' Finally, his third wife pointed out that he looked like a fool -- a fat 48-year-old man in a fedora, Ray-Bans and scarf -- and he changed back into a Rangers hockey shirt and sport jacket, his old self again.</p>
+        <p>This ''godfather to a new crop of comic talent,'' likened by one ''S.N.L.'' writer to Vito Corleone, found his Michael in Brad Grey, a hot young manager with even younger comic talent and a head for business. They became partners in 1992 and produced some of the best television of the last decade (''The Larry Sanders Show'' and ''The Sopranos'').</p>
+        <p>''Where Did I Go Right?'' opens with Brillstein, at 65, selling out his half of the business to Grey. The late-life crisis brought on by semiretirement is related in italicized interstitial passages labeled ''In Transition.'' They are the only bad parts of the book. Like Lear in therapy, he rails, ''I can't believe my value is gone.'' But he survives, just as he did when the I.R.S. came after him for $3 million in back taxes. And he looks forward to a future enriched by the love of his fourth wife, and the opportunity to produce ''The Martin Short Show,'' on which he recently appeared as a guest, flogging this book.</p>
+        <p>Brillstein's idol is Lew Wasserman, an ex-agent who got so big he took over Universal Studios. The last of the old-style moguls, Wasserman once paid Brillstein the supreme compliment by focusing his enormous power horn-rims on him and saying, ''Bernie, there's only two of us left.'' Indeed, how many of the M.B.A.'s in Armani who run Hollywood today could say, as Brillstein can, ''My wink is binding''? No wonder his new best friend is Robert Evans, another Hollywood hustler from the Golden Age. Evans's own memoir, ''The Kid Stays in the Picture,'' is a cult book-on-tape, read by the author in his urgent whisper, and Brillstein thinks it's a movie. Maybe he could write a sequel about himself into the deal: ''The Fat Kid Stays in the Picture.''</p>
+        <p>Rick Marin is a reporter in the style department of The New York Times.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Rick Marin is a reporter in the style department of The New York Times.</tagline>
+    </body.end>
+  </body>
+</nitf>

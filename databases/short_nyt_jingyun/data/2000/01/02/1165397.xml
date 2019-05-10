@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Along the Thames, A Millennium History</title>
+    <meta content="MB105557" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Correction Appended" name="banner"/>
+    <meta content="20000116T000000" name="correction_date"/>
+    <docdata>
+      <doc-id id-string="1165397"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="TRAVEL ADVISORY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <classifier class="indexing_service" type="descriptor">Festivals</classifier>
+        <location class="indexing_service">London (Eng)</location>
+        <location class="indexing_service">Great Britain</location>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Hospitality, Restaurant and Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Britain</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Britain/England/London</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Britain/England</classifier>
+        <classifier class="online_producer" type="general_descriptor">Festivals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Travel and Vacations</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E04E3D81738F931A35752C0A9669C8B63" item-length="280" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Along the Thames, A Millennium History</hl1>
+      </hedline>
+      <abstract>
+        <p>London String of Pearls Millennium Festival, yearlong celebration of British achievements, will allow access to 67 institutions along River Thames; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The London String of Pearls Millennium Festival, a yearlong celebration of Britain's greatest social, political, cultural and technological achievements of the last 1,000 years, will allow access to 67 institutions along the River Thames.</p>
+        <p>Some of the sites, which stretch from Greenwich to Kew Gardens, will open to the public for the first time. Among these are the Shipwright's Palace at Deptford, built by Henry VIII when he founded the Royal Dockyard in 1513; the British government's Foreign and Commonwealth Office, which will have 12 open days, and Lambeth Palace, home of the Archbishop of Canterbury since about 1200.</p>
+      </block>
+      <block class="full_text">
+        <p>The London String of Pearls Millennium Festival, a yearlong celebration of Britain's greatest social, political, cultural and technological achievements of the last 1,000 years, will allow access to 67 institutions along the River Thames.</p>
+        <p>Some of the sites, which stretch from Greenwich to Kew Gardens, will open to the public for the first time. Among these are the Shipwright's Palace at Deptford, built by Henry VIII when he founded the Royal Dockyard in 1513; the British government's Foreign and Commonwealth Office, which will have 12 open days, and Lambeth Palace, home of the Archbishop of Canterbury since about 1200.</p>
+        <p>Among the other places and events, the Houses of Parliament is staging an exhibition on the workings of Parliament, and the Museum of the Royal Pharmaceutical Society is showing its collection covering four centuries of British medicine. There are behind-the-scenes tours at the London Weekend Television Studios, and a look at the BBC World Service and its impressive 1920's headquarters at Bush House Aldwich.</p>
+        <p>Also, London Transport will be running trips to unused historical underground stations, and the Horse Guards building in Whitehall will be open for tours for the first time, allowing visitors to see the desk across which Hitler and Neville Chamberlain negotiated in 1938 and the office where Wellington planned the Napoleonic campaign.</p>
+        <p>Information is available by calling (44-171) 665-1540 or (44-171) 665-1558 and at www.stringofpearls.org.uk. A free brochure  is available from the British Tourist Authority, 551 Fifth Avenue, Suite 701, New York, N.Y 10176; (800) 462-2748.</p>
+        <p>TRAVEL ADVISORY  Correction:  January 16, 2000, Sunday  A report in the Travel Advisory column on Jan. 2 about the London String of Pearls Millennium Festival misspelled the street name for the BBC's headquarters. It is Bush House, Aldwych, not Aldwich.</p>
+      </block>
+      <block class="correction_text">
+        <p>Correction: January 16, 2000, Sunday</p>
+        <p>A report in the Travel Advisory column on Jan. 2 about the London String of Pearls Millennium Festival misspelled the street name for the BBC's headquarters. It is Bush House, Aldwych, not Aldwich.</p>
+        <p>&lt;br&gt;</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

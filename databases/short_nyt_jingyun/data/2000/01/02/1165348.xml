@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Adding Still More Bricks To 'Pink Floyd The Wall'</title>
+    <meta content="02FILI$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="22" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <meta content="Movies; Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165348"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VIDEO"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Motion Pictures</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Recordings (Video)</classifier>
+        <org class="indexing_service">Pink Floyd (Music Group)</org>
+        <person class="indexing_service">Filipski, Kevin</person>
+        <object.title class="indexing_service">Pink Floyd the Wall (Movie)</object.title>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Movies</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Movies/News and Features</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Movies/DVD and Video</classifier>
+        <classifier class="online_producer" type="general_descriptor">Recordings (Audio)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Recordings (Video)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Motion Pictures</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C00E4DA1638F931A35752C0A9669C8B63" item-length="655" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Adding Still More Bricks To 'Pink Floyd The Wall'</hl1>
+      </hedline>
+      <byline class="print_byline">By KEVIN FILIPSKI</byline>
+      <byline class="normalized_byline">Filipski, Kevin</byline>
+      <abstract>
+        <p>Kevin Filipski reviews new DVD release of 1982 movie Pink Floyd the Wall; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IN one of the strangest cinematic collaborations ever, the Pink Floyd lyricist Roger Waters, the animator Gerald Scarfe and the director Alan Parker famously butted heads during the making of ''Pink Floyd The Wall,'' the 1982 film adaptation of the British group's best-selling 1979 album ''The Wall,'' about the alienation and mental breakdown of a burnt-out rock star. The newly released 94-minute DVD (Columbia Music Video, $29.99) includes an accompanying documentary, ''Retrospective,'' in which the principals look back nearly two decades, bemused at the most unpleasant shoot.</p>
+        <p>Needless to say, the movie that resulted is as schizophrenic as its protagonist, thrown off-balance by the disparate efforts of its creative trio.</p>
+      </block>
+      <block class="full_text">
+        <p>IN one of the strangest cinematic collaborations ever, the Pink Floyd lyricist Roger Waters, the animator Gerald Scarfe and the director Alan Parker famously butted heads during the making of ''Pink Floyd The Wall,'' the 1982 film adaptation of the British group's best-selling 1979 album ''The Wall,'' about the alienation and mental breakdown of a burnt-out rock star. The newly released 94-minute DVD (Columbia Music Video, $29.99) includes an accompanying documentary, ''Retrospective,'' in which the principals look back nearly two decades, bemused at the most unpleasant shoot.</p>
+        <p>Needless to say, the movie that resulted is as schizophrenic as its protagonist, thrown off-balance by the disparate efforts of its creative trio.</p>
+        <p>Mr. Scarfe's daringly original animated sequences -- first used at the  concerts Pink Floyd performed to promote the album -- are the most striking aspect of the movie's disjointed episodes. His surreal, often satirical drawings perfectly capture the traumatic events in the hero's life -- the ''bricks in the wall'' of his isolation -- like the death of his father in World War II, the smothering behaviour of his widowed mother and his mistreatment by his teachers. Mr. Parker, who seems to use a sledgehammer instead of a camera, films the live-action sequences with a literalness that destroys even the most obvious symbolism: we don't need to see the actual wriggling worms mentioned in several song lyrics. Mr. Waters's largely autobiographical story, told through 25 wide-ranging songs, from the hard-hitting guitars of the opening ''In the Flesh'' to the mock-pompous, Gilbert and Sullivan-like climax, ''The Trial,'' may be too diffuse for the uninitiated (i.e., non-Pink Floyd fans) to follow.</p>
+        <p>A mainstream failure, ''Pink Floyd The Wall'' became an instant cult favorite. The widescreen transfer has vivid colors and clarity, all-important for Mr. Scarfe's detailed animation. In addition to ''Retrospective,'' there are a making-of featurette, ''The Other Side of the Wall''; dozens of production stills and storyboard drawings; the original music video for the single, ''Another Brick in the Wall (Part 2)''; and a deleted sequence set to ''Hey You,'' one of the album's most popular songs, but expendable in the movie since its bludgeoning visuals  would have seemed merely repetitive. Last and most important, there's the newly remixed soundtrack, which makes the movie's music -- only a fraction of the original album was re-recorded -- sound as good (and as loud) as ''The Wall'' on CD.</p>
+        <p>But Floyd fanatics will appreciate  hearing Mr. Waters, one of the most dour and publicity-shy rock stars, discuss his most personal opus at length. He rightly asserts that the major flaw in ''Pink Floyd The Wall'' is its almost complete lack of humor, then makes the astonishing comment that humor is something his somber songwriting never lacked! As if to bolster this assertion, his commentary is quite funny at times  -- he does a dead-on Irish brogue in imitation of Bob Geldof, who plays ''Pink,'' Mr. Waters's alter ego.</p>
+        <p>One major glitch in the otherwise estimable DVD presentation is the chapter-search menu, which doesn't list song titles. Jumping to ''Comfortably Numb,'' for example, is difficult without knowing it's chapter 21. For such a painstaking enterprise, omitting a chapter-by-chapter song list is unforgivable.</p>
+        <p>''Pink Floyd The Wall'' may ultimately be best remembered as a powerful antiwar statement, thanks to the artful coupling of Mr. Parker's brutally effective battle scenes with the animation and music. The haunting ''Goodbye Blue Sky'' sequence shows Mr. Scarfe's peaceful dove transformed into a menacing hawk as World War II ravages Europe, while ''In the Flesh'' -- wittily rearranged into a brassy, Wagnerian march -- creepily demonstrates Mr. Waters's assertion that rock concerts are like Nazi rallies, with Mr. Scarfe's menacing, marching hammers a disturbing fascist symbol.</p>
+        <p>VIDEO Kevin Filipski's most recent article for Arts &amp; Leisure was about video releases of Peter Greenaway films.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Kevin Filipski's most recent article for Arts &amp; Leisure was about video releases of Peter Greenaway films.</tagline>
+    </body.end>
+  </body>
+</nitf>

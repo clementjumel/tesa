@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Cleveland Orchestra Is Getting Its Home Back</title>
+    <meta content="02ADVB$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Travel Desk" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="5" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165262"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="TRAVEL ADVISORY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <classifier class="indexing_service" type="descriptor">Severance Hall (Cleveland)</classifier>
+        <classifier class="indexing_service" type="descriptor">Restoration and Rehabilitation</classifier>
+        <classifier class="indexing_service" type="descriptor">Travel and Vacations</classifier>
+        <org class="indexing_service">Cleveland Orchestra</org>
+        <person class="indexing_service">albright, john brannon</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Sunday Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Hospitality, Restaurant and Travel</classifier>
+        <classifier class="online_producer" type="general_descriptor">Restoration and Rehabilitation</classifier>
+        <classifier class="online_producer" type="general_descriptor">Travel and Vacations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B04EFDD1339F931A35752C0A9669C8B63" item-length="354" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Cleveland Orchestra Is Getting Its Home Back</hl1>
+      </hedline>
+      <byline class="print_byline">By John Brannon Albright</byline>
+      <byline class="normalized_byline">albright, john brannon</byline>
+      <abstract>
+        <p>Severance Hall, home of Cleveland Orchestra, is opening after two-year restoration; photos (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Severance Hall, home of the Cleveland Orchestra, reopens Saturday after a two-year restoration. The building, containing a 2,000-seat concert auditorium and a 400-seat chamber hall, was opened in February 1931 and named for Elisabeth Severance, the wife of John Severance, the president of the orchestra's board.</p>
+        <p>Hand-painted murals, gilt ceilings and marble wainscoting have been restored, and the main stage was refurbished. The original pipe organ is also being restored but it will not be ready in time for the reopening.</p>
+      </block>
+      <block class="full_text">
+        <p>Severance Hall, home of the Cleveland Orchestra, reopens Saturday after a two-year restoration. The building, containing a 2,000-seat concert auditorium and a 400-seat chamber hall, was opened in February 1931 and named for Elisabeth Severance, the wife of John Severance, the president of the orchestra's board.</p>
+        <p>Hand-painted murals, gilt ceilings and marble wainscoting have been restored, and the main stage was refurbished. The original pipe organ is also being restored but it will not be ready in time for the reopening.</p>
+        <p>The orchestra plans a six-week program of concerts to celebrate the new splendor. On Saturday, the music director, Christoph von Dohnanyi, will conduct works by Wagner, Vaughan Williams and Ravel. The next night chamber music by Schumann, Brahms and Stravinsky will be performed; the pianist in all three works will be Leif Ove Andsnes.</p>
+        <p>On Jan. 13, 14 and 15, Mr. Dohnanyi will lead ''The Damnation of Faust'' by Berlioz, with the mezzo-soprano Jennifer Larmore. The Cleveland Community Gospel Chorus joins the orchestra in a tribute to the Rev. Dr. Martin Luther King Jr. on Jan. 16, and the soprano Sylvia McNair will sing Ravel's ''Sheherazade'' on Jan. 20, 22 and 25. The resident conductor, Jahja Ling, will conduct Bruckner's Eighth Symphony Feb. 3 through 6.</p>
+        <p>The reopening events end with a family concert at 1:30 p.m. Feb. 12, featuring the Cleveland Orchestra and its Youth Orchestra playing works by Vaughan Williams, Prokofiev and Gabrieli.</p>
+        <p>Tickets range from $25 for chamber concerts to $300 for the Saturday opening. Tickets to most regular performances cost between $19 and $58. The Jan. 16 King concert is free but reservations are required.</p>
+        <p>For schedules and tickets: (800) 686-1141, www.clevelandorchestra.com or Cleveland Orchestra Ticket Services, 11001 Euclid Avenue, Cleveland, Ohio 44106.</p>
+        <p>JOHN BRANNON ALBRIGHT</p>
+        <p>TRAVEL ADVISORY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

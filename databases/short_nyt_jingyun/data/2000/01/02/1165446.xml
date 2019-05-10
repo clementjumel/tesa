@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Building of New Church Was Thoughtfully Done</title>
+    <meta content="LTR115827" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Long Island Weekly Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="14LI" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165446"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <location class="indexing_service">Center Moriches (NY)</location>
+        <org class="indexing_service">Roman Catholic Church</org>
+        <person class="indexing_service">novarro, joanne c</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Long Island</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9500E0DB1538F931A35752C0A9669C8B63" item-length="301" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Building of New Church Was Thoughtfully Done</hl1>
+      </hedline>
+      <abstract>
+        <p>Letter from Joanne C Novarro, director of public information, Diocese of Rockville Centre, says contrary to Dec 19 article, church in Center Moriches was not torn down to make way for parking lot; says it was demolished to make way for much larger church (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Contrary to what is stated in the Dec. 19 article, ''A New Church, but Some Old Resentments,'' the 225-seat St. John the Evangelist Roman Catholic Church in Center Moriches was not torn down to make way for a parking lot. It was demolished to make way for construction of a larger, 700-seat church.</p>
+        <p>No matter what the opponents of the new church say or how frequently they repeat it, the decision to raze St. John the Evangelist Church was neither arbitrary nor contrary. Diocesan policy requires that there be only one place of worship in each parish where the Holy Eucharist resides and the baptismal font is located. In Center Moriches, opponents of demolition not only demanded that the old church remain, but that it be retained as worship space, used for Mass, weddings and baptisms.</p>
+      </block>
+      <block class="full_text">
+        <p>Contrary to what is stated in the Dec. 19 article, ''A New Church, but Some Old Resentments,'' the 225-seat St. John the Evangelist Roman Catholic Church in Center Moriches was not torn down to make way for a parking lot. It was demolished to make way for construction of a larger, 700-seat church.</p>
+        <p>No matter what the opponents of the new church say or how frequently they repeat it, the decision to raze St. John the Evangelist Church was neither arbitrary nor contrary. Diocesan policy requires that there be only one place of worship in each parish where the Holy Eucharist resides and the baptismal font is located. In Center Moriches, opponents of demolition not only demanded that the old church remain, but that it be retained as worship space, used for Mass, weddings and baptisms.</p>
+        <p>In early December, 1,500 people attended the first Mass celebrated in the new St. John the Evangelist Church. Another overflow crowd was on hand at the church's dedication a week later. With their new church in place, the average weekly congregation at St. John's parish has increased by 1,000, an indicator of how well the people have embraced this pastoral improvement.</p>
+        <p>Lastly, the claim of those who believe that the situation in Center Moriches will cause the Diocese of Rockville Centre to alter its policy to the ''benefit'' of other parishes is ludicrous. Long Island's Catholics now number more than 1.3 million -- about half the population -- and their numbers are growing. Ninety percent of the Catholic parishes here on Long Island have more than 3,000 families. Our numbers are not dwindling and our church buildings, which are meant to meet pastoral needs, must be large enough to accommodate them.</p>
+        <p>JOANNE C. NOVARRO  Director of Public Information  Diocese of Rockville Centre</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

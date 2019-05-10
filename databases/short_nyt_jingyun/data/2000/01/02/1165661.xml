@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>PERSPECTIVES: Global World Series, and a Few Other Guesses; Auto Racing</title>
+    <meta content="MB025521" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165661"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Automobile Racing</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <person class="indexing_service">Drape, Joe</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Automobiles/Topics/Wheel Spin</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Automobile Racing</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F04E1D91138F931A35752C0A9669C8B63" item-length="268" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>PERSPECTIVES: Global World Series, and a Few Other Guesses; Auto Racing</hl1>
+      </hedline>
+      <byline class="print_byline">By JOE DRAPE</byline>
+      <byline class="normalized_byline">Drape, Joe</byline>
+      <abstract>
+        <p>Joe Drape article offers global predictions for future of auto racing in 21st century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>The Indy 500? Forget about it. Instead, it will be the Indy 5000, with portions in air and over sea as the Jetsons Age finally arrives.</p>
+      </block>
+      <block class="full_text">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>The Indy 500? Forget about it. Instead, it will be the Indy 5000, with portions in air and over sea as the Jetsons Age finally arrives.</p>
+        <p>The Formula One Series will remain an elite and internationally dominated circuit, but new engineering-minded billionaires and everyday Autobahn veterans will challenge the corporate teams.</p>
+        <p>Once the salvation of Southern moonshiners, Nascar will run year round around the globe, as sort of a nostalgia show. London, Tokyo, Rome and Tehran all will have gigantic tracks to play host to expanding fields. Drivers will hail from places far from the South, like Russia, Ecuador or Tibet.</p>
+        <p>Nascar marketers will also be the first to give their ubiquitous sponsors  and action junkie fans what they want: on-track dogfights that result in spectacular crashes. Replacement cars and, if necessary, replacement drivers, will be ready to roar from the pit. It will be a huge television ratings hit and -- throwing in parimutuel betting on race day -- will replace baseball as America's national pastime.</p>
+        <p>JOE DRAPE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

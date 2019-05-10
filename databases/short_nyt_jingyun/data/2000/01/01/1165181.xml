@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Will Dust Survive? And Other Nagging Questions</title>
+    <meta content="01ASOL$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="12" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Science" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165181"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: TECHNOLOGY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Science and Technology</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <person class="indexing_service">Fountain, Henry</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Science</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="general_descriptor">Science and Technology</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C04EED81430F932A35752C0A9669C8B63" item-length="1314" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Will Dust Survive? And Other Nagging Questions</hl1>
+      </hedline>
+      <byline class="print_byline">By Henry Fountain</byline>
+      <byline class="normalized_byline">Fountain, Henry</byline>
+      <abstract>
+        <p>Henry Fountain article on whether in the century ahead science will succeed in reviving bodies frozen in liquid nitrogen, colonizing outer space, eliminating dust mites, improving fabrics used in clothing and making it impossible to be alone; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>In the next century, will those bodies that have been frozen in liquid nitrogen be brought back to life?</p>
+        <p>Bad news for Walt Disney if, as legend has it, he sits in a vat of liquid nitrogen somewhere, hovering 77 degrees above absolute zero.</p>
+      </block>
+      <block class="full_text">
+        <p>In the next century, will those bodies that have been frozen in liquid nitrogen be brought back to life?</p>
+        <p>Bad news for Walt Disney if, as legend has it, he sits in a vat of liquid nitrogen somewhere, hovering 77 degrees above absolute zero.</p>
+        <p>''I can stretch my imagination to see how we'd freeze whole organisms in the future,'' said Locksley E. McGann, a professor of laboratory medicine and pathology at the University of Alberta medical school. ''But thawing out those frozen now, I don't see it.''</p>
+        <p>Dr. McGann is president of the Society for Cryobiology, the field that studies the effects of very low temperatures on living tissue. Cryonics is the common term for the practice of freezing a body in the hope that future technology -- tiny machines, working molecule by molecule, perhaps -- will be able to repair and reanimate it.</p>
+        <p>The problem is that the damage to tissues caused by freezing is enormous. ''It's like a car being hit by a Mack truck,'' Dr. McGann said. ''The cell's pretty well had it.'' Repairing such damage is a daunting task.</p>
+        <p>Only single cells, embryos and small, simple structures like a heart valve can now be frozen and thawed successfully. But scientists should be able to freeze increasingly complex tissues, eventually making storage of hearts and perhaps other organs possible, Dr. McGann said.</p>
+        <p>''Figure that if you can freeze a heart, you are maybe halfway toward being able to freeze a kidney,'' he said. ''And if you follow that path, it might be reasonable in the future to freeze a whole body.''</p>
+        <p>But by then, biosynthetic tissues and other advances in transplantation may make freezing moot. ''The reasons to do it may not be there anymore,'' he said.</p>
+        <p>In the next century, will humans live  elsewhere?</p>
+        <p>Before people can transform the landscape of Mars or set up shop out near Alpha Centauri, they first have to get there safely. For Paul O. Wieland, an environmental systems engineer at NASA's Marshall Space Flight Center, that means designing and building systems that are more efficient and reliable.</p>
+        <p>''If something goes wrong and you're halfway there, you're in big trouble,'' said Mr. Wieland, whose handbook, ''Designing for Human Presence in Space,'' is a bible for engineers.</p>
+        <p>''Systems have to be more reliable and capable of being maintained,'' he said. ''There are some technical challenges to that that are being worked on.''</p>
+        <p>Marshall engineers are testing a laboratory module for the international space station. ''The software is one of the biggest problems at this point,'' Mr. Wieland said. ''It's causing us trouble now because we're trying to make it real easy for the astronauts so they can spend their time doing productive work.''</p>
+        <p>Dr. Wieland noted that the technical knowledge existed to send people back to the moon or to Mars and that the ability to establish permanent settlements was increasing as research progresses. He is optimistic about the chances that humans will live elsewhere.</p>
+        <p>''I'd say we pretty much have to,'' he said. ''We don't have much more room here.''</p>
+        <p>In the next century, will household dust still exist?</p>
+        <p>As long as there's friction, as long as a shoe hitting a carpet kicks up a fiber or two, dust will exist. But dust mites, those tiny creatures that dwell in mattresses, carpets and elsewhere in the home and produce allergens that are a big contributor to asthma, are a different story. There is hope that they may be eliminated, or at least reduced.</p>
+        <p>One strategy, says Glen Needham, a professor of entomology at Ohio State University who studies mites, is integrated pest management, the use of multiple tactics to control a pest population. ''It's normally used for a field crop,'' he said. ''But it's no different in the home.''</p>
+        <p>Mites flourish in humid conditions, so reducing humidity is one tactic. So is the use of insecticides, although Mr. Needham acknowledged that it was difficult to overcome resistance to pesticide use in the home.</p>
+        <p>Biological controls pose problems as well, he added. ''A homeowner probably isn't going to feel good about releasing a thousand predator spider mites to kill dust mites,'' he said. ''He's going to say, 'I'm not sure I want that going on beneath my mattress cover tonight.' ''</p>
+        <p>Even the best pest program probably wouldn't eliminate mites in older homes, Mr. Needham said. But a mite-free existence may be possible in the future in new homes that are designed to reduce humidity and where the furnishings are impregnated with pesticides before they are installed.</p>
+        <p>''A lot of asthmatics are chemophobes,'' he said. ''You tell them you're going to put a pesticide in your home, and they're not even going to want to listen to the facts. But if you put a carpet in there that's already treated, that might be easier.''</p>
+        <p>In the next century, what will clothes be made of?</p>
+        <p>In the future, no one may care if textiles are natural or synthetic. What will be important is the technology that is incorporated into them.</p>
+        <p>''The information component of clothing will increase dramatically,'' said Joe Cunning, director of the National Textile Center, a research consortium of six universities. So-called smart clothing, now only in its infancy, will become a large segment of the industry. ''The fibers themselves will carry information about your health and well-being,'' Mr. Cunning said -- for example, through sensors that monitor things like heartbeat and blood sugar.</p>
+        <p>New hues and new design possibilities will emerge, he added, through the inclusion of small inorganic compounds in fibers that can produce color when excited by a laser. A shirt could be colored at the last minute, just off the rack, Mr. Cunning said.</p>
+        <p>More than anything else, though, the current trend toward increased comfort will accelerate, and the result will be activewear ''carried to an extreme,'' he said.</p>
+        <p>Another big issue that will eventually be solved is fit, Mr. Cunning said. Already, body scanning and other technologies are making it possible to create that oxymoron, mass-produced custom clothing. Eventually, Mr. Cunning said, there will be breakthroughs in the technology of patterning, cutting and manufacturing. ''We will have clothes that fit everybody, not just a few.''</p>
+        <p>In the next century, where will people go when they want to be alone?</p>
+        <p>''Maybe we'll have enough open space,'' said James Boyd, an economist with Resources for the Future, a research organization in Washington. ''It hinges a lot on demographics.''</p>
+        <p>There are encouraging signs in the developed world of lower birthrates, he said, so some of the population-driven pressure on space may ease. But immigration and other factors could ratchet the pressure up again.</p>
+        <p>Information technology, for example, is going to lead to an increase in ''footloose'' employees, who can choose to work anywhere. ''That's good for individuals but probably not good for open space,'' Mr. Boyd said. ''It tends to make us spread out.''</p>
+        <p>And the movement to restrict growth, a politically powerful one in many communities, can add to the overall problem. ''The more land you lock up in that community, development pressure sort of squirts out somewhere else,'' Mr. Boyd said.</p>
+        <p>The real salvation for rural space, he noted, may be urban space.</p>
+        <p>''We'll never lose cities,'' Mr. Boyd said. ''People will always want good Chinese food and theater and never go too far away from that.'' And the more economic and demographic forces lead to concentrations of population, the less pressure there will be on open space.</p>
+        <p>VISIONS: TECHNOLOGY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

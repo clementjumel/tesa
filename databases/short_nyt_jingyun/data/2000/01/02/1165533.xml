@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The World; Fleeing the Eye of the Chechen Storm</title>
+    <meta content="02GORD$05" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Week in Review Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Week in Review" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165533"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <location class="indexing_service">Russia</location>
+        <location class="indexing_service">Chechnya</location>
+        <person class="indexing_service">Charney, Marc D</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Week in Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Russia/Chechnya</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/Russia</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=940DE0DC1338F931A35752C0A9669C8B63" item-length="408" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The World; Fleeing the Eye of the Chechen Storm</hl1>
+      </hedline>
+      <byline class="print_byline">By MARC D. CHARNEY</byline>
+      <byline class="normalized_byline">Charney, Marc D</byline>
+      <abstract>
+        <p>Photos of civilians fleeing fighting in Chechnya</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IF there has been one universal image of the impact of modern war on the innocent since 1914, it is that of the refugee in flight.</p>
+        <p>The faces peer out from faded news photographs from Belgium in 1914, from Poland in 1939, from India and the Galilee, from Korea, Indochina, the Balkans and Ethiopia.</p>
+      </block>
+      <block class="full_text">
+        <p>IF there has been one universal image of the impact of modern war on the innocent since 1914, it is that of the refugee in flight.</p>
+        <p>The faces peer out from faded news photographs from Belgium in 1914, from Poland in 1939, from India and the Galilee, from Korea, Indochina, the Balkans and Ethiopia.</p>
+        <p>Now comes Chechnya.</p>
+        <p>In the last several weeks, Russian forces pounded the restive republic's capital, Grozny, with artillery as they prepared to assault it on foot, intent on rooting out Islamic guerrillas holed up there and, not incidentally, proving once and for all that Russia still controls the republic.</p>
+        <p>As the barrage continued, thousands of refugees poured out of Chechnya, many of them northward in a safe-passage corridor, others through the Caucasus mountains toward Russia's neighbor, Georgia.</p>
+        <p>It was there two weeks ago, at the Georgian border post of Shatili near a high-altitude mountain pass, that the photographer Bruno Stevens met these refugees, as Russian special forces troops battled Chechen guerrillas and the Georgian government tried to seal the border.</p>
+        <p>The hundred or so refugees had gathered in freezing cold on the other side of the pass, and had waited through five days and four nights of fighting around them. They repeatedly came under fire from Russian helicopters and planes. Then, finally, with help from the United Nations High Commissioner for Refugees and the Georgian Ministry of Refugees, the refugees were y allowed to cross the border on Dec. 21. From there, they were ferried out by Georgian military helicopters.</p>
+        <p>Some of the faces are, perhaps, strikingly delicate. But the expressions of weariness and haste, the tight, uncertain mouths are more familiar. Those could belong to any refugee fleeing any modern war.</p>
+        <p>MARC D. CHARNEY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>BENEFITS</title>
+    <meta content="02BENE$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Style Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165463"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="indexing_service" type="descriptor">Parties (Social)</classifier>
+        <classifier class="online_producer" type="types_of_material">Schedule</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D02E0DA1538F931A35752C0A9669C8B63" item-length="487" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>BENEFITS</hl1>
+      </hedline>
+      <abstract>
+        <p>List of some upcoming benefit events (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Playground Spring Cleaning  JAN. 11 -- A cocktail party featuring live and silent auctions at Christie's East, 219 East 67th Street, will raise money for the New York Junior League's Playground Improvement Project, which renovates a city playground each spring. The reception will run from 6:30 to 9:30 p.m., with the live auction to begin at 8. Tickets, $40, from (212) 288-6220, ext. 273, or $50 at the door.</p>
+      </block>
+      <block class="full_text">
+        <p>Playground Spring Cleaning  JAN. 11 -- A cocktail party featuring live and silent auctions at Christie's East, 219 East 67th Street, will raise money for the New York Junior League's Playground Improvement Project, which renovates a city playground each spring. The reception will run from 6:30 to 9:30 p.m., with the live auction to begin at 8. Tickets, $40, from (212) 288-6220, ext. 273, or $50 at the door.</p>
+        <p>Kudos for Kevin Bacon  JAN. 12 -- The actor Kevin Bacon will receive the New York Film Society's first annual Young Friends of Film Award at a benefit for the society, which provides educational programming and reduced-price tickets for children, students, the deaf and those 65 and older. The black-tie evening begins at 7 in the Walter Reade Theater with a screening of ''Telling Lies in America,'' a 1997 film in which Mr. Bacon starred. Cocktails, a buffet and dancing will follow at the Kaplan Penthouse. Tickets, $175, from (212) 875-5630.</p>
+        <p>Fostering Public Health  JAN. 12 -- Katie Couric, of NBC's ''Today'' show, will be the host of a black-tie dinner and dance at the Waldorf-Astoria to raise money for the New York Academy of Medicine, a research and advocacy group that seeks to improve health and health care in cities. To be honored for their contributions to genetics research are Dr. Francis S. Collins, the director of the National Human Genome Research Institute; Dr. Henry A. McKinnell Jr., the president of the Pfizer Pharmaceuticals Group; and Robert B. Shapiro, the president of the Monsanto Company. A cocktail reception begins at 6:30, with dinner at 7:30 and dancing to follow. Tickets, $500, from (212) 822-7244.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

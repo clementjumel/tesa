@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Hostages Land in India After Deal Is Made With Hijackers</title>
+    <meta content="Y01HIJ$01" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="A" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165103"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Airlines and Airplanes</classifier>
+        <classifier class="indexing_service" type="descriptor">Hijacking</classifier>
+        <classifier class="indexing_service" type="descriptor">Hostages</classifier>
+        <location class="indexing_service">Pakistan</location>
+        <location class="indexing_service">India</location>
+        <location class="indexing_service">Afghanistan</location>
+        <location class="indexing_service">Kandahar (Afghanistan)</location>
+        <location class="indexing_service">Afghanistan</location>
+        <org class="indexing_service">Indian Airlines</org>
+        <org class="indexing_service">Taliban (Afghan Group)</org>
+        <person class="indexing_service">Dugger, Celia</person>
+        <person class="indexing_service">Azhar, Maulana Masood</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Afghanistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/India</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Pakistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Asia Pacific</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Manufacturing, Operations and Logistics</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/India</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/Afghanistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/Pakistan</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hijacking</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hostages</classifier>
+        <classifier class="online_producer" type="general_descriptor">Airlines and Airplanes</classifier>
+        <classifier class="online_producer" type="general_descriptor">Crime and Criminals</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F07E3DF1038F932A35752C0A9669C8B63" item-length="1379" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Hostages Land in India After Deal Is Made With Hijackers</hl1>
+      </hedline>
+      <byline class="print_byline">By CELIA W. DUGGER</byline>
+      <byline class="normalized_byline">Dugger, Celia</byline>
+      <dateline>NEW DELHI, Dec. 31</dateline>
+      <abstract>
+        <p>More and 150 people held hostage on a hijacked Indian Airlines plane for eight days arrive safely in New Delhi from Afghanistan after India secures their freedom by agreeing to release three jailed militants; five hijackers leave plan in Kandahar, Afghanistan, where they are joined by the released militants, who include a Muslim cleric named Maulana Masood Azhar; analysts say hijacking may have long-term political consequences in region, helping to legitimize Taliban, Afghan group that helped to end crisis, and further souring relations between India and Pakistan, which Indian officials and press have portrayed as hidden hand behind the hijacking; criticism in India over government's handling of hijacking intensifies in hours after hostages' release militants; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Haggard and exhausted, more than 150 people held hostage on a hijacked jet for eight days arrived here tonight from Afghanistan after India secured their freedom by agreeing to release three jailed militants.</p>
+        <p>The five hijackers, whose names and nationalities are still unknown, clambered down from the Indian Airlines plane this afternoon at the airport in the southern Afghan city of Kandahar and sped away in a van with the three militants. India's foreign minister personally delivered the three men, whom India considers terrorists opposed to Indian rule in Kashmir, to the hijackers.</p>
+      </block>
+      <block class="full_text">
+        <p>Haggard and exhausted, more than 150 people held hostage on a hijacked jet for eight days arrived here tonight from Afghanistan after India secured their freedom by agreeing to release three jailed militants.</p>
+        <p>The five hijackers, whose names and nationalities are still unknown, clambered down from the Indian Airlines plane this afternoon at the airport in the southern Afghan city of Kandahar and sped away in a van with the three militants. India's foreign minister personally delivered the three men, whom India considers terrorists opposed to Indian rule in Kashmir, to the hijackers.</p>
+        <p>The hijackers commandeered the plane on Dec. 24 during a scheduled flight from Katmandu, Nepal, bound for New Delhi, then took it on a harrowing journey from India to Pakistan, on to the United Arab Emirates, and finally to Afghanistan.</p>
+        <p>The Taliban, the Muslim fundamentalist movement that rules most of Afghanistan, gave the hijackers and the freed militants 10 hours to get out of the country, but it was not clear where they would go. The nearest country, Pakistan, said they were unwanted there. And Taliban officials did not spell out what they would do if the hijackers remained in Afghanistan.</p>
+        <p>It is early to judge, but analysts said the hijacking episode may have long-term political consequences in the region. It may help legitimize the Taliban, a group perceived by most of the world as providing a haven for terrorists but praised by India in this case for helping to end the hijacking.</p>
+        <p>And it will almost certainly further sour relations between India and Pakistan, nuclear-armed neighbors and bitter rivals for control of Kashmir. Indian officials and many newspaper accounts here suggested that Pakistan was the hidden hand behind the hijacking -- a charge Pakistan angrily rejected.</p>
+        <p>But at the airport here in New Delhi tonight, no one was thinking about geopolitics, only about the human drama unfolding before them. The scenes were both wrenching and joyous as families were reunited. Most of the hostages were Indian citizens, and in the smoky, polluted haze of a winter's night, entire extended families passed through a gantlet of television cameras, clinging to each other and often physically holding up sagging relatives who had been held captive.</p>
+        <p>Some former hostages, their faces covered with a week's stubble of beard, their eyes bloodshot and puffy, strolled out and waved jauntily to the thousands who greeted them with cheers. Others wept, fainted or fled to waiting cars. An old man caressed the face of a boy who had been held on the plane and now sat dazed in a wheelchair, his neck ringed with garlands of flowers.</p>
+        <p>A few former hostages paused for snatches of conversation about the hijackers. ''When the Indian government refused their demands, they behaved more terribly with us,'' said C. P. Chawla. ''They were very cruel people. I'm happy to be home.''</p>
+        <p>Less than an hour before the former hostages landed here, Prime Minister Atal Behari Vajpayee, in a televised address to the nation, pledged to combat terrorism. ''India shall join hands across nations to rid the world of this crime against humanity,'' he said. ''Let this be our first resolution for the new century.''</p>
+        <p>But criticism of the government's handling of the hijacking -- already vociferous over the past week -- grew even more intense in the hours after the hostages were released. Leaders of the opposition Congress Party said the decision to yield to some of the hijackers' demands would boost the spirits of militants battling Indian rule of predominantly Muslim Kashmir and would encourage more hostage-takings.</p>
+        <p>''Conceding to the demands of the hijackers to release three hard-core terrorists will have serious implications,'' said Pranab Mukherjee, a senior Congress Party official. ''It will demoralize the security forces and encourage terrorists to repeat this kind of activity.''</p>
+        <p>And there was a marked note of defensiveness in various officials' explanations of the government's decision to make a deal with terrorists.</p>
+        <p>Asked on the state-run television station whether the hostages-for-militants swap was appropriate, Brajesh Mishra, one of the prime minister's top advisers, insisted that the government had made the best of a bad situation. The hijackers had demanded $200 million and the release of 36 militants, they noted. India only gave up only three.</p>
+        <p>A State Department official today said it condemned the hijacking, but was pleased that the hostages had been released without the further loss of life.</p>
+        <p>Jaswant Singh, India's foreign minister, took no questions during a news conference at the airport tonight as the hostages poured out of the international arrivals terminal. In a brief statement, Mr. Singh, who had handed the militants over to the hijackers just a few hours earlier, said, ''I want to let it be known that no criminal who dares raise a hand against India shall in the ultimate ever go unpunished.''</p>
+        <p>Mr. Singh also took the opportunity to thank the Taliban once again ''for the cooperation, which was constructive all along this time period.'' Like most countries, India has no diplomatic relations with the Taliban.</p>
+        <p>But while India has repeatedly and publicly praised the Taliban during this crisis, some analysts and Indian diplomats say that it is too early to determine whether the Taliban were truly taking a firm stand against the hijacking. The most important test, they said, would be the Taliban's handling of the freed hijackers.</p>
+        <p>If no other country accepts the hijackers, will the Taliban allow them to melt away into Afghanistan, or will it prosecute them?</p>
+        <p>''There has to be a much clearer assessment after the event, whether you would count the Taliban as having been helpful or not helpful,'' one Indian diplomat said.</p>
+        <p>The analysts and diplomats also noted that the hijackers never made a demand for their own safe passage, presumably because they assumed the Taliban would provide that. And they speculated that some elements in the Taliban may have given the hijackers weapons after they landed in Kandahar -- a theory that gained some support from hostages tonight who said the hijackers seemed to have more guns after reaching Afghanistan.</p>
+        <p>The Taliban played a key role in persuading the hijackers to drop their demands for $200 million and the exhumed body of a slain militant, but they also apparently pressured India to compromise on the release of some militants by threatening to force the plane to leave Afghanistan if the crisis was not quickly resolved.</p>
+        <p>One of those released militants, a Pakistani Muslim cleric named Maulana Masood Azhar, was a leader of Harakat ul-Ansar, a group on the American State Department's list of terrorist organizations that operated training camps in Afghanistan. Mr. Azhar was arrested in India in 1994 and had been held there ever since.</p>
+        <p>The other two militants released by India today were Mushtaq Ahmed Zargar, who once headed a militant group active in Kashmir and who was imprisoned in India in 1992, and Ahmed Umar Saeed Sheik, who has been jailed in India since 1994 on charges of organizing the kidnapping of four Westerners in an earlier effort to win Mr. Azhar's release, the Press Trust of India reported.</p>
+        <p>Given the Taliban's quest for international recognition. some security analysts also wondered whether Mr. Singh's determined praise of the Taliban and his decision to accompany the freed militants personally today on the flight to Afghanistan were part of a deal with the Taliban to help secure release of the hostages.</p>
+        <p>''The release of the three militants was the public part of the cave-in,'' said Brahma Chellaney, a defense expert at the Center for Policy Research in New Delhi. ''What other demands were made and what was agreed upon I do not know.''</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

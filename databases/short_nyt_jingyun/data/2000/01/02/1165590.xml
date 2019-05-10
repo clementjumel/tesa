@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>THE YEAR 2000: Speeches, Star Power and a Whole Lot of Noise Ring In the New; An International Hug At Mexico-U.S. Border</title>
+    <meta content="02LARE" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165590"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9503E7DE1138F931A35752C0A9669C8B63" item-length="564" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>THE YEAR 2000: Speeches, Star Power and a Whole Lot of Noise Ring In the New; An International Hug At Mexico-U.S. Border</hl1>
+      </hedline>
+      <byline class="print_byline">By JIM YARDLEY</byline>
+      <dateline>LAREDO, Tex., Jan. 1</dateline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>In a vivid reminder that many people along the Texas-Mexico border regard the region as one country instead of two, the mayors of Laredo and its Mexican sister city, Nuevo Laredo, walked across a bridge above the Rio Grande shortly before the new year arrived and celebrated the new millennium with an international hug and a kiss.</p>
+        <p>''Como esta?'' asked Mayor Betty Flores of Laredo as she greeted Mayor Horacio Garza Garza of Nuevo Laredo at the halfway point of International Bridge No. 1.</p>
+      </block>
+      <block class="full_text">
+        <p>In a vivid reminder that many people along the Texas-Mexico border regard the region as one country instead of two, the mayors of Laredo and its Mexican sister city, Nuevo Laredo, walked across a bridge above the Rio Grande shortly before the new year arrived and celebrated the new millennium with an international hug and a kiss.</p>
+        <p>''Como esta?'' asked Mayor Betty Flores of Laredo as she greeted Mayor Horacio Garza Garza of Nuevo Laredo at the halfway point of International Bridge No. 1.</p>
+        <p>The meeting was freighted with symbolism for this isolated border region where culture and nationality seem as blurred and fluid as the Rio Grande itself. A few hundred people shouted ''Viva Mexico!'' after singing the Mexican national anthem and then cheered loudly after listening to ''The Star Spangled Banner.''</p>
+        <p>''Our values have stood the test of time,'' Ms. Flores said in a short speech.</p>
+        <p>On the last day of the old millennium, the scene at the bridge had been the usual: old women and cowboys, teenagers and tourists and thousands of other people crossed back and forth, some shopping, others coming or going from jobs on one side of the border or the other. The notion that a line on a map could create hard boundaries seemed as far-fetched as, say, the world changing with the tick of a clock.</p>
+        <p>''It's like it was one city,'' said Terry Medinilla, a salesperson at El Porvenir, a clothing store that depends on customers walking across the bridge from Mexico. ''We can't be without them, and they can't be without us.''</p>
+        <p>By late in the evening, the bridge was empty, closed by officials for the ''abrazo,'' or embrace, ceremony. At about 11 p.m., Central time, the Mexican mayor and his entourage followed a contingent of green-helmeted soldiers toward the stone marker signifying the international boundary.</p>
+        <p>From the American side, Ms. Flores and members of the local city council walked arm-in-arm to greet their Mexican counterparts. Four Laredo police officers carrying the American flag made up a modest color guard.</p>
+        <p>The future actually arrived in Laredo six years before the new millennium. In January 1994, the North American Free Trade Agreement transformed Laredo into the busiest cargo crossing point on the border. Unemployment plummeted as 12,000 trucks a day carried goods back and forth. The trucks have also polluted the air and clogged the roads.</p>
+        <p>After the embrace and the speeches, the two mayors walked back to their side of the river, dividing into two countries once more.</p>
+        <p>In Nuevo Laredo, a huge red, white and green Mexican flag fluttered beside the river.</p>
+        <p>In Laredo, a few hundred people attended a free concert. Fireworks crackled from both sides of the river, as did a more dangerous local New Year's custom, gunshots fired in celebration into the air.</p>
+        <p>Then, an hour or so later, the noise subsided, traffic began flowing across the bridge as the border checkpoints reopened, and life on the border resumed along the stale, green waters of the Rio Grande.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

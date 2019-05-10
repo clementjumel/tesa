@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>New Delhi, Under Fire, Hints at Pakistan Links With Hijackers</title>
+    <meta content="02HIJA$04" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Foreign Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="World" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165604"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Airlines and Airplanes</classifier>
+        <location class="indexing_service">Pakistan</location>
+        <location class="indexing_service">India</location>
+        <location class="indexing_service">Afghanistan</location>
+        <org class="indexing_service">Indian Airlines</org>
+        <person class="indexing_service">Dugger, Celia W</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Afghanistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/India</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/Pakistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Asia Pacific</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Manufacturing, Operations and Logistics</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/India</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/Pakistan</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Asia/Afghanistan</classifier>
+        <classifier class="online_producer" type="general_descriptor">Airlines and Airplanes</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A03E5DC1138F931A35752C0A9669C8B63" item-length="614" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>New Delhi, Under Fire, Hints at Pakistan Links With Hijackers</hl1>
+      </hedline>
+      <byline class="print_byline">By CELIA W. DUGGER</byline>
+      <byline class="normalized_byline">Dugger, Celia W</byline>
+      <dateline>NEW DELHI, Jan. 1</dateline>
+      <abstract>
+        <p>Indian government defends its much-criticized decision to make deal with Muslim militants who seized Indian Airlines jet and hints darkly that Pakistan was behind the hijacking (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The more than 150 hostages freed on Friday from a hijacked Indian Airlines jet today savored the simple pleasures that had been denied them for the past week: a shower, a fresh shave, sleeping with their legs outstretched and eating a home-cooked meal.</p>
+        <p>As the hostages took their first steps back to normal life, India's top diplomat took the offensive. Foreign Minister Jaswant Singh defended the government's much-criticized decision to make a deal with the hijackers -- winning the hostages' freedom by releasing three jailed militants -- and hinted darkly that India's archrival, Pakistan, was behind this latest terrorist act.</p>
+      </block>
+      <block class="full_text">
+        <p>The more than 150 hostages freed on Friday from a hijacked Indian Airlines jet today savored the simple pleasures that had been denied them for the past week: a shower, a fresh shave, sleeping with their legs outstretched and eating a home-cooked meal.</p>
+        <p>As the hostages took their first steps back to normal life, India's top diplomat took the offensive. Foreign Minister Jaswant Singh defended the government's much-criticized decision to make a deal with the hijackers -- winning the hostages' freedom by releasing three jailed militants -- and hinted darkly that India's archrival, Pakistan, was behind this latest terrorist act.</p>
+        <p>Mr. Singh opened his wrap-up news conference on the hijacking by listing a string of accusations that implicated Pakistan. The hijackers were Pakistanis, he said. Most of the 36 militants they wanted released were Pakistanis, he added.</p>
+        <p>And the hijackers and three terror suspects whom India handed over to them on the tarmac in Kandahar, Afghanistan -- where the crisis ended -- had headed for Quetta, Pakistan, he said. To back up that assertion, he cited remarks attributed to an official in the Taliban, which rules most of Afghanistan, in a Pakistani newspaper.</p>
+        <p>But when he was asked directly if he believed the government of Pakistan had sponsored the terrorists, Mr. Singh said, ''I'll not comment authoritatively on that.''</p>
+        <p>While Mr. Singh did not make public evidence to support his charges, his remarks made it clear that the ill will between the neighboring nuclear-armed nations is unabated since they clashed this summer over Kashmir, the beautiful Himalayan territory that each seeks for its own.</p>
+        <p>The hijacking has become one more episode to aggravate the tension between the two countries.</p>
+        <p>Now that the hostages, most of them Indians, are heading home, attention has shifted to where their captors have really gone.</p>
+        <p>The Taliban gave them 10 hours to get out of Afghanistan after the hijacking ended on Friday.</p>
+        <p>When they came down the ladder from the Airbus, they and the three released militants got into a four-wheel-drive vehicle and drove away. The drive to Pakistan from Kandahar is about 5 hours, and it is 12 to 14 hours to the Iranian border.</p>
+        <p>Mr. Singh said the men had headed to Pakistan, and he may well be right. But the Pakistani government said it did not want them to enter.</p>
+        <p>Brig. Rashid Qureshi, spokesman for the military government in Pakistan, said today that the Taliban had never sought permission from Pakistan for the hijackers to go to Pakistan, nor would it have been given.</p>
+        <p>''If you heard the statement yesterday from our Minister of Foreign Affairs, we have said that Pakistan is greatly relieved that the hijacking has ended without bloodshed,'' he said, ''and he emphasized that the punishment for hijackers here in Pakistan is capital punishment.</p>
+        <p>''I do not expect that after such a statement had been issued that the hijackers would risk coming to Pakistan.''</p>
+        <p>He said that Pakistan had increased its border patrols in recent months but had made no special provisions to stop the hijackers. ''I don't expect it is very easy for the hijackers to come across the border, but while I say this, I have to add that we cannot patrol every inch of the border,'' he said.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

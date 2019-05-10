@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="CoreNLP-to-HTML.xsl" type="text/xsl"?>
+<root>
+  <document>
+    <sentences>
+      <sentence id="1">
+        <tokens>
+          <token id="1">
+            <word>A</word>
+            <lemma>a</lemma>
+            <CharacterOffsetBegin>0</CharacterOffsetBegin>
+            <CharacterOffsetEnd>1</CharacterOffsetEnd>
+            <POS>DT</POS>
+            <NER>DURATION</NER>
+            <NormalizedNER>P1Y</NormalizedNER>
+            <Speaker>PER0</Speaker>
+            <Timex tid="t1" type="DURATION">P1Y</Timex>
+          </token>
+          <token id="2">
+            <word>year</word>
+            <lemma>year</lemma>
+            <CharacterOffsetBegin>2</CharacterOffsetBegin>
+            <CharacterOffsetEnd>6</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>DURATION</NER>
+            <NormalizedNER>P1Y</NormalizedNER>
+            <Speaker>PER0</Speaker>
+            <Timex tid="t1" type="DURATION">P1Y</Timex>
+          </token>
+          <token id="3">
+            <word>of</word>
+            <lemma>of</lemma>
+            <CharacterOffsetBegin>7</CharacterOffsetBegin>
+            <CharacterOffsetEnd>9</CharacterOffsetEnd>
+            <POS>IN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="4">
+            <word>parties</word>
+            <lemma>party</lemma>
+            <CharacterOffsetBegin>10</CharacterOffsetBegin>
+            <CharacterOffsetEnd>17</CharacterOffsetEnd>
+            <POS>NNS</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="5">
+            <word>,</word>
+            <lemma>,</lemma>
+            <CharacterOffsetBegin>17</CharacterOffsetBegin>
+            <CharacterOffsetEnd>18</CharacterOffsetEnd>
+            <POS>,</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="6">
+            <word>celebrating</word>
+            <lemma>celebrate</lemma>
+            <CharacterOffsetBegin>19</CharacterOffsetBegin>
+            <CharacterOffsetEnd>30</CharacterOffsetEnd>
+            <POS>VBG</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="7">
+            <word>dance</word>
+            <lemma>dance</lemma>
+            <CharacterOffsetBegin>31</CharacterOffsetBegin>
+            <CharacterOffsetEnd>36</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="8">
+            <word>,</word>
+            <lemma>,</lemma>
+            <CharacterOffsetBegin>36</CharacterOffsetBegin>
+            <CharacterOffsetEnd>37</CharacterOffsetEnd>
+            <POS>,</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="9">
+            <word>art</word>
+            <lemma>art</lemma>
+            <CharacterOffsetBegin>38</CharacterOffsetBegin>
+            <CharacterOffsetEnd>41</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="10">
+            <word>,</word>
+            <lemma>,</lemma>
+            <CharacterOffsetBegin>41</CharacterOffsetBegin>
+            <CharacterOffsetEnd>42</CharacterOffsetEnd>
+            <POS>,</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="11">
+            <word>philanthropy</word>
+            <lemma>philanthropy</lemma>
+            <CharacterOffsetBegin>43</CharacterOffsetBegin>
+            <CharacterOffsetEnd>55</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="12">
+            <word>,</word>
+            <lemma>,</lemma>
+            <CharacterOffsetBegin>55</CharacterOffsetBegin>
+            <CharacterOffsetEnd>56</CharacterOffsetEnd>
+            <POS>,</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="13">
+            <word>Central</word>
+            <lemma>Central</lemma>
+            <CharacterOffsetBegin>57</CharacterOffsetBegin>
+            <CharacterOffsetEnd>64</CharacterOffsetEnd>
+            <POS>NNP</POS>
+            <NER>LOCATION</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="14">
+            <word>Park</word>
+            <lemma>Park</lemma>
+            <CharacterOffsetBegin>65</CharacterOffsetBegin>
+            <CharacterOffsetEnd>69</CharacterOffsetEnd>
+            <POS>NNP</POS>
+            <NER>LOCATION</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="15">
+            <word>,</word>
+            <lemma>,</lemma>
+            <CharacterOffsetBegin>69</CharacterOffsetBegin>
+            <CharacterOffsetEnd>70</CharacterOffsetEnd>
+            <POS>,</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="16">
+            <word>the</word>
+            <lemma>the</lemma>
+            <CharacterOffsetBegin>71</CharacterOffsetBegin>
+            <CharacterOffsetEnd>74</CharacterOffsetEnd>
+            <POS>DT</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="17">
+            <word>library</word>
+            <lemma>library</lemma>
+            <CharacterOffsetBegin>75</CharacterOffsetBegin>
+            <CharacterOffsetEnd>82</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="18">
+            <word>and</word>
+            <lemma>and</lemma>
+            <CharacterOffsetBegin>83</CharacterOffsetBegin>
+            <CharacterOffsetEnd>86</CharacterOffsetEnd>
+            <POS>CC</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="19">
+            <word>rock</word>
+            <lemma>rock</lemma>
+            <CharacterOffsetBegin>87</CharacterOffsetBegin>
+            <CharacterOffsetEnd>91</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="20">
+            <word>'n'</word>
+            <lemma>'n'</lemma>
+            <CharacterOffsetBegin>92</CharacterOffsetBegin>
+            <CharacterOffsetEnd>95</CharacterOffsetEnd>
+            <POS>CC</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="21">
+            <word>roll</word>
+            <lemma>roll</lemma>
+            <CharacterOffsetBegin>96</CharacterOffsetBegin>
+            <CharacterOffsetEnd>100</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="22">
+            <word>fashion</word>
+            <lemma>fashion</lemma>
+            <CharacterOffsetBegin>101</CharacterOffsetBegin>
+            <CharacterOffsetEnd>108</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+          <token id="23">
+            <word>.</word>
+            <lemma>.</lemma>
+            <CharacterOffsetBegin>108</CharacterOffsetBegin>
+            <CharacterOffsetEnd>109</CharacterOffsetEnd>
+            <POS>.</POS>
+            <NER>O</NER>
+            <Speaker>PER0</Speaker>
+          </token>
+        </tokens>
+        <parse>(ROOT (S (NP (NP (DT A) (NN year)) (PP (IN of) (NP (NNS parties)))) (, ,) (VP (VBG celebrating) (NP (NP (NN dance)) (, ,) (NP (NN art)) (, ,) (NP (NN philanthropy)) (, ,) (NP (NNP Central) (NNP Park)) (, ,) (NP (DT the) (NN library)) (CC and) (NP (NP (NN rock)) (CC 'n') (NP (NN roll) (NN fashion))))) (. .))) </parse>
+        <dependencies type="basic-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">year</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="2">year</governor>
+            <dependent idx="1">A</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="4">parties</governor>
+            <dependent idx="3">of</dependent>
+          </dep>
+          <dep type="nmod">
+            <governor idx="2">year</governor>
+            <dependent idx="4">parties</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="2">year</governor>
+            <dependent idx="5">,</dependent>
+          </dep>
+          <dep type="root">
+            <governor idx="5">,</governor>
+            <dependent idx="6">celebrating</dependent>
+          </dep>
+          <dep type="dobj">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="7">dance</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="8">,</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="12">,</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="14">Park</governor>
+            <dependent idx="13">Central</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="17">library</governor>
+            <dependent idx="16">the</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="18">and</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="20">'n'</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="22">fashion</governor>
+            <dependent idx="21">roll</dependent>
+          </dep>
+          <dep type="conj">
+            <governor idx="7">dance</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="23">.</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">year</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="2">year</governor>
+            <dependent idx="1">A</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="4">parties</governor>
+            <dependent idx="3">of</dependent>
+          </dep>
+          <dep type="nmod:of">
+            <governor idx="2">year</governor>
+            <dependent idx="4">parties</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="2">year</governor>
+            <dependent idx="5">,</dependent>
+          </dep>
+          <dep type="root">
+            <governor idx="5">,</governor>
+            <dependent idx="6">celebrating</dependent>
+          </dep>
+          <dep type="dobj">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="7">dance</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="8">,</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="12">,</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="14">Park</governor>
+            <dependent idx="13">Central</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="17">library</governor>
+            <dependent idx="16">the</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="18">and</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="20">'n'</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="22">fashion</governor>
+            <dependent idx="21">roll</dependent>
+          </dep>
+          <dep type="conj:'n'">
+            <governor idx="7">dance</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="23">.</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-ccprocessed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">year</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="2">year</governor>
+            <dependent idx="1">A</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="4">parties</governor>
+            <dependent idx="3">of</dependent>
+          </dep>
+          <dep type="nmod:of">
+            <governor idx="2">year</governor>
+            <dependent idx="4">parties</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="2">year</governor>
+            <dependent idx="5">,</dependent>
+          </dep>
+          <dep type="root">
+            <governor idx="5">,</governor>
+            <dependent idx="6">celebrating</dependent>
+          </dep>
+          <dep type="dobj">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="7">dance</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="8">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="12">,</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="14">Park</governor>
+            <dependent idx="13">Central</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="17">library</governor>
+            <dependent idx="16">the</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="18">and</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="20">'n'</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="22">fashion</governor>
+            <dependent idx="21">roll</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="conj:'n'">
+            <governor idx="7">dance</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="23">.</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="enhanced-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">year</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="2">year</governor>
+            <dependent idx="1">A</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="4">parties</governor>
+            <dependent idx="3">of</dependent>
+          </dep>
+          <dep type="nmod:of">
+            <governor idx="2">year</governor>
+            <dependent idx="4">parties</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="2">year</governor>
+            <dependent idx="5">,</dependent>
+          </dep>
+          <dep type="root">
+            <governor idx="5">,</governor>
+            <dependent idx="6">celebrating</dependent>
+          </dep>
+          <dep type="dobj">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="7">dance</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="8">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="12">,</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="14">Park</governor>
+            <dependent idx="13">Central</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="17">library</governor>
+            <dependent idx="16">the</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="18">and</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="20">'n'</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="22">fashion</governor>
+            <dependent idx="21">roll</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="conj:'n'">
+            <governor idx="7">dance</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="23">.</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="enhanced-plus-plus-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">year</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="2">year</governor>
+            <dependent idx="1">A</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="4">parties</governor>
+            <dependent idx="3">of</dependent>
+          </dep>
+          <dep type="nmod:of">
+            <governor idx="2">year</governor>
+            <dependent idx="4">parties</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="2">year</governor>
+            <dependent idx="5">,</dependent>
+          </dep>
+          <dep type="root">
+            <governor idx="5">,</governor>
+            <dependent idx="6">celebrating</dependent>
+          </dep>
+          <dep type="dobj">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="7">dance</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="8">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="9">art</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="11">philanthropy</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="12">,</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="14">Park</governor>
+            <dependent idx="13">Central</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="14">Park</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">dance</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="17">library</governor>
+            <dependent idx="16">the</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="17">library</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="18">and</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="conj:and">
+            <governor idx="7">dance</governor>
+            <dependent idx="19">rock</dependent>
+          </dep>
+          <dep type="cc">
+            <governor idx="7">dance</governor>
+            <dependent idx="20">'n'</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="22">fashion</governor>
+            <dependent idx="21">roll</dependent>
+          </dep>
+          <dep type="dobj" extra="true">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="conj:'n'">
+            <governor idx="7">dance</governor>
+            <dependent idx="22">fashion</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">celebrating</governor>
+            <dependent idx="23">.</dependent>
+          </dep>
+        </dependencies>
+        <MachineReading>
+          <entities>
+            <entity id="EntityMention-3046882">O
+              <span start="1" end="2"/>
+              <probabilities/>
+            </entity>
+            <entity id="EntityMention-3046883">LOCATION
+              <span start="13" end="14"/>
+              <probabilities/>
+            </entity>
+          </entities>
+          <relations/>
+        </MachineReading>
+      </sentence>
+      <sentence id="2">
+        <tokens>
+          <token id="1">
+            <word>EVENING</word>
+            <lemma>evening</lemma>
+            <CharacterOffsetBegin>110</CharacterOffsetBegin>
+            <CharacterOffsetEnd>117</CharacterOffsetEnd>
+            <POS>NN</POS>
+            <NER>TIME</NER>
+            <NormalizedNER>TEV</NormalizedNER>
+            <Speaker>PER0</Speaker>
+            <Timex tid="t2" type="TIME">TEV</Timex>
+          </token>
+          <token id="2">
+            <word>HOURS</word>
+            <lemma>hour</lemma>
+            <CharacterOffsetBegin>118</CharacterOffsetBegin>
+            <CharacterOffsetEnd>123</CharacterOffsetEnd>
+            <POS>NNS</POS>
+            <NER>DURATION</NER>
+            <NormalizedNER>PTXH</NormalizedNER>
+            <Speaker>PER0</Speaker>
+            <Timex tid="t3" type="DURATION">PTXH</Timex>
+          </token>
+        </tokens>
+        <parse>(ROOT (NP (NN EVENING) (NNS HOURS))) </parse>
+        <dependencies type="basic-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">HOURS</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="2">HOURS</governor>
+            <dependent idx="1">EVENING</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">HOURS</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="2">HOURS</governor>
+            <dependent idx="1">EVENING</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-ccprocessed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">HOURS</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="2">HOURS</governor>
+            <dependent idx="1">EVENING</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="enhanced-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">HOURS</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="2">HOURS</governor>
+            <dependent idx="1">EVENING</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="enhanced-plus-plus-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="2">HOURS</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="2">HOURS</governor>
+            <dependent idx="1">EVENING</dependent>
+          </dep>
+        </dependencies>
+        <MachineReading>
+          <entities>
+            <entity id="EntityMention-3046884">O
+              <span start="0" end="1"/>
+              <probabilities/>
+            </entity>
+            <entity id="EntityMention-3046885">O
+              <span start="1" end="2"/>
+              <probabilities/>
+            </entity>
+          </entities>
+          <relations/>
+        </MachineReading>
+      </sentence>
+    </sentences>
+  </document>
+</root>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>VISIONS: CITIES - Manifestoes To Give City A New Edge; People's Banking Network</title>
+    <meta content="MB121003" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="28" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165039"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Banks and Banking</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Ludwig, Sarah</person>
+        <person class="indexing_service">Johnston, David Cay</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Banking, Finance and Insurance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Banks and Banking</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Finances</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9806E2DC1E39F932A35752C0A9669C8B63" item-length="132" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>VISIONS: CITIES - Manifestoes To Give City A New Edge; People's Banking Network</hl1>
+      </hedline>
+      <byline class="print_byline">By David Cay Johnston</byline>
+      <byline class="normalized_byline">Johnston, David Cay</byline>
+      <abstract>
+        <p>Sarah Ludwig, executive director of Neighborhood Economic Development Advocacy Group, believes New York City should have a nonprofit people's bank, where the poor would have access to their accounts at kiosks in community gatherings spots and be able to pay bills electronically, shop online and obtain mortgages (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>SARAH LUDWIG, executive director, Neighborhood Economic Development Advocacy Project</p>
+      </block>
+      <block class="full_text">
+        <p>SARAH LUDWIG, executive director, Neighborhood Economic Development Advocacy Project</p>
+        <p>Poor neighborhoods often have no bank, just check-cashing businesses that charge high fees. That forces the poor to carry cash, making them vulnerable to robbery. ''We can solve this costly problem by using the Internet to create the people's bank,'' Ms. Ludwig says.</p>
+        <p>The nonprofit bank would encourage direct deposits of checks. The poor would have access to their accounts at kiosks in community gathering spots. Individuals could pay bills electronically, shop online and obtain mortgages.</p>
+        <p>Governments could cover the cost of each transaction out of the money saved from other services -- like the police, courts and prisons now needed to deal with bandits.</p>
+        <p>DAVID CAY JOHNSTON</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

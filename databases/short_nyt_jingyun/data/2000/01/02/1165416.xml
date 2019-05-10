@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Groovin' With Flattop</title>
+    <meta content="02TSID$02" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165416"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Roads and Traffic</classifier>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <location class="indexing_service">New Jersey Turnpike</location>
+        <location class="indexing_service">New Jersey</location>
+        <org class="indexing_service">Beatles (Music Group)</org>
+        <person class="indexing_service">Fried, Jonathan</person>
+        <person class="indexing_service">Berry, Chuck</person>
+        <person class="indexing_service">Lennon, John</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New Jersey</classifier>
+        <classifier class="online_producer" type="general_descriptor">Roads and Traffic</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9800E6DF1438F931A35752C0A9669C8B63" item-length="488" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Groovin' With Flattop</hl1>
+      </hedline>
+      <byline class="print_byline">By JONATHAN FRIED</byline>
+      <byline class="normalized_byline">Fried, Jonathan</byline>
+      <abstract>
+        <p>Perhaps most famous words written about New Jersey Turnpike may be those by John Lennon at start of Beatles classic song, Come Together, that were adapted from 1955 lyrics by rock and roll legend Chuck Berry in song 'You Can't Catch Me' (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Most people don't know it, but of all the words written about the New Jersey  Turnpike, the most famous may be those sung by John Lennon at the start of the Beatles classic song ''Come Together.''</p>
+        <p>''Here come old flattop, he come groovin' up slowly''</p>
+      </block>
+      <block class="full_text">
+        <p>Most people don't know it, but of all the words written about the New Jersey  Turnpike, the most famous may be those sung by John Lennon at the start of the Beatles classic song ''Come Together.''</p>
+        <p>''Here come old flattop, he come groovin' up slowly''</p>
+        <p>In fact, the words were adapted from lyrics written in 1955 by the rock and roll legend Chuck Berry in the song ''You Can't Catch Me,'' recorded at the session that produced his first hit, ''Maybellene.''</p>
+        <p>New Jersey Turnpike in the wee wee hours</p>
+        <p>I was rolling slowly 'cause of drizzlin' showers</p>
+        <p>Up come a flattop he was movin' up with me</p>
+        <p>Then come sailin' goodbye</p>
+        <p>In a little old souped up mini</p>
+        <p>I put my foot in my tank and I begin to roll</p>
+        <p>Horn and a siren was the state patrol</p>
+        <p>So I get out my wings and then I blew my horn</p>
+        <p>Bye-bye New Jersey I become airborne</p>
+        <p>In his autobiography, ''Chuck Berry'' (Harmony Books, 1987) the man who more than anyone else can be said to have invented rock and roll, said the song was inspired by his drag racing experience ''returning from New York City along the New Jersey Turnpike.''</p>
+        <p>''The New Jersey Turnpike itself is long enough, but the song was well on its way in theory as I rolled off the west end of the Pennsylvania Turnpike,'' Mr. Berry wrote. ''It was night and Toddy and I in our Buick had been overtaken by some dudes with crew cuts who pulled up alongside and passed us, waving. Their car was not as late a model as mine, but must have definitely been in better shape or souped up. Naturally, I sped up.''</p>
+        <p>Both he and the flattops got speeding tickets that night.</p>
+        <p>According to music industry lore, Mr. Berry phoned Mr. Lennon to discuss the situation of a No. 1 Beatles hit quoting him directly without giving him any credit. Mr. Lennon, one story goes, asked him what he thought it was worth, Mr. Berry named a figure, and Mr. Lennon wrote him a check. As recently as Dec. 3, Mr. Berry played a sold-out show at the Morristown Community Center. Dick Alen of the William Morris Agency in Beverly Hills, the booking agent for the 73-year-old music, said Mr. Berry still drives himself to local gigs, arriving a few minutes before curtain time, and plays with a band of local musicians.</p>
+        <p>So for those ''counting the cars on the New Jersey Turnpike'' in a folk-rock reverie like the one that inspired Paul Simon to write some other famous words about the New Jersey's highway of highways, one of those cars may have been a Cadillac from Mr. Berry's collection, with the singer himself behind the wheel, and his guitar on the back seat.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

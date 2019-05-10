@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Books in Brief: Fiction &amp; Poetry; Italy's Women Warriors</title>
+    <meta content="RV100936" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165272"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Mcphee, Jenny</person>
+        <person class="indexing_service">Vigano, Renata</person>
+        <object.title class="indexing_service">Partisan Wedding (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=950DE7DC1E39F931A35752C0A9669C8B63" item-length="312" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Books in Brief: Fiction &amp; Poetry; Italy's Women Warriors</hl1>
+      </hedline>
+      <byline class="print_byline">By Jenny McPhee</byline>
+      <byline class="normalized_byline">Mcphee, Jenny</byline>
+      <abstract>
+        <p>Jenny McPhee reviews book Partisan Wedding by Renata Vigano; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>PARTISAN WEDDING (University of Missouri, paper, $19.95), Renata ViganRated R's spare and heart-wrenching story collection, is centered on women involved in the Italian resistance during World War II. The author, who died in 1976, was herself a courier, or staffetta, for the partisans who fought the Germans near Bologna; she fictionalized her experiences and those of other women she knew in these captivating and vivid stories. The title story describes the humble wedding of a servant, Marina, to a partisan in a hilltop hideout. Set against the backdrop of wartime Italy, the ominous mood surrounding the ceremony, together with the bride and groom's innocence, establishes the tone for the collection and introduces one of the book's dominant themes: how the clandestine war was fought on a personal level. In ''Campalbo'' a 13-year-old girl whose father was shot by the Germans proudly risks her life to bring newspapers to the partisans hiding in the hills. Many of ViganRated R's stories depict women deliberately using their sexuality in order to achieve a desired goal. In ''Red Flag,'' a woman hides ammunition under her used sanitary napkins. In ''Argelide,'' a former prostitute poses as the madam of a brothel so that Germans won't suspect her house as a partisan meeting place. ''The Last Action'' tells the story of a German sympathizer who seduces a partisan in order to get him to reveal his colleagues' names. Suzanne Branciforte's translation beautifully renders ViganRated R's simple but passionate prose into English, and her informative introduction rightfully claims for ViganRated R the invaluable contribution her writing has made to the literature of World War II.</p>
+        <p>Jenny McPhee</p>
+      </block>
+      <block class="full_text">
+        <p>PARTISAN WEDDING (University of Missouri, paper, $19.95), Renata ViganRated R's spare and heart-wrenching story collection, is centered on women involved in the Italian resistance during World War II. The author, who died in 1976, was herself a courier, or staffetta, for the partisans who fought the Germans near Bologna; she fictionalized her experiences and those of other women she knew in these captivating and vivid stories. The title story describes the humble wedding of a servant, Marina, to a partisan in a hilltop hideout. Set against the backdrop of wartime Italy, the ominous mood surrounding the ceremony, together with the bride and groom's innocence, establishes the tone for the collection and introduces one of the book's dominant themes: how the clandestine war was fought on a personal level. In ''Campalbo'' a 13-year-old girl whose father was shot by the Germans proudly risks her life to bring newspapers to the partisans hiding in the hills. Many of ViganRated R's stories depict women deliberately using their sexuality in order to achieve a desired goal. In ''Red Flag,'' a woman hides ammunition under her used sanitary napkins. In ''Argelide,'' a former prostitute poses as the madam of a brothel so that Germans won't suspect her house as a partisan meeting place. ''The Last Action'' tells the story of a German sympathizer who seduces a partisan in order to get him to reveal his colleagues' names. Suzanne Branciforte's translation beautifully renders ViganRated R's simple but passionate prose into English, and her informative introduction rightfully claims for ViganRated R the invaluable contribution her writing has made to the literature of World War II.</p>
+        <p>Jenny McPhee</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

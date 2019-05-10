@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Life With Father</title>
+    <meta content="02BICKERT" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165266"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <person class="indexing_service">Bickerton, Derek</person>
+        <person class="indexing_service">Masson, Jeffrey Moussaieff</person>
+        <object.title class="indexing_service">Emperor's Embrace, The (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A0CEEDD1E39F931A35752C0A9669C8B63" item-length="937" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Life With Father</hl1>
+      </hedline>
+      <byline class="print_byline">By Derek Bickerton</byline>
+      <byline class="normalized_byline">Bickerton, Derek</byline>
+      <abstract>
+        <p>Derek Bickerton reviews book The Emperor's Embrace. Reflections on Animal Families and Fatherhood by Jeffrey Moussaieff Masson; drawing (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>THE EMPEROR'S EMBRACE</p>
+        <p>Reflections on Animal Families</p>
+        <p>and Fatherhood.</p>
+        <p>By Jeffrey Moussaieff Masson.</p>
+        <p>253 pp. New York:</p>
+        <p>Pocket Books. $24.</p>
+      </block>
+      <block class="full_text">
+        <p>THE EMPEROR'S EMBRACE</p>
+        <p>Reflections on Animal Families</p>
+        <p>and Fatherhood.</p>
+        <p>By Jeffrey Moussaieff Masson.</p>
+        <p>253 pp. New York:</p>
+        <p>Pocket Books. $24.</p>
+        <p>In an age in which distant dads, child-support deadbeats and serial abusers hog the headlines, it's hard to find fault with anyone who gives positive role models for male parenting. Jeffrey Moussaieff Masson's latest book, ''The Emperor's Embrace: Reflections on Animal Families and Fatherhood,'' seeks to draw just such models from other species.</p>
+        <p>It's not surprising that Masson chooses the animal kingdom as his source. A psychoanalyst who first became known as a Freudian apostate, Masson in his recent books (like ''When Elephants Weep'' and ''Dogs Never Lie About Love'') claims that animals feel the same emotions as we do -- even, in the case of dogs, stronger, purer emotions. The emperor of his latest title is the male emperor penguin; this paragon of paternity protects his spouse's egg by balancing it on his feet through several months of Antarctic winter. Masson shows that in many other species, fathers perform services for their offspring that are equally remarkable, if seldom as arduous. Male Japanese carp take small fry into their mouths when danger threatens. The female seahorse lays her eggs in the male's pouch, then takes off, leaving him to hatch them and nurture the young.</p>
+        <p>But what drives these behaviors? If purely instinctual, their exemplary value for humans would be nil. Not according to Masson. ''Throughout this book I have tried to argue in favor of animals possessing subjective awareness, consciousness,'' he writes, and assumes that this consciousness does not differ significantly from ours. He sees nothing strange in describing the ''pair bonding'' of many bird species as marriage, or asserting that ''birds get married . . . because they fall in love.'' He conjectures that animals consciously decide to perform certain acts; for instance, a father bird who discovers a baby cuckoo in his nest should surely notice its difference from his own fledglings, and may therefore be ''exercising individual preference'': ''This big chick may not be mine, but I like him, and I am going to feed him anyway.''</p>
+        <p>Were such choices even possible, other fathers might say, ''He's an ugly brute and I hate him,'' and throw the intruder out. Yet apparently all avian fathers prove equally charitable -- or gullible. Here Masson commits a logical error. Granted, animals of any species show wide individual differences, but this doesn't mean they can choose to be different. Indeed, for many behaviors, as Masson's own evidence shows, there is no possibility of difference. He himself has pointed out that in humans, male parental involvement is highly variable, ''ranging all the way from completely absent to entirely present.'' Yet he sees nothing incongruous in the fact that, for most of the species he discusses, a single description of fatherly behavior suffices.</p>
+        <p>All emperor penguins balance their spouse's eggs. All seahorses greet their partners with a sunrise dance, ''a reacquaintance ritual that is never absent.'' (Try to think of a single human ritual that is ''never absent''!) He even notes that although lions (who hunt by sight) succeed three times as often when they approach their prey upwind, they never learn to avoid downwind approaches as humans would. Yet he never asks what underlies these human-nonhuman contrasts, still less concludes they might stem from two quite different kinds of consciousness -- one allowing for reflection and deliberate choice, and one, perhaps equally vivid, bound to the fleeting impressions of the moment.</p>
+        <p>Readers unfamiliar with the primary literature on animal breeding and parenting will find much that is entertaining as well as instructive, but they should be warned that this is hardly an impartial account. Masson admits but consistently plays down behaviors that conflict with his thesis, like extra-pair copulation or infanticide, and delivers a good deal of misinformation. ''Cro-Magnon man was bigger, stronger, altogether less gentle than the male of Homo sapiens.'' Sorry: Cro-Magnon was Homo sapiens sapiens. The ''propensity for violence'' is reduced in male mammals that live or stay in touch with their mothers, like dolphins. Recent studies have revealed them as both violent and chauvinistic. ''The very first tool invented by humans was a carrying sling for infants.'' Nobody knows what the first tool was, and anyway, slings don't fossilize.</p>
+        <p>But where does that leave Masson's main theme? He is right in debunking the kind of pop evolutionary psychology that glibly rationalizes male chauvinism and selfishness. He makes a good case for traditional parenting practices -- sharing one's bed with infants, feeding on demand -- as against the nostrums of some modern child psychologists. But his claim that we can learn fatherhood from other species falls flat. He believes that a true account of evolution would support caring father roles, yet draws his best examples from species phylogenetically remote from us, while our nearest, most evolutionarily relevant relatives, the apes, are ignored -- bad dads, all of them.</p>
+        <p>Although there are moments when Masson's infectious enthusiasm almost makes one forgive its flaws, ''The Emperor's Embrace'' fails to live up to its good intentions. Its approach to nature recalls those medieval bestiaries that adjured us to work as industriously as bees or ants, behave as loyally as dogs or horses. Though Masson struggles to deny it, we do differ from other animals, and must work out our own morality in the context of that difference.</p>
+        <p>Derek Bickerton's most recent book is ''Language and Human Behavior''; his next, ''Lingua ex Machina,'' with William Calvin, will appear later this year.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Derek Bickerton's most recent book is ''Language and Human Behavior''; his next, ''Lingua ex Machina,'' with William Calvin, will appear later this year.</tagline>
+    </body.end>
+  </body>
+</nitf>

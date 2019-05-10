@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Body Politic</title>
+    <meta content="02PROC" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="U.S." name="online_sections"/>
+    <meta content="TESTING POLITICS/Does It Work? Should It Be Fixed?" name="series_name"/>
+    <docdata>
+      <doc-id id-string="1165591"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Elections</classifier>
+        <classifier class="indexing_service" type="descriptor">Surveys and Series</classifier>
+        <classifier class="indexing_service" type="descriptor">Voting Requirements and Voters</classifier>
+        <classifier class="indexing_service" type="descriptor">Consultants</classifier>
+        <classifier class="indexing_service" type="descriptor">News and News Media</classifier>
+        <classifier class="indexing_service" type="descriptor">Presidential Election of 2000</classifier>
+        <location class="indexing_service">United States</location>
+        <person class="indexing_service">Clymer, Adam</person>
+        <classifier class="online_producer" type="types_of_material">Series</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="general_descriptor">Surveys and Series</classifier>
+        <classifier class="online_producer" type="general_descriptor">Media</classifier>
+        <classifier class="online_producer" type="general_descriptor">Consultants</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Election of 2000</classifier>
+        <classifier class="online_producer" type="general_descriptor">Voter Registration and Requirements</classifier>
+        <classifier class="online_producer" type="general_descriptor">News and News Media</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidential Elections (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Elections</classifier>
+        <classifier class="online_producer" type="general_descriptor">Presidents and Presidency (US)</classifier>
+        <classifier class="online_producer" type="general_descriptor">United States Politics and Government</classifier>
+        <classifier class="online_producer" type="general_descriptor">Politics and Government</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9801E4DE1138F931A35752C0A9669C8B63" item-length="1673" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Body Politic</hl1>
+      </hedline>
+      <byline class="print_byline">By ADAM CLYMER</byline>
+      <byline class="normalized_byline">Clymer, Adam</byline>
+      <dateline>WASHINGTON, Jan. 1</dateline>
+      <abstract>
+        <p>First in series of articles entitled Testing Politics says American political system is being challenged on front after front, but most tellingly by the Americans who do not vote and by the potential candidates for public office who decline to run; discusses obstacles to voter participation that have been erected by politicians, consultants, interest groups and the press (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The United States enters its 54th presidential election year in a period of remarkable calm and great economic prosperity, with dozens of other nations struggling to adapt American political forms. Yet the American people question their political system on one front after another.</p>
+        <p>Some of the challenges are overt. Former Senator Bill Bradley, who like Senator John McCain has made condemning the campaign finance system a major element of his presidential bid, says ''democracy is a broken thermostat'' because of big contributions. Meanwhile, the Reform Party squabbles but still stands as evidence that millions of Americans reject the traditional structure.</p>
+      </block>
+      <block class="full_text">
+        <p>The United States enters its 54th presidential election year in a period of remarkable calm and great economic prosperity, with dozens of other nations struggling to adapt American political forms. Yet the American people question their political system on one front after another.</p>
+        <p>Some of the challenges are overt. Former Senator Bill Bradley, who like Senator John McCain has made condemning the campaign finance system a major element of his presidential bid, says ''democracy is a broken thermostat'' because of big contributions. Meanwhile, the Reform Party squabbles but still stands as evidence that millions of Americans reject the traditional structure.</p>
+        <p>But the most telling condemnation is passive. A majority (51 percent) of voting-age Americans chose not to vote in 1996, and 64 percent did not vote in 1998. Curtis Gans, an expert on voter turnout, says that more than half the children in America live in households where neither parent votes. Huge majorities tell pollsters they are not paying attention to this year's campaign.</p>
+        <p>Similarly, it is getting harder to recruit able candidates to run for office at a time of insatiable news media scrutiny and incessant demands of fund-raising. And savvy veterans drop out at a high rate, especially from the moderate centers of the two parties.</p>
+        <p>These more fundamental questions and concerns about the way the system works are generally shelved, or used themselves as fodder to appeal to voters, as politicians and the press focus on the nomination contests and the chances of Republicans capturing the presidency or Democrats taking the House. The issues have been building for decades, but come into special focus in 2000, after the first presidential election since 1924 when a majority did not vote.</p>
+        <p>The obstacles to participation have been thrown up by the ''system'' -- of politicians, consultants, interest groups and the press -- just when legal barriers to registration and voting have disappeared.</p>
+        <p>Some of the obstacles come from deliberate decisions. Some television advertisements are really intended to drive down turnout. Both parties have become highly skilled at drawing the boundaries of Congressional and legislative districts so that few seats will be truly competitive. That preserves the careers of incumbents.</p>
+        <p>One way of looking at these trends was offered by Theda Skocpol, professor of government and sociology at Harvard. Professor Skocpol says politicians use the information age to locate and ''compete over a very narrow slice of swing voters.''</p>
+        <p>At the same time, what she calls ''an oligarchy'' of interests uses expertise, lobbyists and campaign contributions to achieve its ends with government, ''rather than by mobilizing large numbers of their fellow citizens into a competitive electoral force.''</p>
+        <p>Some of the old ways of involving citizens have died out, as politicians get their messages out through television and direct mail. Door-to-door canvassing does live on in Iowa and New Hampshire, but almost as museum pieces.</p>
+        <p>Anne Wexler, an antiwar advocate in the 1960's and a Carter aide in the 70's who runs a public relations firm here, observed that in the nation's capital, where people do care about politics, neither Mr. Bradley, Gov. George W. Bush of Texas nor Vice President Al Gore has a headquarters where an interested citizen could volunteer to, say, stuff envelopes. Writing a check is the only participation welcomed.</p>
+        <p>But even more serious may be the way the system is portrayed -- fairly and unfairly, by itself and by the news media.</p>
+        <p>Any veteran observer of Congress, for example, would say that the typical member today is better educated and harder-working than whoever held the seat 35 years ago, and at the same time less likely to be a drunk or a womanizer, or to take bribes. Yet consumers of a press that rarely covered those weaknesses before and regularly covers them now have an opposite set of impressions.</p>
+        <p>Mr. Gans, who heads the Committee for the Study of the American Electorate, blames consultants for ''the conduct of campaigns, especially at the end, in 30-second attack ads that vilify all the candidates and create a miasma over the political system and invite people not to vote for particular candidates and not to vote at all.''</p>
+        <p>John C. Danforth, who retired from the Senate after 18 years in 1994 to practice law in St. Louis, and insists he did not ''go away mad,'' says he is struck by how much Congress now seems to be wholly involved in ''partisan combat,'' not legislating.</p>
+        <p>Mr. Danforth speculated that an influx of Republicans who had been ''treated like dogs'' by House Democrats led to the change, as they saw a chance to get even and scorned ''anyone who tried to do anything on a bipartisan basis,'' like his late Republican colleague, John H. Chafee.</p>
+        <p>The bitter partisan tone in Washington not only discourages potential Congressional candidates who may be used to amiable state legislatures, it turns off voters, too.</p>
+        <p>That effect was sketched by a knowledgeable former Washingtonian, Nancy Sinnott Dwight. In the early 1980's, Mrs. Dwight ran the National Republican Congressional Committee here. Then she married and moved to Lyme, N.H., where every four years she gets a lot of politics to watch.</p>
+        <p>As she hears candidates, she is struck by this year's supply of ''terrific ideas.'' But she says the atmosphere in Washington leads voters to brush off these ideas because they think there is ''too much paralysis.''</p>
+        <p>''The system can't seem to get things done,'' Mrs. Dwight said. A voter can download a good idea off the Web, she said, but does not believe a candidate can make it happen in Washington.</p>
+        <p>No examination of the last session of Congress, for example, would challenge those doubts. But Mr. Gans is not alone in his worry that the news media often make things look worse than they are, either covering things cynically or not at all.</p>
+        <p>For four decades, after all, the political observers with the biggest audiences -- first Johnny Carson and then Jay Leno and David Letterman -- have offered uninterrupted cynical criticism of every president and every member of Congress anyone ever heard of, from Lyndon Johnson to Newt Gingrich.</p>
+        <p>Joel Silbey, professor of history at Cornell, said the combination of news and talk had created ''a culture of criticism'' that portrayed government as a continual failure.</p>
+        <p>Even the revered Walter Cronkite, Professor Silbey said, played a role. When Mr. Cronkite signed off news broadcasts by saying, ''And that's the way it is, Friday, March 28, 1980 -- the 146th day of captivity for the Americans in Iran,'' Mr. Silbey said the anchorman was saying that on that day, again, the American government was powerless.</p>
+        <p>Jon Margolis, a retired Chicago Tribune political columnist, said he thought the problem became severe in the mid-1980's, when politics began to be covered by ''younger people who didn't like politicians and did not like politics'' and were disappointed that it was not entertaining.</p>
+        <p>The news media are often attacked, especially by academics, for paying too much attention to who is ahead and too little to issues. Nelson Polsby, professor of government at the University of California at Berkeley, goes a step further. Professor Polsby says the press and television engage in ''the manufacture of a horse race.'' He calls the news media just another interest group, ''attempting to make their product interesting.''</p>
+        <p>That kind of attention, he said, exaggerated the challenges to Bob Dole in 1996 by implying that Steve Forbes and Patrick J. Buchanan should be taken seriously as potential presidents ''and basically made Bob Dole spend all his money,'' weakening him for the race against President Clinton.</p>
+        <p>There are some modest hopes.  Kathleen Kennedy Townsend, the lieutenant governor of Maryland, said from observing the way her own children used the Internet and the way it was used in Jesse Ventura's Reform Party victory in Minnesota, she believed it would increase political involvement. ''It's immediate,'' she said. ''It's not just television talking at you, but you participate.''</p>
+        <p>At another level, Mrs. Dwight said that in her part of New Hampshire, people were actively involved in the problems that mattered most to them, working hard as volunteers for their churches and schools.</p>
+        <p>Mr. Silbey said that in Ithaca many of the people most active in urging policies on local government were nonvoters, preferring to influence through confrontation.</p>
+        <p>Mr. Gans dismisses those impressions as idiosyncratic, insisting that national polling data shows that ''if people don't vote, they tend not to participate in any other societal activity.''</p>
+        <p>''By and large,'' he said, ''they are disengaged from society.''</p>
+        <p>Not everybody interviewed -- a group whose common threads are knowledge of politics and little or no direct involvement in the 2000 elections -- was that bothered by nonvoting. Richard Norton Smith, a biographer and former Republican speech writer who heads the Gerald R. Ford Library, said, ''I don't think you condemn the system if people don't choose to involve themselves in it.''</p>
+        <p>If the nation truly has only a 12-second attention span, he said, that may be the fault not of the candidates or consultants, but of whoever invented the television remote control -- and of the people themselves.</p>
+        <p>It is the American people, he said, ''who tell pollsters they are offended by negative ads,'' and then elect the candidate who uses them.</p>
+        <p>''We have no one to blame but ourselves,'' he said. ''In the end, democracy is all about standing in front of the mirror.''</p>
+        <p>Testing Politics</p>
+        <p>This article is the first of a series that will appear during the election year, exploring the condition of the American political system through the prism of the campaign. Other articles will examine obstacles to potential candidates for office, the participation of campaign volunteers and the degree to which the system assimilates new voters.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>On French Soil, a Harvest of Hip-Hop Hybrids</title>
+    <meta content="02SERA$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="9" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165345"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="DANCE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Dancing</classifier>
+        <location class="indexing_service">France</location>
+        <person class="indexing_service">Serafin, Amy</person>
+        <person class="indexing_service">Berki, Farid</person>
+        <person class="indexing_service">Attou, Kader</person>
+        <person class="indexing_service">Darmet, Guy</person>
+        <person class="indexing_service">Merzouki, Mourad</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Countries and Territories/France</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/World/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/Europe/France</classifier>
+        <classifier class="online_producer" type="general_descriptor">Dancing</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E0DE7DA1638F931A35752C0A9669C8B63" item-length="1060" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>On French Soil, a Harvest of Hip-Hop Hybrids</hl1>
+      </hedline>
+      <byline class="print_byline">By AMY SERAFIN</byline>
+      <byline class="normalized_byline">Serafin, Amy</byline>
+      <dateline>PARIS</dateline>
+      <abstract>
+        <p>Amy Serafin report on hip-hop choreographers working in France; describes work of Farid Berki, Kader Attou, Guy Darmet and Mourad Merzouki; most of French hip-hop dancers are from North African immigrant backgrounds; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>ONE day last spring, Kader Belarbi found himself rolling around on the floor, clinging to a stick and a chunk of concrete. It was an unusual position for a star of the Paris Opera Ballet.</p>
+        <p>The pose resulted from a project sponsored by the French Author's Guild in which an exceptional dancer chooses a choreographer with whom to create an original work. Mr. Belarbi selected the hip-hop choreographer Farid Berki, and together they were struggling to find a place where classical and urban dance could meet.</p>
+      </block>
+      <block class="full_text">
+        <p>ONE day last spring, Kader Belarbi found himself rolling around on the floor, clinging to a stick and a chunk of concrete. It was an unusual position for a star of the Paris Opera Ballet.</p>
+        <p>The pose resulted from a project sponsored by the French Author's Guild in which an exceptional dancer chooses a choreographer with whom to create an original work. Mr. Belarbi selected the hip-hop choreographer Farid Berki, and together they were struggling to find a place where classical and urban dance could meet.</p>
+        <p>In France, hip-hop dance has transcended the street, moved into the theaters, melded with other forms. Now it had pushed the normally airborne Mr. Belarbi to the ground.</p>
+        <p>''I was looking for an energy that had nothing to do with classical or contemporary dance, something brute,'' says Mr. Belarbi. ''I wanted to be in unknown territory, to put myself in danger. Farid's choreography has many ingredients; he's a hip-hop dissident.''</p>
+        <p>Mr. Berki, 36, is one of the most creative forces in an increasingly inventive movement. Born in the projects of Tourcoing, a northern French city, he comes from what he describes as a ''typical hip-hop background'' in France: French mother, Algerian father, a high school dropout with limited career possibilities whose life changed when he discovered American break dancing on television in the early 80's. He taught himself to break, pop and lock, then studied other dance styles, from African dance to Alvin Ailey.</p>
+        <p>''I consider myself a hip-hop choreographer but reserve the right to go into the fringe,'' he says. ''I work with mixtures, because that's part of my culture.'' Mr. Berki has hip-hopped to everything from flamenco to Stravinsky's ''Petrouchka.'' ''Pas de Vague Avant l'Eclipse'' (''No Waves Before the Eclipse''), his collaboration with Mr. Belarbi, is set to a minimalist score. Slow, strange, uncategorizable, it was first shown in Avignon last summer, and a reworked version will take the stage at the Suresnes Cites Danse festival in a suburb 10 miles west of Paris, from Jan. 14 through Feb. 1.</p>
+        <p>These days in France, hip-hop dance is all over the map. The group Aktuel Force sets its latest creation in Egypt, complete with a Cleopatra figure, a rare female performer in a male-dominated world. The Compagnie Kafig uses Arab-Andalusian music and violins as props to symbolize the gulf between classical music and the street. Other dancers are experimenting with hip-hop and tap.</p>
+        <p>Like most of their American counterparts, most French hip-hop dancers are members of minorities; unlike the Americans, however, the French dancers are predominantly first- or second-generation immigrants, mainly from North Africa, who have grown up in the poorer suburbs, France's equivalent of the inner city. On a recent evening in a theater near Paris, a company named Accrorap presented its ''Priere Pour un Fou'' (''Prayer for a Crazy Man''), a creation inspired by the members' Algerian roots.</p>
+        <p>TRADITIONAL elements of the North African Gnawa culture, like bending from the waist in prayer, mix with classic hip-hop moves. The dancers hold their hands to their faces in the same gesture that Algerian women use to show anguish, as they have after  massacres by the country's religious extremists. One of the strongest images is that of a dancer carrying another sideways, balanced on his shoulders and curled across his face. Blinded and suffocated by what the choreographer, Kader Attou, calls ''death always in front of us,'' the dancer continues to advance, in slow, wavering steps.</p>
+        <p>The crowd for this performance ranged from middle-class, middle-aged theatergoers to excited bands of teenagers -- not an uncommon mixture for a French hip-hop show since the early 90's, when street dancers came to the attention of a handful of theater directors. As doors began to open and the dancers found themselves subsidized and onstage, hip-hop evolved from demonstrations of physical prowess to longer pieces with story lines.</p>
+        <p>''I don't know of any other country that supports dance more than France,'' says Guy Darmet, director of the Maison de la Danse in Lyon, a major player in the development of the French movement. The theater's support has enabled Mr. Attou to plan a trip to India this spring to work on a hybrid of hip-hop and Kathakali dance.</p>
+        <p>Mourad Merzouki, the artistic director of Compagnie Kafig, formed his very successful troupe with a grant from the Lyon theater. Last autumn the company performed in the cradle of hip-hop, the Bronx, as part of the New Europe '99 Festival. Mr. Merzouki remarks that ''American dancers are still very attached to rap culture, television and money.</p>
+        <p>''In France we have a dialogue with theaters and contemporary dance companies that gives us an outlook on different types of music and movement,'' he says.</p>
+        <p>The Suresnes Cites Danse festival has brought together contemporary choreographers and hip-hop dancers since it was created in 1993. ''I didn't want to just present street dance; I wanted to organize exchanges, confrontations between different universes,'' explains the festival's director, Olivier Meyer. From the contemporary dance scene he has invited choreographers like the American postmodernist Doug Elkins; Blanca Li, an unconventional Spanish dancer based in Paris, and Jose Montalvo, whose ''Paradis,'' a piece he created in Lyon with dancers he met in Suresnes, has made him an international sensation. It was also performed as part of the New Europe festival.</p>
+        <p>Although French hip-hoppers are evolving artistically, a movement from the streets is bound to lose some of its edge the day it accepts subsidies. As Mr. Berki points out: ''In the United States, dancers who were our models have now chosen to make a lot of money with videos. Instead of advancing, they are doing the same things. But for us, theaters can be golden prisons. When someone pays you to perform, you have to watch what you do.''</p>
+        <p>DANCE Amy Serafin is the editor of Where magazine in Paris.</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Amy Serafin is the editor of Where magazine in Paris.</tagline>
+    </body.end>
+  </body>
+</nitf>

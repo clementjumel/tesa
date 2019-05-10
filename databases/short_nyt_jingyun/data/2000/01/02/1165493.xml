@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Final Judgements on the Cetury of the Automobile; 4 Key Ingredients That Make the Cake</title>
+    <meta content="02KREB$05" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Automobiles" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="12" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Automobiles" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165493"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Automobiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Nineteen Hundred Ninety-Nine</classifier>
+        <classifier class="indexing_service" type="descriptor">Utility Vehicles and Other Light Trucks</classifier>
+        <person class="indexing_service">Krebs, Michelle</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Automobiles</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Road Trips</classifier>
+        <classifier class="online_producer" type="general_descriptor">Utility Vehicles and Other Light Trucks</classifier>
+        <classifier class="online_producer" type="general_descriptor">Automobiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B06EEDF1238F931A35752C0A9669C8B63" item-length="1129" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Final Judgements on the Cetury of the Automobile; 4 Key Ingredients That Make the Cake</hl1>
+      </hedline>
+      <byline class="print_byline">By MICHELLE KREBS</byline>
+      <byline class="normalized_byline">Krebs, Michelle</byline>
+      <abstract>
+        <p>Michelle Krebs annual review of some of cars and trucks she tested this year; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>REATING a best-of-class car or truck isn't so different from a master chef's development of a signature dish that thrills the critics and lights up the reservations line. Certain key ingredients are essential in just the right measure. All the pieces must come together in the right quantities at the right time. Handsome presentation is a plus.</p>
+      </block>
+      <block class="full_text">
+        <p>REATING a best-of-class car or truck isn't so different from a master chef's development of a signature dish that thrills the critics and lights up the reservations line. Certain key ingredients are essential in just the right measure. All the pieces must come together in the right quantities at the right time. Handsome presentation is a plus.</p>
+        <p>The recipes for my favorite vehicles include a good amount of horsepower, a dash of responsive handling, a comfortable ride and, as icing on the cake, an attractive design. It is not so easy to find all those attributes in the right amounts in the trucks and sport utility vehicles that the public is gobbling up. So, once again, it's the cars that get the highest grades in this annual review of some of the vehicles I've tested this year:</p>
+        <p>AUDI A6 AVANT -- ($37,425-$45,000) Add the cargo capacity of a wagon to the classy styling, comfortable ride, precise steering and responsive handling of the A6 sedan. Order Quattro all-wheel drive for sure-footed traction in bad weather, and you have most of the advantages of a sport utility in a vehicle that is lighter, more nimble and more comfortable than any S.U.V. on the road. A</p>
+        <p>BMW 5-SERIES SPORT WAGONS -- ($41,270-$60,000) Life seems to be speeding up, and these BMW wagons are among the few family haulers that can keep pace. They also have features to keep your precious cargo safe, including standard side air bags, head-protection bags and emergency braking assistance. A</p>
+        <p>CHEVROLET TAHOE -- ($25,604-$41,721) For 2000, the Tahoe shifts from the old C/K pickup truck platform to the much improved architecture of the Chevy Silverado. The new Tahoe handles more responsively and rides more comfortably. Inside, there is now a third-row seat and side air bags. B</p>
+        <p>DODGE NEON -- ($12,970-$16,000) The Neon has shed its cute baby face for a handsome, grown-up profile. Under the hood, though, it's still a raucous adolescent. It is also disappointing that the Neon -- the first small car with two standard air bags and optional antilock brakes -- doesn't offer side air bags. B</p>
+        <p>FORD EXCURSION -- ($34,160-$44,905) Consider the statistics: 19 feet long; 6 feet, 9 inches tall; 8 feet, 9 inches wide, counting the mirrors; 167 feet to a stop from 60 m.p.h.; less than 10 miles to the gallon. And even though the Excursion seats nine with scads of cargo space, it is ridiculously over the top for almost everyone. D</p>
+        <p>FORD EXPLORER SPORT -- ($22,225-$25,245) The popularity of this short, two-door Explorer, especially among young women, is lost on me. Getting in is awkward and the seats are painful. The ride is so harsh that only a young physique can tolerate the wear and tear. D</p>
+        <p>FORD TAURUS -- ($18,245-$25,000) Ford has decided the Taurus need not be a style-setter, and the 2000 model stresses all-American virtues of function and safety. Adjustable pedals help short drivers to move away from the air bag; sensors decide which air bags should deploy, at what instant and with how much force. And the trunk has grown significantly. B+</p>
+        <p>FORD WINDSTAR -- ($20,420-$31,120) This minivan would rate an A+ if only the Honda Odyssey wasn't even better. The Windstar performs well and has extra utility with two sliding doors (one, power-operated). It earns the government's top safety rating, and offers reverse sensors that warn of objects to the rear. But it is noisy and its traditional, removable third seat is less handy than Honda's folding variety. A</p>
+        <p>HYUNDAI SONATA -- ($15,434-$21,252) A redesign for 1999 makes this midsize Korean sedan much more competitive. The new version is handsome and has safety features like side air bags. The reasonable price and 100,000-mile warranty help to compensate for a lack of oomph and tacky fake-wood trim. B</p>
+        <p>INFINITI I30 -- ($29,990-$34,859) Nissan's luxury division is slowly returning to its high-performance roots. The new I30, derived from the Maxima, is thoroughly competent. Too bad the styling isn't more distinctive. B+</p>
+        <p>JAGUAR S-TYPE -- ($43,095-$56,900) If Jaguar ran a shoe store, the XK8 would be stilettos and the S-Type would be classic, sensible pumps, ideal for everyday wear. Its designers rummaged through the closet and pulled out all the classic Jaguar touches. A</p>
+        <p>JAGUAR XKR -- ($77,395-$84,795) The XKR has the same take-your-breath-away beauty and sumptuous accommodations as the XK8, plus a lot of extra power from a supercharged V8. Who could ask for anything more? A+</p>
+        <p>MAZDA MPV -- ($20,475-$30,000) This van now has front drive, blend-into-the crowd styling and two sliding doors. Its compact size is a drawback except in crowded urban areas, and it loses points for a lack of power and a harsh transmission. C+</p>
+        <p>PONTIAC BONNEVILLE -- ($24,310-$34,675) While Pontiac has done a great job of carving out a distinct image, it lost me -- a former Bonneville owner -- along the way. The 2000 model's overdone body cladding and garish dashboard put it on the flashy end of the boy-racer scale. C</p>
+        <p>ROLLS-ROYCE SILVER SERAPH -- ($216,400-$300,000) Hand-stitched Connolly leather smothers the interior and Wilton carpets tempt you to go barefoot. But is it worth the price, which can soar to $300,000 with options like a Wedgwood tea set and armrest bottle cooler? Certainly not, although nothing else has the status of a Rolls. B</p>
+        <p>SATURN L-SERIES -- ($15,450-$24,135) By far the best Saturns yet, these midsize models are surprisingly fun to drive. A new four-cylinder engine feels more powerful than the numbers imply; the V6 is tried and true. B</p>
+        <p>SATURN 3-DOOR COUPE -- ($12,975-$20,850) Necessity is the mother of invention, and a rather simple innovation -- a small extra door on the driver's side -- has breathed new life into the sadly dated S-Series lineup. B-</p>
+        <p>SUBARU LEGACY -- ($19,690-$28,000) Why mess with a winning formula? Subaru has redone the Legacy for 2000, with a stiffer structure to improve ride and handling. But it kept the core traits that make all-wheel-drive Subarus so popular in snowy climates. B+</p>
+        <p>TOYOTA AVALON -- ($25,650-$35,000) The quirky styling of this restyled 2000 model suggests an identity crisis, but the quiet six-passenger cabin imitates big American cars. It may be the best Buick that money can buy. B</p>
+        <p>VOLVO S40/V40 -- ($23,475-$29,952) Volvo figures that there is a market for Accord and Camry buyers who want more luxury. But I'd be tempted to stay within the family, opting for an Acura or a Lexus. C+</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Amy Francetic, Jason Rubinstein</title>
+    <meta content="02FRAN$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Society Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165455"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="WEDDINGS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">WEDDINGS AND ENGAGEMENTS</classifier>
+        <person class="indexing_service">FRANCETIC, AMY NOELLE</person>
+        <person class="indexing_service">RUBINSTEIN, JASON ARTHUR</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style/Weddings and Celebrations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Weddings and Engagements</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9405E5DA1538F931A35752C0A9669C8B63" item-length="184" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Amy Francetic, Jason Rubinstein</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Amy Noelle Francetic, a daughter of Irene Francetic of Racine, Wis., and the late John Francetic, was married last evening to Jason Arthur Rubinstein, the son of Leslie and Paul Rubinstein of New York. The Rev. Kelly Denton-Borhaug, a Lutheran minister, performed the ceremony, with Rabbi Charles Familant taking part, at the Memorial Church of Stanford University in Stanford, Calif.</p>
+        <p>Ms. Francetic, 33, is keeping her name. She is the chief executive and an owner of Zowie Entertainment, a company in San Mateo, Calif., that makes toys that can be operated through personal computers. She graduated from Stanford. Her father was a plant manager for the Western Publishing Company in Racine.</p>
+      </block>
+      <block class="full_text">
+        <p>Amy Noelle Francetic, a daughter of Irene Francetic of Racine, Wis., and the late John Francetic, was married last evening to Jason Arthur Rubinstein, the son of Leslie and Paul Rubinstein of New York. The Rev. Kelly Denton-Borhaug, a Lutheran minister, performed the ceremony, with Rabbi Charles Familant taking part, at the Memorial Church of Stanford University in Stanford, Calif.</p>
+        <p>Ms. Francetic, 33, is keeping her name. She is the chief executive and an owner of Zowie Entertainment, a company in San Mateo, Calif., that makes toys that can be operated through personal computers. She graduated from Stanford. Her father was a plant manager for the Western Publishing Company in Racine.</p>
+        <p>Mr. Rubinstein, 32, is a vice president and division manager of Riffage .com, a company in Palo Alto, Calif., that offers new music that can be downloaded from its Web site. His mother is a freelance journalist in New York. His father is a vice president and stockbroker at Prudential Securities in New York. The bridegroom is a grandson of the late Arthur Rubinstein, the pianist.</p>
+        <p>WEDDINGS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

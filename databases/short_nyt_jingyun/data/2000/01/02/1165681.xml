@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  KAUFMAN, CAROLE</title>
+    <meta content="DN010200" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165681"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">KAUFMAN, CAROLE</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C0DE6D81138F931A35752C0A9669C8B63" item-length="84" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  KAUFMAN, CAROLE</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>KAUFMAN-Carole. On December 31, 1999. Beloved wife of Morton, loving mother of Richard and Joanne, devoted mother-in-law of Robin and Alan, dear sister of Mildred, Gerald, Ted and Susan, adoring ''Grammy'' of Melissa, Jenny, Jesse and Zak. Her warmth, love and extraordinary capacity for giving meant so much to her friends and family. As a teacher, her dedication and creativity touched many lives. She will always be with us. Services will be held Tuesday, 12 noon, at ''The Riverside,'' 76th Street and Amsterdam Avenue.</p>
+      </block>
+      <block class="full_text">
+        <p>KAUFMAN-Carole. On December 31, 1999. Beloved wife of Morton, loving mother of Richard and Joanne, devoted mother-in-law of Robin and Alan, dear sister of Mildred, Gerald, Ted and Susan, adoring ''Grammy'' of Melissa, Jenny, Jesse and Zak. Her warmth, love and extraordinary capacity for giving meant so much to her friends and family. As a teacher, her dedication and creativity touched many lives. She will always be with us. Services will be held Tuesday, 12 noon, at ''The Riverside,'' 76th Street and Amsterdam Avenue.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

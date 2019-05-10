@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Through the Eyes of Children, a More Friendly Future</title>
+    <meta content="01KIDS$19" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Education" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165188"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: TECHNOLOGY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Education and Schools</classifier>
+        <classifier class="indexing_service" type="descriptor">Charter Schools</classifier>
+        <classifier class="indexing_service" type="descriptor">Blacks</classifier>
+        <classifier class="indexing_service" type="descriptor">Hispanic-Americans</classifier>
+        <location class="indexing_service">New Haven (Conn)</location>
+        <org class="indexing_service">Amistad Academy (New Haven)</org>
+        <person class="indexing_service">Wilgoren, Jodi</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Education</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Education</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Connecticut/New Haven</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Connecticut</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hispanic-Americans</classifier>
+        <classifier class="online_producer" type="general_descriptor">Blacks</classifier>
+        <classifier class="online_producer" type="general_descriptor">Charter Schools</classifier>
+        <classifier class="online_producer" type="general_descriptor">Education and Schools</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=980DE4D91330F932A35752C0A9669C8B63" item-length="677" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Through the Eyes of Children, a More Friendly Future</hl1>
+      </hedline>
+      <byline class="print_byline">By Jodi Wilgoren</byline>
+      <byline class="normalized_byline">Wilgoren, Jodi</byline>
+      <abstract>
+        <p>Children at Amistad Academy in New Haven, a charter school that serves mostly poor black and Latino students, make drawings showing how they will live when they are 20 years old; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>TWO women playing tennis under a star-filled sky, trading volleys for a chance to win a trip to the moon. Three malformed animals trying to destroy a tree that has taken away people's lives and is threatening their master. Pokemon saving the human race from a trio of volcanoes erupting at the same time.</p>
+        <p>These were among the images that fifth graders at Amistad Academy in New Haven came up with when asked to draw a scene from a day in their lives 20 years hence. Sure, there were cars that could fly and computers that had swallowed whole rooms. But many of the pictures skipped the cartoonish characters of comic books and animated television, suggesting instead simpler, subtler changes to buildings and buses, grass and sky.</p>
+      </block>
+      <block class="full_text">
+        <p>TWO women playing tennis under a star-filled sky, trading volleys for a chance to win a trip to the moon. Three malformed animals trying to destroy a tree that has taken away people's lives and is threatening their master. Pokemon saving the human race from a trio of volcanoes erupting at the same time.</p>
+        <p>These were among the images that fifth graders at Amistad Academy in New Haven came up with when asked to draw a scene from a day in their lives 20 years hence. Sure, there were cars that could fly and computers that had swallowed whole rooms. But many of the pictures skipped the cartoonish characters of comic books and animated television, suggesting instead simpler, subtler changes to buildings and buses, grass and sky.</p>
+        <p>Tiquentes Gray drew his own auto-body shop, painted bright yellow, where it would cost $90 to get your car fixed. Amanda Bell-King staged a millennium fashion show. (Fubu survives.) The caption that Johnny Walker wrote to explain his picture of a bare-chested man surrounded by a half-blue, half-green background was spare: ''It's a man who is flying to his destiny. It's my uncle.''</p>
+        <p>Amistad, a charter school in its first year, serves mostly poor black and Latino students, three-quarters of whom read below grade level. Its hallways are festooned with banners proclaiming the school's values: Respect, Enthusiasm, Achievement, Citizenship, Hard Work (Reach). Here are examples of what the students were thinking as they drew the year 2019.</p>
+        <p>JODI WILGOREN</p>
+        <p>VISIONS: TECHNOLOGY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

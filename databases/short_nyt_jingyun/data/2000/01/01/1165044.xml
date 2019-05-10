@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Works In Progress From All Over; Rethinking the Graffiti Wars</title>
+    <meta content="01GRAF$03" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Arts/Cultural Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="F" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165044"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Graffiti</classifier>
+        <classifier class="indexing_service" type="descriptor">Vandalism</classifier>
+        <classifier class="indexing_service" type="descriptor">Art</classifier>
+        <classifier class="indexing_service" type="descriptor">Social Conditions and Trends</classifier>
+        <classifier class="indexing_service" type="descriptor">Crime and Criminals</classifier>
+        <location class="indexing_service">New York City</location>
+        <person class="indexing_service">Austin, Joe (Prof)</person>
+        <person class="indexing_service">Smith, Dinitia</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New York</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Mid-Atlantic</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Art and Design</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Art</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Art and Design</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York/New York City</classifier>
+        <classifier class="online_producer" type="general_descriptor">Graffiti</classifier>
+        <classifier class="online_producer" type="general_descriptor">Social Conditions and Trends</classifier>
+        <classifier class="online_producer" type="general_descriptor">Vandalism</classifier>
+        <classifier class="online_producer" type="general_descriptor">Crime and Criminals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Art</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B05E1DE1238F932A35752C0A9669C8B63" item-length="733" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Works In Progress From All Over; Rethinking the Graffiti Wars</hl1>
+      </hedline>
+      <byline class="print_byline">By DINITIA SMITH</byline>
+      <byline class="normalized_byline">Smith, Dinitia</byline>
+      <abstract>
+        <p>Arts &amp; Ideas look at works-in-progress; Joe Austin, professor of popular culture, studies New York's war against graffiti in 1970's and 80's, and perceives sociological phenomenon known as deviance amplification or, the more attention bad behavior gets, the more it is attractive to certain young people; city officials preferred broken-window theory: graffiti suggested society would tolerate crime; Austin claims city repressed 'really important' inner-city art movement; photos (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The centruy's turn has been a time of retrospectives: what was the most important event, who was the most influential thinker? Arts &amp; Ideas decided to take a look ahead at what some of today's researchers are working on. From the most raked-over field, like the history of the ancient world, to the latest medical technology, scholars are coming up with fresh insights. Some ideas may turn into breakthroughs, and others may turn out to be dead-ends, but the journey is rarely boring. Here is a handful of works in progress.</p>
+        <p>Graffiti may seem like a strange subject for a scholar, but for Joe Austin, a professor of popular culture, the effort to eradicate graffiti in New York during the 1970's and 80's illustrated a sociological phenomenon known as deviance amplification. Translation: the more attention bad behavior gets, the more young people want to do it.</p>
+      </block>
+      <block class="full_text">
+        <p>The centruy's turn has been a time of retrospectives: what was the most important event, who was the most influential thinker? Arts &amp; Ideas decided to take a look ahead at what some of today's researchers are working on. From the most raked-over field, like the history of the ancient world, to the latest medical technology, scholars are coming up with fresh insights. Some ideas may turn into breakthroughs, and others may turn out to be dead-ends, but the journey is rarely boring. Here is a handful of works in progress.</p>
+        <p>Graffiti may seem like a strange subject for a scholar, but for Joe Austin, a professor of popular culture, the effort to eradicate graffiti in New York during the 1970's and 80's illustrated a sociological phenomenon known as deviance amplification. Translation: the more attention bad behavior gets, the more young people want to do it.</p>
+        <p>The graffiti wars began in the early 70's and continued through the 1975 fiscal crisis and 1977 blackout in New York. For city officials, ''graffiti was the visible sign it had lost control,'' said Mr. Austin, who teaches at Bowling Green State University in Bowling Green, Ohio, and studies the clash between youth culture and authority.</p>
+        <p>City officials believed that if graffiti went unchecked it would signal a general lawlessness and more serious crimes would follow. This is sometimes called the broken-window thesis, popularized by James Q. Wilson, now a retired professor at the University of California in Los Angeles, and George Kelling of Rutgers University in an 1982 article in The Atlantic Monthly.</p>
+        <p>''If you allowed one window to break in a neighborhood and it wasn't repaired, people would think you can do other acts of vandalism,'' Mr. Austin explained. ''Eventually this would become, 'It's all right to mug and rape people,' and a general sort of social chaos would ensue.''</p>
+        <p>But Mr. Austin argues that the graffiti wars had an unexpected result: the more publicity the campaign got, the more writers sprayed-painted their work across the city.</p>
+        <p>His research does not rely on the standard scholarly tracts. His archives include graffiti magazines like The International Get Hip Times, Flashbacks and Styles for Miles. He has also interviewed more than 100 graffiti writers, whom he considers artists. His work is to be published by Columbia University Press as ''Taking the Train.''</p>
+        <p>The crackdown on graffiti in New York became a game of cat and mouse between the police and artists, said Mr. Austin. ''The code of ethics of a graffiti writer is you don't write over another person's work unless you are trying to provoke him,'' Mr. Austin said. So to create dissension, the police marked over  the artists' work.</p>
+        <p>To confuse the police, graffiti writers adopted different tags, or names. The Metropolitan Transportation Authority had a list of the 10 most wanted artists. ''It was really only five guys,'' Mr. Austin said. ''Three of the names were of one person.''</p>
+        <p>One effect of the crackdown, Mr. Austin said, was that the quality of the artwork declined. Artists began doing fly-by-night drawings, called throw-ups, of the kind mostly seen in the city today.</p>
+        <p>Mr. Austin estimates the city spent about half a billion dollars between 1970 and 1990 trying to eradicate graffiti. By the mid-80's most of the graffiti on subway cars was cleaned up. But he argues that crime on the subways during those 20 years did not significantly decrease. ''The correlation between graffiti and crime had no basis,'' he said. Most experts believe, Mr. Austin said, that the economy is the major influence on the city's crime rate.</p>
+        <p>The city, Mr. Austin said, ''repressed a really important art movement in the 20th century, coming from young people who came from poor backgrounds.</p>
+        <p>''It actually takes a lot of skill to produce a mural that is 100 feet long and 12 feet high,'' he said, referring to the length of a subway train. ''It served to deflect young people from membership in youth gangs.''</p>
+        <p>Rather than squelching graffiti, he added, the city should have used it to beautify urban spaces.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

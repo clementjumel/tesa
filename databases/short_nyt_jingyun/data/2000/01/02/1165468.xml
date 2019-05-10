@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Blind Artist, Big Vision</title>
+    <meta content="MB132618" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="10" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165468"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="JERSEY FOOTLIGHTS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Art</classifier>
+        <classifier class="indexing_service" type="descriptor">Eyes and Eyesight</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <org class="indexing_service">Blair Academy (Blairstown, NJ)</org>
+        <person class="indexing_service">Denney, Lynette</person>
+        <person class="indexing_service">Muro, Matt</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Art and Design</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Art</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Art and Design</classifier>
+        <classifier class="online_producer" type="general_descriptor">Eyes and Eyesight</classifier>
+        <classifier class="online_producer" type="general_descriptor">Art</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B05E6D91538F931A35752C0A9669C8B63" item-length="254" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Blind Artist, Big Vision</hl1>
+      </hedline>
+      <byline class="print_byline">By Matt Muro</byline>
+      <byline class="normalized_byline">Muro, Matt</byline>
+      <abstract>
+        <p>Works of 24 visually impaired artists, including those of Lynette Denney, will be displayed at Blair Academy in Blairstown, NJ, through February 18; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Lynette Denney reveals a lot about herself in her sculpture ''Blind Mother,'' pictured. As a mother and an artist in mid-career, Ms. Denney lost her sight as a result of diabetes. Ms. Denney used her evolving sense of touch and her memory to change her medium from works on canvas to sculpture.</p>
+        <p>Ms. Denney is one of 24 visually impaired artists in ''Art of the Eye II,'' which runs through Feb. 18 at the Blair Academy in Blairstown, and includes paintings, sculpture and photography.</p>
+        <p>Flo Fox, a photographer with multiple sclerosis, was born without vision in one eye and later became legally blind in the other. She uses automatic focusing features on her camera, which is attached to the arm of her motorized wheelchair, and presses a rubber bulb  between her teeth to activate the shutter. Mary Solbrig, a painter with macular degeneration, an eye disease associated with aging, recently had one of her eyes removed and has 20/400 vision in her remaining eye. She uses hand-held magnifiers to help guide her while painting.</p>
+      </block>
+      <block class="full_text">
+        <p>Lynette Denney reveals a lot about herself in her sculpture ''Blind Mother,'' pictured. As a mother and an artist in mid-career, Ms. Denney lost her sight as a result of diabetes. Ms. Denney used her evolving sense of touch and her memory to change her medium from works on canvas to sculpture.</p>
+        <p>Ms. Denney is one of 24 visually impaired artists in ''Art of the Eye II,'' which runs through Feb. 18 at the Blair Academy in Blairstown, and includes paintings, sculpture and photography.</p>
+        <p>Flo Fox, a photographer with multiple sclerosis, was born without vision in one eye and later became legally blind in the other. She uses automatic focusing features on her camera, which is attached to the arm of her motorized wheelchair, and presses a rubber bulb  between her teeth to activate the shutter. Mary Solbrig, a painter with macular degeneration, an eye disease associated with aging, recently had one of her eyes removed and has 20/400 vision in her remaining eye. She uses hand-held magnifiers to help guide her while painting.</p>
+        <p>The show's curator is Scott Nelson, a sculptor with Usher syndrome, with night blindness and tunnel vision among the symptoms. A look at the works in the catalog suggests that seeing things differently is not a handicap, but a catalyst in the creation of visual art. Information: (908) 362-6121.</p>
+        <p>MATT MURO</p>
+        <p>JERSEY FOOTLIGHTS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

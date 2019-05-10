@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>On the Playing Field, the Best Is Yet to Come</title>
+    <meta content="01RUNN$06" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="10" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165224"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: BIOLOGY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Athletics and Sports</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <classifier class="indexing_service" type="descriptor">Records and Achievements</classifier>
+        <person class="indexing_service">Litsky, Frank</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Other Sports</classifier>
+        <classifier class="online_producer" type="general_descriptor">Records and Achievements</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Athletics and Sports</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9802EFD81030F932A35752C0A9669C8B63" item-length="590" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>On the Playing Field, the Best Is Yet to Come</hl1>
+      </hedline>
+      <byline class="print_byline">By Frank Litsky</byline>
+      <byline class="normalized_byline">Litsky, Frank</byline>
+      <abstract>
+        <p>Frank Litsky article on the prospect for toppling records of athletic achievement in next century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>EVER since Greek sports statisticians employed the ancient equivalent of timing devices and tape measures more than two millenniums ago, people have been fascinated by what athletes can achieve and what they may do in the future.</p>
+        <p>Can someone hit more home runs in a season than Mark McGwire or pass for more yards than Dan Marino? Yes and yes, maybe not tomorrow, or next year, but sooner or later almost every record will fall. It's just the nature of things, the improvement of the breed and much else.</p>
+      </block>
+      <block class="full_text">
+        <p>EVER since Greek sports statisticians employed the ancient equivalent of timing devices and tape measures more than two millenniums ago, people have been fascinated by what athletes can achieve and what they may do in the future.</p>
+        <p>Can someone hit more home runs in a season than Mark McGwire or pass for more yards than Dan Marino? Yes and yes, maybe not tomorrow, or next year, but sooner or later almost every record will fall. It's just the nature of things, the improvement of the breed and much else.</p>
+        <p>When Brutus Hamilton was the track coach at the University of California at Berkeley in 1934, he made a list of ''ultimates of human effort'' for 27 track and field events -- lofty goals that he thought athletes could eventually attain. He predicted that an athlete would run a mile in 4 minutes 1 second, high jump 6 feet 11 1/4 inches and put the shot 57 feet 1 inch.</p>
+        <p>Colleagues laughed. No one could ever do those things, they said. But they did. When he drew up new targets over the years, they were surpassed, too. If Brutus were alive today, he would be astonished that one man has run a mile in 3 minutes 43.13 seconds, one has high-jumped 8 feet  1/2 inch and one has put the shot 75 feet 10 1/4 inches.</p>
+        <p>The carnage in the record books will continue. With each generation, humans are generally taller, heavier and stronger. Diet is better. Sports medicine is smarter. Diet supplements help. Training is more scientific and more intense. Coaches understand the body better. More good athletes from remote nations enter sports that were not open to them.</p>
+        <p>But it's not just better bodies; it's technology, too. Better running tracks lead to faster times. Pole vaulters use stronger poles.</p>
+        <p>As someone who has covered athletics for more than half a century, I am looking for more marks to tumble. Some predictions:</p>
+        <p>BASEBALL: Sooner or later, Hank Aaron's record of 755 lifetime home runs will fall. If any records are safe, they may be Joe DiMaggio's 56-game hitting streak and Cy Young's 511 pitching victories.</p>
+        <p>FOOTBALL: Someone will better Walter Payton's 16,726 career rushing yards.</p>
+        <p>BASKETBALL: In this era of lower scoring, Wilt Chamberlain's record of 100 points in one game (''One lucky night,'' he said) could last.</p>
+        <p>HOCKEY: Some people say no one will break Gretzky's records. Someone will.</p>
+        <p>WEIGHT LIFTING: The surest bet for wholesale records. Because drug use was rampant in recent years, officials have thrown out the whole record book by creating new weight classes, and that means all new records.</p>
+        <p>In the 1960's television program, Batman and Robin, chasing bad guys, ran a 3-minute mile. In a quarter-century, a man without Bat-speed may run a mile in 3 minutes 34 seconds; a woman may do it in 4 minutes 4 seconds. A quarter-century later, they will be even faster.</p>
+        <p>Where will it all end, or will it end? As Roger Bannister, who in 1954 ran history's first mile in under four minutes, told me years ago: ''I don't know how fast someone will eventually run the mile, but there must be a limit. No one will do it in nothing flat.''</p>
+        <p>VISIONS: BIOLOGY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Lives They Lived</title>
+    <meta content="WLN090306" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Magazine Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="6" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Magazine" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165303"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Deaths (Obituaries)</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Magazine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="general_descriptor">Deaths (Obituaries)</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E04E2D91F39F931A35752C0A9669C8B63" item-length="357" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Lives They Lived</hl1>
+      </hedline>
+      <abstract>
+        <p>New York Times Magazine pays tribute to noteworthy people who died in 1999; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Whom do we remember, and why? Those are personal questions, and they are answered in dozens of ways in the pages ahead. This is the sixth edition of ''The Lives They Lived,'' an annual look back at noteworthy lives that ended in the year just past. Once more we have chosen to remember, and often (though not always) to celebrate, lives we find compelling.</p>
+        <p>There's more to it than that, of course. In 1999, it would be hard to imagine a person more widely mourned than John F. Kennedy Jr. He is a universal marker -- one life that became a symbol within millions of others. When Paul Simon dropped the name Joe DiMaggio into ''Mrs. Robinson,'' he knew precisely what he was doing: DiMaggio was not just a man but also an icon, flush with meaning that shifted from person to person, generation to generation.</p>
+      </block>
+      <block class="full_text">
+        <p>Whom do we remember, and why? Those are personal questions, and they are answered in dozens of ways in the pages ahead. This is the sixth edition of ''The Lives They Lived,'' an annual look back at noteworthy lives that ended in the year just past. Once more we have chosen to remember, and often (though not always) to celebrate, lives we find compelling.</p>
+        <p>There's more to it than that, of course. In 1999, it would be hard to imagine a person more widely mourned than John F. Kennedy Jr. He is a universal marker -- one life that became a symbol within millions of others. When Paul Simon dropped the name Joe DiMaggio into ''Mrs. Robinson,'' he knew precisely what he was doing: DiMaggio was not just a man but also an icon, flush with meaning that shifted from person to person, generation to generation.</p>
+        <p>There is often good reason to admire a life of achievement, whether athletic (DiMaggio, Wilt Chamberlain, Walter Payton), artistic (Joseph Heller, Stanley Kubrick), commercial (David Ogilvy) or judicial (Harry Blackmun). But this issue is not strictly a</p>
+        <p>record of lives well lived, and you won't find those particular names here. Our choices are a little more idiosyncratic, arrived at in conversations with this issue's writers, who often knew the individual subjects or had strong ideas about them. Certainly there</p>
+        <p>are well-known figures here (Allen Funt, Mario Puzo). But we have also looked to other, less obvious figures, like Louise Patterson and Gorilla Monsoon, whose lives or work captured our imagination. And we did not restrict ourselves to lives that were universally admired. So perhaps it will be a surprise to find Lili St. Cyr, a stripper. Or John Michael Lamb, an admitted murderer of no particular notoriety.</p>
+        <p>All lives are stories. These are the ones that some very good storytellers chose to tell.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Vast Effort to Fix Computers Defended (but It's Not Over)</title>
+    <meta content="02YEAR$05" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="National Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; U.S." name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165619"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="THE YEAR 2000: THE OVERVIEW"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Computer Software</classifier>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <person class="indexing_service">Feder, Barnaby J</person>
+        <person class="indexing_service">Revkin, Andrew C</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S.</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computer Software</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901E6DA1138F931A35752C0A9669C8B63" item-length="1179" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Vast Effort to Fix Computers Defended (but It's Not Over)</hl1>
+      </hedline>
+      <byline class="print_byline">By BARNABY J. FEDER and ANDREW C. REVKIN</byline>
+      <byline class="normalized_byline">Revkin, Andrew C; Feder, Barnaby J</byline>
+      <abstract>
+        <p>Ability of computers to read date '00' as 2000 and not 1900 raises question of whether Y2K rollover problem was overstated or whether a catastrophe was averted through an investment of billions of dollars; most computer experts insist problem was a widespread and major threat before work began and warn that significant problems could still emerge if less critical or less frequently used computers, programs or microchips belatedly become confused; others, some of them angry, believe quiet rollover was predictable and is evidence that risks were wildly exaggerated; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Now that the year 2000 has arrived around the world without significant disruptions of power, transportation, commerce and other activities dependent on computers, the question arises: Was the threat of technology failure overstated, or did spending hundreds of billions of dollars to fix things avert a catastrophe?</p>
+        <p>Most computer experts insist the problem was a widespread and major threat before work began. ''There was puffery by vendors and some money was wasted, but these were real problems,'' said Leon Kappelman, an associate business professor at University of North Texas in Denton, and co-chairman of the Society for Information Management's Year 2000 Working Group.</p>
+      </block>
+      <block class="full_text">
+        <p>Now that the year 2000 has arrived around the world without significant disruptions of power, transportation, commerce and other activities dependent on computers, the question arises: Was the threat of technology failure overstated, or did spending hundreds of billions of dollars to fix things avert a catastrophe?</p>
+        <p>Most computer experts insist the problem was a widespread and major threat before work began. ''There was puffery by vendors and some money was wasted, but these were real problems,'' said Leon Kappelman, an associate business professor at University of North Texas in Denton, and co-chairman of the Society for Information Management's Year 2000 Working Group.</p>
+        <p>Many also warned yesterday that significant problems could still emerge if less critical or less frequently used computers, programs or microchips belatedly became confused. And very little of the world's vast array of financial and office computing systems will face real-world year 2000 conditions until business resumes on Monday.</p>
+        <p>''Probably 10 percent of the world's computer systems had a workout at the gym this weekend, but 90 percent did not,'' said Howard Rubin, chairman of the department of computer science at Hunter College and an international expert on the year 2000 computer problem. ''The statistics say there's still got to be something out there that's wrong. It'll take weeks, perhaps a full year, to understand the full impact.''</p>
+        <p>Still some computer experts, like Willard H. Wattenburg, who developed an automated program to deal with year 2000 flaws, were among those saying the quiet rollover was predictable and was evidence that the risks had been wildly exaggerated. And far stronger charges were flying yesterday from individuals who had expected the worst.</p>
+        <p>''Why did we fall for this hype?'' a correspondent wrote yesterday in an Internet discussion group devoted to year 2000 issues. ''I feel cheated, betrayed, misused, abused, deceived and everything else!'' The note was signed ''Gullible.''</p>
+        <p>Year 2000 project managers looking ahead to the start of normal business tomorrow warned that it was far too soon to relax. In one of the few disruptions to surface, a computer problem blinded one of the nation's spy satellites for two to three hours on Friday night and left it operating yesterday at a reduced level on backup system, the Pentagon reported. Officials said the problem did not involve the satellite itself, but occurred in a ground station as Greenwich Mean Time reached midnight. John J. Hamre, the deputy secretary of defense, called the disruption significant.</p>
+        <p>Meanwhile, thousands of workers spent the early hours yesterday retesting systems needed for office operations once the holiday ended, and the initial results constituted more good news.</p>
+        <p>For instance, the Securities Industry Association, a trade group, said the stock exchanges and other trading support organizations had discovered and had quickly fixed a computer program that generated 1900 dates on some printed forms and one that had miscalculated asset values in a mutual fund report.</p>
+        <p>But the calm was not being interpreted by those overseeing such work as a sign that the huge investments had been unnecessary. ''Had we not fixed our code and done the level of testing and gone out and gotten outside auditors, we would definitely have had failures,'' said Gary Davis, the year 2000 director for New York State, which spent about $270 million on the problem. ''There's a whole laundry list of silver linings.''</p>
+        <p>For example, like most major computer users, New York ended up doing its first thorough inventory of the state's technological underpinnings over the last three years. ''Lots of our technology was 10 years old, some even two decades old,'' Mr. Davis said. ''It all really needed upgrading, and now we're in a much better position to deliver better services to New Yorkers.''</p>
+        <p>John A. Koskinen, chairman of the President's Council on Year 2000 Conversion, added his voice at a 2 a.m. news conference yesterday to those denying that the United States had been chasing a mirage rather than a real threat, even though nations that had spent far less seemed to have encountered no significant difficulties.</p>
+        <p>Mr. Koskinen said that the United States, as the nation most heavily dependent on computers, had needed to spend the most to avoid disruptions from computers unable to handle year 2000 dates. If the news remains good, he said, ''It will reflect the success of a unique, massive cooperative effort.''</p>
+        <p>Computer experts said the United States had benefited in several ways from its heavy spending, pegged at $100 billion by the government and several times that amount by some private analysts. One of the most important, some said, was a recognition by business and government leaders that computers and software must be more carefully managed as information technology becomes more pervasive.</p>
+        <p>Mr. Rubin called the rollover an ''extraordinary success'' after a belated start working on year 2000 flaws. Such slow reactions may not work in the future, he warned.</p>
+        <p>''When computers are in your face -- when you have an Internet refrigerator -- you won't be able to take that kind of chance,'' he said. ''Soon, Earth will have an Internet skin. This skin will be a critical thing. As everything becomes more responsive in real time, the technological risks get higher.''</p>
+        <p>Others said the investment laid the groundwork for some fascinating case studies in technology management. Companies like Delta Airlines, which expects to spend up to $120 million according to filings with the Securities and Exchange Commission, made year 2000 investments part of a broader deployment of technology that should give them a competitive advantage if the money was spent wisely, Mr. Kappelman said.</p>
+        <p>Around the globe -- where the year 2000 expense was estimated at $250 billion or more -- government officials felt an obligation to defend their spending and work as most computers and related systems functioned well into the new year.</p>
+        <p>''There is a certain sense of wry anticlimax out there,'' said Michael Granatt, a director of the British government's millennium center, as he listed a few of the problems that came to light as 2000 dawned, including temporary breakdowns in fare collection systems on trams in Sydney and Adelaide, Australia, and the failure of a tide gauge in Portsmouth, England.</p>
+        <p>But Mr. Granatt said it was important to acknowledge that the lack of truly disastrous computer failures was not a fluke. ''Things don't go right by accident,'' he said. ''They go right through proper planning.''</p>
+        <p>THE YEAR 2000: THE OVERVIEW</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

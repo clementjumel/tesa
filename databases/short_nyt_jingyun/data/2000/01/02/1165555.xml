@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Maybe the 15 Minutes Aren't Up</title>
+    <meta content="MB001417" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="4" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165555"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="BUSINESS: DIARY"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">International Trade and World Market</classifier>
+        <classifier class="indexing_service" type="descriptor">Computer Software</classifier>
+        <org class="indexing_service">Atwood Richards Inc</org>
+        <org class="indexing_service">Argent Trading</org>
+        <person class="indexing_service">Levitz, Bill</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computer Software</classifier>
+        <classifier class="online_producer" type="general_descriptor">International Trade and World Market</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E02E4DB1038F931A35752C0A9669C8B63" item-length="254" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Maybe the 15 Minutes Aren't Up</hl1>
+      </hedline>
+      <byline class="print_byline">By ROY FURCHGOTT</byline>
+      <abstract>
+        <p>Bill Levitz, managing director of Argent Trading, Manhattan, and another firm, Atwood Richard Inc, also an international barter company, hope to swap surplus goods and services that dealt with possible Year 2000 computer problems (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>There is, after all, a market for those Year 2000 bears and millennium sweatshirts languishing on store shelves. At least two international corporate barter companies, which swap surplus goods and services among a large roster of clients, see profits in millennial castoffs.</p>
+        <p>''It's our opinion that some of these items will become collectibles,'' said Bill Levitz, a managing director of Argent Trading in Manhattan. Argent, he said, may hold onto any promising stock up to 13 months, hoping that it will accrue value.</p>
+      </block>
+      <block class="full_text">
+        <p>There is, after all, a market for those Year 2000 bears and millennium sweatshirts languishing on store shelves. At least two international corporate barter companies, which swap surplus goods and services among a large roster of clients, see profits in millennial castoffs.</p>
+        <p>''It's our opinion that some of these items will become collectibles,'' said Bill Levitz, a managing director of Argent Trading in Manhattan. Argent, he said, may hold onto any promising stock up to 13 months, hoping that it will accrue value.</p>
+        <p>A nearby competitor, Atwood Richards Inc., isn't confining itself to millennial trinkets. The company is also buying older computers and medical monitors that might not be Year 2000 compliant, said Moreton Binn, the chief executive. Atwood upgrades the machines and sells them to Eastern European countries that aren't too picky, he added.</p>
+        <p>Beyond speculation, why do people want millennial surplus? ''It's like, what do you do with the Easter Bunny after Easter?'' Mr. Binn said. ''You move it to places where people don't give a hoot about bunnies -- all they care about is chocolate.''</p>
+        <p>ROY FURCHGOTT</p>
+        <p>BUSINESS: DIARY</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

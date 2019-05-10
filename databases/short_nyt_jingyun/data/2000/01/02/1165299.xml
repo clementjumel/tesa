@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Lives They Lived: Questions for Tim Robbins; Body Double</title>
+    <meta content="WLN085958" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Magazine Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="6" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Magazine" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165299"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Ventriloquists</classifier>
+        <person class="indexing_service">Wences (Senor) (Entertainer) (1896-1999)</person>
+        <person class="indexing_service">Rehak, Melanie</person>
+        <person class="indexing_service">Robbins, Tim</person>
+        <classifier class="online_producer" type="types_of_material">Interview</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Magazine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="general_descriptor">Entertainment and Amusements</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9802E3D91F39F931A35752C0A9669C8B63" item-length="495" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Lives They Lived: Questions for Tim Robbins; Body Double</hl1>
+      </hedline>
+      <byline class="print_byline">By Melanie Rehak</byline>
+      <byline class="normalized_byline">Rehak, Melanie</byline>
+      <abstract>
+        <p>Interview with movie director Tim Robbins on ventriloquism in light of 1999 death of ventriloquist Senor Wences; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Q: Your new film includes an aging ventriloquist. What accounted for the heyday of that now-overlooked genre? Did ventriloquism ever have a heyday? Seriously, I think what worked for the really popular ventriloquists, like Senor Wences and Edgar Bergen, is that the puppet had high disregard for the manipulator -- the nastiness that goes back and forth that's mostly directed toward the ventriloquist. Probably mischievousness is a better word. The funny thing about Edgar Bergen, of course, is that he was a radio star. Think about that -- a ventriloquist who was a radio star.</p>
+        <p>Why don't ventriloquists seem that funny anymore? Is it because they seem dated?</p>
+      </block>
+      <block class="full_text">
+        <p>Q: Your new film includes an aging ventriloquist. What accounted for the heyday of that now-overlooked genre? Did ventriloquism ever have a heyday? Seriously, I think what worked for the really popular ventriloquists, like Senor Wences and Edgar Bergen, is that the puppet had high disregard for the manipulator -- the nastiness that goes back and forth that's mostly directed toward the ventriloquist. Probably mischievousness is a better word. The funny thing about Edgar Bergen, of course, is that he was a radio star. Think about that -- a ventriloquist who was a radio star.</p>
+        <p>Why don't ventriloquists seem that funny anymore? Is it because they seem dated?</p>
+        <p>No, no, I don't think it's any kind of modern thing. I think that the setup, the form, the structure is fine. It's that relationship between the dummy and the ventriloquist that I think very few people have gotten to the core of. Personally I've seen maybe two funny ventriloquists. It's not as easy to do as it is to become a magician or to create a personality around something else, because it's a very specific format. To keep that fresh over the years is rare. I think the appeal, when it's done right, has to do with some kind of dualism or schizophrenia. The humor in the dynamics of the relationship works better for me if it has some kind of subtext of schizophrenia.</p>
+        <p>There is something weird and grotesque about the whole thing.You take this little man and you make him talk and people laugh at it.</p>
+        <p>Yeah. There's something weird about it. Theatrically, I like the dynamic: you have a character that can talk to himself through a puppet. In my research for the film I never really got into who the first ventriloquist was, but that would be really interesting. Probably the first one to do it had some kind of personality disorder and decided to do something healthy with it and become an entertainer.</p>
+        <p>In ''Cradle Will Rock,'' the puppet often said things that Bill Murray's character, the ventriloquist, wouldn't. Is there more to that?</p>
+        <p>At a time when speech was less open, did the dummy provide a service we no longer need?</p>
+        <p>I see what you mean. I guess maybe that's what made it interesting at the time. The dummy was able to push the envelope when someone else couldn't. Maybe that's the way to figure out the new way to do ventriloquism. To figure out what people aren't talking about, what they don't feel free to express themselves about.</p>
+        <p>So in the end, was it the dummy's personality or the ventriloquist's that people liked?</p>
+        <p>Well, of course it had to be the ventriloquist! The dummy's not real, silly!</p>
+        <p>Melanie Rehak</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

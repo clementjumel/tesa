@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Take This Capsule, Call in 100 Years</title>
+    <meta content="02HASK$05" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Week in Review Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="4" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Week in Review" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165536"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">Time Capsules</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <org class="indexing_service">National Museum of American History</org>
+        <org class="indexing_service">National Archives and Records Administration</org>
+        <person class="indexing_service">Haskell, Kari E</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Week in Review</classifier>
+        <classifier class="online_producer" type="general_descriptor">Time</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C04E5DB1338F931A35752C0A9669C8B63" item-length="984" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Take This Capsule, Call in 100 Years</hl1>
+      </hedline>
+      <byline class="print_byline">By KARI HASKELL</byline>
+      <byline class="normalized_byline">Haskell, Kari E</byline>
+      <abstract>
+        <p>Description of items in National Millennium Time Capsule, which is to be opened in 2100; photo of prototype on display at Smithsonian's National Museum of American History; actual capsule will be in National Archives (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>''WE choose freedom because it gives us the power to live, learn and love,'' wrote students from Tanapag Elementary School in the Northern Mariana Islands, a U.S. Commonwealth in the western Pacific. Their essay, along with Ray Charles's sunglasses, photos of Earth from space, a Twinkie, Corningware, a computer chip, the Bill of Rights, a World War II helmet, a cell phone and a piece of the Berlin Wall will be among the items sealed this summer in the National Millennium Time Capsule until 2100.</p>
+        <p>The time capsule prototype was unveiled Friday by President Clinton and Hillary Rodham Clinton in Washington. It is on display at the Smithsonian Institution's National Museum of American History. Carved out of wood in an American flag motif, the prototype stands 4 feet high, 6 feet long and 2 feet deep.</p>
+      </block>
+      <block class="full_text">
+        <p>''WE choose freedom because it gives us the power to live, learn and love,'' wrote students from Tanapag Elementary School in the Northern Mariana Islands, a U.S. Commonwealth in the western Pacific. Their essay, along with Ray Charles's sunglasses, photos of Earth from space, a Twinkie, Corningware, a computer chip, the Bill of Rights, a World War II helmet, a cell phone and a piece of the Berlin Wall will be among the items sealed this summer in the National Millennium Time Capsule until 2100.</p>
+        <p>The time capsule prototype was unveiled Friday by President Clinton and Hillary Rodham Clinton in Washington. It is on display at the Smithsonian Institution's National Museum of American History. Carved out of wood in an American flag motif, the prototype stands 4 feet high, 6 feet long and 2 feet deep.</p>
+        <p>''We developed 25 different designs,'' said Jim Biber, an architect from the Pentagram design firm, which collaborated with Robert Brunner, an industrial engineer, to create the piece. ''But the flag was chosen because it is an obvious symbol of the nation.''</p>
+        <p>The actual capsule will be made from three metals. The white stripes will be stainless steel, embodying America's industrial past; the red stripes will be silicon bronze, symbolizing communication, and the blue stars will be titanium, a space-age metal representing America's future. The items were solicited by the White House Millennium Council from almost 400 congressional and presidential medalists and 56 recipients of the National Teacher of the Year award.</p>
+        <p>James Watson, director and president of Cold Spring Harbor Laboratory, submitted a CD-ROM of the human genome project and wrote that ''it will be biology's most important gift ever to human society, being the instruction book for human development and functioning.''</p>
+        <p>Dr. Henry Louis Gates Jr., director of the W. E. B. Du Bois Institute for Afro-American Research and W. E .B. Du Bois Professor of the Humanities at Harvard, sent the Encarta Africana CD-ROM, which he co-edited. ''At the beginning of the 20th century,'' Dr. Gates wrote, ''W. E. B. Du Bois announced that the most effective way to fight anti-black racism would be the publication of a comprehensive encyclopedia of the black world. . . . Ninety years later, some 400 scholars finally banded together to produce this encyclopedia.''</p>
+        <p>The 85-letter Cherokee alphabet was submitted by Wilma Mankiller, principal chief of the Cherokee Nation and Medal of Freedom winner. She called it ''the language that has survived on this land since time immemorial. It is our hope for the future that the Cherokee language will still be spoken 100 years from now.''</p>
+        <p>The playwright August Wilson suggested a recording by Bessie Smith of ''Nobody in Town Can Bake a Sweet Jellyroll Like Mine'' because the first time he heard the song, ''The universe stuttered and everything fell to a new place. . . . It was a birth, a baptism, a resurrection and a redemption all rolled up into one. . . . The ideas of self-determination, self-respect and self-defense . . . are still very much a part of my life as I sit down and write.''</p>
+        <p>Richard Bell, executive director of Young Audiences, chose ''a simple drawing or song created by a child.''</p>
+        <p>Mr. Bell added, ''I believe this would convey our commitment to future generations while at the same time honoring the cultural legacy that sustains all Americans today.''</p>
+        <p>The artistic director of the Steppenwolf Theatre Company and Medal of Arts winner Martha Lavey submitted the novel ''Grapes of Wrath,'' writing: ''This novel captures a profound and constitutive experience in the composition of the American psyche and culture. This is a nation defined by the courage and fortitude of a citizenship seeking a better, fairer and more generous life.''</p>
+        <p>The actor Gregory Peck, among others, suggested '' a film reel showing Neil Armstrong's moon landing.''</p>
+        <p>The White House Millennium Council plans to use all the objects submitted. The submissions, or replicas of large items, will ultimately be placed in smaller stainless steel capsules that can fit in compartments in the capsule, while essays will be placed in its lower drawers.</p>
+        <p>Former President Gerald Ford wrote: ''Amidst all that is new, however, may we never discard those ancient values -- courage and compassion, integrity and reverence for things seen and unseen -- that have made America a historic refuge for the world's oppressed. Our fondest hope for the new millennium is that we realize the promise, older than the republic itself, of a land without limits, as generous as it is inclusive.''</p>
+        <p>More than 1,000 students taught by recipients of the national teacher of the year award submitted individual and collective statements.</p>
+        <p>Lynn Preacher's fourth grade class in Jenks, Okla., made an eagle out of construction and origami paper, stating that the eagle, ''represents our country and has many of the same traits of the U.S. It is smart, brave, mighty and stands for freedom. . . . In America we have rights that people do not have in other countries, and we should be thankful.''</p>
+        <p>The council has not received all contributions, and will continue to accept invited submissions until the official capsule is completed. Until then, the prototype will remain on display at the Smithsonian Institution's National Museum of American History.</p>
+        <p>The actual time capsule is expected to be completed by early summer. It will be on display in the rotunda at the National Archives until the end of the year, then be relocated to more a secure, climate-controlled area to be opened in 100 years.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

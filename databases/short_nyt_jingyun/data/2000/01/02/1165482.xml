@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Lofty Glamour? Leather Gloves? Low-Key 'L G' Baffles Broadway</title>
+    <meta content="02SIGN$02" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="5" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165482"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="NEIGHBORHOOD REPORT: TIMES SQUARE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Signs</classifier>
+        <classifier class="indexing_service" type="descriptor">Advertising</classifier>
+        <location class="indexing_service">Times Square and 42d Street (NYC)</location>
+        <org class="indexing_service">Lg Group</org>
+        <person class="indexing_service">Moynihan, Colin</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Marketing, Advertising and PR</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Signs and Symbols</classifier>
+        <classifier class="online_producer" type="general_descriptor">Advertising and Marketing</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F05E0D71538F931A35752C0A9669C8B63" item-length="431" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Lofty Glamour? Leather Gloves? Low-Key 'L G' Baffles Broadway</hl1>
+      </hedline>
+      <byline class="print_byline">By COLIN MOYNIHAN</byline>
+      <byline class="normalized_byline">Moynihan, Colin</byline>
+      <abstract>
+        <p>LG, Korean conglomerate, deliberately chooses an austere design for its Times Square sign; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Pedestrians walking through Times Square often pause to glance up at the array of neon and electronic billboards in their midst, many of which combine the names and logos of well-known companies with conspicuous and innovative visual images. Among the colorful and constantly changing displays are the giant Panasonic TV screen, an ABC News screen and the new Nasdaq stock-quote board, covering eight floors of the facade of 4 Times Square.</p>
+        <p>In this company, the two simple neon billboards at the top of a corner building on Broadway seem unassuming, even archaic. The 50-foot-tall signs, one overlooking Broadway and the other 45th Street, feature a white background and, in red, the letter ''L'' inside a larger letter ''G.'' Along the bottom of the billboards are the words ''chemicals,'' ''electronics'' and ''communications.''</p>
+      </block>
+      <block class="full_text">
+        <p>Pedestrians walking through Times Square often pause to glance up at the array of neon and electronic billboards in their midst, many of which combine the names and logos of well-known companies with conspicuous and innovative visual images. Among the colorful and constantly changing displays are the giant Panasonic TV screen, an ABC News screen and the new Nasdaq stock-quote board, covering eight floors of the facade of 4 Times Square.</p>
+        <p>In this company, the two simple neon billboards at the top of a corner building on Broadway seem unassuming, even archaic. The 50-foot-tall signs, one overlooking Broadway and the other 45th Street, feature a white background and, in red, the letter ''L'' inside a larger letter ''G.'' Along the bottom of the billboards are the words ''chemicals,'' ''electronics'' and ''communications.''</p>
+        <p>Although the ads may seem enigmatic to some viewers, an employee of LG, a $70 billion Korean conglomerate of some 30 companies, said that the austere appearance of the billboards was intentional.</p>
+        <p>''Many of the billboards in Times Square are flashy,'' said the employee, Dongwon  Lee, an account director for LG Ad, LG's advertising division, ''but we would like to differentiate ourselves from other companies.''</p>
+        <p>The company was renamed LG five years ago, and soon afterward the current billboards replaced yellow-and-white signs that had been at that location for a decade and had spelled out the company's old name, Lucky Goldstar.</p>
+        <p>None of a dozen people questioned in Times Square one day last week knew what the LG billboards meant, but many found them intriguing.</p>
+        <p>Duncan Cameron, a documentary filmmaker who lives on Gold Street in Lower Manhattan, said he had often wondered about the billboards. ''I always thought it was a German company, probably a subsidiary of a subsidiary that's been merged a  hundred times,'' he said.</p>
+        <p>His friend Gordon Gray said he thought that the letters ''L'' and ''G'' were ''currency oriented,'' whatever that means. Mr. Gray's wife, Christine, jokingly suggested that they stood for large. When informed of the meaning of the billboards, the three seemed surprised.</p>
+        <p>''There's got to be someone around here who knows that,'' Mr. Cameron said. He began conducting an impromptu poll, stopping passers-by and quizzing them about the images. After several wrong answers, he gave up.</p>
+        <p>''I guess no one here knows what those billboards mean,'' he said.</p>
+        <p>COLIN MOYNIHAN</p>
+        <p>NEIGHBORHOOD REPORT: TIMES SQUARE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

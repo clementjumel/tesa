@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>To Be Michael Jordan's, Or, Perhaps, Not to Be . . .</title>
+    <meta content="MB235842" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165552"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="PRIVATE SECTOR"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Restaurants</classifier>
+        <classifier class="indexing_service" type="descriptor">Suits and Litigation</classifier>
+        <location class="indexing_service">Chicago (Ill)</location>
+        <org class="indexing_service">Michael Jordan's Restaurant (Chicago)</org>
+        <org class="indexing_service">One Sixtyblue (Chicago, Ill, Restaurant)</org>
+        <person class="indexing_service">Jordan, Michael</person>
+        <person class="indexing_service">Silverberg, Gene H</person>
+        <person class="indexing_service">Silverberg, Joe</person>
+        <person class="indexing_service">Deutsch, Claudia H</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/Illinois</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./Midwest</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Food and Wine</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Hospitality, Restaurant and Travel</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Illinois/Chicago</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/Illinois</classifier>
+        <classifier class="online_producer" type="general_descriptor">Restaurants</classifier>
+        <classifier class="online_producer" type="general_descriptor">Suits and Litigation</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D0CE5DB1038F931A35752C0A9669C8B63" item-length="316" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>To Be Michael Jordan's, Or, Perhaps, Not to Be . . .</hl1>
+      </hedline>
+      <byline class="print_byline">By CLAUDIA H. DEUTSCH</byline>
+      <byline class="normalized_byline">Deutsch, Claudia H</byline>
+      <abstract>
+        <p>Gene H and Joe Silverberg, owners of recently closed Michael Jordan's Restaurant, Chicago, are in legal dispute with Jordan, basketball legend; brothers claim in addition to Jordan giving Silverbergs sole right to use his name on restaurant, he abandoned restaurant by refusing to make frequent visits and unreasonably blocking move to Palmer House Hotel; attorneys for Jordan dispute charges; complicating issue, Jordan is partner in One Sixtyblue, more upscale restaurant nearby (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Had he envisioned the modern-day legal system, Shakespeare might have thought twice before so cavalierly asking, ''What's in a name?''</p>
+        <p>That's what Chicago's Silverberg brothers and Michael Jordan, the basketball legend, are fighting over. As of early last week, Michael Jordan's Restaurant on Chicago's La Salle Street, owned by Gene H. and Joe Silverberg, is closed, but boy, does the memory linger on.</p>
+      </block>
+      <block class="full_text">
+        <p>Had he envisioned the modern-day legal system, Shakespeare might have thought twice before so cavalierly asking, ''What's in a name?''</p>
+        <p>That's what Chicago's Silverberg brothers and Michael Jordan, the basketball legend, are fighting over. As of early last week, Michael Jordan's Restaurant on Chicago's La Salle Street, owned by Gene H. and Joe Silverberg, is closed, but boy, does the memory linger on.</p>
+        <p>In 1990, Mr. Jordan agreed to give the Silverbergs the sole right to use his name on a Chicago restaurant. After a few good years, business tailed off, and a lot of suing began.</p>
+        <p>The Silverbergs have repeatedly accused Mr. Jordan of ''abandoning'' the restaurant by refusing to make frequent appearances, and of unreasonably blocking a move to the Palmer House Hotel. Mr. Jordan's lawyers counter that he was never obliged to visit, that he and his family were harassed when they did, and that the Palmer House is in a weaker location.</p>
+        <p>Complicating the dispute, Mr. Jordan is a partner in One Sixtyblue, a more upscale eatery two miles away. Mr. Jordan's name and athletic paraphernalia are nowhere to be seen there, but the Silverbergs contend that One Sixtyblue infringes on their exclusive rights, and said so in a court hearing Tuesday. The Jordan camp said the Silverbergs had publicly denigrated Mr. Jordan in violation of their contract.</p>
+        <p>Mr. Jordan is having an easier time in New York, with a steak house in Grand Central Terminal that he partly owns but rarely visits.</p>
+        <p>The Silverbergs have said they will reopen soon, using the name of a new hero, Sammy Sosa.</p>
+        <p>CLAUDIA H. DEUTSCH</p>
+        <p>PRIVATE SECTOR</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

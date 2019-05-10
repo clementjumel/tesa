@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Books in Brief: Nonfiction</title>
+    <meta content="RV101007" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165275"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Higbie, Andrea</person>
+        <person class="indexing_service">Long, Elgen M</person>
+        <person class="indexing_service">Long, Marie K</person>
+        <person class="indexing_service">Earhart, Amelia (1898-1937?)</person>
+        <object.title class="indexing_service">Amelia Earhart: The Mystery Solved (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9504E6DC1E39F931A35752C0A9669C8B63" item-length="311" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Books in Brief: Nonfiction</hl1>
+      </hedline>
+      <byline class="print_byline">By Andrea Higbie</byline>
+      <byline class="normalized_byline">Higbie, Andrea</byline>
+      <abstract>
+        <p>Andrea Higbie reviews book Amelia Earhart: The Mystery Solved by Elgen M Long and Marie K Long (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>AMELIA EARHART</p>
+        <p>The Mystery Solved.</p>
+        <p>By Elgen M. Long and Marie K. Long.</p>
+        <p>Simon &amp; Schuster, $25.</p>
+      </block>
+      <block class="full_text">
+        <p>AMELIA EARHART</p>
+        <p>The Mystery Solved.</p>
+        <p>By Elgen M. Long and Marie K. Long.</p>
+        <p>Simon &amp; Schuster, $25.</p>
+        <p>''Amelia Earhart: The Mystery Solved,'' by Elgen M. Long, the first person to fly solo around the world over both poles, and his wife, Marie, a former public relations consultant, plods through the life and last days of Earhart, who disappeared in 1937 during her attempt to circle the world. The authors' intent is to recreate Earhart's life, career and death without taking ''poetic license,'' a noble enterprise to be sure but one that turns dull rather quickly. They eventually conclude that it was a combination of stronger head winds than anticipated, insufficient fuel, incorrect use of direction finders, no shoulder harnesses and a sharp-edged radio control box positioned at eye level -- not to mention a surplus of chutzpah, perhaps on Earhart's part -- that brought down the Electra. Flown by Earhart and her navigator, Fred Noonan, the plane went down within 100 miles of Howland Island, the authors contend. The Longs note that they worked on this book for more than 25 years, traveling more than 100,000 miles and interviewing more than 100 sources, in the course of which they also discovered some lost reports about the final voyage. For aviation buffs the book may be of some interest, but for the rest of the reading population the dry recitation of events will be enlivened only by the facts that Earhart, the first woman to cross the Atlantic Ocean, in 1928, lied about her age (she was 40, not 39 as she had claimed, on her final journey), that she had become involved with the married G. P. Putnam, her publisher, and they later married and that she read the book ''The Story of the Titanic Disaster,'' when she was 29 or 30, depending on whom you believe.</p>
+        <p>Andrea Higbie</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

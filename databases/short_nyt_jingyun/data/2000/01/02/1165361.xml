@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>A Pilgrim's Progress, of Sorts</title>
+    <meta content="02SWAR$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="39" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165361"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MUSIC"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <classifier class="indexing_service" type="descriptor">Two Thousand (Year)</classifier>
+        <classifier class="indexing_service" type="descriptor">Festivals</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <location class="indexing_service">Los Angeles (Calif)</location>
+        <org class="indexing_service">World Festival of Sacred Music (Los Angeles)</org>
+        <person class="indexing_service">Swartley, Ariel</person>
+        <person class="indexing_service">Dalai Lama</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/California</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./West</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/California/Los Angeles</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/California</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Festivals</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E03E7D91638F931A35752C0A9669C8B63" item-length="2068" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>A Pilgrim's Progress, of Sorts</hl1>
+      </hedline>
+      <byline class="print_byline">By ARIEL SWARTLEY</byline>
+      <byline class="normalized_byline">Swartley, Ariel</byline>
+      <dateline>LOS ANGELES</dateline>
+      <abstract>
+        <p>Ariel Swartley comment on recent World Festival of Sacred Music, held in Los Angeles; photos; event was first of five multiethnic, ecosensitive millennial celebrations planned around world, under aegis of Dalai Lama (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IT is a somewhat surreal experience at any time, the slow, almost noiseless ascent via electric tram from the Getty Center's mandatory off-street parking, up a long dry incline peppered with imported greenery, to the museum's isolated hillside perch. Even more so on a recent night, midway through the American segment of the World Festival of Sacred Music -- the first of five pan-ecumenic, multiethnic and ecosensitive celebrations planned under the aegis of the Dalai Lama to take place on consecutive continents in the coming millennial months. Behind us, vistas of city lights unfolded like star maps. High above, the museum's floodlit walls glowed celestially white against the blackness. I was reminded -- Hollywood, after all, lay just beyond the freeway -- of all those comedies, wishfully divine, in which heaven is accessed by up-to-the minute forms of transportation.</p>
+        <p>I was on my way up to hear Lila Downs, a singer whose repertory combines an almost documentarian approach to the multiple folk musics of her mother's homeland, Oaxaca, with a voice so vari-colored and many-octaved that it's difficult to imagine it as the product of a single larynx. But I might as easily have decided to attend a ''Sacred Dance for World Healing'' performed by Tibetan monks in a U.C.L.A. courtyard, or a program of chants to Southern Italy's Black Madonna.</p>
+      </block>
+      <block class="full_text">
+        <p>IT is a somewhat surreal experience at any time, the slow, almost noiseless ascent via electric tram from the Getty Center's mandatory off-street parking, up a long dry incline peppered with imported greenery, to the museum's isolated hillside perch. Even more so on a recent night, midway through the American segment of the World Festival of Sacred Music -- the first of five pan-ecumenic, multiethnic and ecosensitive celebrations planned under the aegis of the Dalai Lama to take place on consecutive continents in the coming millennial months. Behind us, vistas of city lights unfolded like star maps. High above, the museum's floodlit walls glowed celestially white against the blackness. I was reminded -- Hollywood, after all, lay just beyond the freeway -- of all those comedies, wishfully divine, in which heaven is accessed by up-to-the minute forms of transportation.</p>
+        <p>I was on my way up to hear Lila Downs, a singer whose repertory combines an almost documentarian approach to the multiple folk musics of her mother's homeland, Oaxaca, with a voice so vari-colored and many-octaved that it's difficult to imagine it as the product of a single larynx. But I might as easily have decided to attend a ''Sacred Dance for World Healing'' performed by Tibetan monks in a U.C.L.A. courtyard, or a program of chants to Southern Italy's Black Madonna.</p>
+        <p>Indeed, as defined by festival organizers, sacred music is a term elastic enough to include Beethoven's Ninth Symphony, protest songs from the international labor movement and an audience-created improvisational hum simulcast on the Internet. But if there was a theme to the offerings that for nine days sent a cross section of Angelenos ricocheting across their sprawling metropolis -- Encino to Long Beach, Glendale to Malibu -- like so many electrons in search of a nucleus, it was perhaps a faith that music's power to lift listeners out of themselves could likewise propel them into communion with one another.</p>
+        <p>And make no mistake: I yearned to be transported.</p>
+        <p>Like a goodly number of festivalgoers, I am of the age optimistically referred to as midlife. It's not been a Slough of Despond, exactly, but neither would I call it the Delectable Mountains, like those John Bunyan so rapturously envisioned three centuries ago (well, rapturously for a Calvinist) in ''The Pilgrim's Progress.'' More like a predawn stroll down a garden path of badly spaced and wobbly paving stones. Along with the inability to read a menu in any illumination less than 150 watts and a tendency to view every muscle pull as a harbinger of the final collapse, I have noticed with some apprehension a change in my musical tastes.</p>
+        <p>Given the choice of listening to Pygmy chants in pristine field recordings or sampled and decked out with beats, bass and ambient reverb, courtesy of Deep Forest, I find I vastly prefer the latter. In fact, if it weren't for Eric Mouquet's and Michel Sanchez's French-accented contribution to dance-floor ecstasy, I wouldn't know a Pygmy to hear one. Having been a defender in the past of lean asceticism -- both folk and punk -- I fear this subsidence into synthesis is the aural equivalent of elastic waists and jeans cut fuller in the thigh.</p>
+        <p>So it was with visions of redemption that I scanned the festival schedule. I was hoping to find music that would broaden my horizons without feeling too foreign, would move me without making me feel too manipulated, and under whose influence I and fellow concertgoers would leave off being an audience and become something closer to a congregation. And, oh yes, I wanted the moon.</p>
+        <p>Any doubts I might have had that I was asking too much were quickly put to rest by Nazir Jairazbhoy, emeritus professor of ethnomusicology at U.C.L.A. Introducing a program of flute and vocal works from Hindu and Islamic traditions, he noted that the issues central to all devotional music boil down to this: ''What is ecstasy and how is it achieved?'' I had, it seemed, put myself in the hands of experts.</p>
+        <p>Certainly Lakshmi Shankar was one: a small woman with a sturdy figure, shoulder-length wavy hair and a face gently kneaded by age. Perhaps best known to Westerners from the ''Gandhi'' soundtrack, she has been celebrated for decades in much of the world as a gracefully formidable interpreter of Hindustani and southwest Indian tradition. The language of her texts -- the most recent of which was written by a 16th-century female saint -- was incomprehensible to much of the audience. To my ears, accustomed to octaves marking the ends of Western scales like sturdy bookends, the classical Indian modes seem unpredictable, as if they had been subject to a different law of gravity. But Ms. Shankar's phrasing, like Edith Piaf's, is eloquent testimony to singing's power to separate meaning from language. With expressive movements of head and hand, she seemed bent on including listeners not only in the lively musical conversation she was having with the harmonium player, but in a centuries-long dialogue between worshiper and godhead.</p>
+        <p>Still, however inspiring, this was not quite what I understood by ecstasy. My first experience with the idea that music could confer community was in the 60's, when both the music (rock 'n' roll) and the community envisioned were seen as radical departures from tradition. Encountering the idea again against a backdrop of marble halls and polished pews had something of the same effect as discovering that the clench-jawed revolutionary on the tattered wanted poster disguised herself in her years on the run as a pillar of the community. It was difficult to know which to regret: the anarchic past or the unaltered present.</p>
+        <p>Earlier, Mr. Jairazbhoy had observed that devotional tradition tended to divide along two opposing paths to ecstasy, which he characterized as the ''heavy'' and the ''subtle'' -- his terminology perhaps giving a clue to his preference. The latter included music like Ms. Shankar's, which operates like a species of aural garden, enticing the postulant to enter by some combination of sensuousness and serenity and nurturing contemplative exploration. The ''heavy'' approach is direct, physical and as urgent as a full-force gale -- the sort of route embraced by the gospel composer and conductor Andrae Crouch, who brought his multiracial San Fernando Valley choir to Hollywood's Temple Israel two nights later.</p>
+        <p>Gospel's arsenal of musical blandishments is familiar to any Rolling Stones or Bruce Springsteen fan -- the crescendos mounting as surely as the tides, the insistent calls and grateful responses, the final bars that are never quite so final that one more chorus can't be resurrected. But Mr. Crouch was not simply seeking endorsement from the crowd; he was seeking souls for his Lord and to answer ''yeah'' was to commit oneself to something larger than a memorable concert. In the end what brought me to my feet was not only the raw relentlessness of a choir so forceful it utterly overpowered the sound system, but also the physical enactment of community. Under the gilt gaze of the lions of Judea, Mr. Crouch was joined by an ensemble of 12 area cantors who had opened the program. The vision of yarmulkes and cornrows dancing in joint praise was, in this often divided city, worth any number of amens.</p>
+        <p>The trouble with ecstasy, of course, is that it is difficult to integrate with daily life. At one of the festival's four environmental events geared to healing the region's watershed, a supposedly silent meditation directed toward the concrete embanked creek that is the Los Angeles River was punctuated by an organizer's cell phone chitchat and a spring peeperlike chorus of pager beeps. Perhaps it was this distraction, or the fact that the morning's many mentions of a gentle Mother Earth seemed to willfully disregard the 7.1 quake that had torn up the nearby desert only hours before. In any case, it was hard to put my heart in the chanting that followed.</p>
+        <p>The literature of pilgrimage is littered with a recurring irony: a seeker searches the world for grace, only to find it in his own backyard. Nevertheless, if anyone had suggested that the musical transcendence I was hoping for would be found among faces and a tradition that reminded me of home, I would have laughed -- ecstasy and New England being thoughts that seldom occur to me together. Under the vaulted ceilings of the Eagle Rock Community Center, I joined a group of graying men and women whose strong jaws and practical intensity about the process at hand would have made Emerson and Thoreau hail them as compatriots. Their folding chairs were arranged in a square around an open space not much bigger than a pulpit, and where I and the rest of the audience would sit depended on our answers to two questions: did we intend to sing and, if so, which part did we prefer.</p>
+        <p>Sacred Harp singing has long been identified with the rural South, but the practice originated in the 1700's in New England, and it is tempting to see in its rigorously democratic organization an augury of the Revolution. No harps or any other instruments are involved -- ''The Sacred Harp'' is a hymnal that augments standard oval musical notes with triangles and squares. The shapes indicate pitch, as in fa, so, la -- an innovation introduced by itinerant Colonial music teachers to make melodies accessible to singers who hadn't learned to decipher conventional lines and staves. Whoever is leading the song -- the privilege passes to each member of the group in turn -- stands in the center of the square, chooses the hymn and sets the pitch and tempo for the rest.</p>
+        <p>NO description of this benignly rational process, however, can prepare a listener for the joyful anarchy of the sound. Practitioners  refer to their ''full bore, guts on the floor'' style of delivery, and there are times the effort to achieve a personal best in the realm of lung power makes the sing seem like an athletic event, although everyone's playing on the same team. Then too, the arrangement of the parts allows male and female voices to combine in a startling melange. Conventional hymns, which assign the melody to sopranos, favor a layer-cake effect: women's and men's voices clumped together, with the tune like icing almost always on the top. In ''The Sacred Harp,'' the melody rests in the middle with the tenors. Further gender splitting ensues as some men sing the soprano's descant an octave below, while some women take the tenor an octave above. To stand in the middle of the square is to imagine all of Babel shouting in the same language.</p>
+        <p>I first discovered a recording of Sacred Harp singing in the 60's. I used to play cuts for friends, aiming, in the religious parlance of the day, to blow their minds. To discover years later that this tradition was still alive, was being practiced in house-singing groups across the city and at all-day conventions from Chicago to San Diego, was like having history delivered to my door. And it was fitting that here, in spite of my rusty sight-singing and thanks to the powerful voices beside me, I should find, for a line or two in every other hymn, the acceptance and release that I was looking for. Because when it comes to harmony, there's nothing leaner or more ascetic than an octave -- no lushness, no complications. The two notes are practically the same, though one's in another range. Which, when you come to think of it, is a pretty good description of all of us.</p>
+        <p>MUSIC Ariel Swartley's most recent article for Arts &amp; Leisure was about the PBS series ''Wonders of the African World.''</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Ariel Swartley's most recent article for Arts &amp; Leisure was about the PBS series ''Wonders of the African World.''</tagline>
+    </body.end>
+  </body>
+</nitf>

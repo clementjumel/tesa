@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Colleagues Help a Musician in Need</title>
+    <meta content="02MUSI$11" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Westchester Weekly Desk" name="dsk"/>
+    <meta content="14" name="print_page_number"/>
+    <meta content="14WC" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165356"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MUSIC"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <location class="indexing_service">Westchester County (NY)</location>
+        <person class="indexing_service">Sherman, Robert</person>
+        <person class="indexing_service">Amram, David</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Westchester</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Music, Theater and Dance</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New York</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E02EFDA1638F931A35752C0A9669C8B63" item-length="1053" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Colleagues Help a Musician in Need</hl1>
+      </hedline>
+      <byline class="print_byline">By ROBERT SHERMAN</byline>
+      <byline class="normalized_byline">Sherman, Robert</byline>
+      <abstract>
+        <p>Westchester music notes; photo; Amram Jam is planned to help David Amram, whose uninsured home in Putnam Valley was destroyed by fire in October (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>FOR nearly half a century, musicians in need could count on David Amram to volunteer his time and talents on their behalf. Now he is in need -- his uninsured Putnam Valley home was destroyed by fire in October -- and more than a dozen colleagues are planning an Amram Jam next Saturday at 8 p.m. at the Tarrytown Music Hall to raise money for rebuilding. Among the artists will be Chuck Mangione, Max Roach, Clark Terry and Jon Hendricks, along with the actors Keir Dullea and Mia Dillon, the television personality Bill Boggs, Mark Morganelli and his Jazz Forum All-Stars and Mr. Amram, performing on piano, French horn, flutes and sundry folk instruments from his own collection. All the performers have donated their services, and benefit tickets are priced at $25. The number to call for reservations is 631-1000.</p>
+        <p>Until last month, the composer Marc Blitzstein was probably best remembered for his pungent English adaptation of Kurt Weill's ''Threepenny Opera,'' but now he is a movie star, or at least a major character in ''Cradle Will Rock.'' Hank Azaria stars as the composer in Tim Robbins's film about the making of the controversial musical (actually titled ''The Cradle Will Rock''), staged in 1936 by Orson Welles and John Houseman.</p>
+      </block>
+      <block class="full_text">
+        <p>FOR nearly half a century, musicians in need could count on David Amram to volunteer his time and talents on their behalf. Now he is in need -- his uninsured Putnam Valley home was destroyed by fire in October -- and more than a dozen colleagues are planning an Amram Jam next Saturday at 8 p.m. at the Tarrytown Music Hall to raise money for rebuilding. Among the artists will be Chuck Mangione, Max Roach, Clark Terry and Jon Hendricks, along with the actors Keir Dullea and Mia Dillon, the television personality Bill Boggs, Mark Morganelli and his Jazz Forum All-Stars and Mr. Amram, performing on piano, French horn, flutes and sundry folk instruments from his own collection. All the performers have donated their services, and benefit tickets are priced at $25. The number to call for reservations is 631-1000.</p>
+        <p>Until last month, the composer Marc Blitzstein was probably best remembered for his pungent English adaptation of Kurt Weill's ''Threepenny Opera,'' but now he is a movie star, or at least a major character in ''Cradle Will Rock.'' Hank Azaria stars as the composer in Tim Robbins's film about the making of the controversial musical (actually titled ''The Cradle Will Rock''), staged in 1936 by Orson Welles and John Houseman.</p>
+        <p>Another of Blitzstein's major works came to Broadway in 1949. This was ''Regina,'' his musical setting of Lillian Hellman's ''Little Foxes,'' a blistering indictment of the avarice and social exploitation that tears apart the Hubbard family. When Hellman was asked to approve the project, she agreed, but told the composer, ''I don't know how you can add anything to the Hubbards that will make them any more unpleasant than they are already.'' Blitzstein obviously succeeded, for Hellman later pronounced his work ''the most original of American operas and the most daring.''</p>
+        <p>A fully staged production of ''Regina'' is scheduled next Saturday at 8 p.m. and next Sunday at 2 p.m. at Lehman College in the Bronx, performed by the Bronx Opera Company. Performances are also scheduled on Jan. 14 and 15 at 8 p.m. at the John Jay College Theater at 899 10th Avenue in Manhattan. ''The opera has been sporadically staged over the last five decades,'' Michael Spierman, founding director of Bronx Opera, said. ''But not nearly as often as it should be. This remarkable score fuses elements of field songs, spirituals, blues and early Dixieland jazz with arias and extended scenes to tell a Gothic tale of greed and blackmail.''</p>
+        <p>Because of the vocal challenges, ''Regina'' is double cast, with Sarah Hersh and Kara Shay Thomson sharing the title role, while Mr. Spierman conducts the chorus and orchestra. For tickets to all performances, call (718) 402-5202.</p>
+        <p>Two other events in the Bronx next weekend are offered by Wave Hill in the Riverdale section and the Bronx Arts Ensemble at the home of William and Paula Caplan, also in Riverdale.</p>
+        <p>Part of Wave Hill's mission is to display the dynamic interaction between people and the natural world, and next Saturday at 2:30 and 3:30 p.m., the storyteller Nina Jaffe and the drummer David Licht of the Klezmatics explore those links with Jewish nature tales. The number to call for more information is (718) 548-3200.</p>
+        <p>The Bronx Arts Ensemble is presenting a cycle called Chamber Music in Great Homes next Sunday at 3 p.m. The recital will feature the horn virtuoso Sharon Moe and the pianists Irina Morozova and Orlay Alonso, who won the 1999 young Bronx artists competition. On the program will be Liszt's ''Vallee d'Obermann,'' the Brahms Horn Trio and the Copland Sextet. For reservations, call (718) 601-7399.</p>
+        <p>Next Saturday at 1 p.m. in Horace Greeley High School in Chappaqua, the 60-member Chappaqua Chamber Orchestra under its artistic director, James Sadewhite, and the 20 student players in the school's own Chamber Orchestra, led by Davis Knobloch, chairman of performing arts at the school, convene for a family concert. On the program are the first movement of Beethoven's First Symphony, Handel's ''Entrance of the Queen of Sheba'' and, with a Horace Greeley senior, Laura Schechter, as the narrator, Prokofiev's ''Peter and the Wolf.'' Call 921-4642 for reservations.</p>
+        <p>The Ossining Public Library resumes its ''Great Music in a Great Place'' next Sunday at 3 p.m., as the Keith Ingham Trio greets the millennium with centennial salutes in jazz to five masters born at the start of the 20th century: the composers Noel Coward, Kurt Weill, Hoagy Carmichael and Duke Ellington and the dancer Fred Astaire. Mr. Ingham has toured or recorded with Benny Goodman and Bud Freeman, and more recently he served as pianist-arranger for Susannah McCorkle and Maxine Sullivan. His colleagues are the bassist Murray Wall and the instrumentalist Scott Robinson, who plays cornet, euphonium and various flutes, the clarinet and the saxophone. The program is free. The information number is 941-2416.</p>
+        <p>Also resuming its post-holiday activity next Sunday is the Hoff-Barthelson Music School in Scarsdale, with three of its faculty artists -- the pianist David Oei, the violinist Eriko Sato and the cellist Christopher Finckel -- convening at 4 p.m. to play works by Britten, Dvorak and Beethoven. For tickets, call 723-1169.</p>
+        <p>Lucy Kaplansky was in private practice as a psychologist when she began writing music, emerging as one of the leading contemporary folk singer-songwriters. She sang at the Emelin Theater in Mamaroneck last season in a touring collaboration with Dar Williams and Richard Shindell (as the group Cry Cry Cry). On Friday at 8 p.m., she returns to the Emelin to go solo.</p>
+        <p>Bringing a more pronounced pop flavor to the mix is Tom Anderson, who calls himself ''the next Johnny Mathis.'' He will be at the Emelin for back-to-back shows next Saturday at 7 and 9:30 p.m.. The box office number is 698-0098.</p>
+        <p>The Walkabout Clearwater Coffeehouse at the Harvey School in Katonah ends its winter season with  Livingston Taylor next Saturday at 8 p.m. ''He is a serious songwriter, crafting his work carefully and patiently,'' Sharon Lavery, the coffeehouse's community coordinator, said. ''The result is a series of beautiful, gem-like pieces, though his performances are peppered with funny antics and anecdotes. His warmth and whimsical stage presence will have you wanting to hear more.'' The information number is 242-0374.</p>
+        <p>MUSIC</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

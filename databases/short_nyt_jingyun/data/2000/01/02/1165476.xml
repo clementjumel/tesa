@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Gutzon Borglum, Creator of Mount Rushmore</title>
+    <meta content="LTR145323" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Connecticut Weekly Desk" name="dsk"/>
+    <meta content="17" name="print_page_number"/>
+    <meta content="14CN" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165476"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <location class="indexing_service">Mount Rushmore</location>
+        <person class="indexing_service">Borglum, Gutzon</person>
+        <person class="indexing_service">Thoms, Maggie</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/Connecticut</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901E2D81538F931A35752C0A9669C8B63" item-length="113" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Gutzon Borglum, Creator of Mount Rushmore</hl1>
+      </hedline>
+      <abstract>
+        <p>Maggie Thoms letter comments on December 5 article on Gutzon Borglum, creator of Mount Rushmore (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>I was delighted with your article on Gutzon Borglum (Art: A Monument Maker on a Smaller Scale, Dec. 5) and hope to see the exhibition at the Stamford Museum and Nature Center. If I am not mistaken, didn't he design one of the overpasses on the Merritt Parkway?</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>I was delighted with your article on Gutzon Borglum (Art: A Monument Maker on a Smaller Scale, Dec. 5) and hope to see the exhibition at the Stamford Museum and Nature Center. If I am not mistaken, didn't he design one of the overpasses on the Merritt Parkway?</p>
+        <p>You're right -- most people do not know the artist of Mount Rushmore and I am wondering how many Americans know the sculptor of the Statue of Liberty? (Frederic Auguste Bartholdi).</p>
+        <p>MAGGIE THOMS  Stony Creek</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Recreating Bach in His Own Element</title>
+    <meta content="02SHER$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Arts and Leisure Desk" name="dsk"/>
+    <meta content="39" name="print_page_number"/>
+    <meta content="2" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165326"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="MUSIC"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Music</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Recordings (Audio)</classifier>
+        <org class="indexing_service">Gabrieli Consort and Players</org>
+        <person class="indexing_service">Sherman, Bernard D</person>
+        <person class="indexing_service">Mccreesh, Paul</person>
+        <person class="indexing_service">Bach, Johann Sebastian (1685-1750)</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./New England</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Music</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Music</classifier>
+        <classifier class="online_producer" type="general_descriptor">Recordings (Audio)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Music</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B07EEDF1638F931A35752C0A9669C8B63" item-length="1834" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Recreating Bach in His Own Element</hl1>
+      </hedline>
+      <byline class="print_byline">By BERNARD D. SHERMAN</byline>
+      <byline class="normalized_byline">Sherman, Bernard D</byline>
+      <abstract>
+        <p>Bernard D Sherman reviews new recording J S Bach: Epiphany Mass, by Paul McCreesh leading Gabrieli Consort and Players; photo of McCreesh; engraving of Bach's church in Leipzig (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>BACH fanatics have long fantasized about an auditory time machine that might carry them back to the 18th century and to the Thomaskirche in Leipzig, where they could hear Bach leading his cantatas. Now a remarkable recording from Deutsche Grammophon simulates what such time travelers would be after.</p>
+        <p>Titled ''J. S. Bach: Epiphany Mass,'' it is a ''liturgical reconstruction'': a performance, with Paul McCreesh leading the Gabrieli Consort and Players, that puts sacred music into something like its original church context. Many early-music advocates claim that period instruments are critical to proper performance; liturgical reconstruction extends that argument to the performance's original setting.</p>
+      </block>
+      <block class="full_text">
+        <p>BACH fanatics have long fantasized about an auditory time machine that might carry them back to the 18th century and to the Thomaskirche in Leipzig, where they could hear Bach leading his cantatas. Now a remarkable recording from Deutsche Grammophon simulates what such time travelers would be after.</p>
+        <p>Titled ''J. S. Bach: Epiphany Mass,'' it is a ''liturgical reconstruction'': a performance, with Paul McCreesh leading the Gabrieli Consort and Players, that puts sacred music into something like its original church context. Many early-music advocates claim that period instruments are critical to proper performance; liturgical reconstruction extends that argument to the performance's original setting.</p>
+        <p>The claim that context matters is hard to support in much of Bach. The inner logic of his music makes it less dependent on surroundings (and for that matter, instruments) than most Baroque repertory. The works included here (the Cantatas Nos. 65 and 180, the Mass in F, the Sanctus in D and various organ works) have all been recorded before, out of context and to good effect. Some critics write off the reconstructive attitude in Bach as so much historical nostalgia, the same sentiment that gives rise to reconstructions of Civil War battles. One harpsichordist called liturgical reconstruction ''historical performance practice run amok.''</p>
+        <p>Still, when applied specifically to the cantatas, the case for context in Bach is plausible. For many years, critics have pointed to features that can make the cantatas seem out of place in a concert hall. A cantata from Bach's Leipzig period typically has a front-heavy structure: a substantial opening chorus, which one author compared to a locomotive, a train of movements for soloists and a caboose of a final chorale. Bach, the argument continues, would have structured the cantatas differently for concert use. Besides, the expressive ends of his cantatas are religious, not just aesthetic. For such reasons, critics conclude, the cantatas would best be understood in their original setting, like an altarpiece in the church it was designed for.</p>
+        <p>That original setting was an orthodox Lutheran service, consisting of four hours of readings, prayers, sermons and singing -- and a cantata or two. Mr. McCreesh, aided by Robin A. Leaver, a liturgical scholar, tries to create an aural facsimile of what ''might have been celebrated'' in Bach's church, the Thomaskirche, on the feast of the Epiphany, Jan. 6, around 1740. While the results are in various ways modernized, they do indeed shed light on Bach's approach to sacred music.</p>
+        <p>Bach wrote cantatas as he did partly because his job in writing them was to preach. By design, the cantatas function like sermons, interpreting the biblical message and applying it to the worshiper. This recording (Archiv 457 631-2; two CD's) lets us hear the process at work.</p>
+        <p>After we listen to a reading of the Bible text of the day, telling the story of the three wise men bearing gifts to the newborn Jesus, we hear the text sung in the richly conceived opening chorus of Cantata No. 65, ''Sie Werden aus Saba Alle Kommen'' (''From Sheba Will They All Arrive''). Then, in recitatives and arias, we hear a moral message drawn from the Bible text. ''Gold of Ophir is too plain,'' the bass soloist exhorts (in 18th-century German verse). ''Away with these empty gifts dug from the earth!/ What Jesus desires is thy heart./ Present it to Jesus, thou Christian throng, as a New Year's gift.''</p>
+        <p>Such texts, which make some modern Bach lovers cringe, seem purposeful when we hear why Bach was setting them. And the final chorale (''Now, my Lord, I give myself to Thy care'') seems not a caboose here but a prism that focuses the theological message.</p>
+        <p>Bach's listeners liked being preached to. Some were known to attend two or even three services on a Sunday so they could hear more sermons. But few Bach devotees today share that predilection. What most of us listen for is the composer's musical art. Recognizing our aim, Mr. McCreesh saves us busy moderns at least an hour off the real 18th-century experience, mostly by cutting the actual sermon short. In Bach's day, sermons typically lasted an hour or more; here the sermon lasts six minutes.</p>
+        <p>It is an excerpt from a sermon by Martin Luther, published in 1545. Sermons from Bach's era are abundantly available in print, even if none are from his church in Leipzig. Bach's contemporaries might have used a sermon by Luther in a pinch, but Mr. McCreesh clearly chooses one for a different reason: Luther's historical prominence lends interest to his sermon even for secular listeners.</p>
+        <p>Bach owned not only two complete sets of Luther's publications but also more than a dozen books of published sermons by his own contemporaries. His interest in them was not unusual for his era. But it certainly would be for ours. Most listeners will undoubtedly welcome Mr. McCreesh's historical license, just as spectators are relieved that a Civil War reconstruction refrains from using real bullets. If an hourlong sermon were included, it would skip over it.</p>
+        <p>Listeners might also be grateful for other accommodations Mr. McCreesh has made to the present. For one thing, he has chosen a gentle, positive liturgical theme; the Epiphany celebrates the visit of the Magi. A more typical liturgical experience from 18th-century Leipzig might have featured a cantata like No. 26, ''Ach Wie Fluchtig, Ach Wie Nichtig'' (''Ah How Fleeting, Ah How Trivial''), the title referring to human life on earth. That cantata, Leipzig hymn schedules specified, was to appear in services filled with hymns concerning death and dying. By contrast, Mr. McCreesh presents major-key cantatas, accompanied by hymns expressing wonder. If the recording doesn't truly transport us to Leipzig, 1740, it does transport us.</p>
+        <p>Indeed, this release might have broader appeal than most Bach cantata recordings. It could gain a following among the New Age listeners who made best-sellers of Hildegard of Bingen and Gregorian chant, for it creates a golden, celestial aura that most Bach choral music doesn't aim for. (It is hard, for example, to imagine a New Age following for the ''St. Matthew Passion,'' with its ruminations on guilt and remorse.)</p>
+        <p>True, while a typical performance turns a Bach cantata from a primarily religious utterance into a purely aesthetic one, a reconstruction like this, it could be argued, turns the entire Leipzig church service into an aesthetic object. Yet the argument would be a bit unfair.</p>
+        <p>For all its concessions to modern needs, this recording feels more like a church service than a concert. The sense of transport comes not only from the music but also, to a large degree, from liturgical details Mr. McCreesh re-enacts: the bells, the congregational hymns and the general sense of shared purpose. Even for those who may already have known that in orthodox Lutheran services the German Bible texts and many of the prayers were not simply read aloud but chanted in quasi-Gregorian style, there is something about actually hearing such ''heightened'' speech that creates a sense of mystery.</p>
+        <p>The Lutheran liturgy had elements besides the sermon that do not translate well to home listening. One of Luther's innovations was to allow the congregation to participate in some of the singing, in contrast to the Roman Catholic rite, which reserved virtually all the singing for the priests and choir. Whatever one thinks of Luther's reform from a religious standpoint, the Roman approach has advantages for record listeners, who may conclude as much after hearing those Lutheran hymns that repeat the same music verse after verse. One example here goes on for more than 10 minutes.</p>
+        <p>As the Bach scholar Michael Marissen points out, if you were singing the music yourself in a church service, the repetitions might be involving; but for modern listeners, the skip button might again come in handy. On the other hand, the elements least congenial to home listening, like these hymns, contribute most to the feeling of eavesdropping on a church service.</p>
+        <p>How historical is the service here? The question applies most sharply to the Bach performances themselves, as readers familiar with early music might expect. The use of a female soprano, Ann Monoyios, is an obvious compromise with modern realities. (Bach used boy sopranos.) But her singing is first-rate. Other choices held to be purely historical are just as palatable to the ear. Using only one voice per part in some choruses produces beguiling results. And Mr. McCreesh argues that Bach would have used a large cathedral organ to accompany, instead of the chamber organs typical in early-music performances; the added color and weight of the large instrument could set a trend.</p>
+        <p>Mr. McCreesh's colleagues will argue about these choices and more (a couple of speedy tempos, for example). And his critics will note that even the most unerringly faithful reconstruction -- for that matter, even a time machine -- would not give us the real 1740 experience, if only because our cultural and intellectual world differs so much from that of Bach. As a trivial example, the impact of one of Luther's biggest innovations -- using the everyday language rather than Latin -- is lost on us. For most of us, the period German sounds at least as foreign as the Roman church's Latin did to Bach's parishioners (who heard a bit of Latin in their services every week). Even modern Germans find the period German archaic. Nor do we know the hymns that Bach's congregation knew by heart.</p>
+        <p>BESIDES, we are not there to worship. And if we were, modern Lutheran worshipers would not share the kind of belief that gripped Bach and his audience. Bach believed in the divine ordination of kings and aristocrats. He and his listeners worried about the Devil and damnation far more literally than most Lutherans do today. To Bach's listeners, the cantata texts did not seem archaic. Neither did Luther's denunciations of Jews and Catholics. We can't really join Bach's congregation -- few of us would want to -- and even to imagine our way into their church experience demands more than listening to CD's.</p>
+        <p>Yet the glow of this recording can almost make one forget such barriers. It is true that Bach cantatas, taken out of context, would have continued to move us even without Mr. McCreesh's help. And the only reason most of us want to hear a historical Lutheran service re-enacted is Bach's music, which stands out as exceptional in its original context, as listeners will find. Still, by taking us halfway to Bach's turf, this reconstruction reveals something about the music that no other recording quite manages. This music may not depend on its historical context, but context can reveal fascinating things about it all the same.</p>
+        <p>MUSIC Bernard D. Sherman is the author of ''Inside Early Music: Conversations With Performers.''</p>
+      </block>
+    </body.content>
+    <body.end>
+      <tagline class="author_info">Bernard D. Sherman is the author of ''Inside Early Music: Conversations With Performers.''</tagline>
+    </body.end>
+  </body>
+</nitf>

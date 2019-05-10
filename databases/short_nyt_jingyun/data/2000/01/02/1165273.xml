@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Books in Brief: Nonfiction</title>
+    <meta content="RV100946" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Book Review Desk" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="7" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Arts; Books" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165273"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Books and Literature</classifier>
+        <classifier class="indexing_service" type="descriptor">Reviews</classifier>
+        <classifier class="indexing_service" type="descriptor">Biographical Information</classifier>
+        <person class="indexing_service">Loos, Ted</person>
+        <person class="indexing_service">Baxter, John</person>
+        <person class="indexing_service">Allen, Woody</person>
+        <object.title class="indexing_service">Woody Allen: A Biography (Book)</object.title>
+        <classifier class="online_producer" type="types_of_material">Review</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books/Book Reviews</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Books</classifier>
+        <classifier class="online_producer" type="general_descriptor">Books and Literature</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9B0CE7DC1E39F931A35752C0A9669C8B63" item-length="256" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Books in Brief: Nonfiction</hl1>
+      </hedline>
+      <byline class="print_byline">By Ted Loos</byline>
+      <byline class="normalized_byline">Loos, Ted</byline>
+      <abstract>
+        <p>Ted Loos reviews book Woody Allen: A Biography by John Baxter (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Woody Allen</p>
+        <p>A Biography.</p>
+        <p>By John Baxter.</p>
+        <p>Carroll &amp; Graf, $27.</p>
+      </block>
+      <block class="full_text">
+        <p>Woody Allen</p>
+        <p>A Biography.</p>
+        <p>By John Baxter.</p>
+        <p>Carroll &amp; Graf, $27.</p>
+        <p>Woody Allen started out as a comic and ended up an auteur. The boy born in 1935 in Brooklyn who installed himself on the Upper East Side has become a recognizable commodity in Hollywood by staying as far away as possible. Touted as the first major study of Allen since his breakup with Mia Farrow and his pairing off with her adopted daughter, John Baxter's ''Woody Allen'' devotes a chapter to each film or two, chronicling the minutiae right down to production costs and box office receipts. The same dispassionate tone is brought to bear on Allen's personal life. When he allows himself some breathing room, Baxter, who has also written books on Fellini, Bunuel and Kubrick, can be a persuasive analyst; he intelligently points out the gap between the shambling on-screen character that Allen created and the successful, controlling artist. That he is not always adulatory is refreshing, especially concerning Allen's less than successful forays into Bergmanesque drama. But Baxter has made a similar miscalculation: he has written the biography of a great humorist without ever cracking a smile.</p>
+        <p>Ted Loos</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

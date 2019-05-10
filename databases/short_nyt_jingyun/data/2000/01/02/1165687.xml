@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  MEIER, JUNE</title>
+    <meta content="DN010200" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="35" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165687"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">MEIER, JUNE</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9901E5D81138F931A35752C0A9669C8B63" item-length="93" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  MEIER, JUNE</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>MEIER-June. On December 26, 1999. Wife of the late Frank Meier. Mother of Diane, Gordon and Richard. Grandmother of Bennett, Bradford, Rebecca and John. As master-craftsman, teacher and advocate, she helped to rediscover and resurrect lost decorative arts from decoupage to all manner of painted finishes and taught a new generation to appreciate the beauty of the past and weave it into the context of the present. In lieu of flowers, please make donations to The Isabel O'Neil Foundation for the Art of the Painted Finish. A private memorial service is being planned.</p>
+      </block>
+      <block class="full_text">
+        <p>MEIER-June. On December 26, 1999. Wife of the late Frank Meier. Mother of Diane, Gordon and Richard. Grandmother of Bennett, Bradford, Rebecca and John. As master-craftsman, teacher and advocate, she helped to rediscover and resurrect lost decorative arts from decoupage to all manner of painted finishes and taught a new generation to appreciate the beauty of the past and weave it into the context of the present. In lieu of flowers, please make donations to The Isabel O'Neil Foundation for the Art of the Painted Finish. A private memorial service is being planned.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

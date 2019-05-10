@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Paid Notice: Deaths  ROWLEY, LOUIS N.</title>
+    <meta content="DN010100" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Classified" name="dsk"/>
+    <meta content="7" name="print_page_number"/>
+    <meta content="B" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Paid Death Notices" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165239"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <person class="indexing_service">ROWLEY, LOUIS N.</person>
+        <classifier class="online_producer" type="types_of_material">Paid Death Notice</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Paid Death Notices</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C01E4D71030F932A35752C0A9669C8B63" item-length="113" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Paid Notice: Deaths  ROWLEY, LOUIS N.</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>ROWLEY-Louis N.. Jr. Age 90 of Shelton, CT., formerly of Port Washington, L.I., on December 30, 1999. Beloved husband of Maybelle ''Billie'' (nee Chemidlin) for over 66 years, he is also survived by his sons; Rev. Louis E. Rowley of Mount Vernon, New York, Robert S. Rowley of Danbury, CT, and David C. Rowley of Swarthmore, PA., eight grandchildren and five great grandchildren. A memorial service will be held at 2:00 PM on Saturday, January 8 at Crosby Commons, 580 Long Hill Ave., Shelton, CT. Memorial Contributions may be made to the United Methodist Church 1515 Middle Neck Road, PO Box 929, Port Washington, NY 11050, or to the charity of your choice.</p>
+      </block>
+      <block class="full_text">
+        <p>ROWLEY-Louis N.. Jr. Age 90 of Shelton, CT., formerly of Port Washington, L.I., on December 30, 1999. Beloved husband of Maybelle ''Billie'' (nee Chemidlin) for over 66 years, he is also survived by his sons; Rev. Louis E. Rowley of Mount Vernon, New York, Robert S. Rowley of Danbury, CT, and David C. Rowley of Swarthmore, PA., eight grandchildren and five great grandchildren. A memorial service will be held at 2:00 PM on Saturday, January 8 at Crosby Commons, 580 Long Hill Ave., Shelton, CT. Memorial Contributions may be made to the United Methodist Church 1515 Middle Neck Road, PO Box 929, Port Washington, NY 11050, or to the charity of your choice.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

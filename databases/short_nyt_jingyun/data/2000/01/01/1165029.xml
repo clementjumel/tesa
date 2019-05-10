@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Great Hits Headed for The Attic</title>
+    <meta content="MB140605" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="3" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="5" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165029"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Art</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <person class="indexing_service">Picasso, Pablo (1881-1973)</person>
+        <person class="indexing_service">Kimmelman, Michael</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Arts/Art and Design</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Art</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Art and Design</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Art</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9802E2DF1639F932A35752C0A9669C8B63" item-length="244" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Great Hits Headed for The Attic</hl1>
+      </hedline>
+      <byline class="print_byline">By Michael Kimmelman</byline>
+      <byline class="normalized_byline">Kimmelman, Michael</byline>
+      <abstract>
+        <p>Michael Kimmelman article says Picasso's Guernica, the most famous painting of 20th century, is due for major downgrading in next century; photo (S)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The challenge put to The Times's critics was direct: Name a 20th-century work considered ''timeless'' today that you think will be all but forgotten in 100 years. Their selections:</p>
+        <p>PICASSO, A BIT TOO VIRTUOUS</p>
+        <p>When Picasso was commissioned to paint for the Spanish Republican Pavilion at the World's Fair in Paris in 1937, he came up with the idea of a big, abstract picture about the recent bombing of a Basque town he had never visited.</p>
+      </block>
+      <block class="full_text">
+        <p>The challenge put to The Times's critics was direct: Name a 20th-century work considered ''timeless'' today that you think will be all but forgotten in 100 years. Their selections:</p>
+        <p>PICASSO, A BIT TOO VIRTUOUS</p>
+        <p>When Picasso was commissioned to paint for the Spanish Republican Pavilion at the World's Fair in Paris in 1937, he came up with the idea of a big, abstract picture about the recent bombing of a Basque town he had never visited.</p>
+        <p>''Guernica'' became the 20th century's most famous painting because Picasso was the century's most famous artist and because, having been intended for Republican Spain, the picture spent several decades, with Picasso's approval, in conspicuous and splendid exile at the Museum of Modern Art in New York. There it became an international symbol of antifascism until Generalissimo Francisco Franco died.</p>
+        <p>With the personality cult of Picasso having already begun to fade along with memories of the general, ''Guernica'' can increasingly be seen as a virtuous hodgepodge of Cubist design enlarged to the scale of a billboard and hitched to a program of political dissent that Picasso seemed never to have been very comfortable with. In the end, he was comfortable in his art only with himself as the subject.</p>
+        <p>MICHAEL KIMMELMAN</p>
+        <p>VISIONS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

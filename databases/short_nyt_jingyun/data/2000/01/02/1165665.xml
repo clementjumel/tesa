@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>PERSPECTIVES: Global World Series, and a Few Other Guesses; Football</title>
+    <meta content="MB025658" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165665"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Football</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <person class="indexing_service">Freeman, Mike</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Football</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Football</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9A00E1D91138F931A35752C0A9669C8B63" item-length="399" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>PERSPECTIVES: Global World Series, and a Few Other Guesses; Football</hl1>
+      </hedline>
+      <byline class="print_byline">By MIKE FREEMAN</byline>
+      <byline class="normalized_byline">Freeman, Mike</byline>
+      <abstract>
+        <p>Mike Freeman article offers predictions for future of professional football in 21st century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>The year is 2014, and National Football League Commissioner Bill Parcells speaks at the annual state-of-the-league address. His main topic: the number of changes that took place in what was a hectic year for professional football.</p>
+      </block>
+      <block class="full_text">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>The year is 2014, and National Football League Commissioner Bill Parcells speaks at the annual state-of-the-league address. His main topic: the number of changes that took place in what was a hectic year for professional football.</p>
+        <p>''The year 2014 will be remembered as one of the busiest in decades,'' the commissioner's opening statement begins. ''We've expanded to 35 teams, with a franchise in Salt Lake City. The new technology that allows fans watching the game at home on television to listen in on actual huddles has been a rousing success. Our first woman head coach went 18-2 in the regular season and we had the first 70-yard field goal.''</p>
+        <p>A question from the news media: ''Commissioner Parcells, the Los Angeles Warriors just signed John (Millisecond) Flash to a seven-year, $200 million contract. He was recently timed in the 40-yard dash at 3.99, making him the fastest human being ever. And the Giants signed 400-pound offensive lineman Jessie (Cholesterol) Smith to a long-term deal. So my question is, are players becoming too big and too fast?''</p>
+        <p>''I'm glad you asked that,'' Parcells replies. ''Lookit, 14 years ago I traded Vinny Testaverde so I could move up in the draft and trade for Peter Warrick, who turned out to be the best receiver Florida State ever had. And we now know the Ray Lucas-to-Warrick combination is the best ever. My point is, the game evolves, it gets faster, but it always stays the same great game.''</p>
+        <p>''Commissioner, there is talk among ownership that you want to return to coaching. Is that true?''</p>
+        <p>''No, no, no. Bill Belichick is the general manager and coach. He's won three Super Bowls with the Jets. Coaching is a young man's game. I retired from coaching at the end of the 2000 season.</p>
+        <p>''But there is one thing I am considering. How does President Parcells sound to you guys?''</p>
+        <p>MIKE FREEMAN</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

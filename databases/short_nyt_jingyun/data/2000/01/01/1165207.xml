@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Going Higher Tech Degree by Degree</title>
+    <meta content="01UNIV$05" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="29" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Education" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165207"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: CITIES"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Colleges and Universities</classifier>
+        <classifier class="indexing_service" type="descriptor">Forecasts</classifier>
+        <org class="indexing_service">University of Phoenix</org>
+        <org class="indexing_service">Massachusetts Institute of Technology</org>
+        <org class="indexing_service">Alverno College</org>
+        <org class="indexing_service">Rensselaer Polytechnic Institute</org>
+        <org class="indexing_service">Truman State University</org>
+        <person class="indexing_service">Arenson, Karen W</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Education</classifier>
+        <classifier class="online_producer" type="general_descriptor">Forecasts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Colleges and Universities</classifier>
+        <classifier class="online_producer" type="general_descriptor">Economic Conditions and Trends</classifier>
+        <classifier class="online_producer" type="general_descriptor">Education and Schools</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D06E2DE1030F932A35752C0A9669C8B63" item-length="740" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Going Higher Tech Degree by Degree</hl1>
+      </hedline>
+      <byline class="print_byline">By Karen W. Arenson</byline>
+      <byline class="normalized_byline">Arenson, Karen W</byline>
+      <abstract>
+        <p>Among institutions of higher education that have developed a niche for themselves and are expected to be on cutting in 21st century include University of Phoenix, MIT, Alverno College, Rensselaer Polytechnic Institute and Truman State University; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Despite warnings that too many people are overeducated, new high school graduates and adults long out of school are expected to flock to college in ever-growing numbers in the years ahead, even as the notion of higher education expands and changes. There will always be a Harvard (and a Yale and a Princeton). But other traditional colleges are likely to be bypassed as students seek convenience and specially tailored services -- and colleges respond. The watchwords will be high technology and cost efficiency, and courses will be delivered in many ways. For better or worse, the future is full of niches to be filled. Here are some institutions that higher education experts expect to be on the cutting edge.</p>
+        <p>UNIVERSITY OF PHOENIX -- If there is a McDonald's of higher education, it is Phoenix. The name produces shudders among many educators, who say it does not offer the face-to-face interaction that has long characterized elite higher education. A for-profit institution with classrooms in 26 states, and more on the way, Phoenix has turned college education for older students into a mass-market commodity. It has 86,800 degree students, most concentrating in fields like business and technology (including 10,382 who take courses over the Internet). Phoenix employs mostly part-time faculty members to teach a standardized curriculum developed in central headquarters and presented in leased classrooms.</p>
+        <p>MASSACHUSETTS INSTITUTE OF TECHNOLOGY, Cambridge, Mass. -- For the last half-century, the federal government has pumped billions of dollars into research universities to finance their expansion. With that growth ending, universities are looking elsewhere for support. Few have been as successful as M.I.T., which has formed partnerships with corporations ranging from Microsoft to Merrill Lynch for money, research and teaching opportunities. One visible model of that collaboration is its industry-supported Media Laboratory, where professors and students work side by side on high-technology projects. The British government recently tapped M.I.T. to work with Cambridge University and others to bolster their entrepreneurial spirit.</p>
+        <p>ALVERNO COLLEGE, Milwaukee -- As students, professors and politicians seek clearer definitions of what a basic college education should include and how to measure the results, Alverno, a small Roman Catholic women's college, offers a breathtakingly simple approach to both. Its answer: students should learn eight sets of specific skills -- including communications, analysis, problem solving and social interaction -- and their progress should be monitored through regular assessment based on predetermined criteria. Their growth in public speaking, for example, might be judged by comparing videos from one year with those of previous years. Deceptively simple, but Alverno has won many awards and drawn a stream of corporate and educational visitors from as far away as Hong Kong and Abu Dhabi.  RENSSELAER POLYTECHNIC INSTITUTE, Troy, N.Y. -- Convinced that students were not learning as much as they should, R.P.I. turned its classrooms and its curriculum inside out. On entering a physics or calculus classroom, students plug their laptop computers into ports at their desks. A teacher lectures for 5 or 10 minutes, then asks students to solve problems using what they have just learned. Students cannot tune out. And by watching how students deal with problems on their computers, teachers can tell whether students grasp a concept or need more explanation. Rensselaer professors say their students learn fewer facts but have better command of material.</p>
+        <p>TRUMAN STATE UNIVERSITY, Kirksville, Mo. -- In an era in which prestige is closely linked to the test scores of entering students, some public colleges have transformed themselves from run-of-the-mill, comprehensive institutions into increasingly selective ones. Among those that have come the furthest is Truman State, which evolved from Northeast Missouri State Teachers College into a small liberal arts version of flagship institutions like the University of California at Berkeley and the University of Michigan. Others include the College of New Jersey, formerly Trenton State, and the State University of New York at Geneseo. Truman State offers small classes and an honors program and continually tests its 6,000 students with national examinations to determine where it needs to improve instruction.</p>
+      </block>
+      <block class="full_text">
+        <p>Despite warnings that too many people are overeducated, new high school graduates and adults long out of school are expected to flock to college in ever-growing numbers in the years ahead, even as the notion of higher education expands and changes. There will always be a Harvard (and a Yale and a Princeton). But other traditional colleges are likely to be bypassed as students seek convenience and specially tailored services -- and colleges respond. The watchwords will be high technology and cost efficiency, and courses will be delivered in many ways. For better or worse, the future is full of niches to be filled. Here are some institutions that higher education experts expect to be on the cutting edge.</p>
+        <p>UNIVERSITY OF PHOENIX -- If there is a McDonald's of higher education, it is Phoenix. The name produces shudders among many educators, who say it does not offer the face-to-face interaction that has long characterized elite higher education. A for-profit institution with classrooms in 26 states, and more on the way, Phoenix has turned college education for older students into a mass-market commodity. It has 86,800 degree students, most concentrating in fields like business and technology (including 10,382 who take courses over the Internet). Phoenix employs mostly part-time faculty members to teach a standardized curriculum developed in central headquarters and presented in leased classrooms.</p>
+        <p>MASSACHUSETTS INSTITUTE OF TECHNOLOGY, Cambridge, Mass. -- For the last half-century, the federal government has pumped billions of dollars into research universities to finance their expansion. With that growth ending, universities are looking elsewhere for support. Few have been as successful as M.I.T., which has formed partnerships with corporations ranging from Microsoft to Merrill Lynch for money, research and teaching opportunities. One visible model of that collaboration is its industry-supported Media Laboratory, where professors and students work side by side on high-technology projects. The British government recently tapped M.I.T. to work with Cambridge University and others to bolster their entrepreneurial spirit.</p>
+        <p>ALVERNO COLLEGE, Milwaukee -- As students, professors and politicians seek clearer definitions of what a basic college education should include and how to measure the results, Alverno, a small Roman Catholic women's college, offers a breathtakingly simple approach to both. Its answer: students should learn eight sets of specific skills -- including communications, analysis, problem solving and social interaction -- and their progress should be monitored through regular assessment based on predetermined criteria. Their growth in public speaking, for example, might be judged by comparing videos from one year with those of previous years. Deceptively simple, but Alverno has won many awards and drawn a stream of corporate and educational visitors from as far away as Hong Kong and Abu Dhabi.  RENSSELAER POLYTECHNIC INSTITUTE, Troy, N.Y. -- Convinced that students were not learning as much as they should, R.P.I. turned its classrooms and its curriculum inside out. On entering a physics or calculus classroom, students plug their laptop computers into ports at their desks. A teacher lectures for 5 or 10 minutes, then asks students to solve problems using what they have just learned. Students cannot tune out. And by watching how students deal with problems on their computers, teachers can tell whether students grasp a concept or need more explanation. Rensselaer professors say their students learn fewer facts but have better command of material.</p>
+        <p>TRUMAN STATE UNIVERSITY, Kirksville, Mo. -- In an era in which prestige is closely linked to the test scores of entering students, some public colleges have transformed themselves from run-of-the-mill, comprehensive institutions into increasingly selective ones. Among those that have come the furthest is Truman State, which evolved from Northeast Missouri State Teachers College into a small liberal arts version of flagship institutions like the University of California at Berkeley and the University of Michigan. Others include the College of New Jersey, formerly Trenton State, and the State University of New York at Geneseo. Truman State offers small classes and an honors program and continually tests its 6,000 students with national examinations to determine where it needs to improve instruction.</p>
+        <p>VISIONS: CITIES</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>BUSINESS DIGEST</title>
+    <meta content="01DIGE" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Business/Financial Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="C" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165099"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">NO INDEX TERMS FROM NYTIMES</classifier>
+        <classifier class="online_producer" type="types_of_material">Summary</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9401EED61338F932A35752C0A9669C8B63" item-length="464" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>BUSINESS DIGEST</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Russian Stocks Leap After Yeltsin Steps Aside  Boris N. Yeltsin's surprise resignation drove Russian stock prices up sharply, reflecting optimism that the acting president, Vladimir V. Putin, will revive stalled economic reforms. The Russian Trading System stock index rose 18 percent, its biggest one-day increase since July 14, 1998.</p>
+      </block>
+      <block class="full_text">
+        <p>Russian Stocks Leap After Yeltsin Steps Aside  Boris N. Yeltsin's surprise resignation drove Russian stock prices up sharply, reflecting optimism that the acting president, Vladimir V. Putin, will revive stalled economic reforms. The Russian Trading System stock index rose 18 percent, its biggest one-day increase since July 14, 1998.</p>
+        <p>Russian stocks traded in the United States rallied as well, as did the Templeton Russia Fund, a mutual fund. [Page A19.]</p>
+        <p>Bond Prices Close Lower  Bond prices ended the year lower, reversing a two-day gain that analysts labeled an aberration from the bond market's yearlong slump. The price of the benchmark 30-year bond fell 24/32, to 95 12/32. The bond's yield rose to 6.48 percent from 6.42 percent. [C5.]</p>
+        <p>Leading Tax Lawyer Named in Fraud  A Tax Court judge has ruled that Burton W. Kanter was ''the architect'' of a long-running kickback scheme in which millions of dollars were siphoned from funds managed by the Prudential and Travelers insurance companies. Mr. Kanter said he would appeal. [C2.]</p>
+        <p>Global Crossing Shares Are Sold  U S West said it sold 24 million Global Crossing shares, valued at $1.15 billion. U S West bought the shares before canceling its planned merger with Global Crossing, which is building a worldwide phone and data network. [C4.]</p>
+        <p>Waste Merger Called Overpriced  Waste Management, the nation's biggest hauler of trash, contends in a lawsuit that it overpaid in its $1.15 billion purchase of Eastern Environmental Services last year because Eastern's chairman overstated its profits. The suit seeks nearly $600 million in damages. [C6.]</p>
+        <p>Malaysia Defers Share Dispute  Malaysia said it had extended by six months a deadline for resolving an impasse on $3.8 billion worth of Malaysian stocks frozen on a Singapore exchange. Suspension of trading in the shares was among economic measures adopted by Mahathir Mohamad, Malaysia's prime minister, in September 1998, and the two sides have since clashed over how to return the equities to the Malaysian marketplace. [C4.]</p>
+        <p>Some Markets Closed  Most overseas stock and financial markets were closed yesterday for New Year's Eve. In the United States, commmodity markets were closed, and the stock market and Treasury market closed early.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

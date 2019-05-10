@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Gilbert Padula and Kristin Buckler</title>
+    <meta content="02BUCK$01" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Society Desk" name="dsk"/>
+    <meta content="8" name="print_page_number"/>
+    <meta content="9" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Style" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165458"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="WEDDINGS"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">WEDDINGS AND ENGAGEMENTS</classifier>
+        <person class="indexing_service">BUCKLER, KRISTIN LEE (KRISTIN LEE PADULA)</person>
+        <person class="indexing_service">PADULA, GILBERT DARIN ANTHONY</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Style/Fashion and Style/Weddings and Celebrations</classifier>
+        <classifier class="online_producer" type="general_descriptor">Weddings and Engagements</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=990DE2DA1538F931A35752C0A9669C8B63" item-length="265" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Gilbert Padula and Kristin Buckler</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Kristin Lee Buckler, the daughter of Linda L. Buckler and Norman F. Buckler of Scottsdale, Ariz., was married on Thursday to Dr. Gilbert Darin Anthony Padula, the son of Dr. Tatiana Capone Padula of Rochester Hills, Mich., and the late Gilbert N. Padula. The Rev. Robert Schuster performed the Roman Catholic ceremony at St. Hugo of the Hills Church in Bloomfield Hills, Mich.</p>
+        <p>Mrs. Padula, 24, is a student at New York Law School. She graduated from Oakland University. Her parents work in Scottsdale, her father as the western regional sales manager for Synthesys Technologies, which develops medical software, and her mother as a contract analyst for the Franchise Finance Corporation of America.</p>
+      </block>
+      <block class="full_text">
+        <p>Kristin Lee Buckler, the daughter of Linda L. Buckler and Norman F. Buckler of Scottsdale, Ariz., was married on Thursday to Dr. Gilbert Darin Anthony Padula, the son of Dr. Tatiana Capone Padula of Rochester Hills, Mich., and the late Gilbert N. Padula. The Rev. Robert Schuster performed the Roman Catholic ceremony at St. Hugo of the Hills Church in Bloomfield Hills, Mich.</p>
+        <p>Mrs. Padula, 24, is a student at New York Law School. She graduated from Oakland University. Her parents work in Scottsdale, her father as the western regional sales manager for Synthesys Technologies, which develops medical software, and her mother as a contract analyst for the Franchise Finance Corporation of America.</p>
+        <p>Dr. Padula, 30, is a resident in radiation oncology at the Memorial Sloan-Kettering Cancer Center in New York. He graduated from the University of Michigan and received his medical degree from Michigan State University. His mother is a nuclear physicist in defense engineering at General Dynamics in Sterling Heights, Mich. His father was a chief engineer in Chrysler's automotive division in Detroit and owned Gilbert Industrial Engineering, a consulting company that was in Rochester Hills.</p>
+        <p>WEDDINGS</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>The Christmas Tree As Hanukkah Bush</title>
+    <meta content="LTR001527" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165626"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Christmas</classifier>
+        <classifier class="indexing_service" type="descriptor">Christmas Trees</classifier>
+        <classifier class="indexing_service" type="descriptor">Hanukkah</classifier>
+        <person class="indexing_service">edelstein, reada bunin</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hanukkah</classifier>
+        <classifier class="online_producer" type="general_descriptor">Hanukkah</classifier>
+        <classifier class="online_producer" type="general_descriptor">Christmas</classifier>
+        <classifier class="online_producer" type="general_descriptor">Jews</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+        <classifier class="online_producer" type="general_descriptor">Religion and Churches</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D00EEDA1138F931A35752C0A9669C8B63" item-length="94" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>The Christmas Tree As Hanukkah Bush</hl1>
+      </hedline>
+      <abstract>
+        <p>Reada Bunin Edelstein letter, commenting on Yona Zeldis McDonough's Dec 19 article, recalls the Hanukkah bush her family put up at Christmas time</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>The allure of the Christmas tree in my nonreligious but culturally Jewish house was as strong to my siblings and me growing up as it was to Yona Zeldis McDonough (Soapbox, ''Clashing Symbol,'' Dec. 19).</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>The allure of the Christmas tree in my nonreligious but culturally Jewish house was as strong to my siblings and me growing up as it was to Yona Zeldis McDonough (Soapbox, ''Clashing Symbol,'' Dec. 19).</p>
+        <p>Though my parents indulged us, my father saved face by calling it a Hanukkah bush, crowning it with the Star of David instead of the Star of  Bethlehem, and steadfastly maintaining that Dec. 25 was, in fact, the  commemoration of Jesus Christ's bar mitzvah.</p>
+        <p>READA BUNIN EDELSTEIN  Upper West Side</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

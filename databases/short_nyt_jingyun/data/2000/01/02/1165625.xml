@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Gretzky Fans Put Initials on Trade Center</title>
+    <meta content="LTR001518" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="The City Weekly Desk" name="dsk"/>
+    <meta content="11" name="print_page_number"/>
+    <meta content="14" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region; Opinion" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165625"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">World Trade Center (NYC)</classifier>
+        <classifier class="indexing_service" type="descriptor">Lighting</classifier>
+        <person class="indexing_service">Gretzky, Wayne</person>
+        <person class="indexing_service">spiner, sue</person>
+        <classifier class="online_producer" type="types_of_material">Letter</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/The City</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Opinion/Opinion</classifier>
+        <classifier class="online_producer" type="general_descriptor">World Trade Center (NYC)</classifier>
+        <classifier class="online_producer" type="general_descriptor">World Trade Center (NYC)</classifier>
+        <classifier class="online_producer" type="general_descriptor">Lighting</classifier>
+        <classifier class="online_producer" type="general_descriptor">Office Buildings and Commercial Properties</classifier>
+        <classifier class="online_producer" type="general_descriptor">Terrorism</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9F01EEDA1138F931A35752C0A9669C8B63" item-length="202" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Gretzky Fans Put Initials on Trade Center</hl1>
+      </hedline>
+      <abstract>
+        <p>Sue Spiner letter, commenting on Dec 26 article, recalls when Wayne Gretsky's initials were done up in lights on World Trade Center</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>To the Editor:</p>
+        <p>The F.Y.I. column of Dec. 26 (''No Secret Code'') quoted a Port Authority spokesman as saying, ''I never heard of a successful effort to spell out anything'' with lighted windows in the World Trade Center.</p>
+      </block>
+      <block class="full_text">
+        <p>To the Editor:</p>
+        <p>The F.Y.I. column of Dec. 26 (''No Secret Code'') quoted a Port Authority spokesman as saying, ''I never heard of a successful effort to spell out anything'' with lighted windows in the World Trade Center.</p>
+        <p>On the evening of Wayne Gretzky's retirement this fall, some enterprising sports fans, who no doubt work in the building, were able to light the Trade Center windows with letters.  There were a W and a G spelled out in the north-facing windows of the Twin Towers, W in One World Trade Center and G in Two World Trade Center.</p>
+        <p>The letters were up for about a month, and then the W disappeared.  Even tonight, you can see the remnants of the G in 2 World Trade, which could also look like the bottom of a 6. You don't require imagination to see the letters, just a southern exposure and a clear view of the Twin Towers.</p>
+        <p>SUE SPINER  Greenwich Village</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

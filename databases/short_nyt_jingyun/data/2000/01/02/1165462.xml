@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Dumping of Animals Creates a Mystery</title>
+    <meta content="MB130351" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="New Jersey Weekly Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="14NJ" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="New York and Region" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165462"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="IN BRIEF"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Animals</classifier>
+        <location class="indexing_service">New Jersey</location>
+        <location class="indexing_service">Atlantic County (NJ)</location>
+        <location class="indexing_service">Buena Vista Township (NJ)</location>
+        <person class="indexing_service">Demasters, Karen</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/New York and Region/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./U.S. States, Territories and Possessions/New Jersey</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Wildlife</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Destinations/North America/United States/New Jersey</classifier>
+        <classifier class="online_producer" type="general_descriptor">Animals</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9805E0DA1538F931A35752C0A9669C8B63" item-length="152" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Dumping of Animals Creates a Mystery</hl1>
+      </hedline>
+      <byline class="print_byline">By Karen DeMasters</byline>
+      <byline class="normalized_byline">Demasters, Karen</byline>
+      <abstract>
+        <p>In Brief: Dumping of Animals Cr</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>The dumping of the bodies of four dogs and a cat in the same spot by a road in a remote section of Buena Vista Township in the western part of Atlantic County has officials stumped.</p>
+      </block>
+      <block class="full_text">
+        <p>The dumping of the bodies of four dogs and a cat in the same spot by a road in a remote section of Buena Vista Township in the western part of Atlantic County has officials stumped.</p>
+        <p>The animals were found between September and Dec. 23. One dog had been shot in the head but the other animals did not seem to have been abused or hurt, said Nancy Beall of the Atlantic Society for the Prevention of Cruelty to Animals.  ''I've been doing this kind of work for 10 years and I've never seen anything like this,'' Ms. Beall said. ''We're hoping someone will recognize the animals and call to give us a lead.''</p>
+        <p>KAREN DeMASTERS</p>
+        <p>IN BRIEF</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

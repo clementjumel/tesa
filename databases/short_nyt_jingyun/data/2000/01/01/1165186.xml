@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Giving the Globe A Networked Skin</title>
+    <meta content="01ALAB$02" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="The Millennium" name="dsk"/>
+    <meta content="15" name="print_page_number"/>
+    <meta content="E" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <docdata>
+      <doc-id id-string="1165186"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VISIONS: TECHNOLOGY: QUANTUM COMPUTERS AND CARS SMARTER THAN YOU ARE"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Telephones and Telecommunications</classifier>
+        <classifier class="indexing_service" type="descriptor">Research</classifier>
+        <org class="indexing_service">Bell Laboratories</org>
+        <org class="indexing_service">Lucent Technologies</org>
+        <person class="indexing_service">Schiesel, Seth</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Research</classifier>
+        <classifier class="online_producer" type="general_descriptor">Telephones and Telecommunications</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9C01EEDC1230F932A35752C0A9669C8B63" item-length="832" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Giving the Globe A Networked Skin</hl1>
+      </hedline>
+      <byline class="print_byline">By Seth Schiesel</byline>
+      <byline class="normalized_byline">Schiesel, Seth</byline>
+      <abstract>
+        <p>quantum computes and cars smarter than you are**Scientists at Bell Laboratories set their sights on developing ever more capable communications systems as easy to use as they are powerful, making technology sufficiently advanced that it becomes transparent; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IN the 20th century, scientists at Bell Laboratories invented modern marvels like the transistor and the laser, but that is ancient history to the engineers working there today for Lucent Technologies Inc. In fact, they do not really have much use for the present.</p>
+        <p>In a windowless office at Bell Labs' headquarters in Murray Hill, N.J., Gerald Butters, chief of Lucent's optical networking group, gestures dismissively at his magazine-thin laptop computer and the network cord dangling beside it.</p>
+      </block>
+      <block class="full_text">
+        <p>IN the 20th century, scientists at Bell Laboratories invented modern marvels like the transistor and the laser, but that is ancient history to the engineers working there today for Lucent Technologies Inc. In fact, they do not really have much use for the present.</p>
+        <p>In a windowless office at Bell Labs' headquarters in Murray Hill, N.J., Gerald Butters, chief of Lucent's optical networking group, gestures dismissively at his magazine-thin laptop computer and the network cord dangling beside it.</p>
+        <p>''Look,'' he says, ''to get onto the network today, I've got a skinny wire here and I'm limited by the speed of the modem and I'm limited by the network to something surely less than the processor speed in this computing unit.''</p>
+        <p>In the Bell Labs vision, that wire will soon disappear. For that matter, the laptop computer may disappear as well. In their place will emerge a world in which the ability to connect -- with wires or without -- to a global network at lightning speeds will become almost ubiquitous. For when you think about it, which is what Bell Labs spends billions doing, the communications revolution so far has been limited to a mere handful of devices -- the phone, the fax, the modem, the television.</p>
+        <p>Moreover, consumers are generally stuck with only the services that big carriers want to offer. If caller ID is not sold in your area by the local phone company, well, too bad. Want to set up an eight-way conference call for the whole family? It's not generally possible at home. Want your e-mail automatically forwarded to a fax at your hotel? Good luck.</p>
+        <p>The upshot is that for the last few decades, more technology has meant more complexity -- learning a new computer, understanding voice mail instructions, programming a VCR.</p>
+        <p>The challenge that Bell Labs has set for the next few decades is to make ever more capable communications systems as easy to use as they are powerful, to make the technology sufficiently advanced that it becomes transparent.</p>
+        <p>One big part of that is making the global communications network ubiquitous, rather than something that is accessed from a computer at a desk, or a phone jack in the wall. Bell Labs' world is one covered by a skin of communications.</p>
+        <p>Take the changing role of fiber-optic cable. For almost two decades, optical fibers have been widely used to transmit torrents of data between fixed points employing pulses of light rather than pulses of electricity.</p>
+        <p>Now, Bell Labs engineers are trying to perfect a concept largely articulated by British Telecommunications P.L.C.: small wireless communications devices -- essentially antennas -- attached to fiber-optic lines every few hundred feet. Anyone within range of these transmitters could wirelessly tap into the fibers' vast capacity with their camera, or their video unit, or their living room remote control as easily as people use cell phones today.</p>
+        <p>With thousands of miles of optical fiber being deployed around the globe every day, if not every hour, according to many analysts, the industrial world could soon be encased in a literal web of communications.</p>
+        <p>But such a web is of little use if people still must link to the network with clunky, largely fixed devices like today's computers and telephones.</p>
+        <p>That is why Bell Labs is developing new devices and new ways of interacting with them.</p>
+        <p>In Holmdel, N.J., for instance, researchers at Bell Labs have developed what they call the world's smallest camera. It is on a microchip the size of a fingernail. Coupled with a lens and some supporting circuitry, an entire camera unit could be sewn into a lapel, perhaps as a security device. Were you mugged? The offender's picture could be on its way to the police within moments.</p>
+        <p>Similarly small circuitry, coupled with the power of ubiquitous high-speed wireless connections, could allow doctors to continutally monitor the health of chronically ill people, using wireless biomonitors in a wristwatch.</p>
+        <p>All of this is meant to facilitiate communication with people. Currently, communicating with someone who is not in the same room requires linking a set of electronic codes -- home phone numbers, work phone numbers, cellular numbers, fax numbers, pager numbers and e-mail addresses -- with the time to find the right code for the right moment.</p>
+        <p>In a few years, you may be able to tell your watch, ''Call Bob,'' and not have to worry about where Bob is or what sorts of devices he has handy. Using technologies like those being developed at Bell Labs, the network will handle those chores -- finding Bob, if Bob wants to be found.</p>
+        <p>Sound like science fiction? That's what many would have called the Internet just a decade ago.</p>
+        <p>VISIONS: TECHNOLOGY: QUANTUM COMPUTERS AND CARS SMARTER THAN YOU ARE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

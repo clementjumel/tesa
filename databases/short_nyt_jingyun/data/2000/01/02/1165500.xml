@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Growing, And Not Just in Wheelbase</title>
+    <meta content="02LIMO$03" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="12" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="2" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165500"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <series series.name="VICARIOUS CONSUMPTION"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Automobiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Company and Organization Profiles</classifier>
+        <classifier class="indexing_service" type="descriptor">Limousines</classifier>
+        <classifier class="indexing_service" type="descriptor">Industry Profiles</classifier>
+        <org class="indexing_service">Ultra Coachbuilders</org>
+        <person class="indexing_service">foege, alec</person>
+        <person class="indexing_service">Bergeman, Vini</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/U.S./West</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Road Trips</classifier>
+        <classifier class="online_producer" type="general_descriptor">Industry Profiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Company and Organization Profiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Automobiles</classifier>
+        <classifier class="online_producer" type="general_descriptor">Corporations</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9E00EFDE1238F931A35752C0A9669C8B63" item-length="1238" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Growing, And Not Just in Wheelbase</hl1>
+      </hedline>
+      <byline class="print_byline">By ALEC FOEGE</byline>
+      <byline class="normalized_byline">foege, alec</byline>
+      <abstract>
+        <p>What once was enclave of rich and famous--the stretch limousine--has today become the common man's vehicle for such uses as avoiding drinking and driving, hassles of rush-hour traffic or driving to and from sporting event or show; limousines have become worldwide business with annual revenues approaching $5 billion; strongest growth has been among corporate clients who are being encouraged to use them for business travel; companies cite practical benefits like safety of having someone else do the driving; Vini Bergeman, head Of Ultra Coachbuilders, Calif, comments; photo (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>WHEN it comes to the limousine business, Vini Bergeman is a legend. He has stretched vehicles from Lamborghinis to Lincoln Navigators for celebrity clients like Mike Tyson and Sylvester Stallone. His company, Ultra Coachbuilders of Corona, Calif., is listed in the Guinness Book of World Records as having built the world's longest limousine, a 105-footer with a putting green in the middle and a Jacuzzi in the back.</p>
+        <p>But at a recent limousine-trade gathering in Atlantic City, Mr. Bergeman was prohibited from displaying his latest masterwork, a super-stretch Hummer military vehicle, on the showroom floor at the Trump Taj Mahal Casino Resort. He had to park it outside, because it had not yet been submitted to new industry-enforced safety tests.</p>
+      </block>
+      <block class="full_text">
+        <p>WHEN it comes to the limousine business, Vini Bergeman is a legend. He has stretched vehicles from Lamborghinis to Lincoln Navigators for celebrity clients like Mike Tyson and Sylvester Stallone. His company, Ultra Coachbuilders of Corona, Calif., is listed in the Guinness Book of World Records as having built the world's longest limousine, a 105-footer with a putting green in the middle and a Jacuzzi in the back.</p>
+        <p>But at a recent limousine-trade gathering in Atlantic City, Mr. Bergeman was prohibited from displaying his latest masterwork, a super-stretch Hummer military vehicle, on the showroom floor at the Trump Taj Mahal Casino Resort. He had to park it outside, because it had not yet been submitted to new industry-enforced safety tests.</p>
+        <p>Inside the convention hall, Mr. Bergeman stood at his booth and defended his creation, which sells for about $225,000 and includes, as standard features, a bed, two television sets and a microwave oven. ''We probably have the safest car manufactured in this country,'' he said. ''Besides, we're artists.''</p>
+        <p>Today, many in the limousine industry profess to having little appreciation for Mr. Bergeman's kind of art. Riding a wave of unprecedented growth, the industry is trying to promote a more sober image directly at odds with Mr. Bergeman's traveling hot tubs. What once was a vehicle for flashy Hollywood types is now a handy tool for the masses -- a case of vicarious consumption becoming real.</p>
+        <p>''In the late 80's and early 90's, people viewed the limousine industry as being somewhat exclusive,'' said Ric Cohen, publisher of Limousine Digest magazine. ''But today the limousine is the common man's vehicle to avoid drinking and driving, to avoid the hassles of rush-hour traffic or to drive to and from a sporting event or a show.''</p>
+        <p>Limousines have become a worldwide business with annual revenues approaching $5 billion, including sales and rentals. Limousine builders have been reporting annual revenue growth of 15 to 20 percent for the last five years. And two limousine operators, Carey International and Precept Business Services, recently went public.</p>
+        <p>''This is our industry's golden age,'' said Scott Salombrino, president of Dav El Chauffeured Transportation, the nation's largest privately owned limousine operator.</p>
+        <p>The limousine business has responded to the boom by going to charm school. These days, the emphasis is on courtesy and appearance.</p>
+        <p>''Ten years ago, you went to one of these shows and everyone was in satin jackets,'' said Carl Geiger, an operator based in Atlantic City and a board member of the National Limousine Association. ''Now everybody's in suit jackets.''</p>
+        <p>While funerals, weddings and proms are still staples of the limousine rental market, the strongest growth has been among corporate clients, who are more likely to become repeat customers. Manufacturers and operators are encouraging the use of limousines for business travel by pointing to their practical benefits, like the safety of having someone else do the driving.</p>
+        <p>''It is often not only more efficient but more cost-effective to send three or four executives in the back of a limousine -- with their luggage safely tucked in the trunk -- to the airport as opposed to three or four taxis,'' Mr. Cohen said.</p>
+        <p>The increasing affordability of wireless communications systems has helped spur the industry's growth. Even small rental agencies -- about 80 percent of limousine operators have fleets of just 5 to 10 cars -- can offer a professional level of service and response time.</p>
+        <p>''With the new interactive devices, not only do you guarantee that the call gets to the driver, but you know when he gets it, because you get a delivery receipt,'' said Jeffrey Thorson, president of Paragon Systems, maker of a two-way communication system.</p>
+        <p>Even limousine construction has changed.</p>
+        <p>Originally, limousines were mainly the realm of mechanics and auto-body specialists, who often owned and operated vehicles they assembled. Twenty-five years ago, Cadillac began building limousines on its own assembly lines.</p>
+        <p>These days, stretch work is done by independent builders, with Lincoln-Mercury and Cadillac, the two main manufacturers, selling a ''base unit'' sedan for the livery trade. Lincoln-Mercury has 65 percent of the  market in the United States, with Cadillac at 30 percent. The industry produces 6,000 stretch vehicles a year.</p>
+        <p>To stretch a car, the builders slice a sedan in half with a mechanical saw and insert a segment that extends the chassis by 6 to 120 inches. About 20 builders nationwide are certified to do the work.</p>
+        <p>TO stay under warranty, the builder must turn out a car that conforms to weights and lengths set by the automaker and the Limousine Industry Manufacturers Organization, a trade group.</p>
+        <p>Limousines that are stretched longer than authorized by the auto makers, as well as those made by companies other than Lincoln-Mercury and Cadillac -- like Mr. Bergeman's Hummer -- must endure crash tests to get the industry's stamp of approval.</p>
+        <p>Until five years ago, builders could stretch cars to almost any length. Now industry publications will not accept advertising from limousine builders that have not been certified, and trade shows will not display their vehicles. Mr. Bergeman of Ultra, who has been in business for 28 years, says the practice in effect prevents small companies like his from competing with bigger players.</p>
+        <p>Another stretch builder, Bob Haswell, has filed an antitrust suit in Federal District Court in Springfield, Mo., against Ford Motor, General Motors and members of the limousine association. The main reason the automakers started the programs, said Gregory Beck, director of engineering for Krystal Enterprises of Brea, Calif., the nation's largest manufacturer of stretch limousines and a member of the association, was to force the industry to comply with previously unenforced federal safety standards.</p>
+        <p>Mr. Bergeman, pointing to a white Lincoln that he stretched to 34 feet long, said he had to spend $250,000 to crash-test its prototype, because it exceeded the maximum approved length. ''And they still didn't want the car in the show,'' he said. ''I had to bring in hundreds of pages of documentation to prove it to them.''</p>
+        <p>Regardless of the Missouri suit's outcome, it is unlikely that the industry will change its course radically. For one, specialty stretch vehicles account for only 5 percent of limousine sales. Moreover, safety concerns are unlikely to dissipate. A few high-profile accidents, like the 1997 crash of a stretch Lincoln that seriously injured Vladimir Konstantinov of the Detroit Red Wings hockey team, have been a public-relations nightmare.</p>
+        <p>The industry faces other hurdles. Barry Lefkowitz, a lobbyist for limousine owners, said that in many states, local taxi commissions ban limousines from transporting passengers over state lines without an expensive permit. Limousines from New Jersey, for example, at certain hours may drop off passengers at New York airports, but may not pick up passengers for the return trip.</p>
+        <p>A spokesman for the Taxi and Limousine Commission in New York said it could not vouch for the safety of vehicles it does not regulate. But Mr. Lefkowitz said: ''The law has nothing to do with safety. It's just a quick and dirty way to make money.''</p>
+        <p>VICARIOUS CONSUMPTION</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

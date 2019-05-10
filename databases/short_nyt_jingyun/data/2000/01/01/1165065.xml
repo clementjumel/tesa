@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Tax Lawyer Called Architect of a Tax-Evasion Scheme</title>
+    <meta content="Y01TAX" name="slug"/>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Saturday" name="publication_day_of_week"/>
+    <meta content="Business/Financial Desk" name="dsk"/>
+    <meta content="2" name="print_page_number"/>
+    <meta content="C" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165065"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Taxation</classifier>
+        <classifier class="indexing_service" type="descriptor">Decisions and Verdicts</classifier>
+        <classifier class="indexing_service" type="descriptor">Tax Evasion</classifier>
+        <classifier class="indexing_service" type="descriptor">Bribery</classifier>
+        <org class="indexing_service">Prudential Insurance Co</org>
+        <org class="indexing_service">Travelers Insurance Co</org>
+        <org class="indexing_service">Internal Revenue Service</org>
+        <person class="indexing_service">Johnston, David Cay</person>
+        <person class="indexing_service">Kanter, Burton W</person>
+        <person class="indexing_service">Couvillion, D Irvin (Judge)</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="general_descriptor">Bribery</classifier>
+        <classifier class="online_producer" type="general_descriptor">Tax Evasion</classifier>
+        <classifier class="online_producer" type="general_descriptor">Decisions and Verdicts</classifier>
+        <classifier class="online_producer" type="general_descriptor">Taxation</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000101T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9906E2DA1338F932A35752C0A9669C8B63" item-length="1445" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Tax Lawyer Called Architect of a Tax-Evasion Scheme</hl1>
+      </hedline>
+      <byline class="print_byline">By DAVID CAY JOHNSTON</byline>
+      <byline class="normalized_byline">Johnston, David Cay</byline>
+      <abstract>
+        <p>Judge D Irvin Couvillion rules that Burton W Kanter, one of nation's most prominent tax lawyers, was 'architect' of long-running kickback and tax-evasion scheme in which money was siphoned from funds managed by Prudential and Travelers insurance companies; concludes that Internal Revenue Service overwhelmingly proved its civil fraud case against Kanter; Tax Court holds that $13 million in kickbacks were paid from 1972 through 1988 by four developers and another man to Claude Ballard and Robert Lisle, who were senior executives with Prudential overseeing its real estate investments; court says Ballard and Lisle then steered financing and contracts to developers, and gave 10 percent of kickbacks to Kanter; says kickbacks were funneled to 'sham' companies that Kanter controlled; Kanter denies any wrongdoing and says he will appeal; photos (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>A Tax Court judge has ruled that one of the nation's most prominent tax lawyers, Burton W. Kanter of Chicago, was ''the architect'' of a long-running kickback and tax-evasion scheme in which money was siphoned from funds managed by the Prudential and Travelers insurance companies.</p>
+        <p>The special trial judge, D. Irvin Couvillion, ruled that the Internal Revenue Service had overwhelmingly proved its civil fraud case, saying there were indications of fraud in the existence of ''sham'' companies, the destruction of documents and evasive testimony.</p>
+      </block>
+      <block class="full_text">
+        <p>A Tax Court judge has ruled that one of the nation's most prominent tax lawyers, Burton W. Kanter of Chicago, was ''the architect'' of a long-running kickback and tax-evasion scheme in which money was siphoned from funds managed by the Prudential and Travelers insurance companies.</p>
+        <p>The special trial judge, D. Irvin Couvillion, ruled that the Internal Revenue Service had overwhelmingly proved its civil fraud case, saying there were indications of fraud in the existence of ''sham'' companies, the destruction of documents and evasive testimony.</p>
+        <p>Mr. Kanter said he had done nothing illegal and would appeal. He said he had not calculated the potential taxes, civil fraud penalties and interest due, but if the decision was upheld, he said, it could run into tens of millions of dollars for himself and a former insurance executive, Claude Ballard, and the estate of another, Robert Lisle.</p>
+        <p>The Tax Court held that $13 million in kickbacks were paid from 1972 through 1988 by four developers and another man to Mr. Ballard and Mr. Lisle, who were senior executives with Prudential overseeing its real estate investments.</p>
+        <p>The kickbacks, the court ruled, were made to them for using their influence to steer financing and contracts to the developers and the other man. The executives gave 10 percent of those kickbacks to Mr. Kanter, the court ruled.</p>
+        <p>''Kanter was the architect who planned and executed the elaborate scheme,'' Judge Couvillion wrote in his 606-page decision, issued on Dec. 15. ''What we have here, purely and simply, is a concerted effort by an experienced tax lawyer and two corporate executives to defeat and evade payment of taxes and to cover up their acts.''</p>
+        <p>One tactic, he wrote, was to funnel kickbacks to ''sham'' companies that Mr. Kanter controlled. Mr. Kanter, the judge wrote, would then withdraw the cash, replacing it with purported accounts receivable from other sham companies. Such an exchange, if done properly, can be a legal tax-free swap. But, the judge wrote, the accounts receivable would be written off as worthless, fabricating a tax loss for the sham company. These transactions, the judge held, involved no real exchanges and were frauds.</p>
+        <p>In case after case, he found, these transactions involved ''pure tax avoidance vehicles'' with no business purpose.</p>
+        <p>The judge characterized Mr. Kanter's testimony at the 1994 trial as ''implausible'' and ''incredible.''</p>
+        <p>Judge Couvillion, who took five years to reach his ruling, sided with Mr. Kanter on only a few minor issues, one of them involving $349.</p>
+        <p>For his part, Mr. Kanter said he was shocked that the judge ''could ignore the testimony of more than a dozen witnesses'' who were all ''of the highest integrity'' that the payments were not kickbacks.</p>
+        <p>Mr. Kanter, 68, has earned sizeable fees representing many wealthy Americans over the years, including Chicago's multibillionaire Pritzker family and a number of Hollywood producers. Although he said he did not consider himself a wealthy man, five years ago he had enough financial muscle to try to buy the Miami Dolphins football team -- the former Chicago Bears coach Mike Ditka and the Chicago developer Bruce Frey were his partners in that effort.</p>
+        <p>He has a history of fights with the I.R.S., but in many cases his clients have come away paying far less in taxes than the I.R.S. sought. When A. N. Pritzker died in 1986, the I.R.S. sought $150 million in taxes, but because of Mr. Kanter's elaborate tax planning the family paid $9 million.</p>
+        <p>Stef Tucker, a Washington tax lawyer and former chairman of the American Bar Association tax section, said Mr. Kanter was one of the most creative tax lawyers in the country and was a pioneer in seeing how foreign trusts could be used to reduce taxes legally. ''He was simply using gaps, failures by Congress to focus on areas in the tax law, to the advantage of his clients,'' Mr. Tucker said, adding that Mr. Kanter's willingness to disclose his techniques in lectures and articles was a strong indicator that they were lawful ''although he was clearly reaching the edges of the envelope.''</p>
+        <p>The court noted that Mr. Kanter and his wife, Naomi, filed tax returns showing a negative income in each of the 12 years from 1978 through 1989. They reported a total income in those 12 years of negative $9.4 million and paid income taxes in only one of those years, 1978, when they paid $1,671.</p>
+        <p>The I.R.S. has audited his returns every year but one since 1961, Mr. Kanter said. He said that he had settled the audits through 1973, but that each return since then was still in dispute.</p>
+        <p>While Mr. Kanter, a senior editor of the Journal of Taxation, is famous in tax circles for recommending complex trusts to cut taxes, the judge found that Mr. Kanter had committed civil fraud, largely by using simple accounting tricks.</p>
+        <p>Judge Couvillion's opinion notes that the I.R.S. Criminal Investigation Division investigated Mr. Kanter, but is silent about why no indictment was returned. Under federal tax law, once a civil suit is begun, no criminal case is allowed. The I.R.S. and the Justice Department both declined to comment.</p>
+        <p>The kickbacks, the judge wrote, began in the early 1970's with payments by A. N. Pritzker to J. D. Weaver, a Tenneco executive, for his help in steering the contract to manage a new San Francisco hotel to the Pritzker family's Hyatt Hotels chain. Tenneco and Prudential were partners in financing the hotel. No one answered repeated calls yesterday to the Pritzker office for comment.</p>
+        <p>Mr. Weaver, who could not be found for comment, was to be paid 10 percent of the Hyatt management fees, but soon after the hotel, the Embarcadero Hyatt, opened, Mr. Pritzker, the family patriarch, assigned Mr. Kanter to negotiate a lower fee, the judge wrote.</p>
+        <p>As Mr. Kanter was negotiating with Mr. Weaver, the court found, Mr. Kanter was also ''surreptitiously'' negotiating with Mr. Weaver to have 70 percent of the payments turned over to himself, Mr. Ballard and Mr. Lisle.</p>
+        <p>Mr. Weaver eventually agreed to accept $150,000 cash from a company Mr. Kanter controlled in return for relinquishing that 70 percent.</p>
+        <p>The court said it could find ''no reasonable explanation'' for Mr. Weaver to give up millions of dollars of future income in return for $150,000.</p>
+        <p>The court said the only possible explanation was that Mr. Lisle, Mr. Ballard and Mr. Kanter wanted to share in the kickbacks for their roles in steering the contract.</p>
+        <p>Mr. Kanter said that the judge completely mischaracterized financial deals that were completely unrelated, fashioning from bits of testimony a kickback scheme where none existed.</p>
+        <p>Later, the court found, Mr. Ballard and Mr. Lisle steered Prudential investments to a variety of hotel, condominium and office projects of four developers: Mr. Frey of Glencoe, Ill., William Schaffel of New York and Kenneth Schnitzer and John Eulich of Houston.</p>
+        <p>Both Mr. Ballard and Mr. Lisle left Prudential in 1982. Mr. Ballard then became a partner at Goldman, Sachs, and has since retired. Mr. Lisle joined Travelers, where, the Tax Court found that for the next six years, until he retired, he steered Travelers investments to developers who paid him kickbacks, sharing the proceeds with Mr. Kanter. Travelers is now a unit of Citigroup.</p>
+        <p>The lawyer for Mr. Ballard and for the estate of Mr. Lisle, who died in 1993, said both men acted properly and that no kickbacks were paid. The lawyer, Royal B. Martin, said Prudential knew the two men had unrelated financial dealings with Mr. Weaver and the four developers. He said he was not certain whether Travelers knew.</p>
+        <p>Mr. Kanter, in an interview, also said that the payments were unrelated to any financings by Prudential and Travelers, and that Prudential, at least, knew about them.</p>
+        <p>Prudential's chief spokesman, Robert DeFillippo, said the company was reviewing the case to determine what, if any, action it might take.</p>
+        <p>Mr. DeFillippo declined to say what rules, if any, Prudential had at the time, or has now, governing such financial dealings.</p>
+        <p>Travelers is ''researching what actions were taken, if any, regarding Mr. Lisle,'' said Keith Anderson, a Travelers' spokesman.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

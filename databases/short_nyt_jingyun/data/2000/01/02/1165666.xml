@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>PERSPECTIVES: Global World Series, and a Few Other Guesses; Basketball</title>
+    <meta content="MB025721" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Sports Desk" name="dsk"/>
+    <meta content="6" name="print_page_number"/>
+    <meta content="8" name="print_section"/>
+    <meta content="4" name="print_column"/>
+    <meta content="Sports" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165666"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Basketball</classifier>
+        <classifier class="indexing_service" type="descriptor">Twenty-First Century</classifier>
+        <person class="indexing_service">Wise, Mike</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Sports/Pro Basketball</classifier>
+        <classifier class="online_producer" type="general_descriptor">History</classifier>
+        <classifier class="online_producer" type="general_descriptor">Basketball</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9803E1D91138F931A35752C0A9669C8B63" item-length="224" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>PERSPECTIVES: Global World Series, and a Few Other Guesses; Basketball</hl1>
+      </hedline>
+      <byline class="print_byline">By MIKE WISE</byline>
+      <byline class="normalized_byline">Wise, Mike</byline>
+      <abstract>
+        <p>Mike Wise article offers predictions for future of basketball in 21st century (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>Young players flooding the National Basketball Association continues to be a source of consternation between the owners and players, enough so that it influences labor negotiations in 2005.</p>
+      </block>
+      <block class="full_text">
+        <p>Basketball players added muscles and multimillion-dollar sneaker contracts. American yachts lost the America's Cup, gained it back, then lost it again. Grass all but disappeared on tennis courts. The natural stuff almost became extinct in baseball and football before injuries and nostalgia spurred its comeback. Lights finally shone at Wrigley Field. Europe became a major talent pool for the National Hockey League; golf and tennis benefited from America's diversity. What could happen next, on and off the field? A look at nine sports.</p>
+        <p>Young players flooding the National Basketball Association continues to be a source of consternation between the owners and players, enough so that it influences labor negotiations in 2005.</p>
+        <p>Eventually, Isiah Thomas, owner of the Continental Basketball Association, opens up farm teams within a 200-mile radius of each N.B.A. team that cater to players between the ages of 17 and 20.</p>
+        <p>Still dogged by quality-of-play problems, league officials allow zone defenses to be employed for the first time in league history. On the night of the rule change, Allen Iverson  equals Wilt Chamberlain's 100-point game.</p>
+        <p>MIKE WISE</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

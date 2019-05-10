@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>Holiday Lessons In Online Retailing</title>
+    <meta content="02WEBB$04" name="slug"/>
+    <meta content="2" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="2000" name="publication_year"/>
+    <meta content="Sunday" name="publication_day_of_week"/>
+    <meta content="Money and Business/Financial Desk" name="dsk"/>
+    <meta content="1" name="print_page_number"/>
+    <meta content="3" name="print_section"/>
+    <meta content="1" name="print_column"/>
+    <meta content="Technology; Business" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="1165516"/>
+      <doc.copyright holder="The New York Times" year="2000"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">Retail Stores and Trade</classifier>
+        <classifier class="indexing_service" type="descriptor">Computers and the Internet</classifier>
+        <classifier class="indexing_service" type="descriptor">Sales</classifier>
+        <classifier class="indexing_service" type="descriptor">Advertising</classifier>
+        <classifier class="indexing_service" type="descriptor">Christmas</classifier>
+        <classifier class="indexing_service" type="descriptor">Toys</classifier>
+        <classifier class="indexing_service" type="descriptor">Apparel</classifier>
+        <classifier class="indexing_service" type="descriptor">Television</classifier>
+        <person class="indexing_service">Kaufman, Leslie</person>
+        <person class="indexing_service">Hansell, Saul</person>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Technology</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Media and Advertising</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News/Business/Your Money</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/News</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Features/Travel/Guides/Activities and Interests/Shopping</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Retail</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Technology, Telecommunications and Internet</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Fashion, Beauty and Fitness</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Sales and Business Development</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Media, Entertainment and Publishing</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Classifieds/Job Market/Job Categories/Marketing, Advertising and PR</classifier>
+        <classifier class="online_producer" type="general_descriptor">Retail Stores and Trade</classifier>
+        <classifier class="online_producer" type="general_descriptor">Sales</classifier>
+        <classifier class="online_producer" type="general_descriptor">Christmas</classifier>
+        <classifier class="online_producer" type="general_descriptor">Computers and the Internet</classifier>
+        <classifier class="online_producer" type="general_descriptor">Apparel</classifier>
+        <classifier class="online_producer" type="general_descriptor">Television</classifier>
+        <classifier class="online_producer" type="general_descriptor">Toys</classifier>
+        <classifier class="online_producer" type="general_descriptor">Advertising and Marketing</classifier>
+        <classifier class="online_producer" type="general_descriptor">Holidays and Special Occasions</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="20000102T000000" ex-ref="http://query.nytimes.com/gst/fullpage.html?res=9D04E0DB1238F931A35752C0A9669C8B63" item-length="2324" name="The New York Times" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>Holiday Lessons In Online Retailing</hl1>
+      </hedline>
+      <byline class="print_byline">By LESLIE KAUFMAN with SAUL HANSELL</byline>
+      <byline class="normalized_byline">Hansell, Saul; Kaufman, Leslie</byline>
+      <abstract>
+        <p>While this year's electronic Christmas has brought forward forecasts of robust sales, key element of e-sales this year seems to be based on the truism 'delivering on time'; other trends are more subtle, such as role of television; television it seems can no longer be relied on to create successful brands out of thin air; almost all of big gains went to long-established retailers, not e-commerce start-ups with huge ad budgets; in addition, not just anything sells on the Web; items such as toys were successful, while gifts and apparel disappointing; chart on most and least efficient dot.com advertisers (M)</p>
+      </abstract>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>IN summing up this year's electronic Christmas, most everyone uses the same adjective: big.</p>
+        <p>The numbers were as pumped up as Stone Cold Steve Austin's biceps. Total sales tripled. Total traffic doubled. And if some merchants seemed musclebound -- Wal-Mart and Toys ''R'' Us, both retailing giants, couldn't meet the demand for Christmas deliveries -- at least they were in a game that a year ago seemed to be passing them by.</p>
+      </block>
+      <block class="full_text">
+        <p>IN summing up this year's electronic Christmas, most everyone uses the same adjective: big.</p>
+        <p>The numbers were as pumped up as Stone Cold Steve Austin's biceps. Total sales tripled. Total traffic doubled. And if some merchants seemed musclebound -- Wal-Mart and Toys ''R'' Us, both retailing giants, couldn't meet the demand for Christmas deliveries -- at least they were in a game that a year ago seemed to be passing them by.</p>
+        <p>So: Ho, ho, ho. But what were the lessons of this hypercompetitive holiday selling season, and what do they say about the future of e-commerce? Even before the wrapping paper had reached the nation's Dumpsters, retailing executives were back in their offices dissecting sales patterns for clues.</p>
+        <p>The season's most elementary truism was ''Invest in Delivering On Time, Stupid!'' -- the sequel to last year's ''Don't Let Your Web Site Crash.''</p>
+        <p>Other trends were subtler. First, television, it is clear, can no longer be relied on to create successful brands out of thin air; almost all the big gains went to long established retailers, not e-commerce start-ups with huge ad budgets. Second, not just anything sells on the Web; toys triumphed, while gifts sank and apparel disappointed.</p>
+        <p>Finally, in the race to grab new customers, retailers may finally have given too much away, straining the credulity of investors and perhaps ushering in a new era of common sense -- unless it is too late.</p>
+        <p>Of course, such first impressions come loaded with caveats. Returns, which can amount to a third of holiday purchases, are just starting. Most e-merchants will not officially report sales and traffic data until mid-January or later. And by the time conventional wisdom solidifies about what works on the Web, the playing field will probably change -- again.</p>
+        <p>Bye, Bye Ally</p>
+        <p>When the shopping season started, all eyes were glued to the tube. Internet companies big and tiny were spending all their revenues -- if not all their venture capital or I.P.O. financing -- to advertise on top-rated television programs like ''Ally McBeal,'' ''Frasier'' and ''Monday Night Football.'' The expectation was that national television exposure could play fairy godmother; after all, a television ad campaign for eToys a year earlier had turned a barely known $2 million start-up into an industry leader practically overnight.</p>
+        <p>But most of the two dozen Internet users convened in a focus group for The New York Times on Dec. 21 described the dot-com ads as little more than a blur.</p>
+        <p>''I remember there were a lot of ads,'' said Jim Griffin, a school administrator in Phoenix, Md. ''I do not remember for whom.'' The focus group was arranged by NFO Interactive, a research firm in Greenwich, Conn.</p>
+        <p>Amid this dot-com clutter, there was no happy ending for many would-be Cinderellas.</p>
+        <p>For starters, there appeared to be no correlation between the volume of television advertising and online dominance of a shopping category.</p>
+        <p>KBkids.com, owned by Consolidated Stores, topped the Nielsen Media Research list of top television advertisers, which is based on ''impressions'' -- an estimate of how many times each ad was seen. The company itself said it spent some $40 million to promote its Web site. Yet for all the money spent, KBkids ended up third in visitors among toy sellers, behind eToys and Toys ''R'' Us.</p>
+        <p>Pets.com, which flooded the air with the comic antics of a dog puppet, had a similar story to tell. According to Nielsen, Pets ranked seventh among all e-commerce companies in its volume of television advertising -- and first by far among Internet pet stores. Still, it got much less visitor traffic than either Petsmart.com or Petopia.com.</p>
+        <p>Indeed, dividing visitors into advertising outlays for some of the most ubiquitous Web sites produces truly outrageous calculations. Send.com spent $20 million in November and December combined to draw attention to its gift site. Yet while the private company will not release how many visitors it had, Nielsen Netratings says it attracted less than 0.1 percent of the Internet audience in any given week -- so low that the site did not register in Nielsen's ratings.</p>
+        <p>If Nielsen is right, Send.com easily spent more than 4 times its revenues on advertising -- a ratio that might bankrupt a mortal retailer.</p>
+        <p>Mike Lannon, chief executive of Send.com, says that those numbers are wrong and that he has no regrets. The company's goal, he argues, was not $20 million in sales, but making itself the best-known gift site on the Internet, a marker that he believes he reached.</p>
+        <p>''I am going to go to my board and tell them we were the lead story on the 'CBS Evening News' the day after Thanksgiving,'' he said.</p>
+        <p>Besides, he noted, the costs of entry are not going to be any less expensive next year. ''I would hate to have to be building a brand next Christmas,'' Mr. Lannon said.</p>
+        <p>Still, he acknowledged that he is shifting his ad dollars in 2000 away from national television to more radio and print, in geographic areas with proven interest in his product. Not coincidentally, that strategy is fast becoming the mantra of much of the industry.</p>
+        <p>In 1998, Internet companies spent the majority of their ad dollars online. Last year, they spent the majority on network radio and television and national print advertising, building brand identity.</p>
+        <p>For 2000, said Mike Goldstein, chief executive of Bluelight.com, the new joint venture of Kmart and Yahoo, ''everyone is talking about spending money in focused local markets.''</p>
+        <p>Big Stores, Big Sales</p>
+        <p>If start-ups could not buy themselves traction in the online market with advertising, just how did they snare visitors this season? The inescapable answer was this: Have an established brand name to begin with.</p>
+        <p>In 1998, the list of the holiday season's 50 most-visited sites was dominated by retailers that did nothing but e-commerce -- companies like Amazon, eBay and eToys. That left many Web executives to crow that if the bricks-and-mortar set did not get with the e-program and ditch their real estate, they were going to be whipped in the brave new world.</p>
+        <p>But in 1999, both Media Metrix's and Nielsen's lists of the season's 50 top sites read like a Who's Who of land-based retailing. JCPenney.com, Barnesandnoble.com, Gap.com, Wal-Mart.com and Victoriassecret.com were among the clicks-and-mortar merchants that made the grade. With few exceptions, the dot-coms that thrived amid this onslaught were already fixtures in their own right -- eBay, Amazon and CDnow, among others.</p>
+        <p>''I'm still a little afraid of Internet-only stores,'' said Jim Nault, a retiree in Tampa, Fla., during the focus group last month. ''I tend to trust more those that have stores that I frequent in person.''</p>
+        <p>Most of the top clicks-and-mortar players did not spend money explicitly to promote their Web sites; their stores, and ads for their stores, got that job done.</p>
+        <p>And the Web traffic numbers may not tell the whole story of these retailers' triumph. A New York Times/CBS News poll found that some 17 percent of Americans shopped on the Web during the holiday season, up from 7 percent the year before. If that is true, why did online sales account for only about 2 percent of Christmas retail purchases? One answer is that the Web is being used primarily as a search engine. After people study online, they shop off line.</p>
+        <p>''We believe that the real killer application of the Web in 2000 will be helping customers to make decisions online and in driving traffic,'' said Steve Markowitz, chairman of MyPoints.com, which gives shoppers points for online purchases that they can cash in at stores. ''The bricks-and-mortar establishment aren't dead. In fact, the key challenge for 100 percent dot-com retailers will be competing with the off-line merchants.''</p>
+        <p>Anything as Long as It's Pokemon</p>
+        <p>About three years ago -- when the Net was the new, new thing -- conventional wisdom held that customers would only buy  items that were known quantities, like books and CD's, but would steer away from products like clothing or lipstick, which needed to be sampled for fit or color. Last year, such thinking was discarded as outdated, and many companies set out to compete for business in traditional touch-and-feel areas, from couture fashion to diamonds.</p>
+        <p>Now there is fresh evidence that the original supposition was right after all. While all kinds of merchandise were sold over the Web during the holidays, customers clearly preferred items that were ''standard issue'' -- namely, toys, electronics and, well, toys.</p>
+        <p>''The categories that really exploded were relatively narrow,'' said a disappointed-sounding Bill Bass, vice president of e-commerce for landsend.com, the second most visited apparel site, according to Nielsen.</p>
+        <p>''We would have thought it would be more widespread,'' he added.</p>
+        <p>Richard Last, executive vice president for Internet commerce solutions at J. C. Penney, whose sited ranked third in visitors among apparel sellers, concurred.</p>
+        <p>''It is still difficult to buy fashion, so customers are trending toward the basics,'' he said.</p>
+        <p>One Word: Infrastructure</p>
+        <p>In 1998, the No. 1 problem for e-merchants was Web sites that crashed. Thanks to an enormous investment in computing power, such malfunctions were infrequent in the just-concluded holiday season. Instead, the primary bugaboo was failing to deliver packages on time.</p>
+        <p>Toys ''R'' Us blamed its warehouse for its embarrassing announcement, three days before Christmas, that it would be unable to deliver all the holiday gifts its customers had bought. The toys were sitting on its shelves, but the company could not pack and ship the orders.</p>
+        <p>''It's taken us longer to get through the complex process of fulfilling orders than anyone expected,'' John Barbour, the chief executive of Toysrus.com, explained at the time.</p>
+        <p>It did not seem to matter whether an e-merchant outsourced the order-filling process -- called ''fulfillment'' in the trade -- or invested in building up its own facilities. Rather, the key to success this season, and perhaps in seasons to come, was planning audaciously enough for demand.</p>
+        <p>Outpost.com, an electronics site that promised free overnight deliveries, was one e-merchant that won generally high marks for its promptness. ''Analysts said we'd be up double from last year's sales, but we planned and tested for four times last year,'' said Bob Bauman, the company's chief executive. ''Plan for phenomenal success, no matter what anyone says,'' he advised.</p>
+        <p>There were two other lessons related to order filling: automate everything, and be prepared to ship as late as possible.</p>
+        <p>''Last year, we threw bodies at the growth,'' said Ken Seiff, chief executive of Bluefly.com, an online store specializing in cut-rate designer fashions that says its sales doubled this holiday season. ''This year, we planned much more in advance and automated -- and still had to throw bodies at the growth.'' Mr. Seiff said his entire staff of 70 spent part of the shopping peak period either answering customer phone calls or in the warehouse in Niles, Ill.</p>
+        <p>''Next year, because we are growing so quickly, I don't think we will be able to solve problems like that,'' he said. So Bluefly plans to automate as many functions as possible, including the task of responding to customer queries.</p>
+        <p>Merchants also learned that Christmas shoppers want to make last-minute purchases on the Internet, just like they do in stores. So, many e-retailers said they would take steps to make that possible next year.</p>
+        <p>Ashford.com, a site that sells luxury goods like expensive watches and diamond jewelry, offered free shipping for orders placed until 4 p.m. on Christmas Eve -- and concluded that was not late enough.</p>
+        <p>''We had people calling and really wanting $3,000 watches at the last second,'' said Kenny Kurtzman, Ashford.com's chief executive. ''So next season, we are going to have couriers standing by Christmas Eve.''</p>
+        <p>And Free Shipping for All</p>
+        <p>Americans love a bargain, and Web shoppers are no exception. To lure customers during the holidays, retailers offered everything from below-market prices to generous coupons to gifts with each purchase.</p>
+        <p>Among the most ubiquitous perks was free shipping -- so common that Internet shoppers are coming to expect it. ''It is becoming an addiction,'' said Mr. Goldstein of Bluefly. And like the enablers of so many addictions, Web merchants may quickly come to regret their role.</p>
+        <p>Department stores have learned that lesson the hard way. To compete with the up-and-coming discounters in the 1970's, big chains like Macy and Sears, Roebuck began offering customers deep discounts on a few choice items to get them into the store. Fast-forward to the 1990's, when most customers will not go into a department store unless there is a sale. Running 20-percent-off clearances has become a way of life.</p>
+        <p>E-businesses face the same conundrum with all their discounting. For retailers with low average sales and slim-to-nonexistent profit margins, giveaways like free shipping may prove unsustainable. Those that have held out, meanwhile, figure that if they provide better service, customers will come anyway. A gift shipped free that arrives after Christmas ''is not worth much,'' said eToys' chief executive, Toby Lenk.</p>
+        <p>The durability of a Web site's business plan is certainly an issue to which Wall Street and the capital markets are becoming attuned.</p>
+        <p>''We are taking a serious look at marketing expense,'' said Safa Rashtchy, a senior analyst with U.S. Bancorp Piper Jaffray. Promotional gifts, or offering coupons, or giving away shipping may get you one-time customers, Mr. Rashtchy said. The question is whether a site has an affordable model for keeping customers coming back.</p>
+        <p>''That's what we'll be watching,'' he said.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>
