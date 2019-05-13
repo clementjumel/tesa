@@ -4,10 +4,7 @@ from database_creation.utils import BaseClass
 class Coreference(BaseClass):
     # region Class initialization
 
-    to_print = []
-    print_attribute = True
-    print_lines = 1
-    print_offsets = 2
+    to_print, print_attribute, print_lines, print_offsets = [], True, 1, 2
 
     def __init__(self, element):
         """
@@ -20,15 +17,15 @@ class Coreference(BaseClass):
         self.representative = None
         self.mentions = None
 
-        self.get_mentions(element)
+        self.compute_attributes(element)
 
     # endregion
 
-    # region Methods get
+    # region Methods compute_
 
-    def get_mentions(self, element):
+    def compute_attributes(self, element):
         """
-        Compute the mentions of the coreference.
+        Compute the mentions and the representative of the coreference.
 
         Args:
             element: ElementTree.Element, annotations of the coreference.
@@ -55,12 +52,12 @@ class Coreference(BaseClass):
 
 
 def main():
-    from database_creation.articles import Article
+    from database_creation.article import Article
 
     article = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
-    article.get_coreferences()
+    article.compute_coreferences()
 
-    print(article.coreferences[2])
+    print(article.coreferences[0])
     return
 
 

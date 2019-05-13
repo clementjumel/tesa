@@ -12,7 +12,7 @@ class BaseClass:
             str, readable format of the instance.
         """
 
-        to_print, print_attribute, print_lines, print_offsets = self.get_print_parameters()[:4]
+        to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
         attributes = copy(to_print) or list(self.__dict__.keys())
 
         string = ''
@@ -24,7 +24,21 @@ class BaseClass:
         return string
 
     @classmethod
-    def set_print_parameters(cls, to_print=None, print_attribute=None, print_lines=None, print_offsets=None):
+    def get_parameters(cls):
+        """
+        Fetch the print attribute of the class.
+
+        Returns:
+            cls.to_print: list, attributes to print; if [], print all the attributes.
+            cls.print_attribute: bool, whether or not to print the attributes' names.
+            cls.print_lines: int, whether or not to print line breaks (and how many).
+            cls.print_offsets: int, whether or not to print an offset (and how many).
+        """
+
+        return cls.to_print, cls.print_attribute, cls.print_lines, cls.print_offsets
+
+    @classmethod
+    def set_parameters(cls, to_print=None, print_attribute=None, print_lines=None, print_offsets=None):
         """
         Changes the print attributes of the class.
 
@@ -39,20 +53,6 @@ class BaseClass:
         cls.print_attribute = print_attribute if print_attribute is not None else cls.print_attribute
         cls.print_lines = print_lines if print_lines is not None else cls.print_lines
         cls.print_offsets = print_offsets if print_offsets is not None else cls.print_offsets
-
-    @classmethod
-    def get_print_parameters(cls):
-        """
-        Computes the print attribute of the class.
-
-        Returns:
-            cls.to_print: list, attributes to print; if [], print all the attributes.
-            cls.print_attribute: bool, whether or not to print the attributes' names.
-            cls.print_lines: int, whether or not to print line breaks (and how many).
-            cls.print_offsets: int, whether or not to print an offset (and how many).
-        """
-
-        return cls.to_print, cls.print_attribute, cls.print_lines, cls.print_offsets
 
     @staticmethod
     def to_string(item):

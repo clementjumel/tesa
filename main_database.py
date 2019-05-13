@@ -1,5 +1,8 @@
-from database_creation.databases import Database
+from database_creation.database import Database
 
-database = Database(year='2000', limit_articles=1000)
+database = Database(year=2000, max_size=1000)
+
+database.preprocess()
 database.process()
-database.write_candidates('out')
+
+database.write('out')

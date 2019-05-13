@@ -1,5 +1,5 @@
 from database_creation.utils import BaseClass
-from database_creation.nps import Np
+from database_creation.np import Np
 
 from nltk import tree
 
@@ -7,10 +7,7 @@ from nltk import tree
 class Sentence(BaseClass):
     # region Class initialization
 
-    to_print = ['nps', 'similarity']
-    print_attribute = False
-    print_lines = 1
-    print_offsets = 2
+    to_print, print_attribute, print_lines, print_offsets = ['nps'], False, 1, 2
 
     def __init__(self, element):
         """
@@ -41,13 +38,20 @@ class Sentence(BaseClass):
         # [element.remove(machine_reading) for machine_reading in machine_readings]
         # assert not element
 
-        self.nps = self.get_nps()
+        # TODO
+        self.text = None
+
+        self.nps = self.compute_nps()
 
     # endregion
 
-    # region Methods get
+    # region Methods compute_
 
-    def get_nps(self):
+    def compute_text(self):
+        # TODO
+        pass
+
+    def compute_nps(self):
         """
         Compute the NPs defined by self.parse.
 
@@ -60,7 +64,7 @@ class Sentence(BaseClass):
 
         return [Np(np) for np in nps]
 
-    def get_similarities(self, entities_locations, entities_persons, entities_organizations):
+    def compute_similarities(self, entities_locations, entities_persons, entities_organizations):
         """
         Compute the similarities of the NPs to the entities in the article.
 
@@ -71,38 +75,33 @@ class Sentence(BaseClass):
         """
 
         for np in self.nps:
-            np.get_similarities(entities_locations, entities_persons, entities_organizations)
+            np.compute_similarities(entities_locations, entities_persons, entities_organizations)
 
-    def get_candidates_idx(self):
+    def compute_candidates(self, entities_locations, entities_persons, entities_organizations, context):
         """
-        Compute the indexes of the candidate NP of the sentence.
+        Compute the candidate NPs of the sentence.
 
-        Returns:
-            list, indexes of the candidates in the sentence.
+        Args:
+            entities_locations: list, location entities mentioned in the article.
+            entities_persons: list, person entities mentioned in the article.
+            entities_organizations: list, organization entities mentioned in the article.
+            context: collections.deque, queue containing the text of the sentences of the context.
         """
 
-        candidates_idxs = []
-
-        for i in range(len(self.nps)):
-            if self.nps[i].candidate_criterion():
-                candidates_idxs.append(i)
-
-        return candidates_idxs
-
-    # TODO
-    def get_candidate_info(self):
-        pass
+        for np in self.nps:
+            np.compute_candidate(entities_locations, entities_persons, entities_organizations, context) \
+                if np.criterion_candidate() else None
 
     # endregion
 
 
 def main():
-    from database_creation.articles import Article
+    from database_creation.article import Article
 
-    a = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
-    a.get_sentences()
+    article = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
+    article.compute_sentences()
 
-    print(a.sentences[1])
+    print(article.sentences[0])
     return
 
 

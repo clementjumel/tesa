@@ -7,15 +7,9 @@ from copy import copy
 class Word(BaseClass):
     # region Class initialization
 
-    to_print = []
-    print_attribute = False
-    print_lines = 0
-    print_offsets = 0
-
+    to_print, print_attribute, print_lines, print_offsets = [], False, 0, 0
     custom_punctuation = ("''", '``')
-
-    # TODO
-    word_embedding = None
+    word_embedding = None  # TODO
 
     def __init__(self, text, pos):
         """
@@ -41,7 +35,7 @@ class Word(BaseClass):
             str, readable format of the instance.
         """
 
-        to_print, print_attribute, print_lines, print_offsets = self.get_print_parameters()[:4]
+        to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
         attributes = copy(to_print) or list(self.__dict__.keys())
 
         string1 = self.prefix(print_lines=print_lines, print_offsets=print_offsets) + str(self.text)
@@ -56,9 +50,9 @@ class Word(BaseClass):
 
     # endregion
 
-    # region Methods get
+    # region Methods compute_
 
-    def get_similarity(self, entities_locations, entities_persons, entities_organizations):
+    def compute_similarity(self, entities_locations, entities_persons, entities_organizations):
         """
         Compute the similarity of the word to the entities in the article.
 
@@ -85,12 +79,12 @@ class Word(BaseClass):
 
 
 def main():
-    from database_creation.articles import Article
+    from database_creation.article import Article
 
-    a = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
-    a.get_sentences()
+    article = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
+    article.compute_sentences()
 
-    print(a.sentences[1])
+    print(article.sentences[0])
     return
 
 

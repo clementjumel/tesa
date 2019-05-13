@@ -1,8 +1,9 @@
 from database_creation.utils import BaseClass
-from database_creation.sentences import Sentence
-from database_creation.coreferences import Coreference
+from database_creation.sentence import Sentence
+from database_creation.coreference import Coreference
 
 from xml.etree import ElementTree
+from collections import deque
 
 
 class Article(BaseClass):
@@ -10,21 +11,19 @@ class Article(BaseClass):
 
     to_print = ['title', 'entities_locations', 'entities_persons', 'entities_organizations', 'sentences',
                 'coreferences']
-    print_attribute = True
-    print_lines = 1
-    print_offsets = 0
+    print_attribute, print_lines, print_offsets = True, 1, 0
 
-    def __init__(self, article_id, original_path, annotated_path):
+    context_range = 0
+
+    def __init__(self, original_path, annotated_path):
         """
         Initializes an instance of Article.
 
         Args:
-            article_id: str, ID of the article.
             original_path: str, path of the article's original corpus' content.
             annotated_path: str, path of the article's annotated corpus' content.
         """
 
-        self.article_id = str(article_id)
         self.original_path = original_path
         self.annotated_path = annotated_path
 
@@ -44,18 +43,18 @@ class Article(BaseClass):
     def preprocess(self):
         """ Preprocess the article. """
 
-        self.get_title()
-        self.get_entities()
-        self.get_sentences()
-        self.get_coreferences()
+        self.compute_title()
+        self.compute_entities()
+        self.compute_sentences()
+        self.compute_coreferences()
 
     def process(self):
         """ Process the articles. """
 
-        self.get_similarities()
-        self.get_candidates()
+        self.compute_similarities()
+        self.compute_candidates()
 
-    def write_candidates(self, f):
+    def write(self, f):
         """
         Write the candidates of the articles in an opened file.
 
@@ -70,9 +69,9 @@ class Article(BaseClass):
 
     # endregion
 
-    # region Methods get
+    # region Methods compute_
 
-    def get_title(self):
+    def compute_title(self):
         """ Compute the title of an article. """
 
         tree = ElementTree.parse(self.original_path)
@@ -80,7 +79,7 @@ class Article(BaseClass):
 
         self.title = root.find('./head/title').text
 
-    def get_entities(self):
+    def compute_entities(self):
         """ Compute all the entities of an article. """
 
         tree = ElementTree.parse(self.original_path)
@@ -90,60 +89,54 @@ class Article(BaseClass):
         self.entities_persons = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
         self.entities_organizations = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
 
-    def get_sentences(self):
+    def compute_sentences(self):
         """ Compute the sentences of the article. """
 
         root = ElementTree.parse(self.annotated_path)
         elements = root.findall('./document/sentences/sentence')
 
-        self.sentences = [Sentence(element) for element in elements]
+        self.sentences = tuple([Sentence(element) for element in elements])
 
-    def get_coreferences(self):
+    def compute_coreferences(self):
         """ Compute the coreferences of the article. """
 
         root = ElementTree.parse(self.annotated_path)
         elements = root.findall('./document/coreference/coreference')
 
-        self.coreferences = [Coreference(element) for element in elements]
+        self.coreferences = tuple([Coreference(element) for element in elements])
 
-    def get_similarities(self):
+    def compute_similarities(self):
         """ Compute the similarity of the NPs to the entities in the article. """
 
         for sentence in self.sentences:
-            sentence.get_similarities(self.entities_locations, self.entities_persons, self.entities_organizations)
+            sentence.compute_similarities(self.entities_locations, self.entities_persons, self.entities_organizations)
 
-    def get_candidates(self):
-        """ Compute and fills the candidate NPs of the article. """
+    def compute_candidates(self):
+        """ Computes and fills the candidate NPs of the article. """
+
+        context = deque([self.sentences[i].text if 0 <= i < len(self.sentences) else None
+                         for i in range(-Article.context_range, Article.context_range + 1)])
 
         for i in range(len(self.sentences)):
-            idxs = self.sentences[i].get_candidates_idx()
+            self.sentences[i].compute_candidates(entities_locations=self.entities_locations,
+                                                 entities_persons=self.entities_persons,
+                                                 entities_organizations=self.entities_organizations,
+                                                 context=context)
 
-            if idxs:
-                self.sentences[i].get_candidate_info(idxs,
-                                                     self.entities_locations,
-                                                     self.entities_persons,
-                                                     self.entities_organizations,
-                                                     self.get_context(i))
-
-    # TODO
-    def get_context(self, i):
-        pass
+            context.popleft()
+            context.append(self.sentences[i + Article.context_range + 1]
+                           if i + Article.context_range + 1 < len(self.sentences) else None)
 
     # endregion
 
-    # region Methods criterion
+    # region Methods criterion_
 
-    def to_clean(self):
-        """ Check if an article has to be removed during the preprocessing (incomplete data). """
-
-        return self.criterion_no_annotation()
-
-    def criterion_no_annotation(self):
+    def criterion_data(self):
         """
-        Criterion to check if an article has an annotation file.
+        Check if an article's data is complete, ie if its annotation file exists.
 
         Returns:
-            bool, True iff the article has no annotation file.
+            bool, True iff the article's data is incomplete.
         """
 
         try:
@@ -154,9 +147,9 @@ class Article(BaseClass):
         except FileNotFoundError:
             return True
 
-    def criterion_no_entity(self):
+    def criterion_entity(self):
         """
-        Criterion to check if an article has some entity.
+        Check if an article has some entity.
 
         Returns:
             bool, True iff the article has no entity.
@@ -164,25 +157,21 @@ class Article(BaseClass):
 
         return max([len(self.entities_locations), len(self.entities_persons), len(self.entities_organizations)]) == 0
 
-    def criterion_few_entities(self):
-        """
-        Criterion to check if an article has several entities of the same type.
-
-        Returns:
-            bool, True iff the article has at least 2 entities of the same type.
-        """
-
-        return max([len(self.entities_locations), len(self.entities_persons), len(self.entities_organizations)]) <= 1
+    def criterion_similarity(self):
+        # TODO
+        pass
 
     # endregion
 
 
 def main():
-    from database_creation.databases import Database
+    from database_creation.database import Database
 
-    db = Database(year='2000', limit_articles=100)
+    db = Database(max_size=100)
+
+    db.preprocess()
     db.process()
-    db.write_candidates('out')
+
     return
 
 
