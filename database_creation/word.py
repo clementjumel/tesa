@@ -1,15 +1,19 @@
 from database_creation.utils import BaseClass
 
-from string import punctuation
 from copy import copy
+from string import punctuation as string_punctuation
+from nltk.corpus import stopwords as nltk_stopwords
+from gensim.models import KeyedVectors
 
 
 class Word(BaseClass):
     # region Class initialization
 
     to_print, print_attribute, print_lines, print_offsets = [], False, 0, 0
-    custom_punctuation = ("''", '``')
-    word_embedding = None  # TODO
+
+    punctuation = [p for p in string_punctuation] + ["''", '``']
+    stopwords = set(nltk_stopwords.words('english'))
+    embedding_word = None
 
     def __init__(self, text, pos):
         """
@@ -23,9 +27,10 @@ class Word(BaseClass):
         assert text
 
         self.text = text
-        self.pos = pos if pos not in punctuation and pos not in self.custom_punctuation else None
+        self.pos = pos if text not in self.punctuation else None
 
         self.similarity = None
+        self.similar_entities = None
 
     def __str__(self):
         """
@@ -52,39 +57,134 @@ class Word(BaseClass):
 
     # region Methods compute_
 
-    def compute_similarity(self, entities_locations, entities_persons, entities_organizations):
+    def compute_similarity(self, entities):
         """
         Compute the similarity of the word to the entities in the article.
 
         Args:
-            entities_locations: list, location entities mentioned in the article.
-            entities_persons: list, person entities mentioned in the article.
-            entities_organizations: list, organization entities mentioned in the article.
+            entities: list, preprocessed entities of the sentence.
         """
-        pass
-        # TODO
-        # entity_words = [entity.split(' ') for entity in entities_locations] + \
-        #                [entity.split(' ') for entity in entities_persons] + \
-        #                [entity.split(' ') for entity in entities_organizations]
-        #
-        # entity_words = [item for sublist in entity_words for item in sublist]
-        #
-        # w_synset = wn.synsets(self.text)[0] if wn.synsets(self.text) else None
-        # e_synsets = [wn.synsets(entity)[0] if wn.synsets(entity) else None for entity in entity_words]
-        #
-        # if w_synset and e_synsets:
-        #     self.distance = max([w_synset.path_similarity(e_synset) if w_synset and e_synset and w_synset.path_similarity(e_synset) else 0. for e_synset in e_synsets])
+
+        if self.embedding_word is None:
+            self.load_embedding()
+
+        if self.criterion_exclude():
+            return
+
+        word = self.find_vocab()
+        if not word:
+            return
+
+        similarities = []
+
+        for entity in entities:
+            similarities.append(
+                max([self.embedding_word.similarity(word, entity_word)
+                     if entity_word in self.embedding_word.vocab else -1. for entity_word in entity.split()])
+            )
+
+        if max(similarities) != -1:
+            self.similarity = max(similarities)
+            self.similar_entities = \
+                [entities[i] for i in [idx for idx, val in enumerate(similarities) if val == self.similarity]]
+
+    # endregion
+
+    # region Methods criterion_
+
+    def criterion_punctuation(self):
+        """ Check if a word is a punctuation mark. """
+
+        return True if self.pos is None else False
+
+    def criterion_stopwords(self):
+        """ Check if a word is a stop word. """
+
+        return True if self.text.lower() in self.stopwords else False
+
+    def criterion_determiner(self):
+        """ Check if a word is a determiner. """
+
+        return True if self.pos == 'DT' else False
+
+    def criterion_number(self):
+        """ Check if a word is a number. """
+
+        return True if self.pos == 'CD' else False
+
+    def criterion_adjective(self):
+        """ Check if a word is an adjective. """
+
+        return True if self.pos == 'JJ' else False
+
+    def criterion_possessive(self):
+        """ Check if a word is a possessive mark. """
+
+        return True if self.pos == 'POS' else False
+
+    def criterion_exclude(self):
+        """ Check if a word must not be analyzed by similarity methods. """
+
+        if self.criterion_punctuation() \
+                or self.criterion_stopwords() \
+                or self.criterion_determiner() \
+                or self.criterion_number():
+
+            return True
+
+    # endregion
+
+    # region Methods load_
+
+    @classmethod
+    @BaseClass.Verbose("Loading word embeddings...")
+    def load_embedding(cls):
+        """ Load the word embedding. """
+
+        cls.embedding_word = KeyedVectors.load_word2vec_format(
+            fname='../pre_trained_models/GoogleNews-vectors-negative300.bin',
+            binary=True
+        )
+
+    # endregion
+
+    # region Methods find_
+
+    def find_vocab(self):
+        """
+        Finds a string that matches the embedding vocabulary. Otherwise, returns None.
+
+        Returns:
+            str, word that matches the embedding vocabulary or None.
+        """
+
+        if self.text in self.embedding_word.vocab:
+            return self.text
+
+        elif self.text.lower() in self.embedding_word.vocab:
+            return self.text.lower()
+
+        else:
+            return None
 
     # endregion
 
 
 def main():
-    from database_creation.article import Article
 
-    article = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
-    article.compute_sentences()
+    words = tuple([
+        Word('the', 'DT'),
+        Word('urban', 'JJ'),
+        Word('city', 'NN'),
+    ])
 
-    print(article.sentences[0])
+    entities = ['New York', 'San Francisco', 'town']
+
+    for word in words:
+        word.compute_similarity(entities)
+
+    print(Word.to_string(words))
+
     return
 
 

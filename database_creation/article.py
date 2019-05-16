@@ -3,17 +3,17 @@ from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
 from xml.etree import ElementTree
-from collections import deque
+from collections import deque, OrderedDict
+from copy import copy
+import re
 
 
 class Article(BaseClass):
     # region Class initialization
 
-    to_print = ['title', 'entities_locations', 'entities_persons', 'entities_organizations', 'sentences',
-                'coreferences']
-    print_attribute, print_lines, print_offsets = True, 1, 0
+    to_print, print_attribute, print_lines, print_offsets = ['title', 'preprocessed_entities', 'sentences'], True, 1, 0
 
-    context_range = 0
+    context_range = 1
 
     def __init__(self, original_path, annotated_path):
         """
@@ -33,6 +33,8 @@ class Article(BaseClass):
         self.entities_persons = None
         self.entities_organizations = None
 
+        self.preprocessed_entities = None
+
         self.sentences = None
         self.coreferences = None
 
@@ -45,6 +47,7 @@ class Article(BaseClass):
 
         self.compute_title()
         self.compute_entities()
+        self.compute_preprocessed_entities()
         self.compute_sentences()
         self.compute_coreferences()
 
@@ -62,10 +65,9 @@ class Article(BaseClass):
             f: file, ready to be written in.
         """
 
-        candidates = [np if np.candidate else None for sentence in self.sentences for np in sentence.nps]
-        candidates = filter(None, candidates)
+        candidates = [np for sentence in self.sentences for np in sentence.nps if np.candidate]
 
-        f.write(self.to_string(candidates)) if candidates else None
+        f.write(self.to_string(candidates))
 
     # endregion
 
@@ -89,13 +91,55 @@ class Article(BaseClass):
         self.entities_persons = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
         self.entities_organizations = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
 
+    def compute_preprocessed_entities(self):
+        """ Compute the preprocessed entities (consider the text in parenthesis as a separate entity). """
+
+        preprocessed_entities = []
+
+        for entity in self.entities_locations + self.entities_organizations:
+
+            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
+            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
+
+            if len(before) == 0:
+                before = entity
+            else:
+                before = before[0]
+
+            preprocessed_entities.append(before)
+            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+
+        for entity in self.entities_persons:
+
+            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
+            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
+
+            if len(before) == 0:
+                before = entity
+            else:
+                before = before[0]
+
+            if len(before.split(', ')) == 2:
+                before = ' '.join([before.split(', ')[1], before.split(', ')[0]])
+
+            for p in in_parenthesis:
+                if p.replace('-', '').isdigit():
+                    in_parenthesis.remove(p)
+
+            preprocessed_entities.append(before)
+            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+
+        preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
+
+        self.preprocessed_entities = preprocessed_entities
+
     def compute_sentences(self):
         """ Compute the sentences of the article. """
 
         root = ElementTree.parse(self.annotated_path)
         elements = root.findall('./document/sentences/sentence')
 
-        self.sentences = tuple([Sentence(element) for element in elements])
+        self.sentences = [Sentence(element) for element in elements]
 
     def compute_coreferences(self):
         """ Compute the coreferences of the article. """
@@ -103,29 +147,27 @@ class Article(BaseClass):
         root = ElementTree.parse(self.annotated_path)
         elements = root.findall('./document/coreference/coreference')
 
-        self.coreferences = tuple([Coreference(element) for element in elements])
+        self.coreferences = [Coreference(element) for element in elements]
 
     def compute_similarities(self):
         """ Compute the similarity of the NPs to the entities in the article. """
 
         for sentence in self.sentences:
-            sentence.compute_similarities(self.entities_locations, self.entities_persons, self.entities_organizations)
+            sentence.compute_similarities(self.preprocessed_entities)
 
     def compute_candidates(self):
         """ Computes and fills the candidate NPs of the article. """
 
-        context = deque([self.sentences[i].text if 0 <= i < len(self.sentences) else None
+        context = deque([self.sentences[i].text if 0 <= i < len(self.sentences) else ''
                          for i in range(-Article.context_range, Article.context_range + 1)])
 
         for i in range(len(self.sentences)):
-            self.sentences[i].compute_candidates(entities_locations=self.entities_locations,
-                                                 entities_persons=self.entities_persons,
-                                                 entities_organizations=self.entities_organizations,
-                                                 context=context)
+
+            self.sentences[i].compute_candidates(entities=self.preprocessed_entities, context=copy(context))
 
             context.popleft()
-            context.append(self.sentences[i + Article.context_range + 1]
-                           if i + Article.context_range + 1 < len(self.sentences) else None)
+            context.append(self.sentences[i + Article.context_range + 1].text
+                           if i + Article.context_range + 1 < len(self.sentences) else '')
 
     # endregion
 
@@ -149,28 +191,26 @@ class Article(BaseClass):
 
     def criterion_entity(self):
         """
-        Check if an article has some entity.
+        Check if an article has at least 2 entities of the same type.
 
         Returns:
-            bool, True iff the article has no entity.
+            bool, True iff the article hasn't 2 entities of the same type.
         """
 
-        return max([len(self.entities_locations), len(self.entities_persons), len(self.entities_organizations)]) == 0
-
-    def criterion_similarity(self):
-        # TODO
-        pass
+        return max([len(self.entities_locations), len(self.entities_persons), len(self.entities_organizations)]) < 2
 
     # endregion
 
 
 def main():
-    from database_creation.database import Database
 
-    db = Database(max_size=100)
+    article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
+                      '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
-    db.preprocess()
-    db.process()
+    article.preprocess()
+    article.process()
+
+    print(article)
 
     return
 

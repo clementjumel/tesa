@@ -3,7 +3,6 @@ from database_creation.article import Article
 
 from copy import copy
 from numpy import random
-from time import time
 from glob import glob
 
 
@@ -11,8 +10,8 @@ class Database(BaseClass):
     # region Class initialization
 
     to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
-    limit_print, random_print = 50, False
-    verbose, count_modulo = True, 10000
+    limit_print, random_print = 50, True
+    count_modulo = 10000
 
     def __init__(self, max_size=None):
         """
@@ -111,39 +110,10 @@ class Database(BaseClass):
 
     # endregion
 
-    # region Decorator
-
-    class Decorator:
-
-        def __init__(self, message):
-            """ Initializes the Verbose decorator message. """
-
-            self.message = message
-
-        def __call__(self, func):
-            """ Performs the call to the decorated function. """
-
-            def f(*args, **kwargs):
-                """ Decorated function. """
-
-                slf = args[0]
-
-                if slf.verbose:
-                    t0 = time()
-                    print(self.message)
-
-                func(*args, **kwargs)
-
-                if slf.verbose:
-                    print("Done ({} articles, elapsed time: {}s).\n".format(slf.size, round(time() - t0)))
-
-            return f
-
-    # endregion
-
     # region Main methods
 
-    @Decorator("Preprocessing the articles...")
+    @BaseClass.Verbose("Preprocessing the articles...")
+    @BaseClass.Attribute('size')
     def preprocess(self):
         """ Performs the preprocessing of the database. """
 
@@ -157,7 +127,7 @@ class Database(BaseClass):
 
         self.clean(Article.criterion_entity)
 
-    @Decorator("Processing the articles...")
+    @BaseClass.Verbose("Processing the articles...")
     def process(self):
         """ Performs the processing of the database by calling the equivalent Article method. """
 
@@ -167,18 +137,15 @@ class Database(BaseClass):
             count = self.progression(count)
             self.articles[id_].process()
 
-        self.clean(Article.criterion_similarity)
-
-    @Decorator("Writing the candidates...")
+    @BaseClass.Verbose("Writing the candidates...")
     def write(self, file_name):
         """
         Writes the candidates of the database. Overwrites an existing file.
 
         Args:
-            file_name: str, name of the file (without folder and extension).
+            file_name: str, name of the file (with folder and extension).
         """
 
-        file_name = 'results/' + file_name + ".txt"
         count = 0
 
         with open(file_name, "w+") as f:
@@ -227,7 +194,6 @@ class Database(BaseClass):
 
     # region Other methods
 
-    @Decorator("Cleaning the articles...")
     def clean(self, criterion):
         """
         Removes from the database the articles which meets the criterion.
@@ -289,10 +255,13 @@ class Database(BaseClass):
 
 
 def main():
-    database = Database(max_size=100)
+
+    database = Database(max_size=1000)
 
     database.preprocess()
     database.process()
+
+    database.write('../results/out.txt')
 
     return
 

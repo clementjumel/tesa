@@ -17,91 +17,87 @@ class Sentence(BaseClass):
             element: ElementTree.Element, annotations of the sentence.
         """
 
-        parses = element.findall('./parse')
-        assert len(parses) == 1
-        self.parse = parses[0].text
-
-        # TODO
-        # tokens = element.findall('./tokens')
-        # assert len(tokens) == 1
-        # self.tokens = ElementTree.tostring(tokens[0]).decode()
-
-        # dependencies = element.findall('./dependencies')
-        # self.dependencies = [ElementTree.tostring(dependency).decode() for dependency in dependencies]
-
-        # machine_readings = element.findall('./MachineReading')
-        # self.machine_reading = [ElementTree.tostring(mr).decode() for mr in machine_readings]
-
-        # [element.remove(parse) for parse in parses]
-        # [element.remove(token) for token in tokens]
-        # [element.remove(dependency) for dependency in dependencies]
-        # [element.remove(machine_reading) for machine_reading in machine_readings]
-        # assert not element
-
-        # TODO
+        self.parse = None
         self.text = None
+        self.nps = None
 
-        self.nps = self.compute_nps()
+        self.compute_parse(element)
+        self.compute_text()
+        self.compute_nps()
 
     # endregion
 
     # region Methods compute_
 
+    def compute_parse(self, element):
+        """
+        Compute the parsing of the sentence from its element.
+
+        Args:
+            element: ElementTree.Element, annotations of the sentence.
+        """
+
+        parses = element.findall('./parse')
+        assert len(parses) == 1
+
+        self.parse = parses[0].text
+
     def compute_text(self):
-        # TODO
-        pass
+        """ Compute the text defined by self.parse. """
+
+        t = tree.Tree.fromstring(self.parse)
+        text = ' '.join(t.leaves())
+
+        self.text = text
 
     def compute_nps(self):
-        """
-        Compute the NPs defined by self.parse.
-
-        Returns:
-            list, NPs contained in the parse.
-        """
+        """ Compute the NPs defined by self.parse. """
 
         t = tree.Tree.fromstring(self.parse)
         nps = [child.pos() for child in t.subtrees(lambda node: node.label() == 'NP')]
 
-        return [Np(np) for np in nps]
+        self.nps = [Np(np) for np in nps]
 
-    def compute_similarities(self, entities_locations, entities_persons, entities_organizations):
+    def compute_similarities(self, entities):
         """
         Compute the similarities of the NPs to the entities in the article.
 
         Args:
-            entities_locations: list, location entities mentioned in the article.
-            entities_persons: list, person entities mentioned in the article.
-            entities_organizations: list, organization entities mentioned in the article.
+            entities: list, preprocessed entities of the sentence.
         """
 
         for np in self.nps:
-            np.compute_similarities(entities_locations, entities_persons, entities_organizations)
+            np.compute_similarities(entities)
 
-    def compute_candidates(self, entities_locations, entities_persons, entities_organizations, context):
+    def compute_candidates(self, entities, context):
         """
         Compute the candidate NPs of the sentence.
 
         Args:
-            entities_locations: list, location entities mentioned in the article.
-            entities_persons: list, person entities mentioned in the article.
-            entities_organizations: list, organization entities mentioned in the article.
+            entities: list, preprocessed entities of the sentence.
             context: collections.deque, queue containing the text of the sentences of the context.
         """
 
         for np in self.nps:
-            np.compute_candidate(entities_locations, entities_persons, entities_organizations, context) \
-                if np.criterion_candidate() else None
+            np.compute_candidate(entities, context)
 
     # endregion
 
 
 def main():
+
     from database_creation.article import Article
 
-    article = Article('0', '', '../databases/nyt_jingyun/content_annotated/2000content_annotated/1185897.txt.xml')
+    article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
+                      '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+
     article.compute_sentences()
 
-    print(article.sentences[0])
+    for i in range(3):
+        article.sentences[i].compute_similarities(['The New York Times'])
+
+        print(article.sentences[i])
+
     return
 
 

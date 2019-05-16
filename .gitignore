@@ -1,7 +1,7 @@
 .idea/
 notebooks/.ipynb_checkpoints/
-
 database_creation/__pycache__/
+
 databases/nyt_jingyun/
-databases/snli/
 results/
+pre_trained_models/

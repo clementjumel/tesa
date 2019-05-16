@@ -1,7 +1,11 @@
 from copy import copy
+from time import time
 
 
 class BaseClass:
+    # region Class base methods
+
+    verbose = True
     to_print, print_attribute, print_lines, print_offsets = None, None, None, None
 
     def __str__(self):
@@ -80,15 +84,15 @@ class BaseClass:
 
         elif isinstance(item, list):
             if isinstance(item[0], BaseClass):
-                return ' '.join([str(ite) for ite in item if str(ite)])
+                return ' '.join([str(ite) for ite in item if ite])
             else:
-                return '; '.join([str(ite) for ite in item if str(ite)])
+                return '; '.join([BaseClass.to_string(ite) for ite in item if ite])
 
         elif isinstance(item, tuple):
-            return ' '.join([str(ite) for ite in item if str(ite)])
+            return ' '.join([BaseClass.to_string(ite) for ite in item if ite])
 
         elif isinstance(item, dict):
-            return ''.join(['\n' + str(ite) + ': ' + str(item[ite]) for ite in item])
+            return ''.join(['\n' + ite + ': ' + BaseClass.to_string(item[ite]) for ite in item])
 
         else:
             raise Exception("Unsupported type: {}.".format(type(item)))
@@ -125,6 +129,76 @@ class BaseClass:
                 raise Exception("No attribute specified.")
 
         return prefix
+
+    @classmethod
+    def set_verbose(cls, verbose):
+        """
+        Changes the verbose attribute of the class.
+
+        Args:
+            verbose: bool, new verbose value.
+        """
+
+        cls.verbose = verbose
+
+    # endregion
+
+    # region Decorator
+
+    class Verbose:
+        """ Decorator for the display of a simple message. """
+
+        def __init__(self, message):
+            """ Initializes the Verbose decorator message. """
+
+            self.message = message
+
+        def __call__(self, func):
+            """ Performs the call to the decorated function. """
+
+            def f(*args, **kwargs):
+                """ Decorated function. """
+
+                slf = args[0]
+                t0 = time()
+
+                if slf.verbose:
+                    print(self.message)
+
+                func(*args, **kwargs)
+
+                if slf.verbose:
+                    print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
+
+            return f
+
+    class Attribute:
+        """ Decorator for monitoring an attribute. """
+
+        def __init__(self, attribute):
+            """ Initializes the Attribute decorator attribute. """
+
+            self.attribute = attribute
+
+        def __call__(self, func):
+            """ Performs the call to the decorated function. """
+
+            def f(*args, **kwargs):
+                """ Decorated function. """
+
+                slf = args[0]
+
+                if slf.verbose:
+                    print("Initial {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+
+                func(*args, **kwargs)
+
+                if slf.verbose:
+                    print("Final {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+
+            return f
+
+    # endregion
 
 
 def main():
