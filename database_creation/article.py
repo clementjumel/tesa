@@ -42,22 +42,20 @@ class Article(BaseClass):
 
     # region Main methods
 
-    def preprocess(self):
+    def preprocess_candidates(self):
         """ Preprocess the article. """
 
         self.compute_title()
         self.compute_entities()
-        self.compute_preprocessed_entities()
         self.compute_sentences()
-        self.compute_coreferences()
 
-    def process(self):
+    def process_candidates(self):
         """ Process the articles. """
 
         self.compute_similarities()
         self.compute_candidates()
 
-    def write(self, f):
+    def write_candidates(self, f):
         """
         Write the candidates of the articles in an opened file.
 
@@ -68,6 +66,11 @@ class Article(BaseClass):
         candidates = [np for sentence in self.sentences for np in sentence.nps if np.candidate]
 
         f.write(self.to_string(candidates))
+
+    def preprocess_tuples(self):
+        """ Preprocess the article. """
+
+        self.compute_entities()
 
     # endregion
 
@@ -87,51 +90,13 @@ class Article(BaseClass):
         tree = ElementTree.parse(self.original_path)
         root = tree.getroot()
 
-        self.entities_locations = [entity.text for entity in root.findall('./head/docdata/identified-content/location')]
-        self.entities_persons = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
-        self.entities_organizations = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
+        entities_locations = [entity.text for entity in root.findall('./head/docdata/identified-content/location')]
+        entities_persons = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
+        entities_organizations = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
 
-    def compute_preprocessed_entities(self):
-        """ Compute the preprocessed entities (consider the text in parenthesis as a separate entity). """
-
-        preprocessed_entities = []
-
-        for entity in self.entities_locations + self.entities_organizations:
-
-            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
-
-            if len(before) == 0:
-                before = entity
-            else:
-                before = before[0]
-
-            preprocessed_entities.append(before)
-            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
-
-        for entity in self.entities_persons:
-
-            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
-
-            if len(before) == 0:
-                before = entity
-            else:
-                before = before[0]
-
-            if len(before.split(', ')) == 2:
-                before = ' '.join([before.split(', ')[1], before.split(', ')[0]])
-
-            for p in in_parenthesis:
-                if p.replace('-', '').isdigit():
-                    in_parenthesis.remove(p)
-
-            preprocessed_entities.append(before)
-            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
-
-        preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
-
-        self.preprocessed_entities = preprocessed_entities
+        self.entities_locations = self.preprocess_locations(entities_locations)
+        self.entities_persons = self.preprocess_persons(entities_persons)
+        self.entities_organizations = self.preprocess_organizations(entities_organizations)
 
     def compute_sentences(self):
         """ Compute the sentences of the article. """
@@ -153,7 +118,7 @@ class Article(BaseClass):
         """ Compute the similarity of the NPs to the entities in the article. """
 
         for sentence in self.sentences:
-            sentence.compute_similarities(self.preprocessed_entities)
+            sentence.compute_similarities(self.entities_locations + self.entities_persons + self.entities_organizations)
 
     def compute_candidates(self):
         """ Computes and fills the candidate NPs of the article. """
@@ -163,7 +128,10 @@ class Article(BaseClass):
 
         for i in range(len(self.sentences)):
 
-            self.sentences[i].compute_candidates(entities=self.preprocessed_entities, context=copy(context))
+            self.sentences[i].compute_candidates(
+                entities=self.entities_locations + self.entities_persons + self.entities_organizations,
+                context=copy(context)
+            )
 
             context.popleft()
             context.append(self.sentences[i + Article.context_range + 1].text
@@ -201,14 +169,109 @@ class Article(BaseClass):
 
     # endregion
 
+    # region Methods preprocess
+
+    @staticmethod
+    def preprocess_locations(entities):
+        """
+        Preprocess the location entities (consider what is inside parenthesis as an entity).
+
+        Args:
+            entities: list, entities to preprocess.
+
+        Returns:
+            list, preprocessed entities.
+        """
+
+        preprocessed_entities = []
+
+        for entity in entities:
+            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
+            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
+
+            if len(before) == 0:
+                before = entity
+            else:
+                before = before[0]
+
+            preprocessed_entities.append(before)
+            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+
+        preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
+
+        return preprocessed_entities
+
+    @staticmethod
+    def preprocess_persons(entities):
+        """
+        Preprocess the person entities (forget what is inside parenthesis).
+
+        Args:
+            entities: list, entities to preprocess.
+
+        Returns:
+            list, preprocessed entities.
+        """
+
+        preprocessed_entities = []
+
+        for entity in entities:
+            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
+
+            if len(before) == 0:
+                before = entity
+            else:
+                before = before[0]
+
+            if len(before.split(', ')) == 2:
+                before = ' '.join([before.split(', ')[1], before.split(', ')[0]])
+
+            preprocessed_entities.append(before)
+
+        preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
+
+        return preprocessed_entities
+
+    @staticmethod
+    def preprocess_organizations(entities):
+        """
+        Preprocess the organization entities (consider what is inside parenthesis as an entity).
+
+        Args:
+            entities: list, entities to preprocess.
+
+        Returns:
+            list, preprocessed entities.
+        """
+
+        preprocessed_entities = []
+
+        for entity in entities:
+            before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
+            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
+
+            if len(before) == 0:
+                before = entity
+            else:
+                before = before[0]
+
+            preprocessed_entities.append(before)
+            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+
+        preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
+
+        return preprocessed_entities
+
+    # endregion
+
 
 def main():
 
     article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
-    article.preprocess()
-    article.process()
+    article.preprocess_candidate()
+    article.process_candidates()
 
     print(article)
 

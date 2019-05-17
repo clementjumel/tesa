@@ -163,7 +163,7 @@ class BaseClass:
                 t0 = time()
 
                 if slf.verbose:
-                    print(self.message)
+                    print('\n' + self.message)
 
                 func(*args, **kwargs)
 

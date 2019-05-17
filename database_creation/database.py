@@ -4,6 +4,7 @@ from database_creation.article import Article
 from copy import copy
 from numpy import random
 from glob import glob
+from collections import defaultdict
 
 
 class Database(BaseClass):
@@ -11,7 +12,7 @@ class Database(BaseClass):
 
     to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
     limit_print, random_print = 50, True
-    count_modulo = 10000
+    count_modulo = 1000
 
     def __init__(self, max_size=None):
         """
@@ -28,6 +29,7 @@ class Database(BaseClass):
 
         self.articles = None
         self.size = None
+        self.most_frequent_entities = None
 
         self.compute_articles()
         self.compute_size()
@@ -113,8 +115,7 @@ class Database(BaseClass):
     # region Main methods
 
     @BaseClass.Verbose("Preprocessing the articles...")
-    @BaseClass.Attribute('size')
-    def preprocess(self):
+    def preprocess_candidates(self):
         """ Performs the preprocessing of the database. """
 
         self.clean(Article.criterion_data)
@@ -123,22 +124,22 @@ class Database(BaseClass):
 
         for id_ in self.articles:
             count = self.progression(count)
-            self.articles[id_].preprocess()
+            self.articles[id_].preprocess_candidates()
 
         self.clean(Article.criterion_entity)
 
-    @BaseClass.Verbose("Processing the articles...")
-    def process(self):
+    @BaseClass.Verbose("Processing the articles candidates...")
+    def process_candidates(self):
         """ Performs the processing of the database by calling the equivalent Article method. """
 
         count = 0
 
         for id_ in self.articles:
             count = self.progression(count)
-            self.articles[id_].process()
+            self.articles[id_].process_candidates()
 
     @BaseClass.Verbose("Writing the candidates...")
-    def write(self, file_name):
+    def write_candidates(self, file_name):
         """
         Writes the candidates of the database. Overwrites an existing file.
 
@@ -151,7 +152,27 @@ class Database(BaseClass):
         with open(file_name, "w+") as f:
             for id_ in self.articles:
                 count = self.progression(count)
-                self.articles[id_].write(f)
+                self.articles[id_].write_candidates(f)
+
+    @BaseClass.Verbose("Preprocessing the articles...")
+    def preprocess_tuples(self):
+        """ Performs the preprocessing of the database. """
+
+        self.clean(Article.criterion_data)
+
+        count = 0
+
+        for id_ in self.articles:
+            count = self.progression(count)
+            self.articles[id_].preprocess_tuples()
+
+        self.clean(Article.criterion_entity)
+
+    @BaseClass.Verbose("Processing the articles aggregation tuples...")
+    def process_tuples(self):
+        """ Performs the processing of the possible aggregation tuples of the database. """
+
+        self.compute_most_frequent_entities(20)
 
     # endregion
 
@@ -176,6 +197,32 @@ class Database(BaseClass):
 
         self.size = len(self.get_ids())
 
+    @BaseClass.Verbose("Computing the most frequent entities...")
+    def compute_most_frequent_entities(self, limit):
+        """
+        Compute the most frequent tuple of entities.
+
+        Args:
+            limit: int, maximum number of tuples.
+        """
+
+        count, entities_dict = 0, defaultdict(int)
+
+        for id_ in self.articles:
+            count = self.progression(count)
+
+            for entity_type in ['locations', 'persons', 'organizations']:
+                entities = getattr(self.articles[id_], 'entities_' + entity_type)
+
+                if entities and len(entities) >= 2:
+                    entities.sort()
+
+                    for t in self.tuples(entities):
+                        entities_dict[t] += 1
+
+        self.most_frequent_entities = \
+            [(t, entities_dict[t]) for t in sorted(entities_dict, key=entities_dict.get, reverse=True)[0:limit]]
+
     # endregion
 
     # region Methods get_
@@ -194,6 +241,8 @@ class Database(BaseClass):
 
     # region Other methods
 
+    @BaseClass.Verbose("Cleaning the database...")
+    @BaseClass.Attribute('size')
     def clean(self, criterion):
         """
         Removes from the database the articles which meets the criterion.
@@ -202,11 +251,9 @@ class Database(BaseClass):
             function, criterion that an article must meet to be removed.
         """
 
-        count, to_del = 0, []
+        to_del = []
 
         for id_ in self.articles:
-            count = self.progression(count)
-
             if criterion(self.articles[id_]):
                 to_del.append(id_)
 
@@ -251,19 +298,51 @@ class Database(BaseClass):
 
         return paths[:limit] if limit else paths
 
+    @staticmethod
+    def tuples(l):
+        """
+        Compute all the possible tuples from l of len >= 2. Note that the element inside a tuple will appear in the same
+        order as in l.
+
+        Args:
+            l: list, original list.
+
+        Returns:
+            set, all the possible tuples of len >= 2 of l.
+        """
+
+        if len(l) == 2 or len(l) > 10:
+            return {tuple(l)}
+
+        else:
+            res = {tuple(l)}
+            for x in l:
+                res = res | Database.tuples([y for y in l if y != x])
+
+            return res
+
     # endregion
 
 
+# def main():
+#
+#     database = Database(max_size=1000)
+#
+#     database.preprocess_candidates()
+#     database.process_candidates()
+#
+#     database.write_candidates('../results/out.txt')
+#
+#     return
+
 def main():
 
-    database = Database(max_size=1000)
+    d = Database(max_size=10000)
 
-    database.preprocess()
-    database.process()
+    d.preprocess_tuples()
+    d.process_tuples()
 
-    database.write('../results/out.txt')
-
-    return
+    print(d.most_frequent_entities)
 
 
 if __name__ == '__main__':
