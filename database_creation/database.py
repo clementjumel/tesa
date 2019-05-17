@@ -29,7 +29,9 @@ class Database(BaseClass):
 
         self.articles = None
         self.size = None
-        self.most_frequent_entities = None
+
+        self.frequent_entities = None
+        self.frequent_entities_articles = None
 
         self.compute_articles()
         self.compute_size()
@@ -168,11 +170,14 @@ class Database(BaseClass):
 
         self.clean(Article.criterion_entity)
 
+        self.compute_frequent_entities(100)
+        self.clean(Database.criterion_rare_entities)
+
     @BaseClass.Verbose("Processing the articles aggregation tuples...")
     def process_tuples(self):
         """ Performs the processing of the possible aggregation tuples of the database. """
 
-        self.compute_most_frequent_entities(20)
+        pass
 
     # endregion
 
@@ -198,15 +203,15 @@ class Database(BaseClass):
         self.size = len(self.get_ids())
 
     @BaseClass.Verbose("Computing the most frequent entities...")
-    def compute_most_frequent_entities(self, limit):
+    def compute_frequent_entities(self, limit):
         """
-        Compute the most frequent tuple of entities.
+        Compute the most frequent tuples of entities.
 
         Args:
             limit: int, maximum number of tuples.
         """
 
-        count, entities_dict = 0, defaultdict(int)
+        entities_dict, count = defaultdict(set), 0
 
         for id_ in self.articles:
             count = self.progression(count)
@@ -218,10 +223,13 @@ class Database(BaseClass):
                     entities.sort()
 
                     for t in self.tuples(entities):
-                        entities_dict[t] += 1
+                        entities_dict[t].add(id_)
 
-        self.most_frequent_entities = \
-            [(t, entities_dict[t]) for t in sorted(entities_dict, key=entities_dict.get, reverse=True)[0:limit]]
+        sorted_dict = sorted(entities_dict, key=lambda k: len(entities_dict[k]), reverse=True)[0:limit]
+
+        self.frequent_entities = [(t, len(entities_dict[t])) for t in sorted_dict]
+        self.frequent_entities_articles = \
+            set([item for subset in [entities_dict[t] for t in sorted_dict] for item in subset])
 
     # endregion
 
@@ -239,23 +247,51 @@ class Database(BaseClass):
 
     # endregion
 
+    # region Methods criterion_
+
+    def criterion_rare_entities(self, id_):
+        """
+        Check if an article's entities contain the most frequent tuples of entities.
+
+        Args:
+            id_: string, ID of the article to analyze.
+
+        Returns:
+            bool, True iff the article's entities does not contain frequent entities.
+        """
+
+        return True if id_ not in self.frequent_entities_articles else False
+
+    # endregion
+
     # region Other methods
 
     @BaseClass.Verbose("Cleaning the database...")
     @BaseClass.Attribute('size')
     def clean(self, criterion):
         """
-        Removes from the database the articles which meets the criterion.
+        Removes from the database the articles which meets the Article's or Database's criterion.
 
-        Returns:
-            function, criterion that an article must meet to be removed.
+        Args:
+            criterion: function, method from Article or Database, criterion that an article must meet to be removed.
         """
 
         to_del = []
 
-        for id_ in self.articles:
-            if criterion(self.articles[id_]):
-                to_del.append(id_)
+        if criterion.__module__.split('.')[-1] == 'article':
+
+            for id_ in self.articles:
+                if criterion(self.articles[id_]):
+                    to_del.append(id_)
+
+        elif criterion.__module__.split('.')[-1] in ['__main__', 'database']:
+
+            for id_ in self.articles:
+                if criterion(self, id_):
+                    to_del.append(id_)
+
+        else:
+            raise Exception("Wrong criterion module: {}".format(criterion.__module__))
 
         for id_ in to_del:
             del self.articles[id_]
@@ -324,25 +360,12 @@ class Database(BaseClass):
     # endregion
 
 
-# def main():
-#
-#     database = Database(max_size=1000)
-#
-#     database.preprocess_candidates()
-#     database.process_candidates()
-#
-#     database.write_candidates('../results/out.txt')
-#
-#     return
-
 def main():
 
     d = Database(max_size=10000)
 
     d.preprocess_tuples()
     d.process_tuples()
-
-    print(d.most_frequent_entities)
 
 
 if __name__ == '__main__':

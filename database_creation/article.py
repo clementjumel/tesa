@@ -174,7 +174,7 @@ class Article(BaseClass):
     @staticmethod
     def preprocess_locations(entities):
         """
-        Preprocess the location entities (consider what is inside parenthesis as an entity).
+        Preprocess the location entities (forget what is inside parenthesis).
 
         Args:
             entities: list, entities to preprocess.
@@ -187,15 +187,11 @@ class Article(BaseClass):
 
         for entity in entities:
             before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
 
-            if len(before) == 0:
-                before = entity
-            else:
-                before = before[0]
+            if len(before) > 0:
+                entity = before[0]
 
-            preprocessed_entities.append(before)
-            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+            preprocessed_entities.append(entity)
 
         preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
 
@@ -218,15 +214,16 @@ class Article(BaseClass):
         for entity in entities:
             before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
 
-            if len(before) == 0:
-                before = entity
-            else:
-                before = before[0]
+            if len(before) > 0:
+                entity = before[0]
 
-            if len(before.split(', ')) == 2:
-                before = ' '.join([before.split(', ')[1], before.split(', ')[0]])
+            if len(entity.split(', ')) == 2:
+                entity = ' '.join([entity.split(', ')[1], entity.split(', ')[0]])
 
-            preprocessed_entities.append(before)
+            if len(entity.split()) > 2:
+                entity = ' '.join([s for s in entity.split() if len(s) > 1])
+
+            preprocessed_entities.append(entity)
 
         preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
 
@@ -235,7 +232,7 @@ class Article(BaseClass):
     @staticmethod
     def preprocess_organizations(entities):
         """
-        Preprocess the organization entities (consider what is inside parenthesis as an entity).
+        Preprocess the organization entities (forget what is inside parenthesis).
 
         Args:
             entities: list, entities to preprocess.
@@ -248,15 +245,11 @@ class Article(BaseClass):
 
         for entity in entities:
             before = re.findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-            in_parenthesis = re.findall(r'\((.*?)\)', entity)  # find the text in parenthesis (possibly several cases)
 
-            if len(before) == 0:
-                before = entity
-            else:
-                before = before[0]
+            if len(before) > 0:
+                entity = before[0]
 
-            preprocessed_entities.append(before)
-            preprocessed_entities.extend(in_parenthesis) if in_parenthesis else None
+            preprocessed_entities.append(entity)
 
         preprocessed_entities = list(OrderedDict.fromkeys(preprocessed_entities))  # remove duplicates (keep the order)
 
@@ -270,7 +263,7 @@ def main():
     article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
-    article.preprocess_candidate()
+    article.preprocess_candidates()
     article.process_candidates()
 
     print(article)
