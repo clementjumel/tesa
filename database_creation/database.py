@@ -14,24 +14,25 @@ class Database(BaseClass):
     limit_print, random_print = 50, True
     count_modulo = 1000
 
-    def __init__(self, max_size=None):
+    def __init__(self, max_size=None, root='databases/nyt_jingyun', year='2000'):
         """
         Initializes an instance of Database.
 
         Args:
             max_size: int, maximum number of articles in the database; if None, takes all articles.
+            root: str, relative path to the root of the project.
+            year: str, year of the database to analyse.
         """
 
         self.max_size = max_size
-
-        self.year = '2000'
-        self.root = '../databases/nyt_jingyun'
+        self.root = root
+        self.year = str(year)
 
         self.articles = None
         self.size = None
 
-        self.frequent_entities = None
-        self.frequent_entities_articles = None
+        self.entity_tuples = None
+        self.entity_tuples_articles = None
 
         self.compute_articles()
         self.compute_size()
@@ -65,8 +66,8 @@ class Database(BaseClass):
             s = self.to_string(self.articles[id_])
 
             if s:
-                string += self.prefix(print_attribute, print_lines if string else 0, print_offsets, 'id ' + str(id_)) \
-                          + s
+                string += self.prefix(print_attribute, print_lines if string else 0, print_offsets,
+                                      'article ' + str(id_)) + s
                 count += 1
                 if count == limit_print:
                     break
@@ -116,9 +117,9 @@ class Database(BaseClass):
 
     # region Main methods
 
-    @BaseClass.Verbose("Preprocessing the articles...")
-    def preprocess_candidates(self):
-        """ Performs the preprocessing of the database. """
+    @BaseClass.Verbose("Preprocessing the articles (standard)...")
+    def preprocess_standard(self):
+        """ Performs the standard preprocessing of the database. """
 
         self.clean(Article.criterion_data)
 
@@ -126,19 +127,88 @@ class Database(BaseClass):
 
         for id_ in self.articles:
             count = self.progression(count)
-            self.articles[id_].preprocess_candidates()
+
+            self.articles[id_].preprocess()
 
         self.clean(Article.criterion_entity)
 
-    @BaseClass.Verbose("Processing the articles candidates...")
-    def process_candidates(self):
-        """ Performs the processing of the database by calling the equivalent Article method. """
+    @BaseClass.Verbose("Preprocessing the articles (most frequent tuples)...")
+    def preprocess_tuples(self, limit=100, display=False):
+        """
+        Performs a preprocessing of the database to isolate articles with frequent entity tuples..
+
+        Args:
+            limit: int, maximum number of tuples.
+            display: bool, whether or not to display the ranking of the tuples.
+        """
+
+        self.clean(Article.criterion_data)
 
         count = 0
 
         for id_ in self.articles:
             count = self.progression(count)
+
+            self.articles[id_].compute_entities()
+
+        self.clean(Article.criterion_entity)
+
+        self.compute_entity_tuples(limit=limit, display=display)
+        self.clean(Database.criterion_rare_entities)
+
+        count = 0
+
+        for id_ in self.articles:
+            count = self.progression(count)
+
+            self.articles[id_].preprocess()
+
+    @BaseClass.Verbose("Processing the articles (find aggregation candidates)...")
+    def process_candidates(self):
+        """ Performs the processing of the database by computing the aggregation candidates. """
+
+        count = 0
+
+        for id_ in self.articles:
+            count = self.progression(count)
+
             self.articles[id_].process_candidates()
+
+    @BaseClass.Verbose("Processing the articles (compute frequent entity tuples contexts)...")
+    def process_tuples(self):
+        """ Performs the processing of the database by computing the frequent entity tuples contexts. """
+
+        count = 0
+
+        for id_ in self.articles:
+            count = self.progression(count)
+
+            self.articles[id_].process_tuples()
+
+        self.clean(Article.criterion_context)
+
+    def process_tuple(self, idx):
+        entity_tuple, ids = self.entity_tuples[idx]
+        count = 0
+
+        print("Entity tuples: {}\n\n".format(self.to_string(list(entity_tuple))))
+
+        for id_ in ids:
+            try:
+                article = self.articles[id_]
+            except KeyError:
+                continue
+
+            if article.tuple_contexts is not None:
+                try:
+                    context = article.tuple_contexts[entity_tuple]
+                    count += len(list(context.keys())) - 1
+                    print(self.to_string(context) + '\n\n')
+
+                except KeyError:
+                    pass
+
+        print("\n{} samples out of {} articles".format(count, len(ids)))
 
     @BaseClass.Verbose("Writing the candidates...")
     def write_candidates(self, file_name):
@@ -155,29 +225,6 @@ class Database(BaseClass):
             for id_ in self.articles:
                 count = self.progression(count)
                 self.articles[id_].write_candidates(f)
-
-    @BaseClass.Verbose("Preprocessing the articles...")
-    def preprocess_tuples(self):
-        """ Performs the preprocessing of the database. """
-
-        self.clean(Article.criterion_data)
-
-        count = 0
-
-        for id_ in self.articles:
-            count = self.progression(count)
-            self.articles[id_].preprocess_tuples()
-
-        self.clean(Article.criterion_entity)
-
-        self.compute_frequent_entities(100)
-        self.clean(Database.criterion_rare_entities)
-
-    @BaseClass.Verbose("Processing the articles aggregation tuples...")
-    def process_tuples(self):
-        """ Performs the processing of the possible aggregation tuples of the database. """
-
-        pass
 
     # endregion
 
@@ -203,12 +250,13 @@ class Database(BaseClass):
         self.size = len(self.get_ids())
 
     @BaseClass.Verbose("Computing the most frequent entities...")
-    def compute_frequent_entities(self, limit):
+    def compute_entity_tuples(self, limit, display):
         """
         Compute the most frequent tuples of entities.
 
         Args:
             limit: int, maximum number of tuples.
+            display: bool, whether or not to display the ranking of the tuples.
         """
 
         entities_dict, count = defaultdict(set), 0
@@ -222,14 +270,20 @@ class Database(BaseClass):
                 if entities and len(entities) >= 2:
                     entities.sort()
 
-                    for t in self.tuples(entities):
+                    for t in self.subtuples(entities):
                         entities_dict[t].add(id_)
 
-        sorted_dict = sorted(entities_dict, key=lambda k: len(entities_dict[k]), reverse=True)[0:limit]
+        sorted_tuples = sorted(entities_dict, key=lambda k: len(entities_dict[k]), reverse=True)[0:limit]
 
-        self.frequent_entities = [(t, len(entities_dict[t])) for t in sorted_dict]
-        self.frequent_entities_articles = \
-            set([item for subset in [entities_dict[t] for t in sorted_dict] for item in subset])
+        if display:
+            print('\nMost frequent entity tuples:')
+            for t in sorted_tuples:
+                print(self.to_string(list(t)) + ' (' + str(len(entities_dict[t])) + ')')
+            print('')
+
+        self.entity_tuples = [[t, entities_dict[t]] for t in sorted_tuples]
+        self.entity_tuples_articles = \
+            set([item for subset in [entities_dict[t] for t in sorted_tuples] for item in subset])
 
     # endregion
 
@@ -260,7 +314,7 @@ class Database(BaseClass):
             bool, True iff the article's entities does not contain frequent entities.
         """
 
-        return True if id_ not in self.frequent_entities_articles else False
+        return True if id_ not in self.entity_tuples_articles else False
 
     # endregion
 
@@ -334,38 +388,17 @@ class Database(BaseClass):
 
         return paths[:limit] if limit else paths
 
-    @staticmethod
-    def tuples(l):
-        """
-        Compute all the possible tuples from l of len >= 2. Note that the element inside a tuple will appear in the same
-        order as in l.
-
-        Args:
-            l: list, original list.
-
-        Returns:
-            set, all the possible tuples of len >= 2 of l.
-        """
-
-        if len(l) == 2 or len(l) > 10:
-            return {tuple(l)}
-
-        else:
-            res = {tuple(l)}
-            for x in l:
-                res = res | Database.tuples([y for y in l if y != x])
-
-            return res
-
     # endregion
 
 
 def main():
 
-    d = Database(max_size=10000)
+    d = Database(max_size=1000, root='../databases/nyt_jingyun')
 
-    d.preprocess_tuples()
+    d.preprocess_tuples(limit=100, display=True)
     d.process_tuples()
+
+    print(d)
 
 
 if __name__ == '__main__':

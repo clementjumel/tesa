@@ -1,5 +1,6 @@
 from database_creation.utils import BaseClass
 from database_creation.np import Np
+from database_creation.word import Word
 
 from nltk import tree
 
@@ -46,7 +47,12 @@ class Sentence(BaseClass):
         """ Compute the text defined by self.parse. """
 
         t = tree.Tree.fromstring(self.parse)
-        text = ' '.join(t.leaves())
+        words = t.leaves()
+
+        text = ''
+        for word in words:
+            text += '' if word[0] in Word.punctuation else ' '
+            text += word
 
         self.text = text
 
@@ -93,7 +99,7 @@ def main():
 
     article.compute_sentences()
 
-    for i in range(3):
+    for i in range(1, 4):
         article.sentences[i].compute_similarities(['The New York Times'])
 
         print(article.sentences[i])
