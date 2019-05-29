@@ -216,13 +216,13 @@ class Article(BaseClass):
         sentences = set()
 
         for entity in entity_tuple:
-            coreference = [c for c in self.coreferences if c.entity and c.entity == entity]
+            coreferences = [c for c in self.coreferences if c.entity and c.entity == entity]
 
-            if len(coreference) == 0:
+            if len(coreferences) == 0:
                 return None
 
             else:
-                coreference = coreference[0]
+                coreference = coreferences[0]
 
                 if not sentences:
                     sentences.update(coreference.sentences)
@@ -258,10 +258,8 @@ def main():
     article.preprocess()
     article.process_tuples()
 
-    article.set_parameters(to_print=['entities', 'tuple_contexts'])
+    article.set_parameters(to_print=['entities', 'tuple_contexts'], print_attribute=True)
     print(article)
-
-    return
 
 
 if __name__ == '__main__':

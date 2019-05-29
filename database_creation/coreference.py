@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass
+from database_creation.utils import BaseClass, Mention
 
 
 class Coreference(BaseClass):
@@ -21,7 +21,7 @@ class Coreference(BaseClass):
         self.entity = None
         self.sentences = None
 
-        self.compute_mentions(element)
+        self.compute_annotations(element)
 
         self.compute_entity(entities)
         self.compute_sentences()
@@ -30,7 +30,7 @@ class Coreference(BaseClass):
 
     # region Methods compute_
 
-    def compute_mentions(self, element):
+    def compute_annotations(self, element):
         """
         Compute the mentions and the representative of the coreference, and the corresponding sentences.
 
@@ -40,17 +40,20 @@ class Coreference(BaseClass):
 
         element_mentions = element.findall('./mention')
 
-        mention = element_mentions[0]
-        assert mention.attrib and mention.attrib['representative'] == 'true'
-        representative = [mention.find('text').text, mention.find('sentence').text,
-                          mention.find('start').text, mention.find('end').text]
+        m = element_mentions[0]
+        assert m.attrib and m.attrib['representative'] == 'true'
+        representative = Mention(text=m.find('text').text,
+                                 sentence=int(m.find('sentence').text),
+                                 start=int(m.find('start').text),
+                                 end=int(m.find('end').text))
 
         mentions = []
         for i in range(1, len(element_mentions)):
-
-            mention = element_mentions[i]
-            mentions.append([mention.find('text').text, mention.find('sentence').text,
-                             mention.find('start').text, mention.find('end').text])
+            m = element_mentions[i]
+            mentions.append(Mention(text=m.find('text').text,
+                                    sentence=int(m.find('sentence').text),
+                                    start=int(m.find('start').text),
+                                    end=int(m.find('end').text)))
 
         self.representative = representative
         self.mentions = mentions
@@ -63,86 +66,34 @@ class Coreference(BaseClass):
             entities: list, entities of the articles.
         """
 
-        for mention in [self.representative] + self.mentions:
-            text = self.get_text(mention)
-
+        for m in [self.representative] + self.mentions:
             for entity in entities:
-                if self.match(text, entity):
+                if self.match(m.text, entity):
                     self.entity = entity
                     return
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
 
-        sentences = set([self.get_sentence(mention) for mention in [self.representative] + self.mentions])
+        sentences = set([m.sentence for m in [self.representative] + self.mentions])
 
         self.sentences = sentences
 
     # endregion
 
-    # region Methods get_
-
-    @staticmethod
-    def get_text(mention):
-        """
-        Returns the text of a mention.
-
-        Args:
-            mention: tuple, mention to analyse.
-
-        Returns:
-            str, text of the mention.
-        """
-
-        return mention[0]
-
-    @staticmethod
-    def get_sentence(mention):
-        """
-        Returns the sentence index of a mention.
-
-        Args:
-            mention: tuple, mention to analyse.
-
-        Returns:
-            int, index of the sentence of the mention.
-        """
-
-        return int(mention[1])
-
-    @staticmethod
-    def get_range(mention):
-        """
-        Returns the range of words of a mention.
-
-        Args:
-            mention: tuple, mention to analyse.
-
-        Returns:
-            tuple, start and end indexes of the mention.
-        """
-
-        return int(mention[2]), int(mention[3])
-
-    # endregion
-
 
 def main():
+    from xml.etree import ElementTree
 
-    from database_creation.article import Article
+    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    root = tree.getroot()
 
-    article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
-                      '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    entities = ['James Joyce', 'Richard Bernstein']
+    coreferences = [Coreference(coreference_element, entities) for coreference_element
+                    in root.findall('./document/coreference/coreference')[:3]]
 
-    article.compute_entities()
-    article.compute_coreferences()
-
-    print(BaseClass.to_string(article.entities))
-
-    for i in range(3):
-        print(article.coreferences[i])
-
-    return
+    Coreference.set_parameters(to_print=[], print_attribute=True)
+    print(Coreference.to_string(coreferences))
 
 
 if __name__ == '__main__':

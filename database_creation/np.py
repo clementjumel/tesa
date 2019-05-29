@@ -1,5 +1,5 @@
 from database_creation.utils import BaseClass
-from database_creation.word import Word
+from database_creation.token import Token
 
 from gensim.models import KeyedVectors
 
@@ -10,22 +10,23 @@ class Np(BaseClass):
     to_print, print_attribute, print_lines, print_offsets = [], True, 1, 4
 
     embedding_entity = None
-    word_threshold, entity_threshold = 0.3, 0.3
+    token_threshold, entity_threshold = 0.3, 0.3
 
-    def __init__(self, np):
+    def __init__(self, tokens):
         """
         Initializes an instance of Np.
 
         Args:
-            np: list, tuples (text, pos) that defines a word.
+            tokens: dict, Tokens that define the Noun Phrase.
         """
 
-        self.words = tuple([Word(text=word[0], pos=word[1]) for word in np])
+        self.tokens = tokens
 
-        self.word_similarity = None
+        # TODO: implement Similarity
+        self.token_similarity = None
         self.entity_similarity = None
 
-        self.word_similar_entities = None
+        self.token_similar_entities = None
         self.entity_similar_entities = None
 
         self.candidate = None
@@ -44,12 +45,12 @@ class Np(BaseClass):
             entities: list, preprocessed entities of the sentence.
         """
 
-        self.compute_word_similarity(entities)
+        self.compute_token_similarity(entities)
         self.compute_entity_similarity(entities)
 
-    def compute_word_similarity(self, entities):
+    def compute_token_similarity(self, entities):
         """
-        Compute the word similarity of the NP to the entities in the article.
+        Compute the token similarity of the NP to the entities in the article.
 
         Args:
             entities: list, preprocessed entities of the sentence.
@@ -57,17 +58,18 @@ class Np(BaseClass):
 
         similarities, similar_entities = [], []
 
-        for word in self.words:
-            word.compute_similarity(entities)
+        for idx in self.tokens:
+            token = self.tokens[idx]
+            token.compute_similarity(entities)
 
-            similarities.append(word.similarity) if word.similarity is not None else None
-            similar_entities.append((word.text, word.similar_entities)) if word.similarity is not None else None
+            similarities.append(token.similarity) if token.similarity is not None else None
+            similar_entities.append((token.word, token.similar_entities)) if token.similarity is not None else None
 
         if similarities:
-            self.word_similarity = max(similarities)
-            self.word_similar_entities = \
+            self.token_similarity = max(similarities)
+            self.token_similar_entities = \
                 [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
-                                               if val == self.word_similarity]]
+                                               if val == self.token_similarity]]
 
     def compute_entity_similarity(self, entities):
         """
@@ -128,7 +130,7 @@ class Np(BaseClass):
             bool, True iff the article is a candidate.
         """
 
-        if (self.word_similarity and self.word_similarity >= self.word_threshold) \
+        if (self.token_similarity and self.token_similarity >= self.token_threshold) \
                 or (self.entity_similarity and self.entity_similarity >= self.entity_threshold):
 
             return True
@@ -151,6 +153,7 @@ class Np(BaseClass):
 
     # region Other methods
 
+    # TODO: repair
     def find_vocab_np(self):
         """
         Finds in the NP some entities from the vocabulary. Otherwise, returns None.
@@ -159,34 +162,34 @@ class Np(BaseClass):
             list, entities which belong to the vocabulary of the entity embedding, or None.
         """
 
-        words_groups = []
+        tokens_groups = []
         separators = [-1]
 
-        for idx in range(len(self.words)):
-            if self.words[idx].text in [',', ';', 'and', 'or']:
+        for idx in range(len(self.tokens)):
+            if self.tokens[idx].text in [',', ';', 'and', 'or']:
                 separators.append(idx)
 
-        separators.append(len(self.words))
+        separators.append(len(self.tokens))
 
         for i in range(len(separators) - 1):
             start = separators[i] + 1
             end = separators[i + 1]
 
-            words_groups.append(self.words[start: end])
+            tokens_groups.append(self.tokens[start: end])
 
-        words_groups.append(self.words) if len(separators) > 2 else None
+        tokens_groups.append(self.tokens) if len(separators) > 2 else None
 
         entities = []
 
-        for words in words_groups:
+        for tokens in tokens_groups:
 
             plausible_entities = []
 
             for criterion_name in ['punctuation', 'possessive', 'stopwords', 'determiner', 'number', 'adjective']:
-                criterion = getattr(Word, 'criterion_' + criterion_name)
+                criterion = getattr(Token, 'criterion_' + criterion_name)
 
-                words = [word for word in words if not criterion(word)]
-                plausible_entity = '_'.join([word.text.lower().replace('-', '_') for word in words])
+                tokens = [token for token in tokens if not criterion(token)]
+                plausible_entity = '_'.join([token.text.lower().replace('-', '_') for token in tokens])
 
                 if plausible_entity and plausible_entity not in plausible_entities:
                     plausible_entities.append(plausible_entity)
@@ -201,6 +204,7 @@ class Np(BaseClass):
 
         return entities if entities else None
 
+    # TODO: repair
     def find_vocab_entities(self, entities):
         """
         Finds for each entity an entity from the vocabulary. Otherwise, returns None.
@@ -227,22 +231,22 @@ class Np(BaseClass):
 
 
 def main():
+    from database_creation.sentence import Sentence
+    from xml.etree import ElementTree
 
-    nps = [
-        Np([('A', 'DT'), ('nice', 'JJ'), ('city', 'NN')]),
-        Np([('New', 'NNP'), ('York', 'NNP')]),
-        Np([('The', 'DT'), ('New', 'NNP'), ('York', 'NNP'), ('Times', 'NNP')]),
-        Np([('New', 'NNP'), ('York', 'NNP'), ('and', 'CC'), ('Chicago', 'NNP')]),
-    ]
+    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    root = tree.getroot()
 
-    entities = ['San Francisco', 'Philadelphia', 'town']
+    entities = ['James Joyce', 'Richard Bernstein']
+    sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
 
-    for np in nps:
-        np.compute_similarities(entities)
+    # TODO: repair
+    # for sentence in sentences:
+    #     sentence.compute_similarities(entities)
 
-    print(Np.to_string(nps))
-
-    return
+    Np.set_parameters(to_print=[], print_attribute=True)
+    for sentence in sentences:
+        print(Np.to_string(sentence.nps))
 
 
 if __name__ == '__main__':

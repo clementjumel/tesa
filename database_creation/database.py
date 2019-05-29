@@ -392,12 +392,12 @@ class Database(BaseClass):
 
 
 def main():
-
     d = Database(max_size=1000, root='../databases/nyt_jingyun')
 
     d.preprocess_tuples(limit=100, display=True)
     d.process_tuples()
 
+    Database.set_parameters(to_print=[], print_attribute=True)
     print(d)
 
 
