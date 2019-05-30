@@ -169,9 +169,8 @@ def main():
     entities = ['James Joyce', 'Richard Bernstein']
     sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
 
-    # TODO: repair
-    # for sentence in sentences:
-    #     sentence.compute_similarities(entities)
+    for sentence in sentences:
+        sentence.compute_similarities(entities)
 
     Sentence.set_parameters(to_print=[], print_attribute=True)
     print(Sentence.to_string(sentences))

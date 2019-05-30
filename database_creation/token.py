@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass
+from database_creation.utils import BaseClass, Similarity
 
 from copy import copy
 from string import punctuation as string_punctuation
@@ -29,7 +29,6 @@ class Token(BaseClass):
         self.ner = None
 
         self.similarity = None
-        self.similar_entities = None
 
         self.compute_annotations(token_element)
 
@@ -75,7 +74,6 @@ class Token(BaseClass):
             self.pos = token_element.find('POS').text
             self.ner = ner if ner != 'O' else None
 
-    # TODO: implement Similarity
     def compute_similarity(self, entities):
         """
         Compute the similarity of the token to the entities in the article.
@@ -94,18 +92,21 @@ class Token(BaseClass):
         if not token:
             return
 
-        similarities = []
+        sim = None
 
         for entity in entities:
-            similarities.append(
-                max([self.embedding_token.similarity(token, entity_token)
-                     if entity_token in self.embedding_token.vocab else -1. for entity_token in entity.split()])
-            )
+            token_sim = [self.embedding_token.similarity(token, entity_token) for entity_token in entity.split()
+                         if entity_token in self.embedding_token.vocab]
+            score = max(token_sim) if token_sim else None
 
-        if max(similarities) != -1:
-            self.similarity = max(similarities)
-            self.similar_entities = \
-                [entities[i] for i in [idx for idx, val in enumerate(similarities) if val == self.similarity]]
+            if score:
+                if sim is None or score > sim.score:
+                    sim = Similarity(score=score, items=[self.word], similar_items=[entity])
+
+                elif sim is not None and sim.score == score:
+                    sim.similar_items.append(entity)
+
+        self.similarity = sim
 
     # endregion
 

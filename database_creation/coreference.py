@@ -42,18 +42,14 @@ class Coreference(BaseClass):
 
         m = element_mentions[0]
         assert m.attrib and m.attrib['representative'] == 'true'
-        representative = Mention(text=m.find('text').text,
-                                 sentence=int(m.find('sentence').text),
-                                 start=int(m.find('start').text),
-                                 end=int(m.find('end').text))
+        representative = Mention(text=m.find('text').text, sentence=int(m.find('sentence').text),
+                                 start=int(m.find('start').text), end=int(m.find('end').text))
 
         mentions = []
         for i in range(1, len(element_mentions)):
             m = element_mentions[i]
-            mentions.append(Mention(text=m.find('text').text,
-                                    sentence=int(m.find('sentence').text),
-                                    start=int(m.find('start').text),
-                                    end=int(m.find('end').text)))
+            mentions.append(Mention(text=m.find('text').text, sentence=int(m.find('sentence').text),
+                                    start=int(m.find('start').text), end=int(m.find('end').text)))
 
         self.representative = representative
         self.mentions = mentions
@@ -90,7 +86,7 @@ def main():
 
     entities = ['James Joyce', 'Richard Bernstein']
     coreferences = [Coreference(coreference_element, entities) for coreference_element
-                    in root.findall('./document/coreference/coreference')[:3]]
+                    in root.findall('./document/coreference/coreference')]
 
     Coreference.set_parameters(to_print=[], print_attribute=True)
     print(Coreference.to_string(coreferences))

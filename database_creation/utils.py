@@ -362,17 +362,19 @@ class BaseClass:
 class Similarity:
     # region Class base methods
 
-    def __init__(self, score, similar_to):
+    def __init__(self, score, items, similar_items):
         """
         Initializes the Similarity instance.
 
         Args:
             score: float, similarity score between the object and similar_to.
-            similar_to: list, objects similar to the initial object.
+            items: list, items compared.
+            similar_items: list, objects similar to the initial objects.
         """
 
         self.score = score
-        self.similar_to = similar_to
+        self.items = items
+        self.similar_items = similar_items
 
     def __str__(self):
         """
@@ -382,7 +384,10 @@ class Similarity:
             str, readable format of the instance.
         """
 
-        return BaseClass.to_string(self.score) + ' [' + BaseClass.to_string(self.similar_to) + ']'
+        string = BaseClass.to_string(self.score)
+        string += ' (' + BaseClass.to_string(self.items) + '/' + BaseClass.to_string(self.similar_items) + ')'
+
+        return string
 
     # endregion
 
@@ -412,8 +417,8 @@ class Dependency:
             str, readable format of the instance.
         """
 
-        string = BaseClass.to_string(self.governor) + ' / ' + BaseClass.to_string(self.dependent) + \
-            ' (' + BaseClass.to_string(self.type_) + ')'
+        string = BaseClass.to_string(self.governor) + '/' + BaseClass.to_string(self.dependent)
+        string += ' (' + BaseClass.to_string(self.type_) + ')'
 
         return string
 
@@ -441,14 +446,14 @@ class Mention:
 
     def __str__(self):
         """
-        Overrides the builtin str method for the instances of Mentions.
+        Overrides the builtin str method for the instances of Mention.
 
         Returns:
             str, readable format of the instance.
         """
 
-        string = BaseClass.to_string(self.text) + ' (sentence: ' + BaseClass.to_string(self.sentence) + \
-            ', tokens: ' + BaseClass.to_string(self.start) + ' to ' + BaseClass.to_string(self.end) + ')'
+        string = BaseClass.to_string(self.text) + ' (sentence: ' + BaseClass.to_string(self.sentence)
+        string += ', tokens: ' + BaseClass.to_string(self.start) + ' to ' + BaseClass.to_string(self.end) + ')'
 
         return string
 

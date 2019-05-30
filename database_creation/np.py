@@ -1,6 +1,7 @@
 from database_creation.utils import BaseClass
 from database_creation.token import Token
 
+from copy import deepcopy
 from gensim.models import KeyedVectors
 
 
@@ -22,12 +23,8 @@ class Np(BaseClass):
 
         self.tokens = tokens
 
-        # TODO: implement Similarity
         self.token_similarity = None
         self.entity_similarity = None
-
-        self.token_similar_entities = None
-        self.entity_similar_entities = None
 
         self.candidate = None
         self.entities = None
@@ -46,7 +43,8 @@ class Np(BaseClass):
         """
 
         self.compute_token_similarity(entities)
-        self.compute_entity_similarity(entities)
+        # TODO: repair
+        # self.compute_entity_similarity(entities)
 
     def compute_token_similarity(self, entities):
         """
@@ -56,21 +54,24 @@ class Np(BaseClass):
             entities: list, preprocessed entities of the sentence.
         """
 
-        similarities, similar_entities = [], []
+        sim = None
 
         for idx in self.tokens:
             token = self.tokens[idx]
+
             token.compute_similarity(entities)
 
-            similarities.append(token.similarity) if token.similarity is not None else None
-            similar_entities.append((token.word, token.similar_entities)) if token.similarity is not None else None
+            if token.similarity is not None:
+                if sim is None or token.similarity.score > sim.score:
+                    sim = deepcopy(token.similarity)
 
-        if similarities:
-            self.token_similarity = max(similarities)
-            self.token_similar_entities = \
-                [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
-                                               if val == self.token_similarity]]
+                elif sim is not None and token.similarity.score == sim.score:
+                    sim.items.extend(token.similarity.items)
+                    sim.similar_items.extend(token.similarity.similar_items)
 
+        self.token_similarity = sim
+
+    # TODO: repair
     def compute_entity_similarity(self, entities):
         """
         Compute the entity similarity of the NP to the entities in the article.
@@ -101,8 +102,8 @@ class Np(BaseClass):
 
         if similarities:
             self.entity_similarity = max(similarities)
-            self.entity_similar_entities = [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
-                                                                          if val == self.entity_similarity]]
+            # self.entity_similar_entities = [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
+            #                                                               if val == self.entity_similarity]]
 
     def compute_candidate(self, entities, context):
         """
@@ -130,10 +131,11 @@ class Np(BaseClass):
             bool, True iff the article is a candidate.
         """
 
-        if (self.token_similarity and self.token_similarity >= self.token_threshold) \
-                or (self.entity_similarity and self.entity_similarity >= self.entity_threshold):
+        score_token = self.token_similarity.score if self.token_similarity is not None else None
+        score_entity = self.entity_similarity.score if self.entity_similarity is not None else None
 
-            return True
+        return True if (score_token and score_token >= self.token_threshold) \
+                       or (score_entity and score_entity >= self.entity_threshold) else False
 
     # endregion
 
@@ -240,9 +242,8 @@ def main():
     entities = ['James Joyce', 'Richard Bernstein']
     sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
 
-    # TODO: repair
-    # for sentence in sentences:
-    #     sentence.compute_similarities(entities)
+    for sentence in sentences:
+        sentence.compute_similarities(entities)
 
     Np.set_parameters(to_print=[], print_attribute=True)
     for sentence in sentences:
