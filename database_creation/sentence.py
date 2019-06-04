@@ -8,7 +8,8 @@ from nltk import tree
 class Sentence(BaseClass):
     # region Class initialization
 
-    to_print, print_attribute, print_lines, print_offsets = [], False, 1, 2
+    to_print = ['tokens', 'text', 'nps']
+    print_attribute, print_lines, print_offsets = False, 1, 2
 
     def __init__(self, sentence_element):
         """
@@ -77,19 +78,21 @@ class Sentence(BaseClass):
             for dep in dependency_element:
                 type_ = dep.attrib['type']
 
-                governor_idx = int(dep.find('governor').attrib['idx'])
-                dependent_idx = int(dep.find('dependent').attrib['idx'])
+                gov_idx = int(dep.find('governor').attrib['idx'])
+                dep_idx = int(dep.find('dependent').attrib['idx'])
 
-                if governor_idx != 0:
-                    governor = self.tokens[governor_idx]
-                    assert governor.word == dep.find('governor').text
+                if gov_idx != 0:
+                    gov_word = self.tokens[gov_idx].word
+                    assert gov_word == dep.find('governor').text
                 else:
-                    governor = 'ROOT'
+                    gov_word = 'ROOT'
 
-                dependent = self.tokens[dependent_idx]
-                assert dependent.word == dep.find('dependent').text
+                dep_word = self.tokens[dep_idx].word
+                assert dep_word == dep.find('dependent').text
 
-                dependency_list.append(Dependency(type_=type_, governor=governor, dependent=dependent))
+                dependency_list.append(Dependency(type_=type_,
+                                                  gov_word=gov_word, gov_idx=gov_idx,
+                                                  dep_word=dep_word, dep_idx=dep_idx))
 
             dependencies[dependency_element.attrib['type']] = dependency_list
 
@@ -99,7 +102,6 @@ class Sentence(BaseClass):
         """ Compute the text defined by the tokens. """
 
         text = ''
-
         for idx in self.tokens:
             token = self.tokens[idx]
 
@@ -112,23 +114,32 @@ class Sentence(BaseClass):
         """ Compute the NPs defined by self.parse. """
 
         t = tree.Tree.fromstring(self.parse)
-        idx = 1
-
+        idx = 0
         for position in t.treepositions('leaves'):
-            t[position] += '|' + str(idx)
-            idx += 1
+
+            if position[-1] == 0:
+                idx += 1
+                t[position] += '|' + str(idx)
+
+            # Case of non-breaking spaces inside a token
+            else:
+                old_position = tuple(list(position[:-1]) + [0])
+                # Insert a non-breaking space
+                t[old_position] = t[old_position].split('|')[0] + ' ' + t[position] + '|' + str(idx)
+                t[position] = ''
 
         nps = []
-
         for leaves in [subtree.leaves() for subtree in t.subtrees(lambda node: node.label() == 'NP')]:
             tokens = {}
 
             for leaf in leaves:
-                idx = int(leaf.split('|')[1])
-                word = leaf.split('|')[0]
-                assert self.tokens[idx].word == word
+                if leaf:
+                    split = leaf.split('|')
+                    idx = int(split[1])
+                    word = split[0]
 
-                tokens[idx] = self.tokens[idx]
+                    assert self.tokens[idx].word == word
+                    tokens[idx] = self.tokens[idx]
 
             nps.append(Np(tokens))
 
@@ -172,7 +183,7 @@ def main():
     for sentence in sentences:
         sentence.compute_similarities(entities)
 
-    Sentence.set_parameters(to_print=[], print_attribute=True)
+    # Sentence.set_parameters(to_print=[], print_attribute=True)
     print(Sentence.to_string(sentences))
 
 

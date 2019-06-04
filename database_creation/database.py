@@ -10,7 +10,8 @@ from collections import defaultdict
 class Database(BaseClass):
     # region Class initialization
 
-    to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
+    to_print,  = ['articles']
+    print_attributes, print_lines, print_offsets = False, 2, 0
     limit_print, random_print = 50, True
     count_modulo = 1000
 
@@ -31,6 +32,7 @@ class Database(BaseClass):
         self.articles = None
         self.size = None
 
+        # TODO: change to stats
         self.entity_tuples = None
         self.entity_tuples_articles = None
 
@@ -128,12 +130,16 @@ class Database(BaseClass):
         for id_ in self.articles:
             count = self.progression(count)
 
-            self.articles[id_].preprocess()
+            try:
+                self.articles[id_].preprocess()
+            except AssertionError:
+                print(id_)
+                raise AssertionError
 
         self.clean(Article.criterion_entity)
 
     @BaseClass.Verbose("Preprocessing the articles (most frequent tuples)...")
-    def preprocess_tuples(self, limit=100, display=False):
+    def preprocess_contexts(self, limit=100, display=False):
         """
         Performs a preprocessing of the database to isolate articles with frequent entity tuples..
 
@@ -156,12 +162,7 @@ class Database(BaseClass):
         self.compute_entity_tuples(limit=limit, display=display)
         self.clean(Database.criterion_rare_entities)
 
-        count = 0
-
-        for id_ in self.articles:
-            count = self.progression(count)
-
-            self.articles[id_].preprocess()
+        self.preprocess_standard()
 
     @BaseClass.Verbose("Processing the articles (find aggregation candidates)...")
     def process_candidates(self):
@@ -175,7 +176,7 @@ class Database(BaseClass):
             self.articles[id_].process_candidates()
 
     @BaseClass.Verbose("Processing the articles (compute frequent entity tuples contexts)...")
-    def process_tuples(self):
+    def process_contexts(self):
         """ Performs the processing of the database by computing the frequent entity tuples contexts. """
 
         count = 0
@@ -183,10 +184,11 @@ class Database(BaseClass):
         for id_ in self.articles:
             count = self.progression(count)
 
-            self.articles[id_].process_tuples()
+            self.articles[id_].process_contexts()
 
         self.clean(Article.criterion_context)
 
+    # TODO: finish
     def process_tuple(self, idx):
         entity_tuple, ids = self.entity_tuples[idx]
         count = 0
@@ -394,10 +396,10 @@ class Database(BaseClass):
 def main():
     d = Database(max_size=1000, root='../databases/nyt_jingyun')
 
-    d.preprocess_tuples(limit=100, display=True)
-    d.process_tuples()
+    d.preprocess_contexts(limit=10, display=True)
+    d.process_contexts()
 
-    Database.set_parameters(to_print=[], print_attribute=True)
+    # Database.set_parameters(to_print=[], print_attribute=True)
     print(d)
 
 

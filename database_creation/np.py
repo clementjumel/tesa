@@ -1,16 +1,15 @@
 from database_creation.utils import BaseClass
-from database_creation.token import Token
 
 from copy import deepcopy
-from gensim.models import KeyedVectors
 
 
 class Np(BaseClass):
     # region Class initialization
 
-    to_print, print_attribute, print_lines, print_offsets = [], True, 1, 4
+    to_print = ['tokens', 'token_similarity', 'entity_similarity']
+    print_attribute, print_lines, print_offsets = False, 1, 4
 
-    embedding_entity = None
+    embeddings_entity = None
     token_threshold, entity_threshold = 0.3, 0.3
 
     def __init__(self, tokens):
@@ -71,39 +70,38 @@ class Np(BaseClass):
 
         self.token_similarity = sim
 
-    # TODO: repair
-    def compute_entity_similarity(self, entities):
-        """
-        Compute the entity similarity of the NP to the entities in the article.
-
-        Args:
-            entities: list, preprocessed entities of the sentence.
-        """
-
-        if self.embedding_entity is None:
-            self.load_embedding()
-
-        vocab_np = self.find_vocab_np()
-        if not vocab_np:
-            return
-
-        vocab_entities = self.find_vocab_entities(entities)
-        if not vocab_entities:
-            return
-
-        similarities, similar_entities = [], []
-
-        for np in vocab_np:
-            for entity in vocab_entities:
-                similarity = self.embedding_entity.similarity(np, entity)
-
-                similarities.append(similarity) if similarity else None
-                similar_entities.append((np, entity)) if similarity else None
-
-        if similarities:
-            self.entity_similarity = max(similarities)
-            # self.entity_similar_entities = [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
-            #                                                               if val == self.entity_similarity]]
+    # def compute_entity_similarity(self, entities):
+    #     """
+    #     Compute the entity similarity of the NP to the entities in the article.
+    #
+    #     Args:
+    #         entities: list, preprocessed entities of the sentence.
+    #     """
+    #
+    #     if self.embedding_entity is None:
+    #         self.load_embedding()
+    #
+    #     vocab_np = self.find_vocab_np()
+    #     if not vocab_np:
+    #         return
+    #
+    #     vocab_entities = self.find_vocab_entities(entities)
+    #     if not vocab_entities:
+    #         return
+    #
+    #     similarities, similar_entities = [], []
+    #
+    #     for np in vocab_np:
+    #         for entity in vocab_entities:
+    #             similarity = self.embedding_entity.similarity(np, entity)
+    #
+    #             similarities.append(similarity) if similarity else None
+    #             similar_entities.append((np, entity)) if similarity else None
+    #
+    #     if similarities:
+    #         self.entity_similarity = max(similarities)
+    #         self.entity_similar_entities = [similar_entities[i] for i in [idx for idx, val in enumerate(similarities)
+    #                                                                       if val == self.entity_similarity]]
 
     def compute_candidate(self, entities, context):
         """
@@ -139,95 +137,79 @@ class Np(BaseClass):
 
     # endregion
 
-    # region Methods load_
-
-    @classmethod
-    @BaseClass.Verbose("Loading entity embeddings...")
-    def load_embedding(cls):
-        """ Load the entity embedding. """
-
-        cls.embedding_entity = KeyedVectors.load_word2vec_format(
-            fname='../pre_trained_models/freebase-vectors-skipgram1000-en.bin',
-            binary=True
-        )
-
-    # endregion
-
     # region Other methods
 
-    # TODO: repair
-    def find_vocab_np(self):
-        """
-        Finds in the NP some entities from the vocabulary. Otherwise, returns None.
+    # def find_vocab_np(self):
+    #     """
+    #     Finds in the NP some entities from the vocabulary. Otherwise, returns None.
+    #
+    #     Returns:
+    #         list, entities which belong to the vocabulary of the entity embedding, or None.
+    #     """
+    #
+    #     tokens_groups = []
+    #     separators = [-1]
+    #
+    #     for idx in range(len(self.tokens)):
+    #         if self.tokens[idx].text in [',', ';', 'and', 'or']:
+    #             separators.append(idx)
+    #
+    #     separators.append(len(self.tokens))
+    #
+    #     for i in range(len(separators) - 1):
+    #         start = separators[i] + 1
+    #         end = separators[i + 1]
+    #
+    #         tokens_groups.append(self.tokens[start: end])
+    #
+    #     tokens_groups.append(self.tokens) if len(separators) > 2 else None
+    #
+    #     entities = []
+    #
+    #     for tokens in tokens_groups:
+    #
+    #         plausible_entities = []
+    #
+    #         for criterion_name in ['punctuation', 'possessive', 'stopwords', 'determiner', 'number', 'adjective']:
+    #             criterion = getattr(Token, 'criterion_' + criterion_name)
+    #
+    #             tokens = [token for token in tokens if not criterion(token)]
+    #             plausible_entity = '_'.join([token.text.lower().replace('-', '_') for token in tokens])
+    #
+    #             if plausible_entity and plausible_entity not in plausible_entities:
+    #                 plausible_entities.append(plausible_entity)
+    #
+    #         entity = None
+    #         for e in plausible_entities:
+    #             if '/en/' + e in self.embedding_entity.vocab:
+    #                 entity = '/en/' + e
+    #                 break
+    #
+    #         entities.append(entity) if entity else None
+    #
+    #     return entities if entities else None
 
-        Returns:
-            list, entities which belong to the vocabulary of the entity embedding, or None.
-        """
-
-        tokens_groups = []
-        separators = [-1]
-
-        for idx in range(len(self.tokens)):
-            if self.tokens[idx].text in [',', ';', 'and', 'or']:
-                separators.append(idx)
-
-        separators.append(len(self.tokens))
-
-        for i in range(len(separators) - 1):
-            start = separators[i] + 1
-            end = separators[i + 1]
-
-            tokens_groups.append(self.tokens[start: end])
-
-        tokens_groups.append(self.tokens) if len(separators) > 2 else None
-
-        entities = []
-
-        for tokens in tokens_groups:
-
-            plausible_entities = []
-
-            for criterion_name in ['punctuation', 'possessive', 'stopwords', 'determiner', 'number', 'adjective']:
-                criterion = getattr(Token, 'criterion_' + criterion_name)
-
-                tokens = [token for token in tokens if not criterion(token)]
-                plausible_entity = '_'.join([token.text.lower().replace('-', '_') for token in tokens])
-
-                if plausible_entity and plausible_entity not in plausible_entities:
-                    plausible_entities.append(plausible_entity)
-
-            entity = None
-            for e in plausible_entities:
-                if '/en/' + e in self.embedding_entity.vocab:
-                    entity = '/en/' + e
-                    break
-
-            entities.append(entity) if entity else None
-
-        return entities if entities else None
-
-    # TODO: repair
-    def find_vocab_entities(self, entities):
-        """
-        Finds for each entity an entity from the vocabulary. Otherwise, returns None.
-
-        Returns:
-            list, entities which belongs to the vocabulary of the entity embedding, or None.
-        """
-
-        vocab_entities = []
-
-        for entity in entities:
-
-            entity = entity.lower().replace(' ', '_').replace('-', '_').replace('.', '').replace(',', '')
-            plausible_entities = [entity] + entity.split('_')
-
-            for e in plausible_entities:
-                if '/en/' + e in self.embedding_entity.vocab:
-                    vocab_entities.append('/en/' + e)
-                    break
-
-        return vocab_entities if vocab_entities else None
+    # def find_vocab_entities(self, entities):
+    #     """
+    #     Finds for each entity an entity from the vocabulary. Otherwise, returns None.
+    #
+    #     Returns:
+    #         list, entities which belongs to the vocabulary of the entity embedding, or None.
+    #     """
+    #
+    #     vocab_entities = []
+    #
+    #     for entity in entities:
+    #
+    #         entity = entity.lower().replace(' ', '_').replace('-', '_').replace('.', '').replace(',', '')
+    #         plausible_entities = [entity] + entity.split('_')
+    #
+    #         for e in plausible_entities:
+    #             if '/en/' + e in self.embedding_entity.vocab:
+    #                 vocab_entities.append('/en/' + e)
+    #                 break
+    #
+    #     return vocab_entities if vocab_entities else None
 
     # endregion
 
@@ -245,7 +227,7 @@ def main():
     for sentence in sentences:
         sentence.compute_similarities(entities)
 
-    Np.set_parameters(to_print=[], print_attribute=True)
+    # Np.set_parameters(to_print=[], print_attribute=True)
     for sentence in sentences:
         print(Np.to_string(sentence.nps))
 

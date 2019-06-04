@@ -1,12 +1,14 @@
 from copy import copy
 from time import time
 from re import findall
+from gensim.models import KeyedVectors
 
 
 class BaseClass:
     # region Class base methods
 
     verbose = True
+    # TODO: add a print_lines before
     to_print, print_attribute, print_lines, print_offsets = None, None, None, None
 
     def __str__(self):
@@ -95,7 +97,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention)):
+        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context)):
             return str(item)
 
         # Case of lists
@@ -262,10 +264,10 @@ class BaseClass:
         entity = before[0] if len(before) > 0 else entity
 
         split = entity.split(', ')
-        entity = ' '.join([split[1], split[0]]) if len(split) == 2 else entity
+        entity = ' '.join([split[1], split[0]]) if len(split) == 2 else entity  # inverse last name, first names
 
         split = entity.split()
-        entity = ' '.join([split[0], split[2]]) if len(split) == 3 else entity
+        entity = ' '.join([split[0], split[2]]) if len(split) == 3 else entity  # remove middle name
 
         return entity
 
@@ -308,7 +310,7 @@ class BaseClass:
             standardization.add(s)
 
             if standardize_name == 'person' and len(s.split()) == 2:
-                standardization.add(s.split()[1])
+                standardization.add(s.split()[1])  # add the case of only last name
 
         return standardization
 
@@ -356,6 +358,31 @@ class BaseClass:
 
         return True if BaseClass.standardize(entity1).intersection(BaseClass.standardize(entity2)) else False
 
+    @classmethod
+    @Verbose("Loading embeddings...")
+    def load_embeddings(cls, type_):
+        """
+        Load the token or entity embeddings.
+
+        Args:
+            type_: str, must be 'token' or 'entity', type of the embeddings.
+        """
+
+        if type_ == 'token':
+            cls.embeddings_token = KeyedVectors.load_word2vec_format(
+                fname='../pre_trained_models/GoogleNews-vectors-negative300.bin',
+                binary=True
+            )
+
+        elif type_ == 'entity':
+            cls.embeddings_entity = KeyedVectors.load_word2vec_format(
+                fname='../pre_trained_models/freebase-vectors-skipgram1000-en.bin',
+                binary=True
+            )
+
+        else:
+            raise Exception("Wrong embeddings' type: {}".format(type_))
+
     # endregion
 
 
@@ -395,19 +422,23 @@ class Similarity:
 class Dependency:
     # region Class base methods
 
-    def __init__(self, type_, governor, dependent):
+    def __init__(self, type_, gov_word, gov_idx, dep_word, dep_idx):
         """
         Initializes the Dependency instance.
 
         Args:
             type_: str, type of the dependency.
-            governor: Token, governor of the dependency relationship.
-            dependent: Token, dependent of the dependency relationship.
+            gov_word: str, word of the governor Token.
+            gov_idx: int, index of the governor Token.
+            dep_word: str, word of the dependent Token.
+            dep_idx: int, index of the dependent Token.
         """
 
         self.type_ = type_
-        self.governor = governor
-        self.dependent = dependent
+        self.gov_word = gov_word
+        self.gov_idx = gov_idx
+        self.dep_word = dep_word
+        self.dep_idx = dep_idx
 
     def __str__(self):
         """
@@ -417,8 +448,9 @@ class Dependency:
             str, readable format of the instance.
         """
 
-        string = BaseClass.to_string(self.governor) + '/' + BaseClass.to_string(self.dependent)
-        string += ' (' + BaseClass.to_string(self.type_) + ')'
+        string = BaseClass.to_string(self.type_) + ': '
+        string += BaseClass.to_string(self.gov_word) + '[' + BaseClass.to_string(self.gov_idx) + ']/'
+        string += BaseClass.to_string(self.dep_word) + '[' + BaseClass.to_string(self.dep_idx) + ']'
 
         return string
 
@@ -452,8 +484,66 @@ class Mention:
             str, readable format of the instance.
         """
 
-        string = BaseClass.to_string(self.text) + ' (sentence: ' + BaseClass.to_string(self.sentence)
-        string += ', tokens: ' + BaseClass.to_string(self.start) + ' to ' + BaseClass.to_string(self.end) + ')'
+        string = BaseClass.to_string(self.text)
+        string += ' (sentence [' + BaseClass.to_string(self.sentence) + '], '
+        string += 'tokens [' + BaseClass.to_string(self.start) + '-' + BaseClass.to_string(self.end) + '])'
+
+        return string
+
+    # endregion
+
+
+class Context:
+    # region Class base methods
+
+    def __init__(self, sentence_texts, sentence_idxs,
+                 before_texts=None, before_idxs=None,
+                 after_texts=None, after_idxs=None):
+        """
+        Initializes the Context instance.
+
+        Args:
+            sentence_texts: list, the context's sentences' texts.
+            sentence_idxs: list, indexes of sentences' sentences.
+            before_texts: list, sentences' texts before the actual context.
+            before_idxs: list, indexes of before's sentences.
+            after_texts: list, sentences' texts after the actual context.
+            after_idxs: list, indexes of after's sentences.
+        """
+
+        self.sentence_texts = sentence_texts
+        self.sentence_idxs = sentence_idxs
+        self.before_texts = before_texts
+        self.before_idxs = before_idxs
+        self.after_texts = after_texts
+        self.after_idxs = after_idxs
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Mention.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        string = ''
+
+        if self.before_texts is not None:
+            string += ' '.join([
+                BaseClass.to_string(self.before_texts[i]) + '[' + BaseClass.to_string(self.before_idxs[i]) + ']'
+                if self.before_texts[i] else '[...]' for i in range(len(self.before_texts))
+            ])
+            string += '\n'
+
+        string += ' '.join([BaseClass.to_string(self.sentence_texts[i]) + '[' +
+                            BaseClass.to_string(self.sentence_idxs[i]) + ']' for i in range(len(self.sentence_texts))])
+
+        if self.after_texts is not None:
+            string += '\n'
+            string += ' '.join([
+                BaseClass.to_string(self.after_texts[i]) + '[' + BaseClass.to_string(self.after_idxs[i]) + ']'
+                if self.after_texts[i] else '[...]' for i in range(len(self.after_texts))
+            ])
 
         return string
 

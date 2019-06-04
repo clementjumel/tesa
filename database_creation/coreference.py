@@ -4,7 +4,8 @@ from database_creation.utils import BaseClass, Mention
 class Coreference(BaseClass):
     # region Class initialization
 
-    to_print, print_attribute, print_lines, print_offsets = [], True, 1, 2
+    to_print = ['representative', 'mentions', 'entity']
+    print_attribute, print_lines, print_offsets = True, 1, 2
 
     def __init__(self, element, entities):
         """
@@ -88,7 +89,7 @@ def main():
     coreferences = [Coreference(coreference_element, entities) for coreference_element
                     in root.findall('./document/coreference/coreference')]
 
-    Coreference.set_parameters(to_print=[], print_attribute=True)
+    # Coreference.set_parameters(to_print=[], print_attribute=True)
     print(Coreference.to_string(coreferences))
 
 

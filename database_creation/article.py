@@ -1,16 +1,18 @@
-from database_creation.utils import BaseClass
+from database_creation.utils import BaseClass, Context
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
 from xml.etree import ElementTree
 from collections import deque
 from copy import copy
+from collections import defaultdict
 
 
 class Article(BaseClass):
     # region Class initialization
 
-    to_print, print_attribute, print_lines, print_offsets = ['title', 'entities', 'sentences'], True, 1, 0
+    to_print = ['entities', 'same_sentence_contexts', 'neighboring_sentences_contexts', 'same_role_contexts']
+    print_attribute, print_lines, print_offsets = True, 1, 0
 
     context_range = 1
 
@@ -36,7 +38,9 @@ class Article(BaseClass):
         self.sentences = None
         self.coreferences = None
 
-        self.tuple_contexts = None
+        self.same_sentence_contexts = None
+        self.neighboring_sentences_contexts = None
+        self.same_role_contexts = None
 
     # endregion
 
@@ -56,10 +60,12 @@ class Article(BaseClass):
         self.compute_similarities()
         self.compute_candidates()
 
-    def process_tuples(self):
+    def process_contexts(self):
         """ Performs the processing of the frequent entity tuples of the article. """
 
-        self.compute_tuple_contexts()
+        # self.compute_contexts('same_sentence')
+        self.compute_contexts('neighboring_sentences')
+        # self.compute_contexts('same_role')
 
     def write_candidates(self, f):
         """
@@ -140,8 +146,15 @@ class Article(BaseClass):
             context.append(self.sentences[i + Article.context_range + 1].text
                            if i + Article.context_range + 1 < len(self.sentences) else '')
 
-    def compute_tuple_contexts(self):
-        """ Compute the tuple contexts of the article. """
+    def compute_contexts(self, type_):
+        """
+        Compute some contexts of the article, according to the specified type.
+
+        Args:
+            type_: str, must be 'same_sentence', 'neighboring_sentences', or 'same_role', type of the contexts.
+        """
+
+        assert type_ in ['same_sentence', 'neighboring_sentences', 'same_role']
 
         tuple_contexts = {}
 
@@ -151,11 +164,33 @@ class Article(BaseClass):
             entity_tuples = self.subtuples(entities)
 
             for entity_tuple in entity_tuples:
-                context = self.context(entity_tuple)
-                if context is not None:
-                    tuple_contexts[entity_tuple] = context
+                contexts = getattr(self, 'contexts_' + type_)(entity_tuple)
+                if contexts:
+                    tuple_contexts[entity_tuple] = contexts
 
-        self.tuple_contexts = tuple_contexts if tuple_contexts else None
+        setattr(self, type_ + '_contexts', tuple_contexts) if tuple_contexts else None
+
+    # endregion
+
+    # region Methods get_
+
+    def get_entity_sentences(self, entity):
+        """
+        Returns the indexes of the sentences where there is a mention of the specified entity.
+
+        Args:
+            entity: str, entity we want to find mentions of.
+
+        Returns:
+            list, sorted list of sentences' indexes.
+        """
+
+        entity_sentences = set()
+
+        for coreference in [c for c in self.coreferences if c.entity and c.entity == entity]:
+            entity_sentences.update(coreference.sentences)
+
+        return sorted(entity_sentences)
 
     # endregion
 
@@ -195,58 +230,102 @@ class Article(BaseClass):
             bool, True iff the article doesn't have a context.
         """
 
-        return True if self.tuple_contexts is None else False
+        return True if (self.same_sentence_contexts is None and self.neighboring_sentences_contexts is None and
+                        self.same_role_contexts is None) \
+            else False
 
     # endregion
 
     # region Other methods
 
-    def context(self, entity_tuple):
+    def contexts_same_sentence(self, entity_tuple):
         """
-        Returns the context for a single entity tuple, that is the sentences where the entities are referred to.
+        Returns the same-sentence contexts for a single entity tuple, that is the sentences where all the entities are
+        mentioned.
 
         Args:
             entity_tuple: tuple, entities to analyse.
 
         Returns:
-            dict, context of the entity, ie the sentences with references to all the entities of the tuple, and the
-            previous and following ones.
+            list, same-sentence Contexts of the entities.
         """
 
-        sentences = set()
+        sentences = defaultdict(int)
 
         for entity in entity_tuple:
-            coreferences = [c for c in self.coreferences if c.entity and c.entity == entity]
+            for idx in self.get_entity_sentences(entity):
+                sentences[idx] += 1
 
-            if len(coreferences) == 0:
-                return None
+        sentences = [idx for idx in sentences if sentences[idx] == len(entity_tuple)]
 
-            else:
-                coreference = coreferences[0]
-
-                if not sentences:
-                    sentences.update(coreference.sentences)
-                else:
-                    sentences.intersection_update(coreference.sentences)
-
-                if not sentences:
-                    return None
-
-        sentences = sorted(sentences)
-        context = {'sentences': sentences}
+        contexts = []
 
         for idx in sentences:
-            sample = []
+            before_texts, before_idxs = [], []
 
-            for j in range(idx - self.context_range, idx + self.context_range + 1):
+            for i in range(self.context_range):
                 try:
-                    sample.append(self.sentences[j].text)
+                    before_texts.append(self.sentences[idx - self.context_range + i].text)
+                    before_idxs.append(idx - self.context_range + i)
                 except KeyError:
                     pass
 
-            context['sample_' + str(idx)] = ' '.join(sample)
+            contexts.append(Context(sentence_texts=[self.sentences[idx].text], sentence_idxs=[idx],
+                                    before_texts=before_texts, before_idxs=before_idxs,
+                                    after_texts=None, after_idxs=None))
 
-        return context
+        return contexts
+
+    def contexts_neighboring_sentences(self, entity_tuple):
+        """
+        Returns the neighboring-sentences contexts for a single entity tuple, that is the neighboring sentences where
+        the entities are mentioned.
+
+        Args:
+            entity_tuple: tuple, entities to analyse.
+
+        Returns:
+            list, neighbouring-sentences Contexts of the entities.
+        """
+
+        sentences = defaultdict(set)
+
+        for i in range(len(entity_tuple)):
+            for idx in self.get_entity_sentences(entity_tuple[i]):
+                sentences[idx].add(i)
+
+        contexts_sentences = set()
+
+        for idx in sentences:
+            unseens = list(range(len(entity_tuple)))
+            seers = set()
+
+            for i in range(len(entity_tuple)):
+                if idx + i in sentences:
+                    for j in sentences[idx + i]:
+                        try:
+                            unseens.remove(j)
+                            seers.add(idx + i)
+                        except ValueError:
+                            pass
+
+                    if not unseens:
+                        contexts_sentences.add(tuple(sorted(seers)))
+                        break
+
+        contexts_sentences = sorted(contexts_sentences)
+        contexts = []
+
+        for idxs in contexts_sentences:
+            contexts.append(Context(sentence_texts=[self.sentences[idx].text if idx in idxs else ''
+                                                    for idx in range(idxs[0], idxs[-1] + 1)],
+                                    sentence_idxs=list(range(idxs[0], idxs[-1] + 1))))
+
+        return contexts
+
+    def contexts_same_role(self, entity_tuple):
+        # TODO: create function
+        pass
 
     # endregion
 
@@ -256,9 +335,9 @@ def main():
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
     article.preprocess()
-    article.process_tuples()
+    article.process_contexts()
 
-    article.set_parameters(to_print=['entities', 'tuple_contexts'], print_attribute=True)
+    # article.set_parameters(to_print=[], print_attribute=True)
     print(article)
 
 

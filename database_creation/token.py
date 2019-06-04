@@ -3,17 +3,17 @@ from database_creation.utils import BaseClass, Similarity
 from copy import copy
 from string import punctuation as string_punctuation
 from nltk.corpus import stopwords as nltk_stopwords
-from gensim.models import KeyedVectors
 
 
 class Token(BaseClass):
     # region Class initialization
 
-    to_print, print_attribute, print_lines, print_offsets = [], False, 0, 0
+    to_print = ['word', 'pos', 'ner', 'similarity']
+    print_attribute, print_lines, print_offsets = False, 0, 0
 
     punctuation = [p for p in string_punctuation] + ["''", '``']
     stopwords = set(nltk_stopwords.words('english'))
-    embedding_token = None
+    embeddings_token = None
 
     def __init__(self, token_element):
         """
@@ -65,7 +65,10 @@ class Token(BaseClass):
             token_element: ElementTree.Element, annotations of the token.
         """
 
-        self.word = token_element.find('word').text
+        word = token_element.find('word').text
+
+        assert word
+        self.word = word
 
         if self.word not in self.punctuation:
             ner = token_element.find('NER').text
@@ -82,21 +85,18 @@ class Token(BaseClass):
             entities: list, preprocessed entities of the sentence.
         """
 
-        if self.embedding_token is None:
-            self.load_embedding()
+        if self.embeddings_token is None:
+            self.load_embeddings(type_='token')
 
-        if self.criterion_exclude():
-            return
-
-        token = self.find_vocab()
+        token = self.find_embedding()
         if not token:
             return
 
         sim = None
 
         for entity in entities:
-            token_sim = [self.embedding_token.similarity(token, entity_token) for entity_token in entity.split()
-                         if entity_token in self.embedding_token.vocab]
+            token_sim = [self.embeddings_token.similarity(token, entity_token) for entity_token in entity.split()
+                         if entity_token in self.embeddings_token.vocab]
             score = max(token_sim) if token_sim else None
 
             if score:
@@ -104,6 +104,7 @@ class Token(BaseClass):
                     sim = Similarity(score=score, items=[self.word], similar_items=[entity])
 
                 elif sim is not None and sim.score == score:
+                    sim.items.append(self.word)
                     sim.similar_items.append(entity)
 
         self.similarity = sim
@@ -145,49 +146,37 @@ class Token(BaseClass):
     def criterion_exclude(self):
         """ Check if a token must not be analyzed by similarity methods. """
 
-        if self.criterion_punctuation() \
-                or self.criterion_stopwords() \
-                or self.criterion_determiner() \
-                or self.criterion_number():
+        if self.criterion_punctuation() or self.criterion_stopwords() \
+                or self.criterion_determiner() or self.criterion_number():
             return True
 
     # endregion
 
-    # region Methods load_
+    # region Other methods
 
-    @classmethod
-    @BaseClass.Verbose("Loading token embeddings...")
-    def load_embedding(cls):
-        """ Load the token embedding. """
-
-        cls.embedding_token = KeyedVectors.load_word2vec_format(
-            fname='../pre_trained_models/GoogleNews-vectors-negative300.bin',
-            binary=True
-        )
-
-    # endregion
-
-    # region Methods find_
-
-    def find_vocab(self):
+    def find_embedding(self):
         """
-        Finds a string that matches the embedding vocabulary. Otherwise, returns None.
+        Finds a string that matches the embeddings' vocabulary. Otherwise, returns None.
 
         Returns:
             str, token that matches the embedding vocabulary or None.
         """
 
-        if self.word in self.embedding_token.vocab:
-            return self.word
-
-        if self.word.lower() in self.embedding_token.vocab:
-            return self.word.lower()
-
-        elif self.lemma.lower() in self.embedding_token.vocab:
-            return self.lemma.lower()
+        if self.criterion_exclude():
+            return None
 
         else:
-            return None
+            if self.word in self.embeddings_token.vocab:
+                return self.word
+
+            if self.word.lower() in self.embeddings_token.vocab:
+                return self.word.lower()
+
+            elif self.lemma.lower() in self.embeddings_token.vocab:
+                return self.lemma.lower()
+
+            else:
+                return None
 
     # endregion
 
@@ -204,7 +193,7 @@ def main():
     for token in tokens:
         token.compute_similarity(entities)
 
-    Token.set_parameters(to_print=[], print_attribute=True)
+    # Token.set_parameters(to_print=[], print_attribute=True)
     print(Token.to_string(tokens))
 
 
