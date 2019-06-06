@@ -5,16 +5,20 @@ from copy import copy
 from numpy import random
 from glob import glob
 from collections import defaultdict
+from numpy import histogram
+
+import matplotlib.pyplot as plt
 
 
 class Database(BaseClass):
     # region Class initialization
 
-    to_print,  = ['articles']
+    to_print = ['articles']
     print_attributes, print_lines, print_offsets = False, 2, 0
     limit_print, random_print = 50, True
     count_modulo = 1000
 
+    @BaseClass.Verbose("Initializing the database...")
     def __init__(self, max_size=None, root='databases/nyt_jingyun', year='2000'):
         """
         Initializes an instance of Database.
@@ -32,12 +36,14 @@ class Database(BaseClass):
         self.articles = None
         self.size = None
 
-        # TODO: change to stats
-        self.entity_tuples = None
-        self.entity_tuples_articles = None
+        self.tuples = None
+        self.tuples_ids = None
+        self.stats = None
 
         self.compute_articles()
         self.compute_size()
+
+        self.clean(Article.criterion_data)
 
     def __str__(self):
         """
@@ -119,60 +125,30 @@ class Database(BaseClass):
 
     # region Main methods
 
-    @BaseClass.Verbose("Preprocessing the articles (standard)...")
-    def preprocess_standard(self):
-        """ Performs the standard preprocessing of the database. """
+    @BaseClass.Verbose("Preprocessing the database...")
+    def preprocess_database(self):
+        """ Performs the preprocessing of the database. """
 
-        self.clean(Article.criterion_data)
+        self.compute_entities()
+        self.compute_tuples()
+        self.clean(Database.criterion_tuples_ids)
 
-        count = 0
-
-        for id_ in self.articles:
-            count = self.progression(count)
-
-            try:
-                self.articles[id_].preprocess()
-            except AssertionError:
-                print(id_)
-                raise AssertionError
-
-        self.clean(Article.criterion_entity)
-
-    @BaseClass.Verbose("Preprocessing the articles (most frequent tuples)...")
-    def preprocess_contexts(self, limit=100, display=False):
-        """
-        Performs a preprocessing of the database to isolate articles with frequent entity tuples..
-
-        Args:
-            limit: int, maximum number of tuples.
-            display: bool, whether or not to display the ranking of the tuples.
-        """
-
-        self.clean(Article.criterion_data)
+    @BaseClass.Verbose("Preprocessing the articles...")
+    def preprocess_articles(self):
+        """ Performs the preprocessing of the articles. """
 
         count = 0
-
         for id_ in self.articles:
             count = self.progression(count)
-
-            self.articles[id_].compute_entities()
-
-        self.clean(Article.criterion_entity)
-
-        self.compute_entity_tuples(limit=limit, display=display)
-        self.clean(Database.criterion_rare_entities)
-
-        self.preprocess_standard()
+            self.articles[id_].preprocess()
 
     @BaseClass.Verbose("Processing the articles (find aggregation candidates)...")
     def process_candidates(self):
         """ Performs the processing of the database by computing the aggregation candidates. """
 
         count = 0
-
         for id_ in self.articles:
             count = self.progression(count)
-
             self.articles[id_].process_candidates()
 
     @BaseClass.Verbose("Processing the articles (compute frequent entity tuples contexts)...")
@@ -180,37 +156,66 @@ class Database(BaseClass):
         """ Performs the processing of the database by computing the frequent entity tuples contexts. """
 
         count = 0
-
         for id_ in self.articles:
             count = self.progression(count)
-
             self.articles[id_].process_contexts()
 
-        self.clean(Article.criterion_context)
+    @BaseClass.Verbose("Computing the entities tuples statistics...")
+    def stats_tuples(self):
+        """ Compute and display the entities tuples statistics of the database. """
+
+        self.compute_stats_tuples()
+        self.display_stats_tuples(print_data=True)
+
+    @BaseClass.Verbose("Computing the contexts statistics...")
+    def stats_contexts(self):
+        """ Compute and display the contexts statistics of the database. """
+
+        self.compute_stats_contexts()
+        self.display_stats_contexts(print_data=True)
+
+    @BaseClass.Verbose("Filtering the articles according to a threshold...")
+    @BaseClass.Attribute('tuples', True)
+    def filter_threshold(self, threshold):
+        """
+        Filter out the articles that doesn't respect the specified threshold on the entities tuple frequency.
+
+        Args:
+            threshold: int, minimal number of articles an entities tuple must appear in to be considered.
+        """
+
+        tuples, tuples_ids = [], set()
+
+        for entities_tuple in self.tuples:
+            if entities_tuple['frequency'] >= threshold:
+                tuples.append(entities_tuple)
+                tuples_ids.update(entities_tuple['ids'])
+
+        self.tuples = tuples
+        self.tuples_ids = tuples_ids
+
+        self.clean(Database.criterion_tuples_ids)
 
     # TODO: finish
-    def process_tuple(self, idx):
-        entity_tuple, ids = self.entity_tuples[idx]
-        count = 0
+    def display_tuple(self, idx):
 
-        print("Entity tuples: {}\n\n".format(self.to_string(list(entity_tuple))))
+        entity_tuple = self.tuples[idx]['tuple_']
+        ids = self.tuples[idx]['ids']
+
+        length = 0
+
+        print("Entity tuples: {}\n\n".format(self.to_string(entity_tuple)))
 
         for id_ in ids:
-            try:
-                article = self.articles[id_]
-            except KeyError:
-                continue
+            article = self.articles[id_]
 
-            if article.tuple_contexts is not None:
-                try:
-                    context = article.tuple_contexts[entity_tuple]
-                    count += len(list(context.keys())) - 1
-                    print(self.to_string(context) + '\n\n')
+            for type_ in article.contexts:
+                contexts = article.contexts[type_][entity_tuple]
+                length += len(contexts)
 
-                except KeyError:
-                    pass
+                print(self.to_string(contexts) + '\n\n')
 
-        print("\n{} samples out of {} articles".format(count, len(ids)))
+        print("\n{} samples out of {} articles".format(length, len(ids)))
 
     @BaseClass.Verbose("Writing the candidates...")
     def write_candidates(self, file_name):
@@ -222,7 +227,6 @@ class Database(BaseClass):
         """
 
         count = 0
-
         with open(file_name, "w+") as f:
             for id_ in self.articles:
                 count = self.progression(count)
@@ -251,41 +255,52 @@ class Database(BaseClass):
 
         self.size = len(self.get_ids())
 
-    @BaseClass.Verbose("Computing the most frequent entities...")
-    def compute_entity_tuples(self, limit, display):
-        """
-        Compute the most frequent tuples of entities.
-
-        Args:
-            limit: int, maximum number of tuples.
-            display: bool, whether or not to display the ranking of the tuples.
-        """
-
-        entities_dict, count = defaultdict(set), 0
+    def compute_entities(self):
+        """ Compute the entities of the articles. """
 
         for id_ in self.articles:
-            count = self.progression(count)
+            self.articles[id_].compute_entities()
 
-            for entity_type in ['locations', 'persons', 'organizations']:
-                entities = getattr(self.articles[id_], 'entities_' + entity_type)
+    def compute_tuples(self):
+        """ Compute the entities tuples of the database as a sorted list of dictionaries with the tuple, the frequency
+        (in number of articles) and the ids of the articles. """
 
-                if entities and len(entities) >= 2:
-                    entities.sort()
+        tuples_ids = defaultdict(set)
 
+        for id_ in self.articles:
+            for entity_type in ['location', 'person', 'organization']:
+                entities = getattr(self.articles[id_], 'entities')[entity_type]
+
+                if len(entities) >= 2:
                     for t in self.subtuples(entities):
-                        entities_dict[t].add(id_)
+                        tuples_ids[t].add(id_)
 
-        sorted_tuples = sorted(entities_dict, key=lambda k: len(entities_dict[k]), reverse=True)[0:limit]
+        sorted_tuples = sorted(tuples_ids, key=lambda k: len(tuples_ids[k]), reverse=True)
+        tuples = [{'tuple_': t, 'frequency': len(tuples_ids[t]), 'ids': tuples_ids[t]} for t in sorted_tuples]
+        tuples_ids = set([id_ for tuple_ in tuples for id_ in tuple_['ids']])
 
-        if display:
-            print('\nMost frequent entity tuples:')
-            for t in sorted_tuples:
-                print(self.to_string(list(t)) + ' (' + str(len(entities_dict[t])) + ')')
-            print('')
+        self.tuples = tuples
+        self.tuples_ids = tuples_ids
 
-        self.entity_tuples = [[t, entities_dict[t]] for t in sorted_tuples]
-        self.entity_tuples_articles = \
-            set([item for subset in [entities_dict[t] for t in sorted_tuples] for item in subset])
+    def compute_stats_tuples(self):
+        """ Compute the entities tuples statistics of the database. """
+
+        if self.stats is None:
+            self.stats = dict()
+
+        self.stats['tuples_lengths'] = self.stat_tuples_lengths()
+        self.stats['tuples_frequencies'] = self.stat_tuples_frequencies()
+        self.stats['tuples_thresholds'] = self.stat_tuples_thresholds()
+
+    def compute_stats_contexts(self):
+        """ Compute the contexts statistics of the database. """
+
+        if self.stats is None:
+            self.stats = dict()
+
+        self.stats['contexts_same_sent'] = self.stat_contexts('same_sent')
+        self.stats['contexts_neigh_sent'] = self.stat_contexts('neigh_sent')
+        self.stats['contexts_same_role'] = self.stat_contexts('same_role')
 
     # endregion
 
@@ -305,18 +320,148 @@ class Database(BaseClass):
 
     # region Methods criterion_
 
-    def criterion_rare_entities(self, id_):
+    def criterion_tuples_ids(self, id_):
         """
-        Check if an article's entities contain the most frequent tuples of entities.
+        Check if an article does not belong to the tuples ids.
 
         Args:
-            id_: string, ID of the article to analyze.
+            id_: string, id of the article to analyze.
 
         Returns:
-            bool, True iff the article's entities does not contain frequent entities.
+            bool, True iff the article does not belong to the tuples ids.
         """
 
-        return True if id_ not in self.entity_tuples_articles else False
+        return True if id_ not in self.tuples_ids else False
+
+    # endregion
+
+    # region Methods stat_
+
+    def stat_tuples_lengths(self):
+        """
+        Compute the histogram of the lengths of the tuples as a numpy.histogram.
+
+        Returns:
+            numpy.histogram, histogram of the lengths of the entities tuples, starting from 0.
+        """
+
+        data = [len(entities_tuple['tuple_']) for entities_tuple in self.tuples]
+        bins = max(data) + 1
+        range_ = (0, max(data) + 1)
+
+        return histogram(data, bins=bins, range=range_)
+
+    def stat_tuples_frequencies(self):
+        """
+        Compute the histogram of the frequencies of the tuples as a numpy.histogram.
+
+        Returns:
+            numpy.histogram, histogram of the frequencies of the entities tuples, starting from 0.
+        """
+
+        data = [entities_tuple['frequency'] for entities_tuple in self.tuples]
+        bins = max(data) + 1
+        range_ = (0, max(data) + 1)
+
+        return histogram(data, bins=bins, range=range_)
+
+    def stat_tuples_thresholds(self):
+        """
+        Compute the histogram of the size of the database corresponding to each threshold over the entities tuples
+        frequency, starting from 0 (no threshold), as a numpy.histogram.
+
+        Returns:
+            numpy.histogram, histogram of the number of articles for each threshold.
+        """
+
+        m = max([entities_tuple['frequency'] for entities_tuple in self.tuples])
+
+        threshold_ids = [set() for _ in range(m + 1)]
+        threshold_ids[0].update(set(self.get_ids()))
+
+        for entities_tuple in self.tuples:
+            for threshold in range(1, entities_tuple['frequency'] + 1):
+                threshold_ids[threshold].update(entities_tuple['ids'])
+
+        data = [i for i in range(m + 1) for _ in threshold_ids[i]]
+        bins = m + 1
+        range_ = (0, m + 1)
+
+        return histogram(data, bins=bins, range=range_)
+
+    def stat_contexts(self, type_):
+        """
+        Compute the histogram of the number of contexts for the specified type_, as a numpy.histogram.
+
+        Args:
+            type_: str, type of the context, must be 'same_sent', 'neigh_sent', or 'same_role'.
+
+        Returns:
+            numpy.histogram, histogram of the number of contexts.
+        """
+
+        data = []
+        for entities_tuple in self.tuples:
+            length = 0
+            for id_ in entities_tuple['ids']:
+                length += len(self.articles[id_].contexts[type_][entities_tuple['tuple_']])
+
+            data.append(length)
+
+        bins = max(data) + 1
+        range_ = (0, max(data) + 1)
+
+        return histogram(data, bins=bins, range=range_)
+
+    # endregion
+
+    # region Methods display_
+
+    def display_stats_tuples(self, print_data):
+        """
+        Display the entities tuples statistics of the database.
+
+        Args:
+            print_data: bool, whether to print the data or not.
+        """
+
+        print("\nTotal number of tuples: {}".format(len(self.tuples)))
+        print("10 most frequent tuples:")
+        for entities_tuple in self.tuples[:10]:
+            print("{} (in {} articles)".format(self.to_string(entities_tuple['tuple_']), entities_tuple['frequency']))
+        print('\n')
+
+        self.plot_hist(fig=1, data=self.stats['tuples_lengths'], title='Lengths of the entities tuples',
+                       xlabel='lengths', log=True, print_data=print_data)
+
+        self.plot_hist(fig=2, data=self.stats['tuples_frequencies'], title='Frequencies of the entities tuples',
+                       xlabel='frequencies', log=True, print_data=print_data)
+
+        self.plot_hist(fig=3, data=self.stats['tuples_thresholds'], title='Number of articles for each threshold',
+                       xlabel='thresholds', log=True, print_data=print_data)
+
+        print('\n')
+
+    def display_stats_contexts(self, print_data):
+        """
+        Display the contexts statistics of the database.
+
+        Args:
+            print_data: bool, whether to print the data or not.
+        """
+
+        print('\n')
+
+        self.plot_hist(fig=4, data=self.stats['contexts_same_sent'], title='Number of same-sentence contexts',
+                       xlabel='contexts size', log=True, print_data=print_data)
+
+        self.plot_hist(fig=5, data=self.stats['contexts_neigh_sent'], title='Number of neighboring-sentences contexts',
+                       xlabel='contexts size', log=True, print_data=print_data)
+
+        self.plot_hist(fig=6, data=self.stats['contexts_same_role'], title='Number of same-role contexts',
+                       xlabel='contexts size', log=True, print_data=print_data)
+
+        print('\n')
 
     # endregion
 
@@ -335,13 +480,11 @@ class Database(BaseClass):
         to_del = []
 
         if criterion.__module__.split('.')[-1] == 'article':
-
             for id_ in self.articles:
                 if criterion(self.articles[id_]):
                     to_del.append(id_)
 
         elif criterion.__module__.split('.')[-1] in ['__main__', 'database']:
-
             for id_ in self.articles:
                 if criterion(self, id_):
                     to_del.append(id_)
@@ -390,17 +533,47 @@ class Database(BaseClass):
 
         return paths[:limit] if limit else paths
 
+    def plot_hist(self, fig, data, title, xlabel, log=False, print_data=True):
+        """
+        Plot the data as a histogram using matplotlib.pyplot. Print the data as well.
+
+        Args:
+            fig: int, index of the figure.
+            data: numpy.histogram, histogram of the data.
+            title: str, title of the figure.
+            xlabel: str, label of the x-axis.
+            log: bool, whether to use a logarithmic scale or not.
+            print_data: bool, whether to print the data or not.
+        """
+
+        plt.figure(fig)
+
+        counts, bins = data
+        plt.hist(bins[:-1], bins, weights=counts, align='left', rwidth=.8, log=log)
+        plt.title(title)
+        plt.xlabel(xlabel)
+
+        if print_data:
+            s = self.to_string([str(int(bins[i])) + ':' + str(int(counts[i])) for i in range(len(counts))])
+            print(title + ': ' + s)
+
     # endregion
 
 
 def main():
     d = Database(max_size=1000, root='../databases/nyt_jingyun')
 
-    d.preprocess_contexts(limit=10, display=True)
+    d.preprocess_database()
+    d.stats_tuples()
+
+    d.filter_threshold(threshold=2)
+    d.preprocess_articles()
+
     d.process_contexts()
+    d.stats_contexts()
 
     # Database.set_parameters(to_print=[], print_attribute=True)
-    print(d)
+    # print(d)
 
 
 if __name__ == '__main__':

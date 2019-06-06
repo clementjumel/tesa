@@ -11,7 +11,7 @@ from collections import defaultdict
 class Article(BaseClass):
     # region Class initialization
 
-    to_print = ['entities', 'same_sentence_contexts', 'neighboring_sentences_contexts', 'same_role_contexts']
+    to_print = ['entities', 'title', 'contexts']
     print_attribute, print_lines, print_offsets = True, 1, 0
 
     context_range = 1
@@ -29,18 +29,12 @@ class Article(BaseClass):
         self.annotated_path = annotated_path
 
         self.title = None
-
         self.entities = None
-        self.entities_locations = None
-        self.entities_persons = None
-        self.entities_organizations = None
 
         self.sentences = None
         self.coreferences = None
 
-        self.same_sentence_contexts = None
-        self.neighboring_sentences_contexts = None
-        self.same_role_contexts = None
+        self.contexts = None
 
     # endregion
 
@@ -63,9 +57,7 @@ class Article(BaseClass):
     def process_contexts(self):
         """ Performs the processing of the frequent entity tuples of the article. """
 
-        # self.compute_contexts('same_sentence')
-        self.compute_contexts('neighboring_sentences')
-        # self.compute_contexts('same_role')
+        self.compute_contexts(['same_sent', 'neigh_sent', 'same_role'])
 
     def write_candidates(self, f):
         """
@@ -99,15 +91,20 @@ class Article(BaseClass):
             tree = ElementTree.parse(self.original_path)
             root = tree.getroot()
 
-            entities_locations = [entity.text for entity in root.findall('./head/docdata/identified-content/location')]
-            entities_persons = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
-            entities_organizations = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
+            entities_location = [entity.text for entity in root.findall('./head/docdata/identified-content/location')]
+            entities_person = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
+            entities_organization = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
 
-            self.entities_locations = [self.standardize_location(entity) for entity in entities_locations]
-            self.entities_persons = [self.standardize_person(entity) for entity in entities_persons]
-            self.entities_organizations = [self.standardize_organization(entity) for entity in entities_organizations]
+            entities_location = [self.standardize_location(entity) for entity in entities_location]
+            entities_person = [self.standardize_person(entity) for entity in entities_person]
+            entities_organization = [self.standardize_organization(entity) for entity in entities_organization]
 
-            self.entities = self.entities_locations + self.entities_persons + self.entities_organizations
+            self.entities = {
+                'all': entities_location + entities_person + entities_organization,
+                'location': entities_location,
+                'person': entities_person,
+                'organization': entities_organization
+            }
 
     def compute_sentences(self):
         """ Compute the sentences of the article. """
@@ -124,14 +121,15 @@ class Article(BaseClass):
         if self.coreferences is None:
             root = ElementTree.parse(self.annotated_path)
             elements = root.findall('./document/coreference/coreference')
+            entities = self.entities['all']
 
-            self.coreferences = [Coreference(element, self.entities) for element in elements]
+            self.coreferences = [Coreference(element, entities) for element in elements]
 
     def compute_similarities(self):
         """ Compute the similarity of the NPs to the entities in the article. """
 
         for sentence in self.sentences:
-            sentence.compute_similarities(self.entities)
+            sentence.compute_similarities(self.entities['all'])
 
     def compute_candidates(self):
         """ Computes and fills the candidate NPs of the article. """
@@ -140,35 +138,37 @@ class Article(BaseClass):
                          for i in range(-Article.context_range, Article.context_range + 1)])
 
         for i in range(len(self.sentences)):
-            self.sentences[i].compute_candidates(entities=self.entities, context=copy(context))
+            self.sentences[i].compute_candidates(entities=self.entities['all'], context=copy(context))
 
             context.popleft()
             context.append(self.sentences[i + Article.context_range + 1].text
                            if i + Article.context_range + 1 < len(self.sentences) else '')
 
-    def compute_contexts(self, type_):
+    def compute_contexts(self, types):
         """
-        Compute some contexts of the article, according to the specified type.
+        Compute some contexts of the article, according to the specified contexts types.
 
         Args:
-            type_: str, must be 'same_sentence', 'neighboring_sentences', or 'same_role', type of the contexts.
+            types: list, types of the context, each one being 'same_sent', 'neigh_sent', or 'same_role'.
         """
 
-        assert type_ in ['same_sentence', 'neighboring_sentences', 'same_role']
+        contexts = {}
 
-        tuple_contexts = {}
+        entities_tuples = set()
+        for entity_type in ['location', 'person', 'organization']:
+            entities = getattr(self, 'entities')[entity_type]
 
-        for entity_type in ['locations', 'persons', 'organizations']:
-            entities = getattr(self, 'entities_' + entity_type)
+            entities_tuples.update(self.subtuples(entities))
 
-            entity_tuples = self.subtuples(entities)
+        for type_ in types:
+            type_contexts = {}
 
-            for entity_tuple in entity_tuples:
-                contexts = getattr(self, 'contexts_' + type_)(entity_tuple)
-                if contexts:
-                    tuple_contexts[entity_tuple] = contexts
+            for entity_tuple in entities_tuples:
+                type_contexts[entity_tuple] = getattr(self, 'contexts_' + type_)(entity_tuple)
 
-        setattr(self, type_ + '_contexts', tuple_contexts) if tuple_contexts else None
+            contexts[type_] = type_contexts
+
+        self.contexts = contexts
 
     # endregion
 
@@ -220,7 +220,10 @@ class Article(BaseClass):
             bool, True iff the article hasn't 2 entities of the same type.
         """
 
-        return max([len(self.entities_locations), len(self.entities_persons), len(self.entities_organizations)]) < 2
+        if max([len(self.entities['location']), len(self.entities['person']), len(self.entities['organization'])]) < 2:
+            return True
+        else:
+            return False
 
     def criterion_context(self):
         """
@@ -230,15 +233,17 @@ class Article(BaseClass):
             bool, True iff the article doesn't have a context.
         """
 
-        return True if (self.same_sentence_contexts is None and self.neighboring_sentences_contexts is None and
-                        self.same_role_contexts is None) \
-            else False
+        if self.contexts['same_sent'] is None and self.contexts[' neigh_sent'] is None \
+                and self.contexts['same_role'] is None:
+            return True
+        else:
+            return False
 
     # endregion
 
-    # region Other methods
+    # region Methods context_
 
-    def contexts_same_sentence(self, entity_tuple):
+    def contexts_same_sent(self, entity_tuple):
         """
         Returns the same-sentence contexts for a single entity tuple, that is the sentences where all the entities are
         mentioned.
@@ -276,7 +281,7 @@ class Article(BaseClass):
 
         return contexts
 
-    def contexts_neighboring_sentences(self, entity_tuple):
+    def contexts_neigh_sent(self, entity_tuple):
         """
         Returns the neighboring-sentences contexts for a single entity tuple, that is the neighboring sentences where
         the entities are mentioned.
@@ -325,7 +330,7 @@ class Article(BaseClass):
 
     def contexts_same_role(self, entity_tuple):
         # TODO: create function
-        pass
+        return []
 
     # endregion
 

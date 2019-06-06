@@ -10,29 +10,32 @@ from database_creation.token import Token
 # region Display parameters
 Database.set_parameters(to_print=['articles'],
                         print_attribute=True,
-                        random_print=False,
+                        random_print=True,
                         limit_print=10)
 
-Article.set_parameters(to_print=['entities', 'same_sentence_contexts', 'neighboring_sentences_contexts',
-                                 'same_role_contexts'],
+Article.set_parameters(to_print=['entities', 'title', 'contexts'],
                        print_attribute=True)
 
-Coreference.set_parameters(to_print=['entity', 'representative', 'mentions'],
+Coreference.set_parameters(to_print=['entity', 'representative'],
                            print_attribute=True)
 
 Sentence.set_parameters(to_print=['text'],
                         print_attribute=False)
 
-Np.set_parameters(to_print=['words'],
+Np.set_parameters(to_print=['tokens'],
                   print_attribute=False)
 
 Token.set_parameters(to_print=['word'],
                      print_attribute=False)
 # endregion
 
-database = Database(max_size=1000)
-database.preprocess_contexts(limit=100, display=True)
+database = Database(max_size=10000)
+
+database.preprocess_database()
+database.stats_tuples()
+
+database.filter_threshold(threshold=10)
+database.preprocess_articles()
 
 database.process_contexts()
-
-print(database)
+database.stats_contexts()

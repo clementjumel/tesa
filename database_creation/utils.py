@@ -1,5 +1,6 @@
 from copy import copy
 from time import time
+from numpy import int64
 from re import findall
 from gensim.models import KeyedVectors
 
@@ -93,7 +94,7 @@ class BaseClass:
             return item
 
         # Case of numbers
-        elif isinstance(item, (int, float)):
+        elif isinstance(item, (float, int, int64)):
             return str(round(item, 2))
 
         # Case of instances of custom objects
@@ -102,34 +103,42 @@ class BaseClass:
 
         # Case of lists
         elif isinstance(item, list):
+            strings = [BaseClass.to_string(ite) for ite in item]
+
             # List of custom objects
             if isinstance(item[0], BaseClass):
-                return ' '.join([str(ite) for ite in item if ite])
+                return ' '.join([s for s in strings if s])
+
             # List of lists
             elif isinstance(item[0], list):
-                return '\n'.join([BaseClass.to_string(ite) for ite in item if ite])
+                return '\n'.join([s for s in strings if s])
+
             # Other lists
             else:
-                return ' | '.join([BaseClass.to_string(ite) for ite in item if ite])
+                return '|'.join([s for s in strings if s])
 
         # Case of sets and tuples
         elif isinstance(item, (set, tuple)):
-            return ' | '.join([BaseClass.to_string(ite) for ite in item if ite])
+            strings = [BaseClass.to_string(ite) for ite in item]
+            return '|'.join([s for s in strings if s])
 
         # Case of dictionaries
         elif isinstance(item, dict):
+            strings = [(BaseClass.to_string(ite), BaseClass.to_string(item[ite])) for ite in item]
+
             # The keys are int (long dictionaries)
             if isinstance(list(item.keys())[0], int):
-                return ' '.join([BaseClass.to_string(item[ite]) for ite in item])
+                return ' '.join([s[1] for s in strings if s[1]])
+
             # The keys are strings or tuples (short dictionaries)
             elif isinstance(list(item.keys())[0], (str, tuple)):
-                # Dictionary of dictionaries or dependencies
+                # Dictionary of dictionaries
                 if isinstance(item[list(item.keys())[0]], dict):
-                    return '\n'.join([BaseClass.to_string(ite) + ':\n' +
-                                      BaseClass.to_string(item[ite]) for ite in item])
+                    return '\n'.join([s[0] + ':\n' + s[1] for s in strings if s[1]])
+
                 # Other dictionaries
                 else:
-                    return '\n'.join([BaseClass.to_string(ite) + ': ' + BaseClass.to_string(item[ite]) for ite in item])
+                    return '\n'.join([s[0] + ': ' + s[1] for s in strings if s[1]])
 
         else:
             raise Exception("Unsupported type: {}.".format(type(item)))
@@ -201,10 +210,11 @@ class BaseClass:
     class Attribute:
         """ Decorator for monitoring an attribute. """
 
-        def __init__(self, attribute):
+        def __init__(self, attribute, length=False):
             """ Initializes the Attribute decorator attribute. """
 
             self.attribute = attribute
+            self.length = length
 
         def __call__(self, func):
             """ Performs the call to the decorated function. """
@@ -215,12 +225,18 @@ class BaseClass:
                 slf = args[0]
 
                 if slf.verbose:
-                    print("Initial {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    if not self.length:
+                        print("Initial {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    else:
+                        print("Initial length of {}: {}".format(self.attribute, len(getattr(slf, self.attribute))))
 
                 func(*args, **kwargs)
 
                 if slf.verbose:
-                    print("Final {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    if not self.length:
+                        print("Final {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    else:
+                        print("Final length of {}: {}".format(self.attribute, len(getattr(slf, self.attribute))))
 
             return f
 
@@ -321,7 +337,7 @@ class BaseClass:
     @staticmethod
     def subtuples(l):
         """
-        Compute all the possible sorted subtuples of len > 1 from sorted l.
+        Compute all the possible sorted subtuples of len > 1 from a list.
 
         Args:
             l: list, original list.
