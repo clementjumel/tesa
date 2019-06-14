@@ -82,7 +82,7 @@ class Token(BaseClass):
         Compute the similarity of the token to the entities in the article.
 
         Args:
-            entities: list, preprocessed entities of the sentence.
+            entities: dict, full entities of the sentence.
         """
 
         if self.embeddings_token is None:
@@ -94,7 +94,7 @@ class Token(BaseClass):
 
         sim = None
 
-        for entity in entities:
+        for entity in entities['all']:
             token_sim = [self.embeddings_token.similarity(token, entity_token) for entity_token in entity.split()
                          if entity_token in self.embeddings_token.vocab]
             score = max(token_sim) if token_sim else None
@@ -187,13 +187,13 @@ def main():
     tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
     root = tree.getroot()
 
-    entities = ['James Joyce', 'Richard Bernstein']
+    entities = {'person': ['James Joyce', 'Richard Bernstein'], 'location': [], 'organization': [],
+                'all': ['James Joyce', 'Richard Bernstein']}
     tokens = [Token(token_element) for token_element in root.find('./document/sentences/sentence/tokens')]
 
     for token in tokens:
         token.compute_similarity(entities)
 
-    # Token.set_parameters(to_print=[], print_attribute=True)
     print(Token.to_string(tokens))
 
 

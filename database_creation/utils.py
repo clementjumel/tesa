@@ -9,7 +9,6 @@ class BaseClass:
     # region Class base methods
 
     verbose = True
-    # TODO: add a print_lines before
     to_print, print_attribute, print_lines, print_offsets = None, None, None, None
 
     def __str__(self):
@@ -98,7 +97,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context)):
+        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Sample)):
             return str(item)
 
         # Case of lists
@@ -208,13 +207,12 @@ class BaseClass:
             return f
 
     class Attribute:
-        """ Decorator for monitoring an attribute. """
+        """ Decorator for monitoring the length of an attribute. """
 
-        def __init__(self, attribute, length=False):
+        def __init__(self, attribute):
             """ Initializes the Attribute decorator attribute. """
 
             self.attribute = attribute
-            self.length = length
 
         def __call__(self, func):
             """ Performs the call to the decorated function. """
@@ -225,29 +223,33 @@ class BaseClass:
                 slf = args[0]
 
                 if slf.verbose:
-                    if not self.length:
-                        print("Initial {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    attribute = getattr(slf, self.attribute)
+                    if attribute is None:
+                        length = 0
                     else:
-                        print("Initial length of {}: {}".format(self.attribute, len(getattr(slf, self.attribute))))
+                        length = len(attribute)
+                    print("Initial length of {}: {}".format(self.attribute, length))
 
                 func(*args, **kwargs)
 
                 if slf.verbose:
-                    if not self.length:
-                        print("Final {}: {}".format(self.attribute, getattr(slf, self.attribute)))
+                    attribute = getattr(slf, self.attribute)
+                    if attribute is None:
+                        length = 0
                     else:
-                        print("Final length of {}: {}".format(self.attribute, len(getattr(slf, self.attribute))))
+                        length = len(attribute)
+                    print("Final length of {}: {}".format(self.attribute, length))
 
             return f
 
     # endregion
 
-    # region Methods standardize
+    # region Methods standardize_
 
     @staticmethod
     def standardize_location(entity):
         """
-        Standardize a location entity (forget what is inside parenthesis).
+        Standardize a location entity.
 
         Args:
             entity: str, location entity to standardize.
@@ -257,16 +259,16 @@ class BaseClass:
         """
 
         before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-
         entity = before[0] if len(before) > 0 else entity
+
+        entity = entity.replace(' & ', ' and ')
 
         return entity
 
     @staticmethod
     def standardize_person(entity):
         """
-        Standardize a person entity (forget what is inside parenthesis, inverse last name and first name when necessary, 
-        remove middle name/letter).
+        Standardize a person entity.
 
         Args:
             entity: str, person entity to standardize.
@@ -276,21 +278,35 @@ class BaseClass:
         """
 
         before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-
         entity = before[0] if len(before) > 0 else entity
+
+        split = entity.split()
+        if split[-1].lower() in ['jr', 'jr.']:
+            entity = ' '.join(split[:-1])
+            jr = ' Jr'
+        elif split[-1].lower() in ['sr', 'sr.']:
+            entity = ' '.join(split[:-1])
+            jr = ' Sr'
+        else:
+            jr = ''
 
         split = entity.split(', ')
         entity = ' '.join([split[1], split[0]]) if len(split) == 2 else entity  # inverse last name, first names
 
+        words = [s for s in entity.split() if len(s) > 1]
+        entity = ' '.join(words) if len(words) >= 2 else entity  # remove single letters
+
         split = entity.split()
         entity = ' '.join([split[0], split[2]]) if len(split) == 3 else entity  # remove middle name
+
+        entity += jr
 
         return entity
 
     @staticmethod
     def standardize_organization(entity):
         """
-        Standardize an organization entity (forget what is inside parenthesis).
+        Standardize an organization entity.
 
         Args:
             entity: str, entity to standardize.
@@ -300,35 +316,133 @@ class BaseClass:
         """
 
         before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-
         entity = before[0] if len(before) > 0 else entity
+
+        entity = entity.replace(' & ', ' and ')
 
         return entity
 
-    @staticmethod
-    def standardize(entity):
+    def standardize(self, entity, type_):
         """
-        Standardize an entity by returning all possible different standardizations.
+        Standardize an entity of type type_.
 
         Args:
             entity: str, entity to standardize.
+            type_: str, type of the entity, must be 'location', 'person' or organization'.
 
         Returns:
-            set, strings representing the different standardizations of the entity.
+            str, standardized entity.
         """
 
-        standardization = {entity}
+        return getattr(self, 'standardize_' + type_)(entity)
 
-        for standardize_name in ['location', 'person', 'organization']:
-            standardize = getattr(BaseClass, 'standardize_' + standardize_name)
-            s = standardize(entity)
+    # endregion
 
-            standardization.add(s)
+    # region Methods match_
 
-            if standardize_name == 'person' and len(s.split()) == 2:
-                standardization.add(s.split()[1])  # add the case of only last name
+    def match_location(self, entity1, entity2, flexible):
+        """
+        Check if two location entities match.
 
-        return standardization
+        Args:
+            entity1: str, first entity to compare.
+            entity2: str, second entity to compare.
+            flexible: bool, if True, loosen the conditions for matching.
+
+        Returns:
+            bool, True iff the two strings refer to the same location entity.
+        """
+
+        standardized1, standardized2 = self.standardize_location(entity1), self.standardize_location(entity2)
+
+        candidates1 = {entity1}
+        candidates1.add(standardized1 or entity1)
+
+        candidates2 = {entity2}
+        candidates2.add(standardized2 or entity2)
+
+        if flexible:
+            pass
+
+        return True if candidates1.intersection(candidates2) else False
+
+    def match_person(self, entity1, entity2, flexible):
+        """
+        Check if two person entities match.
+
+        Args:
+            entity1: str, first entity to compare.
+            entity2: str, second entity to compare.
+            flexible: bool, if True, loosen the conditions for matching.
+
+        Returns:
+            bool, True iff the two strings refer to the same person entity.
+        """
+
+        standardized1, standardized2 = self.standardize_person(entity1), self.standardize_person(entity2)
+
+        candidates1 = {entity1}
+        candidates1.add(standardized1 or entity1)
+
+        candidates2 = {entity2}
+        candidates2.add(standardized2 or entity2)
+
+        if flexible:
+            candidates1.add(standardized1.split()[-1])
+            candidates2.add(standardized2.split()[-1])
+
+        return True if candidates1.intersection(candidates2) else False
+
+    def match_organization(self, entity1, entity2, flexible):
+        """
+        Check if two organization entities match.
+
+        Args:
+            entity1: str, first entity to compare.
+            entity2: str, second entity to compare.
+            flexible: bool, if True, loosen the conditions for matching.
+
+        Returns:
+            bool, True iff the two strings refer to the same organization entity.
+        """
+
+        standardized1, standardized2 = self.standardize_organization(entity1), self.standardize_organization(entity2)
+
+        candidates1 = {entity1}
+        candidates1.add(standardized1 or entity1)
+        candidates1.add(' '.join(standardized1.split()[:-1])
+                        if standardized1.split()[-1].lower() in ['co', 'co.', 'company', 'foundation'] else entity1)
+
+        candidates2 = {entity2}
+        candidates2.add(standardized2 or entity2)
+        candidates2.add(' '.join(standardized2.split()[:-1])
+                        if standardized2.split()[-1].lower() in ['co', 'co.', 'company', 'foundation'] else entity2)
+
+        if flexible:
+            pass
+
+        return True if candidates1.intersection(candidates2) else False
+
+    def match(self, entity1, entity2, type_=None, flexible=True):
+        """
+        Check if two entities match.
+
+        Args:
+            entity1: str, first entity to compare.
+            entity2: str, second entity to compare.
+            type_: str, type of the entity, must be 'location', 'person' or organization'.
+            flexible: bool, if True, loosen the conditions for matching.
+
+        Returns:
+            bool, True iff the two strings refer to the same entity of type type_, if mentioned.
+        """
+
+        if type_ is not None:
+            return getattr(self, 'match_' + type_)(entity1, entity2, flexible)
+
+        else:
+            return any([getattr(self, 'match_' + type_)(entity1, entity2, flexible)
+                        for type_ in ['location', 'person', 'organization']])
 
     # endregion
 
@@ -358,21 +472,6 @@ class BaseClass:
                 res = res.union(BaseClass.subtuples([y for y in l if y != x]))
 
             return res
-
-    @staticmethod
-    def match(entity1, entity2):
-        """
-        Check if the two entities match by checking the intersection of their standardization.
-
-        Args:
-            entity1: str, first entity to compare.
-            entity2: str, second entity to compare.
-
-        Returns:
-            bool, True iff the two entities match.
-        """
-
-        return True if BaseClass.standardize(entity1).intersection(BaseClass.standardize(entity2)) else False
 
     @classmethod
     @Verbose("Loading embeddings...")
@@ -512,9 +611,8 @@ class Mention:
 class Context:
     # region Class base methods
 
-    def __init__(self, sentence_texts, sentence_idxs,
-                 before_texts=None, before_idxs=None,
-                 after_texts=None, after_idxs=None):
+    def __init__(self, sentence_texts, sentence_idxs, before_texts=None, before_idxs=None, after_texts=None,
+                 after_idxs=None):
         """
         Initializes the Context instance.
 
@@ -551,8 +649,8 @@ class Context:
             ])
             string += '\n'
 
-        string += ' '.join([BaseClass.to_string(self.sentence_texts[i]) + '[' +
-                            BaseClass.to_string(self.sentence_idxs[i]) + ']' for i in range(len(self.sentence_texts))])
+        string += '\n'.join([BaseClass.to_string(self.sentence_texts[i])
+                             for i in range(len(self.sentence_texts))])
 
         if self.after_texts is not None:
             string += '\n'
@@ -560,6 +658,53 @@ class Context:
                 BaseClass.to_string(self.after_texts[i]) + '[' + BaseClass.to_string(self.after_idxs[i]) + ']'
                 if self.after_texts[i] else '[...]' for i in range(len(self.after_texts))
             ])
+
+        return string
+
+    # endregion
+
+
+class Sample:
+    # region Class base methods
+
+    def __init__(self, tuple_, article, info, context):
+        """
+        Initializes the Aggregation Task instance.
+
+        Args:
+            tuple_: tuple, entities mentioned in the article.
+            article: Article, article from where the Aggregation Task comes from.
+            info: dict, wikipedia information of the entities.
+            context: Context, context of the entities in the article.
+        """
+
+        self.tuple_ = tuple_
+
+        self.title = article.title
+        self.date = article.date
+        self.abstract = article.abstract
+
+        self.info = info
+        self.context = context
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Sample.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        string = ''
+
+        string += "Entities: " + BaseClass.to_string(self.tuple_) + '\n'
+        string += BaseClass.to_string(self.info) + '\n\n'
+
+        string += "Article: " + BaseClass.to_string(self.title)
+        string += ' (' + BaseClass.to_string(self.date) + ')'
+        string += BaseClass.to_string(self.abstract) + '\n\n'
+
+        string += BaseClass.to_string(self.context) + '\n\n'
 
         return string
 

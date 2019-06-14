@@ -13,7 +13,7 @@ class Coreference(BaseClass):
 
         Args:
             element: ElementTree.Element, annotations of the coreference.
-            entities: list, entities of the articles.
+            entities: dict, full entities of the articles.
         """
 
         self.representative = None
@@ -60,21 +60,20 @@ class Coreference(BaseClass):
         Compute the entity the coreference refer to, or None.
 
         Args:
-            entities: list, entities of the articles.
+            entities: dict, full entities of the articles.
         """
 
         for m in [self.representative] + self.mentions:
-            for entity in entities:
-                if self.match(m.text, entity):
-                    self.entity = entity
-                    return
+            for type_ in ['location', 'person', 'organization']:
+                for entity in entities[type_]:
+                    if self.match(m.text, entity, type_=type_, flexible=True):
+                        self.entity = entity
+                        return
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
 
-        sentences = set([m.sentence for m in [self.representative] + self.mentions])
-
-        self.sentences = sentences
+        self.sentences = set([m.sentence for m in [self.representative] + self.mentions])
 
     # endregion
 
@@ -85,11 +84,11 @@ def main():
     tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
     root = tree.getroot()
 
-    entities = ['James Joyce', 'Richard Bernstein']
+    entities = {'person': ['James Joyce', 'Richard Bernstein'], 'location': [], 'organization': [],
+                'all': ['James Joyce', 'Richard Bernstein']}
     coreferences = [Coreference(coreference_element, entities) for coreference_element
                     in root.findall('./document/coreference/coreference')]
 
-    # Coreference.set_parameters(to_print=[], print_attribute=True)
     print(Coreference.to_string(coreferences))
 
 

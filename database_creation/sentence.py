@@ -8,7 +8,7 @@ from nltk import tree
 class Sentence(BaseClass):
     # region Class initialization
 
-    to_print = ['tokens', 'text', 'nps']
+    to_print = ['tokens', 'text', 'nps', 'dependencies']
     print_attribute, print_lines, print_offsets = False, 1, 2
 
     def __init__(self, sentence_element):
@@ -150,23 +150,11 @@ class Sentence(BaseClass):
         Compute the similarities of the NPs to the entities in the article.
 
         Args:
-            entities: list, preprocessed entities of the sentence.
+            entities: dict, full entities of the sentence.
         """
 
         for np in self.nps:
             np.compute_similarities(entities)
-
-    def compute_candidates(self, entities, context):
-        """
-        Compute the candidate NPs of the sentence.
-
-        Args:
-            entities: list, preprocessed entities of the sentence.
-            context: collections.deque, queue containing the text of the sentences of the context.
-        """
-
-        for np in self.nps:
-            np.compute_candidate(entities, context)
 
     # endregion
 
@@ -177,13 +165,13 @@ def main():
     tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
     root = tree.getroot()
 
-    entities = ['James Joyce', 'Richard Bernstein']
+    entities = {'person': ['James Joyce', 'Richard Bernstein'], 'location': [], 'organization': [],
+                'all': ['James Joyce', 'Richard Bernstein']}
     sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
 
     for sentence in sentences:
         sentence.compute_similarities(entities)
 
-    # Sentence.set_parameters(to_print=[], print_attribute=True)
     print(Sentence.to_string(sentences))
 
 

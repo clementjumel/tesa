@@ -1,20 +1,16 @@
-from database_creation.utils import BaseClass, Context
+from database_creation.utils import BaseClass, Context, Sample
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
 from xml.etree import ElementTree
-from collections import deque
-from copy import copy
 from collections import defaultdict
 
 
 class Article(BaseClass):
     # region Class initialization
 
-    to_print = ['entities', 'title', 'contexts']
+    to_print = ['entities', 'title', 'date', 'abstract', 'contexts']
     print_attribute, print_lines, print_offsets = True, 1, 0
-
-    context_range = 1
 
     def __init__(self, original_path, annotated_path):
         """
@@ -29,150 +25,177 @@ class Article(BaseClass):
         self.annotated_path = annotated_path
 
         self.title = None
+        self.date = None
+        self.abstract = None
         self.entities = None
+        self.raw_entities = None
 
         self.sentences = None
         self.coreferences = None
-
         self.contexts = None
-
-    # endregion
-
-    # region Main methods
-
-    def preprocess(self):
-        """ Preprocess the article. """
-
-        self.compute_title()
-        self.compute_entities()
-        self.compute_sentences()
-        self.compute_coreferences()
-
-    def process_candidates(self):
-        """ Process the articles. """
-
-        self.compute_similarities()
-        self.compute_candidates()
-
-    def process_contexts(self):
-        """ Performs the processing of the frequent entity tuples of the article. """
-
-        self.compute_contexts(['same_sent', 'neigh_sent', 'same_role'])
-
-    def write_candidates(self, f):
-        """
-        Write the candidates of the articles in an opened file.
-
-        Args:
-            f: file, ready to be written in.
-        """
-
-        candidates = [np for sentence in self.sentences for np in sentence.nps if np.candidate]
-
-        f.write(self.to_string(candidates))
 
     # endregion
 
     # region Methods compute_
 
-    def compute_title(self):
-        """ Compute the title of an article. """
+    def compute_metadata(self):
+        """ Compute the metadata (title, date, abstract, entities, raw_entities) of the article. """
 
-        if self.title is None:
-            tree = ElementTree.parse(self.original_path)
-            root = tree.getroot()
+        root = ElementTree.parse(self.original_path).getroot()
 
-            self.title = root.find('./head/title').text
+        title = self.title or self.get_title(root)
+        date = self.date or self.get_date(root)
+        abstract = self.abstract or self.get_abstract(root)
+        entities, raw_entities = (self.entities, self.raw_entities) if self.entities and self.raw_entities \
+            else self.get_entities(root)
 
-    def compute_entities(self):
-        """ Compute all the entities of an article. """
+        self.title = title
+        self.date = date
+        self.abstract = abstract
+        self.entities = entities
+        self.raw_entities = raw_entities
 
-        if self.entities is None:
-            tree = ElementTree.parse(self.original_path)
-            root = tree.getroot()
+    def compute_annotations(self):
+        """ Compute the annotations (sentences, coreferences) of the article. """
 
-            entities_location = [entity.text for entity in root.findall('./head/docdata/identified-content/location')]
-            entities_person = [entity.text for entity in root.findall('./head/docdata/identified-content/person')]
-            entities_organization = [entity.text for entity in root.findall('./head/docdata/identified-content/org')]
+        root = ElementTree.parse(self.annotated_path).getroot()
 
-            entities_location = [self.standardize_location(entity) for entity in entities_location]
-            entities_person = [self.standardize_person(entity) for entity in entities_person]
-            entities_organization = [self.standardize_organization(entity) for entity in entities_organization]
+        sentences = self.sentences or self.get_sentences(root)
+        coreferences = self.coreferences or self.get_coreferences(root)
 
-            self.entities = {
-                'all': entities_location + entities_person + entities_organization,
-                'location': entities_location,
-                'person': entities_person,
-                'organization': entities_organization
-            }
-
-    def compute_sentences(self):
-        """ Compute the sentences of the article. """
-
-        if self.sentences is None:
-            root = ElementTree.parse(self.annotated_path)
-            elements = root.findall('./document/sentences/sentence')
-
-            self.sentences = {int(element.attrib['id']): Sentence(element) for element in elements}
-
-    def compute_coreferences(self):
-        """ Compute the coreferences of the article. """
-
-        if self.coreferences is None:
-            root = ElementTree.parse(self.annotated_path)
-            elements = root.findall('./document/coreference/coreference')
-            entities = self.entities['all']
-
-            self.coreferences = [Coreference(element, entities) for element in elements]
+        self.sentences = sentences
+        self.coreferences = coreferences
 
     def compute_similarities(self):
         """ Compute the similarity of the NPs to the entities in the article. """
 
-        for sentence in self.sentences:
-            sentence.compute_similarities(self.entities['all'])
+        for idx in self.sentences:
+            self.sentences[idx].compute_similarities(self.entities)
 
-    def compute_candidates(self):
-        """ Computes and fills the candidate NPs of the article. """
-
-        context = deque([self.sentences[i].text if 0 <= i < len(self.sentences) else ''
-                         for i in range(-Article.context_range, Article.context_range + 1)])
-
-        for i in range(len(self.sentences)):
-            self.sentences[i].compute_candidates(entities=self.entities['all'], context=copy(context))
-
-            context.popleft()
-            context.append(self.sentences[i + Article.context_range + 1].text
-                           if i + Article.context_range + 1 < len(self.sentences) else '')
-
-    def compute_contexts(self, types):
+    def compute_contexts(self, tuple_, type_):
         """
-        Compute some contexts of the article, according to the specified contexts types.
+        Compute the contexts of the article for the entities tuple, according to the specified context type.
 
         Args:
-            types: list, types of the context, each one being 'same_sent', 'neigh_sent', or 'same_role'.
+            tuple_: tuple, entities mentioned in the article.
+            type_: str, type of the context, must be 'same_sent', 'neigh_sent', or 'same_role'.
         """
 
-        contexts = {}
-
-        entities_tuples = set()
-        for entity_type in ['location', 'person', 'organization']:
-            entities = getattr(self, 'entities')[entity_type]
-
-            entities_tuples.update(self.subtuples(entities))
-
-        for type_ in types:
-            type_contexts = {}
-
-            for entity_tuple in entities_tuples:
-                type_contexts[entity_tuple] = getattr(self, 'contexts_' + type_)(entity_tuple)
-
-            contexts[type_] = type_contexts
-
-        self.contexts = contexts
+        self.contexts = self.contexts or dict()
+        self.contexts[tuple_] = getattr(self, 'contexts_' + type_)(tuple_)
 
     # endregion
 
     # region Methods get_
+
+    @staticmethod
+    def get_title(root):
+        """
+        Returns the title of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            str, title of the article.
+        """
+
+        return root.find('./head/title').text
+
+    @staticmethod
+    def get_date(root):
+        """
+        Returns the date of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            str, date of the article.
+        """
+
+        d = root.find('./head/meta[@name="publication_day_of_month"]').get('content')
+        m = root.find('./head/meta[@name="publication_month"]').get('content')
+        y = root.find('./head/meta[@name="publication_year"]').get('content')
+
+        d = '0' + d if len(d) == 1 else d
+        m = '0' + m if len(m) == 1 else m
+
+        return '/'.join([y, m, d])
+
+    @staticmethod
+    def get_abstract(root):
+        """
+        Returns the abstract of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            str, abstract of the article.
+        """
+
+        return root.find('./body/body.head/abstract/p').text
+
+    def get_entities(self, root):
+        """
+        Returns the entities and the raw_entities of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            entities: dict, standardized entities of the article sorted into 'all' or each type.
+            raw_entities: dict, mapping from the standardized entities to their original versions.
+        """
+
+        locations = [(self.standardize_location(entity.text), entity.text)
+                     for entity in root.findall('./head/docdata/identified-content/location')]
+        persons = [(self.standardize_person(entity.text), entity.text)
+                   for entity in root.findall('./head/docdata/identified-content/person')]
+        organizations = [(self.standardize_organization(entity.text), entity.text)
+                         for entity in root.findall('./head/docdata/identified-content/org')]
+
+        entities = {'location': [entity[0] for entity in locations],
+                    'person': [entity[0] for entity in persons],
+                    'organization': [entity[0] for entity in organizations],
+                    'all': [entity[0] for entity in locations + persons + organizations]}
+        raw_entities = dict(locations + persons + organizations)
+
+        return entities, raw_entities
+
+    @staticmethod
+    def get_sentences(root):
+        """
+        Returns the Sentences of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            dict, Sentences of the article (mapped with their indexes).
+        """
+
+        elements = root.findall('./document/sentences/sentence')
+        sentences = {int(element.attrib['id']): Sentence(element) for element in elements}
+
+        return sentences
+
+    def get_coreferences(self, root):
+        """
+        Returns the Coreferences of an article given the tree of its metadata.
+
+        Args:
+            root: ElementTree.root, root of the metadata of the article.
+
+        Returns:
+            list, Coreferences of the article.
+        """
+
+        elements = root.findall('./document/coreference/coreference')
+        coreferences = [Coreference(element, self.entities) for element in elements]
+
+        return coreferences
 
     def get_entity_sentences(self, entity):
         """
@@ -191,6 +214,25 @@ class Article(BaseClass):
             entity_sentences.update(coreference.sentences)
 
         return sorted(entity_sentences)
+
+    def get_samples(self, tuple_, info):
+        """
+        Returns the samples for an entities' tuple of the article.
+
+        Args:
+            tuple_: tuple, entities mentioned in the article.
+            info: str, wikipedia information of the entities.
+
+        Returns:
+            dict, aggregation Samples mapped with the context id_.
+        """
+
+        tuple_samples = dict()
+
+        for id_ in self.contexts[tuple_]:
+            tuple_samples[id_] = Sample(tuple_=tuple_, article=self, info=info, context=self.contexts[tuple_][id_])
+
+        return tuple_samples
 
     # endregion
 
@@ -225,23 +267,9 @@ class Article(BaseClass):
         else:
             return False
 
-    def criterion_context(self):
-        """
-        Check if an article has a context.
-
-        Returns:
-            bool, True iff the article doesn't have a context.
-        """
-
-        if self.contexts['same_sent'] is None and self.contexts[' neigh_sent'] is None \
-                and self.contexts['same_role'] is None:
-            return True
-        else:
-            return False
-
     # endregion
 
-    # region Methods context_
+    # region Methods contexts_
 
     def contexts_same_sent(self, entity_tuple):
         """
@@ -252,7 +280,7 @@ class Article(BaseClass):
             entity_tuple: tuple, entities to analyse.
 
         Returns:
-            list, same-sentence Contexts of the entities.
+            dict, same-sentence Contexts of the entities mapped with their sentence idx.
         """
 
         sentences = defaultdict(int)
@@ -263,21 +291,20 @@ class Article(BaseClass):
 
         sentences = [idx for idx in sentences if sentences[idx] == len(entity_tuple)]
 
-        contexts = []
+        contexts = dict()
 
         for idx in sentences:
             before_texts, before_idxs = [], []
 
-            for i in range(self.context_range):
-                try:
-                    before_texts.append(self.sentences[idx - self.context_range + i].text)
-                    before_idxs.append(idx - self.context_range + i)
-                except KeyError:
-                    pass
+            try:
+                before_texts.append(self.sentences[idx - 1].text)
+                before_idxs.append(idx - 1)
+            except KeyError:
+                pass
 
-            contexts.append(Context(sentence_texts=[self.sentences[idx].text], sentence_idxs=[idx],
+            contexts[idx] = Context(sentence_texts=[self.sentences[idx].text], sentence_idxs=[idx],
                                     before_texts=before_texts, before_idxs=before_idxs,
-                                    after_texts=None, after_idxs=None))
+                                    after_texts=None, after_idxs=None)
 
         return contexts
 
@@ -290,7 +317,8 @@ class Article(BaseClass):
             entity_tuple: tuple, entities to analyse.
 
         Returns:
-            list, neighbouring-sentences Contexts of the entities.
+            dict, neighbouring-sentences Contexts of the entities, mapped with their sentences span (indexes of the
+            first and last sentences separated by |).
         """
 
         sentences = defaultdict(set)
@@ -315,22 +343,19 @@ class Article(BaseClass):
                             pass
 
                     if not unseens:
-                        contexts_sentences.add(tuple(sorted(seers)))
+                        seers = sorted(seers)
+                        contexts_sentences.add(tuple(range(seers[0], seers[-1] + 1)))
                         break
 
         contexts_sentences = sorted(contexts_sentences)
-        contexts = []
+        contexts = dict()
 
         for idxs in contexts_sentences:
-            contexts.append(Context(sentence_texts=[self.sentences[idx].text if idx in idxs else ''
-                                                    for idx in range(idxs[0], idxs[-1] + 1)],
-                                    sentence_idxs=list(range(idxs[0], idxs[-1] + 1))))
+            id_ = str(idxs[0]) + '|' + str(idxs[-1])
+            contexts[id_] = Context(sentence_texts=[self.sentences[idx].text for idx in idxs],
+                                    sentence_idxs=list(idxs))
 
         return contexts
-
-    def contexts_same_role(self, entity_tuple):
-        # TODO: create function
-        return []
 
     # endregion
 
@@ -339,10 +364,12 @@ def main():
     article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
-    article.preprocess()
-    article.process_contexts()
+    article.compute_metadata()
+    article.compute_annotations()
 
-    # article.set_parameters(to_print=[], print_attribute=True)
+    article.compute_similarities()
+    article.compute_contexts(('James Joyce', 'Richard Bernstein'), 'neigh_sent')
+
     print(article)
 
 

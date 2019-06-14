@@ -1,11 +1,9 @@
-# region Imports
 from database_creation.database import Database
 from database_creation.article import Article
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 from database_creation.np import Np
 from database_creation.token import Token
-# endregion
 
 # region Display parameters
 Database.set_parameters(to_print=['articles'],
@@ -13,11 +11,11 @@ Database.set_parameters(to_print=['articles'],
                         random_print=True,
                         limit_print=10)
 
-Article.set_parameters(to_print=['entities', 'title', 'contexts'],
+Article.set_parameters(to_print=['entities', 'title', 'date', 'abstract' 'contexts'],
                        print_attribute=True)
 
-Coreference.set_parameters(to_print=['entity', 'representative'],
-                           print_attribute=True)
+Coreference.set_parameters(to_print=['representative', 'entity'],
+                           print_attribute=False)
 
 Sentence.set_parameters(to_print=['text'],
                         print_attribute=False)
@@ -29,13 +27,14 @@ Token.set_parameters(to_print=['word'],
                      print_attribute=False)
 # endregion
 
-database = Database(max_size=10000)
+database = Database()
 
 database.preprocess_database()
-database.stats_tuples()
+database.filter_threshold(threshold=5)
 
-database.filter_threshold(threshold=10)
 database.preprocess_articles()
-
 database.process_contexts()
-database.stats_contexts()
+
+database.process_wikipedia(load=False)
+
+database.process_samples(load=False)
