@@ -48,7 +48,8 @@ class Database(BaseClass):
 
         self.stats = None
 
-        self.samples = None
+        self.questions = None
+        self.answers = None
 
         self.compute_articles()
         self.clean(Article.criterion_data)
@@ -176,21 +177,21 @@ class Database(BaseClass):
 
         self.compute_contexts()
 
-    @BaseClass.Verbose("Processing the aggregation samples...")
-    def process_samples(self, load):
+    @BaseClass.Verbose("Processing the aggregation task...")
+    def process_task(self, load):
         """
-        Performs the processing of the aggregation samples of the database.
+        Performs the processing of the aggregation task.
 
         Args:
-            load: bool, if True, load an existing file.
+            load: bool, if True, load an existing questions file.
         """
 
         if load:
-            self.load_attribute(attribute_name='samples', file_name='results/samples')
+            self.load_attribute(attribute_name='questions', file_name='questions/questions')
 
         else:
-            self.compute_samples()
-            self.save_attribute(attribute_name='samples', file_name='results/samples')
+            self.compute_questions()
+            self.save_attribute(attribute_name='questions', file_name='questions/questions')
 
     @BaseClass.Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -335,27 +336,26 @@ class Database(BaseClass):
         self.not_wikipedia = not_wikipedia
         self.ambiguous = ambiguous
 
-    @BaseClass.Verbose("Computing the aggregation samples...")
-    def compute_samples(self):
-        """ Compute the aggregation samples of the database. """
+    @BaseClass.Verbose("Computing the aggregation questions...")
+    def compute_questions(self):
+        """ Compute the aggregation questions of the database. """
 
-        samples = dict()
+        questions = dict()
         count, size = 0, len(self.tuples)
 
         for entities_tuple in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            info = dict([(entity, self.wikipedia[entity])
-                         for entity in entities_tuple['tuple_'] if entity in self.wikipedia])
+            info = self.get_info(entities_tuple['tuple_'])
 
             for article_id_ in entities_tuple['ids']:
-                article_samples = self.articles[article_id_].get_samples(entities_tuple['tuple_'], info)
+                article_questions = self.articles[article_id_].get_questions(entities_tuple['tuple_'], info)
 
-                for context_id_ in article_samples:
-                    sample_id_ = str(entities_tuple['rank']) + '_' + article_id_ + '_' + context_id_
-                    samples[sample_id_] = article_samples[context_id_]
+                for context_id_ in article_questions:
+                    question_id_ = str(entities_tuple['rank']) + '_' + article_id_ + '_' + context_id_
+                    questions[question_id_] = article_questions[context_id_]
 
-        self.samples = samples
+        self.questions = questions
 
     # endregion
 
@@ -398,6 +398,26 @@ class Database(BaseClass):
             raw_entities = [raw_entities[0]]
 
         return raw_entities
+
+    def get_info(self, tuple_):
+        """
+        Compute the wikipedia info of the tuple as the first paragraph of the entities' summaries.
+
+        Args:
+            tuple_: tuple, entities mentioned in the article.
+
+        Returns:
+            dict, wikipedia info of the tuple.
+        """
+
+        info = dict()
+
+        for entity in tuple_:
+            if entity in self.wikipedia:
+                paragraphs = self.wikipedia[entity].split('\n')
+                info[entity] = paragraphs[0]
+
+        return info
 
     # endregion
 
@@ -751,7 +771,7 @@ class Database(BaseClass):
             suffix: str, ending of the name of the file (after the basic name of the file).
         """
 
-        prefix = self.project_root
+        prefix = self.project_root + 'results/'
         suffix = '_' + self.year
 
         if self.max_size is not None:
@@ -802,7 +822,7 @@ class Database(BaseClass):
 
 
 def main():
-    database = Database(max_size=1000, project_root='../')
+    database = Database(max_size=1000, threshold=2, project_root='../')
 
     database.preprocess_database()
     database.filter_threshold()
@@ -812,7 +832,7 @@ def main():
 
     database.process_wikipedia(load=False)
 
-    database.process_samples(load=False)
+    database.process_task(load=False)
 
 
 if __name__ == '__main__':

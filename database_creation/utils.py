@@ -97,7 +97,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Sample)):
+        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Question)):
             return str(item)
 
         # Case of lists
@@ -664,16 +664,16 @@ class Context:
     # endregion
 
 
-class Sample:
+class Question:
     # region Class base methods
 
     def __init__(self, tuple_, article, info, context):
         """
-        Initializes the Aggregation Task instance.
+        Initializes the aggregation question instance.
 
         Args:
             tuple_: tuple, entities mentioned in the article.
-            article: Article, article from where the Aggregation Task comes from.
+            article: Article, article from where the question comes from.
             info: dict, wikipedia information of the entities.
             context: Context, context of the entities in the article.
         """
@@ -684,24 +684,21 @@ class Sample:
         self.date = article.date
         self.abstract = article.abstract
 
-        self.info = info
         self.context = context
+        self.info = info
 
     def __str__(self):
         """
-        Overrides the builtin str method for the instances of Sample.
+        Overrides the builtin str method for the instances of Question.
 
         Returns:
             str, readable format of the instance.
         """
 
-        string = ''
-
-        string += "Entities: " + BaseClass.to_string(self.tuple_) + '\n'
+        string = "Entities: " + BaseClass.to_string(self.tuple_) + '\n'
         string += BaseClass.to_string(self.info) + '\n\n'
 
-        string += "Article: " + BaseClass.to_string(self.title)
-        string += ' (' + BaseClass.to_string(self.date) + ')'
+        string += "Article: " + BaseClass.to_string(self.title) + ' (' + BaseClass.to_string(self.date) + ')\n'
         string += BaseClass.to_string(self.abstract) + '\n\n'
 
         string += BaseClass.to_string(self.context) + '\n\n'

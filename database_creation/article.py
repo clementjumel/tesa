@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass, Context, Sample
+from database_creation.utils import BaseClass, Context, Question
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
@@ -215,24 +215,24 @@ class Article(BaseClass):
 
         return sorted(entity_sentences)
 
-    def get_samples(self, tuple_, info):
+    def get_questions(self, tuple_, info):
         """
-        Returns the samples for an entities' tuple of the article.
+        Returns the aggregation questions for an entities' tuple of the article.
 
         Args:
             tuple_: tuple, entities mentioned in the article.
-            info: str, wikipedia information of the entities.
+            info: dict, wikipedia information of the entities.
 
         Returns:
-            dict, aggregation Samples mapped with the context id_.
+            dict, aggregation Question mapped with the context id_.
         """
 
-        tuple_samples = dict()
+        tuple_questions = dict()
 
         for id_ in self.contexts[tuple_]:
-            tuple_samples[id_] = Sample(tuple_=tuple_, article=self, info=info, context=self.contexts[tuple_][id_])
+            tuple_questions[id_] = Question(tuple_=tuple_, article=self, info=info, context=self.contexts[tuple_][id_])
 
-        return tuple_samples
+        return tuple_questions
 
     # endregion
 
@@ -367,7 +367,6 @@ def main():
     article.compute_metadata()
     article.compute_annotations()
 
-    article.compute_similarities()
     article.compute_contexts(('James Joyce', 'Richard Bernstein'), 'neigh_sent')
 
     print(article)

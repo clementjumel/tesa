@@ -37,4 +37,4 @@ database.process_contexts()
 
 database.process_wikipedia(load=False)
 
-database.process_samples(load=False)
+database.process_task(load=False)
