@@ -22,22 +22,23 @@ class Database(BaseClass):
     limit_print, random_print = 50, True
     modulo_articles, modulo_tuples = 1000, 100
 
-    @BaseClass.Verbose("Initializing the database...")
-    def __init__(self, max_size=None, year='2000', project_root='', min_articles=None, min_queries=None):
+    def __init__(self, year='2000', max_size=None, project_root='', verbose=True, min_articles=None, min_queries=None):
         """
         Initializes an instance of Database.
 
         Args:
-            max_size: int, maximum number o=f articles in the database; if None, takes all articles.
             year: str, year of the database to analyse.
+            max_size: int, maximum number o=f articles in the database; if None, takes all articles.
             project_root: str, relative path to the root of the project.
+            verbose: bool, verbose option of the database.
             min_articles: int, minimum number of articles an entities' tuple must be in.
             min_queries: int, minimum number of Queries an entities' tuple must have.
         """
 
-        self.max_size = max_size
         self.year = str(year)
+        self.max_size = max_size
         self.project_root = project_root
+        self.verbose = verbose
 
         self.min_articles = min_articles
         self.min_queries = min_queries
@@ -55,9 +56,6 @@ class Database(BaseClass):
 
         self.queries = None
         self.answers = None
-
-        self.compute_articles()
-        self.clean(Article.criterion_data)
 
     def __str__(self):
         """
@@ -145,6 +143,8 @@ class Database(BaseClass):
     def preprocess_database(self):
         """ Performs the preprocessing of the database. """
 
+        self.compute_articles()
+        self.clean(Article.criterion_data)
         self.compute_metadata()
         self.compute_tuples()
 
@@ -181,10 +181,10 @@ class Database(BaseClass):
             self.save('not_wikipedia')
             self.save('ambiguous')
 
-    @BaseClass.Verbose("Processing the aggregation task...")
-    def create_task(self, load, file_name=None):
+    @BaseClass.Verbose("Processing the aggregation queries...")
+    def process_queries(self, load, file_name=None):
         """
-        Performs the processing of the aggregation task.
+        Performs the processing of the aggregation queries.
 
         Args:
             load: bool, if True, load an existing queries file.
@@ -259,7 +259,6 @@ class Database(BaseClass):
 
                 self.clean(Database.criterion_article_ids)
 
-    # TODO: make different folders for the different parameters
     @BaseClass.Verbose("Performing the annotation task..")
     def ask(self, n_queries=1):
         """
@@ -272,55 +271,55 @@ class Database(BaseClass):
         with open(self.project_root + 'results/instructions.txt', 'r') as f:
             print(f.read())
 
-        count = 1
-        while True:
-            try:
-                self.load(file_name='answers/answer_' + str(count))
-                count += 1
-            except FileNotFoundError:
-                break
-
-        self.answers = defaultdict(list)
-
+        answer = defaultdict(list)
         query_ids = sample(list(self.queries), n_queries)
+
         for query_id_ in query_ids:
             print(self.to_string(self.queries[query_id_]))
 
-            answer = input("Answer: ")
-            self.answers[query_id_].append(answer)
-
-        self.save(attribute_name='answers', file_name='answers/answer_' + str(count))
-
-    # TODO: make different folders for the different parameters
-    @BaseClass.Verbose("Gathering the answers..")
-    @BaseClass.Attribute('answers')
-    def gather(self):
-        """ Gather the different answers into one file and load the answers. """
-
-        try:
-            answers = self.load(file_name='answers/answers')
-        except FileNotFoundError:
-            answers = defaultdict(list)
+            a = input("Answer: ")
+            answer[query_id_].append(a) if a else None
+            print('\n')
 
         count = 1
         while True:
             try:
-                answer = self.pop_file(file_name='answers/answer_' + str(count))
+                self.load(file_name='answer_' + str(count), folder_name='answers')
+                count += 1
+            except FileNotFoundError:
+                break
+
+        self.save(obj=answer, file_name='answer_' + str(count), folder_name='answers')
+
+    @BaseClass.Verbose("Gathering the answers..")
+    @BaseClass.Attribute('answers')
+    def gather(self):
+        """ Gather the different answers into one file and load them. """
+
+        try:
+            self.load(attribute_name='answers', folder_name='answers')
+        except FileNotFoundError:
+            self.answers = defaultdict(list)
+
+        count = 1
+        while True:
+            try:
+                answer = self.pop_file(file_name='answer_' + str(count), folder_name='answers')
                 count += 1
 
                 for query_id_ in answer:
-                    answers[query_id_].extend(answer[query_id_])
+                    self.answers[query_id_].extend(answer[query_id_])
 
             except FileNotFoundError:
                 break
 
-        self.answers = answers
-        self.save(attribute_name='answers', file_name='answers/answers')
+        self.save(attribute_name='answers', folder_name='answers')
 
     # endregion
 
     # region Methods compute_
 
+    @BaseClass.Verbose("Computing the database' article...")
     def compute_articles(self):
         """ Computes and initializes the articles in the database. """
 
@@ -441,7 +440,6 @@ class Database(BaseClass):
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
             info = self.get_info(tuple_.entities)
-            query_ids = set()
 
             for article_id_ in tuple_.article_ids:
                 article_contexts = self.articles[article_id_].contexts[tuple_.entities]
@@ -453,10 +451,6 @@ class Database(BaseClass):
                                                article=self.articles[article_id_],
                                                info=info,
                                                context=article_contexts[context_id_])
-                    query_ids.add(query_id_)
-
-            # TODO: remove
-            assert tuple_.query_ids == query_ids
 
         self.queries = queries
 
@@ -816,7 +810,7 @@ class Database(BaseClass):
         plt.title(title)
         plt.xlabel(xlabel)
 
-    def save(self, attribute_name=None, obj=None, file_name=None):
+    def save(self, attribute_name=None, obj=None, file_name=None, folder_name='queries'):
         """
         Save an attribute (designated by its name) or an object into a file using pickle.
 
@@ -824,6 +818,7 @@ class Database(BaseClass):
             attribute_name: str, name of the attribute to save; if None, save an object instead.
             obj: unk, object saved if no attribute name is provided.
             file_name: str, name of the file; if None, save an attribute with the standard name.
+            folder_name: str, name of the folder to save in.
         """
 
         if attribute_name is not None:
@@ -833,10 +828,10 @@ class Database(BaseClass):
 
         prefix, suffix = self.prefix_suffix()
         if file_name is not None:
-            file_name = prefix + file_name + '.pkl'
+            file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
         else:
             if attribute_name is not None:
-                file_name = prefix + attribute_name + suffix + '.pkl'
+                file_name = prefix + folder_name + '/' + attribute_name + suffix + '.pkl'
             else:
                 raise Exception("Missing file name to save the object.")
 
@@ -848,21 +843,22 @@ class Database(BaseClass):
         else:
             self.print("Object saved at {}.".format(file_name))
 
-    def load(self, attribute_name=None, file_name=None):
+    def load(self, attribute_name=None, file_name=None, folder_name='queries'):
         """
         Load an attribute (designated by its name) or an object from a file using pickle.
 
         Args:
             attribute_name: str, name of the attribute to load; if None, returns the object.
             file_name: str, name of the file to load; if None, load the file with the corresponding standard name.
+            folder_name: str, name of the folder to load from.
         """
 
         prefix, suffix = self.prefix_suffix()
         if file_name is not None:
-            file_name = prefix + file_name + '.pkl'
+            file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
         else:
             if attribute_name is not None:
-                file_name = prefix + attribute_name + suffix + '.pkl'
+                file_name = prefix + folder_name + '/' + attribute_name + suffix + '.pkl'
             else:
                 raise Exception("Missing file name to load the object.")
 
@@ -876,16 +872,17 @@ class Database(BaseClass):
             self.print("Object loaded from {}".format(file_name))
             return obj
 
-    def pop_file(self, file_name=None):
+    def pop_file(self, file_name=None, folder_name='queries'):
         """
         Remove and returns a pickle file.
 
         Args:
             file_name: str, name of the file to delete.
+            folder_name: str, name of the folder of the file to delete.
         """
 
-        prefix, _ = self.prefix_suffix()
-        file_name = prefix + file_name + '.pkl'
+        prefix, suffix = self.prefix_suffix()
+        file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
 
         with open(file_name, 'rb') as f:
             obj = load(f)
@@ -959,6 +956,62 @@ class Database(BaseClass):
     # endregion
 
 
+# region Main functions
+def create_database(project_root='', max_size=None, min_articles=1, min_queries=1):
+    """
+    Run the whole pipeline for the creation of a queries file for the database.
+
+    Args:
+        project_root: str, relative path to the root of the project.
+        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
+        min_articles: int, minimum number of articles an entities' tuple must be in.
+        min_queries: int, minimum number of Queries an entities' tuple must have.
+    """
+
+    database = Database(max_size=max_size, project_root=project_root)
+    database.preprocess_database()
+    database.filter(min_articles=min_articles)
+    database.preprocess_articles()
+    database.filter(min_queries=min_queries)
+    database.process_wikipedia(load=False)
+    database.process_queries(load=False)
+
+
+def annotation_task(n_queries=1, project_root='', max_size=None, min_articles=1, min_queries=1):
+    """
+    Run the annotation task for the specify number of queries.
+
+    Args:
+        n_queries: int, number of queries to annotate.
+        project_root: str, relative path to the root of the project.
+        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
+        min_articles: int, minimum number of articles an entities' tuple must be in.
+        min_queries: int, minimum number of Queries an entities' tuple must have.
+    """
+
+    database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
+                        min_queries=min_queries, verbose=False)
+    database.process_queries(load=True)
+    database.ask(n_queries)
+
+
+def gather_answers(project_root='', max_size=None, min_articles=1, min_queries=1):
+    """
+    Gather the answers file.
+
+    Args:
+        project_root: str, relative path to the root of the project.
+        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
+        min_articles: int, minimum number of articles an entities' tuple must be in.
+        min_queries: int, minimum number of Queries an entities' tuple must have.
+    """
+
+    database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
+                        min_queries=min_queries)
+    database.gather()
+# endregion
+
+
 def main():
     # Parameters
     max_size = 1000
@@ -966,21 +1019,15 @@ def main():
     min_queries = 1
     n_queries = 3
 
-    # Create the annotation task
-    database = Database(max_size=max_size, project_root='../')
-    database.preprocess_database()
-    database.filter(min_articles=min_articles)
-    database.preprocess_articles()
-    database.filter(min_queries=min_queries)
-    database.process_wikipedia(load=False)
-    database.create_task(load=False)
+    # Create the queries database
+    create_database(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
 
     # Run the annotation task
-    Database.set_verbose(False)
-    database = Database(max_size=max_size, project_root='../', min_articles=min_articles, min_queries=min_queries)
-    database.create_task(load=True)
-    database.ask(n_queries)
-    database.gather()
+    annotation_task(n_queries=n_queries, project_root='../', max_size=max_size, min_articles=min_articles,
+                    min_queries=min_queries)
+
+    # Gather the answers
+    gather_answers(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
 
 
 if __name__ == '__main__':
