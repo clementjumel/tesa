@@ -27,14 +27,24 @@ Token.set_parameters(to_print=['word'],
                      print_attribute=False)
 # endregion
 
-database = Database()
+# Parameters
+max_size = 10000
+min_articles = 2
+min_queries = 3
+n_queries = 3
 
+# Initializes the database
+database = Database(max_size=max_size)
 database.preprocess_database()
-database.filter_threshold(threshold=5)
-
+database.filter(min_articles=min_articles)
 database.preprocess_articles()
-database.process_contexts()
-
+database.filter(min_queries=min_queries)
 database.process_wikipedia(load=False)
+database.create_task(load=False)
 
-database.process_task(load=False)
+# Run the annotation task
+Database.set_verbose(False)
+database = Database(max_size=max_size, min_articles=min_articles, min_queries=min_queries)
+database.create_task(load=True)
+database.ask(n_queries)
+database.gather()

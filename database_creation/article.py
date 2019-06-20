@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass, Context, Question
+from database_creation.utils import BaseClass, Context
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
@@ -72,17 +72,17 @@ class Article(BaseClass):
         for idx in self.sentences:
             self.sentences[idx].compute_similarities(self.entities)
 
-    def compute_contexts(self, tuple_, type_):
+    def compute_contexts(self, entities, type_):
         """
-        Compute the contexts of the article for the entities tuple, according to the specified context type.
+        Compute the contexts of the article for the entities, according to the specified context type.
 
         Args:
-            tuple_: tuple, entities mentioned in the article.
+            entities: tuple, entities mentioned in the article.
             type_: str, type of the context, must be 'same_sent', 'neigh_sent', or 'same_role'.
         """
 
         self.contexts = self.contexts or dict()
-        self.contexts[tuple_] = getattr(self, 'contexts_' + type_)(tuple_)
+        self.contexts[entities] = getattr(self, 'contexts_' + type_)(entities)
 
     # endregion
 
@@ -214,25 +214,6 @@ class Article(BaseClass):
             entity_sentences.update(coreference.sentences)
 
         return sorted(entity_sentences)
-
-    def get_questions(self, tuple_, info):
-        """
-        Returns the aggregation questions for an entities' tuple of the article.
-
-        Args:
-            tuple_: tuple, entities mentioned in the article.
-            info: dict, wikipedia information of the entities.
-
-        Returns:
-            dict, aggregation Question mapped with the context id_.
-        """
-
-        tuple_questions = dict()
-
-        for id_ in self.contexts[tuple_]:
-            tuple_questions[id_] = Question(tuple_=tuple_, article=self, info=info, context=self.contexts[tuple_][id_])
-
-        return tuple_questions
 
     # endregion
 

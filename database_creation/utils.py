@@ -30,6 +30,17 @@ class BaseClass:
 
         return string
 
+    def print(self, string):
+        """
+        Alternative to the builtin method to take into account self.verbose.
+
+        Args:
+            string: str, message to print.
+        """
+
+        if self.verbose:
+            print(string)
+
     @classmethod
     def get_parameters(cls):
         """
@@ -97,7 +108,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Question)):
+        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Query)):
             return str(item)
 
         # Case of lists
@@ -177,7 +188,7 @@ class BaseClass:
 
     # endregion
 
-    # region Decorator
+    # region Decorators
 
     class Verbose:
         """ Decorator for the display of a simple message. """
@@ -224,21 +235,15 @@ class BaseClass:
 
                 if slf.verbose:
                     attribute = getattr(slf, self.attribute)
-                    if attribute is None:
-                        length = 0
-                    else:
-                        length = len(attribute)
-                    print("Initial length of {}: {}".format(self.attribute, length))
+                    if attribute is not None:
+                        print("Initial length of {}: {}".format(self.attribute, len(attribute)))
 
                 func(*args, **kwargs)
 
                 if slf.verbose:
                     attribute = getattr(slf, self.attribute)
-                    if attribute is None:
-                        length = 0
-                    else:
-                        length = len(attribute)
-                    print("Final length of {}: {}".format(self.attribute, length))
+                    if attribute is not None:
+                        print("Final length of {}: {}".format(self.attribute, len(attribute)))
 
             return f
 
@@ -608,6 +613,40 @@ class Mention:
     # endregion
 
 
+class Tuple:
+    # region Class base methods
+
+    def __init__(self, id_, entities, type_, article_ids, query_ids=None):
+        """
+        Initializes an entity Tuple instance.
+
+        Args:
+            id_: str, id of the Tuple.
+            entities: tuple, entities of the Tuple.
+            type_: str, type of the entities, must be 'location', 'person' or 'organization'.
+            article_ids: set, ids of the articles where the entities are mentioned.
+            query_ids: set, ids of the queries corresponding to the Tuple.
+        """
+
+        self.id_ = id_
+        self.entities = entities
+        self.type_ = type_
+        self.article_ids = article_ids
+        self.query_ids = query_ids
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Tuple.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return BaseClass.to_string(self.entities)
+
+    # endregion
+
+
 class Context:
     # region Class base methods
 
@@ -664,38 +703,38 @@ class Context:
     # endregion
 
 
-class Question:
+class Query:
     # region Class base methods
 
-    def __init__(self, tuple_, article, info, context):
+    def __init__(self, entities, article, info, context):
         """
-        Initializes the aggregation question instance.
+        Initializes the aggregation Query instance.
 
         Args:
-            tuple_: tuple, entities mentioned in the article.
-            article: Article, article from where the question comes from.
+            entities: tuple, entities mentioned in the article.
+            article: Article, article from where the query comes from.
             info: dict, wikipedia information of the entities.
             context: Context, context of the entities in the article.
         """
 
-        self.tuple_ = tuple_
+        self.entities = entities
 
         self.title = article.title
         self.date = article.date
         self.abstract = article.abstract
 
-        self.context = context
         self.info = info
+        self.context = context
 
     def __str__(self):
         """
-        Overrides the builtin str method for the instances of Question.
+        Overrides the builtin str method for the instances of Query.
 
         Returns:
             str, readable format of the instance.
         """
 
-        string = "Entities: " + BaseClass.to_string(self.tuple_) + '\n'
+        string = "Entities: " + BaseClass.to_string(self.entities) + '\n'
         string += BaseClass.to_string(self.info) + '\n\n'
 
         string += "Article: " + BaseClass.to_string(self.title) + ' (' + BaseClass.to_string(self.date) + ')\n'

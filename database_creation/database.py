@@ -1,8 +1,10 @@
-from database_creation.utils import BaseClass
+from database_creation.utils import BaseClass, Tuple, Query
 from database_creation.article import Article
 
+from os import remove as os_remove
 from copy import copy
-from numpy import random
+from numpy.random import shuffle
+from random import sample
 from glob import glob
 from collections import defaultdict
 from numpy import histogram
@@ -21,26 +23,29 @@ class Database(BaseClass):
     modulo_articles, modulo_tuples = 1000, 100
 
     @BaseClass.Verbose("Initializing the database...")
-    def __init__(self, max_size=None, threshold=1, year='2000', project_root=''):
+    def __init__(self, max_size=None, year='2000', project_root='', min_articles=None, min_queries=None):
         """
         Initializes an instance of Database.
 
         Args:
-            max_size: int, maximum number of articles in the database; if None, takes all articles.
-            threshold: int, minimum frequency of the tuples of entities we consider.
+            max_size: int, maximum number o=f articles in the database; if None, takes all articles.
             year: str, year of the database to analyse.
             project_root: str, relative path to the root of the project.
+            min_articles: int, minimum number of articles an entities' tuple must be in.
+            min_queries: int, minimum number of Queries an entities' tuple must have.
         """
 
         self.max_size = max_size
-        self.threshold = threshold
         self.year = str(year)
         self.project_root = project_root
 
+        self.min_articles = min_articles
+        self.min_queries = min_queries
+
         self.articles = None
+        self.article_ids = None
 
         self.tuples = None
-        self.tuples_ids = None
 
         self.wikipedia = None
         self.not_wikipedia = None
@@ -48,7 +53,7 @@ class Database(BaseClass):
 
         self.stats = None
 
-        self.questions = None
+        self.queries = None
         self.answers = None
 
         self.compute_articles()
@@ -73,9 +78,9 @@ class Database(BaseClass):
                 else ''
 
         if 'articles' in attributes:
-            ids = self.get_ids()
+            ids = self.article_ids
             if random_print:
-                random.shuffle(ids)
+                shuffle(ids)
 
             string += self.prefix(True, print_lines if string else 0, print_offsets, 'articles') \
                 if print_attribute else ''
@@ -142,56 +147,59 @@ class Database(BaseClass):
 
         self.compute_metadata()
         self.compute_tuples()
-        self.clean(Database.criterion_tuples_ids)
 
     @BaseClass.Verbose("Preprocessing the articles...")
     def preprocess_articles(self):
         """ Performs the preprocessing of the articles. """
 
         self.compute_annotations()
+        self.compute_contexts()
 
     @BaseClass.Verbose("Processing the wikipedia information...")
-    def process_wikipedia(self, load):
+    def process_wikipedia(self, load, file_name=None):
         """
         Performs the processing of the wikipedia information of the database.
 
         Args:
             load: bool, if True, load an existing file (don't add new entry).
+            file_name: str, name of the wikipedia file to load; if None, load the standard files.
         """
 
         if load:
-            self.load_attribute(attribute_name='wikipedia', file_name='wikipedia/wikipedia')
-            self.load_attribute(attribute_name='not_wikipedia', file_name='wikipedia/not_wikipedia')
-            self.load_attribute(attribute_name='ambiguous', file_name='wikipedia/ambiguous')
+            if file_name is None:
+                self.load('wikipedia')
+                self.load('not_wikipedia')
+                self.load('ambiguous')
+
+            else:
+                self.load(attribute_name='wikipedia', file_name=file_name)
 
         else:
             self.compute_wikipedia()
 
-            self.save_attribute(attribute_name='wikipedia', file_name='wikipedia/wikipedia')
-            self.save_attribute(attribute_name='not_wikipedia', file_name='wikipedia/not_wikipedia')
-            self.save_attribute(attribute_name='ambiguous', file_name='wikipedia/ambiguous')
-
-    @BaseClass.Verbose("Processing the articles contexts...")
-    def process_contexts(self):
-        """ Performs the processing of the contexts of the database. """
-
-        self.compute_contexts()
+            self.save('wikipedia')
+            self.save('not_wikipedia')
+            self.save('ambiguous')
 
     @BaseClass.Verbose("Processing the aggregation task...")
-    def process_task(self, load):
+    def create_task(self, load, file_name=None):
         """
         Performs the processing of the aggregation task.
 
         Args:
-            load: bool, if True, load an existing questions file.
+            load: bool, if True, load an existing queries file.
+            file_name: str, name of the queries file to load; if None, load the standard file.
         """
 
         if load:
-            self.load_attribute(attribute_name='questions', file_name='questions/questions')
+            if file_name is None:
+                self.load('queries')
+            else:
+                self.load(attribute_name='queries', file_name=file_name)
 
         else:
-            self.compute_questions()
-            self.save_attribute(attribute_name='questions', file_name='questions/questions')
+            self.compute_queries()
+            self.save('queries')
 
     @BaseClass.Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -205,30 +213,109 @@ class Database(BaseClass):
         getattr(self, 'compute_stats_' + type_)()
         getattr(self, 'display_stats_' + type_)()
 
-    @BaseClass.Verbose("Filtering the articles according to a threshold...")
+    @BaseClass.Verbose("Filtering the articles...")
     @BaseClass.Attribute('tuples')
-    def filter_threshold(self, threshold=None):
+    def filter(self, min_articles=None, min_queries=None):
         """
-        Filter out the articles that doesn't respect the specified threshold on the entities tuple frequency.
+        Filter out the articles that doesn't respect the specified threshold on the minimum number of articles or the
+        minimum number of queries.
 
         Args:
-            threshold: int, minimal number of articles an entities tuple must appear in to be considered; if None,
-            doesn't change the threshold.
+            min_articles: int, minimum number of articles an entities' tuple must be in.
+            min_queries: int, minimum number of Queries an entities' tuple must have.
         """
 
-        self.threshold = threshold if threshold else self.threshold
+        if min_articles is not None:
+            self.print("Minimum number of articles: {}".format(min_articles))
 
-        tuples, tuples_ids = [], set()
+            if min_articles >= 1:
+                tuples, article_ids = [], set()
 
-        for entities_tuple in self.tuples:
-            if entities_tuple['frequency'] >= self.threshold:
-                tuples.append(entities_tuple)
-                tuples_ids.update(entities_tuple['ids'])
+                for tuple_ in self.tuples:
+                    if len(tuple_.article_ids) >= min_articles:
+                        tuples.append(tuple_)
+                        article_ids.update(tuple_.article_ids)
 
-        self.tuples = tuples
-        self.tuples_ids = tuples_ids
+                self.tuples = tuples
+                self.article_ids = article_ids
+                self.min_articles = min_articles
 
-        self.clean(Database.criterion_tuples_ids)
+                self.clean(Database.criterion_article_ids)
+
+        if min_queries is not None:
+            self.print("Minimum number of queries: {}".format(min_queries))
+
+            if min_queries >= 1:
+                tuples, article_ids = [], set()
+
+                for tuple_ in self.tuples:
+                    if len(tuple_.query_ids) >= min_queries:
+                        tuples.append(tuple_)
+                        article_ids.update(tuple_.article_ids)
+
+                self.tuples = tuples
+                self.article_ids = article_ids
+                self.min_queries = min_queries
+
+                self.clean(Database.criterion_article_ids)
+
+    # TODO: make different folders for the different parameters
+    @BaseClass.Verbose("Performing the annotation task..")
+    def ask(self, n_queries=1):
+        """
+        Performs the annotation task by asking the specified number of queries.
+
+        Args:
+            n_queries: int, number of queries to ask.
+        """
+
+        with open(self.project_root + 'results/instructions.txt', 'r') as f:
+            print(f.read())
+
+        count = 1
+        while True:
+            try:
+                self.load(file_name='answers/answer_' + str(count))
+                count += 1
+            except FileNotFoundError:
+                break
+
+        self.answers = defaultdict(list)
+
+        query_ids = sample(list(self.queries), n_queries)
+        for query_id_ in query_ids:
+            print(self.to_string(self.queries[query_id_]))
+
+            answer = input("Answer: ")
+            self.answers[query_id_].append(answer)
+
+        self.save(attribute_name='answers', file_name='answers/answer_' + str(count))
+
+    # TODO: make different folders for the different parameters
+    @BaseClass.Verbose("Gathering the answers..")
+    @BaseClass.Attribute('answers')
+    def gather(self):
+        """ Gather the different answers into one file and load the answers. """
+
+        try:
+            answers = self.load(file_name='answers/answers')
+        except FileNotFoundError:
+            answers = defaultdict(list)
+
+        count = 1
+        while True:
+            try:
+                answer = self.pop_file(file_name='answers/answer_' + str(count))
+                count += 1
+
+                for query_id_ in answer:
+                    answers[query_id_].extend(answer[query_id_])
+
+            except FileNotFoundError:
+                break
+
+        self.answers = answers
+        self.save(attribute_name='answers', file_name='answers/answers')
 
     # endregion
 
@@ -247,6 +334,7 @@ class Database(BaseClass):
             articles[id_] = Article(original_path=original_path, annotated_path=annotated_path)
 
         self.articles = articles
+        self.article_ids = set(self.articles.keys())
 
     @BaseClass.Verbose("Computing the articles' metadata...")
     def compute_metadata(self):
@@ -268,14 +356,15 @@ class Database(BaseClass):
 
     @BaseClass.Verbose("Computing the entity tuples...")
     def compute_tuples(self):
-        """ Compute the entities tuples of the database as a sorted list of dictionaries with the tuple, the frequency
-        (in number of articles) and the ids of the articles. """
+        """ Compute the entity tuples of the database as a sorted list of Tuples with its entities, its type and the
+        ids of its articles. """
 
         tuples_ids, tuples_type = defaultdict(set), defaultdict(str)
         count, size = 0, len(self.articles)
 
         for id_ in self.articles:
             count = self.progression(count, self.modulo_articles, size, 'article')
+
             for type_ in ['location', 'person', 'organization']:
                 entities = getattr(self.articles[id_], 'entities')[type_]
 
@@ -285,25 +374,30 @@ class Database(BaseClass):
                         tuples_type[t] = type_
 
         sorted_tuples = sorted(tuples_ids, key=lambda k: len(tuples_ids[k]), reverse=True)
-        tuples = [{'tuple_': t, 'rank': rank + 1, 'frequency': len(tuples_ids[t]),
-                   'ids': tuples_ids[t], 'type_': tuples_type[t]}
-                  for rank, t in enumerate(sorted_tuples)]
-        tuples_ids = set([id_ for tuple_ in tuples for id_ in tuple_['ids']])
+
+        tuples = [Tuple(id_=str(idx + 1), entities=t, type_=tuples_type[t], article_ids=tuples_ids[t])
+                  for idx, t in enumerate(sorted_tuples)]
 
         self.tuples = tuples
-        self.tuples_ids = tuples_ids
 
     @BaseClass.Verbose("Computing the contexts...")
     def compute_contexts(self):
-        """ Compute the contexts of the articles for each tuple of entities. """
+        """ Compute the contexts of the articles for each entity Tuple. """
 
         count, size = 0, len(self.tuples)
 
-        for entities_tuple in self.tuples:
+        for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            for id_ in entities_tuple['ids']:
-                self.articles[id_].compute_contexts(tuple_=entities_tuple['tuple_'], type_='neigh_sent')
+            query_ids = set()
+
+            for article_id_ in tuple_.article_ids:
+                self.articles[article_id_].compute_contexts(entities=tuple_.entities, type_='neigh_sent')
+
+                query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
+                                  for context_id_ in self.articles[article_id_].contexts[tuple_.entities]})
+
+            tuple_.query_ids = query_ids
 
     @BaseClass.Verbose("Computing the wikipedia information...")
     def compute_wikipedia(self):
@@ -312,20 +406,20 @@ class Database(BaseClass):
         wikipedia, not_wikipedia, ambiguous = dict(), dict(), dict()
         count, size = 0, len(self.tuples)
 
-        for entities_tuple in self.tuples:
+        for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            for entity in entities_tuple['tuple_']:
+            for entity in tuple_.entities:
                 if entity not in wikipedia and entity not in not_wikipedia:
 
-                    raw_entities = self.get_raw_entities(entity, entities_tuple['ids'], entities_tuple['type_'])
+                    raw_entities = self.get_raw_entities(entity, tuple_.article_ids, tuple_.type_)
 
                     if len(raw_entities) > 1:
-                        print("Ambiguous case, first one chosen: {}".format(self.to_string(raw_entities)))
+                        self.print("Ambiguous case, first one chosen: {}".format(self.to_string(raw_entities)))
                         ambiguous[entity] = raw_entities
 
                     raw_entity = raw_entities[0]
-                    p = self.wikipedia_page(entity, raw_entity, entities_tuple['type_'])
+                    p = self.wikipedia_page(entity, raw_entity, tuple_.type_)
 
                     if p:
                         wikipedia[entity] = p.summary
@@ -336,59 +430,57 @@ class Database(BaseClass):
         self.not_wikipedia = not_wikipedia
         self.ambiguous = ambiguous
 
-    @BaseClass.Verbose("Computing the aggregation questions...")
-    def compute_questions(self):
-        """ Compute the aggregation questions of the database. """
+    @BaseClass.Verbose("Computing the aggregation queries...")
+    def compute_queries(self):
+        """ Compute the aggregation Queries of the database. """
 
-        questions = dict()
+        queries = dict()
         count, size = 0, len(self.tuples)
 
-        for entities_tuple in self.tuples:
+        for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            info = self.get_info(entities_tuple['tuple_'])
+            info = self.get_info(tuple_.entities)
+            query_ids = set()
 
-            for article_id_ in entities_tuple['ids']:
-                article_questions = self.articles[article_id_].get_questions(entities_tuple['tuple_'], info)
+            for article_id_ in tuple_.article_ids:
+                article_contexts = self.articles[article_id_].contexts[tuple_.entities]
 
-                for context_id_ in article_questions:
-                    question_id_ = str(entities_tuple['rank']) + '_' + article_id_ + '_' + context_id_
-                    questions[question_id_] = article_questions[context_id_]
+                for context_id_ in article_contexts:
+                    query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
 
-        self.questions = questions
+                    queries[query_id_] = Query(entities=tuple_.entities,
+                                               article=self.articles[article_id_],
+                                               info=info,
+                                               context=article_contexts[context_id_])
+                    query_ids.add(query_id_)
+
+            # TODO: remove
+            assert tuple_.query_ids == query_ids
+
+        self.queries = queries
 
     # endregion
 
     # region Methods get_
 
-    def get_ids(self):
-        """
-        Computes the ids of the articles in the database.
-
-        Returns:
-            list, ids of the articles.
-        """
-
-        return list(self.articles.keys())
-
-    def get_raw_entities(self, entity, ids, type_):
+    def get_raw_entities(self, entity, article_ids, type_):
         """
         Return the raw entities of the entity from the articles ids.
 
         Args:
             entity: str, entity to analyse.
-            ids: set, ids of the articles to scan.
+            article_ids: set, ids of the articles to scan.
             type_: str, type of the entity.
 
         Returns:
             list, raw entities of the entity.
         """
 
-        raw_entities = sorted(
-            set([self.articles[id_].raw_entities[entity] for id_ in ids if self.articles[id_].raw_entities[entity]]),
-            key=len,
-            reverse=True
-        )
+        raw_entities = sorted(set([self.articles[id_].raw_entities[entity]
+                                   for id_ in article_ids if self.articles[id_].raw_entities[entity]]),
+                              key=len,
+                              reverse=True)
 
         standardized = getattr(self, 'standardize_' + type_)(entity)
         if len(raw_entities) > 1 and standardized in raw_entities:
@@ -399,12 +491,12 @@ class Database(BaseClass):
 
         return raw_entities
 
-    def get_info(self, tuple_):
+    def get_info(self, entities):
         """
-        Compute the wikipedia info of the tuple as the first paragraph of the entities' summaries.
+        Compute the wikipedia info of the entities as the first paragraph of the entities' summaries.
 
         Args:
-            tuple_: tuple, entities mentioned in the article.
+            entities: tuple, entities mentioned in the article.
 
         Returns:
             dict, wikipedia info of the tuple.
@@ -412,10 +504,12 @@ class Database(BaseClass):
 
         info = dict()
 
-        for entity in tuple_:
+        for entity in entities:
             if entity in self.wikipedia:
                 paragraphs = self.wikipedia[entity].split('\n')
                 info[entity] = paragraphs[0]
+            else:
+                info[entity] = "No information found on Wikipedia."
 
         return info
 
@@ -423,18 +517,18 @@ class Database(BaseClass):
 
     # region Methods criterion_
 
-    def criterion_tuples_ids(self, id_):
+    def criterion_article_ids(self, id_):
         """
-        Check if an article does not belong to the tuples ids.
+        Check if an article does not belong to the article ids attribute.
 
         Args:
             id_: string, id of the article to analyze.
 
         Returns:
-            bool, True iff the article does not belong to the tuples ids.
+            bool, True iff the article does not belong to the article ids.
         """
 
-        return True if id_ not in self.tuples_ids else False
+        return True if id_ not in self.article_ids else False
 
     # endregion
 
@@ -475,7 +569,7 @@ class Database(BaseClass):
             numpy.histogram, histogram of the lengths of the entities tuples, starting from 0.
         """
 
-        data = [len(entities_tuple['tuple_']) for entities_tuple in self.tuples]
+        data = [len(tuple_.entities) for tuple_ in self.tuples]
         bins = max(data) + 1
         range_ = (0, max(data) + 1)
 
@@ -489,7 +583,7 @@ class Database(BaseClass):
             numpy.histogram, histogram of the frequencies of the entities tuples, starting from 0.
         """
 
-        data = [entities_tuple['frequency'] for entities_tuple in self.tuples]
+        data = [len(tuple_.article_ids) for tuple_ in self.tuples]
         bins = max(data) + 1
         range_ = (0, max(data) + 1)
 
@@ -504,14 +598,14 @@ class Database(BaseClass):
             numpy.histogram, histogram of the number of articles for each threshold.
         """
 
-        m = max([entities_tuple['frequency'] for entities_tuple in self.tuples])
+        m = max([len(tuple_.article_ids) for tuple_ in self.tuples])
 
         threshold_ids = [set() for _ in range(m + 1)]
-        threshold_ids[0].update(set(self.get_ids()))
+        threshold_ids[0].update(self.article_ids)
 
-        for entities_tuple in self.tuples:
-            for threshold in range(1, entities_tuple['frequency'] + 1):
-                threshold_ids[threshold].update(entities_tuple['ids'])
+        for tuple_ in self.tuples:
+            for threshold in range(1, len(tuple_.article_ids) + 1):
+                threshold_ids[threshold].update(tuple_.article_ids)
 
         data = [i for i in range(m + 1) for _ in threshold_ids[i]]
         bins = m + 1
@@ -550,8 +644,7 @@ class Database(BaseClass):
 
         file = getattr(self, file)
 
-        data = [entities_tuple['frequency'] for entities_tuple in self.tuples
-                for entity in entities_tuple['tuple_'] if entity in file]
+        data = [len(tuple_.article_ids) for tuple_ in self.tuples for entity in tuple_.entities if entity in file]
         bins = max(data) + 1
         range_ = (0, max(data) + 1)
 
@@ -566,10 +659,10 @@ class Database(BaseClass):
         """
 
         data = []
-        for entities_tuple in self.tuples:
+        for tuple_ in self.tuples:
             length = 0
-            for id_ in entities_tuple['ids']:
-                length += len(self.articles[id_].contexts[entities_tuple['tuple_']])
+            for id_ in tuple_.article_ids:
+                length += len(self.articles[id_].contexts[tuple_.entities])
 
             data.append(length)
 
@@ -583,8 +676,8 @@ class Database(BaseClass):
 
         print("\nTotal number of tuples: {}".format(len(self.tuples)))
         print("\n10 most frequent tuples:")
-        for entities_tuple in self.tuples[:10]:
-            print("{} (in {} articles)".format(self.to_string(entities_tuple['tuple_']), entities_tuple['frequency']))
+        for tuple_ in self.tuples[:10]:
+            print("{} (in {} articles)".format(self.to_string(tuple_.entities), len(tuple_.article_ids)))
         print()
 
         self.plot_hist(fig=1, data=self.stats['tuples_lengths'], xlabel='lengths', log=True,
@@ -596,6 +689,12 @@ class Database(BaseClass):
         self.plot_hist(fig=3, data=self.stats['tuples_thresholds'], xlabel='thresholds', log=True,
                        title='Number of articles for each threshold on the frequency')
 
+    def display_stats_contexts(self):
+        """ Display the contexts statistics of the database. """
+
+        self.plot_hist(fig=6, data=self.stats['contexts'], xlabel='number of contexts', log=True,
+                       title="Number of contexts found for each tuple")
+
     def display_stats_wikipedia(self):
         """ Display the wikipedia statistics of the database. """
 
@@ -604,18 +703,16 @@ class Database(BaseClass):
                       self.stats['notwikipedia_length'],
                       self.stats['ambiguous_length']))
 
-        print("\nWikipedia info of 5 most frequent tuples:")
-        for entities_tuple in self.tuples[:5]:
-            for entity in entities_tuple['tuple_']:
-                print('\n' + self.wikipedia[entity]) if entity in self.wikipedia \
-                    else print("\nNo information on {}".format(entity))
+        print("\nWikipedia info of 10 most frequent tuples:\n")
+        for tuple_ in self.tuples[:10]:
+            print(self.to_string(self.get_info(tuple_.entities)) + '\n')
 
-        print("\n10 not_wikipedia examples:")
-        for entity in list(self.not_wikipedia.keys())[:10]:
+        print("\nEntities not found in wikipedia:")
+        for entity in self.not_wikipedia:
             print(entity + ' (' + self.not_wikipedia[entity] + ')')
 
-        print("\n10 ambiguous examples:")
-        for entity in list(self.ambiguous.keys())[:10]:
+        print("\nAmbiguous cases:")
+        for entity in self.ambiguous:
             print(self.to_string(self.ambiguous[entity]) + ' (' + entity + ')')
         print()
 
@@ -624,12 +721,6 @@ class Database(BaseClass):
 
         self.plot_hist(fig=5, data=self.stats['notwikipedia_frequencies'], xlabel='frequencies', log=True,
                        title='Tuple frequency of the entities not found in wikipedia')
-
-    def display_stats_contexts(self):
-        """ Display the contexts statistics of the database. """
-
-        self.plot_hist(fig=6, data=self.stats['contexts'], xlabel='number of contexts', log=True,
-                       title="Number of contexts found for each tuple")
 
     # endregion
 
@@ -645,7 +736,7 @@ class Database(BaseClass):
             criterion: function, method from Article or Database, criterion that an article must meet to be removed.
         """
 
-        print("Criterion: {}".format([line for line in criterion.__doc__.splitlines() if line][0][8:]))
+        self.print("Criterion: {}".format([line for line in criterion.__doc__.splitlines() if line][0][8:]))
         to_del = []
 
         if criterion.__module__.split('.')[-1] == 'article':
@@ -664,6 +755,8 @@ class Database(BaseClass):
         for id_ in to_del:
             del self.articles[id_]
 
+        self.article_ids = set(self.articles.keys())
+
     def progression(self, count, modulo, size, text):
         """
         Prints progression's updates and update the count.
@@ -680,8 +773,8 @@ class Database(BaseClass):
 
         count += 1
 
-        if self.verbose and count % modulo == 0:
-            print("  " + text + " {}/{}...".format(count, size))
+        if count % modulo == 0:
+            self.print("  " + text + " {}/{}...".format(count, size))
 
         return count
 
@@ -723,44 +816,84 @@ class Database(BaseClass):
         plt.title(title)
         plt.xlabel(xlabel)
 
-    def save_attribute(self, attribute_name, file_name):
+    def save(self, attribute_name=None, obj=None, file_name=None):
         """
-        Save an attribute using pickle.
+        Save an attribute (designated by its name) or an object into a file using pickle.
 
         Args:
-            attribute_name: str, name of the attribute to save.
-            file_name: str, folder and name of the file to load (without extension).
+            attribute_name: str, name of the attribute to save; if None, save an object instead.
+            obj: unk, object saved if no attribute name is provided.
+            file_name: str, name of the file; if None, save an attribute with the standard name.
         """
 
-        obj = getattr(self, attribute_name)
+        if attribute_name is not None:
+            obj = getattr(self, attribute_name)
         if obj is None:
-            raise Exception("Nothing to save, attribute is None.")
+            raise Exception("Nothing to save, object is None.")
 
         prefix, suffix = self.prefix_suffix()
-        file_name = prefix + file_name + suffix + '.pkl'
+        if file_name is not None:
+            file_name = prefix + file_name + '.pkl'
+        else:
+            if attribute_name is not None:
+                file_name = prefix + attribute_name + suffix + '.pkl'
+            else:
+                raise Exception("Missing file name to save the object.")
 
         with open(file_name, 'wb') as f:
             dump(obj=obj, file=f, protocol=-1)
 
-        print("Attribute {} saved at {}".format(attribute_name, file_name))
+        if attribute_name is not None:
+            self.print("Attribute {} saved at {}.".format(attribute_name, file_name))
+        else:
+            self.print("Object saved at {}.".format(file_name))
 
-    def load_attribute(self, attribute_name, file_name):
+    def load(self, attribute_name=None, file_name=None):
         """
-        Load an attribute using pickle.
+        Load an attribute (designated by its name) or an object from a file using pickle.
 
         Args:
-            attribute_name: str, name of the attribute to load.
-            file_name: str, folder and name of the file to load (without extension).
+            attribute_name: str, name of the attribute to load; if None, returns the object.
+            file_name: str, name of the file to load; if None, load the file with the corresponding standard name.
         """
 
         prefix, suffix = self.prefix_suffix()
-        file_name = prefix + file_name + suffix + '.pkl'
+        if file_name is not None:
+            file_name = prefix + file_name + '.pkl'
+        else:
+            if attribute_name is not None:
+                file_name = prefix + attribute_name + suffix + '.pkl'
+            else:
+                raise Exception("Missing file name to load the object.")
 
         with open(file_name, 'rb') as f:
             obj = load(f)
 
-        setattr(self, attribute_name, obj)
-        print("Attribute {} loaded from {}".format(attribute_name, file_name))
+        if attribute_name is not None:
+            self.print("Attribute {} loaded from {}.".format(attribute_name, file_name))
+            setattr(self, attribute_name, obj)
+        else:
+            self.print("Object loaded from {}".format(file_name))
+            return obj
+
+    def pop_file(self, file_name=None):
+        """
+        Remove and returns a pickle file.
+
+        Args:
+            file_name: str, name of the file to delete.
+        """
+
+        prefix, _ = self.prefix_suffix()
+        file_name = prefix + file_name + '.pkl'
+
+        with open(file_name, 'rb') as f:
+            obj = load(f)
+
+        os_remove(file_name)
+
+        self.print("Object loaded from {} and file deleted.".format(file_name))
+        return obj
 
     def prefix_suffix(self):
         """
@@ -771,14 +904,19 @@ class Database(BaseClass):
             suffix: str, ending of the name of the file (after the basic name of the file).
         """
 
-        prefix = self.project_root + 'results/'
-        suffix = '_' + self.year
+        prefix, suffix = self.project_root + 'results/' + self.year + '/', ''
 
-        if self.max_size is not None:
-            if self.max_size >= 1000:
-                suffix += '_size' + str(self.max_size // 1000) + 'k_threshold' + str(self.threshold)
-            else:
-                suffix += '_size' + str(self.max_size) + '_threshold' + str(self.threshold)
+        if self.max_size is None:
+            suffix += '_sizemax'
+        elif self.max_size >= 1000:
+            suffix += '_size' + str(self.max_size // 1000) + 'k'
+        else:
+            suffix += '_size' + str(self.max_size)
+
+        if self.min_articles is not None:
+            suffix += '_articles' + str(self.min_articles)
+        if self.min_queries is not None:
+            suffix += '_queries' + str(self.min_queries)
 
         return prefix, suffix
 
@@ -822,17 +960,27 @@ class Database(BaseClass):
 
 
 def main():
-    database = Database(max_size=1000, threshold=2, project_root='../')
+    # Parameters
+    max_size = 1000
+    min_articles = 1
+    min_queries = 1
+    n_queries = 3
 
+    # Create the annotation task
+    database = Database(max_size=max_size, project_root='../')
     database.preprocess_database()
-    database.filter_threshold()
-
+    database.filter(min_articles=min_articles)
     database.preprocess_articles()
-    database.process_contexts()
-
+    database.filter(min_queries=min_queries)
     database.process_wikipedia(load=False)
+    database.create_task(load=False)
 
-    database.process_task(load=False)
+    # Run the annotation task
+    Database.set_verbose(False)
+    database = Database(max_size=max_size, project_root='../', min_articles=min_articles, min_queries=min_queries)
+    database.create_task(load=True)
+    database.ask(n_queries)
+    database.gather()
 
 
 if __name__ == '__main__':
