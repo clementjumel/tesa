@@ -1,0 +1,7 @@
+Instructions:
+
+The goal of this task is to perform the aggregation of the entities designated for each examples.
+
+To help you do this in a natural and contextualized way, the entities are selected from a single New York Times article, and their mentions in the article are located in a window of a few sentences.
+Besides, the title, date and abstract of each article is provided, as well as some information extracted from Wikipedia, in order to provide additional information about the entities and their possible aggregations.
+

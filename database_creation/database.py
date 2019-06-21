@@ -156,38 +156,38 @@ class Database(BaseClass):
         self.compute_contexts()
 
     @BaseClass.Verbose("Processing the wikipedia information...")
-    def process_wikipedia(self, load, file_name=None):
+    def process_wikipedia(self, load=False, file_name=None):
         """
         Performs the processing of the wikipedia information of the database.
 
         Args:
-            load: bool, if True, load an existing file (don't add new entry).
+            load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to load; if None, load the standard files.
         """
 
         if load:
             if file_name is None:
-                self.load('wikipedia')
-                self.load('not_wikipedia')
-                self.load('ambiguous')
+                self.load(attribute_name='wikipedia', folder_name='wikipedia')
+                self.load(attribute_name='not_wikipedia', folder_name='wikipedia')
+                self.load(attribute_name='ambiguous', folder_name='wikipedia')
 
             else:
-                self.load(attribute_name='wikipedia', file_name=file_name)
+                self.load(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
         else:
             self.compute_wikipedia()
 
-            self.save('wikipedia')
-            self.save('not_wikipedia')
-            self.save('ambiguous')
+            self.save(attribute_name='wikipedia', folder_name='wikipedia')
+            self.save(attribute_name='not_wikipedia', folder_name='wikipedia')
+            self.save(attribute_name='ambiguous', folder_name='wikipedia')
 
     @BaseClass.Verbose("Processing the aggregation queries...")
-    def process_queries(self, load, file_name=None):
+    def process_queries(self, load=False, file_name=None):
         """
         Performs the processing of the aggregation queries.
 
         Args:
-            load: bool, if True, load an existing queries file.
+            load: bool, if True, load an existing file.
             file_name: str, name of the queries file to load; if None, load the standard file.
         """
 
@@ -957,7 +957,7 @@ class Database(BaseClass):
 
 
 # region Main functions
-def create_database(project_root='', max_size=None, min_articles=1, min_queries=1):
+def create_queries(project_root='', max_size=None, min_articles=1, min_queries=1):
     """
     Run the whole pipeline for the creation of a queries file for the database.
 
@@ -973,8 +973,8 @@ def create_database(project_root='', max_size=None, min_articles=1, min_queries=
     database.filter(min_articles=min_articles)
     database.preprocess_articles()
     database.filter(min_queries=min_queries)
-    database.process_wikipedia(load=False)
-    database.process_queries(load=False)
+    database.process_wikipedia()
+    database.process_queries()
 
 
 def annotation_task(n_queries=1, project_root='', max_size=None, min_articles=1, min_queries=1):
@@ -1020,7 +1020,7 @@ def main():
     n_queries = 3
 
     # Create the queries database
-    create_database(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
+    create_queries(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
 
     # Run the annotation task
     annotation_task(n_queries=n_queries, project_root='../', max_size=max_size, min_articles=min_articles,
