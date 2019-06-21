@@ -2,6 +2,7 @@
 notebooks/.ipynb_checkpoints/
 database_creation/__pycache__/
 
-databases/nyt_jingyun/
+databases/
 pre_trained_models/
-results/
+results/2000/wikipedia/
+results/2000/save/
