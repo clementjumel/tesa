@@ -268,9 +268,6 @@ class Database(BaseClass):
             n_queries: int, number of queries to ask.
         """
 
-        with open(self.project_root + 'results/instructions.txt', 'r') as f:
-            print(f.read())
-
         answer = defaultdict(list)
         query_ids = sample(list(self.queries), n_queries)
 
@@ -956,17 +953,23 @@ class Database(BaseClass):
     # endregion
 
 
-# region Main functions
-def create_queries(project_root='', max_size=None, min_articles=1, min_queries=1):
-    """
-    Run the whole pipeline for the creation of a queries file for the database.
+# region Annotation task
+n_queries = 10
+project_root = ''
+max_size = 10000
+min_articles = 1
+min_queries = 1
 
-    Args:
-        project_root: str, relative path to the root of the project.
-        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
-        min_articles: int, minimum number of articles an entities' tuple must be in.
-        min_queries: int, minimum number of Queries an entities' tuple must have.
-    """
+
+def instructions():
+    """ Show the instructions of the task. """
+
+    with open(project_root + 'results/instructions.txt', 'r') as f:
+        print(f.read())
+
+
+def create_queries():
+    """ Run the pipeline for the creation of a queries file for the database. """
 
     database = Database(max_size=max_size, project_root=project_root)
     database.preprocess_database()
@@ -977,17 +980,8 @@ def create_queries(project_root='', max_size=None, min_articles=1, min_queries=1
     database.process_queries()
 
 
-def annotation_task(n_queries=1, project_root='', max_size=None, min_articles=1, min_queries=1):
-    """
-    Run the annotation task for the specify number of queries.
-
-    Args:
-        n_queries: int, number of queries to annotate.
-        project_root: str, relative path to the root of the project.
-        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
-        min_articles: int, minimum number of articles an entities' tuple must be in.
-        min_queries: int, minimum number of Queries an entities' tuple must have.
-    """
+def annotation_task():
+    """ Run the annotation task. """
 
     database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
                         min_queries=min_queries, verbose=False)
@@ -996,15 +990,7 @@ def annotation_task(n_queries=1, project_root='', max_size=None, min_articles=1,
 
 
 def gather_answers(project_root='', max_size=None, min_articles=1, min_queries=1):
-    """
-    Gather the answers file.
-
-    Args:
-        project_root: str, relative path to the root of the project.
-        max_size: int, maximum number o=f articles in the database; if None, takes all articles.
-        min_articles: int, minimum number of articles an entities' tuple must be in.
-        min_queries: int, minimum number of Queries an entities' tuple must have.
-    """
+    """ Gather the answers file. """
 
     database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
                         min_queries=min_queries)
@@ -1013,21 +999,17 @@ def gather_answers(project_root='', max_size=None, min_articles=1, min_queries=1
 
 
 def main():
-    # Parameters
-    max_size = 1000
-    min_articles = 1
-    min_queries = 1
-    n_queries = 3
-
     # Create the queries database
-    create_queries(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
+    create_queries()
+
+    # Show the instructions of the annotation task
+    instructions()
 
     # Run the annotation task
-    annotation_task(n_queries=n_queries, project_root='../', max_size=max_size, min_articles=min_articles,
-                    min_queries=min_queries)
+    annotation_task()
 
     # Gather the answers
-    gather_answers(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
+    gather_answers()
 
 
 if __name__ == '__main__':
