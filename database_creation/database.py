@@ -961,13 +961,6 @@ min_articles = 1
 min_queries = 1
 
 
-def instructions():
-    """ Show the instructions of the task. """
-
-    with open(project_root + 'results/instructions.txt', 'r') as f:
-        print(f.read())
-
-
 def create_queries():
     """ Run the pipeline for the creation of a queries file for the database. """
 
@@ -978,6 +971,13 @@ def create_queries():
     database.filter(min_queries=min_queries)
     database.process_wikipedia()
     database.process_queries()
+
+
+def instructions():
+    """ Show the instructions of the task. """
+
+    with open(project_root + 'results/instructions.txt', 'r') as f:
+        print(BaseClass.to_string(f.read()))
 
 
 def annotation_task():
@@ -999,17 +999,7 @@ def gather_answers(project_root='', max_size=None, min_articles=1, min_queries=1
 
 
 def main():
-    # Create the queries database
-    create_queries()
-
-    # Show the instructions of the annotation task
-    instructions()
-
-    # Run the annotation task
-    annotation_task()
-
-    # Gather the answers
-    gather_answers()
+    return
 
 
 if __name__ == '__main__':
