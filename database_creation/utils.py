@@ -3,6 +3,7 @@ from time import time
 from numpy import int64
 from re import findall
 from gensim.models import KeyedVectors
+from textwrap import fill
 
 
 class BaseClass:
@@ -734,13 +735,13 @@ class Query:
             str, readable format of the instance.
         """
 
-        string = "Entities: " + BaseClass.to_string(self.entities) + '\n'
-        string += BaseClass.to_string(self.info) + '\n\n'
+        string = fill("Entities: " + BaseClass.to_string(self.entities)) + '\n'
+        string += fill(BaseClass.to_string(self.info)) + '\n\n'
 
-        string += "Article: " + BaseClass.to_string(self.title) + ' (' + BaseClass.to_string(self.date) + ')\n'
-        string += BaseClass.to_string(self.abstract) + '\n\n'
+        string += fill("Article: " + BaseClass.to_string(self.title + ' (' + self.date + ')')) + '\n'
+        string += fill(BaseClass.to_string(self.abstract)) + '\n\n'
 
-        string += BaseClass.to_string(self.context) + '\n\n'
+        string += fill(BaseClass.to_string(self.context)) + '\n\n'
 
         return string
 

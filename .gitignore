@@ -1,5 +1,5 @@
 .idea/
-notebooks/.ipynb_checkpoints/
+.ipynb_checkpoints/
 database_creation/__pycache__/
 
 databases/
