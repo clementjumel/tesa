@@ -4,10 +4,10 @@ from database_creation.database import create_queries, instructions, annotation_
 create_queries()
 
 # Show the instructions of the annotation task
-instructions()
+# instructions()
 
 # Run the annotation task
-annotation_task()
+# annotation_task()
 
 # Gather the answers
-gather_answers()
+# gather_answers()

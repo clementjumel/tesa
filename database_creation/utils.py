@@ -11,6 +11,7 @@ class BaseClass:
 
     verbose = True
     to_print, print_attribute, print_lines, print_offsets = None, None, None, None
+    text_width = 100
 
     def __str__(self):
         """
@@ -131,7 +132,7 @@ class BaseClass:
         # Case of sets and tuples
         elif isinstance(item, (set, tuple)):
             strings = [BaseClass.to_string(ite) for ite in item]
-            return '|'.join([s for s in strings if s])
+            return '; '.join([s for s in strings if s])
 
         # Case of dictionaries
         elif isinstance(item, dict):
@@ -152,6 +153,7 @@ class BaseClass:
                     return '\n'.join([s[0] + ': ' + s[1] for s in strings if s[1]])
 
         else:
+            print(item)
             raise Exception("Unsupported type: {}.".format(type(item)))
 
     @staticmethod
@@ -689,8 +691,8 @@ class Context:
             ])
             string += '\n'
 
-        string += '\n'.join([BaseClass.to_string(self.sentence_texts[i])
-                             for i in range(len(self.sentence_texts))])
+        string += ' '.join([BaseClass.to_string(self.sentence_texts[i])
+                            for i in range(len(self.sentence_texts))])
 
         if self.after_texts is not None:
             string += '\n'
@@ -707,25 +709,34 @@ class Context:
 class Query:
     # region Class base methods
 
-    def __init__(self, entities, article, info, context):
+    def __init__(self, id_, entities, title, date, abstract, info, context):
         """
         Initializes the aggregation Query instance.
 
         Args:
+            id_, str, id of the query.
             entities: tuple, entities mentioned in the article.
-            article: Article, article from where the query comes from.
+            title: str, title of the article from where the query comes from.
+            date: str, date of the article from where the query comes from.
+            abstract: str, abstract of the article from where the query comes from.
             info: dict, wikipedia information of the entities.
             context: Context, context of the entities in the article.
         """
 
+        self.id_ = id_
+
         self.entities = entities
-
-        self.title = article.title
-        self.date = article.date
-        self.abstract = article.abstract
-
         self.info = info
+
+        self.title = title
+        self.date = date
+        self.abstract = abstract
+
         self.context = context
+
+        self.html_entities = self.get_html_entities()
+        self.html_info = self.get_html_info()
+        self.html_context = self.get_html_context()
 
     def __str__(self):
         """
@@ -735,15 +746,72 @@ class Query:
             str, readable format of the instance.
         """
 
-        string = fill("Entities: " + BaseClass.to_string(self.entities)) + '\n'
-        string += fill(BaseClass.to_string(self.info)) + '\n\n'
+        string = fill("Entities: " + BaseClass.to_string(self.entities), BaseClass.text_width) + '\n\n'
 
-        string += fill("Article: " + BaseClass.to_string(self.title + ' (' + self.date + ')')) + '\n'
-        string += fill(BaseClass.to_string(self.abstract)) + '\n\n'
+        string += '\n\n'.join([fill(self.info[entity], BaseClass.text_width) for entity in self.info
+                               if self.info[entity]]) + '\n\n'
 
-        string += fill(BaseClass.to_string(self.context)) + '\n\n'
+        string += fill("Article: " + self.title + ' (' + self.date + ')', BaseClass.text_width) + '\n'
+        string += fill(self.abstract, BaseClass.text_width) + '\n\n'
+
+        string += fill(BaseClass.to_string(self.context), BaseClass.text_width) + '\n\n'
 
         return string
+
+    def to_dict(self):
+        """
+        Return the object as a dictionary.
+
+        Returns:
+            dict, object as a dictionary.
+        """
+
+        d = {
+            'id': self.id_,
+            'html_entities': self.html_entities,
+            'html_info': self.html_info,
+            'title': self.title,
+            'date': self.date,
+            'abstract': self.abstract,
+            'html_context': self.html_context,
+        }
+
+        return d
+
+    def get_html_entities(self):
+        """
+        Returns the html version of the entities.
+
+        Returns:
+            str, html version of the entities.
+        """
+
+        return ', '.join([entity for entity in self.entities[:-1]]) + ' & ' + self.entities[-1]
+
+    def get_html_info(self):
+        """
+        Returns the html version of the information.
+
+        Returns:
+            str, html version of the information.
+        """
+
+        string = '<br/>'.join([
+            '<a href=' + self.info[entity]['url'] + '>' + entity + '</a>: ' + self.info[entity]['paragraph']
+            if self.info[entity] else entity + ': No information found.' for entity in self.info
+        ])
+
+        return string
+
+    def get_html_context(self):
+        """
+        Returns the html version of the Context.
+
+        Returns:
+            str, html version of the Context.
+        """
+
+        return str(self.context)
 
     # endregion
 

@@ -64,7 +64,7 @@ class Coreference(BaseClass):
         """
 
         for m in [self.representative] + self.mentions:
-            for type_ in ['location', 'person', 'organization']:
+            for type_ in entities:
                 for entity in entities[type_]:
                     if self.match(m.text, entity, type_=type_, flexible=True):
                         self.entity = entity
