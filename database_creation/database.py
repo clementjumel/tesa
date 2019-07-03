@@ -3,13 +3,17 @@ from database_creation.article import Article
 
 from os import remove as os_remove
 from copy import copy
-from numpy.random import shuffle
+from numpy.random import shuffle, seed
 from random import sample
 from glob import glob
 from collections import defaultdict
 from numpy import histogram
 from wikipedia import search, page, PageError, DisambiguationError
-from pickle import dump, load
+from pickle import dump, load, PicklingError
+from textwrap import fill
+from nltk import sent_tokenize
+from pandas import DataFrame
+from re import sub
 
 import matplotlib.pyplot as plt
 
@@ -21,6 +25,7 @@ class Database(BaseClass):
     print_attributes, print_lines, print_offsets = False, 2, 0
     limit_print, random_print = 50, True
     modulo_articles, modulo_tuples = 1000, 100
+    info_length = 600
 
     def __init__(self, year='2000', max_size=None, project_root='', verbose=True, min_articles=None, min_queries=None):
         """
@@ -199,7 +204,10 @@ class Database(BaseClass):
 
         else:
             self.compute_queries()
+
             self.save('queries')
+            self.save_csv(attribute_name='queries', limit=None)
+            self.save_csv(attribute_name='queries', limit=200)
 
     @BaseClass.Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -418,7 +426,7 @@ class Database(BaseClass):
                     p = self.wikipedia_page(entity, raw_entity, tuple_.type_)
 
                     if p:
-                        wikipedia[entity] = p.summary
+                        wikipedia[entity] = {'summary': p.summary, 'url': p.url}
                     else:
                         not_wikipedia[entity] = raw_entity
 
@@ -444,8 +452,11 @@ class Database(BaseClass):
                 for context_id_ in article_contexts:
                     query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
 
-                    queries[query_id_] = Query(entities=tuple_.entities,
-                                               article=self.articles[article_id_],
+                    queries[query_id_] = Query(id_=query_id_,
+                                               entities=tuple_.entities,
+                                               title=self.articles[article_id_].title,
+                                               date=self.articles[article_id_].date,
+                                               abstract=self.articles[article_id_].abstract,
                                                info=info,
                                                context=article_contexts[context_id_])
 
@@ -484,7 +495,7 @@ class Database(BaseClass):
 
     def get_info(self, entities):
         """
-        Compute the wikipedia info of the entities as the first paragraph of the entities' summaries.
+        Compute the wikipedia info of the entities.
 
         Args:
             entities: tuple, entities mentioned in the article.
@@ -497,10 +508,28 @@ class Database(BaseClass):
 
         for entity in entities:
             if entity in self.wikipedia:
-                paragraphs = self.wikipedia[entity].split('\n')
-                info[entity] = paragraphs[0]
+                paragraph = self.wikipedia[entity]['summary'].split('\n')[0]
+
+                if len(paragraph) > self.info_length:
+                    sentences = sent_tokenize(paragraph)[0]
+
+                    for sentence in sent_tokenize(paragraph)[1:]:
+                        if len(sentences + sentence) <= self.info_length:
+                            sentences += ' ' + sentence
+                        else:
+                            break
+
+                    paragraph = sentences
+
+                paragraph = sub(r'\([^)]*\)', '', paragraph).replace('  ', ' ')
+                paragraph = paragraph.encode("utf-8", errors="ignore").decode()
+
+                url = self.wikipedia[entity]['url']
+
+                info[entity] = {'paragraph': paragraph, 'url': url}
+
             else:
-                info[entity] = "No information found on Wikipedia."
+                info[entity] = {}
 
         return info
 
@@ -832,13 +861,17 @@ class Database(BaseClass):
             else:
                 raise Exception("Missing file name to save the object.")
 
-        with open(file_name, 'wb') as f:
-            dump(obj=obj, file=f, protocol=-1)
+        try:
+            with open(file_name, 'wb') as f:
+                dump(obj=obj, file=f, protocol=-1)
 
-        if attribute_name is not None:
-            self.print("Attribute {} saved at {}.".format(attribute_name, file_name))
-        else:
-            self.print("Object saved at {}.".format(file_name))
+            if attribute_name is not None:
+                self.print("Attribute {} saved at {}.".format(attribute_name, file_name))
+            else:
+                self.print("Object saved at {}.".format(file_name))
+
+        except PicklingError:
+            print("Could not save (PicklingError.")
 
     def load(self, attribute_name=None, file_name=None, folder_name='queries'):
         """
@@ -888,6 +921,35 @@ class Database(BaseClass):
 
         self.print("Object loaded from {} and file deleted.".format(file_name))
         return obj
+
+    def save_csv(self, attribute_name=None, folder_name='queries', limit=None):
+        """
+        Save a dictionary attribute to a .csv using pandas DataFrame.
+
+        Args:
+            attribute_name: str, name of the attribute to save.
+            folder_name: str, name of the folder to save in.
+            limit: int, maximum number of data to save; if None, save all of them.
+        """
+
+        obj = getattr(self, attribute_name)
+        ids = list(obj.keys())
+
+        if limit is not None:
+            seed(seed=42)
+            shuffle(ids)
+            ids = ids[:limit]
+
+        data = [obj[id_].to_dict() for id_ in ids]
+        df = DataFrame.from_records(data=data)
+
+        prefix, suffix = self.prefix_suffix()
+        file_name = attribute_name if limit is None else attribute_name + '_short'
+        file_name = prefix + folder_name + '/' + file_name + suffix + '.csv'
+
+        df.to_csv(file_name, index_label='idx')
+
+        self.print("Attribute {} saved at {}".format(attribute_name, file_name))
 
     def prefix_suffix(self):
         """
@@ -964,20 +1026,22 @@ min_queries = 1
 def create_queries():
     """ Run the pipeline for the creation of a queries file for the database. """
 
-    database = Database(max_size=max_size, project_root=project_root)
+    database = Database(max_size=max_size, project_root=project_root,
+                        min_articles=min_articles, min_queries=min_queries)
     database.preprocess_database()
     database.filter(min_articles=min_articles)
     database.preprocess_articles()
     database.filter(min_queries=min_queries)
-    database.process_wikipedia()
-    database.process_queries()
+    database.process_wikipedia(load=False)
+    database.process_queries(load=False)
 
 
 def instructions():
     """ Show the instructions of the task. """
 
     with open(project_root + 'results/instructions.txt', 'r') as f:
-        print(BaseClass.to_string(f.read()))
+        for line in f:
+            print(fill(line, BaseClass.text_width))
 
 
 def annotation_task():
@@ -989,7 +1053,7 @@ def annotation_task():
     database.ask(n_queries)
 
 
-def gather_answers(project_root='', max_size=None, min_articles=1, min_queries=1):
+def gather_answers():
     """ Gather the answers file. """
 
     database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
