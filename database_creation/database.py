@@ -24,7 +24,7 @@ class Database(BaseClass):
     to_print = ['articles']
     print_attributes, print_lines, print_offsets = False, 2, 0
     limit_print, random_print = 50, True
-    modulo_articles, modulo_tuples = 1000, 100
+    modulo_articles, modulo_tuples = 1000, 1000
     info_length = 600
 
     def __init__(self, year='2000', max_size=None, project_root='', verbose=True, min_articles=None, min_queries=None):
@@ -423,10 +423,10 @@ class Database(BaseClass):
                         ambiguous[entity] = raw_entities
 
                     raw_entity = raw_entities[0]
-                    p = self.wikipedia_page(entity, raw_entity, tuple_.type_)
+                    p, exact = self.wikipedia_page(entity, raw_entity, tuple_.type_)
 
                     if p:
-                        wikipedia[entity] = {'summary': p.summary, 'url': p.url}
+                        wikipedia[entity] = {'summary': p.summary, 'url': p.url, 'exact': exact}
                     else:
                         not_wikipedia[entity] = raw_entity
 
@@ -447,16 +447,35 @@ class Database(BaseClass):
             info = self.get_info(tuple_.entities)
 
             for article_id_ in tuple_.article_ids:
-                article_contexts = self.articles[article_id_].contexts[tuple_.entities]
 
-                for context_id_ in article_contexts:
-                    query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
-
+                query_id_ = tuple_.id_ + '_' + article_id_
+                if query_id_ not in queries:
                     queries[query_id_] = Query(id_=query_id_,
                                                entities=tuple_.entities,
                                                title=self.articles[article_id_].title,
                                                date=self.articles[article_id_].date,
-                                               abstract=self.articles[article_id_].abstract,
+                                               abstract='',
+                                               info=info,
+                                               context=self.articles[article_id_].abstract)
+
+                article_contexts = self.articles[article_id_].contexts[tuple_.entities]
+                for context_id_ in article_contexts:
+
+                    # query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
+                    # queries[query_id_] = Query(id_=query_id_,
+                    #                            entities=tuple_.entities,
+                    #                            title=self.articles[article_id_].title,
+                    #                            date=self.articles[article_id_].date,
+                    #                            abstract=self.articles[article_id_].abstract,
+                    #                            info=info,
+                    #                            context=article_contexts[context_id_])
+
+                    query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
+                    queries[query_id_] = Query(id_=query_id_,
+                                               entities=tuple_.entities,
+                                               title=self.articles[article_id_].title,
+                                               date=self.articles[article_id_].date,
+                                               abstract='',
                                                info=info,
                                                context=article_contexts[context_id_])
 
@@ -508,8 +527,11 @@ class Database(BaseClass):
 
         for entity in entities:
             if entity in self.wikipedia:
-                paragraph = self.wikipedia[entity]['summary'].split('\n')[0]
+                summary = self.wikipedia[entity]['summary']
+                url = self.wikipedia[entity]['url']
+                exact = self.wikipedia[entity]['exact']
 
+                paragraph = summary.split('\n')[0]
                 if len(paragraph) > self.info_length:
                     sentences = sent_tokenize(paragraph)[0]
 
@@ -523,8 +545,7 @@ class Database(BaseClass):
 
                 paragraph = sub(r'\([^)]*\)', '', paragraph).replace('  ', ' ')
                 paragraph = paragraph.encode("utf-8", errors="ignore").decode()
-
-                url = self.wikipedia[entity]['url']
+                paragraph = '(related article) ' + paragraph if not exact else paragraph
 
                 info[entity] = {'paragraph': paragraph, 'url': url}
 
@@ -986,12 +1007,13 @@ class Database(BaseClass):
             type_: str, type of the entity, must be 'location', 'person' or organization'.
 
         Returns:
-            wikipedia.page, page of the entity.
+            p: wikipedia.page, page of the entity.
+            exact: bool, whether the page corresponds to the entity or is only related.
         """
 
         try:
-            p = page(entity)
-            return p
+            p, exact = page(entity), True
+            return p, exact
 
         except DisambiguationError:
             pass
@@ -1002,15 +1024,19 @@ class Database(BaseClass):
             try:
                 p = page(s)
                 for e in [entity, raw_entity]:
-                    if self.match(e, p.title, type_, flexible=False) or e in p.summary:
-                        return p
+                    if self.match(e, p.title, type_, flexible=False):
+                        exact = True
+                        return p, exact
+                    elif e in p.summary:
+                        exact = False
+                        return p, exact
 
             except DisambiguationError:
                 pass
             except PageError:
                 pass
 
-        return None
+        return None, None
 
     # endregion
 

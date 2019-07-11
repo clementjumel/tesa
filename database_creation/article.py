@@ -4,6 +4,7 @@ from database_creation.coreference import Coreference
 
 from xml.etree import ElementTree
 from collections import defaultdict
+from copy import deepcopy
 
 
 class Article(BaseClass):
@@ -135,7 +136,16 @@ class Article(BaseClass):
             str, abstract of the article.
         """
 
-        return root.find('./body/body.head/abstract/p').text
+        abstract = root.find('./body/body.head/abstract/p').text
+        abstract = abstract.replace(' (M)', '').replace(' (L)', '').replace(' (S)', '')
+
+        abstract = abstract.split('; ')
+        while abstract[-1] in ['photo', 'photos', 'portrait', 'portraits', 'map', 'maps']:
+            abstract = abstract[:-1]
+
+        abstract = '; '.join(abstract)
+
+        return abstract
 
     def get_entities(self, root):
         """
@@ -252,43 +262,6 @@ class Article(BaseClass):
 
     # region Methods contexts_
 
-    def contexts_same_sent(self, entity_tuple):
-        """
-        Returns the same-sentence contexts for a single entity tuple, that is the sentences where all the entities are
-        mentioned.
-
-        Args:
-            entity_tuple: tuple, entities to analyse.
-
-        Returns:
-            dict, same-sentence Contexts of the entities mapped with their sentence idx.
-        """
-
-        sentences = defaultdict(int)
-
-        for entity in entity_tuple:
-            for idx in self.get_entity_sentences(entity):
-                sentences[idx] += 1
-
-        sentences = [idx for idx in sentences if sentences[idx] == len(entity_tuple)]
-
-        contexts = dict()
-
-        for idx in sentences:
-            before_texts, before_idxs = [], []
-
-            try:
-                before_texts.append(self.sentences[idx - 1].text)
-                before_idxs.append(idx - 1)
-            except KeyError:
-                pass
-
-            contexts[idx] = Context(sentence_texts=[self.sentences[idx].text], sentence_idxs=[idx],
-                                    before_texts=before_texts, before_idxs=before_idxs,
-                                    after_texts=None, after_idxs=None)
-
-        return contexts
-
     def contexts_neigh_sent(self, entity_tuple):
         """
         Returns the neighboring-sentences contexts for a single entity tuple, that is the neighboring sentences where
@@ -299,24 +272,24 @@ class Article(BaseClass):
 
         Returns:
             dict, neighbouring-sentences Contexts of the entities, mapped with their sentences span (indexes of the
-            first and last sentences separated by |).
+            first and last sentences separated by '_').
         """
 
-        sentences = defaultdict(set)
+        sentences_entities = defaultdict(set)
 
         for i in range(len(entity_tuple)):
             for idx in self.get_entity_sentences(entity_tuple[i]):
-                sentences[idx].add(i)
+                sentences_entities[idx].add(i)
 
         contexts_sentences = set()
 
-        for idx in sentences:
+        for idx in sentences_entities:
             unseens = list(range(len(entity_tuple)))
             seers = set()
 
             for i in range(len(entity_tuple)):
-                if idx + i in sentences:
-                    for j in sentences[idx + i]:
+                if idx + i in sentences_entities:
+                    for j in sentences_entities[idx + i]:
                         try:
                             unseens.remove(j)
                             seers.add(idx + i)
@@ -332,9 +305,16 @@ class Article(BaseClass):
         contexts = dict()
 
         for idxs in contexts_sentences:
-            id_ = str(idxs[0]) + '|' + str(idxs[-1])
-            contexts[id_] = Context(sentence_texts=[self.sentences[idx].text for idx in idxs],
-                                    sentence_idxs=list(idxs))
+            entity_coreferences = {}
+            for idx in idxs:
+                entity_coreferences[idx] = {
+                    entity: [c for c in self.coreferences if c.entity and c.entity == entity and idx in c.sentences]
+                    for entity in entity_tuple
+                }
+
+            id_ = str(idxs[0]) + '_' + str(idxs[-1])
+            contexts[id_] = Context(sentences={idx: deepcopy(self.sentences[idx]) for idx in idxs},
+                                    entity_coreferences=entity_coreferences)
 
         return contexts
 

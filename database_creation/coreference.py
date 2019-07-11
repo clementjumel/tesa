@@ -65,10 +65,11 @@ class Coreference(BaseClass):
 
         for m in [self.representative] + self.mentions:
             for type_ in entities:
-                for entity in entities[type_]:
-                    if self.match(m.text, entity, type_=type_, flexible=True):
-                        self.entity = entity
-                        return
+                if type_ != 'all':
+                    for entity in entities[type_]:
+                        if self.match(m.text, entity, type_=type_, flexible=True):
+                            self.entity = entity
+                            return
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """

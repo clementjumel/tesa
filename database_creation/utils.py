@@ -653,26 +653,17 @@ class Tuple:
 class Context:
     # region Class base methods
 
-    def __init__(self, sentence_texts, sentence_idxs, before_texts=None, before_idxs=None, after_texts=None,
-                 after_idxs=None):
+    def __init__(self, sentences, entity_coreferences):
         """
         Initializes the Context instance.
 
         Args:
-            sentence_texts: list, the context's sentences' texts.
-            sentence_idxs: list, indexes of sentences' sentences.
-            before_texts: list, sentences' texts before the actual context.
-            before_idxs: list, indexes of before's sentences.
-            after_texts: list, sentences' texts after the actual context.
-            after_idxs: list, indexes of after's sentences.
+            sentences: dict, the context's sentences (deep copy of the article's sentences), mapped by their indexes.
+            entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
         """
 
-        self.sentence_texts = sentence_texts
-        self.sentence_idxs = sentence_idxs
-        self.before_texts = before_texts
-        self.before_idxs = before_idxs
-        self.after_texts = after_texts
-        self.after_idxs = after_idxs
+        self.sentences = sentences
+        self.enhance_entities(entity_coreferences)
 
     def __str__(self):
         """
@@ -682,26 +673,34 @@ class Context:
             str, readable format of the instance.
         """
 
-        string = ''
-
-        if self.before_texts is not None:
-            string += ' '.join([
-                BaseClass.to_string(self.before_texts[i]) + '[' + BaseClass.to_string(self.before_idxs[i]) + ']'
-                if self.before_texts[i] else '[...]' for i in range(len(self.before_texts))
-            ])
-            string += '\n'
-
-        string += ' '.join([BaseClass.to_string(self.sentence_texts[i])
-                            for i in range(len(self.sentence_texts))])
-
-        if self.after_texts is not None:
-            string += '\n'
-            string += ' '.join([
-                BaseClass.to_string(self.after_texts[i]) + '[' + BaseClass.to_string(self.after_idxs[i]) + ']'
-                if self.after_texts[i] else '[...]' for i in range(len(self.after_texts))
-            ])
+        string = '[...] ' if list(self.sentences.keys())[0] != 1 else ''
+        string += ' '.join([self.sentences[id_].text for id_ in self.sentences])
+        string += ' [...]'
 
         return string
+
+    def enhance_entities(self, entity_coreferences):
+        """
+        Enhance the entities mentioned in the context.
+
+        Args:
+            entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
+        """
+
+        for idx in entity_coreferences:
+            for entity in entity_coreferences[idx]:
+                for coreference in entity_coreferences[idx][entity]:
+                    for mention in [coreference.representative] + coreference.mentions:
+
+                        if mention.sentence == idx:
+                            if not BaseClass.match(self.sentences[idx], entity, mention.text):
+                                self.sentences[idx].tokens[mention.end - 1].word += ' [' + entity + ']'
+
+                            self.sentences[idx].tokens[mention.start].word = \
+                                '<strong>' + self.sentences[idx].tokens[mention.start].word
+                            self.sentences[idx].tokens[mention.end - 1].word += '</strong>'
+
+            self.sentences[idx].compute_text()
 
     # endregion
 
