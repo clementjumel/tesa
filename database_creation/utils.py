@@ -708,7 +708,7 @@ class Context:
 class Query:
     # region Class base methods
 
-    def __init__(self, id_, entities, title, date, abstract, info, context):
+    def __init__(self, id_, entities, title, date, abstract, info, context, is_abstract):
         """
         Initializes the aggregation Query instance.
 
@@ -720,6 +720,7 @@ class Query:
             abstract: str, abstract of the article from where the query comes from.
             info: dict, wikipedia information of the entities.
             context: Context, context of the entities in the article.
+            is_abstract: bool, whether the context is actually an abstract or not.
         """
 
         self.id_ = id_
@@ -730,11 +731,13 @@ class Query:
         self.title = title
         self.date = date
         self.abstract = abstract
+        self.is_abstract = is_abstract
 
         self.context = context
 
         self.html_entities = self.get_html_entities()
         self.html_info = self.get_html_info()
+        self.html_title = self.get_html_title()
         self.html_context = self.get_html_context()
 
     def __str__(self):
@@ -767,12 +770,11 @@ class Query:
 
         d = {
             'id': self.id_,
-            'html_entities': self.html_entities,
-            'html_info': self.html_info,
-            'title': self.title,
-            'date': self.date,
+            'entities': self.html_entities,
+            'info': self.html_info,
+            'title': self.html_title,
             'abstract': self.abstract,
-            'html_context': self.html_context,
+            'context': self.html_context,
         }
 
         return d
@@ -785,7 +787,10 @@ class Query:
             str, html version of the entities.
         """
 
-        return ', '.join([entity for entity in self.entities[:-1]]) + ' & ' + self.entities[-1]
+        # string = ', '.join([entity for entity in self.entities[:-1]]) + ' & ' + self.entities[-1]
+        string = ''.join(['<th>' + entity + '</th>' for entity in self.entities])
+
+        return string
 
     def get_html_info(self):
         """
@@ -795,9 +800,13 @@ class Query:
             str, html version of the information.
         """
 
-        string = '<br/>'.join([
-            '<a href=' + self.info[entity]['url'] + '>' + entity + '</a>: ' + self.info[entity]['paragraph']
-            if self.info[entity] else entity + ': No information found.' for entity in self.info
+        # string = '<br/>'.join([
+        #     '<a href=' + self.info[entity]['url'] + '>' + entity + '</a>: ' + self.info[entity]['paragraph']
+        #     if self.info[entity] else entity + ': No information found.' for entity in self.info
+        # ])
+        string = ''.join([
+            '<td>' + self.info[entity]['paragraph'] + '</td>' if self.info[entity] else '<td>No information found.</td>'
+            for entity in self.info
         ])
 
         return string
@@ -810,7 +819,30 @@ class Query:
             str, html version of the Context.
         """
 
-        return str(self.context)
+        # string = str(self.context)
+
+        string = '<td colspan=' + str(len(self.entities)) + '><strong_blue>'
+        string += 'Abstract of the article: ' if self.is_abstract else 'Mentions of the entities: '
+        string += '</strong_blue>' + str(self.context)
+        string += '</td>'
+
+        return string
+
+    def get_html_title(self):
+        """
+        Returns the html version of the title.
+
+        Returns:
+            str, html version of the title.
+        """
+
+        string = '<td colspan=' + str(len(self.entities)) + '><strong_blue>'
+        string += 'Title of the article: '
+        string += '</strong_blue>' + str(self.title)
+        string += ' (' + str(self.date) + ')'
+        string += '</td>'
+
+        return string
 
     # endregion
 

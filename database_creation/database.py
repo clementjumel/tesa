@@ -456,7 +456,8 @@ class Database(BaseClass):
                                                date=self.articles[article_id_].date,
                                                abstract='',
                                                info=info,
-                                               context=self.articles[article_id_].abstract)
+                                               context=self.articles[article_id_].abstract,
+                                               is_abstract=True)
 
                 article_contexts = self.articles[article_id_].contexts[tuple_.entities]
                 for context_id_ in article_contexts:
@@ -468,7 +469,8 @@ class Database(BaseClass):
                     #                            date=self.articles[article_id_].date,
                     #                            abstract=self.articles[article_id_].abstract,
                     #                            info=info,
-                    #                            context=article_contexts[context_id_])
+                    #                            context=article_contexts[context_id_],
+                    #                            is_abstract=False)
 
                     query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
                     queries[query_id_] = Query(id_=query_id_,
@@ -477,7 +479,8 @@ class Database(BaseClass):
                                                date=self.articles[article_id_].date,
                                                abstract='',
                                                info=info,
-                                               context=article_contexts[context_id_])
+                                               context=article_contexts[context_id_],
+                                               is_abstract=False)
 
         self.queries = queries
 
