@@ -1,9 +1,9 @@
-from copy import copy
 from time import time
 from numpy import int64
-from re import findall
-from gensim.models import KeyedVectors
+from re import findall, sub
 from textwrap import fill
+from nltk import sent_tokenize
+from wikipedia import search, page, PageError, DisambiguationError
 
 
 class BaseClass:
@@ -22,7 +22,7 @@ class BaseClass:
         """
 
         to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
-        attributes = copy(to_print) or list(self.__dict__.keys())
+        attributes = to_print or list(self.__dict__.keys())
 
         string = ''
 
@@ -110,7 +110,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Similarity, Dependency, Mention, Context, Query)):
+        elif isinstance(item, (BaseClass, Mention, Context, Query)):
             return str(item)
 
         # Case of lists
@@ -252,333 +252,6 @@ class BaseClass:
 
     # endregion
 
-    # region Methods standardize_
-
-    @staticmethod
-    def standardize_location(entity):
-        """
-        Standardize a location entity.
-
-        Args:
-            entity: str, location entity to standardize.
-
-        Returns:
-            str, standardized entity.
-        """
-
-        before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-        entity = before[0] if len(before) > 0 else entity
-
-        entity = entity.replace(' & ', ' and ')
-
-        return entity
-
-    @staticmethod
-    def standardize_person(entity):
-        """
-        Standardize a person entity.
-
-        Args:
-            entity: str, person entity to standardize.
-
-        Returns:
-            str, standardized entity.
-        """
-
-        before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-        entity = before[0] if len(before) > 0 else entity
-
-        split = entity.split()
-        if split[-1].lower() in ['jr', 'jr.']:
-            entity = ' '.join(split[:-1])
-            jr = ' Jr'
-        elif split[-1].lower() in ['sr', 'sr.']:
-            entity = ' '.join(split[:-1])
-            jr = ' Sr'
-        else:
-            jr = ''
-
-        split = entity.split(', ')
-        entity = ' '.join([split[1], split[0]]) if len(split) == 2 else entity  # inverse last name, first names
-
-        words = [s for s in entity.split() if len(s) > 1]
-        entity = ' '.join(words) if len(words) >= 2 else entity  # remove single letters
-
-        split = entity.split()
-        entity = ' '.join([split[0], split[2]]) if len(split) == 3 else entity  # remove middle name
-
-        entity += jr
-
-        return entity
-
-    @staticmethod
-    def standardize_organization(entity):
-        """
-        Standardize an organization entity.
-
-        Args:
-            entity: str, entity to standardize.
-
-        Returns:
-            str, standardized entity.
-        """
-
-        before = findall(r'(.*?)\s*\(', entity)  # find the text before the parenthesis
-        entity = before[0] if len(before) > 0 else entity
-
-        entity = entity.replace(' & ', ' and ')
-
-        return entity
-
-    def standardize(self, entity, type_):
-        """
-        Standardize an entity of type type_.
-
-        Args:
-            entity: str, entity to standardize.
-            type_: str, type of the entity, must be 'location', 'person' or organization'.
-
-        Returns:
-            str, standardized entity.
-        """
-
-        return getattr(self, 'standardize_' + type_)(entity)
-
-    # endregion
-
-    # region Methods match_
-
-    def match_location(self, entity1, entity2, flexible):
-        """
-        Check if two location entities match.
-
-        Args:
-            entity1: str, first entity to compare.
-            entity2: str, second entity to compare.
-            flexible: bool, if True, loosen the conditions for matching.
-
-        Returns:
-            bool, True iff the two strings refer to the same location entity.
-        """
-
-        standardized1, standardized2 = self.standardize_location(entity1), self.standardize_location(entity2)
-
-        candidates1 = {entity1}
-        candidates1.add(standardized1 or entity1)
-
-        candidates2 = {entity2}
-        candidates2.add(standardized2 or entity2)
-
-        if flexible:
-            pass
-
-        return True if candidates1.intersection(candidates2) else False
-
-    def match_person(self, entity1, entity2, flexible):
-        """
-        Check if two person entities match.
-
-        Args:
-            entity1: str, first entity to compare.
-            entity2: str, second entity to compare.
-            flexible: bool, if True, loosen the conditions for matching.
-
-        Returns:
-            bool, True iff the two strings refer to the same person entity.
-        """
-
-        standardized1, standardized2 = self.standardize_person(entity1), self.standardize_person(entity2)
-
-        candidates1 = {entity1}
-        candidates1.add(standardized1 or entity1)
-
-        candidates2 = {entity2}
-        candidates2.add(standardized2 or entity2)
-
-        if flexible:
-            candidates1.add(standardized1.split()[-1])
-            candidates2.add(standardized2.split()[-1])
-
-        return True if candidates1.intersection(candidates2) else False
-
-    def match_organization(self, entity1, entity2, flexible):
-        """
-        Check if two organization entities match.
-
-        Args:
-            entity1: str, first entity to compare.
-            entity2: str, second entity to compare.
-            flexible: bool, if True, loosen the conditions for matching.
-
-        Returns:
-            bool, True iff the two strings refer to the same organization entity.
-        """
-
-        standardized1, standardized2 = self.standardize_organization(entity1), self.standardize_organization(entity2)
-
-        candidates1 = {entity1}
-        candidates1.add(standardized1 or entity1)
-        candidates1.add(' '.join(standardized1.split()[:-1])
-                        if standardized1.split()[-1].lower() in ['co', 'co.', 'company', 'foundation'] else entity1)
-
-        candidates2 = {entity2}
-        candidates2.add(standardized2 or entity2)
-        candidates2.add(' '.join(standardized2.split()[:-1])
-                        if standardized2.split()[-1].lower() in ['co', 'co.', 'company', 'foundation'] else entity2)
-
-        if flexible:
-            pass
-
-        return True if candidates1.intersection(candidates2) else False
-
-    def match(self, entity1, entity2, type_=None, flexible=True):
-        """
-        Check if two entities match.
-
-        Args:
-            entity1: str, first entity to compare.
-            entity2: str, second entity to compare.
-            type_: str, type of the entity, must be 'location', 'person' or organization'.
-            flexible: bool, if True, loosen the conditions for matching.
-
-        Returns:
-            bool, True iff the two strings refer to the same entity of type type_, if mentioned.
-        """
-
-        if type_ is not None:
-            return getattr(self, 'match_' + type_)(entity1, entity2, flexible)
-
-        else:
-            return any([getattr(self, 'match_' + type_)(entity1, entity2, flexible)
-                        for type_ in ['location', 'person', 'organization']])
-
-    # endregion
-
-    # region Other methods
-
-    @staticmethod
-    def subtuples(l):
-        """
-        Compute all the possible sorted subtuples of len > 1 from a list.
-
-        Args:
-            l: list, original list.
-
-        Returns:
-            set, all the possible subtuples of len > 1 of l.
-        """
-
-        if len(l) < 2:
-            return set()
-
-        elif len(l) == 2 or len(l) > 10:
-            return {tuple(sorted(l))}
-
-        else:
-            res = {tuple(sorted(l))}
-            for x in l:
-                res = res.union(BaseClass.subtuples([y for y in l if y != x]))
-
-            return res
-
-    @classmethod
-    @Verbose("Loading embeddings...")
-    def load_embeddings(cls, type_):
-        """
-        Load the token or entity embeddings.
-
-        Args:
-            type_: str, must be 'token' or 'entity', type of the embeddings.
-        """
-
-        if type_ == 'token':
-            cls.embeddings_token = KeyedVectors.load_word2vec_format(
-                fname='../pre_trained_models/GoogleNews-vectors-negative300.bin',
-                binary=True
-            )
-
-        elif type_ == 'entity':
-            cls.embeddings_entity = KeyedVectors.load_word2vec_format(
-                fname='../pre_trained_models/freebase-vectors-skipgram1000-en.bin',
-                binary=True
-            )
-
-        else:
-            raise Exception("Wrong embeddings' type: {}".format(type_))
-
-    # endregion
-
-
-class Similarity:
-    # region Class base methods
-
-    def __init__(self, score, items, similar_items):
-        """
-        Initializes the Similarity instance.
-
-        Args:
-            score: float, similarity score between the object and similar_to.
-            items: list, items compared.
-            similar_items: list, objects similar to the initial objects.
-        """
-
-        self.score = score
-        self.items = items
-        self.similar_items = similar_items
-
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Similarity.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        string = BaseClass.to_string(self.score)
-        string += ' (' + BaseClass.to_string(self.items) + '/' + BaseClass.to_string(self.similar_items) + ')'
-
-        return string
-
-    # endregion
-
-
-class Dependency:
-    # region Class base methods
-
-    def __init__(self, type_, gov_word, gov_idx, dep_word, dep_idx):
-        """
-        Initializes the Dependency instance.
-
-        Args:
-            type_: str, type of the dependency.
-            gov_word: str, word of the governor Token.
-            gov_idx: int, index of the governor Token.
-            dep_word: str, word of the dependent Token.
-            dep_idx: int, index of the dependent Token.
-        """
-
-        self.type_ = type_
-        self.gov_word = gov_word
-        self.gov_idx = gov_idx
-        self.dep_word = dep_word
-        self.dep_idx = dep_idx
-
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Dependency.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        string = BaseClass.to_string(self.type_) + ': '
-        string += BaseClass.to_string(self.gov_word) + '[' + BaseClass.to_string(self.gov_idx) + ']/'
-        string += BaseClass.to_string(self.dep_word) + '[' + BaseClass.to_string(self.dep_idx) + ']'
-
-        return string
-
-    # endregion
-
 
 class Mention:
     # region Class base methods
@@ -616,40 +289,6 @@ class Mention:
     # endregion
 
 
-class Tuple:
-    # region Class base methods
-
-    def __init__(self, id_, entities, type_, article_ids, query_ids=None):
-        """
-        Initializes an entity Tuple instance.
-
-        Args:
-            id_: str, id of the Tuple.
-            entities: tuple, entities of the Tuple.
-            type_: str, type of the entities, must be 'location', 'person' or 'organization'.
-            article_ids: set, ids of the articles where the entities are mentioned.
-            query_ids: set, ids of the queries corresponding to the Tuple.
-        """
-
-        self.id_ = id_
-        self.entities = entities
-        self.type_ = type_
-        self.article_ids = article_ids
-        self.query_ids = query_ids
-
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Tuple.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        return BaseClass.to_string(self.entities)
-
-    # endregion
-
-
 class Context:
     # region Class base methods
 
@@ -679,6 +318,10 @@ class Context:
 
         return string
 
+    # endregion
+
+    # region Other methods
+
     def enhance_entities(self, entity_coreferences):
         """
         Enhance the entities mentioned in the context.
@@ -693,7 +336,7 @@ class Context:
                     for mention in [coreference.representative] + coreference.mentions:
 
                         if mention.sentence == idx:
-                            if not BaseClass.match(self.sentences[idx], entity, mention.text):
+                            if not entity.match(mention.text):
                                 self.sentences[idx].tokens[mention.end - 1].word += ' [' + entity + ']'
 
                             self.sentences[idx].tokens[mention.start].word = \
@@ -705,20 +348,370 @@ class Context:
     # endregion
 
 
+class Entity:
+    # region Class base methods
+
+    def __init__(self, original_name, type_):
+        """
+        Initializes the Entity instance.
+
+        Args:
+            original_name: str, original mention of the entity.
+            type_: str, type of the entity.
+        """
+
+        self.original_name = original_name
+        self.type_ = type_
+
+        self.name = None
+        self.plausible_names = None
+        self.possible_names = None
+        self.extra_info = None
+
+        self.wiki = None
+
+        self.compute_name()
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Entity.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return self.name
+
+    # endregion
+
+    # region Methods compute_
+
+    def compute_name(self):
+        """ Compute the name and possibly the plausible names and the extra info of the entity. """
+
+        before_parenthesis = findall(r'(.*?)\s*\(', self.original_name)
+        if len(before_parenthesis) == 0:
+            before_parenthesis = self.original_name
+        elif len(before_parenthesis) == 1:
+            before_parenthesis = before_parenthesis[0]
+        else:
+            raise Exception("Too many parenthesis: {}".format(self.original_name))
+
+        in_parenthesis = findall(r'\((.*?)\)', self.original_name)
+        if len(in_parenthesis) == 0:
+            in_parenthesis = None
+        elif len(in_parenthesis) == 1:
+            in_parenthesis = in_parenthesis[0]
+        else:
+            raise Exception("Too many parenthesis: {}".format(self.original_name))
+
+        plausible_names, possible_names = set(), set()
+
+        if self.type_ == 'person':
+            split = before_parenthesis.split()
+            if split[-1].lower().replace('.', '') == 'jr':
+                name = ' '.join(split[:-1])
+                suffix = ' Jr.'
+            elif split[-1].lower().replace('.', '') == 'sr':
+                name = ' '.join(split[:-1])
+                suffix = ' Sr.'
+            else:
+                name = before_parenthesis
+                suffix = ''
+
+            split = name.split(', ')
+            name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
+
+            split = name.split()
+
+            plausible_names.update([name, name + suffix])
+
+            plausible_name = ' '.join([word for word in split if len(word) > 1])
+            plausible_names.update([plausible_name, plausible_name + suffix])
+
+            possible_name = split[-1]
+            possible_names.update([possible_name, possible_name + suffix])
+
+            if len(split) > 1:
+                plausible_name = split[0] + ' ' + split[-1]
+                plausible_names.update([plausible_name, plausible_name + suffix])
+
+            for i in range(len(split)):
+                if len(split[i]) == 1:
+                    split[i] += '.'
+
+            name = ' '.join(split)
+            plausible_names.update([name, name + suffix])
+
+            name += suffix
+
+        elif self.type_ == 'location':
+            name = before_parenthesis
+
+            if in_parenthesis is not None:
+                in_parenthesis = in_parenthesis if in_parenthesis != 'DC' else 'D.C.'
+                plausible_names.add(name + ', ' + in_parenthesis)
+
+        elif self.type_ == 'organization':
+            split = before_parenthesis.split()
+            if split[-1].lower().replace('.', '') == 'co':
+                name = ' '.join(split[:-1])
+                suffix1, suffix2 = ' Co.', ' Company'
+            elif split[-1].lower().replace('.', '') == 'company':
+                name = ' '.join(split[:-1])
+                suffix1, suffix2 = ' Company', ' Co.'
+            elif split[-1].lower().replace('.', '') == 'foundation':
+                name = ' '.join(split[:-1])
+                suffix1, suffix2 = ' Foundation', ''
+            else:
+                name = ' '.join(split)
+                suffix1, suffix2 = '', ''
+
+            plausible_names.update([name, name + suffix1, name + suffix2])
+
+            plausible_name = name.replace(' & ', ' and ')
+            plausible_names.update([plausible_name, plausible_name + suffix1, plausible_name + suffix2])
+
+            name += suffix1
+
+        else:
+            raise Exception("Wrong type for an entity: {}".format(self.type_))
+
+        if name in plausible_names:
+            plausible_names.remove(name)
+        for n in plausible_names.intersection(possible_names):
+            possible_names.remove(n)
+
+        extra_info = {in_parenthesis} if in_parenthesis is not None else set()
+
+        self.name = name
+        self.plausible_names = plausible_names
+        self.possible_names = possible_names
+        self.extra_info = extra_info
+
+    def compute_wiki(self):
+        """ Compute the wikipedia information of the entity. """
+
+        p, exact = self.match_page(self.name)
+
+        if p is None:
+            for query in search(self.name):
+                p, exact = self.match_page(query)
+                if p is not None:
+                    break
+
+        self.wiki = Wikipedia(p, exact)
+
+    # endregion
+
+    # region Other methods
+
+    def match(self, string, flexible=False):
+        """
+        Check if the entity matches another entity represented as a string.
+
+        Args:
+            string: str, entity to check.
+            flexible: bool, whether or not to check the possible names as well.
+
+        Returns:
+            bool, True iff the string matches the entity.
+        """
+
+        entity = Entity(string, self.type_)
+
+        names1 = {self.name}.union(self.plausible_names)
+        names2 = {entity.name}.union(entity.plausible_names)
+
+        if flexible:
+            names1.update(self.possible_names)
+            names2.update(entity.possible_names)
+
+        return bool(names1.intersection(names2))
+
+    def is_in(self, string, flexible=False):
+        """
+        Check if the entity is in a text.
+
+        Args:
+            string: str, text to check.
+            flexible: bool, whether or not to check the possible names as well.
+
+        Returns:
+            bool, True iff the text contains the entity.
+        """
+
+        string = string.split()
+
+        names = {self.name}.union(self.plausible_names)
+        if flexible:
+            names.update(self.possible_names)
+
+        for name in names:
+            split = name.split()
+
+            try:
+                idxs = [string.index(word) for word in split]
+            except ValueError:
+                continue
+
+            differences = [idxs[i + 1] - idxs[i] for i in range(len(split) - 1)]
+
+            if min(differences) > 0 and max(differences) <= 4:
+                return True
+
+        return False
+
+    def match_page(self, query):
+        """
+        Check if the entity matches the Wikipedia page found with a query and if the match is exact or if the page is
+        only related to the entity.
+
+        Args:
+            query: str, query to perform to find the page.
+
+        Returns:
+            p: wikipedia.page, wikipedia page corresponding to the entity, or None.
+            exact: bool, whether or not the match is exact or not.
+        """
+
+        try:
+            p = page(query)
+        except PageError:
+            return None, None
+        except DisambiguationError:
+            return None, None
+
+        if self.match(p.title):
+            return p, True
+
+        elif self.is_in(p.summary):
+            return p, False
+
+        else:
+            return None, None
+
+    # endregion
+
+
+class Wikipedia:
+    # region Class base methods
+
+    info_length = 600
+
+    def __init__(self, page, exact):
+        """
+        Initializes the Wikipedia instance.
+
+        Args:
+            page: wikipedia.page, wikipedia page of the entity; can be None.
+            exact: bool, whether the page corresponds directly to an entity.
+        """
+
+        if page is not None:
+            self.title = page.title
+            self.summary = page.summary
+            self.url = page.url
+
+            self.exact = exact
+
+            self.info = None
+            self.compute_info()
+
+        else:
+            self.title, self.summary, self.url, self.exact, self.info = None, None, None, None, None
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Wikipedia.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        if self.info is not None:
+            return self.info
+
+        else:
+            return "No information found."
+
+    # endregion
+
+    # region Methods compute_
+
+    def compute_info(self):
+        """ Compute the information of the Wikipedia object. """
+
+        paragraph = self.summary.split('\n')[0]
+
+        if len(paragraph) <= self.info_length:
+            info = paragraph
+
+        else:
+            sentences = sent_tokenize(paragraph)
+            info = sentences[0]
+
+            for sentence in sentences[1:]:
+                new_info = info + ' ' + sentence
+                if len(new_info) <= self.info_length:
+                    info = new_info
+                else:
+                    break
+
+        info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
+        info = info.encode("utf-8", errors="ignore").decode()
+        info = '[related article] ' + info if not self.exact else info
+
+        self.info = info
+
+    # endregion
+
+
+class Tuple:
+    # region Class base methods
+
+    def __init__(self, id_, entities, article_ids=None, query_ids=None):
+        """
+        Initializes the Tuple instance.
+
+        Args:
+            id_: str, id of the Tuple.
+            entities: tuple, names of the entities of the Tuple.
+            article_ids: set, ids of the articles where the entities are mentioned.
+            query_ids: set, ids of the queries corresponding to the Tuple.
+        """
+
+        self.id_ = id_
+        self.entities = entities
+        self.article_ids = article_ids
+        self.query_ids = query_ids
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Tuple.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return BaseClass.to_string(self.entities)
+
+    # endregion
+
+
 class Query:
     # region Class base methods
 
-    def __init__(self, id_, entities, title, date, abstract, info, context, is_abstract):
+    def __init__(self, id_, entities, info, title, date, context, is_abstract):
         """
-        Initializes the aggregation Query instance.
+        Initializes the Query instance.
 
         Args:
             id_, str, id of the query.
-            entities: tuple, entities mentioned in the article.
+            entities: tuple, names of the entities mentioned in the article.
+            info: dict, wikipedia information of the entities.
             title: str, title of the article from where the query comes from.
             date: str, date of the article from where the query comes from.
-            abstract: str, abstract of the article from where the query comes from.
-            info: dict, wikipedia information of the entities.
             context: Context, context of the entities in the article.
             is_abstract: bool, whether the context is actually an abstract or not.
         """
@@ -730,10 +723,9 @@ class Query:
 
         self.title = title
         self.date = date
-        self.abstract = abstract
-        self.is_abstract = is_abstract
 
         self.context = context
+        self.is_abstract = is_abstract
 
         self.html_entities = self.get_html_entities()
         self.html_info = self.get_html_info()
@@ -748,36 +740,18 @@ class Query:
             str, readable format of the instance.
         """
 
-        string = fill("Entities: " + BaseClass.to_string(self.entities), BaseClass.text_width) + '\n\n'
+        width = BaseClass.text_width
 
-        string += '\n\n'.join([fill(self.info[entity], BaseClass.text_width) for entity in self.info
-                               if self.info[entity]]) + '\n\n'
-
-        string += fill("Article: " + self.title + ' (' + self.date + ')', BaseClass.text_width) + '\n'
-        string += fill(self.abstract, BaseClass.text_width) + '\n\n'
-
-        string += fill(BaseClass.to_string(self.context), BaseClass.text_width) + '\n\n'
+        string = fill("Entities: " + BaseClass.to_string(self.entities), width) + '\n\n'
+        string += '\n\n'.join([fill(self.info[entity], width) for entity in self.info if self.info[entity]]) + '\n\n'
+        string += fill("Article: " + self.title + ' (' + self.date + ')', width) + '\n\n'
+        string += fill(BaseClass.to_string(self.context), width) + '\n\n'
 
         return string
 
-    def to_dict(self):
-        """
-        Return the object as a dictionary.
+    # endregion
 
-        Returns:
-            dict, object as a dictionary.
-        """
-
-        d = {
-            'id': self.id_,
-            'entities': self.html_entities,
-            'info': self.html_info,
-            'title': self.html_title,
-            'abstract': self.abstract,
-            'context': self.html_context,
-        }
-
-        return d
+    # region Methods get_
 
     def get_html_entities(self):
         """
@@ -787,7 +761,6 @@ class Query:
             str, html version of the entities.
         """
 
-        # string = ', '.join([entity for entity in self.entities[:-1]]) + ' & ' + self.entities[-1]
         string = ''.join(['<th>' + entity + '</th>' for entity in self.entities])
 
         return string
@@ -800,14 +773,7 @@ class Query:
             str, html version of the information.
         """
 
-        # string = '<br/>'.join([
-        #     '<a href=' + self.info[entity]['url'] + '>' + entity + '</a>: ' + self.info[entity]['paragraph']
-        #     if self.info[entity] else entity + ': No information found.' for entity in self.info
-        # ])
-        string = ''.join([
-            '<td>' + self.info[entity]['paragraph'] + '</td>' if self.info[entity] else '<td>No information found.</td>'
-            for entity in self.info
-        ])
+        string = ''.join(['<td>' + str(self.info[entity]) + '</td>' for entity in self.info])
 
         return string
 
@@ -819,12 +785,7 @@ class Query:
             str, html version of the Context.
         """
 
-        # string = str(self.context)
-
-        string = '<td colspan=' + str(len(self.entities)) + '><strong_blue>'
-        string += 'Abstract of the article: ' if self.is_abstract else 'Mentions of the entities: '
-        string += '</strong_blue>' + str(self.context)
-        string += '</td>'
+        string = '<td colspan=' + str(len(self.entities)) + '>' + str(self.context) + '</td>'
 
         return string
 
@@ -843,6 +804,29 @@ class Query:
         string += '</td>'
 
         return string
+
+    # endregion
+
+    # region Other methods
+
+    def to_dict(self):
+        """
+        Return the object as a dictionary.
+
+        Returns:
+            dict, object as a dictionary.
+        """
+
+        d = {
+            'id': self.id_,
+            'entities': self.html_entities,
+            'info': self.html_info,
+            'title': self.html_title,
+            'context': self.html_context,
+            'is_abstract': self.is_abstract,
+        }
+
+        return d
 
     # endregion
 
