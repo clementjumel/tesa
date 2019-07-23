@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass, Context
+from database_creation.utils import BaseClass, Entity, Context
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
@@ -28,8 +28,8 @@ class Article(BaseClass):
         self.title = None
         self.date = None
         self.abstract = None
+
         self.entities = None
-        self.raw_entities = None
 
         self.sentences = None
         self.coreferences = None
@@ -40,21 +40,19 @@ class Article(BaseClass):
     # region Methods compute_
 
     def compute_metadata(self):
-        """ Compute the metadata (title, date, abstract, entities, raw_entities) of the article. """
+        """ Compute the metadata (title, date, abstract, entities) of the article. """
 
         root = ElementTree.parse(self.original_path).getroot()
 
         title = self.title or self.get_title(root)
         date = self.date or self.get_date(root)
         abstract = self.abstract or self.get_abstract(root)
-        entities, raw_entities = (self.entities, self.raw_entities) if self.entities and self.raw_entities \
-            else self.get_entities(root)
+        entities = self.entities or self.get_entities(root)
 
         self.title = title
         self.date = date
         self.abstract = abstract
         self.entities = entities
-        self.raw_entities = raw_entities
 
     def compute_annotations(self):
         """ Compute the annotations (sentences, coreferences) of the article. """
@@ -67,23 +65,19 @@ class Article(BaseClass):
         self.sentences = sentences
         self.coreferences = coreferences
 
-    def compute_similarities(self):
-        """ Compute the similarity of the NPs to the entities in the article. """
-
-        for idx in self.sentences:
-            self.sentences[idx].compute_similarities(self.entities)
-
-    def compute_contexts(self, entities, type_):
+    def compute_contexts(self, tuple_, type_):
         """
-        Compute the contexts of the article for the entities, according to the specified context type.
+        Compute the contexts of the article for the Tuple of entities, according to the specified context type.
 
         Args:
-            entities: tuple, entities mentioned in the article.
-            type_: str, type of the context, must be 'same_sent', 'neigh_sent', or 'same_role'.
+            tuple_: Tuple, tuple of Entities mentioned in the article.
+            type_: str, type of the context.
         """
 
+        name = tuple_.get_name()
+
         self.contexts = self.contexts or dict()
-        self.contexts[entities] = getattr(self, 'contexts_' + type_)(entities)
+        self.contexts[name] = getattr(self, 'contexts_' + type_)(tuple_)
 
     # endregion
 
@@ -147,32 +141,26 @@ class Article(BaseClass):
 
         return abstract
 
-    def get_entities(self, root):
+    @staticmethod
+    def get_entities(root):
         """
-        Returns the entities and the raw_entities of an article given the tree of its metadata.
+        Returns the Entities of the article given the tree of its metadata.
 
         Args:
             root: ElementTree.root, root of the metadata of the article.
 
         Returns:
-            entities: dict, standardized entities of the article sorted into 'all' or each type.
-            raw_entities: dict, mapping from the standardized entities to their original versions.
+            set, Entities of the article.
         """
 
-        locations = [(self.standardize_location(entity.text), entity.text)
+        locations = [Entity(entity.text, 'location')
                      for entity in root.findall('./head/docdata/identified-content/location')]
-        persons = [(self.standardize_person(entity.text), entity.text)
-                   for entity in root.findall('./head/docdata/identified-content/person')]
-        organizations = [(self.standardize_organization(entity.text), entity.text)
-                         for entity in root.findall('./head/docdata/identified-content/org')]
+        persons = [Entity(entity.text, 'person') for entity in root.findall('./head/docdata/identified-content/person')]
+        orgs = [Entity(entity.text, 'org') for entity in root.findall('./head/docdata/identified-content/org')]
 
-        entities = {'location': [entity[0] for entity in locations],
-                    'person': [entity[0] for entity in persons],
-                    'organization': [entity[0] for entity in organizations],
-                    'all': [entity[0] for entity in locations + persons + organizations]}
-        raw_entities = dict(locations + persons + organizations)
+        entities = set(locations + persons + orgs)
 
-        return entities, raw_entities
+        return entities
 
     @staticmethod
     def get_sentences(root):
@@ -212,7 +200,7 @@ class Article(BaseClass):
         Returns the indexes of the sentences where there is a mention of the specified entity.
 
         Args:
-            entity: str, entity we want to find mentions of.
+            entity: Entity, entity we want to find mentions of.
 
         Returns:
             list, sorted list of sentences' indexes.
@@ -220,8 +208,9 @@ class Article(BaseClass):
 
         entity_sentences = set()
 
-        for coreference in [c for c in self.coreferences if c.entity and c.entity == entity]:
-            entity_sentences.update(coreference.sentences)
+        for coreference in self.coreferences:
+            if coreference.entity and entity.match(coreference.entity):
+                entity_sentences.update(coreference.sentences)
 
         return sorted(entity_sentences)
 
@@ -253,22 +242,22 @@ class Article(BaseClass):
             bool, True iff the article hasn't 2 entities of the same type.
         """
 
-        if max([len(self.entities['location']), len(self.entities['person']), len(self.entities['organization'])]) < 2:
-            return True
-        else:
-            return False
+        numbers = {'location': 0, 'person': 0, 'organization': 0}
+        for entity in self.entities:
+            numbers[entity.type_] += 1
+
+        return True if max([numbers[type_] for type_ in numbers]) < 2 else False
 
     # endregion
 
     # region Methods contexts_
 
-    def contexts_neigh_sent(self, entity_tuple):
+    def contexts_neigh_sent(self, tuple_):
         """
-        Returns the neighboring-sentences contexts for a single entity tuple, that is the neighboring sentences where
-        the entities are mentioned.
+        Returns the neighboring-sentences contexts for a Tuple (neighboring sentences where the entities are mentioned).
 
         Args:
-            entity_tuple: tuple, entities to analyse.
+            tuple_: Tuple, entities to analyse.
 
         Returns:
             dict, neighbouring-sentences Contexts of the entities, mapped with their sentences span (indexes of the
@@ -277,17 +266,17 @@ class Article(BaseClass):
 
         sentences_entities = defaultdict(set)
 
-        for i in range(len(entity_tuple)):
-            for idx in self.get_entity_sentences(entity_tuple[i]):
+        for i in range(len(tuple_.entities)):
+            for idx in self.get_entity_sentences(tuple_.entities[i]):
                 sentences_entities[idx].add(i)
 
         contexts_sentences = set()
 
         for idx in sentences_entities:
-            unseens = list(range(len(entity_tuple)))
+            unseens = list(range(len(tuple_.entities)))
             seers = set()
 
-            for i in range(len(entity_tuple)):
+            for i in range(len(tuple_.entities)):
                 if idx + i in sentences_entities:
                     for j in sentences_entities[idx + i]:
                         try:
@@ -308,8 +297,9 @@ class Article(BaseClass):
             entity_coreferences = {}
             for idx in idxs:
                 entity_coreferences[idx] = {
-                    entity: [c for c in self.coreferences if c.entity and c.entity == entity and idx in c.sentences]
-                    for entity in entity_tuple
+                    entity.name: [c for c in self.coreferences
+                                  if c.entity and idx in c.sentences and entity.match(c.entity)]
+                    for entity in tuple_.entities
                 }
 
             id_ = str(idxs[0]) + '_' + str(idxs[-1])
@@ -322,15 +312,21 @@ class Article(BaseClass):
 
 
 def main():
+    from database_creation.utils import Entity, Tuple
+
     article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
+    tuple_ = Tuple(id_='0',
+                   entities=(Entity(original_name='Joyce, James', type_='person'),
+                             Entity(original_name='Bernstein, Richard', type_='person')))
+
     article.compute_metadata()
     article.compute_annotations()
-
-    article.compute_contexts(('James Joyce', 'Richard Bernstein'), 'neigh_sent')
+    article.compute_contexts(tuple_=tuple_, type_='neigh_sent')
 
     print(article)
+    return
 
 
 if __name__ == '__main__':
