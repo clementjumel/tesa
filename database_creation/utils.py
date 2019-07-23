@@ -110,7 +110,7 @@ class BaseClass:
             return str(round(item, 2))
 
         # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Mention, Context, Query)):
+        elif isinstance(item, (BaseClass, Mention, Context, Entity, Wikipedia, Tuple, Query)):
             return str(item)
 
         # Case of lists
@@ -676,7 +676,7 @@ class Tuple:
 
         Args:
             id_: str, id of the Tuple.
-            entities: tuple, names of the entities of the Tuple.
+            entities: tuple, Entities of the Tuple.
             article_ids: set, ids of the articles where the entities are mentioned.
             query_ids: set, ids of the queries corresponding to the Tuple.
         """
@@ -685,6 +685,8 @@ class Tuple:
         self.entities = entities
         self.article_ids = article_ids
         self.query_ids = query_ids
+
+        self.type_ = self.get_type()
 
     def __str__(self):
         """
@@ -698,31 +700,58 @@ class Tuple:
 
     # endregion
 
+    # region Methods get_
+
+    def get_type(self):
+        """
+        Returns the type of the Tuple.
+
+        Returns:
+            str, type of the tuple, must be 'location', 'person' or 'org'.
+        """
+
+        types = set([entity.type_ for entity in self.entities])
+        assert len(types) == 1 and types.issubset({'location', 'person', 'org'})
+
+        return types.pop()
+
+    def get_name(self):
+        """
+        Returns the tuple of names of the Tuple.
+
+        Returns:
+            tuple, tuple of the names (str) of the Tuple.
+        """
+
+        name = tuple([entity.name for entity in self.entities])
+
+        return name
+
+    # endregion
+
 
 class Query:
     # region Class base methods
 
-    def __init__(self, id_, entities, info, title, date, context, is_abstract):
+    def __init__(self, id_, tuple_, article, context, is_abstract):
         """
         Initializes the Query instance.
 
         Args:
-            id_, str, id of the query.
-            entities: tuple, names of the entities mentioned in the article.
-            info: dict, wikipedia information of the entities.
-            title: str, title of the article from where the query comes from.
-            date: str, date of the article from where the query comes from.
-            context: Context, context of the entities in the article.
+            id_: str, id of the Query.
+            tuple_: Tuple, Tuple of entities mentioned in the article.
+            article: Article, article from where the query comes from.
+            context: Context or str, context of the entities in the article or abstract of the article.
             is_abstract: bool, whether the context is actually an abstract or not.
         """
 
         self.id_ = id_
 
-        self.entities = entities
-        self.info = info
+        self.entities = tuple_.entities
+        self.info = [entity.info for entity in tuple_.entities]
 
-        self.title = title
-        self.date = date
+        self.title = article.title
+        self.date = article.date
 
         self.context = context
         self.is_abstract = is_abstract
@@ -743,9 +772,9 @@ class Query:
         width = BaseClass.text_width
 
         string = fill("Entities: " + BaseClass.to_string(self.entities), width) + '\n\n'
-        string += '\n\n'.join([fill(self.info[entity], width) for entity in self.info if self.info[entity]]) + '\n\n'
+        string += "Info:" + '\n\n'.join([fill(info, width) for info in self.info]) + '\n\n'
         string += fill("Article: " + self.title + ' (' + self.date + ')', width) + '\n\n'
-        string += fill(BaseClass.to_string(self.context), width) + '\n\n'
+        string += fill("Context: " + BaseClass.to_string(self.context), width) + '\n\n'
 
         return string
 
@@ -773,7 +802,7 @@ class Query:
             str, html version of the information.
         """
 
-        string = ''.join(['<td>' + str(self.info[entity]) + '</td>' for entity in self.info])
+        string = ''.join(['<td>' + info + '</td>' for info in self.info])
 
         return string
 
@@ -818,12 +847,11 @@ class Query:
         """
 
         d = {
-            'id': self.id_,
+            'id_': self.id_,
             'entities': self.html_entities,
             'info': self.html_info,
             'title': self.html_title,
             'context': self.html_context,
-            'is_abstract': self.is_abstract,
         }
 
         return d
