@@ -1,14 +1,11 @@
 from database_creation.utils import BaseClass
-from database_creation.np import Np
 from database_creation.token import Token
-
-from nltk import tree
 
 
 class Sentence(BaseClass):
     # region Class initialization
 
-    to_print = ['text', 'nps']
+    to_print = ['text', 'tokens']
     print_attribute, print_lines, print_offsets = False, 1, 2
 
     def __init__(self, sentence_element):
@@ -20,14 +17,10 @@ class Sentence(BaseClass):
         """
 
         self.tokens = None
-        self.parse = None
         self.text = None
-        self.nps = None
 
         self.compute_tokens(sentence_element)
-        self.compute_parse(sentence_element)
         self.compute_text()
-        self.compute_nps()
 
     # endregion
 
@@ -48,16 +41,6 @@ class Sentence(BaseClass):
 
         self.tokens = tokens
 
-    def compute_parse(self, sentence_element):
-        """
-        Compute the parsing of the sentence from its element.
-
-        Args:
-            sentence_element: ElementTree.Element, annotations of the sentence.
-        """
-
-        self.parse = sentence_element.find('./parse').text
-
     def compute_text(self):
         """ Compute the text defined by the tokens. """
 
@@ -69,41 +52,6 @@ class Sentence(BaseClass):
             text += token.word
 
         self.text = text
-
-    def compute_nps(self):
-        """ Compute the NPs defined by self.parse. """
-
-        t = tree.Tree.fromstring(self.parse)
-        idx = 0
-        for position in t.treepositions('leaves'):
-
-            if position[-1] == 0:
-                idx += 1
-                t[position] += '|' + str(idx)
-
-            # Case of non-breaking spaces inside a token
-            else:
-                old_position = tuple(list(position[:-1]) + [0])
-                # Insert a non-breaking space
-                t[old_position] = t[old_position].split('|')[0] + ' ' + t[position] + '|' + str(idx)
-                t[position] = ''
-
-        nps = []
-        for leaves in [subtree.leaves() for subtree in t.subtrees(lambda node: node.label() == 'NP')]:
-            tokens = {}
-
-            for leaf in leaves:
-                if leaf:
-                    split = leaf.split('|')
-                    idx = int(split[1])
-                    word = split[0]
-
-                    assert self.tokens[idx].word == word
-                    tokens[idx] = self.tokens[idx]
-
-            nps.append(Np(tokens))
-
-        self.nps = nps
 
     # endregion
 
