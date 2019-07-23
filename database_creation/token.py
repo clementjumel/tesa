@@ -75,40 +75,6 @@ class Token(BaseClass):
 
     # endregion
 
-    # region Methods criterion_
-
-    def criterion_punctuation(self):
-        """ Check if a token is a punctuation mark. """
-
-        return True if self.word in self.punctuation else False
-
-    def criterion_stopwords(self):
-        """ Check if a token is a stop word. """
-
-        return True if self.lemma in self.stopwords else False
-
-    def criterion_determiner(self):
-        """ Check if a token is a determiner. """
-
-        return True if self.pos == 'DT' else False
-
-    def criterion_number(self):
-        """ Check if a token is a number. """
-
-        return True if self.pos == 'CD' else False
-
-    def criterion_adjective(self):
-        """ Check if a token is an adjective. """
-
-        return True if self.pos == 'JJ' else False
-
-    def criterion_possessive(self):
-        """ Check if a token is a possessive mark. """
-
-        return True if self.pos == 'POS' else False
-
-    # endregion
-
 
 def main():
     from xml.etree import ElementTree
