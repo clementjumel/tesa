@@ -489,8 +489,17 @@ class Entity:
         self.possible_names = possible_names
         self.extra_info = extra_info
 
-    def compute_wiki(self):
-        """ Compute the wikipedia information of the entity. """
+    # endregion
+
+    # region Methods get_
+
+    def get_wiki(self):
+        """
+        Returns the wikipedia information of the entity.
+
+        Returns:
+            Wikipedia, wikipedia page of the entity.
+        """
 
         p, exact = self.match_page(self.name)
 
@@ -500,7 +509,7 @@ class Entity:
                 if p is not None:
                     break
 
-        self.wiki = Wikipedia(p, exact)
+        return Wikipedia(p, exact)
 
     # endregion
 
