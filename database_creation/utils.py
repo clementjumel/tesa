@@ -780,7 +780,7 @@ class Tuple:
 class Query:
     # region Class base methods
 
-    def __init__(self, id_, tuple_, article, context, is_abstract):
+    def __init__(self, id_, tuple_, article, context):
         """
         Initializes the Query instance.
 
@@ -788,8 +788,7 @@ class Query:
             id_: str, id of the Query.
             tuple_: Tuple, Tuple of entities mentioned in the article.
             article: Article, article from where the query comes from.
-            context: Context or str, context of the entities in the article or abstract of the article.
-            is_abstract: bool, whether the context is actually an abstract or not.
+            context: Context, context of the entities in the article.
         """
 
         self.id_ = id_
@@ -800,8 +799,8 @@ class Query:
         self.title = article.title
         self.date = article.date
 
-        self.context = context
-        self.is_abstract = is_abstract
+        self.context = str(context)
+        self.type_ = context.get_type()
 
         self.html_entities = self.get_html_entities()
         self.html_info = self.get_html_info()
@@ -837,7 +836,7 @@ class Query:
             str, html version of the entities.
         """
 
-        string = ''.join(['<th>' + entity + '</th>' for entity in self.entities])
+        string = ''.join(['<th>' + str(entity) + '</th>' for entity in self.entities])
 
         return string
 
@@ -849,7 +848,7 @@ class Query:
             str, html version of the information.
         """
 
-        string = ''.join(['<td>' + info + '</td>' for info in self.info])
+        string = ''.join(['<td>' + str(info) + '</td>' for info in self.info])
 
         return string
 
