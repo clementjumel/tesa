@@ -292,17 +292,28 @@ class Mention:
 class Context:
     # region Class base methods
 
-    def __init__(self, sentences, entity_coreferences):
+    def __init__(self, sentences=None, entity_coreferences=None, abstract=None):
         """
         Initializes the Context instance.
 
         Args:
             sentences: dict, the context's sentences (deep copy of the article's sentences), mapped by their indexes.
             entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
+            abstract: str, abstract of an article.
         """
 
-        self.sentences = sentences
-        self.enhance_entities(entity_coreferences)
+        if abstract is None:
+            assert sentences is not None and entity_coreferences is not None
+
+            self.sentences = sentences
+            self.abstract = None
+            self.enhance_entities(entity_coreferences)
+
+        else:
+            assert sentences is None and entity_coreferences is None
+
+            self.sentences = None
+            self.abstract = abstract
 
     def __str__(self):
         """
@@ -312,9 +323,13 @@ class Context:
             str, readable format of the instance.
         """
 
-        string = '[...] ' if list(self.sentences.keys())[0] != 1 else ''
-        string += ' '.join([self.sentences[id_].text for id_ in self.sentences])
-        string += ' [...]'
+        if self.abstract is None:
+            string = '[...] ' if list(self.sentences.keys())[0] != 1 else ''
+            string += ' '.join([self.sentences[id_].text for id_ in self.sentences])
+            string += ' [...]'
+
+        else:
+            string = self.abstract
 
         return string
 
@@ -344,6 +359,16 @@ class Context:
                             self.sentences[idx].tokens[mention.end - 1].word += '</strong>'
 
             self.sentences[idx].compute_text()
+
+    def is_abstract(self):
+        """
+        Check if a Context is an abstract of not.
+
+        Returns:
+            bool, True iff the Context is actually an abstract.
+        """
+
+        return True if self.abstract is not None else False
 
     # endregion
 
