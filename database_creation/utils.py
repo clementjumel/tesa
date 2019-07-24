@@ -360,15 +360,15 @@ class Context:
 
             self.sentences[idx].compute_text()
 
-    def is_abstract(self):
+    def get_type(self):
         """
-        Check if a Context is an abstract of not.
+        Returns the type of the Context.
 
         Returns:
-            bool, True iff the Context is actually an abstract.
+            str, type of the Context.
         """
 
-        return True if self.abstract is not None else False
+        return 'abstract' if self.abstract is not None else 'context'
 
     # endregion
 
