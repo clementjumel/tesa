@@ -47,15 +47,17 @@ class Article(BaseClass):
         title = self.title or self.get_title(root)
         date = self.date or self.get_date(root)
         abstract = self.abstract or self.get_abstract(root)
-        entities = self.entities or self.get_entities(root)
 
         self.title = title
         self.date = date
         self.abstract = abstract
-        self.entities = entities
 
     def compute_annotations(self):
         """ Compute the annotations (sentences, coreferences) of the article. """
+
+        if self.entities is None:
+            root = ElementTree.parse(self.original_path).getroot()
+            self.entities = self.get_entities(root)
 
         root = ElementTree.parse(self.annotated_path).getroot()
 
@@ -312,18 +314,15 @@ class Article(BaseClass):
 
 
 def main():
-    from database_creation.utils import Entity, Tuple
+    from database_creation.utils import Tuple
 
     article = Article('../databases/nyt_jingyun/data/2000/01/01/1165027.xml',
                       '../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
 
-    tuple_ = Tuple(id_='0',
-                   entities=(Entity(original_name='Joyce, James', type_='person'),
-                             Entity(original_name='Bernstein, Richard', type_='person')))
-
     article.compute_metadata()
     article.compute_annotations()
-    article.compute_contexts(tuple_=tuple_, type_='neigh_sent')
+    article.compute_contexts(tuple_=Tuple(id_='0', entities=tuple(article.entities)),
+                             type_='neigh_sent')
 
     print(article)
     return
