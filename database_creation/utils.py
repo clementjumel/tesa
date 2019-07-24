@@ -591,6 +591,19 @@ class Entity:
         else:
             return None, None
 
+    def update_info(self, entity):
+        """
+        Updates the information (plausible & possible names, extra info) of the current entity with another one.
+
+        Args:
+            entity: Entity, new entity to take into account.
+        """
+
+        if self.type_ == entity.type_:
+            self.plausible_names.update(entity.plausible_names)
+            self.possible_names.update(entity.possible_names)
+            self.extra_info.update(entity.extra_info)
+
     # endregion
 
 
