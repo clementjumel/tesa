@@ -67,19 +67,25 @@ class Article(BaseClass):
         self.sentences = sentences
         self.coreferences = coreferences
 
-    def compute_contexts(self, tuple_, type_):
+    def compute_contexts(self, tuple_, types):
         """
-        Compute the contexts of the article for the Tuple of entities, according to the specified context type.
+        Compute the contexts of the article for the Tuple of entities, according to the specified context types.
 
         Args:
             tuple_: Tuple, tuple of Entities mentioned in the article.
-            type_: str, type of the context.
+            types: set, set of strings, types of the context to compute.
         """
 
         name = tuple_.get_name()
 
         self.contexts = self.contexts or dict()
-        self.contexts[name] = getattr(self, 'contexts_' + type_)(tuple_)
+        self.contexts[name] = dict()
+
+        for type_ in types:
+            contexts = getattr(self, 'contexts_' + type_)(tuple_)
+
+            for context_id_, context in contexts.items():
+                self.contexts[name][context_id_] = context
 
     # endregion
 
@@ -307,6 +313,27 @@ class Article(BaseClass):
             id_ = str(idxs[0]) + '_' + str(idxs[-1])
             contexts[id_] = Context(sentences={idx: deepcopy(self.sentences[idx]) for idx in idxs},
                                     entity_coreferences=entity_coreferences)
+
+        return contexts
+
+    def contexts_abstract(self, tuple_):
+        """
+        Returns the abstract contexts for a Tuple (abstract if the entities are mentioned).
+
+        Args:
+            tuple_: Tuple, entities to analyse.
+
+        Returns:
+            dict, abstract Context of the entities, mapped with its id_ (which is '0').
+        """
+
+        contexts = dict()
+
+        for entity in tuple_.entities:
+            if not entity.is_in(string=self.abstract, flexible=True):
+                return contexts
+
+        contexts['0'] = Context(abstract=self.abstract)
 
         return contexts
 
