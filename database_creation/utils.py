@@ -346,13 +346,12 @@ class Context:
         """
 
         for idx in entity_coreferences:
-            for entity in entity_coreferences[idx]:
-                for coreference in entity_coreferences[idx][entity]:
+            for entity, correspondence in entity_coreferences[idx]:
+                for coreference in correspondence:
                     for mention in [coreference.representative] + coreference.mentions:
-
                         if mention.sentence == idx:
                             if not entity.match(mention.text):
-                                self.sentences[idx].tokens[mention.end - 1].word += ' [' + entity + ']'
+                                self.sentences[idx].tokens[mention.end - 1].word += ' [' + str(entity) + ']'
 
                             self.sentences[idx].tokens[mention.start].word = \
                                 '<strong>' + self.sentences[idx].tokens[mention.start].word
@@ -411,33 +410,23 @@ class Entity:
 
     # region Methods compute_
 
+    # TODO: deal with City (NYC)
     def compute_name(self):
         """ Compute the name and possibly the plausible names and the extra info of the entity. """
 
         before_parenthesis = findall(r'(.*?)\s*\(', self.original_name)
-        if len(before_parenthesis) == 0:
-            before_parenthesis = self.original_name
-        elif len(before_parenthesis) == 1:
-            before_parenthesis = before_parenthesis[0]
-        else:
-            raise Exception("Too many parenthesis: {}".format(self.original_name))
-
-        in_parenthesis = findall(r'\((.*?)\)', self.original_name)
-        if len(in_parenthesis) == 0:
-            in_parenthesis = None
-        elif len(in_parenthesis) == 1:
-            in_parenthesis = in_parenthesis[0]
-        else:
-            raise Exception("Too many parenthesis: {}".format(self.original_name))
+        before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
+            else self.original_name
+        in_parenthesis = set(findall(r'\((.*?)\)', self.original_name))
 
         plausible_names, possible_names = set(), set()
 
         if self.type_ == 'person':
             split = before_parenthesis.split()
-            if split[-1].lower().replace('.', '') == 'jr':
+            if len(split) > 1 and split[-1].lower().replace('.', '') == 'jr':
                 name = ' '.join(split[:-1])
                 suffix = ' Jr.'
-            elif split[-1].lower().replace('.', '') == 'sr':
+            elif len(split) > 1 and split[-1].lower().replace('.', '') == 'sr':
                 name = ' '.join(split[:-1])
                 suffix = ' Sr.'
             else:
@@ -473,11 +462,11 @@ class Entity:
         elif self.type_ == 'location':
             name = before_parenthesis
 
-            if in_parenthesis is not None:
-                in_parenthesis = in_parenthesis if in_parenthesis != 'DC' else 'D.C.'
-                plausible_names.add(name + ', ' + in_parenthesis)
+            if in_parenthesis:
+                info = ', '.join(in_parenthesis)
+                plausible_names.add(name + ', ' + info)
 
-        elif self.type_ == 'organization':
+        elif self.type_ == 'org':
             split = before_parenthesis.split()
             if split[-1].lower().replace('.', '') == 'co':
                 name = ' '.join(split[:-1])
@@ -507,7 +496,7 @@ class Entity:
         for n in plausible_names.intersection(possible_names):
             possible_names.remove(n)
 
-        extra_info = {in_parenthesis} if in_parenthesis is not None else set()
+        extra_info = in_parenthesis
 
         self.name = name
         self.plausible_names = plausible_names
@@ -583,19 +572,22 @@ class Entity:
 
         for name in names:
             split = name.split()
-
             try:
                 idxs = [string.index(word) for word in split]
             except ValueError:
                 continue
 
-            differences = [idxs[i + 1] - idxs[i] for i in range(len(split) - 1)]
-
-            if min(differences) > 0 and max(differences) <= 4:
+            if len(split) == 1:
                 return True
+
+            else:
+                differences = [idxs[i + 1] - idxs[i] for i in range(len(split) - 1)]
+                if min(differences) > 0 and max(differences) <= 4:
+                    return True
 
         return False
 
+    # TODO: add check with the extra_info
     def match_page(self, query):
         """
         Check if the entity matches the Wikipedia page found with a query and if the match is exact or if the page is
@@ -794,7 +786,7 @@ class Query:
         self.id_ = id_
 
         self.entities = tuple_.entities
-        self.info = [entity.info for entity in tuple_.entities]
+        self.info = [str(entity.wiki) for entity in tuple_.entities]
 
         self.title = article.title
         self.date = article.date
@@ -872,11 +864,11 @@ class Query:
             str, html version of the title.
         """
 
-        string = '<td colspan=' + str(len(self.entities)) + '><strong_blue>'
+        string = '<th colspan=' + str(len(self.entities)) + '><strong_blue>'
         string += 'Title of the article: '
         string += '</strong_blue>' + str(self.title)
         string += ' (' + str(self.date) + ')'
-        string += '</td>'
+        string += '</th>'
 
         return string
 
