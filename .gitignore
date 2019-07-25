@@ -6,3 +6,5 @@ databases/
 pre_trained_models/
 results/2000/wikipedia/
 results/2000/save/
+results/2000/queries/
+
