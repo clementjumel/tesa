@@ -4,5 +4,4 @@ database_creation/__pycache__/
 
 databases/
 pre_trained_models/
-results/2000/wikipedia/
-results/2000/save/
+results/
