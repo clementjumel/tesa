@@ -1,6 +1,0 @@
-The goal of this task is to perform the aggregation of the entities designated in each query.
-
-To help you do this in a natural and contextualized way, the entities are selected from neighboring sentences in a New York Times article.
-Besides, the title, date and abstract of each article is provided, as well as some information extracted from Wikipedia, in order to provide additional information about the entities and their possible aggregations.
-
-Note that empty answers are not saved, so in case the query is not relevant or you want to finish the exercise, you can skip a query using only the enter key.
