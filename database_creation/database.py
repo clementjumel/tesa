@@ -1,19 +1,12 @@
-from database_creation.utils import BaseClass, Tuple, Query
+from database_creation.utils import BaseClass, Tuple, Wikipedia, Query
 from database_creation.article import Article
 
-from os import remove as os_remove
-from copy import copy
 from numpy.random import shuffle, seed
-from random import sample
 from glob import glob
 from collections import defaultdict
 from numpy import histogram
-from wikipedia import search, page, PageError, DisambiguationError
 from pickle import dump, load, PicklingError
-from textwrap import fill
-from nltk import sent_tokenize
 from pandas import DataFrame
-from re import sub
 
 import matplotlib.pyplot as plt
 
@@ -24,8 +17,7 @@ class Database(BaseClass):
     to_print = ['articles']
     print_attributes, print_lines, print_offsets = False, 2, 0
     limit_print, random_print = 50, True
-    modulo_articles, modulo_tuples = 1000, 1000
-    info_length = 600
+    modulo_articles, modulo_tuples = 1000, 500
 
     def __init__(self, year='2000', max_size=None, project_root='', verbose=True, min_articles=None, min_queries=None):
         """
@@ -44,23 +36,15 @@ class Database(BaseClass):
         self.max_size = max_size
         self.project_root = project_root
         self.verbose = verbose
-
         self.min_articles = min_articles
         self.min_queries = min_queries
 
         self.articles = None
-        self.article_ids = None
-
+        self.entities = None
         self.tuples = None
-
         self.wikipedia = None
-        self.not_wikipedia = None
-        self.ambiguous = None
-
-        self.stats = None
-
         self.queries = None
-        self.answers = None
+        self.stats = None
 
     def __str__(self):
         """
@@ -71,7 +55,7 @@ class Database(BaseClass):
         """
 
         to_print, print_attribute, print_lines, print_offsets, limit_print, random_print = self.get_parameters()[:6]
-        attributes = copy(to_print) or list(self.__dict__.keys())
+        attributes = to_print or list(self.__dict__.keys())
 
         string = ''
 
@@ -81,7 +65,7 @@ class Database(BaseClass):
                 else ''
 
         if 'articles' in attributes:
-            ids = self.article_ids
+            ids = set(self.articles.keys())
             if random_print:
                 shuffle(ids)
 
@@ -151,6 +135,8 @@ class Database(BaseClass):
         self.compute_articles()
         self.clean(Article.criterion_data)
         self.compute_metadata()
+
+        self.compute_entities()
         self.compute_tuples()
 
     @BaseClass.Verbose("Preprocessing the articles...")
@@ -158,7 +144,7 @@ class Database(BaseClass):
         """ Performs the preprocessing of the articles. """
 
         self.compute_annotations()
-        self.compute_contexts()
+        self.compute_contexts(types={'abstract', 'neigh_sent'})
 
     @BaseClass.Verbose("Processing the wikipedia information...")
     def process_wikipedia(self, load=False, file_name=None):
@@ -171,20 +157,12 @@ class Database(BaseClass):
         """
 
         if load:
-            if file_name is None:
-                self.load(attribute_name='wikipedia', folder_name='wikipedia')
-                self.load(attribute_name='not_wikipedia', folder_name='wikipedia')
-                self.load(attribute_name='ambiguous', folder_name='wikipedia')
-
-            else:
-                self.load(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+            self.load(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+            self.compute_wikipedia(load=load)
 
         else:
-            self.compute_wikipedia()
-
+            self.compute_wikipedia(load=load)
             self.save(attribute_name='wikipedia', folder_name='wikipedia')
-            self.save(attribute_name='not_wikipedia', folder_name='wikipedia')
-            self.save(attribute_name='ambiguous', folder_name='wikipedia')
 
     @BaseClass.Verbose("Processing the aggregation queries...")
     def process_queries(self, load=False, file_name=None):
@@ -197,16 +175,11 @@ class Database(BaseClass):
         """
 
         if load:
-            if file_name is None:
-                self.load('queries')
-            else:
-                self.load(attribute_name='queries', file_name=file_name)
+            self.load(attribute_name='queries', file_name=file_name)
 
         else:
             self.compute_queries()
-
             self.save('queries')
-            self.save_csv(attribute_name='queries', limit=None)
             self.save_csv(attribute_name='queries', limit=200)
 
     @BaseClass.Verbose("Computing and displaying statistics...")
@@ -221,6 +194,7 @@ class Database(BaseClass):
         getattr(self, 'compute_stats_' + type_)()
         getattr(self, 'display_stats_' + type_)()
 
+    # TODO: add a filter to clean entities as well
     @BaseClass.Verbose("Filtering the articles...")
     @BaseClass.Attribute('tuples')
     def filter(self, min_articles=None, min_queries=None):
@@ -245,10 +219,8 @@ class Database(BaseClass):
                         article_ids.update(tuple_.article_ids)
 
                 self.tuples = tuples
-                self.article_ids = article_ids
                 self.min_articles = min_articles
-
-                self.clean(Database.criterion_article_ids)
+                self.clean(Database.criterion_article_ids, param=article_ids)
 
         if min_queries is not None:
             self.print("Minimum number of queries: {}".format(min_queries))
@@ -262,63 +234,8 @@ class Database(BaseClass):
                         article_ids.update(tuple_.article_ids)
 
                 self.tuples = tuples
-                self.article_ids = article_ids
                 self.min_queries = min_queries
-
-                self.clean(Database.criterion_article_ids)
-
-    @BaseClass.Verbose("Performing the annotation task..")
-    def ask(self, n_queries=1):
-        """
-        Performs the annotation task by asking the specified number of queries.
-
-        Args:
-            n_queries: int, number of queries to ask.
-        """
-
-        answer = defaultdict(list)
-        query_ids = sample(list(self.queries), n_queries)
-
-        for query_id_ in query_ids:
-            print(self.to_string(self.queries[query_id_]))
-
-            a = input("Answer: ")
-            answer[query_id_].append(a) if a else None
-            print('\n')
-
-        count = 1
-        while True:
-            try:
-                self.load(file_name='answer_' + str(count), folder_name='answers')
-                count += 1
-            except FileNotFoundError:
-                break
-
-        self.save(obj=answer, file_name='answer_' + str(count), folder_name='answers')
-
-    @BaseClass.Verbose("Gathering the answers..")
-    @BaseClass.Attribute('answers')
-    def gather(self):
-        """ Gather the different answers into one file and load them. """
-
-        try:
-            self.load(attribute_name='answers', folder_name='answers')
-        except FileNotFoundError:
-            self.answers = defaultdict(list)
-
-        count = 1
-        while True:
-            try:
-                answer = self.pop_file(file_name='answer_' + str(count), folder_name='answers')
-                count += 1
-
-                for query_id_ in answer:
-                    self.answers[query_id_].extend(answer[query_id_])
-
-            except FileNotFoundError:
-                break
-
-        self.save(attribute_name='answers', folder_name='answers')
+                self.clean(Database.criterion_article_ids, param=article_ids)
 
     # endregion
 
@@ -338,7 +255,6 @@ class Database(BaseClass):
             articles[id_] = Article(original_path=original_path, annotated_path=annotated_path)
 
         self.articles = articles
-        self.article_ids = set(self.articles.keys())
 
     @BaseClass.Verbose("Computing the articles' metadata...")
     def compute_metadata(self):
@@ -349,6 +265,51 @@ class Database(BaseClass):
             count = self.progression(count, self.modulo_articles, size, 'article')
             self.articles[id_].compute_metadata()
 
+    @BaseClass.Verbose("Computing the database' entities...")
+    def compute_entities(self):
+        """ Compute the entities of the database. """
+
+        self.entities = dict()
+
+        count, size = 0, len(self.articles)
+        for id_ in self.articles:
+            count = self.progression(count, self.modulo_articles, size, 'article')
+
+            entities = self.articles[id_].get_entities()
+
+            for entity in entities:
+                if entity.name in self.entities:
+                    self.entities[entity.name].update_info(entity)
+                else:
+                    self.entities[entity.name] = entity
+
+            self.articles[id_].entities = set([self.entities[entity.name] for entity in entities])
+
+    @BaseClass.Verbose("Computing the entity tuples...")
+    def compute_tuples(self):
+        """ Compute the Tuples of the database as a sorted list of Tuples (by number of articles). """
+
+        ids = defaultdict(set)
+
+        count, size = 0, len(self.articles)
+        for id_ in self.articles:
+            count = self.progression(count, self.modulo_articles, size, 'article')
+
+            entities = defaultdict(set)
+            for entity in self.articles[id_].entities:
+                entities[entity.type_].add(entity.name)
+
+            for type_ in entities:
+                for tuple_ in self.subtuples(entities[type_]):
+                    ids[tuple_].add(id_)
+
+        ranking = sorted(ids, key=lambda k: len(ids[k]), reverse=True)
+
+        self.tuples = [Tuple(id_=str(rank + 1),
+                             entities=tuple([self.entities[name] for name in tuple_]),
+                             article_ids=ids[tuple_])
+                       for rank, tuple_ in enumerate(ranking)]
+
     @BaseClass.Verbose("Computing the articles' annotations...")
     def compute_annotations(self):
         """ Computes the annotations of the articles. """
@@ -358,225 +319,112 @@ class Database(BaseClass):
             count = self.progression(count, self.modulo_articles, size, 'article')
             self.articles[id_].compute_annotations()
 
-    @BaseClass.Verbose("Computing the entity tuples...")
-    def compute_tuples(self):
-        """ Compute the entity tuples of the database as a sorted list of Tuples with its entities, its type and the
-        ids of its articles. """
-
-        tuples_ids, tuples_type = defaultdict(set), defaultdict(str)
-        count, size = 0, len(self.articles)
-
-        for id_ in self.articles:
-            count = self.progression(count, self.modulo_articles, size, 'article')
-
-            for type_ in ['location', 'person', 'organization']:
-                entities = getattr(self.articles[id_], 'entities')[type_]
-
-                if len(entities) >= 2:
-                    for t in self.subtuples(entities):
-                        tuples_ids[t].add(id_)
-                        tuples_type[t] = type_
-
-        sorted_tuples = sorted(tuples_ids, key=lambda k: len(tuples_ids[k]), reverse=True)
-
-        tuples = [Tuple(id_=str(idx + 1), entities=t, type_=tuples_type[t], article_ids=tuples_ids[t])
-                  for idx, t in enumerate(sorted_tuples)]
-
-        self.tuples = tuples
-
     @BaseClass.Verbose("Computing the contexts...")
-    def compute_contexts(self):
-        """ Compute the contexts of the articles for each entity Tuple. """
+    def compute_contexts(self, types):
+        """
+        Compute the contexts of the articles for each Tuple.
+
+        Args:
+            types: set, set of strings, types of the context to compute.
+        """
 
         count, size = 0, len(self.tuples)
-
         for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
             query_ids = set()
 
             for article_id_ in tuple_.article_ids:
-                self.articles[article_id_].compute_contexts(entities=tuple_.entities, type_='neigh_sent')
+                self.articles[article_id_].compute_contexts(tuple_=tuple_, types=types)
 
                 query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
-                                  for context_id_ in self.articles[article_id_].contexts[tuple_.entities]})
+                                  for context_id_ in self.articles[article_id_].contexts[tuple_.get_name()]})
 
             tuple_.query_ids = query_ids
 
-    @BaseClass.Verbose("Computing the wikipedia information...")
-    def compute_wikipedia(self):
-        """ Compute the wikipedia information about the entities from self.tuples. """
+    @BaseClass.Verbose("Computing the Wikipedia information...")
+    def compute_wikipedia(self, load):
+        """
+        Compute the wikipedia information about the entities from self.tuples.
 
-        wikipedia, not_wikipedia, ambiguous = dict(), dict(), dict()
+        Args:
+            load: bool, if True, load an existing file.
+        """
+
+        wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
+
         count, size = 0, len(self.tuples)
-
         for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
             for entity in tuple_.entities:
-                if entity not in wikipedia and entity not in not_wikipedia:
+                if entity.wiki is None:
+                    if not load:
+                        wiki = entity.get_wiki()
 
-                    raw_entities = self.get_raw_entities(entity, tuple_.article_ids, tuple_.type_)
+                        if wiki.info is not None:
+                            wikipedia['found'][entity.name] = wiki
+                        else:
+                            wikipedia['not_found'].add(entity.name)
 
-                    if len(raw_entities) > 1:
-                        self.print("Ambiguous case, first one chosen: {}".format(self.to_string(raw_entities)))
-                        ambiguous[entity] = raw_entities
-
-                    raw_entity = raw_entities[0]
-                    p, exact = self.wikipedia_page(entity, raw_entity, tuple_.type_)
-
-                    if p:
-                        wikipedia[entity] = {'summary': p.summary, 'url': p.url, 'exact': exact}
                     else:
-                        not_wikipedia[entity] = raw_entity
+                        if entity.name in wikipedia['found']:
+                            wiki = wikipedia['found'][entity.name]
+                        elif entity.name in wikipedia['not_found']:
+                            wiki = Wikipedia(None, None)
+                        else:
+                            wiki = None
+                            print("The entity ({}) is not in the loaded wikipedia file.".format(str(entity)))
+
+                    entity.wiki = wiki
 
         self.wikipedia = wikipedia
-        self.not_wikipedia = not_wikipedia
-        self.ambiguous = ambiguous
 
-    @BaseClass.Verbose("Computing the aggregation queries...")
+    @BaseClass.Verbose("Computing the Queries...")
     def compute_queries(self):
-        """ Compute the aggregation Queries of the database. """
+        """ Compute the Queries of the database. """
 
         queries = dict()
-        count, size = 0, len(self.tuples)
 
+        count, size = 0, len(self.tuples)
         for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            info = self.get_info(tuple_.entities)
-
             for article_id_ in tuple_.article_ids:
+                article_contexts = self.articles[article_id_].contexts[tuple_.get_name()]
 
-                query_id_ = tuple_.id_ + '_' + article_id_
-                if query_id_ not in queries:
-                    queries[query_id_] = Query(id_=query_id_,
-                                               entities=tuple_.entities,
-                                               title=self.articles[article_id_].title,
-                                               date=self.articles[article_id_].date,
-                                               abstract='',
-                                               info=info,
-                                               context=self.articles[article_id_].abstract,
-                                               is_abstract=True)
-
-                article_contexts = self.articles[article_id_].contexts[tuple_.entities]
                 for context_id_ in article_contexts:
-
-                    # query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
-                    # queries[query_id_] = Query(id_=query_id_,
-                    #                            entities=tuple_.entities,
-                    #                            title=self.articles[article_id_].title,
-                    #                            date=self.articles[article_id_].date,
-                    #                            abstract=self.articles[article_id_].abstract,
-                    #                            info=info,
-                    #                            context=article_contexts[context_id_],
-                    #                            is_abstract=False)
-
                     query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
                     queries[query_id_] = Query(id_=query_id_,
-                                               entities=tuple_.entities,
-                                               title=self.articles[article_id_].title,
-                                               date=self.articles[article_id_].date,
-                                               abstract='',
-                                               info=info,
-                                               context=article_contexts[context_id_],
-                                               is_abstract=False)
+                                               tuple_=tuple_,
+                                               article=self.articles[article_id_],
+                                               context=article_contexts[context_id_])
 
         self.queries = queries
 
     # endregion
 
-    # region Methods get_
-
-    def get_raw_entities(self, entity, article_ids, type_):
-        """
-        Return the raw entities of the entity from the articles ids.
-
-        Args:
-            entity: str, entity to analyse.
-            article_ids: set, ids of the articles to scan.
-            type_: str, type of the entity.
-
-        Returns:
-            list, raw entities of the entity.
-        """
-
-        raw_entities = sorted(set([self.articles[id_].raw_entities[entity]
-                                   for id_ in article_ids if self.articles[id_].raw_entities[entity]]),
-                              key=len,
-                              reverse=True)
-
-        standardized = getattr(self, 'standardize_' + type_)(entity)
-        if len(raw_entities) > 1 and standardized in raw_entities:
-            raw_entities.remove(standardized)
-
-        if len(raw_entities) > 1 and all([raw_entities[i] in raw_entities[0] for i in range(1, len(raw_entities))]):
-            raw_entities = [raw_entities[0]]
-
-        return raw_entities
-
-    def get_info(self, entities):
-        """
-        Compute the wikipedia info of the entities.
-
-        Args:
-            entities: tuple, entities mentioned in the article.
-
-        Returns:
-            dict, wikipedia info of the tuple.
-        """
-
-        info = dict()
-
-        for entity in entities:
-            if entity in self.wikipedia:
-                summary = self.wikipedia[entity]['summary']
-                url = self.wikipedia[entity]['url']
-                exact = self.wikipedia[entity]['exact']
-
-                paragraph = summary.split('\n')[0]
-                if len(paragraph) > self.info_length:
-                    sentences = sent_tokenize(paragraph)[0]
-
-                    for sentence in sent_tokenize(paragraph)[1:]:
-                        if len(sentences + sentence) <= self.info_length:
-                            sentences += ' ' + sentence
-                        else:
-                            break
-
-                    paragraph = sentences
-
-                paragraph = sub(r'\([^)]*\)', '', paragraph).replace('  ', ' ')
-                paragraph = paragraph.encode("utf-8", errors="ignore").decode()
-                paragraph = '(related article) ' + paragraph if not exact else paragraph
-
-                info[entity] = {'paragraph': paragraph, 'url': url}
-
-            else:
-                info[entity] = {}
-
-        return info
-
-    # endregion
-
     # region Methods criterion_
 
-    def criterion_article_ids(self, id_):
+    @staticmethod
+    def criterion_article_ids(id_, param):
         """
         Check if an article does not belong to the article ids attribute.
 
         Args:
             id_: string, id of the article to analyze.
+            param: set, ids of the articles to keep.
 
         Returns:
             bool, True iff the article does not belong to the article ids.
         """
 
-        return True if id_ not in self.article_ids else False
+        return True if id_ not in param else False
 
     # endregion
 
     # region Statistics methods
+    # TODO: change all the functions
 
     def compute_stats_tuples(self):
         """ Compute the entities tuples statistics of the database. """
@@ -645,7 +493,7 @@ class Database(BaseClass):
         m = max([len(tuple_.article_ids) for tuple_ in self.tuples])
 
         threshold_ids = [set() for _ in range(m + 1)]
-        threshold_ids[0].update(self.article_ids)
+        threshold_ids[0].update(set(self.articles.keys()))
 
         for tuple_ in self.tuples:
             for threshold in range(1, len(tuple_.article_ids) + 1):
@@ -772,12 +620,13 @@ class Database(BaseClass):
 
     @BaseClass.Verbose("Cleaning the database...")
     @BaseClass.Attribute('articles')
-    def clean(self, criterion):
+    def clean(self, criterion, param=None):
         """
         Removes from the database the articles which meets the Article's or Database's criterion.
 
         Args:
             criterion: function, method from Article or Database, criterion that an article must meet to be removed.
+            param: unk, optional parameter to include in the filter.
         """
 
         self.print("Criterion: {}".format([line for line in criterion.__doc__.splitlines() if line][0][8:]))
@@ -785,21 +634,27 @@ class Database(BaseClass):
 
         if criterion.__module__.split('.')[-1] == 'article':
             for id_ in self.articles:
-                if criterion(self.articles[id_]):
-                    to_del.append(id_)
+                if param is not None:
+                    if criterion(self.articles[id_], param):
+                        to_del.append(id_)
+                else:
+                    if criterion(self.articles[id_]):
+                        to_del.append(id_)
 
         elif criterion.__module__.split('.')[-1] in ['__main__', 'database']:
             for id_ in self.articles:
-                if criterion(self, id_):
-                    to_del.append(id_)
+                if param is not None:
+                    if criterion(id_, param):
+                        to_del.append(id_)
+                else:
+                    if criterion(id_):
+                        to_del.append(id_)
 
         else:
             raise Exception("Wrong criterion module: {}".format(criterion.__module__))
 
         for id_ in to_del:
             del self.articles[id_]
-
-        self.article_ids = set(self.articles.keys())
 
     def progression(self, count, modulo, size, text):
         """
@@ -839,6 +694,31 @@ class Database(BaseClass):
         paths.sort()
 
         return paths[:limit] if limit else paths
+
+    @staticmethod
+    def subtuples(l):
+        """
+        Compute all the possible sorted subtuples of len > 1 from a list.
+
+        Args:
+            l: list, original list.
+
+        Returns:
+            set, all the possible subtuples of len > 1 of l.
+        """
+
+        if len(l) < 2:
+            return set()
+
+        elif len(l) == 2 or len(l) > 10:
+            return {tuple(sorted(l))}
+
+        else:
+            res = {tuple(sorted(l))}
+            for x in l:
+                res = res.union(Database.subtuples([y for y in l if y != x]))
+
+            return res
 
     @staticmethod
     def plot_hist(fig, data, title, xlabel, log=False):
@@ -895,7 +775,7 @@ class Database(BaseClass):
                 self.print("Object saved at {}.".format(file_name))
 
         except PicklingError:
-            print("Could not save (PicklingError.")
+            print("Could not save (PicklingError).")
 
     def load(self, attribute_name=None, file_name=None, folder_name='queries'):
         """
@@ -925,26 +805,6 @@ class Database(BaseClass):
         else:
             self.print("Object loaded from {}".format(file_name))
             return obj
-
-    def pop_file(self, file_name=None, folder_name='queries'):
-        """
-        Remove and returns a pickle file.
-
-        Args:
-            file_name: str, name of the file to delete.
-            folder_name: str, name of the folder of the file to delete.
-        """
-
-        prefix, suffix = self.prefix_suffix()
-        file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
-
-        with open(file_name, 'rb') as f:
-            obj = load(f)
-
-        os_remove(file_name)
-
-        self.print("Object loaded from {} and file deleted.".format(file_name))
-        return obj
 
     def save_csv(self, attribute_name=None, folder_name='queries', limit=None):
         """
@@ -1000,98 +860,24 @@ class Database(BaseClass):
 
         return prefix, suffix
 
-    def wikipedia_page(self, entity, raw_entity, type_):
-        """
-        Compute the wikipedia page of the entity, or None is none found.
-
-        Args:
-            entity: str, standardized entity to look for.
-            raw_entity: str, original entity to look for.
-            type_: str, type of the entity, must be 'location', 'person' or organization'.
-
-        Returns:
-            p: wikipedia.page, page of the entity.
-            exact: bool, whether the page corresponds to the entity or is only related.
-        """
-
-        try:
-            p, exact = page(entity), True
-            return p, exact
-
-        except DisambiguationError:
-            pass
-        except PageError:
-            pass
-
-        for s in search(raw_entity)[0:5]:
-            try:
-                p = page(s)
-                for e in [entity, raw_entity]:
-                    if self.match(e, p.title, type_, flexible=False):
-                        exact = True
-                        return p, exact
-                    elif e in p.summary:
-                        exact = False
-                        return p, exact
-
-            except DisambiguationError:
-                pass
-            except PageError:
-                pass
-
-        return None, None
-
     # endregion
 
 
-# region Annotation task
-n_queries = 10
-project_root = ''
-max_size = 10000
-min_articles = 1
-min_queries = 1
+def main():
+    max_size = 10000
+    min_articles = 1
+    min_queries = 1
 
+    database = Database(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
 
-def create_queries():
-    """ Run the pipeline for the creation of a queries file for the database. """
-
-    database = Database(max_size=max_size, project_root=project_root,
-                        min_articles=min_articles, min_queries=min_queries)
     database.preprocess_database()
     database.filter(min_articles=min_articles)
+
     database.preprocess_articles()
     database.filter(min_queries=min_queries)
+
     database.process_wikipedia(load=False)
     database.process_queries(load=False)
-
-
-def instructions():
-    """ Show the instructions of the task. """
-
-    with open(project_root + 'results/instructions.txt', 'r') as f:
-        for line in f:
-            print(fill(line, BaseClass.text_width))
-
-
-def annotation_task():
-    """ Run the annotation task. """
-
-    database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
-                        min_queries=min_queries, verbose=False)
-    database.process_queries(load=True)
-    database.ask(n_queries)
-
-
-def gather_answers():
-    """ Gather the answers file. """
-
-    database = Database(max_size=max_size, project_root=project_root, min_articles=min_articles,
-                        min_queries=min_queries)
-    database.gather()
-# endregion
-
-
-def main():
     return
 
 
