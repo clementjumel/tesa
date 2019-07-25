@@ -56,8 +56,7 @@ class Article(BaseClass):
         """ Compute the annotations (sentences, coreferences) of the article. """
 
         if self.entities is None:
-            root = ElementTree.parse(self.original_path).getroot()
-            self.entities = self.get_entities(root)
+            self.entities = self.get_entities()
 
         root = ElementTree.parse(self.annotated_path).getroot()
 
@@ -149,17 +148,15 @@ class Article(BaseClass):
 
         return abstract
 
-    @staticmethod
-    def get_entities(root):
+    def get_entities(self):
         """
         Returns the Entities of the article given the tree of its metadata.
-
-        Args:
-            root: ElementTree.root, root of the metadata of the article.
 
         Returns:
             set, Entities of the article.
         """
+
+        root = ElementTree.parse(self.original_path).getroot()
 
         locations = [Entity(entity.text, 'location')
                      for entity in root.findall('./head/docdata/identified-content/location')]
@@ -304,11 +301,15 @@ class Article(BaseClass):
         for idxs in contexts_sentences:
             entity_coreferences = {}
             for idx in idxs:
-                entity_coreferences[idx] = {
-                    entity.name: [c for c in self.coreferences
-                                  if c.entity and idx in c.sentences and entity.match(c.entity)]
-                    for entity in tuple_.entities
-                }
+                correspondences = []
+
+                for entity in tuple_.entities:
+                    correspondence = [coreference for coreference in self.coreferences if idx in coreference.sentences
+                                      and coreference.entity and coreference.entity == entity.name]
+
+                    correspondences.append(tuple([entity, correspondence]))
+
+                entity_coreferences[idx] = correspondences
 
             id_ = str(idxs[0]) + '_' + str(idxs[-1])
             contexts[id_] = Context(sentences={idx: deepcopy(self.sentences[idx]) for idx in idxs},
@@ -316,6 +317,7 @@ class Article(BaseClass):
 
         return contexts
 
+    # TODO: put in bold the entities in the abstract
     def contexts_abstract(self, tuple_):
         """
         Returns the abstract contexts for a Tuple (abstract if the entities are mentioned).
@@ -349,7 +351,7 @@ def main():
     article.compute_metadata()
     article.compute_annotations()
     article.compute_contexts(tuple_=Tuple(id_='0', entities=tuple(article.entities)),
-                             type_='neigh_sent')
+                             types=['abstract', 'neigh_sent'])
 
     print(article)
     return
