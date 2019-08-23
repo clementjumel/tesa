@@ -9,7 +9,6 @@ from wikipedia import search, page, PageError, DisambiguationError
 class BaseClass:
     # region Class base methods
 
-    verbose = True
     to_print, print_attribute, print_lines, print_offsets = None, None, None, None
     text_width = 100
 
@@ -32,17 +31,6 @@ class BaseClass:
 
         return string
 
-    def print(self, string):
-        """
-        Alternative to the builtin method to take into account self.verbose.
-
-        Args:
-            string: str, message to print.
-        """
-
-        if self.verbose:
-            print(string)
-
     @classmethod
     def get_parameters(cls):
         """
@@ -56,34 +44,6 @@ class BaseClass:
         """
 
         return cls.to_print, cls.print_attribute, cls.print_lines, cls.print_offsets
-
-    @classmethod
-    def set_parameters(cls, to_print=None, print_attribute=None, print_lines=None, print_offsets=None):
-        """
-        Changes the print attributes of the class.
-
-        Args:
-            to_print: list, attributes to print; if [], print all the attributes.
-            print_attribute: bool, whether or not to print the attributes' names.
-            print_lines: int, whether or not to print line breaks (and how many).
-            print_offsets: int, whether or not to print an offset (and how many).
-        """
-
-        cls.to_print = to_print if to_print is not None else cls.to_print
-        cls.print_attribute = print_attribute if print_attribute is not None else cls.print_attribute
-        cls.print_lines = print_lines if print_lines is not None else cls.print_lines
-        cls.print_offsets = print_offsets if print_offsets is not None else cls.print_offsets
-
-    @classmethod
-    def set_verbose(cls, verbose):
-        """
-        Changes the verbose attribute of the class.
-
-        Args:
-            verbose: bool, new verbose value.
-        """
-
-        cls.verbose = verbose
 
     @staticmethod
     def to_string(item):
@@ -207,16 +167,11 @@ class BaseClass:
             def f(*args, **kwargs):
                 """ Decorated function. """
 
-                slf = args[0]
                 t0 = time()
 
-                if slf.verbose:
-                    print('\n' + self.message)
-
+                print(self.message)
                 func(*args, **kwargs)
-
-                if slf.verbose:
-                    print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
+                print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
 
             return f
 
@@ -236,17 +191,15 @@ class BaseClass:
 
                 slf = args[0]
 
-                if slf.verbose:
-                    attribute = getattr(slf, self.attribute)
-                    if attribute is not None:
-                        print("Initial length of {}: {}".format(self.attribute, len(attribute)))
+                attribute = getattr(slf, self.attribute)
+                length = len(attribute) if attribute is not None else 0
+                print("Initial length of {}: {}".format(self.attribute, length))
 
                 func(*args, **kwargs)
 
-                if slf.verbose:
-                    attribute = getattr(slf, self.attribute)
-                    if attribute is not None:
-                        print("Final length of {}: {}".format(self.attribute, len(attribute)))
+                attribute = getattr(slf, self.attribute)
+                length = len(attribute) if attribute is not None else 0
+                print("Final length of {}: {}".format(self.attribute, length))
 
             return f
 
@@ -292,28 +245,20 @@ class Mention:
 class Context:
     # region Class base methods
 
-    def __init__(self, sentences=None, entity_coreferences=None, abstract=None):
+    def __init__(self, sentences=None, entity_coreferences=None, type_=None):
         """
         Initializes the Context instance.
 
         Args:
             sentences: dict, the context's sentences (deep copy of the article's sentences), mapped by their indexes.
             entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
-            abstract: str, abstract of an article.
+            type_: str, type_ of the context.
         """
 
-        if abstract is None:
-            assert sentences is not None and entity_coreferences is not None
+        self.sentences = sentences
+        self.type_ = type_
 
-            self.sentences = sentences
-            self.abstract = None
-            self.enhance_entities(entity_coreferences)
-
-        else:
-            assert sentences is None and entity_coreferences is None
-
-            self.sentences = None
-            self.abstract = abstract
+        self.highlight(entity_coreferences)
 
     def __str__(self):
         """
@@ -323,13 +268,11 @@ class Context:
             str, readable format of the instance.
         """
 
-        if self.abstract is None:
-            string = '[...] ' if list(self.sentences.keys())[0] != 1 else ''
-            string += ' '.join([self.sentences[id_].text for id_ in self.sentences])
-            string += ' [...]'
+        string = ''
 
-        else:
-            string = self.abstract
+        string += '[...] ' if self.type_ == 'content' and list(self.sentences.keys())[0] != 1 else ''
+        string += BaseClass.to_string(self.sentences)
+        string += ' [...]' if self.type_ == 'content' else ''
 
         return string
 
@@ -337,9 +280,10 @@ class Context:
 
     # region Other methods
 
-    def enhance_entities(self, entity_coreferences):
+    # TODO: add order, change for Text, remove possibility of several []
+    def highlight(self, entity_coreferences):
         """
-        Enhance the entities mentioned in the context.
+        Enhance the entities mentioned in the sentences context.
 
         Args:
             entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
@@ -358,16 +302,6 @@ class Context:
                             self.sentences[idx].tokens[mention.end - 1].word += '</strong>'
 
             self.sentences[idx].compute_text()
-
-    def get_type(self):
-        """
-        Returns the type of the Context.
-
-        Returns:
-            str, type of the Context.
-        """
-
-        return 'abstract' if self.abstract is not None else 'context'
 
     # endregion
 
@@ -792,7 +726,7 @@ class Query:
         self.date = article.date
 
         self.context = str(context)
-        self.type_ = context.get_type()
+        self.type_ = context.type_
 
         self.html_entities = self.get_html_entities()
         self.html_info = self.get_html_info()
