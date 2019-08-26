@@ -26,6 +26,10 @@ class Token(BaseClass):
         self.pos = None
         self.ner = None
 
+        self.start_tag = None
+        self.end_tag = None
+        self.entity = None
+
         self.compute_annotations(token_element)
 
     def __str__(self):
@@ -93,7 +97,7 @@ class Token(BaseClass):
 def main():
     from xml.etree import ElementTree
 
-    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml')
     root = tree.getroot()
 
     tokens = [Token(token_element) for token_element in root.find('./document/sentences/sentence/tokens')]
