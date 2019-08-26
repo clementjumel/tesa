@@ -88,7 +88,9 @@ def main():
     coreferences = [Coreference(coreference_element, entities) for coreference_element
                     in root.findall('./document/coreference/coreference')]
 
-    print(Coreference.to_string(coreferences))
+    for coreference in coreferences:
+        if coreference.entity is not None:
+            print(Coreference.to_string(coreference))
     return
 
 
