@@ -7,10 +7,7 @@ min_queries = 1
 database = Database(max_size=max_size, min_articles=min_articles, min_queries=min_queries)
 
 database.preprocess_database()
-database.filter(min_articles=min_articles)
-
-database.preprocess_articles()
-database.filter(min_queries=min_queries)
+database.process_articles()
 
 database.process_wikipedia(load=False)
 database.process_queries(load=False)
