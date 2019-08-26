@@ -71,7 +71,6 @@ class Article(BaseClass):
 
         contexts = dict()
 
-        # TODO: change
         contexts.update(self.content.contexts_neigh_sent(tuple_=tuple_, type_='content'))
         contexts.update(self.summary.contexts_all_sent(tuple_=tuple_, type_='summary'))
 
@@ -106,7 +105,9 @@ class Article(BaseClass):
             str, title of the article.
         """
 
-        return root.find('./head/title').text
+        element = root.find('./head/title')
+
+        return element.text if element is not None else 'No title.'
 
     @staticmethod
     def get_date(root):
