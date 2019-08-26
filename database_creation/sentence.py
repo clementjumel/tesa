@@ -59,7 +59,7 @@ class Sentence(BaseClass):
 def main():
     from xml.etree import ElementTree
 
-    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml')
     root = tree.getroot()
 
     sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
