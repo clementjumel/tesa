@@ -79,11 +79,11 @@ def main():
     from database_creation.utils import Entity
     from xml.etree import ElementTree
 
-    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2000content_annotated/1165027.txt.xml')
+    tree = ElementTree.parse('../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml')
     root = tree.getroot()
 
-    entities = {Entity(original_name='Joyce, James', type_='person'),
-                Entity(original_name='Bernstein, Richard', type_='person')}
+    entities = {Entity(original_name='Babel, Isaac', type_='person'),
+                Entity(original_name='Campbell, James', type_='person')}
 
     coreferences = [Coreference(coreference_element, entities) for coreference_element
                     in root.findall('./document/coreference/coreference')]
