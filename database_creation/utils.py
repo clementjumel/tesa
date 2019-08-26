@@ -245,20 +245,17 @@ class Mention:
 class Context:
     # region Class base methods
 
-    def __init__(self, sentences=None, entity_coreferences=None, type_=None):
+    def __init__(self, sentences=None, type_=None):
         """
         Initializes the Context instance.
 
         Args:
             sentences: dict, the context's sentences (deep copy of the article's sentences), mapped by their indexes.
-            entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
             type_: str, type_ of the context.
         """
 
         self.sentences = sentences
         self.type_ = type_
-
-        self.highlight(entity_coreferences)
 
     def __str__(self):
         """
@@ -275,33 +272,6 @@ class Context:
         string += ' [...]' if self.type_ == 'content' else ''
 
         return string
-
-    # endregion
-
-    # region Other methods
-
-    # TODO: add order, change for Text, remove possibility of several []
-    def highlight(self, entity_coreferences):
-        """
-        Enhance the entities mentioned in the sentences context.
-
-        Args:
-            entity_coreferences: dict, coreferences mapped by the indexes and then the entities.
-        """
-
-        for idx in entity_coreferences:
-            for entity, correspondence in entity_coreferences[idx]:
-                for coreference in correspondence:
-                    for mention in [coreference.representative] + coreference.mentions:
-                        if mention.sentence == idx:
-                            if not entity.match(mention.text):
-                                self.sentences[idx].tokens[mention.end - 1].word += ' [' + str(entity) + ']'
-
-                            self.sentences[idx].tokens[mention.start].word = \
-                                '<strong>' + self.sentences[idx].tokens[mention.start].word
-                            self.sentences[idx].tokens[mention.end - 1].word += '</strong>'
-
-            self.sentences[idx].compute_text()
 
     # endregion
 
@@ -344,7 +314,6 @@ class Entity:
 
     # region Methods compute_
 
-    # TODO: deal with City (NYC)
     def compute_name(self):
         """ Compute the name and possibly the plausible names and the extra info of the entity. """
 
@@ -399,6 +368,10 @@ class Entity:
             if in_parenthesis:
                 info = ', '.join(in_parenthesis)
                 plausible_names.add(name + ', ' + info)
+
+            split = name.split()
+            if len(split) > 1 and split[-1].lower() == 'city':
+                plausible_names.add(' '.join(split[:-1]))
 
         elif self.type_ == 'org':
             split = before_parenthesis.split()
@@ -521,7 +494,6 @@ class Entity:
 
         return False
 
-    # TODO: add check with the extra_info
     def match_page(self, query):
         """
         Check if the entity matches the Wikipedia page found with a query and if the match is exact or if the page is
