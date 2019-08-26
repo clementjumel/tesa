@@ -170,7 +170,7 @@ class Text(BaseClass):
                         if not entity.match(string=mention.text, flexible=True):
                             sentences[mention.sentence].tokens[mention.end - 1].entity = entity.name
 
-        for _, sentence in sentences:
+        for _, sentence in sentences.items():
             sentence.compute_text()
 
     # endregion
