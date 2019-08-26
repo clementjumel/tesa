@@ -15,7 +15,7 @@ class Database(BaseClass):
     # region Class initialization
 
     to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
-    modulo_articles, modulo_tuples, modulo_entities = 1000, 500, 1000
+    modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
     def __init__(self, years=(2006, 2007), max_size=None, project_root='', verbose=True, min_articles=None,
                  min_queries=None):
@@ -330,7 +330,6 @@ class Database(BaseClass):
     # endregion
 
     # region Statistics methods
-    # TODO: change all the functions
 
     def compute_stats_tuples(self):
         """ Compute the entities tuples statistics of the database. """
@@ -346,11 +345,10 @@ class Database(BaseClass):
 
         self.stats = self.stats or dict()
 
-        self.stats['wikipedia_length'] = self.stat_wikipedia_length('wikipedia')
-        self.stats['notwikipedia_length'] = self.stat_wikipedia_length('not_wikipedia')
-        self.stats['ambiguous_length'] = self.stat_wikipedia_length('ambiguous')
-        self.stats['wikipedia_frequencies'] = self.stat_wikipedia_frequencies('wikipedia')
-        self.stats['notwikipedia_frequencies'] = self.stat_wikipedia_frequencies('not_wikipedia')
+        self.stats['wikipedia_length'] = self.stat_wikipedia_length('found')
+        self.stats['notwikipedia_length'] = self.stat_wikipedia_length('not_found')
+        self.stats['wikipedia_frequencies'] = self.stat_wikipedia_frequencies('found')
+        self.stats['notwikipedia_frequencies'] = self.stat_wikipedia_frequencies('not_found')
 
     def compute_stats_contexts(self):
         """ Compute the contexts statistics of the database. """
@@ -411,38 +409,39 @@ class Database(BaseClass):
 
         return histogram(data, bins=bins, range=range_)
 
-    def stat_wikipedia_length(self, file):
+    def stat_wikipedia_length(self, dictionary):
         """
-        Compute the number of entries in the file.
+        Compute the number of entries in the corresponding dict of wikipedia.
 
         Args:
-            file: str, file to analyse, must be 'wikipedia', 'not_wikipedia' or 'ambiguous'.
+            dictionary: str, name of the dict, must be  'found' or 'not_found'.
 
         Returns:
-            int, number of entries in the file.
+            int, number of entries in the dict.
         """
 
-        file = getattr(self, file)
+        d = self.wikipedia[dictionary]
 
-        if file is not None:
-            return len(file)
+        if d is not None:
+            return len(d)
         else:
             return 0
 
-    def stat_wikipedia_frequencies(self, file):
+    def stat_wikipedia_frequencies(self, dictionary):
         """
-        Compute the histogram of the frequencies of the tuples where appear the entities from file as a numpy.histogram.
+        Compute the histogram of the frequencies of the tuples where appear the entities from the corresponing dict
+         as a numpy.histogram.
 
         Args:
-            file: str, file to analyse, must be 'wikipedia', 'not_wikipedia' or 'ambiguous'.
+            dictionary: str, name of the dict, must be  'found' or 'not_found'.
 
         Returns:
             numpy.histogram, histogram of the frequencies of the entities tuples, starting from 0.
         """
 
-        file = getattr(self, file)
+        d = self.wikipedia[dictionary]
 
-        data = [len(tuple_.article_ids) for tuple_ in self.tuples for entity in tuple_.entities if entity in file]
+        data = [len(tuple_.article_ids) for tuple_ in self.tuples for entity in tuple_.entities if entity.name in d]
         bins = max(data) + 1
         range_ = (0, max(data) + 1)
 
@@ -496,22 +495,20 @@ class Database(BaseClass):
     def display_stats_wikipedia(self):
         """ Display the wikipedia statistics of the database. """
 
-        print("\nTotal number of wikipedia: {}/not_wikipedia: {}/ambiguous: {}"
+        print("\nTotal number of wikipedia: {}/not_wikipedia: {}"
               .format(self.stats['wikipedia_length'],
-                      self.stats['notwikipedia_length'],
-                      self.stats['ambiguous_length']))
+                      self.stats['notwikipedia_length']))
 
         print("\nWikipedia info of 10 most frequent tuples:\n")
         for tuple_ in self.tuples[:10]:
-            print(self.to_string(self.get_info(tuple_.entities)) + '\n')
+            for entity in tuple_.entities:
+                print(entity.name, '; ', entity.wiki)
+            print()
 
         print("\nEntities not found in wikipedia:")
-        for entity in self.not_wikipedia:
-            print(entity + ' (' + self.not_wikipedia[entity] + ')')
+        for entity in self.wikipedia['not_found']:
+            print(entity)
 
-        print("\nAmbiguous cases:")
-        for entity in self.ambiguous:
-            print(self.to_string(self.ambiguous[entity]) + ' (' + entity + ')')
         print()
 
         self.plot_hist(fig=4, data=self.stats['wikipedia_frequencies'], xlabel='frequencies', log=True,
@@ -806,7 +803,7 @@ class Database(BaseClass):
         count += 1
 
         if count % modulo == 0:
-            print("  " + text + " {}/{}...".format(count, size))
+            print("   " + text + " {}/{}...".format(count, size))
 
         return count
 
@@ -886,8 +883,8 @@ def main():
     database.preprocess_database()
     database.process_articles()
 
-    database.process_wikipedia(load=True)
-    database.process_queries(load=True)
+    database.process_wikipedia(load=False)
+    database.process_queries(load=False)
     return
 
 
