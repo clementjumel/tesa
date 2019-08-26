@@ -2,12 +2,14 @@ from database_creation.utils import BaseClass, Context
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
-from collections import defaultdict
 from copy import deepcopy
 
 
 class Text(BaseClass):
     # region Class initialization
+
+    to_print = ['sentences']
+    print_attribute, print_lines, print_offsets = False, 1, 0
 
     def __init__(self, root, entities):
         """
@@ -83,108 +85,111 @@ class Text(BaseClass):
 
     # region Methods contexts_
 
-    # TODO: change
     def contexts_neigh_sent(self, tuple_, type_):
         """
-        Returns the neighboring-sentences contexts for a Tuple (neighboring sentences where the entities are mentioned).
+        Returns the neighboring-sentences Contexts for a Tuple (neighboring sentences where the entities are mentioned).
 
         Args:
             tuple_: Tuple, entities to analyse.
-            type_: str, type of the Context.
+            type_: str, type of the Text used for the Context.
 
         Returns:
-            dict, neighbouring-sentences Contexts of the entities, mapped with their sentences span (indexes of the
-            first and last sentences separated by '_').
+            dict, Contexts mapped with the indexes of the first and last sentences separated by '_'.
         """
 
-        sentences_entities = defaultdict(set)
+        contexts, context_length = {}, len(tuple_.entities)
 
-        for i in range(len(tuple_.entities)):
-            for idx in self.get_entity_sentences(tuple_.entities[i]):
-                sentences_entities[idx].add(i)
+        # Mapping between the name of the entities and the indexes of the mentions' sentences
+        entities_sentences = dict([(str(entity), self.get_entity_sentences(entity)) for entity in tuple_.entities])
+        all_entities_sentences = set([idx for _, sentences in entities_sentences.items() for idx in sentences])
 
-        contexts_sentences = set()
+        for start_idx in all_entities_sentences:
+            seen = set()
 
-        for idx in sentences_entities:
-            unseens = list(range(len(tuple_.entities)))
-            seers = set()
+            for idx in range(start_idx, start_idx + context_length):
+                seen.update([name for name, sentences in entities_sentences.items() if idx in sentences])
 
-            for i in range(len(tuple_.entities)):
-                if idx + i in sentences_entities:
-                    for j in sentences_entities[idx + i]:
-                        try:
-                            unseens.remove(j)
-                            seers.add(idx + i)
-                        except ValueError:
-                            pass
+                if len(seen) == context_length:
+                    sentences = {i: deepcopy(self.sentences[i]) for i in range(start_idx, idx)}
+                    self.highlight(sentences=sentences, tuple_=tuple_)
 
-                    if not unseens:
-                        seers = sorted(seers)
-                        contexts_sentences.add(tuple(range(seers[0], seers[-1] + 1)))
-                        break
-
-        contexts_sentences = sorted(contexts_sentences)
-        contexts = dict()
-
-        for idxs in contexts_sentences:
-            entity_coreferences = {}
-            for idx in idxs:
-                correspondences = []
-
-                for entity in tuple_.entities:
-                    correspondence = [coreference for coreference in self.coreferences if idx in coreference.sentences
-                                      and coreference.entity and coreference.entity == entity.name]
-
-                    correspondences.append(tuple([entity, correspondence]))
-
-                entity_coreferences[idx] = correspondences
-
-            id_ = str(idxs[0]) + '_' + str(idxs[-1])
-            contexts[id_] = Context(sentences={idx: deepcopy(self.sentences[idx]) for idx in idxs},
-                                    entity_coreferences=entity_coreferences,
-                                    type_=type_)
+                    id_ = str(start_idx) + '_' + str(idx)
+                    contexts[id_] = Context(sentences=sentences, type_=type_)
+                    break
 
         return contexts
 
-    # TODO: change
     def contexts_all_sent(self, tuple_, type_):
         """
-        Returns the all-sentences contexts for a Tuple (neighboring sentences where the entities are mentioned).
+        Returns the all-sentences Contexts for a Tuple (all the sentences if all the entities are mentioned).
 
         Args:
             tuple_: Tuple, entities to analyse.
-            type_: str, type of the Context.
+            type_: type of the Text used for the Context.
 
         Returns:
-            dict, all-sentences Contexts of the entities, mapped with '0'.
+            dict, Contexts mapped with the index '0'.
         """
 
-        for entity in tuple_.entities:
-            if not self.get_entity_sentences(entity):
-                return dict()
+        contexts, context_length = {}, len(tuple_.entities)
 
-        contexts_sentences = {tuple(range(list(self.sentences.keys())[0], list(self.sentences.keys())[-1] + 1))}
-        contexts = dict()
+        # Mapping between the name of the entities and the existence of a mention about it
+        entities_sentences = dict([(str(entity), 1 if self.get_entity_sentences(entity) else 0)
+                                   for entity in tuple_.entities])
 
-        for idxs in contexts_sentences:
-            entity_coreferences = {}
-            for idx in idxs:
-                correspondences = []
+        if len(entities_sentences) == context_length:
+            sentences = deepcopy(self.sentences)
+            self.highlight(sentences=sentences, tuple_=tuple_)
 
-                for entity in tuple_.entities:
-                    correspondence = [coreference for coreference in self.coreferences if
-                                      idx in coreference.sentences
-                                      and coreference.entity and coreference.entity == entity.name]
-
-                    correspondences.append(tuple([entity, correspondence]))
-
-                entity_coreferences[idx] = correspondences
-
-            id_ = '0'
-            contexts[id_] = Context(sentences={idx: deepcopy(self.sentences[idx]) for idx in idxs},
-                                    entity_coreferences=entity_coreferences,
-                                    type_=type_)
+            contexts['0'] = Context(sentences=sentences, type_=type_)
 
         return contexts
 
     # endregion
+
+    # region Other methods
+
+    def highlight(self, sentences, tuple_):
+        """
+        Highlight (put in bold) the mentions of the entities of the Tuple in the sentences.
+
+        Args:
+            sentences: dict, sentences to highlight.
+            tuple_: Tuple, entities to analyse.
+        """
+
+        for coreference in self.coreferences:
+            if coreference.entity and coreference.entity in tuple_.get_name():
+                entity = [entity for entity in tuple_.entities if entity.name == coreference.entity][0]
+                for mention in [coreference.representative] + coreference.mentions:
+                    if mention.sentence in sentences:
+
+                        sentences[mention.sentence].tokens[mention.start].start_tag = '<strong>'
+                        sentences[mention.sentence].tokens[mention.end - 1].end_tag = '</strong>'
+
+                        if not entity.match(string=mention.text, flexible=True):
+                            sentences[mention.sentence].tokens[mention.end - 1].entity = entity.name
+
+        for _, sentence in sentences:
+            sentence.compute_text()
+
+    # endregion
+
+
+def main():
+    from database_creation.article import Article
+
+    article = Article('../databases/nyt_jingyun/data/2006/01/01/1728670.xml',
+                      '../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml',
+                      '../databases/nyt_jingyun/summary_annotated/2006summary_annotated/1728670.txt.xml')
+
+    article.compute_entities()
+    article.compute_annotations()
+
+    print(article.content)
+    print(article.summary)
+    return
+
+
+if __name__ == '__main__':
+    main()
