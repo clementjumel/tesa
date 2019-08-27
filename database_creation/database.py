@@ -284,7 +284,6 @@ class Database(BaseClass):
 
             if not load:
                 wiki = entity.get_wiki()
-
                 if wiki.info is not None:
                     wikipedia['found'][name] = wiki
                 else:
@@ -298,6 +297,10 @@ class Database(BaseClass):
                 else:
                     print("The entity ({}) is not in the loaded wikipedia file.".format(str(entity)))
                     wiki = entity.get_wiki()
+                    if wiki.info is not None:
+                        wikipedia['found'][name] = wiki
+                    else:
+                        wikipedia['not_found'].add(name)
 
             entity.wiki = wiki
 
