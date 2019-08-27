@@ -126,6 +126,7 @@ class Database(BaseClass):
         if load:
             self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
             self.compute_wikipedia(load=load)
+            self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
         else:
             self.compute_wikipedia(load=load)
@@ -293,14 +294,12 @@ class Database(BaseClass):
                 if name in wikipedia['found']:
                     wiki = wikipedia['found'][name]
                 elif name in wikipedia['not_found']:
-                    wiki = Wikipedia(None, None)
+                    wiki = Wikipedia()
                 else:
                     print("The entity ({}) is not in the loaded wikipedia file.".format(str(entity)))
                     wiki = entity.get_wiki()
 
             entity.wiki = wiki
-
-        print("Number of entities found/not found: {}/{}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
 
         self.wikipedia = wikipedia
 
@@ -495,7 +494,7 @@ class Database(BaseClass):
     def display_stats_wikipedia(self):
         """ Display the wikipedia statistics of the database. """
 
-        print("\nTotal number of wikipedia: {}/not_wikipedia: {}"
+        print("\nTotal number of wikipedia entries found: {}/not found: {}"
               .format(self.stats['wikipedia_length'],
                       self.stats['notwikipedia_length']))
 
