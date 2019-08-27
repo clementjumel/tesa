@@ -459,7 +459,7 @@ class Database(BaseClass):
         for tuple_ in self.tuples:
             length = 0
             for id_ in tuple_.article_ids:
-                length += len(self.articles[id_].contexts[tuple_.entities])
+                length += len(self.articles[id_].contexts[tuple_.get_name()])
 
             data.append(length)
 
