@@ -133,15 +133,14 @@ class Text(BaseClass):
 
         contexts, context_length = {}, len(tuple_.entities)
 
-        # Mapping between the name of the entities and the existence of a mention about it
-        entities_sentences = dict([(str(entity), 1 if self.get_entity_sentences(entity) else 0)
-                                   for entity in tuple_.entities])
+        for entity in tuple_.entities:
+            if not self.get_entity_sentences(entity):
+                return contexts
 
-        if len(entities_sentences) == context_length:
-            sentences = deepcopy(self.sentences)
-            self.highlight(sentences=sentences, tuple_=tuple_)
+        sentences = deepcopy(self.sentences)
+        self.highlight(sentences=sentences, tuple_=tuple_)
 
-            contexts['0'] = Context(sentences=sentences, type_=type_)
+        contexts['0'] = Context(sentences=sentences, type_=type_)
 
         return contexts
 
