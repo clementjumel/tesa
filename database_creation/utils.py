@@ -267,7 +267,7 @@ class Context:
 
         string = ''
 
-        string += '[...] ' if self.type_ == 'content' and list(self.sentences.keys())[0] != 1 else ''
+        string += '[...] ' if self.type_ == 'content' else ''
         string += BaseClass.to_string(self.sentences)
         string += ' [...]' if self.type_ == 'content' else ''
 
