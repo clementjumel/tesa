@@ -544,13 +544,13 @@ class Wikipedia:
 
     info_length = 600
 
-    def __init__(self, page, exact):
+    def __init__(self, page=None, exact=None):
         """
-        Initializes the Wikipedia instance.
+        Initializes the Wikipedia instance; if the wikipedia entry is not found, the arguments are None.
 
         Args:
             page: wikipedia.page, wikipedia page of the entity; can be None.
-            exact: bool, whether the page corresponds directly to an entity.
+            exact: bool, whether the page corresponds directly to an entity; can be None.
         """
 
         if page is not None:
