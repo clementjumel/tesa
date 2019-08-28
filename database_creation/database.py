@@ -17,14 +17,15 @@ class Database(BaseClass):
     to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
     modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
-    def __init__(self, years=(2006, 2007), max_size=None, project_root='', verbose=True, min_articles=None,
-                 min_queries=None):
+    def __init__(self, years=(2006, 2007), max_size=None, shuffle=False, project_root='', verbose=True,
+                 min_articles=None, min_queries=None):
         """
         Initializes an instance of Database.
 
         Args:
             years: list, years (int) of the database to analyse.
             max_size: int, maximum number of articles in the database; if None, takes all articles.
+            shuffle: bool, whether to shuffle the articles selected in the database.
             project_root: str, relative path to the root of the project.
             verbose: bool, verbose option of the database.
             min_articles: int, minimum number of articles an entities' tuple must be in.
@@ -33,6 +34,7 @@ class Database(BaseClass):
 
         self.years = years
         self.max_size = max_size
+        self.shuffle = shuffle
         self.project_root = project_root
         self.verbose = verbose
         self.min_articles = min_articles
@@ -120,7 +122,7 @@ class Database(BaseClass):
 
         Args:
             load: bool, if True, load an existing file.
-            file_name: str, name of the wikipedia file to load; if None, load the standard files.
+            file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
         """
 
         if load:
@@ -130,7 +132,7 @@ class Database(BaseClass):
 
         else:
             self.compute_wikipedia(load=load)
-            self.save_pkl(attribute_name='wikipedia', folder_name='wikipedia')
+            self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @BaseClass.Verbose("Processing the aggregation queries...")
     def process_queries(self, load=False, file_name=None):
@@ -139,7 +141,7 @@ class Database(BaseClass):
 
         Args:
             load: bool, if True, load an existing file.
-            file_name: str, name of the queries file to load; if None, load the standard file.
+            file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
         """
 
         if load:
@@ -147,8 +149,8 @@ class Database(BaseClass):
 
         else:
             self.compute_queries()
-            self.save_pkl('queries')
-            self.save_csv(attribute_name='queries', limit=200)
+            self.save_pkl(attribute_name='queries', file_name=file_name)
+            self.save_csv(attribute_name='queries', file_name=file_name, limit=200)
 
     @BaseClass.Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -277,33 +279,38 @@ class Database(BaseClass):
         """
 
         wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
+        print("Initial found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
 
-        count, size = 0, len(self.entities)
-        for name, entity in self.entities.items():
-            count = self.progression(count, self.modulo_entities, size, 'entity')
+        try:
+            count, size = 0, len(self.entities)
+            for name, entity in self.entities.items():
+                count = self.progression(count, self.modulo_entities, size, 'entity')
 
-            if not load:
-                wiki = entity.get_wiki()
-                if wiki.info is not None:
-                    wikipedia['found'][name] = wiki
-                else:
-                    wikipedia['not_found'].add(name)
-
-            else:
-                if name in wikipedia['found']:
-                    wiki = wikipedia['found'][name]
-                elif name in wikipedia['not_found']:
-                    wiki = Wikipedia()
-                else:
-                    print("The entity ({}) is not in the loaded wikipedia file.".format(str(entity)))
+                if not load:
                     wiki = entity.get_wiki()
                     if wiki.info is not None:
                         wikipedia['found'][name] = wiki
                     else:
                         wikipedia['not_found'].add(name)
 
-            entity.wiki = wiki
+                else:
+                    if name in wikipedia['found']:
+                        wiki = wikipedia['found'][name]
+                    elif name in wikipedia['not_found']:
+                        wiki = Wikipedia()
+                    else:
+                        wiki = entity.get_wiki()
+                        if wiki.info is not None:
+                            wikipedia['found'][name] = wiki
+                        else:
+                            wikipedia['not_found'].add(name)
 
+                entity.wiki = wiki
+
+        except KeyboardInterrupt:
+            print("Interruption of the wikipedia information computation.")
+
+        print("Final found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
         self.wikipedia = wikipedia
 
     @BaseClass.Verbose("Computing the Queries...")
@@ -681,6 +688,9 @@ class Database(BaseClass):
         else:
             suffix += '_size' + str(self.max_size)
 
+        if self.shuffle:
+            suffix += '_shuffle'
+
         if self.min_articles is not None:
             suffix += '_articles' + str(self.min_articles)
         if self.min_queries is not None:
@@ -705,8 +715,9 @@ class Database(BaseClass):
             raise Exception("Nothing to save, object is None.")
 
         prefix, suffix = self.prefix_suffix()
+
         if file_name is not None:
-            file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
+            file_name = prefix + folder_name + '/' + file_name + '.pkl'
         else:
             if attribute_name is not None:
                 file_name = prefix + folder_name + '/' + attribute_name + suffix + '.pkl'
@@ -736,8 +747,9 @@ class Database(BaseClass):
         """
 
         prefix, suffix = self.prefix_suffix()
+
         if file_name is not None:
-            file_name = prefix + folder_name + '/' + file_name + suffix + '.pkl'
+            file_name = prefix + folder_name + '/' + file_name + '.pkl'
         else:
             if attribute_name is not None:
                 file_name = prefix + folder_name + '/' + attribute_name + suffix + '.pkl'
@@ -754,12 +766,38 @@ class Database(BaseClass):
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def save_csv(self, attribute_name=None, folder_name='queries', limit=None):
+    def combine_pkl(self, in_names, out_name='wikipedia_global'):
+        """
+        Combines the wikipedia files into a single file.
+
+        Args:
+            in_names: list, names of the file to combine.
+            out_name: str, name of the file to write in.
+        """
+
+        out_wikipedia = {'found': dict(), 'not_found': set()}
+
+        for in_name in in_names:
+            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
+
+            print("Current file: {} found/{} not_found...".format(len(in_wikipedia['found']),
+                                                                  len(in_wikipedia['not_found'])))
+
+            for type_ in ['found', 'not_found']:
+                out_wikipedia[type_].update(in_wikipedia[type_])
+
+            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
+                                                                         len(out_wikipedia['not_found'])))
+
+        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
+
+    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
 
         Args:
             attribute_name: str, name of the attribute to save.
+            file_name: str, name of the file; if None, save an attribute with the standard name.
             folder_name: str, name of the folder to save in.
             limit: int, maximum number of data to save; if None, save all of them.
         """
@@ -776,8 +814,12 @@ class Database(BaseClass):
         df = DataFrame.from_records(data=data)
 
         prefix, suffix = self.prefix_suffix()
-        file_name = attribute_name if limit is None else attribute_name + '_short'
-        file_name = prefix + folder_name + '/' + file_name + suffix + '.csv'
+
+        if file_name is not None:
+            file_name = prefix + folder_name + '/' + file_name + '.pkl'
+        else:
+            file_name = attribute_name if limit is None else attribute_name + '_short'
+            file_name = prefix + folder_name + '/' + file_name + suffix + '.csv'
 
         df.to_csv(file_name, index_label='idx')
 
@@ -822,10 +864,15 @@ class Database(BaseClass):
         paths = []
         for pattern in patterns:
             paths.extend(glob(pattern))
-
         paths.sort()
 
-        return paths[:self.max_size] if self.max_size is not None else paths
+        if self.shuffle:
+            seed(seed=7)
+            shuffle(paths)
+
+        paths = paths[:self.max_size] if self.max_size is not None else paths
+
+        return paths
 
     @staticmethod
     def subtuples(l):

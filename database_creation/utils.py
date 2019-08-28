@@ -692,7 +692,8 @@ class Query:
         self.id_ = id_
 
         self.entities = tuple_.entities
-        self.info = [str(entity.wiki) for entity in tuple_.entities]
+        self.string_entities = self.get_string_entities(tuple_)
+        self.info = self.get_info(tuple_)
 
         self.title = article.title
         self.date = article.date
@@ -715,7 +716,7 @@ class Query:
 
         width = BaseClass.text_width
 
-        string = fill("Entities: " + BaseClass.to_string(self.entities), width) + '\n\n'
+        string = fill("Entities: " + self.string_entities, width) + '\n\n'
         string += "Info:" + '\n\n'.join([fill(info, width) for info in self.info]) + '\n\n'
         string += fill("Article: " + self.title + ' (' + self.date + ')', width) + '\n\n'
         string += fill("Context: " + BaseClass.to_string(self.context), width) + '\n\n'
@@ -725,6 +726,43 @@ class Query:
     # endregion
 
     # region Methods get_
+
+    @staticmethod
+    def get_string_entities(tuple_):
+        """
+        Returns the entities in a natural language string.
+
+        Args:
+            tuple_: Tuple, Tuple of entities mentioned in the article.
+
+        Returns:
+            str, list of the entities separated by ',' or 'and'.
+        """
+
+        names = tuple_.get_name()
+
+        return ', '.join(names[:-1]) + ' and ' + names[-1]
+
+    @staticmethod
+    def get_info(tuple_):
+        """
+        Returns the wikipedia information as a list of information for each Entity.
+
+        Args:
+            tuple_: Tuple, Tuple of entities mentioned in the article.
+
+        Returns:
+            list, information for each Entity as a string.
+        """
+
+        info = []
+        for entity in tuple_.entities:
+            if entity.wiki is None:
+                info.append("Entity not searched.")
+            else:
+                info.append(str(entity.wiki))
+
+        return info
 
     def get_html_entities(self):
         """
@@ -793,6 +831,7 @@ class Query:
         d = {
             'id_': self.id_,
             'entities': self.html_entities,
+            'string_entities': self.string_entities,
             'info': self.html_info,
             'title': self.html_title,
             'context': self.html_context,
