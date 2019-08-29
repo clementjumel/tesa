@@ -110,7 +110,7 @@ class Text(BaseClass):
                 seen.update([name for name, sentences in entities_sentences.items() if idx in sentences])
 
                 if len(seen) == context_length:
-                    sentences = {i: deepcopy(self.sentences[i]) for i in range(start_idx, idx)}
+                    sentences = {i: deepcopy(self.sentences[i]) for i in range(start_idx, idx + 1)}
                     self.highlight(sentences=sentences, tuple_=tuple_)
 
                     id_ = str(start_idx) + '_' + str(idx)

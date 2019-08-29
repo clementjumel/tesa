@@ -150,7 +150,7 @@ class Database(BaseClass):
         else:
             self.compute_queries()
             self.save_pkl(attribute_name='queries', file_name=file_name)
-            self.save_csv(attribute_name='queries', file_name=file_name, limit=200)
+            self.save_csv(attribute_name='queries', file_name=file_name, limit=100)
 
     @BaseClass.Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):

@@ -3,6 +3,7 @@ from numpy import int64
 from re import findall, sub
 from textwrap import fill
 from nltk import sent_tokenize
+from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
 
 
@@ -268,7 +269,7 @@ class Context:
         string = ''
 
         string += '[...] ' if self.type_ == 'content' else ''
-        string += BaseClass.to_string(self.sentences)
+        string += ' '.join([sentence.text for _, sentence in self.sentences.items()])
         string += ' [...]' if self.type_ == 'content' else ''
 
         return string
@@ -457,6 +458,9 @@ class Entity:
             names1.update(self.possible_names)
             names2.update(entity.possible_names)
 
+        names1 = {unidecode(name) for name in names1}
+        names2 = {unidecode(name) for name in names2}
+
         return bool(names1.intersection(names2))
 
     def is_in(self, string, flexible=False):
@@ -471,11 +475,13 @@ class Entity:
             bool, True iff the text contains the entity.
         """
 
+        string = unidecode(string)
         string = string.split()
 
         names = {self.name}.union(self.plausible_names)
         if flexible:
             names.update(self.possible_names)
+        names = {unidecode(name) for name in names}
 
         for name in names:
             split = name.split()
