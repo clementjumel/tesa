@@ -7,6 +7,7 @@ from collections import defaultdict
 from numpy import histogram
 from pickle import dump, load, PicklingError
 from pandas import DataFrame
+from wikipedia import WikipediaException
 
 import matplotlib.pyplot as plt
 
@@ -208,14 +209,31 @@ class Database(BaseClass):
             count = self.progression(count, self.modulo_articles, size, 'article')
 
             entities = self.articles[id_].get_entities()
+            to_ignore = set()
 
-            for entity in entities:
-                if entity.name in self.entities:
-                    self.entities[entity.name].update_info(entity)
+            for i in range(len(entities)):
+                entity = entities[i]
+                matches = [entity.match(string=e.name, type_=e.type_) for e in entities[:i]]
+
+                if any(matches):
+                    match_name = entities[matches.index(True)].name
+                    match_entity = self.entities[match_name]
+                    del self.entities[match_name]
+
+                    match_entity.update_info(entity)
+                    self.entities[match_entity.name] = match_entity
+
+                    to_ignore.add(match_name) if match_name != match_entity.name else to_ignore.add(entity.name)
+
                 else:
-                    self.entities[entity.name] = entity
+                    if entity.name in self.entities:
+                        self.entities[entity.name].update_info(entity)
 
-            self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}}
+                    else:
+                        self.entities[entity.name] = entity
+
+            self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}
+                                           if name not in to_ignore}
 
     @BaseClass.Verbose("Computing the entity tuples...")
     @BaseClass.Attribute('tuples')
@@ -307,8 +325,8 @@ class Database(BaseClass):
 
                 entity.wiki = wiki
 
-        except KeyboardInterrupt:
-            print("Interruption of the wikipedia information computation.")
+        except (KeyboardInterrupt, WikipediaException):
+            print("A known error occurred, saving the loaded information...")
 
         print("Final found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
         self.wikipedia = wikipedia
