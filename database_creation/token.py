@@ -28,7 +28,6 @@ class Token(BaseClass):
 
         self.start_tag = None
         self.end_tag = None
-        self.entity = None
 
         self.compute_annotations(token_element)
 
