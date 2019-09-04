@@ -51,7 +51,6 @@ class Sentence(BaseClass):
             text += '' if token.criterion_punctuation() or not text else ' '
             text += token.start_tag if token.start_tag else ''
             text += token.word
-            text += ' [' + token.entity + ']' if token.entity else ''
             text += token.end_tag if token.end_tag else ''
 
         self.text = text
