@@ -3,6 +3,7 @@ from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
 from copy import deepcopy
+from collections import defaultdict
 
 
 class Text(BaseClass):
@@ -157,19 +158,40 @@ class Text(BaseClass):
             tuple_: Tuple, entities to analyse.
         """
 
+        entities_boundaries = defaultdict(set)
+
         for coreference in self.coreferences:
             if coreference.entity and coreference.entity in tuple_.get_name():
                 entity = [entity for entity in tuple_.entities if entity.name == coreference.entity][0]
                 for mention in [coreference.representative] + coreference.mentions:
                     if mention.sentence in sentences:
+                        entities_boundaries[mention.sentence].add((entity.name, mention.start, mention.end))
 
-                        sentences[mention.sentence].tokens[mention.start].start_tag = '<strong>'
-                        sentences[mention.sentence].tokens[mention.end - 1].end_tag = '</strong>'
+        for sentence_id, sentence in sentences.items():
+            boundaries = entities_boundaries[sentence_id]
+            to_remove = set()
 
-                        if not entity.match(string=mention.text, flexible=True):
-                            sentences[mention.sentence].tokens[mention.end - 1].entity = entity.name
+            for boundary1 in boundaries:
+                for boundary2 in boundaries:
+                    if boundary1[0] == boundary2[0] and \
+                            ((boundary1[1] > boundary2[1] and boundary1[2] <= boundary2[2])
+                             or (boundary1[1] >= boundary2[1] and boundary1[2] < boundary2[2])):
+                        to_remove.add(boundary2)
 
-        for _, sentence in sentences.items():
+            for boundary in to_remove:
+                boundaries.remove(boundary)
+
+            for entity_name, start_idx, end_idx in boundaries:
+                if sentence.tokens[start_idx].start_tag is None:
+                    sentence.tokens[start_idx].start_tag = '<strong>'
+                else:
+                    sentence.tokens[start_idx].start_tag += '<strong>'
+
+                if sentence.tokens[end_idx - 1].end_tag is None:
+                    sentence.tokens[end_idx - 1].end_tag = '[' + entity_name + ']</strong>'
+                else:
+                    sentence.tokens[end_idx - 1].end_tag += '[' + entity_name + ']</strong>'
+
             sentence.compute_text()
 
     # endregion
