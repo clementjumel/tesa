@@ -321,47 +321,63 @@ class Entity:
         before_parenthesis = findall(r'(.*?)\s*\(', self.original_name)
         before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
             else self.original_name
+
         in_parenthesis = set(findall(r'\((.*?)\)', self.original_name))
 
         plausible_names, possible_names = set(), set()
 
         if self.type_ == 'person':
+            before_parenthesis = before_parenthesis.replace('.', '')
             split = before_parenthesis.split()
-            if len(split) > 1 and split[-1].lower().replace('.', '') == 'jr':
+
+            if len(split) > 1 and split[-1].lower().replace('.', '') in ['jr', 'junior']:
                 name = ' '.join(split[:-1])
                 suffix = ' Jr.'
-            elif len(split) > 1 and split[-1].lower().replace('.', '') == 'sr':
+            elif len(split) > 1 and split[-1].lower().replace('.', '') in ['sr', 'senior']:
                 name = ' '.join(split[:-1])
                 suffix = ' Sr.'
             else:
                 name = before_parenthesis
                 suffix = ''
 
+            # Inverse the words when there is a comma
             split = name.split(', ')
             name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
 
+            # Add '.' to single letters
             split = name.split()
-
-            plausible_names.update([name, name + suffix])
-
-            plausible_name = ' '.join([word for word in split if len(word) > 1])
-            plausible_names.update([plausible_name, plausible_name + suffix])
-
-            possible_name = split[-1]
-            possible_names.update([possible_name, possible_name + suffix])
-
-            if len(split) > 1:
-                plausible_name = split[0] + ' ' + split[-1]
-                plausible_names.update([plausible_name, plausible_name + suffix])
-
             for i in range(len(split)):
                 if len(split[i]) == 1:
                     split[i] += '.'
 
+            # Full name
             name = ' '.join(split)
-            plausible_names.update([name, name + suffix])
-
+            plausible_names.add(name)
             name += suffix
+            plausible_names.add(name)
+
+            # Name without single letters
+            plausible_name = ' '.join([word for word in split if len(word.replace('.', '')) > 1])
+            plausible_names.add(plausible_name + suffix)
+            plausible_names.add(plausible_name)
+
+            # Last word of the name
+            if len(split) > 0:
+                possible_name = split[-1]
+                possible_names.add(possible_name + suffix)
+                possible_names.add(possible_name)
+
+            # Fist and last part of the name
+            if len(split) > 1:
+                plausible_name = split[0] + ' ' + split[-1]
+                plausible_names.add(plausible_name + suffix)
+                plausible_names.add(plausible_name)
+
+            # Write first letter for words in the middle
+            if len(split) > 2:
+                plausible_name = split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1]
+                plausible_names.add(plausible_name + suffix)
+                plausible_names.add(plausible_name)
 
         elif self.type_ == 'location':
             name = before_parenthesis
@@ -437,19 +453,26 @@ class Entity:
 
     # region Other methods
 
-    def match(self, string, flexible=False):
+    def match(self, string, type_=None, flexible=False):
         """
         Check if the entity matches another entity represented as a string.
 
         Args:
             string: str, entity to check.
+            type_: str, type of the entity; if None, takes the same as the other entity.
             flexible: bool, whether or not to check the possible names as well.
 
         Returns:
             bool, True iff the string matches the entity.
         """
 
-        entity = Entity(string, self.type_)
+        if type_ is not None:
+            if self.type_ != type_:
+                return False
+        else:
+            type_ = self.type_
+
+        entity = Entity(string, type_)
 
         names1 = {self.name}.union(self.plausible_names)
         names2 = {entity.name}.union(entity.plausible_names)
@@ -461,7 +484,7 @@ class Entity:
         names1 = {unidecode(name) for name in names1}
         names2 = {unidecode(name) for name in names2}
 
-        return bool(names1.intersection(names2))
+        return self.name in names2 or entity.name in names1
 
     def is_in(self, string, flexible=False):
         """
@@ -537,10 +560,12 @@ class Entity:
             entity: Entity, new entity to take into account.
         """
 
-        if self.type_ == entity.type_:
-            self.plausible_names.update(entity.plausible_names)
-            self.possible_names.update(entity.possible_names)
-            self.extra_info.update(entity.extra_info)
+        e = self if len(self.name.split()) >= len(entity.name.split()) else entity
+
+        self.name = e.name
+        self.plausible_names = e.plausible_names
+        self.possible_names = e.possible_names
+        self.extra_info.update(entity.extra_info)
 
     # endregion
 
@@ -849,6 +874,16 @@ class Query:
 
 
 def main():
+    for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
+                 'George Walker Bush Sr']:
+        e = Entity(name, 'person')
+        print(e.name, e.plausible_names, e.possible_names)
+
+    for pair in [('George Bush', 'George Walker Bush'),
+                 ('George Walker Bush Sr', 'George Bush jr'),
+                 ('George Walker Bush', 'George H W Bush')]:
+        print(Entity(pair[0], 'person').match(pair[1], 'person'))
+
     return
 
 
