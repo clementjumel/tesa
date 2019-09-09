@@ -235,32 +235,6 @@ class Database(BaseClass):
             self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}
                                            if name not in to_ignore}
 
-    @BaseClass.Verbose("Computing the entity tuples...")
-    @BaseClass.Attribute('tuples')
-    def compute_tuples(self):
-        """ Compute the Tuples of the database as a sorted list of Tuples (by number of articles). """
-
-        ids = defaultdict(set)
-
-        count, size = 0, len(self.articles)
-        for id_ in self.articles:
-            count = self.progression(count, self.modulo_articles, size, 'article')
-
-            entities = defaultdict(set)
-            for entity in self.articles[id_].entities:
-                entities[entity.type_].add(entity.name)
-
-            for type_ in entities:
-                for tuple_ in self.subtuples(entities[type_]):
-                    ids[tuple_].add(id_)
-
-        ranking = sorted(ids, key=lambda k: len(ids[k]), reverse=True)
-
-        self.tuples = [Tuple(id_=str(rank + 1),
-                             entities=tuple([self.entities[name] for name in tuple_]),
-                             article_ids=ids[tuple_])
-                       for rank, tuple_ in enumerate(ranking)]
-
     @BaseClass.Verbose("Computing the articles' annotations...")
     def compute_annotations(self):
         """ Computes the annotations of the articles. """
@@ -286,6 +260,32 @@ class Database(BaseClass):
                                   for context_id_ in self.articles[article_id_].contexts[tuple_.get_name()]})
 
             tuple_.query_ids = query_ids
+
+    @BaseClass.Verbose("Computing the entity tuples...")
+    @BaseClass.Attribute('tuples')
+    def compute_tuples(self):
+        """ Compute the Tuples of the database as a sorted list of Tuples (by number of articles). """
+
+        ids = defaultdict(set)
+
+        count, size = 0, len(self.articles)
+        for id_ in self.articles:
+            count = self.progression(count, self.modulo_articles, size, 'article')
+
+            entities = defaultdict(set)
+            for entity in self.articles[id_].entities:
+                entities[entity.type_].add(entity.name)
+
+            for type_ in entities:
+                for tuple_ in self.subtuples(entities[type_]):
+                    ids[tuple_].add(id_)
+
+        ranking = sorted(ids, key=lambda k: len(ids[k]), reverse=True)
+
+        self.tuples = [Tuple(id_=str(rank + 1),
+                             entities=tuple([self.entities[name] for name in tuple_]),
+                             article_ids=ids[tuple_])
+                       for rank, tuple_ in enumerate(ranking)]
 
     @BaseClass.Verbose("Computing the Wikipedia information...")
     def compute_wikipedia(self, load):
