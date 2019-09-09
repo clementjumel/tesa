@@ -160,6 +160,12 @@ class Text(BaseClass):
 
         entities_boundaries = defaultdict(set)
 
+        idx = 0
+        entity_to_color = dict()
+        for i in range(len(tuple_.entities)):
+            entity = tuple_.entities[i]
+            entity_to_color[entity.name] = 'color' + str(i)
+
         for coreference in self.coreferences:
             if coreference.entity and coreference.entity in tuple_.get_name():
                 entity = [entity for entity in tuple_.entities if entity.name == coreference.entity][0]
@@ -181,16 +187,22 @@ class Text(BaseClass):
             for boundary in to_remove:
                 boundaries.remove(boundary)
 
-            for entity_name, start_idx, end_idx in boundaries:
+            for name, start_idx, end_idx in boundaries:
+                color = entity_to_color[name]
+                start_tag = '<div class="popup" onclick="pop(' + str(idx) + ')"><' + color + '>'
+                end_tag = '</' + color + '><span class="popuptext" id="' + str(idx) + '">' + name + '</span></div>'
+
                 if sentence.tokens[start_idx].start_tag is None:
-                    sentence.tokens[start_idx].start_tag = '<strong>'
+                    sentence.tokens[start_idx].start_tag = start_tag
                 else:
-                    sentence.tokens[start_idx].start_tag += '<strong>'
+                    sentence.tokens[start_idx].start_tag += start_tag
 
                 if sentence.tokens[end_idx - 1].end_tag is None:
-                    sentence.tokens[end_idx - 1].end_tag = '[' + entity_name + ']</strong>'
+                    sentence.tokens[end_idx - 1].end_tag = end_tag
                 else:
-                    sentence.tokens[end_idx - 1].end_tag += '[' + entity_name + ']</strong>'
+                    sentence.tokens[end_idx - 1].end_tag += end_tag
+
+                idx += 1
 
             sentence.compute_text()
 
