@@ -891,7 +891,7 @@ class Query:
 
 def main():
     for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
-                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson']:
+                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson', 'Sacco and Vanzetti']:
         e = Entity(name, 'person')
         print(e.name, e.plausible_names, e.possible_names)
 
