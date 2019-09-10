@@ -357,9 +357,17 @@ class Entity:
             plausible_names.add(name)
 
             # Name without single letters
-            plausible_name = ' '.join([word for word in split if len(word.replace('.', '')) > 1])
+            split_bis = [word for word in split if len(word.replace('.', '')) > 1]
+            plausible_name = ' '.join(split_bis)
             plausible_names.add(plausible_name + suffix)
             plausible_names.add(plausible_name)
+
+            # Combination of pairs of words
+            if len(split_bis) > 2:
+                for i in range(len(split_bis) - 1):
+                    for j in range(i + 1, len(split_bis)):
+                        possible_name = split_bis[i] + ' ' + split_bis[j]
+                        possible_names.add(possible_name)
 
             # Last word of the name
             if len(split) > 0:
@@ -390,6 +398,11 @@ class Entity:
             if len(split) > 1 and split[-1].lower() == 'city':
                 plausible_names.add(' '.join(split[:-1]))
 
+            if len(split) > 2:
+                for i in range(len(split) - 1):
+                    possible_name = split[i] + split[i + 1]
+                    possible_names.add(possible_name)
+
         elif self.type_ == 'org':
             split = before_parenthesis.split()
             if split[-1].lower().replace('.', '') == 'co':
@@ -409,6 +422,11 @@ class Entity:
 
             plausible_name = name.replace(' & ', ' and ')
             plausible_names.update([plausible_name, plausible_name + suffix1, plausible_name + suffix2])
+
+            if len(split) > 2:
+                for i in range(len(split) - 1):
+                    possible_name = split[i] + split[i + 1]
+                    possible_names.add(possible_name)
 
             name += suffix1
 
@@ -538,15 +556,13 @@ class Entity:
 
         try:
             p = page(query)
-        except PageError:
-            return None, None
-        except DisambiguationError:
+        except (PageError, DisambiguationError):
             return None, None
 
-        if self.match(p.title):
+        if self.match(string=p.title, flexible=True):
             return p, True
 
-        elif self.is_in(p.summary):
+        elif self.is_in(string=p.title) or self.is_in(string=p.summary):
             return p, False
 
         else:
@@ -636,7 +652,7 @@ class Wikipedia:
 
         info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
         info = info.encode("utf-8", errors="ignore").decode()
-        info = '[related article] ' + info if not self.exact else info
+        info = info + ' [This may be a related article.]' if not self.exact else info
 
         self.info = info
 
@@ -875,14 +891,16 @@ class Query:
 
 def main():
     for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
-                 'George Walker Bush Sr']:
+                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson']:
         e = Entity(name, 'person')
         print(e.name, e.plausible_names, e.possible_names)
 
     for pair in [('George Bush', 'George Walker Bush'),
                  ('George Walker Bush Sr', 'George Bush jr'),
-                 ('George Walker Bush', 'George H W Bush')]:
-        print(Entity(pair[0], 'person').match(pair[1], 'person'))
+                 ('George Walker Bush', 'George H W Bush'),
+                 ('Valerie Plame', 'Valerie Elise Plame Wilson')]:
+        print(Entity(pair[0], 'person').match(pair[1], 'person', False),
+              Entity(pair[0], 'person').match(pair[1], 'person', True))
 
     return
 
