@@ -10,7 +10,10 @@ database = Database(max_size=max_size, shuffle=shuffle, min_articles=min_article
 database.preprocess_database()
 database.process_articles()
 
-database.process_wikipedia(load=True)
+database.process_wikipedia(load=False)
 database.process_queries(load=False)
 
-database.combine_pkl(in_names=['wikipedia_global', 'wikipedia_size10k_shuffle_articles1_queries1'])
+# database.combine_pkl(in_names=[
+#     'wikipedia_global',
+#     'wikipedia_size10k_shuffle_articles1_queries1',
+# ])
