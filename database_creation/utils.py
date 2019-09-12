@@ -652,7 +652,7 @@ class Wikipedia:
 
         info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
         info = info.encode("utf-8", errors="ignore").decode()
-        info = info + ' [This may be a related article.]' if not self.exact else info
+        # info = info + ' [This may be a related article.]' if not self.exact else info
 
         self.info = info
 
@@ -891,14 +891,17 @@ class Query:
 
 def main():
     for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
-                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson', 'Sacco and Vanzetti']:
+                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson', 'Sacco and Vanzetti', 'I. Lewis Libby Jr.']:
+
         e = Entity(name, 'person')
         print(e.name, e.plausible_names, e.possible_names)
 
     for pair in [('George Bush', 'George Walker Bush'),
                  ('George Walker Bush Sr', 'George Bush jr'),
                  ('George Walker Bush', 'George H W Bush'),
-                 ('Valerie Plame', 'Valerie Elise Plame Wilson')]:
+                 ('Valerie Plame', 'Valerie Elise Plame Wilson'),
+                 ('Lewis Libby', 'I. Lewis Libby Jr.')]:
+
         print(Entity(pair[0], 'person').match(pair[1], 'person', False),
               Entity(pair[0], 'person').match(pair[1], 'person', True))
 
