@@ -63,7 +63,7 @@ class Token:
     def criterion_punctuation(self):
         """ Check if a token is a punctuation mark. """
 
-        return True if self.word in self.punctuation else False
+        return True if self.word in self.punctuation and self.word != '--' else False
 
     def criterion_stopwords(self):
         """ Check if a token is a stop word. """
