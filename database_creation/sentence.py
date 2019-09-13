@@ -1,12 +1,8 @@
-from database_creation.utils import BaseClass
 from database_creation.token import Token
 
 
-class Sentence(BaseClass):
+class Sentence:
     # region Class initialization
-
-    to_print = ['text', 'tokens']
-    print_attribute, print_lines, print_offsets = False, 1, 2
 
     def __init__(self, sentence_element):
         """
@@ -17,10 +13,24 @@ class Sentence(BaseClass):
         """
 
         self.tokens = None
-        self.text = None
 
         self.compute_tokens(sentence_element)
-        self.compute_text()
+
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Sentence.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        s = ''
+
+        for _, token in self.tokens.items():
+            s += '' if token.criterion_punctuation() or not s else ' '
+            s += str(token)
+
+        return s
 
     # endregion
 
@@ -41,20 +51,6 @@ class Sentence(BaseClass):
 
         self.tokens = tokens
 
-    def compute_text(self):
-        """ Compute the text defined by the tokens. """
-
-        text = ''
-        for idx in self.tokens:
-            token = self.tokens[idx]
-
-            text += '' if token.criterion_punctuation() or not text else ' '
-            text += token.start_tag if token.start_tag else ''
-            text += token.word
-            text += token.end_tag if token.end_tag else ''
-
-        self.text = text
-
     # endregion
 
 
@@ -66,7 +62,9 @@ def main():
 
     sentences = [Sentence(sentence_element) for sentence_element in root.findall('./document/sentences/sentence')[:3]]
 
-    print(Sentence.to_string(sentences))
+    for sentence in sentences:
+        print(str(sentence))
+
     return
 
 
