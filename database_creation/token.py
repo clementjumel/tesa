@@ -33,7 +33,11 @@ class Token:
             str, readable format of the instance.
         """
 
-        return self.word
+        s = self.start_tag if self.start_tag is not None else ''
+        s += self.word
+        s += self.end_tag if self.end_tag is not None else ''
+
+        return s
 
     # endregion
 
