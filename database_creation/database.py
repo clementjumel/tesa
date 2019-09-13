@@ -1,7 +1,8 @@
-from database_creation.utils import BaseClass, Tuple, Wikipedia, Query
+from database_creation.utils import Tuple, Wikipedia, Query
 from database_creation.article import Article
 
 from numpy.random import shuffle, seed
+from time import time
 from glob import glob
 from collections import defaultdict
 from numpy import histogram
@@ -12,10 +13,9 @@ from wikipedia import WikipediaException
 import matplotlib.pyplot as plt
 
 
-class Database(BaseClass):
+class Database:
     # region Class initialization
 
-    to_print, print_attributes, print_lines, print_offsets = ['articles'], False, 2, 0
     modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
     def __init__(self, years=(2006, 2007), max_size=None, shuffle=False, project_root='', verbose=True,
@@ -56,104 +56,146 @@ class Database(BaseClass):
             str, readable format of the instance.
         """
 
-        to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
-        random_print, limit_print = False, 20
-        attributes = to_print or list(self.__dict__.keys())
+        s = "Years: " + ', '.join([str(year) for year in self.years]) + '\n'
+        s += "Max size: " + str(self.max_size) + '\n'
+        s += "Shuffle: " + str(self.shuffle) + '\n'
+        s += "Min articles: " + str(self.min_articles) + '\n'
+        s += "Min queries: " + str(self.min_queries)
 
-        string = ''
+        return s
 
-        for attribute in attributes:
-            s = self.to_string(getattr(self, attribute)) if attribute != 'articles' else ''
-            string += self.prefix(print_attribute, print_lines if string else 0, print_offsets, attribute) + s if s \
-                else ''
+    # endregion
 
-        if 'articles' in attributes:
-            ids = set(self.articles.keys())
-            if random_print:
-                shuffle(ids)
+    # region Decorators
 
-            string += self.prefix(True, print_lines if string else 0, print_offsets, 'articles') \
-                if print_attribute else ''
+    class Verbose:
+        """ Decorator for the display of a simple message. """
 
-            count = 0
-            for id_ in ids:
-                s = self.to_string(self.articles[id_])
+        def __init__(self, message):
+            """ Initializes the Verbose decorator message. """
 
-                if s:
-                    string += self.prefix(print_attribute, print_lines if string else 0, print_offsets,
-                                          'article ' + str(id_)) + s
-                    count += 1
-                    if count == limit_print:
-                        break
+            self.message = message
 
-        return string
+        def __call__(self, func):
+            """ Performs the call to the decorated function. """
+
+            def f(*args, **kwargs):
+                """ Decorated function. """
+
+                t0 = time()
+
+                print(self.message)
+                func(*args, **kwargs)
+                print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
+
+            return f
+
+    class Attribute:
+        """ Decorator for monitoring the length of an attribute. """
+
+        def __init__(self, attribute):
+            """ Initializes the Attribute decorator attribute. """
+
+            self.attribute = attribute
+
+        def __call__(self, func):
+            """ Performs the call to the decorated function. """
+
+            def f(*args, **kwargs):
+                """ Decorated function. """
+
+                slf = args[0]
+
+                attribute = getattr(slf, self.attribute)
+                length = len(attribute) if attribute is not None else 0
+                print("Initial length of {}: {}".format(self.attribute, length))
+
+                func(*args, **kwargs)
+
+                attribute = getattr(slf, self.attribute)
+                length = len(attribute) if attribute is not None else 0
+                print("Final length of {}: {}".format(self.attribute, length))
+
+            return f
 
     # endregion
 
     # region Main methods
 
-    @BaseClass.Verbose("Preprocessing the database...")
-    def preprocess_database(self):
-        """ Performs the preprocessing of the database. """
+    @Verbose("Preprocessing the database...")
+    def preprocess_database(self, debug=False):
+        """
+        Performs the preprocessing of the database.
 
-        self.compute_articles()
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
+
+        self.compute_articles(debug=debug)
 
         self.clean_articles(criterion=Article.criterion_content)
         self.clean_articles(criterion=Article.criterion_summary)
 
-        self.compute_metadata()
-        self.compute_entities()
-        self.compute_tuples()
+        self.compute_metadata(debug=debug)
+        self.compute_entities(debug=debug)
+        self.compute_tuples(debug=debug)
 
         self.filter(min_articles=self.min_articles)
 
-    @BaseClass.Verbose("Preprocessing the articles...")
-    def process_articles(self):
-        """ Performs the preprocessing of the articles. """
+    @Verbose("Preprocessing the articles...")
+    def process_articles(self, debug=False):
+        """
+        Performs the preprocessing of the articles.
 
-        self.compute_annotations()
-        self.compute_contexts()
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
+
+        self.compute_annotations(debug=debug)
+        self.compute_contexts(debug=debug)
 
         self.filter(min_queries=self.min_queries)
 
-    @BaseClass.Verbose("Processing the wikipedia information...")
-    def process_wikipedia(self, load=False, file_name=None):
+    @Verbose("Processing the wikipedia information...")
+    def process_wikipedia(self, load=False, file_name=None, debug=False):
         """
         Performs the processing of the wikipedia information of the database.
 
         Args:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
+            debug: bool, whether or not to perform the debugging of the database.
         """
 
         if load:
             self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
-            self.compute_wikipedia(load=load)
+            self.compute_wikipedia(load=load, debug=debug)
             self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
         else:
-            self.compute_wikipedia(load=load)
+            self.compute_wikipedia(load=load, debug=debug)
             self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
-    @BaseClass.Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, file_name=None):
+    @Verbose("Processing the aggregation queries...")
+    def process_queries(self, load=False, file_name=None, debug=False):
         """
         Performs the processing of the aggregation queries.
 
         Args:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
+            debug: bool, whether or not to perform the debugging of the database.
         """
 
         if load:
             self.load_pkl(attribute_name='queries', file_name=file_name)
 
         else:
-            self.compute_queries()
+            self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
             self.save_csv(attribute_name='queries', file_name=file_name, limit=100)
 
-    @BaseClass.Verbose("Computing and displaying statistics...")
+    @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
         """
         Compute and display the statistics of the database of the given type.
@@ -169,10 +211,15 @@ class Database(BaseClass):
 
     # region Methods compute_
 
-    @BaseClass.Verbose("Computing the database' article...")
-    @BaseClass.Attribute('articles')
-    def compute_articles(self):
-        """ Computes and initializes the articles in the database. """
+    @Verbose("Computing the database' article...")
+    @Attribute('articles')
+    def compute_articles(self, debug=False):
+        """
+        Computes and initializes the articles in the database.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
 
         articles = {}
         root = self.project_root + 'databases/nyt_jingyun/'
@@ -187,20 +234,36 @@ class Database(BaseClass):
             articles[id_] = Article(data_path=data_path, content_path=content_path, summary_path=summary_path)
 
         self.articles = articles
+        
+        if debug:
+            self.write_debug(field='articles', method='articles')
 
-    @BaseClass.Verbose("Computing the articles' metadata...")
-    def compute_metadata(self):
-        """ Computes the metadata of the articles. """
+    @Verbose("Computing the articles' metadata...")
+    def compute_metadata(self, debug=False):
+        """
+        Computes the metadata of the articles.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
 
         count, size = 0, len(self.articles)
         for id_ in self.articles:
             count = self.progression(count, self.modulo_articles, size, 'article')
             self.articles[id_].compute_metadata()
 
-    @BaseClass.Verbose("Computing the database' entities...")
-    @BaseClass.Attribute('entities')
-    def compute_entities(self):
-        """ Compute the entities of the database. """
+        if debug:
+            self.write_debug(field='articles', method='metadata')
+
+    @Verbose("Computing the database' entities...")
+    @Attribute('entities')
+    def compute_entities(self, debug=False):
+        """
+        Compute the entities of the database.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
 
         self.entities = dict()
 
@@ -235,36 +298,18 @@ class Database(BaseClass):
             self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}
                                            if name not in to_ignore}
 
-    @BaseClass.Verbose("Computing the articles' annotations...")
-    def compute_annotations(self):
-        """ Computes the annotations of the articles. """
+        if debug:
+            self.write_debug(field='articles', method='entities')
 
-        count, size = 0, len(self.articles)
-        for id_ in self.articles:
-            count = self.progression(count, self.modulo_articles, size, 'article')
-            self.articles[id_].compute_annotations()
+    @Verbose("Computing the entity tuples...")
+    @Attribute('tuples')
+    def compute_tuples(self, debug=False):
+        """
+        Compute the Tuples of the database as a sorted list of Tuples (by number of articles).
 
-    @BaseClass.Verbose("Computing the contexts...")
-    def compute_contexts(self):
-        """ Compute the contexts of the articles for each Tuple. """
-
-        count, size = 0, len(self.tuples)
-        for tuple_ in self.tuples:
-            count = self.progression(count, self.modulo_tuples, size, 'tuple')
-            query_ids = set()
-
-            for article_id_ in tuple_.article_ids:
-                self.articles[article_id_].compute_contexts(tuple_=tuple_)
-
-                query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
-                                  for context_id_ in self.articles[article_id_].contexts[tuple_.get_name()]})
-
-            tuple_.query_ids = query_ids
-
-    @BaseClass.Verbose("Computing the entity tuples...")
-    @BaseClass.Attribute('tuples')
-    def compute_tuples(self):
-        """ Compute the Tuples of the database as a sorted list of Tuples (by number of articles). """
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
 
         ids = defaultdict(set)
 
@@ -287,13 +332,59 @@ class Database(BaseClass):
                              article_ids=ids[tuple_])
                        for rank, tuple_ in enumerate(ranking)]
 
-    @BaseClass.Verbose("Computing the Wikipedia information...")
-    def compute_wikipedia(self, load):
+        if debug:
+            self.write_debug(field='tuples', method='tuples')
+
+    @Verbose("Computing the articles' annotations...")
+    def compute_annotations(self, debug=False):
+        """
+        Computes the annotations of the articles.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
+
+        count, size = 0, len(self.articles)
+        for id_ in self.articles:
+            count = self.progression(count, self.modulo_articles, size, 'article')
+            self.articles[id_].compute_annotations()
+
+        if debug:
+            self.write_debug(field='articles', method='annotations')
+
+    @Verbose("Computing the contexts...")
+    def compute_contexts(self, debug=False):
+        """
+        Compute the contexts of the articles for each Tuple.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
+
+        count, size = 0, len(self.tuples)
+        for tuple_ in self.tuples:
+            count = self.progression(count, self.modulo_tuples, size, 'tuple')
+            query_ids = set()
+
+            for article_id_ in tuple_.article_ids:
+                self.articles[article_id_].compute_contexts(tuple_=tuple_)
+
+                query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
+                                  for context_id_ in self.articles[article_id_].contexts[tuple_.get_name()]})
+
+            tuple_.query_ids = query_ids
+
+        if debug:
+            self.write_debug(field='articles', method='contexts')
+
+    @Verbose("Computing the Wikipedia information...")
+    def compute_wikipedia(self, load, debug=False):
         """
         Compute the wikipedia information about the entities from self.tuples.
 
         Args:
             load: bool, if True, load an existing file.
+            debug: bool, whether or not to perform the debugging of the database.
         """
 
         wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
@@ -331,10 +422,18 @@ class Database(BaseClass):
         print("Final found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
         self.wikipedia = wikipedia
 
-    @BaseClass.Verbose("Computing the Queries...")
-    @BaseClass.Attribute('queries')
-    def compute_queries(self):
-        """ Compute the Queries of the database. """
+        if debug:
+            self.write_debug(field='wikipedia', method='wikipedia')
+
+    @Verbose("Computing the Queries...")
+    @Attribute('queries')
+    def compute_queries(self, debug=False):
+        """
+        Compute the Queries of the database.
+
+        Args:
+            debug: bool, whether or not to perform the debugging of the database.
+        """
 
         queries = dict()
 
@@ -353,6 +452,9 @@ class Database(BaseClass):
                                                context=article_contexts[context_id_])
 
         self.queries = queries
+
+        if debug:
+            self.write_debug(field='queries', method='queries')
 
     # endregion
 
@@ -501,7 +603,7 @@ class Database(BaseClass):
         print("\nTotal number of tuples: {}".format(len(self.tuples)))
         print("\n10 most frequent tuples:")
         for tuple_ in self.tuples[:10]:
-            print("{} (in {} articles)".format(self.to_string(tuple_.entities), len(tuple_.article_ids)))
+            print("{} (in {} articles)".format(str(tuple_), len(tuple_.article_ids)))
         print()
 
         self.plot_hist(fig=1, data=self.stats['tuples_lengths'], xlabel='lengths', log=True,
@@ -548,8 +650,8 @@ class Database(BaseClass):
 
     # region Cleaning methods
 
-    @BaseClass.Verbose("Cleaning the database's articles...")
-    @BaseClass.Attribute('articles')
+    @Verbose("Cleaning the database's articles...")
+    @Attribute('articles')
     def clean_articles(self, criterion=None, to_del=None, to_keep=None):
         """
         Removes from the database the articles which meet the Article's criterion or whose ids are in to_del or are not
@@ -586,8 +688,8 @@ class Database(BaseClass):
         for id_ in to_del:
             del self.articles[id_]
 
-    @BaseClass.Verbose("Cleaning the database's tuples...")
-    @BaseClass.Attribute('tuples')
+    @Verbose("Cleaning the database's tuples...")
+    @Attribute('tuples')
     def clean_tuples(self, to_del=None, to_keep=None):
         """
         Removes from the database the tuples whose names are in to_del or are not in to_keep.
@@ -618,8 +720,8 @@ class Database(BaseClass):
         else:
             raise Exception("Either to_del or to_keep must be specified.")
 
-    @BaseClass.Verbose("Cleaning the database's entities...")
-    @BaseClass.Attribute('entities')
+    @Verbose("Cleaning the database's entities...")
+    @Attribute('entities')
     def clean_entities(self, to_del=None, to_keep=None):
         """
         Removes from the database the entities whose names are in to_del or are not in to_keep.
@@ -646,7 +748,7 @@ class Database(BaseClass):
         for name in to_del:
             del self.entities[name]
 
-    @BaseClass.Verbose("Filtering the articles, tuples and entities...")
+    @Verbose("Filtering the articles, tuples and entities...")
     def filter(self, min_articles=None, min_queries=None):
         """
         Filter out the articles that doesn't respect the specified threshold on the minimum number of articles or the
@@ -842,6 +944,40 @@ class Database(BaseClass):
         df.to_csv(file_name, index_label='idx')
 
         print("Attribute {} saved at {}".format(attribute_name, file_name))
+
+    def write_debug(self, field, method):
+        """
+        Write the debugging of a method into a text file.
+
+        Args:
+            field: str, field of the database we want to debug.
+            method: str, name of the method to debug.
+        """
+
+        if field == 'articles':
+            lines = [getattr(article, 'debug_' + method)(id_) for id_, article in self.articles.items()]
+
+        elif field == 'tuples':
+            lines = [tuple_.debug_tuples() for tuple_ in self.tuples]
+
+        elif field == 'wikipedia':
+            lines = [wikipedia.debug_found(name) for name, wikipedia in self.wikipedia['found'].items()] \
+                    + [Wikipedia.debug_notfound(name) for name in self.wikipedia['not_found']]
+
+        elif field == 'queries':
+            lines = [query.debug_queries(id_) for id_, query in self.queries.items()]
+
+        else:
+            raise Exception("Wrong field/method specified: {}/{}.".format(field, method))
+
+        if any([line.split(':')[1] for line in lines]):
+            prefix, _ = self.prefix_suffix()
+            file_name = prefix + 'debug/' + method + '.txt'
+
+            with open(file_name, 'w') as f:
+                f.writelines(lines)
+
+            print("Debugging Written in {}...".format(file_name))
 
     # endregion
 
