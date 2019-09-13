@@ -1,4 +1,4 @@
-from database_creation.utils import BaseClass, Context
+from database_creation.utils import Context
 from database_creation.sentence import Sentence
 from database_creation.coreference import Coreference
 
@@ -6,11 +6,8 @@ from copy import deepcopy
 from collections import defaultdict
 
 
-class Text(BaseClass):
+class Text:
     # region Class initialization
-
-    to_print = ['sentences']
-    print_attribute, print_lines, print_offsets = False, 1, 0
 
     def __init__(self, root, entities):
         """
@@ -23,6 +20,16 @@ class Text(BaseClass):
 
         self.sentences = self.get_sentences(root)
         self.coreferences = self.get_coreferences(root, entities)
+
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Text.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return ' '.join([str(sentence) for _, sentence in self.sentences.items()])
 
     # endregion
 
@@ -221,6 +228,7 @@ def main():
 
     print(article.content)
     print(article.summary)
+
     return
 
 
