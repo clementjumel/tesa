@@ -1,11 +1,8 @@
-from database_creation.utils import BaseClass, Mention
+from database_creation.utils import Mention
 
 
-class Coreference(BaseClass):
+class Coreference:
     # region Class initialization
-
-    to_print = ['representative', 'mentions', 'entity', 'sentences']
-    print_attribute, print_lines, print_offsets = True, 1, 2
 
     def __init__(self, element, entities):
         """
@@ -24,6 +21,18 @@ class Coreference(BaseClass):
         self.compute_annotations(element)
         self.compute_entity(entities)
         self.compute_sentences()
+
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Coreference.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        entity = self.entity + ': ' if self.entity is not None else ''
+
+        return entity + '; '.join([str(mention) for mention in [self.representative] + self.mentions])
 
     # endregion
 
@@ -89,8 +98,8 @@ def main():
                     in root.findall('./document/coreference/coreference')]
 
     for coreference in coreferences:
-        if coreference.entity is not None:
-            print(Coreference.to_string(coreference))
+        print(str(coreference))
+
     return
 
 
