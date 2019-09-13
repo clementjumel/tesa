@@ -70,7 +70,7 @@ class Article:
             tuple_: Tuple, tuple of Entities mentioned in the article.
         """
 
-        name = tuple_.get_name()
+        name = str(tuple_)
         self.contexts = self.contexts or dict()
 
         contexts = dict()
