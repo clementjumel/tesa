@@ -1,210 +1,8 @@
-from time import time
-from numpy import int64
 from re import findall, sub
 from textwrap import fill
 from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
-
-
-class BaseClass:
-    # region Class base methods
-
-    to_print, print_attribute, print_lines, print_offsets = None, None, None, None
-    text_width = 100
-
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of BaseClass.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
-        attributes = to_print or list(self.__dict__.keys())
-
-        string = ''
-
-        for attribute in attributes:
-            s = self.to_string(getattr(self, attribute))
-            string += self.prefix(print_attribute, print_lines, print_offsets, attribute) + s if s else ''
-
-        return string
-
-    @classmethod
-    def get_parameters(cls):
-        """
-        Fetch the print attribute of the class.
-
-        Returns:
-            cls.to_print: list, attributes to print; if [], print all the attributes.
-            cls.print_attribute: bool, whether or not to print the attributes' names.
-            cls.print_lines: int, whether or not to print line breaks (and how many).
-            cls.print_offsets: int, whether or not to print an offset (and how many).
-        """
-
-        return cls.to_print, cls.print_attribute, cls.print_lines, cls.print_offsets
-
-    @staticmethod
-    def to_string(item):
-        """
-        Converts an item of any type into a string with a easily readable format.
-
-        Args:
-            item: unknown type, item to convert into string, can be of any type.
-
-        Returns:
-            str, readable format of item.
-        """
-
-        # Cases corresponding to an empty string
-        if item is None or item == [] or item == () or item == {}:
-            return ''
-
-        # Case of strings
-        elif isinstance(item, str):
-            return item
-
-        # Case of numbers
-        elif isinstance(item, (float, int, int64)):
-            return str(round(item, 2))
-
-        # Case of instances of custom objects
-        elif isinstance(item, (BaseClass, Mention, Context, Entity, Wikipedia, Tuple, Query)):
-            return str(item)
-
-        # Case of lists
-        elif isinstance(item, list):
-            strings = [BaseClass.to_string(ite) for ite in item]
-
-            # List of custom objects
-            if isinstance(item[0], BaseClass):
-                return ' '.join([s for s in strings if s])
-
-            # List of lists
-            elif isinstance(item[0], list):
-                return '\n'.join([s for s in strings if s])
-
-            # Other lists
-            else:
-                return '|'.join([s for s in strings if s])
-
-        # Case of sets and tuples
-        elif isinstance(item, (set, tuple)):
-            strings = [BaseClass.to_string(ite) for ite in item]
-            return '; '.join([s for s in strings if s])
-
-        # Case of dictionaries
-        elif isinstance(item, dict):
-            strings = [(BaseClass.to_string(ite), BaseClass.to_string(item[ite])) for ite in item]
-
-            # The keys are int (long dictionaries)
-            if isinstance(list(item.keys())[0], int):
-                return ' '.join([s[1] for s in strings if s[1]])
-
-            # The keys are strings or tuples (short dictionaries)
-            elif isinstance(list(item.keys())[0], (str, tuple)):
-                # Dictionary of dictionaries
-                if isinstance(item[list(item.keys())[0]], dict):
-                    return '\n'.join([s[0] + ':\n' + s[1] for s in strings if s[1]])
-
-                # Other dictionaries
-                else:
-                    return '\n'.join([s[0] + ': ' + s[1] for s in strings if s[1]])
-
-        else:
-            print(item)
-            raise Exception("Unsupported type: {}.".format(type(item)))
-
-    @staticmethod
-    def prefix(print_attribute=False, print_lines=0, print_offsets=0, attribute=None):
-        """
-        Returns a prefix corresponding to the parameters.
-
-        Args:
-            print_attribute: bool, whether or not to print the attributes' names.
-            print_lines: int, whether or not to print line breaks (and how many).
-            print_offsets: int, whether or not to print an offset (and how many).
-            attribute: str, attribute to print (if relevant).
-
-        Returns:
-            str, prefix corresponding to the parameters.
-        """
-
-        prefix = ''
-
-        if print_lines:
-            for _ in range(print_lines):
-                prefix += '\n'
-
-        if print_offsets:
-            for _ in range(print_offsets):
-                prefix += '  '
-
-        if print_attribute:
-            if attribute is not None:
-                prefix += attribute + ': '
-            else:
-                raise Exception("No attribute specified.")
-
-        return prefix
-
-    # endregion
-
-    # region Decorators
-
-    class Verbose:
-        """ Decorator for the display of a simple message. """
-
-        def __init__(self, message):
-            """ Initializes the Verbose decorator message. """
-
-            self.message = message
-
-        def __call__(self, func):
-            """ Performs the call to the decorated function. """
-
-            def f(*args, **kwargs):
-                """ Decorated function. """
-
-                t0 = time()
-
-                print(self.message)
-                func(*args, **kwargs)
-                print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
-
-            return f
-
-    class Attribute:
-        """ Decorator for monitoring the length of an attribute. """
-
-        def __init__(self, attribute):
-            """ Initializes the Attribute decorator attribute. """
-
-            self.attribute = attribute
-
-        def __call__(self, func):
-            """ Performs the call to the decorated function. """
-
-            def f(*args, **kwargs):
-                """ Decorated function. """
-
-                slf = args[0]
-
-                attribute = getattr(slf, self.attribute)
-                length = len(attribute) if attribute is not None else 0
-                print("Initial length of {}: {}".format(self.attribute, length))
-
-                func(*args, **kwargs)
-
-                attribute = getattr(slf, self.attribute)
-                length = len(attribute) if attribute is not None else 0
-                print("Final length of {}: {}".format(self.attribute, length))
-
-            return f
-
-    # endregion
 
 
 class Mention:
@@ -234,11 +32,7 @@ class Mention:
             str, readable format of the instance.
         """
 
-        string = BaseClass.to_string(self.text)
-        string += ' (sentence [' + BaseClass.to_string(self.sentence) + '], '
-        string += 'tokens [' + BaseClass.to_string(self.start) + '-' + BaseClass.to_string(self.end) + '])'
-
-        return string
+        return self.text
 
     # endregion
 
@@ -266,13 +60,11 @@ class Context:
             str, readable format of the instance.
         """
 
-        string = ''
+        s = '[...] ' if self.type_ == 'content' else ''
+        s += ' '.join([str(sentence) for _, sentence in self.sentences.items()])
+        s += ' [...]' if self.type_ == 'content' else ''
 
-        string += '[...] ' if self.type_ == 'content' else ''
-        string += ' '.join([sentence.text for _, sentence in self.sentences.items()])
-        string += ' [...]' if self.type_ == 'content' else ''
-
-        return string
+        return s
 
     # endregion
 
@@ -296,7 +88,6 @@ class Entity:
         self.plausible_names = None
         self.possible_names = None
         self.extra_info = None
-
         self.wiki = None
 
         self.compute_name()
@@ -621,11 +412,7 @@ class Wikipedia:
             str, readable format of the instance.
         """
 
-        if self.info is not None:
-            return self.info
-
-        else:
-            return "No information found."
+        return self.info if self.info is not None else "No information found."
 
     # endregion
 
@@ -652,9 +439,39 @@ class Wikipedia:
 
         info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
         info = info.encode("utf-8", errors="ignore").decode()
-        # info = info + ' [This may be a related article.]' if not self.exact else info
 
         self.info = info
+
+    # endregion
+
+    # region Methods debug_
+
+    def debug_found(self, name):
+        """
+        Returns a string showing the debugging of an entity found in wikipedia.
+
+        Args:
+            name: str, name of the entity.
+
+        Returns:
+            str, debugging of the entities.
+        """
+
+        return name + ' (' + self.title + '): ' + self.info
+
+    @staticmethod
+    def debug_notfound(name):
+        """
+        Returns a string showing the debugging of an entity not found in wikipedia.
+
+        Args:
+            name: str, name of the entity.
+
+        Returns:
+            str, debugging of the entities.
+        """
+
+        return name
 
     # endregion
 
@@ -688,7 +505,7 @@ class Tuple:
             str, readable format of the instance.
         """
 
-        return BaseClass.to_string(self.entities)
+        return ', '.join([str(entity) for entity in self.entities[:-1]]) + ' and ' + str(self.entities[-1])
 
     # endregion
 
@@ -707,17 +524,23 @@ class Tuple:
 
         return types.pop()
 
-    def get_name(self):
+    # endregion
+
+    # region Methods debug_
+
+    def debug_tuples(self):
         """
-        Returns the tuple of names of the Tuple.
+        Returns a string showing the debugging of a tuple.
 
         Returns:
-            tuple, tuple of the names (str) of the Tuple.
+            str, debugging of the tuple.
         """
 
-        name = tuple([entity.name for entity in self.entities])
+        s = str(self) + ' (' + self.type_ + '): '
+        s += 'articles: ' + str(len(self.article_ids))
+        s += '; queries: ' + str(len(self.query_ids))
 
-        return name
+        return s
 
     # endregion
 
@@ -739,7 +562,7 @@ class Query:
         self.id_ = id_
 
         self.entities = tuple_.entities
-        self.string_entities = self.get_string_entities(tuple_)
+        self.entities_names = str(tuple_)
         self.info = self.get_info(tuple_)
 
         self.title = article.title
@@ -761,34 +584,14 @@ class Query:
             str, readable format of the instance.
         """
 
-        width = BaseClass.text_width
+        s = self.entities_names + ':\n'
+        s += str(self.context)
 
-        string = fill("Entities: " + self.string_entities, width) + '\n\n'
-        string += "Info:" + '\n\n'.join([fill(info, width) for info in self.info]) + '\n\n'
-        string += fill("Article: " + self.title + ' (' + self.date + ')', width) + '\n\n'
-        string += fill("Context: " + BaseClass.to_string(self.context), width) + '\n\n'
-
-        return string
+        return s
 
     # endregion
 
     # region Methods get_
-
-    @staticmethod
-    def get_string_entities(tuple_):
-        """
-        Returns the entities in a natural language string.
-
-        Args:
-            tuple_: Tuple, Tuple of entities mentioned in the article.
-
-        Returns:
-            str, list of the entities separated by ',' or 'and'.
-        """
-
-        names = tuple_.get_name()
-
-        return ', '.join(names[:-1]) + ' and ' + names[-1]
 
     @staticmethod
     def get_info(tuple_):
@@ -878,13 +681,31 @@ class Query:
         d = {
             'id_': self.id_,
             'entities': self.html_entities,
-            'string_entities': self.string_entities,
+            'entities_names': self.entities_names,
             'info': self.html_info,
             'title': self.html_title,
             'context': self.html_context,
         }
 
         return d
+
+    # endregion
+
+    # region Methods debug_
+
+    @staticmethod
+    def debug_queries(id_):
+        """
+        Returns a string showing the debugging of a query.
+
+        Args:
+            id_: str, id_ of the query.
+
+        Returns:
+            str, debugging of the query.
+        """
+
+        return id_ + ':'
 
     # endregion
 
