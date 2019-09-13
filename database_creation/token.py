@@ -1,14 +1,9 @@
-from database_creation.utils import BaseClass
-
 from string import punctuation as string_punctuation
 from nltk.corpus import stopwords as nltk_stopwords
 
 
-class Token(BaseClass):
+class Token:
     # region Class initialization
-
-    to_print = ['word', 'pos', 'ner']
-    print_attribute, print_lines, print_offsets = False, 0, 0
 
     punctuation = [p for p in string_punctuation] + ["''", '``']
     stopwords = set(nltk_stopwords.words('english'))
@@ -25,7 +20,6 @@ class Token(BaseClass):
         self.lemma = None
         self.pos = None
         self.ner = None
-
         self.start_tag = None
         self.end_tag = None
 
@@ -39,18 +33,7 @@ class Token(BaseClass):
             str, readable format of the instance.
         """
 
-        to_print, print_attribute, print_lines, print_offsets = self.get_parameters()[:4]
-        attributes = to_print or list(self.__dict__.keys())
-
-        string1 = self.prefix(print_lines=print_lines, print_offsets=print_offsets) + str(self.word)
-        string2 = ''
-
-        for attribute in attributes:
-            s = self.to_string(getattr(self, attribute)) if attribute != 'word' else ''
-            string2 += ', ' if s and string2 else ''
-            string2 += self.prefix(print_attribute=print_attribute, attribute=attribute) + s if s else ''
-
-        return string1 + ' (' + string2 + ')' if string2 else string1
+        return self.word
 
     # endregion
 
@@ -64,17 +47,10 @@ class Token(BaseClass):
             token_element: ElementTree.Element, annotations of the token.
         """
 
-        word = token_element.find('word').text
-
-        assert word
-        self.word = word
-
-        if self.word not in self.punctuation:
-            ner = token_element.find('NER').text
-
-            self.lemma = token_element.find('lemma').text
-            self.pos = token_element.find('POS').text
-            self.ner = ner if ner != 'O' else None
+        self.word = token_element.find('word').text
+        self.lemma = token_element.find('lemma').text
+        self.pos = token_element.find('POS').text
+        self.ner = token_element.find('NER').text
 
     # endregion
 
@@ -101,7 +77,9 @@ def main():
 
     tokens = [Token(token_element) for token_element in root.find('./document/sentences/sentence/tokens')]
 
-    print(Token.to_string(tokens))
+    for token in tokens:
+        print(', '.join([token.word, token.ner]))
+
     return
 
 
