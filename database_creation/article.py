@@ -1,14 +1,11 @@
-from database_creation.utils import BaseClass, Entity
+from database_creation.utils import Entity
 from database_creation.text import Text
 
 from xml.etree import ElementTree
 
 
-class Article(BaseClass):
+class Article:
     # region Class initialization
-
-    to_print = ['entities', 'title', 'date', 'contexts']
-    print_attribute, print_lines, print_offsets = True, 1, 0
 
     def __init__(self, data_path, content_path, summary_path):
         """
@@ -26,13 +23,20 @@ class Article(BaseClass):
 
         self.title = None
         self.date = None
-
         self.entities = None
-
         self.content = None
         self.summary = None
-
         self.contexts = None
+
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Article.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return '\n'.join([self.title, str(self.summary), str(self.content)])
 
     # endregion
 
@@ -188,6 +192,86 @@ class Article(BaseClass):
 
     # endregion
 
+    # region Methods debug_
+
+    @staticmethod
+    def debug_articles(id_):
+        """
+        Returns a string showing the debugging of an article.
+
+        Args:
+            id_: str, id_ of the article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        return id_ + ':'
+
+    def debug_metadata(self, id_):
+        """
+        Returns a string showing the debugging of an article.
+
+        Args:
+            id_: str, id_ of the article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        return id_ + ': ' + self.date + '; ' + self.title
+
+    def debug_entities(self, id_):
+        """
+        Returns a string showing the debugging of an article.
+
+        Args:
+            id_: str, id_ of the article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        s = id_ + ': '
+        s += ', '.join([str(entity) for entity in self.get_entities()])
+        s += ' -> ' + ', '.join([str(entity) for entity in self.entities])
+
+        return s
+
+    def debug_annotations(self, id_):
+        """
+        Returns a string showing the debugging of an article.
+
+        Args:
+            id_: str, id_ of the article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        s = id_ + ': '
+        s += '; '.join([str(coreference) for coreference in self.content.coreferences + self.summary.coreferences])
+
+        return s
+
+    def debug_contexts(self, id_):
+        """
+        Returns a string showing the debugging of an article.
+
+        Args:
+            id_: str, id_ of the article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        s = id_ + ': '
+        s += '; '.join([name + ': ' + str(context) for name, context in self.contexts.items()])
+
+        return s
+
+    # endregion
+
 
 def main():
     from database_creation.utils import Tuple
@@ -202,6 +286,7 @@ def main():
     article.compute_contexts(tuple_=Tuple(id_='0', entities=tuple(article.entities)))
 
     print(article)
+
     return
 
 
