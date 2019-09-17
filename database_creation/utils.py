@@ -1,5 +1,4 @@
 from re import findall, sub
-from textwrap import fill
 from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
@@ -446,32 +445,15 @@ class Wikipedia:
 
     # region Methods debug_
 
-    def debug_found(self, name):
+    def debug_found(self):
         """
         Returns a string showing the debugging of an entity found in wikipedia.
 
-        Args:
-            name: str, name of the entity.
-
         Returns:
             str, debugging of the entities.
         """
 
-        return name + ' (' + self.title + '): ' + self.info
-
-    @staticmethod
-    def debug_notfound(name):
-        """
-        Returns a string showing the debugging of an entity not found in wikipedia.
-
-        Args:
-            name: str, name of the entity.
-
-        Returns:
-            str, debugging of the entities.
-        """
-
-        return name
+        return self.title + ' -> ' + self.info
 
     # endregion
 
@@ -536,9 +518,8 @@ class Tuple:
             str, debugging of the tuple.
         """
 
-        s = str(self) + ' (' + self.type_ + '): '
-        s += 'articles: ' + str(len(self.article_ids))
-        s += '; queries: ' + str(len(self.query_ids))
+        s = 'type -> ' + self.type_ + '; '
+        s += 'articles -> ' + str(len(self.article_ids))
 
         return s
 
@@ -622,9 +603,21 @@ class Query:
             str, html version of the entities.
         """
 
-        string = ''.join(['<th>' + str(entity) + '</th>' for entity in self.entities])
+        s = ''
+        for entity in self.entities:
+            url = entity.wiki.url if entity.wiki is not None else None
 
-        return string
+            s += '<th>'
+            if url is not None:
+                s += '<a href="' + url + '" target="_blank">'
+
+            s += str(entity)
+
+            if url is not None:
+                s += '</a>'
+            s += '</th>'
+
+        return s
 
     def get_html_info(self):
         """
@@ -688,24 +681,6 @@ class Query:
         }
 
         return d
-
-    # endregion
-
-    # region Methods debug_
-
-    @staticmethod
-    def debug_queries(id_):
-        """
-        Returns a string showing the debugging of a query.
-
-        Args:
-            id_: str, id_ of the query.
-
-        Returns:
-            str, debugging of the query.
-        """
-
-        return id_ + ':'
 
     # endregion
 
