@@ -194,81 +194,50 @@ class Article:
 
     # region Methods debug_
 
-    @staticmethod
-    def debug_articles(id_):
+    def debug_metadata(self):
         """
         Returns a string showing the debugging of an article.
-
-        Args:
-            id_: str, id_ of the article.
 
         Returns:
             str, debugging of the article.
         """
 
-        return id_ + ':'
+        return self.date + '; ' + self.title
 
-    def debug_metadata(self, id_):
+    def debug_entities(self):
         """
         Returns a string showing the debugging of an article.
-
-        Args:
-            id_: str, id_ of the article.
 
         Returns:
             str, debugging of the article.
         """
 
-        return id_ + ': ' + self.date + '; ' + self.title
-
-    def debug_entities(self, id_):
-        """
-        Returns a string showing the debugging of an article.
-
-        Args:
-            id_: str, id_ of the article.
-
-        Returns:
-            str, debugging of the article.
-        """
-
-        s = id_ + ': '
-        s += ', '.join([str(entity) for entity in self.get_entities()])
+        s = ', '.join([str(entity) for entity in self.get_entities()])
         s += ' -> ' + ', '.join([str(entity) for entity in self.entities])
 
         return s
 
-    def debug_annotations(self, id_):
+    def debug_annotations(self):
         """
         Returns a string showing the debugging of an article.
-
-        Args:
-            id_: str, id_ of the article.
 
         Returns:
             str, debugging of the article.
         """
 
-        s = id_ + ': '
-        s += '; '.join([str(coreference) for coreference in self.content.coreferences + self.summary.coreferences])
+        return '; '.join([str(coreference) for coreference in self.content.coreferences + self.summary.coreferences])
 
-        return s
-
-    def debug_contexts(self, id_):
+    def debug_contexts(self):
         """
         Returns a string showing the debugging of an article.
-
-        Args:
-            id_: str, id_ of the article.
 
         Returns:
             str, debugging of the article.
         """
 
-        s = id_ + ': '
-        s += '; '.join([name + ': ' + str(context) for name, context in self.contexts.items()])
+        return
 
-        return s
+    # endregion
 
     # endregion
 
