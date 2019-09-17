@@ -169,12 +169,16 @@ class Text:
 
         idx = 0
         entity_to_color = dict()
+
+        if len(tuple_.entities) > 8:
+            raise Exception("Not enough colors, implement more of them!")
+
         for i in range(len(tuple_.entities)):
             entity = tuple_.entities[i]
             entity_to_color[entity.name] = 'color' + str(i)
 
         for coreference in self.coreferences:
-            if coreference.entity and coreference.entity in tuple_.get_name():
+            if coreference.entity and coreference.entity in [str(entity) for entity in tuple_.entities]:
                 entity = [entity for entity in tuple_.entities if entity.name == coreference.entity][0]
                 for mention in [coreference.representative] + coreference.mentions:
                     if mention.sentence in sentences:
@@ -210,8 +214,6 @@ class Text:
                     sentence.tokens[end_idx - 1].end_tag += end_tag
 
                 idx += 1
-
-            sentence.compute_text()
 
     # endregion
 
