@@ -962,8 +962,9 @@ class Database:
             lines = [str(tuple_) + ': ' + tuple_.debug_tuples() + '\n' for tuple_ in self.tuples]
 
         elif field == 'wikipedia':
-            lines = [name + ': ' + wikipedia.debug_wikipedia() for name, wikipedia in self.wikipedia['found'].items()] \
-                    + [name + ': not found' for name in self.wikipedia['not_found']]
+            lines = [name + ': ' + wikipedia.debug_wikipedia() + '\n'
+                     for name, wikipedia in self.wikipedia['found'].items()] \
+                    + [name + ': not found' + '\n' for name in self.wikipedia['not_found']]
 
         elif field == 'queries':
             lines = [id_ + ': ' + query.debug_queries() + '\n' for id_, query in self.queries.items()]
