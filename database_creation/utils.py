@@ -445,12 +445,12 @@ class Wikipedia:
 
     # region Methods debug_
 
-    def debug_found(self):
+    def debug_wikipedia(self):
         """
-        Returns a string showing the debugging of an entity found in wikipedia.
+        Returns a string showing the debugging of a wikipedia information.
 
         Returns:
-            str, debugging of the entities.
+            str, debugging of the wikipedia information.
         """
 
         return self.title + ' -> ' + self.info
@@ -681,6 +681,20 @@ class Query:
         }
 
         return d
+
+    # endregion
+
+    # region Methods debug_
+
+    def debug_queries(self):
+        """
+        Returns a string showing the debugging of an query.
+
+        Returns:
+            str, debugging of the query.
+        """
+
+        return self.entities_names + ' -> ' + self.context
 
     # endregion
 
