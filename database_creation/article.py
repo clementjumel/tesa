@@ -222,10 +222,13 @@ class Article:
             str, debugging of the article.
         """
 
-        s = ', '.join([str(entity) for entity in self.get_entities()])
-        s += ' -> ' + ', '.join([str(entity) for entity in self.entities])
+        entities1 = [str(entity) for entity in self.get_entities()]
+        entities2 = [str(entity) for entity in self.entities]
 
-        return s
+        if len(entities1) != len(entities2) or bool([entity for entity in entities2 if entity not in entities1]):
+            return ', '.join(entities1) + ' -> ' + ', '.join(entities2)
+        else:
+            return ''
 
     def debug_annotations(self):
         """
