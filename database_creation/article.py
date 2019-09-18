@@ -194,6 +194,16 @@ class Article:
 
     # region Methods debug_
 
+    def debug_articles(self):
+        """
+        Returns a string showing the debugging of an article.
+
+        Returns:
+            str, debugging of the article.
+        """
+
+        return self.data_path
+
     def debug_metadata(self):
         """
         Returns a string showing the debugging of an article.
@@ -235,7 +245,7 @@ class Article:
             str, debugging of the article.
         """
 
-        return
+        return '; '.join([str(context) for _, context in self.contexts.items()])
 
     # endregion
 
