@@ -235,8 +235,7 @@ class Database:
 
         self.articles = articles
         
-        if debug:
-            self.write_debug(field='articles', method='articles')
+        self.write_debug(field='articles', method='articles') if debug else None
 
     @Verbose("Computing the articles' metadata...")
     def compute_metadata(self, debug=False):
@@ -252,8 +251,7 @@ class Database:
             count = self.progression(count, self.modulo_articles, size, 'article')
             self.articles[id_].compute_metadata()
 
-        if debug:
-            self.write_debug(field='articles', method='metadata')
+        self.write_debug(field='articles', method='metadata') if debug else None
 
     @Verbose("Computing the database' entities...")
     @Attribute('entities')
@@ -298,8 +296,7 @@ class Database:
             self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}
                                            if name not in to_ignore}
 
-        if debug:
-            self.write_debug(field='articles', method='entities')
+        self.write_debug(field='articles', method='entities') if debug else None
 
     @Verbose("Computing the entity tuples...")
     @Attribute('tuples')
@@ -325,15 +322,14 @@ class Database:
                 for tuple_ in self.subtuples(entities[type_]):
                     ids[tuple_].add(id_)
 
-        ranking = sorted(ids, key=lambda k: len(ids[k]), reverse=True)
+        ranking = sorted(ids, key=lambda k: (len(ids[k]), str(k)), reverse=True)
 
         self.tuples = [Tuple(id_=str(rank + 1),
                              entities=tuple([self.entities[name] for name in tuple_]),
                              article_ids=ids[tuple_])
                        for rank, tuple_ in enumerate(ranking)]
 
-        if debug:
-            self.write_debug(field='tuples', method='tuples')
+        self.write_debug(field='tuples', method='tuples') if debug else None
 
     @Verbose("Computing the articles' annotations...")
     def compute_annotations(self, debug=False):
@@ -349,8 +345,7 @@ class Database:
             count = self.progression(count, self.modulo_articles, size, 'article')
             self.articles[id_].compute_annotations()
 
-        if debug:
-            self.write_debug(field='articles', method='annotations')
+        self.write_debug(field='articles', method='annotations') if debug else None
 
     @Verbose("Computing the contexts...")
     def compute_contexts(self, debug=False):
@@ -370,12 +365,11 @@ class Database:
                 self.articles[article_id_].compute_contexts(tuple_=tuple_)
 
                 query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
-                                  for context_id_ in self.articles[article_id_].contexts[tuple_.get_name()]})
+                                  for context_id_ in self.articles[article_id_].contexts[str(tuple_)]})
 
             tuple_.query_ids = query_ids
 
-        if debug:
-            self.write_debug(field='articles', method='contexts')
+        self.write_debug(field='articles', method='contexts') if debug else None
 
     @Verbose("Computing the Wikipedia information...")
     def compute_wikipedia(self, load, debug=False):
@@ -416,14 +410,13 @@ class Database:
 
                 entity.wiki = wiki
 
-        except (KeyboardInterrupt, WikipediaException):
-            print("A known error occurred, saving the loaded information...")
+        except (KeyboardInterrupt, WikipediaException) as e:
+            print("A known error occurred, saving the loaded information ({})...".format(e))
 
         print("Final found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
         self.wikipedia = wikipedia
 
-        if debug:
-            self.write_debug(field='wikipedia', method='wikipedia')
+        self.write_debug(field='wikipedia', method='wikipedia') if debug else None
 
     @Verbose("Computing the Queries...")
     @Attribute('queries')
@@ -441,20 +434,19 @@ class Database:
         for tuple_ in self.tuples:
             count = self.progression(count, self.modulo_tuples, size, 'tuple')
 
-            for article_id_ in tuple_.article_ids:
-                article_contexts = self.articles[article_id_].contexts[tuple_.get_name()]
+            for article_id_ in sorted(tuple_.article_ids):
+                article_contexts = self.articles[article_id_].contexts[str(tuple_)]
 
-                for context_id_ in article_contexts:
-                    query_id_ = tuple_.id_ + '_' + article_id_ + '_' + context_id_
+                for context_id_, context in article_contexts.items():
+                    query_id_ = '_'.join([article_id_, tuple_.id_, context_id_])
                     queries[query_id_] = Query(id_=query_id_,
                                                tuple_=tuple_,
                                                article=self.articles[article_id_],
-                                               context=article_contexts[context_id_])
+                                               context=context)
 
         self.queries = queries
 
-        if debug:
-            self.write_debug(field='queries', method='queries')
+        self.write_debug(field='queries', method='queries') if debug else None
 
     # endregion
 
@@ -588,7 +580,7 @@ class Database:
         for tuple_ in self.tuples:
             length = 0
             for id_ in tuple_.article_ids:
-                length += len(self.articles[id_].contexts[tuple_.get_name()])
+                length += len(self.articles[id_].contexts[str(tuple_)])
 
             data.append(length)
 
@@ -705,7 +697,7 @@ class Database:
             self.tuples = []
 
             for tuple_ in tuples:
-                if tuple_.get_name() not in to_del:
+                if str(tuple_) not in to_del:
                     self.tuples.append(tuple_)
 
         elif to_del is None and to_keep is not None:
@@ -714,7 +706,7 @@ class Database:
             self.tuples = []
 
             for tuple_ in tuples:
-                if tuple_.get_name() in to_keep:
+                if str(tuple_) in to_keep:
                     self.tuples.append(tuple_)
 
         else:
@@ -774,9 +766,9 @@ class Database:
 
         for tuple_ in self.tuples:
             if len(getattr(tuple_, attribute)) >= threshold:
-                to_keep_tuples.add(tuple_.get_name())
+                to_keep_tuples.add(str(tuple_))
                 to_keep_articles.update(tuple_.article_ids)
-                to_keep_entities.update([entity.name for entity in tuple_.entities])
+                to_keep_entities.update([str(entity) for entity in tuple_.entities])
 
         self.clean_tuples(to_keep=to_keep_tuples)
         self.clean_articles(to_keep=to_keep_articles)
@@ -955,22 +947,22 @@ class Database:
         """
 
         if field == 'articles':
-            lines = [getattr(article, 'debug_' + method)(id_) for id_, article in self.articles.items()]
+            lines = [id_ + ': ' + getattr(article, 'debug_' + method)() + '\n' for id_, article in self.articles.items()]
 
         elif field == 'tuples':
-            lines = [tuple_.debug_tuples() for tuple_ in self.tuples]
+            lines = [str(tuple_) + ': ' + tuple_.debug_tuples() + '\n' for tuple_ in self.tuples]
 
         elif field == 'wikipedia':
-            lines = [wikipedia.debug_found(name) for name, wikipedia in self.wikipedia['found'].items()] \
-                    + [Wikipedia.debug_notfound(name) for name in self.wikipedia['not_found']]
+            lines = [name + ': ' + wikipedia.debug_wikipedia() for name, wikipedia in self.wikipedia['found'].items()] \
+                    + [name + ': not found' for name in self.wikipedia['not_found']]
 
         elif field == 'queries':
-            lines = [query.debug_queries(id_) for id_, query in self.queries.items()]
+            lines = [id_ + ': ' + query.debug_queries() + '\n' for id_, query in self.queries.items()]
 
         else:
             raise Exception("Wrong field/method specified: {}/{}.".format(field, method))
 
-        if any([line.split(':')[1] for line in lines]):
+        if any([line.split(': ')[1] for line in lines]):
             prefix, _ = self.prefix_suffix()
             file_name = prefix + 'debug/' + method + '.txt'
 
