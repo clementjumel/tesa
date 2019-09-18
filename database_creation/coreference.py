@@ -70,16 +70,38 @@ class Coreference:
             entities: set, Entities of the articles.
         """
 
-        for m in [self.representative] + self.mentions:
-            for entity in entities:
-                if entity.match(m.text, flexible=True):
-                    self.entity = str(entity)
-                    return
+        matches = [str(entity) for entity in entities
+                   if (entity.match(self.representative.text, flexible=True) or
+                       entity.is_in(self.representative.text, flexible=False))
+                   and not self.to_exclude(entity)]
+
+        if len(matches) == 1:
+            self.entity = matches[0]
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
 
         self.sentences = set([m.sentence for m in [self.representative] + self.mentions])
+
+    # endregion
+
+    # region Other methods
+
+    def to_exclude(self, entity):
+        """
+        Check if the coreference must not be compared to the entity.
+
+        Args:
+            entity: Entity, entity to check.
+
+        Returns:
+            bool, True iff the coreference must not be compared to the entity.
+        """
+
+        if ' and ' in self.representative.text and entity.type_ == 'person':
+            return True
+
+        return False
 
     # endregion
 
