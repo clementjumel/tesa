@@ -234,7 +234,7 @@ class Database:
             articles[id_] = Article(data_path=data_path, content_path=content_path, summary_path=summary_path)
 
         self.articles = articles
-        
+
         self.write_debug(field='articles', method='articles') if debug else None
 
     @Verbose("Computing the articles' metadata...")
@@ -266,35 +266,43 @@ class Database:
         self.entities = dict()
 
         count, size = 0, len(self.articles)
-        for id_ in self.articles:
+        for _, article in self.articles.items():
             count = self.progression(count, self.modulo_articles, size, 'article')
 
-            entities = self.articles[id_].get_entities()
+            entities = article.get_entities()
             to_ignore = set()
 
-            for i in range(len(entities)):
-                entity = entities[i]
-                matches = [entity.match(string=e.name, type_=e.type_) for e in entities[:i]]
+            for idx, entity in enumerate(entities):
+                matches = set([str(e) for e in entities[:idx] if entity.match(string=str(e), type_=e.type_)])
+                matches = matches.difference(to_ignore)
 
-                if any(matches):
-                    match_name = entities[matches.index(True)].name
+                if len(matches) == 0:
+                    if str(entity) in self.entities:
+                        self.entities[str(entity)].update_info(entity)
+                    else:
+                        self.entities[str(entity)] = entity
+
+                elif len(matches) == 1:
+                    match_name = matches.pop()
                     match_entity = self.entities[match_name]
+
                     del self.entities[match_name]
-
                     match_entity.update_info(entity)
-                    self.entities[match_entity.name] = match_entity
+                    self.entities[str(match_entity)] = match_entity
 
-                    to_ignore.add(match_name) if match_name != match_entity.name else to_ignore.add(entity.name)
+                    if str(entity) != match_name:
+                        if str(match_entity) == str(entity):
+                            to_ignore.add(match_name)
+                        elif str(match_entity) == match_name:
+                            to_ignore.add(str(entity))
+                        else:
+                            raise Exception("The Entity match_entity has the wrong name.")
 
                 else:
-                    if entity.name in self.entities:
-                        self.entities[entity.name].update_info(entity)
+                    raise Exception("Too many matches: {}.".format(matches))
 
-                    else:
-                        self.entities[entity.name] = entity
-
-            self.articles[id_].entities = {self.entities[name] for name in {entity.name for entity in entities}
-                                           if name not in to_ignore}
+            entity_names = sorted({str(entity) for entity in entities}.difference(to_ignore))
+            article.entities = {self.entities[name] for name in entity_names}
 
         self.write_debug(field='articles', method='entities') if debug else None
 
@@ -947,7 +955,8 @@ class Database:
         """
 
         if field == 'articles':
-            lines = [id_ + ': ' + getattr(article, 'debug_' + method)() + '\n' for id_, article in self.articles.items()]
+            lines = [id_ + ': ' + getattr(article, 'debug_' + method)() + '\n'
+                     for id_, article in self.articles.items()]
 
         elif field == 'tuples':
             lines = [str(tuple_) + ': ' + tuple_.debug_tuples() + '\n' for tuple_ in self.tuples]
@@ -962,7 +971,8 @@ class Database:
         else:
             raise Exception("Wrong field/method specified: {}/{}.".format(field, method))
 
-        if any([line.split(': ')[1] for line in lines]):
+        lines = [line for line in lines if line.split(': ')[1].split('\n')[0]]
+        if lines:
             prefix, _ = self.prefix_suffix()
             file_name = prefix + 'debug/' + method + '.txt'
 
@@ -1015,8 +1025,11 @@ class Database:
         if self.shuffle:
             seed(seed=7)
             shuffle(paths)
+            paths = paths[:self.max_size] if self.max_size is not None else paths
+            paths.sort()
 
-        paths = paths[:self.max_size] if self.max_size is not None else paths
+        else:
+            paths = paths[:self.max_size] if self.max_size is not None else paths
 
         return paths
 
