@@ -185,7 +185,7 @@ class Text:
                         entities_boundaries[mention.sentence].add((entity.name, mention.start, mention.end))
 
         for sentence_id, sentence in sentences.items():
-            boundaries = entities_boundaries[sentence_id]
+            boundaries = sorted(entities_boundaries[sentence_id])
             to_remove = set()
 
             for boundary1 in boundaries:
