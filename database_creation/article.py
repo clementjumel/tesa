@@ -252,8 +252,6 @@ class Article:
 
     # endregion
 
-    # endregion
-
 
 def main():
     from database_creation.utils import Tuple
