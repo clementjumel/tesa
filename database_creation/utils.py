@@ -259,6 +259,28 @@ class Entity:
 
     # endregion
 
+    # region Methods debug_
+
+    def debug_entities(self):
+        """
+        Returns a string showing the debugging of an entity.
+
+        Returns:
+            str, debugging of the entity.
+        """
+
+        s = ' (' + self.original_name + '): '
+        for name in self.plausible_names:
+            s += name
+
+        s += '|'
+        for name in self.possible_names:
+            s += name
+
+        return s
+
+    # endregion
+
     # region Other methods
 
     def match(self, string, type_=None, flexible=False):
@@ -453,7 +475,7 @@ class Wikipedia:
             str, debugging of the wikipedia information.
         """
 
-        return self.title + ' -> ' + self.info
+        return ' (' + self.title + '): ' + self.info[:100]
 
     # endregion
 
@@ -518,10 +540,7 @@ class Tuple:
             str, debugging of the tuple.
         """
 
-        s = 'in ' + str(len(self.article_ids)) + ' articles'
-        s += ' (' + self.type_ + ')'
-
-        return s
+        return ' (' + self.type_ + '): in ' + str(len(self.article_ids)) + ' articles'
 
     # endregion
 
@@ -694,7 +713,7 @@ class Query:
             str, debugging of the query.
         """
 
-        return self.entities_names + ' -> ' + self.context
+        return ': ' + self.entities_names + ' -> ' + self.context + '\n'
 
     # endregion
 
