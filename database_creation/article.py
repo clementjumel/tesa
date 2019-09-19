@@ -174,22 +174,6 @@ class Article:
         except FileNotFoundError:
             return True
 
-    def criterion_summary(self):
-        """
-        Check if an article's summary file exists.
-
-        Returns:
-            bool, True iff the file doesn't exist and must be deleted.
-        """
-
-        try:
-            f = open(self.summary_path, 'r')
-            f.close()
-            return False
-
-        except FileNotFoundError:
-            return True
-
     # endregion
 
     # region Methods debug_
@@ -222,8 +206,8 @@ class Article:
             str, debugging of the article.
         """
 
-        entities1 = [str(entity) for entity in self.get_entities()]
-        entities2 = [str(entity) for entity in self.entities]
+        entities1 = sorted([str(entity) for entity in self.get_entities()])
+        entities2 = sorted([str(entity) for entity in self.entities])
 
         if len(entities1) != len(entities2):
             return ': ' + ', '.join(entities1) + '\n      -> ' + ', '.join(entities2)
@@ -238,7 +222,7 @@ class Article:
             str, debugging of the article.
         """
 
-        s = ':\n'
+        s = ': ' + ', '.join([str(entity) for entity in self.entities]) + '\n'
         for coreference in self.content.coreferences + self.summary.coreferences:
             s += str(coreference) + '\n'
         s += '\n'
@@ -253,6 +237,7 @@ class Article:
             str, debugging of the article.
         """
 
+        empty = True
         s = ':\n'
 
         for tuple_name, contexts in self.contexts.items():
@@ -260,11 +245,13 @@ class Article:
             for _, context in contexts.items():
                 temp += str(context) + '\n'
 
-            s += tuple_name + ':\n' + temp if temp else ''
+            if temp:
+                s += tuple_name + ':\n' + temp
+                empty = False
 
         s += '\n'
 
-        return s
+        return s if not empty else ''
 
     # endregion
 
