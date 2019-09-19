@@ -304,7 +304,8 @@ class Database:
             entity_names = sorted({str(entity) for entity in entities}.difference(to_ignore))
             article.entities = {self.entities[name] for name in entity_names}
 
-        self.write_debug(field='articles', method='entities') if debug else None
+        self.write_debug(field='articles', method='article_entities') if debug else None
+        self.write_debug(field='entities', method='entities') if debug else None
 
     @Verbose("Computing the entity tuples...")
     @Attribute('tuples')
@@ -955,24 +956,26 @@ class Database:
         """
 
         if field == 'articles':
-            lines = [id_ + ': ' + getattr(article, 'debug_' + method)() + '\n'
-                     for id_, article in self.articles.items()]
+            lines = [[id_, getattr(article, 'debug_' + method)()] for id_, article in self.articles.items()]
+
+        elif field == 'entities':
+            lines = [[name, entity.debug_entities()] for name, entity in self.entities.items()]
 
         elif field == 'tuples':
-            lines = [str(tuple_) + ': ' + tuple_.debug_tuples() + '\n' for tuple_ in self.tuples]
+            lines = [[str(tuple_), tuple_.debug_tuples()] for tuple_ in self.tuples]
 
         elif field == 'wikipedia':
-            lines = [name + ': ' + wikipedia.debug_wikipedia() + '\n'
-                     for name, wikipedia in self.wikipedia['found'].items()] \
-                    + [name + ': not found' + '\n' for name in self.wikipedia['not_found']]
+            lines = [[name, wikipedia.debug_wikipedia()] for name, wikipedia in self.wikipedia['found'].items()] \
+                    + [[name, 'not found'] for name in self.wikipedia['not_found']]
 
         elif field == 'queries':
-            lines = [id_ + ': ' + query.debug_queries() + '\n' for id_, query in self.queries.items()]
+            lines = [[id_, query.debug_queries()] for id_, query in self.queries.items()]
 
         else:
             raise Exception("Wrong field/method specified: {}/{}.".format(field, method))
 
-        lines = [line for line in lines if line.split(': ')[1].split('\n')[0]]
+        lines = [line[0] + ' -> ' + line[1] + '\n' for line in lines if line[1]]
+
         if lines:
             prefix, _ = self.prefix_suffix()
             file_name = prefix + 'debug/' + method + '.txt'
