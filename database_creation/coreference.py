@@ -30,7 +30,7 @@ class Coreference:
             str, readable format of the instance.
         """
 
-        entity = self.entity + ': ' if self.entity is not None else ''
+        entity = '[' + self.entity + '] ' if self.entity is not None else ''
 
         return entity + '; '.join([str(mention) for mention in [self.representative] + self.mentions])
 

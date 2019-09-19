@@ -518,8 +518,8 @@ class Tuple:
             str, debugging of the tuple.
         """
 
-        s = 'type -> ' + self.type_ + '; '
-        s += 'articles -> ' + str(len(self.article_ids))
+        s = 'in ' + str(len(self.article_ids)) + ' articles'
+        s += ' (' + self.type_ + ')'
 
         return s
 

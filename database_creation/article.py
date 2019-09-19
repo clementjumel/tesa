@@ -202,7 +202,7 @@ class Article:
             str, debugging of the article.
         """
 
-        return self.data_path
+        return ' -> ' + self.data_path
 
     def debug_metadata(self):
         """
@@ -212,9 +212,9 @@ class Article:
             str, debugging of the article.
         """
 
-        return self.date + '; ' + self.title
+        return ' -> ' + self.title + ' (' + self.date + ')'
 
-    def debug_entities(self):
+    def debug_article_entities(self):
         """
         Returns a string showing the debugging of an article.
 
@@ -225,8 +225,8 @@ class Article:
         entities1 = [str(entity) for entity in self.get_entities()]
         entities2 = [str(entity) for entity in self.entities]
 
-        if len(entities1) != len(entities2) or bool([entity for entity in entities2 if entity not in entities1]):
-            return ', '.join(entities1) + ' -> ' + ', '.join(entities2)
+        if len(entities1) != len(entities2):
+            return ': ' + ', '.join(entities1) + '\n      -> ' + ', '.join(entities2)
         else:
             return ''
 
@@ -238,7 +238,12 @@ class Article:
             str, debugging of the article.
         """
 
-        return '; '.join([str(coreference) for coreference in self.content.coreferences + self.summary.coreferences])
+        s = ':\n'
+        for coreference in self.content.coreferences + self.summary.coreferences:
+            s += str(coreference) + '\n'
+        s += '\n'
+
+        return s
 
     def debug_contexts(self):
         """
@@ -248,7 +253,13 @@ class Article:
             str, debugging of the article.
         """
 
-        return '; '.join([str(context) for _, context in self.contexts.items()])
+        context_strings = []
+
+        for tuple_name, contexts in self.contexts.items():
+            c = [str(context) for _, context in contexts.items()]
+            context_strings.append(tuple_name + ' -> ' + '; '.join(c)) if c else None
+
+        return '\n'.join(context_strings)
 
     # endregion
 
