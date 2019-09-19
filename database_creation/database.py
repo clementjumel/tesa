@@ -974,7 +974,7 @@ class Database:
         else:
             raise Exception("Wrong field/method specified: {}/{}.".format(field, method))
 
-        lines = [line[0] + ' -> ' + line[1] + '\n' for line in lines if line[1]]
+        lines = [line[0] + line[1] + '\n' for line in lines if line[1]]
 
         if lines:
             prefix, _ = self.prefix_suffix()
