@@ -253,13 +253,18 @@ class Article:
             str, debugging of the article.
         """
 
-        context_strings = []
+        s = ':\n'
 
         for tuple_name, contexts in self.contexts.items():
-            c = [str(context) for _, context in contexts.items()]
-            context_strings.append(tuple_name + ' -> ' + '; '.join(c)) if c else None
+            temp = ''
+            for _, context in contexts.items():
+                temp += str(context) + '\n'
 
-        return '\n'.join(context_strings)
+            s += tuple_name + ':\n' + temp if temp else ''
+
+        s += '\n'
+
+        return s
 
     # endregion
 
