@@ -416,7 +416,7 @@ class Database:
 
                 if not load:
                     wiki = entity.get_wiki()
-                    if wiki.info is not None:
+                    if wiki.summary is not None:
                         wikipedia['found'][name] = wiki
                     else:
                         wikipedia['not_found'].add(name)
@@ -428,7 +428,7 @@ class Database:
                         wiki = Wikipedia()
                     else:
                         wiki = entity.get_wiki()
-                        if wiki.info is not None:
+                        if wiki.summary is not None:
                             wikipedia['found'][name] = wiki
                         else:
                             wikipedia['not_found'].add(name)
