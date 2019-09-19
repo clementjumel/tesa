@@ -18,8 +18,8 @@ class Database:
 
     modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
-    def __init__(self, years=(2006, 2007), max_size=None, shuffle=False, project_root='', verbose=True,
-                 min_articles=None, min_queries=None):
+    def __init__(self, years=(2006, 2007), max_size=None, shuffle=False, project_root='',
+                 min_articles=None, min_queries=None, random_seed=None):
         """
         Initializes an instance of Database.
 
@@ -28,18 +28,18 @@ class Database:
             max_size: int, maximum number of articles in the database; if None, takes all articles.
             shuffle: bool, whether to shuffle the articles selected in the database.
             project_root: str, relative path to the root of the project.
-            verbose: bool, verbose option of the database.
             min_articles: int, minimum number of articles an entities' tuple must be in.
             min_queries: int, minimum number of Queries an entities' tuple must have.
+            random_seed: int, the seed to use for the random processes.
         """
 
         self.years = years
         self.max_size = max_size
         self.shuffle = shuffle
         self.project_root = project_root
-        self.verbose = verbose
         self.min_articles = min_articles
         self.min_queries = min_queries
+        self.random_seed = random_seed
 
         self.articles = None
         self.entities = None
@@ -47,6 +47,8 @@ class Database:
         self.wikipedia = None
         self.queries = None
         self.stats = None
+
+        seed(seed=self.random_seed)
 
     def __str__(self):
         """
@@ -134,7 +136,6 @@ class Database:
         self.compute_articles(debug=debug)
 
         self.clean_articles(criterion=Article.criterion_content)
-        self.clean_articles(criterion=Article.criterion_summary)
 
         self.compute_metadata(debug=debug)
         self.compute_entities(debug=debug)
@@ -177,12 +178,13 @@ class Database:
             self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, file_name=None, debug=False):
+    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False):
         """
         Performs the processing of the aggregation queries.
 
         Args:
             load: bool, if True, load an existing file.
+            check_changes: bool, if not load, load the existing queries file and check if there are changes in the new.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
         """
@@ -191,9 +193,23 @@ class Database:
             self.load_pkl(attribute_name='queries', file_name=file_name)
 
         else:
+            if check_changes:
+                try:
+                    self.load_pkl(attribute_name='queries', file_name=file_name)
+                except FileNotFoundError:
+                    check_changes = False
+                    print("Unable to check the changes: the queries file is missing.")
+            old_queries = self.queries
+
             self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
             self.save_csv(attribute_name='queries', file_name=file_name, limit=100)
+
+            if check_changes:
+                if old_queries == self.queries:
+                    print("\nNo change in the computed queries.")
+                else:
+                    print("\nThe queries have changed!")
 
     @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -817,6 +833,9 @@ class Database:
         if self.min_queries is not None:
             suffix += '_queries' + str(self.min_queries)
 
+        if self.random_seed is not None:
+            suffix += '_seed' + str(self.random_seed)
+
         return prefix, suffix
 
     def save_pkl(self, attribute_name=None, obj=None, file_name=None, folder_name='queries'):
@@ -887,22 +906,34 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def combine_pkl(self, in_names, out_name='wikipedia_global'):
+    def combine_pkl(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
         """
-        Combines the wikipedia files into a single file.
+        Combines current wikipedia information and some other wikipedia files into a single file.
 
         Args:
+            current: bool, whether to use the current wikipedia information.
             in_names: list, names of the file to combine.
             out_name: str, name of the file to write in.
         """
 
         out_wikipedia = {'found': dict(), 'not_found': set()}
 
+        if current:
+            print("Current wikipedia information: {} found/{} not_found...".format(len(self.wikipedia['found']),
+                                                                                   len(self.wikipedia['not_found'])))
+
+            for type_ in ['found', 'not_found']:
+                out_wikipedia[type_].update(self.wikipedia[type_])
+
+            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
+                                                                         len(out_wikipedia['not_found'])))
+
         for in_name in in_names:
             in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
 
-            print("Current file: {} found/{} not_found...".format(len(in_wikipedia['found']),
-                                                                  len(in_wikipedia['not_found'])))
+            print("File {}: {} found/{} not_found...".format(in_name,
+                                                             len(in_wikipedia['found']),
+                                                             len(in_wikipedia['not_found'])))
 
             for type_ in ['found', 'not_found']:
                 out_wikipedia[type_].update(in_wikipedia[type_])
@@ -927,7 +958,6 @@ class Database:
         ids = list(obj.keys())
 
         if limit is not None:
-            seed(seed=42)
             shuffle(ids)
             ids = ids[:limit]
 
@@ -1027,7 +1057,6 @@ class Database:
         paths.sort()
 
         if self.shuffle:
-            seed(seed=7)
             shuffle(paths)
             paths = paths[:self.max_size] if self.max_size is not None else paths
             paths.sort()
