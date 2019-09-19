@@ -215,7 +215,7 @@ class Entity:
 
             if len(split) > 2:
                 for i in range(len(split) - 1):
-                    possible_name = split[i] + split[i + 1]
+                    possible_name = split[i] + ' ' + split[i + 1]
                     possible_names.add(possible_name)
 
             name += suffix1
@@ -247,15 +247,15 @@ class Entity:
             Wikipedia, wikipedia page of the entity.
         """
 
-        p, exact = self.match_page(self.name)
+        p = self.match_page(self.name)
 
         if p is None:
             for query in search(self.name):
-                p, exact = self.match_page(query)
+                p = self.match_page(query)
                 if p is not None:
                     break
 
-        return Wikipedia(p, exact)
+        return Wikipedia(p)
 
     # endregion
 
@@ -270,12 +270,7 @@ class Entity:
         """
 
         s = ' (' + self.original_name + '): '
-        for name in self.plausible_names:
-            s += name
-
-        s += '|'
-        for name in self.possible_names:
-            s += name
+        s += '; '.join(self.plausible_names) + '|' + '; '.join(self.possible_names)
 
         return s
 
@@ -355,30 +350,25 @@ class Entity:
 
     def match_page(self, query):
         """
-        Check if the entity matches the Wikipedia page found with a query and if the match is exact or if the page is
-        only related to the entity.
+        Check if the entity matches the Wikipedia page found with a query.
 
         Args:
             query: str, query to perform to find the page.
 
         Returns:
-            p: wikipedia.page, wikipedia page corresponding to the entity, or None.
-            exact: bool, whether or not the match is exact or not.
+            wikipedia.page, wikipedia page corresponding to the entity, or None.
         """
 
         try:
             p = page(query)
         except (PageError, DisambiguationError):
-            return None, None
+            return None
 
-        if self.match(string=p.title, flexible=True):
-            return p, True
-
-        elif self.is_in(string=p.title) or self.is_in(string=p.summary):
-            return p, False
+        if self.match(string=p.title, flexible=True) or self.is_in(string=p.title) or self.is_in(string=p.summary):
+            return p
 
         else:
-            return None, None
+            return None
 
     def update_info(self, entity):
         """
@@ -403,13 +393,12 @@ class Wikipedia:
 
     info_length = 600
 
-    def __init__(self, page=None, exact=None):
+    def __init__(self, page=None):
         """
         Initializes the Wikipedia instance; if the wikipedia entry is not found, the arguments are None.
 
         Args:
             page: wikipedia.page, wikipedia page of the entity; can be None.
-            exact: bool, whether the page corresponds directly to an entity; can be None.
         """
 
         if page is not None:
@@ -417,13 +406,10 @@ class Wikipedia:
             self.summary = page.summary
             self.url = page.url
 
-            self.exact = exact
-
-            self.info = None
-            self.compute_info()
-
         else:
-            self.title, self.summary, self.url, self.exact, self.info = None, None, None, None, None
+            self.title = None
+            self.summary = None
+            self.url = None
 
     def __str__(self):
         """
@@ -433,20 +419,24 @@ class Wikipedia:
             str, readable format of the instance.
         """
 
-        return self.info if self.info is not None else "No information found."
+        return "No information found." if self.summary is None else self.get_info()
 
     # endregion
 
-    # region Methods compute_
+    # region Methods get_
 
-    def compute_info(self):
-        """ Compute the information of the Wikipedia object. """
+    def get_info(self):
+        """
+        Returns the information of the Wikipedia object.
+
+        Returns:
+            str, info of the Wikipedia object.
+        """
 
         paragraph = self.summary.split('\n')[0]
 
         if len(paragraph) <= self.info_length:
             info = paragraph
-
         else:
             sentences = sent_tokenize(paragraph)
             info = sentences[0]
@@ -461,7 +451,7 @@ class Wikipedia:
         info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
         info = info.encode("utf-8", errors="ignore").decode()
 
-        self.info = info
+        return info
 
     # endregion
 
@@ -475,7 +465,7 @@ class Wikipedia:
             str, debugging of the wikipedia information.
         """
 
-        return ' (' + self.title + '): ' + self.info[:100]
+        return ' (' + self.title + '): ' + str(self)[:150] + '...'
 
     # endregion
 
@@ -588,6 +578,16 @@ class Query:
         s += str(self.context)
 
         return s
+
+    def __eq__(self, obj):
+        """
+        Overrides the builtin equals method for the instances of Query.
+
+        Returns:
+            bool, whether or not the two objects are equal.
+        """
+
+        return isinstance(obj, Query) and self.to_dict() == obj.to_dict()
 
     # endregion
 
