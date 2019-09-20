@@ -222,12 +222,18 @@ class Article:
             str, debugging of the article.
         """
 
-        s = ': ' + ', '.join([str(entity) for entity in self.entities]) + '\n'
-        for coreference in self.content.coreferences + self.summary.coreferences:
-            s += str(coreference) + '\n'
-        s += '\n'
+        s, empty = ': ' + ', '.join([str(entity) for entity in self.entities]) + '\n', True
 
-        return s
+        for coreference in self.content.coreferences + self.summary.coreferences:
+            mentions = [coreference.representative] + coreference.mentions
+            matches = sorted(set([str(entity) for entity in self.entities for mention in mentions
+                                  if entity.is_in(str(mention), flexible=True)]))
+
+            if matches:
+                s += str(coreference) + ' (' + ', '.join(matches) + ')' + '\n'
+                empty = False
+
+        return s if not empty else ''
 
     def debug_contexts(self):
         """
@@ -237,19 +243,14 @@ class Article:
             str, debugging of the article.
         """
 
-        empty = True
-        s = ':\n'
+        s, empty = ':', True
 
         for tuple_name, contexts in self.contexts.items():
-            temp = ''
-            for _, context in contexts.items():
-                temp += str(context) + '\n'
+            temp = '\n'.join([str(context) for _, context in contexts.items()])
 
             if temp:
-                s += tuple_name + ':\n' + temp
+                s += '\n' + tuple_name + ':\n' + temp + '\n'
                 empty = False
-
-        s += '\n'
 
         return s if not empty else ''
 
