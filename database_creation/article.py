@@ -80,19 +80,6 @@ class Article:
 
         self.contexts[name] = contexts
 
-    def compute_entities(self):
-        """ Compute the entities of the article. """
-
-        entities = dict()
-
-        for entity in self.get_entities():
-            if entity.name in entities:
-                entities[entity.name].update_info(entity)
-            else:
-                entities[entity.name] = entity
-
-        self.entities = {entities[name] for name in {entity.name for entity in self.get_entities()}}
-
     # endregion
 
     # region Methods get_
@@ -145,12 +132,17 @@ class Article:
 
         root = ElementTree.parse(self.data_path).getroot()
 
-        locations = [Entity(entity.text, 'location')
-                     for entity in root.findall('./head/docdata/identified-content/location')]
-        persons = [Entity(entity.text, 'person') for entity in root.findall('./head/docdata/identified-content/person')]
-        orgs = [Entity(entity.text, 'org') for entity in root.findall('./head/docdata/identified-content/org')]
+        person_elements = root.findall('./head/docdata/identified-content/person')
+        location_elements = root.findall('./head/docdata/identified-content/location')
+        org_elements = root.findall('./head/docdata/identified-content/org')
 
-        entities = locations + persons + orgs
+        elements = set([('person', e.text) for e in person_elements if e.get('class') == 'indexing_service']
+                       + [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service']
+                       + [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service'])
+
+        entities = [Entity(original_name=element[1], type_=element[0]) for element in sorted(elements)]
+        if len(entities) != len(set([str(entity) for entity in entities])):
+            entities = []
 
         return entities
 
@@ -264,7 +256,7 @@ def main():
                       '../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml',
                       '../databases/nyt_jingyun/summary_annotated/2006summary_annotated/1728670.txt.xml')
 
-    article.compute_entities()
+    article.entities = article.get_entities()
     article.compute_metadata()
     article.compute_annotations()
     article.compute_contexts(tuple_=Tuple(id_='0', entities=tuple(article.entities)))
