@@ -136,13 +136,12 @@ class Article:
         location_elements = root.findall('./head/docdata/identified-content/location')
         org_elements = root.findall('./head/docdata/identified-content/org')
 
-        elements = set([('person', e.text) for e in person_elements if e.get('class') == 'indexing_service']
-                       + [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service']
-                       + [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service'])
+        elements = set([('person', e.text) for e in person_elements if e.get('class') == 'indexing_service'] +
+                       [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service'] +
+                       [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service'])
 
         entities = [Entity(original_name=element[1], type_=element[0]) for element in sorted(elements)]
-        if len(entities) != len(set([str(entity) for entity in entities])):
-            entities = []
+        assert len(entities) == len(set([str(entity) for entity in entities]))
 
         return entities
 
@@ -198,8 +197,18 @@ class Article:
             str, debugging of the article.
         """
 
-        entities1 = sorted([str(entity) for entity in self.get_entities()])
-        entities2 = sorted([str(entity) for entity in self.entities])
+        root = ElementTree.parse(self.data_path).getroot()
+
+        person_elements = root.findall('./head/docdata/identified-content/person')
+        location_elements = root.findall('./head/docdata/identified-content/location')
+        org_elements = root.findall('./head/docdata/identified-content/org')
+
+        entities1 = [('person', e.text) for e in person_elements if e.get('class') == 'indexing_service'] + \
+                    [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service'] + \
+                    [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service']
+
+        entities1 = [pair[1] + ' (' + pair[0] + ')' for pair in sorted(entities1)]
+        entities2 = [str(entity) for entity in self.entities]
 
         if len(entities1) != len(entities2):
             return ': ' + ', '.join(entities1) + '\n      -> ' + ', '.join(entities2)
