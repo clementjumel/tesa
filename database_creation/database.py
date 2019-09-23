@@ -288,7 +288,8 @@ class Database:
             try:
                 entities = article.get_entities()
             except AssertionError:
-                print("Several entities have the same name; ignoring them...")
+                entities = article.get_vanilla_entities()
+                print("      Several entities have the same name ({}); ignoring them...".format(entities))
                 entities = []
 
             for entity in entities:
@@ -296,7 +297,7 @@ class Database:
                     try:
                         self.entities[str(entity)].update_info(entity)
                     except AssertionError:
-                        print("{} corresponds to both {} and {}, ignoring the later...".format(
+                        print("      {} corresponds to both {} and {}, ignoring the later...".format(
                             str(entity), entity.type_, self.entities[str(entity)].type_
                         ))
                 else:
