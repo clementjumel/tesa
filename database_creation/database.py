@@ -285,7 +285,11 @@ class Database:
         for _, article in self.articles.items():
             count = self.progression(count, self.modulo_articles, size, 'article')
 
-            entities = article.get_entities()
+            try:
+                entities = article.get_entities()
+            except AssertionError:
+                print("Several entities have the same name; ignoring them...")
+                entities = []
 
             for entity in entities:
                 if str(entity) in self.entities:
