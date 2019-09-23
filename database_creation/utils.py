@@ -101,17 +101,35 @@ class Entity:
 
         return self.name
 
+    def __eq__(self, obj):
+        """
+        Overrides the builtin equals method for the instances of Entity.
+
+        Returns:
+            bool, whether or not the two objects are equal.
+        """
+
+        if not isinstance(obj, Entity):
+            return False
+
+        if self.name != obj.name:
+            return False
+
+        if self.type_ != obj.type_:
+            return False
+
+        return True
+
     # endregion
 
     # region Methods compute_
 
     def compute_name(self):
-        """ Compute the name and possibly the plausible names and the extra info of the entity. """
+        """ Compute the names and the extra info of the entity. """
 
         before_parenthesis = findall(r'(.*?)\s*\(', self.original_name)
         before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
             else self.original_name
-
         in_parenthesis = set(findall(r'\((.*?)\)', self.original_name))
 
         plausible_names, possible_names = set(), set()
@@ -120,18 +138,15 @@ class Entity:
             before_parenthesis = before_parenthesis.replace('.', '')
             split = before_parenthesis.split()
 
-            if len(split) > 1 and split[-1].lower().replace('.', '') in ['jr', 'junior']:
+            if len(split) > 1 and split[-1].lower() in ['jr', 'sr']:
                 name = ' '.join(split[:-1])
-                suffix = ' Jr.'
-            elif len(split) > 1 and split[-1].lower().replace('.', '') in ['sr', 'senior']:
-                name = ' '.join(split[:-1])
-                suffix = ' Sr.'
+                suffix = ' ' + split[-1].lower().capitalize() + '.'
             else:
-                name = before_parenthesis
-                suffix = ''
+                name, suffix = ' '.join(split), ''
 
             # Inverse the words when there is a comma
             split = name.split(', ')
+            assert len(split) < 3
             name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
 
             # Add '.' to single letters
@@ -139,101 +154,88 @@ class Entity:
             for i in range(len(split)):
                 if len(split[i]) == 1:
                     split[i] += '.'
-
-            # Full name
             name = ' '.join(split)
-            plausible_names.add(name)
-            name += suffix
-            plausible_names.add(name)
+
+            # Name without suffix
+            plausible_names.add(name) if suffix else None
 
             # Name without single letters
-            split_bis = [word for word in split if len(word.replace('.', '')) > 1]
-            plausible_name = ' '.join(split_bis)
-            plausible_names.add(plausible_name + suffix)
-            plausible_names.add(plausible_name)
+            split = [word for word in name.split() if len(word.replace('.', '')) > 1]
+            plausible_names.add(' '.join(split))
+            plausible_names.add(' '.join(split) + suffix) if suffix else None
 
             # Combination of pairs of words
-            if len(split_bis) > 2:
-                for i in range(len(split_bis) - 1):
-                    for j in range(i + 1, len(split_bis)):
-                        possible_name = split_bis[i] + ' ' + split_bis[j]
-                        possible_names.add(possible_name)
+            split = [word for word in name.split() if len(word.replace('.', '')) > 1]
+            if len(split) > 2:
+                for i in range(len(split) - 1):
+                    for j in range(i + 1, len(split)):
+                        plausible_names.add(split[i] + ' ' + split[j])
+                        plausible_names.add(split[i] + ' ' + split[j] + suffix) if suffix else None
 
             # Last word of the name
-            if len(split) > 0:
-                possible_name = split[-1]
-                possible_names.add(possible_name + suffix)
-                possible_names.add(possible_name)
+            split = name.split()
+            if len(split) > 1:
+                possible_names.add(split[-1])
+                possible_names.add(split[-1] + suffix) if suffix else None
 
             # Fist and last part of the name
-            if len(split) > 1:
-                plausible_name = split[0] + ' ' + split[-1]
-                plausible_names.add(plausible_name + suffix)
-                plausible_names.add(plausible_name)
+            split = name.split()
+            if len(split) > 2:
+                plausible_names.add(split[0] + ' ' + split[-1])
+                plausible_names.add(split[0] + ' ' + split[-1] + suffix) if suffix else None
 
             # Write first letter for words in the middle
+            split = name.split()
             if len(split) > 2:
-                plausible_name = split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1]
-                plausible_names.add(plausible_name + suffix)
-                plausible_names.add(plausible_name)
+                plausible_names.add(split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1])
+                plausible_names.add(split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1]
+                                    + suffix) if suffix else None
+
+            name += suffix
 
         elif self.type_ == 'location':
-            name = before_parenthesis
+            split = before_parenthesis.split()
+
+            if len(split) > 1 and split[-1].lower() in ['city']:
+                name = ' '.join(split[:-1])
+                suffix = ' ' + split[-1].lower().capitalize()
+            else:
+                name, suffix = ' '.join(split), ''
+
+            plausible_names.add(name)
+            name += suffix
 
             if in_parenthesis:
                 info = ', '.join(in_parenthesis)
                 plausible_names.add(name + ', ' + info)
 
-            split = name.split()
-            if len(split) > 1 and split[-1].lower() == 'city':
-                plausible_names.add(' '.join(split[:-1]))
-
-            if len(split) > 2:
-                for i in range(len(split) - 1):
-                    possible_name = split[i] + split[i + 1]
-                    possible_names.add(possible_name)
-
         elif self.type_ == 'org':
             split = before_parenthesis.split()
-            if split[-1].lower().replace('.', '') == 'co':
+
+            if len(split) > 1 and split[-1].lower().replace('.', '') in ['co', 'corp', 'inc']:
                 name = ' '.join(split[:-1])
-                suffix1, suffix2 = ' Co.', ' Company'
-            elif split[-1].lower().replace('.', '') == 'company':
+                suffix = ' ' + split[-1].lower().replace('.', '').capitalize() + '.'
+            elif len(split) > 1 and split[-1].lower() in ['company', 'university']:
                 name = ' '.join(split[:-1])
-                suffix1, suffix2 = ' Company', ' Co.'
-            elif split[-1].lower().replace('.', '') == 'foundation':
-                name = ' '.join(split[:-1])
-                suffix1, suffix2 = ' Foundation', ''
+                suffix = ' ' + split[-1].lower().replace('.', '').capitalize()
             else:
-                name = ' '.join(split)
-                suffix1, suffix2 = '', ''
+                name, suffix = ' '.join(split), ''
 
-            plausible_names.update([name, name + suffix1, name + suffix2])
-
-            plausible_name = name.replace(' & ', ' and ')
-            plausible_names.update([plausible_name, plausible_name + suffix1, plausible_name + suffix2])
-
-            if len(split) > 2:
-                for i in range(len(split) - 1):
-                    possible_name = split[i] + ' ' + split[i + 1]
-                    possible_names.add(possible_name)
-
-            name += suffix1
+            plausible_names.add(name)
+            name += suffix
 
         else:
             raise Exception("Wrong type for an entity: {}".format(self.type_))
 
-        if name in plausible_names:
-            plausible_names.remove(name)
         for n in plausible_names.intersection(possible_names):
             possible_names.remove(n)
-
-        extra_info = in_parenthesis
+        for n in {name}.intersection(plausible_names):
+            plausible_names.remove(n)
 
         self.name = name
         self.plausible_names = plausible_names
         self.possible_names = possible_names
-        self.extra_info = extra_info
+        self.extra_info = in_parenthesis
 
     # endregion
 
@@ -731,8 +733,11 @@ def main():
                  ('Valerie Plame', 'Valerie Elise Plame Wilson'),
                  ('Lewis Libby', 'I. Lewis Libby Jr.')]:
 
-        print(Entity(pair[0], 'person').match(pair[1], 'person', False),
-              Entity(pair[0], 'person').match(pair[1], 'person', True))
+        e1, e2 = Entity(pair[0], 'person'), Entity(pair[1], 'person')
+
+        print(e1 == e2,
+              e1.match(pair[1], 'person', False),
+              e1.match(pair[1], 'person', True))
 
     return
 
