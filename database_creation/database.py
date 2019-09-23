@@ -288,8 +288,9 @@ class Database:
             try:
                 entities = article.get_entities()
             except AssertionError:
-                entities = article.get_vanilla_entities()
-                print("      Several entities have the same name ({}); ignoring them...".format(entities))
+                print("      Several entities have the same name ({}); ignoring them...".format(
+                    '; '.join(article.get_vanilla_entities())
+                ))
                 entities = []
 
             for entity in entities:
