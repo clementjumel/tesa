@@ -380,12 +380,18 @@ class Entity:
             entity: Entity, new entity to take into account.
         """
 
-        e = self if len(self.name.split()) >= len(entity.name.split()) else entity
+        assert self.__eq__(entity)
 
-        self.name = e.name
-        self.plausible_names = e.plausible_names
-        self.possible_names = e.possible_names
-        self.extra_info.update(entity.extra_info)
+        if self.original_name != entity.original_name:
+            names1 = set([self.name] + list(self.plausible_names) + list(self.possible_names))
+            names2 = set([entity.name] + list(entity.plausible_names) + list(entity.possible_names))
+
+            if len(names1) != len(names2):
+                e = self if len(names1) > len(names2) else entity
+                self.plausible_names = e.plausible_names
+                self.possible_names = e.possible_names
+
+            self.extra_info.update(entity.extra_info)
 
     # endregion
 
