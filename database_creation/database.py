@@ -293,7 +293,12 @@ class Database:
 
             for entity in entities:
                 if str(entity) in self.entities:
-                    self.entities[str(entity)].update_info(entity)
+                    try:
+                        self.entities[str(entity)].update_info(entity)
+                    except AssertionError:
+                        print("{} corresponds to both {} and {}, ignoring the later...".format(
+                            str(entity), entity.type_, self.entities[str(entity)].type_
+                        ))
                 else:
                     self.entities[str(entity)] = entity
 
