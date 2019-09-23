@@ -286,39 +286,14 @@ class Database:
             count = self.progression(count, self.modulo_articles, size, 'article')
 
             entities = article.get_entities()
-            to_ignore = set()
 
-            for idx, entity in enumerate(entities):
-                matches = set([str(e) for e in entities[:idx] if entity.match(string=str(e), type_=e.type_)])
-                matches = matches.difference(to_ignore)
-
-                if len(matches) == 0:
-                    if str(entity) in self.entities:
-                        self.entities[str(entity)].update_info(entity)
-                    else:
-                        self.entities[str(entity)] = entity
-
-                elif len(matches) == 1:
-                    match_name = matches.pop()
-                    match_entity = self.entities[match_name]
-
-                    del self.entities[match_name]
-                    match_entity.update_info(entity)
-                    self.entities[str(match_entity)] = match_entity
-
-                    if str(entity) != match_name:
-                        if str(match_entity) == str(entity):
-                            to_ignore.add(match_name)
-                        elif str(match_entity) == match_name:
-                            to_ignore.add(str(entity))
-                        else:
-                            raise Exception("The Entity match_entity has the wrong name.")
-
+            for entity in entities:
+                if str(entity) in self.entities:
+                    self.entities[str(entity)].update_info(entity)
                 else:
-                    raise Exception("Too many matches: {}.".format(matches))
+                    self.entities[str(entity)] = entity
 
-            entity_names = sorted({str(entity) for entity in entities}.difference(to_ignore))
-            article.entities = {self.entities[name] for name in entity_names}
+            article.entities = [self.entities[name] for name in [str(entity) for entity in entities]]
 
         self.write_debug(field='articles', method='article_entities') if debug else None
         self.write_debug(field='entities', method='entities') if debug else None
