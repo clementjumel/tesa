@@ -146,7 +146,8 @@ class Entity:
 
             # Inverse the words when there is a comma
             split = name.split(', ')
-            assert len(split) < 3
+            # TODO: check
+            # assert len(split) < 3
             name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
 
             # Add '.' to single letters
@@ -224,6 +225,9 @@ class Entity:
             plausible_names.add(name)
             name += suffix
 
+            if name[-1] == 's':
+                plausible_names.add('the ' + name)
+
         else:
             raise Exception("Wrong type for an entity: {}".format(self.type_))
 
@@ -272,7 +276,8 @@ class Entity:
         """
 
         s = ' (' + self.original_name + '): '
-        s += '; '.join(self.plausible_names) + '|' + '; '.join(self.possible_names)
+        s += '; '.join(self.plausible_names) + ' | ' + '; '.join(self.possible_names) + ' | '
+        s += '; '.join(self.extra_info)
 
         return s
 
@@ -280,38 +285,55 @@ class Entity:
 
     # region Other methods
 
-    def match(self, string, type_=None, flexible=False):
+    def match_entity(self, entity, flexible=False):
         """
-        Check if the entity matches another entity represented as a string.
+        Check if the entity matches another entity.
 
         Args:
-            string: str, entity to check.
-            type_: str, type of the entity; if None, takes the same as the other entity.
+            entity: Entity, entity to check.
             flexible: bool, whether or not to check the possible names as well.
 
         Returns:
-            bool, True iff the string matches the entity.
+            bool, True iff the entities match.
         """
 
-        if type_ is not None:
-            if self.type_ != type_:
-                return False
+        if self.__eq__(entity):
+            return True
+
+        elif not isinstance(entity, Entity) or not self.type_ == entity.type_:
+            return False
+
         else:
-            type_ = self.type_
+            names1 = {self.name}.union(self.plausible_names)
+            names2 = {entity.name}.union(entity.plausible_names)
 
-        entity = Entity(string, type_)
+            if flexible:
+                names1.update(self.possible_names)
+                names2.update(entity.possible_names)
 
-        names1 = {self.name}.union(self.plausible_names)
-        names2 = {entity.name}.union(entity.plausible_names)
+            names1 = {unidecode(name) for name in names1}
+            names2 = {unidecode(name) for name in names2}
 
-        if flexible:
-            names1.update(self.possible_names)
-            names2.update(entity.possible_names)
+            return self.name in names2 or entity.name in names1
 
-        names1 = {unidecode(name) for name in names1}
-        names2 = {unidecode(name) for name in names2}
+    def match_string(self, string, flexible=False):
+        """
+        Check if the entity matches a string representing potentially an entity.
 
-        return self.name in names2 or entity.name in names1
+        Args:
+            string: str, string to check.
+            flexible: bool, whether or not to check the possible names as well.
+
+        Returns:
+            bool, True iff the entity matches the string.
+        """
+
+        if self.not_match(string):
+            return False
+
+        else:
+            entity = Entity(original_name=string, type_=self.type_)
+            return self.match_entity(entity=entity, flexible=flexible)
 
     def is_in(self, string, flexible=False):
         """
@@ -366,7 +388,9 @@ class Entity:
         except (PageError, DisambiguationError):
             return None
 
-        if self.match(string=p.title, flexible=True) or self.is_in(string=p.title) or self.is_in(string=p.summary):
+        if self.match_string(string=p.title, flexible=False) \
+                or self.is_in(string=p.title, flexible=False) \
+                or self.is_in(string=p.summary, flexible=False):
             return p
 
         else:
@@ -392,6 +416,34 @@ class Entity:
                 self.possible_names = e.possible_names
 
             self.extra_info.update(entity.extra_info)
+
+    def not_match(self, string):
+        """
+        Check if a string must not be compared to the entity.
+
+        Args:
+            string: str, string to check.
+
+        Returns:
+            bool, True iff the string must not be compared to the entity.
+        """
+
+        words = string.lower().split()
+
+        if self.type_ == 'person':
+            if 'and' in words:
+                return True
+
+        elif self.type_ == 'location':
+            pass
+
+        elif self.type_ == 'org':
+            pass
+
+        else:
+            raise Exception("Wrong type of entity: {}".format(self.type_))
+
+        return False
 
     # endregion
 
