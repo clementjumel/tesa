@@ -326,15 +326,19 @@ class Entity:
         """
 
         if not self.not_match(string):
-            split = string.split()
+            words, strings = string.split(), [string]
 
-            entity = Entity(original_name=string, type_=self.type_)
-            if self.match_entity(entity=entity, flexible=flexible):
-                return True
+            if len(words) > 1 and words[-1] in ["'", "'s"]:
+                s = ' '.join(words[:-1])
+                strings.append(s)
+                words = s.split()
 
-            if len(split) > 1:
-                string = ' '.join(split[1:])
-                entity = Entity(original_name=string, type_=self.type_)
+            if len(words) > 1:
+                s = ' '.join(words[1:])
+                strings.append(s)
+
+            for s in strings:
+                entity = Entity(original_name=s, type_=self.type_)
                 if self.match_entity(entity=entity, flexible=flexible):
                     return True
 

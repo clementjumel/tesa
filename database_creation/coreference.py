@@ -75,29 +75,29 @@ class Coreference:
 
         texts = set([self.representative.text] + [mention.text for mention in self.mentions])
 
-        matches = [str(entity) for entity in entities
-                   if entity.match_string(string=self.representative.text, flexible=False)]
+        matches = set([str(entity) for entity in entities
+                       if entity.match_string(string=self.representative.text, flexible=False)])
 
         if len(matches) == 1:
-            self.entity = matches[0]
+            self.entity = matches.pop()
             return
         elif len(matches) > 1:
             return
 
-        matches = [str(entity) for entity in entities
-                   if entity.match_string(string=self.representative.text, flexible=True)]
+        matches = set([str(entity) for entity in entities
+                       if entity.match_string(string=self.representative.text, flexible=True)])
 
         if len(matches) == 1:
-            self.entity = matches[0]
+            self.entity = matches.pop()
             return
         elif len(matches) > 1:
             return
 
-        matches = [str(entity) for entity in entities for text in texts
-                   if entity.match_string(string=text, flexible=False)]
+        matches = set([str(entity) for entity in entities for text in texts
+                       if entity.match_string(string=text, flexible=False)])
 
         if len(matches) == 1:
-            self.entity = matches[0]
+            self.entity = matches.pop()
         elif len(matches) > 1:
             return
 
