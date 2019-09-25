@@ -56,8 +56,11 @@ class Coreference:
         mentions = []
         for i in range(1, len(element_mentions)):
             m = element_mentions[i]
-            mentions.append(Mention(text=m.find('text').text, sentence=int(m.find('sentence').text),
-                                    start=int(m.find('start').text), end=int(m.find('end').text)))
+
+            text = m.find('text').text
+            if len(text.split()) <= 10:
+                mentions.append(Mention(text=text, sentence=int(m.find('sentence').text),
+                                        start=int(m.find('start').text), end=int(m.find('end').text)))
 
         self.representative = representative
         self.mentions = mentions
@@ -70,10 +73,29 @@ class Coreference:
             entities: set, Entities of the articles.
         """
 
+        # TODO: see to remove is_in
+        # matches = [str(entity) for entity in entities
+        #            if (entity.match_string(string=self.representative.text, flexible=True) or
+        #                entity.is_in(string=self.representative.text, flexible=False))]
+
+        texts = set([self.representative.text] + [mention.text for mention in self.mentions])
+
         matches = [str(entity) for entity in entities
-                   if (entity.match(self.representative.text, flexible=True) or
-                       entity.is_in(self.representative.text, flexible=False))
-                   and not self.to_exclude(entity)]
+                   if entity.match_string(string=self.representative.text, flexible=False)]
+
+        if len(matches) == 1:
+            self.entity = matches[0]
+            return
+
+        matches = [str(entity) for entity in entities
+                   if entity.match_string(string=self.representative.text, flexible=True)]
+
+        if len(matches) == 1:
+            self.entity = matches[0]
+            return
+
+        matches = [str(entity) for entity in entities for text in texts
+                   if entity.match_string(string=text, flexible=False)]
 
         if len(matches) == 1:
             self.entity = matches[0]
@@ -82,26 +104,6 @@ class Coreference:
         """ Compute the indexes of the sentences of the coreference chain. """
 
         self.sentences = set([m.sentence for m in [self.representative] + self.mentions])
-
-    # endregion
-
-    # region Other methods
-
-    def to_exclude(self, entity):
-        """
-        Check if the coreference must not be compared to the entity.
-
-        Args:
-            entity: Entity, entity to check.
-
-        Returns:
-            bool, True iff the coreference must not be compared to the entity.
-        """
-
-        if ' and ' in self.representative.text and entity.type_ == 'person':
-            return True
-
-        return False
 
     # endregion
 
