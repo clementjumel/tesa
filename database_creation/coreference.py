@@ -73,11 +73,6 @@ class Coreference:
             entities: set, Entities of the articles.
         """
 
-        # TODO: see to remove is_in
-        # matches = [str(entity) for entity in entities
-        #            if (entity.match_string(string=self.representative.text, flexible=True) or
-        #                entity.is_in(string=self.representative.text, flexible=False))]
-
         texts = set([self.representative.text] + [mention.text for mention in self.mentions])
 
         matches = [str(entity) for entity in entities

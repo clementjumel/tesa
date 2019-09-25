@@ -982,7 +982,7 @@ class Database:
 
         elif field == 'wikipedia':
             lines = [[name, wikipedia.debug_wikipedia()] for name, wikipedia in self.wikipedia['found'].items()] \
-                    + [[name, 'not found'] for name in self.wikipedia['not_found']]
+                    + [[name, ': not found'] for name in self.wikipedia['not_found']]
 
         elif field == 'queries':
             lines = [[id_, query.debug_queries()] for id_, query in self.queries.items()]
