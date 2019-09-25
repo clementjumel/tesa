@@ -225,9 +225,6 @@ class Entity:
             plausible_names.add(name)
             name += suffix
 
-            if name[-1] == 's':
-                plausible_names.add('the ' + name)
-
         else:
             raise Exception("Wrong type for an entity: {}".format(self.type_))
 
@@ -328,12 +325,20 @@ class Entity:
             bool, True iff the entity matches the string.
         """
 
-        if self.not_match(string):
-            return False
+        if not self.not_match(string):
+            split = string.split()
 
-        else:
             entity = Entity(original_name=string, type_=self.type_)
-            return self.match_entity(entity=entity, flexible=flexible)
+            if self.match_entity(entity=entity, flexible=flexible):
+                return True
+
+            if len(split) > 1:
+                string = ' '.join(split[1:])
+                entity = Entity(original_name=string, type_=self.type_)
+                if self.match_entity(entity=entity, flexible=flexible):
+                    return True
+
+        return False
 
     def is_in(self, string, flexible=False):
         """
