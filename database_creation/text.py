@@ -84,7 +84,7 @@ class Text:
         entity_sentences = set()
 
         for coreference in self.coreferences:
-            if coreference.entity and entity.match(coreference.entity):
+            if coreference.entity and str(entity) == coreference.entity:
                 entity_sentences.update(coreference.sentences)
 
         return sorted(entity_sentences)
@@ -225,7 +225,7 @@ def main():
                       '../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml',
                       '../databases/nyt_jingyun/summary_annotated/2006summary_annotated/1728670.txt.xml')
 
-    article.compute_entities()
+    article.entities = article.get_entities()
     article.compute_annotations()
 
     print(article.content)
