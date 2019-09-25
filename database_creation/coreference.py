@@ -86,6 +86,8 @@ class Coreference:
         if len(matches) == 1:
             self.entity = matches[0]
             return
+        elif len(matches) > 1:
+            return
 
         matches = [str(entity) for entity in entities
                    if entity.match_string(string=self.representative.text, flexible=True)]
@@ -93,12 +95,16 @@ class Coreference:
         if len(matches) == 1:
             self.entity = matches[0]
             return
+        elif len(matches) > 1:
+            return
 
         matches = [str(entity) for entity in entities for text in texts
                    if entity.match_string(string=text, flexible=False)]
 
         if len(matches) == 1:
             self.entity = matches[0]
+        elif len(matches) > 1:
+            return
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
