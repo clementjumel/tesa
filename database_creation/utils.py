@@ -629,6 +629,7 @@ class Query:
 
         self.context = str(context)
         self.type_ = context.type_
+        self.generic_phrase = self.get_generic_phrase(tuple_)
 
         self.html_entities = self.get_html_entities()
         self.html_info = self.get_html_info()
@@ -682,6 +683,24 @@ class Query:
                 info.append(str(entity.wiki))
 
         return info
+
+    @staticmethod
+    def get_generic_phrase(tuple_):
+        """
+        Returns a generic phrase such as "the two persons".
+
+        Args:
+            tuple_: Tuple, Tuple of entities mentioned in the article.
+
+        Returns:
+            str, generic phrase of the tuple.
+        """
+
+        type_ = tuple_.type_
+        int_to_str = {2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
+        number = int_to_str[len(tuple_.entities)]
+
+        return 'The ' + number + ' ' + type_ + 's'
 
     def get_html_entities(self):
         """
@@ -766,6 +785,7 @@ class Query:
             'info': self.html_info,
             'title': self.html_title,
             'context': self.html_context,
+            'generic_phrase': self.generic_phrase,
         }
 
         return d
@@ -802,9 +822,9 @@ def main():
 
         e1, e2 = Entity(pair[0], 'person'), Entity(pair[1], 'person')
 
-        print(e1 == e2,
-              e1.match(pair[1], 'person', False),
-              e1.match(pair[1], 'person', True))
+        # print(e1 == e2,
+        #       e1.match(pair[1], 'person', False),
+        #       e1.match(pair[1], 'person', True))
 
     return
 

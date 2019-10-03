@@ -118,7 +118,14 @@ class Text:
                 seen.update([name for name, sentences in entities_sentences.items() if idx in sentences])
 
                 if len(seen) == context_length:
-                    sentences = {i: deepcopy(self.sentences[i]) for i in range(start_idx, idx + 1)}
+                    if idx == start_idx:  # Case of one-sentence context
+                        if start_idx == 1:  # Case of beginning of article
+                            idx += 1
+                        else:  # Case of middle of the article
+                            start_idx -= 1
+
+                    sentence_span = range(start_idx, idx + 1)
+                    sentences = {i: deepcopy(self.sentences[i]) for i in sentence_span}
                     self.highlight(sentences=sentences, tuple_=tuple_)
 
                     id_ = str(start_idx) + '_' + str(idx)

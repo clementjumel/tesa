@@ -958,7 +958,7 @@ class Database:
             file_name = attribute_name if limit is None else attribute_name + '_short'
             file_name = prefix + folder_name + '/' + file_name + suffix + '.csv'
 
-        df.to_csv(file_name, index_label='idx')
+        df.to_csv(file_name, index=False)
 
         print("Attribute {} saved at {}".format(attribute_name, file_name))
 
