@@ -696,15 +696,27 @@ class Query:
             str, generic phrase of the tuple.
         """
 
-        type_ = tuple_.type_
+        type_ = tuple_.type_ + 's'
+        if type_ == 'persons':
+            type_ = 'people'
+        elif type_ == 'locations':
+            type_ = 'areas'
+        elif type_ == 'orgs':
+            type_ = 'organizations'
+        else:
+            raise Exception
+
         int_to_str = {2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
         number = int_to_str[len(tuple_.entities)]
 
-        return 'The ' + number + ' ' + type_ + 's'
+        return 'The ' + number + ' ' + type_
 
-    def get_html_entities(self):
+    def get_html_entities(self, check_box=False):
         """
         Returns the html version of the entities.
+
+        Args:
+            check_box: bool, whether or not to add check-boxes to the name of the entities.
 
         Returns:
             str, html version of the entities.
@@ -713,8 +725,8 @@ class Query:
         s = ''
         for entity in self.entities:
             url = entity.wiki.url if entity.wiki is not None else None
+            s += '<th><crowd-checkbox name="entities" value="' + str(entity) + '" checked>' if check_box else '<th>'
 
-            s += '<th>'
             if url is not None:
                 s += '<a href="' + url + '" target="_blank">'
 
@@ -722,7 +734,8 @@ class Query:
 
             if url is not None:
                 s += '</a>'
-            s += '</th>'
+
+            s += '</crowd-checkbox></th>' if check_box else '</th>'
 
         return s
 
@@ -761,7 +774,6 @@ class Query:
         string = '<th colspan=' + str(len(self.entities)) + '><strong_blue>'
         string += 'Title of the article: '
         string += '</strong_blue>' + str(self.title)
-        string += ' (' + str(self.date) + ')'
         string += '</th>'
 
         return string
