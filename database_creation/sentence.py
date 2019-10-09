@@ -24,11 +24,21 @@ class Sentence:
             str, readable format of the instance.
         """
 
-        s = ''
+        s, start = '', True
 
         for _, token in self.tokens.items():
-            s += '' if token.criterion_punctuation() or not s else ' '
-            s += str(token)
+            if start:  # Beginning of the sentence
+                if token.criterion_punctuation():
+                    s += str(token)
+                else:
+                    s += str(token)[0].capitalize() + str(token)[1:]
+                    start = False
+
+            else:
+                if not token.criterion_punctuation():
+                    s += ' '
+
+                s += str(token)
 
         return s
 
