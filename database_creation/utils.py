@@ -711,12 +711,9 @@ class Query:
 
         return 'The ' + number + ' ' + type_
 
-    def get_html_entities(self, check_box=False):
+    def get_html_entities(self):
         """
         Returns the html version of the entities.
-
-        Args:
-            check_box: bool, whether or not to add check-boxes to the name of the entities.
 
         Returns:
             str, html version of the entities.
@@ -725,7 +722,7 @@ class Query:
         s = ''
         for entity in self.entities:
             url = entity.wiki.url if entity.wiki is not None else None
-            s += '<th><crowd-checkbox name="entities" value="' + str(entity) + '" checked>' if check_box else '<th>'
+            s += '<th>'
 
             if url is not None:
                 s += '<a href="' + url + '" target="_blank">'
@@ -735,7 +732,7 @@ class Query:
             if url is not None:
                 s += '</a>'
 
-            s += '</crowd-checkbox></th>' if check_box else '</th>'
+            s += '</th>'
 
         return s
 
