@@ -18,8 +18,7 @@ class Database:
 
     modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
-    def __init__(self, years=(2006, 2007), max_size=None, shuffle=False, project_root='',
-                 min_articles=None, min_queries=None, random_seed=None):
+    def __init__(self, years=(2006, 2007), max_size=None, shuffle=True, min_articles=1, min_queries=1, random_seed=0):
         """
         Initializes an instance of Database.
 
@@ -27,7 +26,6 @@ class Database:
             years: list, years (int) of the database to analyse.
             max_size: int, maximum number of articles in the database; if None, takes all articles.
             shuffle: bool, whether to shuffle the articles selected in the database.
-            project_root: str, relative path to the root of the project.
             min_articles: int, minimum number of articles an entities' tuple must be in.
             min_queries: int, minimum number of Queries an entities' tuple must have.
             random_seed: int, the seed to use for the random processes.
@@ -36,7 +34,6 @@ class Database:
         self.years = years
         self.max_size = max_size
         self.shuffle = shuffle
-        self.project_root = project_root
         self.min_articles = min_articles
         self.min_queries = min_queries
         self.random_seed = random_seed
@@ -238,7 +235,7 @@ class Database:
         """
 
         articles = {}
-        root = self.project_root + 'databases/nyt_jingyun/'
+        root = '../databases/nyt_jingyun/'
 
         for data_path in self.paths():
             id_ = data_path.split('/')[-1].split('.')[0]
@@ -802,7 +799,7 @@ class Database:
         """
 
         year = str(self.years[0]) if len(self.years) == 1 else str(self.years[0]) + '-' + str(self.years[-1])[2:4]
-        prefix, suffix = self.project_root + 'results/' + year + '/', ''
+        prefix, suffix = '../results/' + year + '/', ''
 
         if self.max_size is None:
             suffix += '_sizemax'
@@ -1035,20 +1032,20 @@ class Database:
             list, sorted file paths of the data of the articles.
         """
 
-        patterns = [self.project_root + 'databases/nyt_jingyun/data/' + str(year) + '/*/*/*.xml' for year in self.years]
+        patterns = ['../databases/nyt_jingyun/data/' + str(year) + '/*/*/*.xml' for year in self.years]
 
         paths = []
         for pattern in patterns:
             paths.extend(glob(pattern))
         paths.sort()
 
-        if self.shuffle:
-            shuffle(paths)
-            paths = paths[:self.max_size] if self.max_size is not None else paths
-            paths.sort()
-
-        else:
-            paths = paths[:self.max_size] if self.max_size is not None else paths
+        if self.max_size is not None:
+            if self.shuffle:
+                shuffle(paths)
+                paths = paths[:self.max_size]
+                paths.sort()
+            else:
+                paths = paths[:self.max_size]
 
         return paths
 
@@ -1101,18 +1098,13 @@ class Database:
 
 
 def main():
-    max_size = 1000
-    min_articles = 1
-    min_queries = 1
-
-    database = Database(project_root='../', max_size=max_size, min_articles=min_articles, min_queries=min_queries)
+    database = Database(max_size=1000)
 
     database.preprocess_database()
     database.process_articles()
 
-    database.process_wikipedia(load=False)
-    database.process_queries(load=False)
-    return
+    database.process_wikipedia(load=True, file_name='wikipedia_global')
+    database.process_queries()
 
 
 if __name__ == '__main__':
