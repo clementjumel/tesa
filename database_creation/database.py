@@ -889,7 +889,7 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def combine_pkl(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
+    def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
         """
         Combines current wikipedia information and some other wikipedia files into a single file.
 
