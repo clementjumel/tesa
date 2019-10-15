@@ -9,6 +9,6 @@ database.preprocess_database(debug=debug)
 database.process_articles(debug=debug)
 
 database.process_wikipedia(load=True, debug=debug)
-database.process_queries(load=False, check_changes=True, debug=debug)
+database.process_queries(check_changes=True, debug=debug)
 
 database.combine_wiki()
