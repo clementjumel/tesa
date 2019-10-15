@@ -1104,7 +1104,7 @@ def main():
     database.process_articles()
 
     database.process_wikipedia(load=True, file_name='wikipedia_global')
-    database.process_queries()
+    database.process_queries(check_changes=True)
 
 
 if __name__ == '__main__':
