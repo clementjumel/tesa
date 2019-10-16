@@ -838,6 +838,20 @@ class Result:
         self.duration = row.get('WorkTimeInSeconds')
         self.bug = row.get('Answer.box_impossible.on')
 
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Result.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        s = self.answer1
+        if self.answer2:
+            s += '/' + self.answer2
+
+        return s
+
     # endregion
 
 
