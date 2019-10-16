@@ -816,6 +816,30 @@ class Query:
     # endregion
 
 
+class Result:
+    # region Class base methods
+
+    def __init__(self, id_, row, annotator):
+        """
+        Initializes the Result instance.
+
+        Args:
+            id_: str, id of the Result.
+            row: panda.Series, whole data of the result.
+            annotator: str, name of the annotator.
+        """
+
+        self.id_ = id_
+        self.annotator = annotator
+
+        self.answer1 = row.get('Answer.utterance_1')
+        self.answer2 = row.get('Answer.utterance_2')
+        self.duration = row.get('WorkTimeInSeconds')
+        self.bug = row.get('Answer.box_impossible.on')
+
+    # endregion
+
+
 def main():
     for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
                  'George Walker Bush Sr', 'Valerie Elise Plame Wilson', 'Sacco and Vanzetti', 'I. Lewis Libby Jr.']:

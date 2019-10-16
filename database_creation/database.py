@@ -1,4 +1,4 @@
-from database_creation.utils import Tuple, Wikipedia, Query
+from database_creation.utils import Tuple, Wikipedia, Query, Result
 from database_creation.article import Article
 
 from numpy.random import shuffle, seed
@@ -7,7 +7,7 @@ from glob import glob
 from collections import defaultdict
 from numpy import histogram
 from pickle import dump, load, PicklingError
-from pandas import DataFrame
+from pandas import DataFrame, read_csv
 from wikipedia import WikipediaException
 
 import matplotlib.pyplot as plt
@@ -44,6 +44,7 @@ class Database:
         self.wikipedia = None
         self.queries = None
         self.stats = None
+        self.results = None
 
         seed(seed=self.random_seed)
 
@@ -207,6 +208,18 @@ class Database:
                     print("\nNo change in the computed queries.")
                 else:
                     print("\nThe queries have changed!")
+
+    @Verbose("Processing the results...")
+    def process_results(self, version):
+        """
+        Process the results of an annotation task.
+
+        Args:
+            version: str, version of the pilot, like 'v1_0'.
+        """
+
+        self.load_pkl(attribute_name='queries', folder_name='../../pilots/'+version+'/task')
+        self.compute_results(version=version)
 
     @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -455,6 +468,28 @@ class Database:
         self.queries = queries
 
         self.write_debug(field='queries', method='queries') if debug else None
+
+    @Verbose("Computing the Results...")
+    @Attribute('results')
+    def compute_results(self, version):
+        """
+        Compute the results of an annotation task.
+
+        Args:
+            version: str, version of the pilot, like 'v1_0'.
+        """
+
+        results = defaultdict(list)
+
+        for path in glob('../pilots/' + version + '/results/*/*.csv'):
+            annotator = path.split('/')[4]
+            df = read_csv(path)
+
+            for _, row in df.iterrows():
+                id_ = row.get('Input.id_')
+                results[id_].append(Result(id_, row, annotator))
+
+        self.results = results
 
     # endregion
 
