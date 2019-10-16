@@ -819,7 +819,7 @@ class Query:
 class Result:
     # region Class base methods
 
-    def __init__(self, id_, row, annotator):
+    def __init__(self, id_, row, version, annotator):
         """
         Initializes the Result instance.
 
@@ -830,6 +830,7 @@ class Result:
         """
 
         self.id_ = id_
+        self.version = version
         self.annotator = annotator
 
         self.answer1 = row.get('Answer.utterance_1')
