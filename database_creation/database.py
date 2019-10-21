@@ -44,6 +44,7 @@ class Database:
         self.wikipedia = None
         self.queries = None
         self.stats = None
+        self.tasks = None
         self.results = None
 
         seed(seed=self.random_seed)
@@ -156,7 +157,7 @@ class Database:
         self.filter(min_queries=self.min_queries)
 
     @Verbose("Processing the wikipedia information...")
-    def process_wikipedia(self, load=False, file_name=None, debug=False):
+    def process_wikipedia(self, load=False, file_name=None, debug=False, reinitialize_entities=()):
         """
         Performs the processing of the wikipedia information of the database.
 
@@ -164,11 +165,12 @@ class Database:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
+            reinitialize_entities: list, name of the entities to reinitialize.
         """
 
         if load:
             self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
-            self.compute_wikipedia(load=load, debug=debug)
+            self.compute_wikipedia(load=load, debug=debug, reinitialize_entities=reinitialize_entities)
             self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
         else:
@@ -210,16 +212,11 @@ class Database:
                     print("\nThe queries have changed!")
 
     @Verbose("Processing the results...")
-    def process_results(self, version):
-        """
-        Process the results of an annotation task.
+    def process_results(self):
+        """ Process the results of an annotation task. """
 
-        Args:
-            version: str, version of the pilot, like 'v1_0'.
-        """
-
-        self.load_pkl(attribute_name='queries', folder_name='../../pilots/'+version+'/task')
-        self.compute_results(version=version)
+        self.compute_tasks()
+        self.compute_results()
 
     @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -393,17 +390,22 @@ class Database:
         self.write_debug(field='articles', method='contexts') if debug else None
 
     @Verbose("Computing the Wikipedia information...")
-    def compute_wikipedia(self, load, debug=False):
+    def compute_wikipedia(self, load, debug=False, reinitialize_entities=()):
         """
         Compute the wikipedia information about the entities from self.tuples.
 
         Args:
             load: bool, if True, load an existing file.
             debug: bool, whether or not to perform the debugging of the database.
+            reinitialize_entities: list, name of the entities to reinitialize.
         """
 
         wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
         print("Initial found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
+
+        if load and reinitialize_entities:
+            for entity in reinitialize_entities:
+                del self.wikipedia[entity]
 
         try:
             count, size = 0, len(self.entities)
@@ -469,25 +471,34 @@ class Database:
 
         self.write_debug(field='queries', method='queries') if debug else None
 
-    @Verbose("Computing the Results...")
+    @Verbose("Computing the tasks...")
+    @Attribute('tasks')
+    def compute_tasks(self):
+        """ Compute the tasks of the annotation. """
+
+        tasks = dict()
+
+        for path in glob('../pilot/*/task/*.pkl'):
+            version = path.split('/')[2]
+            folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
+
+            tasks[version] = self.load_pkl(file_name=file_name, folder_name=folder_name)
+
+        self.tasks = tasks
+
+    @Verbose("Computing the results...")
     @Attribute('results')
-    def compute_results(self, version):
-        """
-        Compute the results of an annotation task.
+    def compute_results(self):
+        """ Compute the results of an annotation task. """
 
-        Args:
-            version: str, version of the pilot, like 'v1_0'.
-        """
+        results = dict()
 
-        results = defaultdict(list)
-
-        for path in glob('../pilots/' + version + '/results/*/*.csv'):
-            annotator = path.split('/')[4]
+        for path in glob('../pilot/*/results/*/*.csv'):
+            version, _, annotator = path.split('/')[2:5]
             df = read_csv(path)
 
-            for _, row in df.iterrows():
-                id_ = row.get('Input.id_')
-                results[id_].append(Result(id_, row, annotator))
+            results[version] = dict([(row.get('Input.id_'), Result(row.get('Input.id_'), row, version, annotator))
+                                     for _, row in df.iterrows()])
 
         self.results = results
 
@@ -833,8 +844,7 @@ class Database:
             suffix: str, ending of the name of the file (after the basic name of the file).
         """
 
-        year = str(self.years[0]) if len(self.years) == 1 else str(self.years[0]) + '-' + str(self.years[-1])[2:4]
-        prefix, suffix = '../results/' + year + '/', ''
+        prefix, suffix = '../results/', ''
 
         if self.max_size is None:
             suffix += '_sizemax'
