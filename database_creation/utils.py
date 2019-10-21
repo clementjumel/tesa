@@ -846,9 +846,14 @@ class Result:
             str, readable format of the instance.
         """
 
-        s = self.answer1
-        if self.answer2:
-            s += '/' + self.answer2
+        if not self.bug:
+            s = self.answer1
+            s += '/' + self.answer2 if self.answer2 else ''
+
+        else:
+            s = 'bug'
+            s += self.answer1 if self.answer1 != 'bug' else ''
+            s += '/' + self.answer2 if self.answer2 else ''
 
         return s
 
