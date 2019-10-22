@@ -620,21 +620,16 @@ class Query:
 
         self.id_ = id_
 
-        self.entities = tuple_.entities
-        self.entities_names = str(tuple_)
-        self.info = self.get_info(tuple_)
+        self.entities = [str(entity) for entity in tuple_.entities]
+        self.entities_type_ = tuple_.type_
+        self.summaries = dict([(str(entity), str(entity.wiki)) for entity in tuple_.entities])
+        self.urls = dict([(str(entity), entity.wiki.url) for entity in tuple_.entities])
 
         self.title = article.title
         self.date = article.date
 
         self.context = str(context)
-        self.type_ = context.type_
-        self.generic_phrase = self.get_generic_phrase(tuple_)
-
-        self.html_entities = self.get_html_entities()
-        self.html_info = self.get_html_info()
-        self.html_title = self.get_html_title()
-        self.html_context = self.get_html_context()
+        self.context_type_ = context.type_
 
     def __str__(self):
         """
@@ -644,10 +639,9 @@ class Query:
             str, readable format of the instance.
         """
 
-        s = self.entities_names + ':\n'
-        s += str(self.context)
+        d = self.to_readable()
 
-        return s
+        return d['entities'] + ':\n' + d['context'] + '\n'
 
     def __eq__(self, obj):
         """
@@ -657,46 +651,21 @@ class Query:
             bool, whether or not the two objects are equal.
         """
 
-        return isinstance(obj, Query) and self.to_dict() == obj.to_dict()
+        return isinstance(obj, Query) and self.to_html() == obj.to_html() and self.to_readable() == obj.to_readable()
 
     # endregion
 
     # region Methods get_
 
-    @staticmethod
-    def get_info(tuple_):
-        """
-        Returns the wikipedia information as a list of information for each Entity.
-
-        Args:
-            tuple_: Tuple, Tuple of entities mentioned in the article.
-
-        Returns:
-            list, information for each Entity as a string.
-        """
-
-        info = []
-        for entity in tuple_.entities:
-            if entity.wiki is None:
-                info.append("Entity not searched.")
-            else:
-                info.append(str(entity.wiki))
-
-        return info
-
-    @staticmethod
-    def get_generic_phrase(tuple_):
+    def get_entities_phrase(self):
         """
         Returns a generic phrase such as "the two persons".
-
-        Args:
-            tuple_: Tuple, Tuple of entities mentioned in the article.
 
         Returns:
             str, generic phrase of the tuple.
         """
 
-        type_ = tuple_.type_ + 's'
+        type_ = self.entities_type_ + 's'
         if type_ == 'persons':
             type_ = 'people'
         elif type_ == 'locations':
@@ -707,11 +676,11 @@ class Query:
             raise Exception
 
         int_to_str = {2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
-        number = int_to_str[len(tuple_.entities)]
+        number = int_to_str[len(self.entities)]
 
         return 'The ' + number + ' ' + type_
 
-    def get_html_entities(self):
+    def get_entities_html(self):
         """
         Returns the html version of the entities.
 
@@ -720,47 +689,23 @@ class Query:
         """
 
         s = ''
-        for entity in self.entities:
-            url = entity.wiki.url if entity.wiki is not None else None
-            s += '<th>'
 
+        for entity_name in self.entities:
+            url = self.urls[entity_name]
+
+            s += '<th>'
             if url is not None:
                 s += '<a href="' + url + '" target="_blank">'
 
-            s += str(entity)
+            s += entity_name
 
             if url is not None:
                 s += '</a>'
-
             s += '</th>'
 
         return s
 
-    def get_html_info(self):
-        """
-        Returns the html version of the information.
-
-        Returns:
-            str, html version of the information.
-        """
-
-        string = ''.join(['<td>' + str(info) + '</td>' for info in self.info])
-
-        return string
-
-    def get_html_context(self):
-        """
-        Returns the html version of the Context.
-
-        Returns:
-            str, html version of the Context.
-        """
-
-        string = '<td colspan=' + str(len(self.entities)) + '>' + str(self.context) + '</td>'
-
-        return string
-
-    def get_html_title(self):
+    def get_title_html(self):
         """
         Returns the html version of the title.
 
@@ -768,20 +713,34 @@ class Query:
             str, html version of the title.
         """
 
-        string = '<th colspan=' + str(len(self.entities)) + '><strong_blue>'
-        string += 'Title of the article: '
-        string += '</strong_blue>' + str(self.title)
-        string += '</th>'
+        s = '<th colspan=' + str(len(self.entities)) + '><strong_blue>Title of the article:</strong_blue> '
+        s += self.title + '</th>'
 
-        return string
+        return s
+
+    def get_context_readable(self):
+        """
+        Returns the readable version of the context.
+
+        Returns:
+            str, readable version of the context.
+        """
+
+        s = self.context
+
+        s = sub(r'<span.*?>', ' [', s)
+        s = sub(r'</span.*?>', ']', s)
+        s = sub(r'<.*?>', '', s)
+
+        return s
 
     # endregion
 
-    # region Other methods
+    # region Methods to_
 
-    def to_dict(self):
+    def to_html(self):
         """
-        Return the object as a dictionary.
+        Return the html elements of the object as a dictionary.
 
         Returns:
             dict, object as a dictionary.
@@ -789,12 +748,28 @@ class Query:
 
         d = {
             'id_': self.id_,
-            'entities': self.html_entities,
-            'entities_names': self.entities_names,
-            'info': self.html_info,
-            'title': self.html_title,
-            'context': self.html_context,
-            'generic_phrase': self.generic_phrase,
+            'entities': self.get_entities_html(),
+            'generic_phrase': self.get_entities_phrase(),
+            'context': '<td colspan=' + str(len(self.entities)) + '>' + self.context + '</td>',
+            'entities_names': ', '.join(self.entities[:-1]) + ' and ' + self.entities[-1],
+            'info': ''.join(['<td>' + self.summaries[entity_name] + '</td>' for entity_name in self.entities]),
+            'title': self.get_title_html(),
+        }
+
+        return d
+
+    def to_readable(self):
+        """
+        Return the readable elements of the object as a dictionary.
+
+        Returns:
+            dict, object as a dictionary.
+        """
+
+        d = {
+            'entities': ', '.join(self.entities[:-1]) + ' and ' + self.entities[-1],
+            'info': '\n'.join([self.summaries[entity_name] for entity_name in self.entities]),
+            'context': self.get_context_readable(),
         }
 
         return d
@@ -811,7 +786,7 @@ class Query:
             str, debugging of the query.
         """
 
-        return ': ' + self.entities_names + ' -> ' + self.context + '\n'
+        return str(self)
 
     # endregion
 
@@ -833,10 +808,10 @@ class Result:
         self.version = version
         self.annotator = annotator
 
-        self.answer1 = row.get('Answer.utterance_1')
-        self.answer2 = row.get('Answer.utterance_2')
-        self.duration = row.get('WorkTimeInSeconds')
-        self.bug = row.get('Answer.box_impossible.on')
+        self.answer1 = str(row.get('Answer.utterance_1'))
+        self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'None' else None
+        self.duration = str(row.get('WorkTimeInSeconds'))
+        self.bug = True if row.get('Answer.box_impossible.on') == 'true' else False
 
     def __str__(self):
         """
@@ -855,30 +830,14 @@ class Result:
             s += self.answer1 if self.answer1 != 'bug' else ''
             s += '/' + self.answer2 if self.answer2 else ''
 
+        s += ' (' + self.annotator + ', ' + self.version + ')'
+
         return s
 
     # endregion
 
 
 def main():
-    for name in ['George Bush', 'George W Bush', 'George Walker Bush', 'George Bush Sr', 'George W Bush Sr',
-                 'George Walker Bush Sr', 'Valerie Elise Plame Wilson', 'Sacco and Vanzetti', 'I. Lewis Libby Jr.']:
-
-        e = Entity(name, 'person')
-        print(e.name, e.plausible_names, e.possible_names)
-
-    for pair in [('George Bush', 'George Walker Bush'),
-                 ('George Walker Bush Sr', 'George Bush jr'),
-                 ('George Walker Bush', 'George H W Bush'),
-                 ('Valerie Plame', 'Valerie Elise Plame Wilson'),
-                 ('Lewis Libby', 'I. Lewis Libby Jr.')]:
-
-        e1, e2 = Entity(pair[0], 'person'), Entity(pair[1], 'person')
-
-        # print(e1 == e2,
-        #       e1.match(pair[1], 'person', False),
-        #       e1.match(pair[1], 'person', True))
-
     return
 
 

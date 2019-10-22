@@ -178,7 +178,7 @@ class Database:
             self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False):
+    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_seed=1):
         """
         Performs the processing of the aggregation queries.
 
@@ -187,6 +187,7 @@ class Database:
             check_changes: bool, if not load, load the existing queries file and check if there are changes in the new.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
+            csv_seed: int, the seed to use for the random processes.
         """
 
         if load:
@@ -203,7 +204,7 @@ class Database:
 
             self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
-            self.save_csv(attribute_name='queries', file_name=file_name, limit=100)
+            self.save_csv(attribute_name='queries', file_name=file_name, limit=100, random_seed=csv_seed)
 
             if check_changes:
                 if old_queries == self.queries:
@@ -491,14 +492,15 @@ class Database:
     def compute_results(self):
         """ Compute the results of an annotation task. """
 
-        results = dict()
+        results = defaultdict(lambda: defaultdict(list))  # defaultdict of defaultdict(list)
 
         for path in glob('../pilot/*/results/*/*.csv'):
             version, _, annotator = path.split('/')[2:5]
             df = read_csv(path)
 
-            results[version] = dict([(row.get('Input.id_'), Result(row.get('Input.id_'), row, version, annotator))
-                                     for _, row in df.iterrows()])
+            for _, row in df.iterrows():
+                id_ = row.get('Input.id_')
+                results[version][id_].append(Result(id_, row, version, annotator))
 
         self.results = results
 
@@ -971,7 +973,7 @@ class Database:
 
         self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
 
-    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None):
+    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None, random_seed=None):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
 
@@ -980,16 +982,20 @@ class Database:
             file_name: str, name of the file; if None, save an attribute with the standard name.
             folder_name: str, name of the folder to save in.
             limit: int, maximum number of data to save; if None, save all of them.
+            random_seed: int, the seed to use for the random processes.
         """
 
         obj = getattr(self, attribute_name)
-        ids = list(obj.keys())
+        ids = sorted(obj.keys())
 
         if limit is not None:
+            if random_seed is not None:
+                seed(seed=random_seed)
+
             shuffle(ids)
             ids = ids[:limit]
 
-        data = [obj[id_].to_dict() for id_ in ids]
+        data = [obj[id_].to_html() for id_ in ids]
         df = DataFrame.from_records(data=data)
 
         prefix, suffix = self.prefix_suffix()
