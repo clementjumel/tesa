@@ -65,7 +65,8 @@ class Coreference:
         self.representative = representative
         self.mentions = mentions
 
-    def compute_entity(self, entities):
+    # v1_0
+    def compute_entity_old(self, entities):
         """
         Compute the entity the coreference refer to, or None.
 
@@ -100,6 +101,23 @@ class Coreference:
             self.entity = matches.pop()
         elif len(matches) > 1:
             return
+
+    # v1_1
+    def compute_entity(self, entities):
+        """
+        Compute the entity the coreference refer to, or None.
+
+        Args:
+            entities: set, Entities of the articles.
+        """
+
+        matches = set([str(entity) for entity in entities
+                       if entity.match_string(string=self.representative.text, flexible=False)])
+
+        if len(matches) == 1:
+            self.entity = matches.pop()
+
+        return
 
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
