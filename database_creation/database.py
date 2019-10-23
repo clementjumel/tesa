@@ -47,7 +47,7 @@ class Database:
         self.tasks = None
         self.results = None
 
-        seed(seed=self.random_seed)
+        seed(random_seed)
 
     def __str__(self):
         """
@@ -990,7 +990,7 @@ class Database:
 
         if limit is not None:
             if random_seed is not None:
-                seed(seed=random_seed)
+                seed(random_seed)
 
             shuffle(ids)
             ids = ids[:limit]
