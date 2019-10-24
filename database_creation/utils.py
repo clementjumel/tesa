@@ -480,6 +480,8 @@ class Wikipedia:
             self.summary = None
             self.url = None
 
+        self.exact = False
+
     def __str__(self):
         """
         Overrides the builtin str method for the instances of Wikipedia.
