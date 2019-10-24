@@ -794,20 +794,23 @@ class Query:
 class Result:
     # region Class base methods
 
-    def __init__(self, id_, row, version, annotator):
+    id_to_name = {'A1W4KDUGDWFN28': 'paul_b',
+                  'A0532418PLGOLBXSM6T': 'paul_n'}
+
+    def __init__(self, id_, version, row):
         """
         Initializes the Result instance.
 
         Args:
             id_: str, id of the Result.
+            version: str, version of the pilot.
             row: panda.Series, whole data of the result.
-            annotator: str, name of the annotator.
         """
 
         self.id_ = id_
         self.version = version
-        self.annotator = annotator
 
+        self.annotator = self.id_to_name[str(row.get('WorkerId'))]
         self.answer1 = str(row.get('Answer.utterance_1'))
         self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'None' else None
         self.duration = str(row.get('WorkTimeInSeconds'))
