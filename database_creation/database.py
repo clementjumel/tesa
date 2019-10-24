@@ -492,15 +492,15 @@ class Database:
     def compute_results(self):
         """ Compute the results of an annotation task. """
 
-        results = defaultdict(lambda: defaultdict(list))  # defaultdict of defaultdict(list)
+        results = defaultdict(lambda: defaultdict(list))  # defaultdict of defaultdict of list
 
-        for path in glob('../pilot/*/results/*/*.csv'):
-            version, _, annotator = path.split('/')[2:5]
+        for path in glob('../pilot/*/results/*.csv'):
+            version = path.split('/')[2]
             df = read_csv(path)
 
             for _, row in df.iterrows():
                 id_ = row.get('Input.id_')
-                results[version][id_].append(Result(id_, row, version, annotator))
+                results[version][id_].append(Result(id_, version, row))
 
         self.results = results
 
