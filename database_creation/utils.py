@@ -146,8 +146,6 @@ class Entity:
 
             # Inverse the words when there is a comma
             split = name.split(', ')
-            # TODO: check
-            # assert len(split) < 3
             name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
 
             # Add '.' to single letters
