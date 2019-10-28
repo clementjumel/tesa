@@ -5,10 +5,9 @@ from numpy.random import shuffle, seed
 from time import time
 from glob import glob
 from collections import defaultdict
-from numpy import histogram
 from pickle import dump, load, PicklingError
 from pandas import DataFrame, read_csv
-from wikipedia import WikipediaException
+from wikipedia import search, page, WikipediaException, DisambiguationError
 
 import matplotlib.pyplot as plt
 
@@ -157,7 +156,7 @@ class Database:
         self.filter(min_queries=self.min_queries)
 
     @Verbose("Processing the wikipedia information...")
-    def process_wikipedia(self, load=False, file_name=None, debug=False, reinitialize_entities=()):
+    def process_wikipedia(self, load=False, file_name=None, debug=False):
         """
         Performs the processing of the wikipedia information of the database.
 
@@ -165,17 +164,11 @@ class Database:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
-            reinitialize_entities: list, name of the entities to reinitialize.
         """
 
-        if load:
-            self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
-            self.compute_wikipedia(load=load, debug=debug, reinitialize_entities=reinitialize_entities)
-            self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
-
-        else:
-            self.compute_wikipedia(load=load, debug=debug)
-            self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+        self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia') if load else None
+        self.compute_wikipedia(load=load, debug=debug)
+        self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
     def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_seed=1):
@@ -230,6 +223,60 @@ class Database:
 
         getattr(self, 'compute_stats_' + type_)()
         getattr(self, 'display_stats_' + type_)()
+
+    @Verbose("Combining the wikipedia files...")
+    def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
+        """
+        Combines current wikipedia information and some other wikipedia files into a single file. Note that the
+        most up to date information should come from the last file form in_names.
+
+        Args:
+            current: bool, whether to use the current wikipedia information.
+            in_names: list, names of the file to combine.
+            out_name: str, name of the file to write in.
+        """
+
+        out_wikipedia = {'found': dict(), 'not_found': set()}
+
+        if current:
+            print("Current wikipedia information: {} found/{} not_found...".format(len(self.wikipedia['found']),
+                                                                                   len(self.wikipedia['not_found'])))
+
+            for type_ in ['found', 'not_found']:
+                out_wikipedia[type_].update(self.wikipedia[type_])
+
+            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
+                                                                         len(out_wikipedia['not_found'])))
+
+        for in_name in in_names:
+            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
+
+            print("File {}: {} found/{} not_found...".format(in_name,
+                                                             len(in_wikipedia['found']),
+                                                             len(in_wikipedia['not_found'])))
+
+            for type_ in ['found', 'not_found']:
+                out_wikipedia[type_].update(in_wikipedia[type_])
+
+            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
+                                                                         len(out_wikipedia['not_found'])))
+
+        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
+
+    @Verbose("Solving manually the wikipedia issues...")
+    def correct_wiki(self, in_name='wikipedia_global', out_name='wikipedia_global', step=None):
+        """
+        Run the manual correction of the wikipedia tricky cases.
+
+        Args:
+            in_name: str, name of the wikipedia file to load; if None, deal with the standard files name.
+            out_name: str, name of the wikipedia file to save; if None, deal with the standard files name.
+            step: int, step of the correction to perform, starting with 0; if None, does all of them.
+        """
+
+        self.load_pkl(attribute_name='wikipedia', file_name=in_name, folder_name='wikipedia')
+        self.compute_correction(step=step)
+        self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
 
     # endregion
 
@@ -391,22 +438,17 @@ class Database:
         self.write_debug(field='articles', method='contexts') if debug else None
 
     @Verbose("Computing the Wikipedia information...")
-    def compute_wikipedia(self, load, debug=False, reinitialize_entities=()):
+    def compute_wikipedia(self, load, debug=False):
         """
         Compute the wikipedia information about the entities from self.tuples.
 
         Args:
             load: bool, if True, load an existing file.
             debug: bool, whether or not to perform the debugging of the database.
-            reinitialize_entities: list, name of the entities to reinitialize.
         """
 
         wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
         print("Initial found entries: {}/not found: {}".format(len(wikipedia['found']), len(wikipedia['not_found'])))
-
-        if load and reinitialize_entities:
-            for entity in reinitialize_entities:
-                del self.wikipedia[entity]
 
         try:
             count, size = 0, len(self.entities)
@@ -504,195 +546,64 @@ class Database:
 
         self.results = results
 
-    # endregion
-
-    # region Statistics methods
-
-    def compute_stats_tuples(self):
-        """ Compute the entities tuples statistics of the database. """
-
-        self.stats = self.stats or dict()
-
-        self.stats['tuples_lengths'] = self.stat_tuples_lengths()
-        self.stats['tuples_frequencies'] = self.stat_tuples_frequencies()
-        self.stats['tuples_thresholds'] = self.stat_tuples_thresholds()
-
-    def compute_stats_wikipedia(self):
-        """ Compute the wikipedia statistics of the database. """
-
-        self.stats = self.stats or dict()
-
-        self.stats['wikipedia_length'] = self.stat_wikipedia_length('found')
-        self.stats['notwikipedia_length'] = self.stat_wikipedia_length('not_found')
-        self.stats['wikipedia_frequencies'] = self.stat_wikipedia_frequencies('found')
-        self.stats['notwikipedia_frequencies'] = self.stat_wikipedia_frequencies('not_found')
-
-    def compute_stats_contexts(self):
-        """ Compute the contexts statistics of the database. """
-
-        self.stats = self.stats or dict()
-
-        self.stats['contexts'] = self.stat_contexts()
-
-    def stat_tuples_lengths(self):
+    # TODO
+    @Verbose("Computing the correction of the wikipedia information...")
+    def compute_correction(self, step=None):
         """
-        Compute the histogram of the lengths of the tuples as a numpy.histogram.
-
-        Returns:
-            numpy.histogram, histogram of the lengths of the entities tuples, starting from 0.
-        """
-
-        data = [len(tuple_.entities) for tuple_ in self.tuples]
-        bins = max(data) + 1
-        range_ = (0, max(data) + 1)
-
-        return histogram(data, bins=bins, range=range_)
-
-    def stat_tuples_frequencies(self):
-        """
-        Compute the histogram of the frequencies of the tuples as a numpy.histogram.
-
-        Returns:
-            numpy.histogram, histogram of the frequencies of the entities tuples, starting from 0.
-        """
-
-        data = [len(tuple_.article_ids) for tuple_ in self.tuples]
-        bins = max(data) + 1
-        range_ = (0, max(data) + 1)
-
-        return histogram(data, bins=bins, range=range_)
-
-    def stat_tuples_thresholds(self):
-        """
-        Compute the histogram of the size of the database corresponding to each threshold over the entities tuples
-        frequency, starting from 0 (no threshold), as a numpy.histogram.
-
-        Returns:
-            numpy.histogram, histogram of the number of articles for each threshold.
-        """
-
-        m = max([len(tuple_.article_ids) for tuple_ in self.tuples])
-
-        threshold_ids = [set() for _ in range(m + 1)]
-        threshold_ids[0].update(set(self.articles.keys()))
-
-        for tuple_ in self.tuples:
-            for threshold in range(1, len(tuple_.article_ids) + 1):
-                threshold_ids[threshold].update(tuple_.article_ids)
-
-        data = [i for i in range(m + 1) for _ in threshold_ids[i]]
-        bins = m + 1
-        range_ = (0, m + 1)
-
-        return histogram(data, bins=bins, range=range_)
-
-    def stat_wikipedia_length(self, dictionary):
-        """
-        Compute the number of entries in the corresponding dict of wikipedia.
+        Performs the manual correction of the wikipedia information.
 
         Args:
-            dictionary: str, name of the dict, must be  'found' or 'not_found'.
-
-        Returns:
-            int, number of entries in the dict.
+            step: int, step of the correction to perform, starting with 0; if None, does all of them.
         """
 
-        d = self.wikipedia[dictionary]
+        found, not_found = [], []
 
-        if d is not None:
-            return len(d)
-        else:
-            return 0
+        count, size = 0, len(self.wikipedia['found'])
+        for name, wiki in self.wikipedia['found'].items():
+            count = self.progression(count, self.modulo_entities, size, 'found entity')
 
-    def stat_wikipedia_frequencies(self, dictionary):
-        """
-        Compute the histogram of the frequencies of the tuples where appear the entities from the corresponing dict
-         as a numpy.histogram.
+            if not wiki.exact:
+                if name == wiki.title:
+                    wiki.exact = True
+                else:
+                    print(name + '/' + wiki.title)
+                    answer = input("Is this good? [y/n]")
 
-        Args:
-            dictionary: str, name of the dict, must be  'found' or 'not_found'.
+                    if answer == 'y':
+                        wiki.exact = True
 
-        Returns:
-            numpy.histogram, histogram of the frequencies of the entities tuples, starting from 0.
-        """
+                    elif answer == 'n':
+                        wiki_search = search(name)
 
-        d = self.wikipedia[dictionary]
+                        print("Wikipedia search:")
+                        for cmpt, title in enumerate(wiki_search):
+                            print(str(cmpt + 1) + ': ' + title)
 
-        data = [len(tuple_.article_ids) for tuple_ in self.tuples for entity in tuple_.entities if entity.name in d]
-        bins = max(data) + 1
-        range_ = (0, max(data) + 1)
+                        try:
+                            answer = int(input("Which number is the good one? (0 for no-one)"))
+                        except ValueError:
+                            print("The answer is not a number, skip to next case...")
+                            continue
 
-        return histogram(data, bins=bins, range=range_)
+                        if answer == 0:
+                            not_found.append(name)
+                        else:
+                            try:
+                                p = page(wiki_search[answer])
+                            except DisambiguationError:
+                                answer = input("Search is still ambiguous, enter a new search...")
+                                p = page(answer)
+                                answer = input("Is this good? " + p.title + ' [y/n]')
 
-    def stat_contexts(self):
-        """
-        Compute the histogram of the number of contexts as a numpy.histogram.
+                                if answer == 'y':
+                                    pass
+                                elif answer == 'n':
+                                    pass
+                                else:
+                                    print("Wrong answer, not saving it.")
 
-        Returns:
-            numpy.histogram, histogram of the number of contexts.
-        """
-
-        data = []
-        for tuple_ in self.tuples:
-            length = 0
-            for id_ in tuple_.article_ids:
-                length += len(self.articles[id_].contexts[str(tuple_)])
-
-            data.append(length)
-
-        bins = max(data) + 1
-        range_ = (0, max(data) + 1)
-
-        return histogram(data, bins=bins, range=range_)
-
-    def display_stats_tuples(self):
-        """ Display the entities tuples statistics of the database. """
-
-        print("\nTotal number of tuples: {}".format(len(self.tuples)))
-        print("\n10 most frequent tuples:")
-        for tuple_ in self.tuples[:10]:
-            print("{} (in {} articles)".format(str(tuple_), len(tuple_.article_ids)))
-        print()
-
-        self.plot_hist(fig=1, data=self.stats['tuples_lengths'], xlabel='lengths', log=True,
-                       title='Lengths of the tuples of entities')
-
-        self.plot_hist(fig=2, data=self.stats['tuples_frequencies'], xlabel='frequencies', log=True,
-                       title='Frequencies of the tuples of entities')
-
-        self.plot_hist(fig=3, data=self.stats['tuples_thresholds'], xlabel='thresholds', log=True,
-                       title='Number of articles for each threshold on the frequency')
-
-    def display_stats_contexts(self):
-        """ Display the contexts statistics of the database. """
-
-        self.plot_hist(fig=6, data=self.stats['contexts'], xlabel='number of contexts', log=True,
-                       title="Number of contexts found for each tuple")
-
-    def display_stats_wikipedia(self):
-        """ Display the wikipedia statistics of the database. """
-
-        print("\nTotal number of wikipedia entries found: {}/not found: {}"
-              .format(self.stats['wikipedia_length'],
-                      self.stats['notwikipedia_length']))
-
-        print("\nWikipedia info of 10 most frequent tuples:\n")
-        for tuple_ in self.tuples[:10]:
-            for entity in tuple_.entities:
-                print(entity.name, '; ', entity.wiki)
-            print()
-
-        print("\nEntities not found in wikipedia:")
-        for entity in self.wikipedia['not_found']:
-            print(entity)
-
-        print()
-
-        self.plot_hist(fig=4, data=self.stats['wikipedia_frequencies'], xlabel='frequencies', log=True,
-                       title='Tuple frequency of the entities found in wikipedia')
-
-        self.plot_hist(fig=5, data=self.stats['notwikipedia_frequencies'], xlabel='frequencies', log=True,
-                       title='Tuple frequency of the entities not found in wikipedia')
+                    else:
+                        print("Wrong answer, not saving it.")
 
     # endregion
 
@@ -936,43 +847,6 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
-        """
-        Combines current wikipedia information and some other wikipedia files into a single file.
-
-        Args:
-            current: bool, whether to use the current wikipedia information.
-            in_names: list, names of the file to combine.
-            out_name: str, name of the file to write in.
-        """
-
-        out_wikipedia = {'found': dict(), 'not_found': set()}
-
-        if current:
-            print("Current wikipedia information: {} found/{} not_found...".format(len(self.wikipedia['found']),
-                                                                                   len(self.wikipedia['not_found'])))
-
-            for type_ in ['found', 'not_found']:
-                out_wikipedia[type_].update(self.wikipedia[type_])
-
-            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
-                                                                         len(out_wikipedia['not_found'])))
-
-        for in_name in in_names:
-            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
-
-            print("File {}: {} found/{} not_found...".format(in_name,
-                                                             len(in_wikipedia['found']),
-                                                             len(in_wikipedia['not_found'])))
-
-            for type_ in ['found', 'not_found']:
-                out_wikipedia[type_].update(in_wikipedia[type_])
-
-            print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
-                                                                         len(out_wikipedia['not_found'])))
-
-        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
-
     def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None, random_seed=None):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
@@ -1153,9 +1027,12 @@ def main():
 
     database.preprocess_database()
     database.process_articles()
+    database.process_wikipedia(load=True)
 
-    database.process_wikipedia(load=True, file_name='wikipedia_global')
-    database.process_queries(check_changes=True)
+    database.combine_wiki()
+    database.correct_wiki()
+
+    database.process_queries(check_changes=True, csv_seed=1)
 
 
 if __name__ == '__main__':
