@@ -262,19 +262,18 @@ class Database:
                                                                          len(out_wikipedia['not_found'])))
 
         self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
+        self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
-    def correct_wiki(self, in_name='wikipedia_global', out_name='wikipedia_global', step=None):
+    def correct_wiki(self, out_name=None, step=None):
         """
         Run the manual correction of the wikipedia tricky cases.
 
         Args:
-            in_name: str, name of the wikipedia file to load; if None, deal with the standard files name.
             out_name: str, name of the wikipedia file to save; if None, deal with the standard files name.
             step: int, step of the correction to perform, starting with 0; if None, does all of them.
         """
 
-        self.load_pkl(attribute_name='wikipedia', file_name=in_name, folder_name='wikipedia')
         self.compute_correction(step=step)
         self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
 
@@ -556,54 +555,98 @@ class Database:
             step: int, step of the correction to perform, starting with 0; if None, does all of them.
         """
 
-        found, not_found = [], []
+        to_correct = [name for name, wiki in self.wikipedia['found'].items() if not wiki.exact]
+        if not to_correct:
+            print("All the {} entities are exact, no correction to be made...".format(len(self.wikipedia['found'])))
+            return
+        else:
+            print("{} entities to correct (on {}).".format(len(to_correct), len(self.wikipedia['found'])))
 
-        count, size = 0, len(self.wikipedia['found'])
-        for name, wiki in self.wikipedia['found'].items():
-            count = self.progression(count, self.modulo_entities, size, 'found entity')
+        steps = [1, 2, 3] if step is None else [step]
 
-            if not wiki.exact:
-                if name == wiki.title:
-                    wiki.exact = True
-                else:
-                    print(name + '/' + wiki.title)
-                    answer = input("Is this good? [y/n]")
+        try:
+            if 1 in steps:
+                count, size = 0, len(to_correct)
+                for name in to_correct:
+                    count = self.progression(count, self.modulo_entities, size, 'to correct entity')
+
+                    if name == self.wikipedia['found'][name].title:
+                        self.wikipedia['found'][name].exact = True
+                        to_correct.remove(name)
+
+                print("First step over, still {} to correct (on {})".format(len(to_correct),
+                                                                            len(self.wikipedia['found'])))
+
+            if 2 in steps:
+                count, size = 0, len(to_correct)
+                for name in to_correct:
+                    count = self.progression(count, self.modulo_entities, size, 'to correct entity')
+
+                    while True:
+                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": is this good? [y/n]")
+                        if answer in ['y', 'n']:
+                            break
+                        else:
+                            print("Answer should be 'y' or 'n', try again.")
 
                     if answer == 'y':
-                        wiki.exact = True
+                        self.wikipedia['found'][name].exact = True
+                        to_correct.remove(name)
 
-                    elif answer == 'n':
-                        wiki_search = search(name)
+                print("Second step over, still {} to correct (on {})".format(len(to_correct),
+                                                                             len(self.wikipedia['found'])))
 
-                        print("Wikipedia search:")
-                        for cmpt, title in enumerate(wiki_search):
-                            print(str(cmpt + 1) + ': ' + title)
+            if 3 in steps:
+                count, size = 0, len(to_correct)
+                for name in to_correct:
+                    count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
+                    wiki_search = search(name)
+                    print("Wikipedia search:")
+                    for cmpt, title in enumerate(wiki_search):
+                        print(str(cmpt + 1) + ': ' + title)
+
+                    while True:
                         try:
                             answer = int(input("Which number is the good one? (0 for no-one)"))
+                            if answer in range(len(wiki_search + 1)):
+                                break
+                            else:
+                                print("Answer should be between 0 and the length of the wikipedia search, try again.")
                         except ValueError:
-                            print("The answer is not a number, skip to next case...")
-                            continue
+                            print("Answer should be an int, try again.")
 
-                        if answer == 0:
-                            not_found.append(name)
-                        else:
-                            try:
-                                p = page(wiki_search[answer])
-                            except DisambiguationError:
-                                answer = input("Search is still ambiguous, enter a new search...")
-                                p = page(answer)
-                                answer = input("Is this good? " + p.title + ' [y/n]')
 
-                                if answer == 'y':
-                                    pass
-                                elif answer == 'n':
-                                    pass
-                                else:
-                                    print("Wrong answer, not saving it.")
-
+                    # TODO
+                    if answer == 0:
+                        # not_found.add(name)
+                        pass
                     else:
-                        print("Wrong answer, not saving it.")
+                        answer -= 1
+                        try:
+                            p = page(wiki_search[answer])
+                        except DisambiguationError:
+                            answer = input("Search is still ambiguous, enter a new search.")
+                            # try:
+                            #     p = page(answer)
+
+
+
+                                #             answer = input("Is this good? " + p.title + ' [y/n]')
+                                #
+                                #             if answer == 'y':
+                                #                 pass
+                                #             elif answer == 'n':
+                                #                 pass
+                                #             else:
+                                #                 print("Wrong answer, not saving it.")
+                                #
+                                # else:
+                                #     print("Wrong answer, not saving it.")
+                            ###
+
+        except KeyboardInterrupt:
+            print("Keyboard interruption, saving the results...")
 
     # endregion
 
@@ -1029,7 +1072,6 @@ def main():
     database.process_articles()
     database.process_wikipedia(load=True)
 
-    database.combine_wiki()
     database.correct_wiki()
 
     database.process_queries(check_changes=True, csv_seed=1)
