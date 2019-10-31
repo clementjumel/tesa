@@ -7,6 +7,7 @@ from glob import glob
 from collections import defaultdict
 from pickle import dump, load, PicklingError
 from pandas import DataFrame, read_csv
+from unidecode import unidecode
 from wikipedia import search, page, WikipediaException, DisambiguationError
 
 import matplotlib.pyplot as plt
@@ -265,13 +266,13 @@ class Database:
         self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
-    def correct_wiki(self, out_name=None, step=None):
+    def correct_wiki(self, step, out_name=None):
         """
         Run the manual correction of the wikipedia tricky cases.
 
         Args:
+            step: int, step of the correction to perform, between 1 and 4.
             out_name: str, name of the wikipedia file to save; if None, deal with the standard files name.
-            step: int, step of the correction to perform, starting with 0; if None, does all of them.
         """
 
         self.compute_correction(step=step)
@@ -546,12 +547,12 @@ class Database:
         self.results = results
 
     @Verbose("Computing the correction of the wikipedia information...")
-    def compute_correction(self, step=None):
+    def compute_correction(self, step):
         """
         Performs the manual correction of the wikipedia information.
 
         Args:
-            step: int, step of the correction to perform, starting with 0; if None, does all of them.
+            step: int, step of the correction to perform, starting with 0.
         """
 
         to_correct, corrected = set([name for name, wiki in self.wikipedia['found'].items() if not wiki.exact]), set()
@@ -561,15 +562,18 @@ class Database:
         else:
             print("{} entities to correct (on {}).".format(len(to_correct), len(self.wikipedia['found'])))
 
-        steps = range(1, 5) if step is None else [step]
-
         try:
-            if 1 in steps:
+            if step == 1:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
-                    if name == self.wikipedia['found'][name].title:
+                    preprocessed_name_1 = unidecode(name).lower().replace('.', '')
+                    preprocessed_name_2 = ' '.join([word for word in preprocessed_name_1.split() if len(word) > 1])
+                    preprocessed_title = unidecode(self.wikipedia['found'][name].title).lower().replace('.', '')
+
+                    if preprocessed_name_1 == preprocessed_title or preprocessed_name_1 in preprocessed_title \
+                            or preprocessed_name_2 == preprocessed_title or preprocessed_name_2 in preprocessed_title:
                         self.wikipedia['found'][name].exact = True
                         corrected.add(name)
 
@@ -577,17 +581,25 @@ class Database:
                 print("First step over, still {} to correct (on {})".format(len(to_correct),
                                                                             len(self.wikipedia['found'])))
 
-            if 2 in steps:
+            if step == 2:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
                     while True:
-                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": is this good? [y/n]")
-                        if answer in ['y', 'n']:
+                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": is this good? [y/n/o]")
+                        if answer in ['y', 'n', 'o']:
                             break
                         else:
-                            print("Answer should be 'y' or 'n', try again.")
+                            print("Answer should be 'y', 'n' or 'o', try again.")
+
+                    if answer == 'o':
+                        while True:
+                            answer = input(self.wikipedia['found'][name].get_info() + ": is this good? [y/n]")
+                            if answer in ['y', 'n']:
+                                break
+                            else:
+                                print("Answer should be 'y' or 'n', try again.")
 
                     if answer == 'y':
                         self.wikipedia['found'][name].exact = True
@@ -597,20 +609,20 @@ class Database:
                 print("Second step over, still {} to correct (on {})".format(len(to_correct),
                                                                              len(self.wikipedia['found'])))
 
-            if 3 in steps:
+            if step == 3:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
                     wiki_search = search(name)
-                    print("Wikipedia search:")
+                    print("Wikipedia search for {}:".format(name))
                     for cmpt, title in enumerate(wiki_search):
                         print(str(cmpt + 1) + ': ' + title)
 
                     while True:
                         try:
                             answer = int(input("Which number is the good one? (0 for no-one)"))
-                            if answer in range(len(wiki_search + 1)):
+                            if answer in range(len(wiki_search) + 1):
                                 break
                             else:
                                 print("Answer should be between 0 and the length of the wikipedia search, try again.")
@@ -621,17 +633,15 @@ class Database:
                         try:
                             p = page(wiki_search[answer - 1])
                             self.wikipedia['found'][name] = Wikipedia(p)
-                            self.wikipedia['found'][name].exact = True
-                            corrected.add(name)
 
                         except DisambiguationError:
-                            print("Search is still ambiguous, giving up...")
+                            print("Search is still ambiguous, moving on...")
 
                 to_correct, corrected = to_correct.difference(corrected), set()
                 print("Third step over, still {} to correct (on {})".format(len(to_correct),
                                                                             len(self.wikipedia['found'])))
 
-            if 4 in steps:
+            if step == 4:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
