@@ -570,10 +570,11 @@ class Database:
 
                     preprocessed_name_1 = unidecode(name).lower().replace('.', '')
                     preprocessed_name_2 = ' '.join([word for word in preprocessed_name_1.split() if len(word) > 1])
-                    preprocessed_title = unidecode(self.wikipedia['found'][name].title).lower().replace('.', '')
 
-                    if preprocessed_name_1 == preprocessed_title or preprocessed_name_1 in preprocessed_title \
-                            or preprocessed_name_2 == preprocessed_title or preprocessed_name_2 in preprocessed_title:
+                    preprocessed_title_1 = unidecode(self.wikipedia['found'][name].title).lower().replace('.', '')
+                    preprocessed_title_2 = ' '.join([word for word in preprocessed_title_1.split() if len(word) > 1])
+
+                    if preprocessed_name_1 == preprocessed_title_1 or preprocessed_name_2 == preprocessed_title_2:
                         self.wikipedia['found'][name].exact = True
                         corrected.add(name)
 
