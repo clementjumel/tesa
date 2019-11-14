@@ -647,13 +647,42 @@ class Database:
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
+                    while True:
+                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": discard? [y/n/o]")
+                        if answer in ['y', 'n', 'o']:
+                            break
+                        else:
+                            print("Answer should be 'y', 'n' or 'o', try again.")
+
+                    if answer == 'o':
+                        while True:
+                            answer = input(self.wikipedia['found'][name].get_info() + ": discard? [y/n]")
+                            if answer in ['y', 'n']:
+                                break
+                            else:
+                                print("Answer should be 'y' or 'n', try again.")
+
+                    if answer == 'y':
+                        del self.wikipedia['found'][name]
+                        self.wikipedia['not_found'].add(name)
+                        corrected.add(name)
+
+                to_correct, corrected = to_correct.difference(corrected), set()
+                print("Fourth step over, still {} to correct (on {})".format(len(to_correct),
+                                                                             len(self.wikipedia['found'])))
+
+            if step == 5:
+                count, size = 0, len(to_correct)
+                for name in sorted(to_correct):
+                    count = self.progression(count, self.modulo_entities, size, 'to correct entity')
+
                     del self.wikipedia['found'][name]
                     self.wikipedia['not_found'].add(name)
                     corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                print("Fourth step over, still {} to correct (on {})".format(len(to_correct),
-                                                                             len(self.wikipedia['found'])))
+                print("Fifth step over, still {} to correct (on {})".format(len(to_correct),
+                                                                            len(self.wikipedia['found'])))
 
         except KeyboardInterrupt:
             print("Keyboard interruption, saving the results...")
