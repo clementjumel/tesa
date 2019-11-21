@@ -1,7 +1,7 @@
 from database_creation.utils import Tuple, Wikipedia, Query, Result
 from database_creation.article import Article
 
-from numpy.random import shuffle, seed
+from numpy.random import seed, shuffle, choice
 from time import time
 from glob import glob
 from collections import defaultdict
@@ -172,7 +172,7 @@ class Database:
         self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_seed=1):
+    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_size=100, csv_seed=1):
         """
         Performs the processing of the aggregation queries.
 
@@ -181,6 +181,7 @@ class Database:
             check_changes: bool, if not load, load the existing queries file and check if there are changes in the new.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
+            csv_size: int, the number of queries to write in the csv.
             csv_seed: int, the seed to use for the random processes.
         """
 
@@ -198,7 +199,7 @@ class Database:
 
             self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
-            self.save_csv(attribute_name='queries', file_name=file_name, limit=100, random_seed=csv_seed)
+            self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed)
 
             if check_changes:
                 if old_queries == self.queries:
@@ -929,7 +930,8 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None, random_seed=None):
+    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None, random_seed=None,
+                 exclude_pilot=False):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
 
@@ -939,17 +941,31 @@ class Database:
             folder_name: str, name of the folder to save in.
             limit: int, maximum number of data to save; if None, save all of them.
             random_seed: int, the seed to use for the random processes.
+            exclude_pilot: bool, whether to exclude the queries from the pilot v2_0 and later.
         """
 
         obj = getattr(self, attribute_name)
         ids = sorted(obj.keys())
 
-        if limit is not None:
-            if random_seed is not None:
-                seed(random_seed)
+        if exclude_pilot:
+            print("Excluding previous tasks (initial number of ids: {})".format(len(ids)))
+            to_exclude = set()
 
-            shuffle(ids)
-            ids = ids[:limit]
+            for path in glob('../pilot/*/task/*.pkl'):
+                version = path.split('/')[2]
+                if version not in ['v1_0', 'v1_1']:
+                    folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
+                    task = self.load_pkl(file_name=file_name, folder_name=folder_name)
+
+                    to_exclude.update(set(task.keys()))
+                    print("Excluding the task from {} (number of ids: {}).".format(version, len(task.keys())))
+
+            ids = [id_ for id_ in ids if id_ not in to_exclude]
+            print("Exclusion done (final number of ids: {})".format(len(ids)))
+
+        if limit is not None:
+            seed(random_seed)
+            ids = choice(a=ids, size=limit, replace=False)
 
         data = [obj[id_].to_html() for id_ in ids]
         df = DataFrame.from_records(data=data)
@@ -1051,6 +1067,10 @@ class Database:
                 shuffle(paths)
                 paths = paths[:self.max_size]
                 paths.sort()
+                ###
+                # paths = choice(a=paths, size=self.max_size, replace=False)
+                # paths.sort()
+                ###
             else:
                 paths = paths[:self.max_size]
 
