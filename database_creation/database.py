@@ -954,14 +954,14 @@ class Database:
             print("Excluding previous tasks (initial number of ids: {})".format(len(ids)))
             to_exclude = set()
 
-            for path in glob('../pilot/*/task/*.pkl'):
+            for path in glob('../pilot/*/task/*.csv'):
                 version = path.split('/')[2]
                 if version not in ['v1_0', 'v1_1']:
-                    folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
-                    task = self.load_pkl(file_name=file_name, folder_name=folder_name)
+                    df = read_csv(path)
+                    df_ids = set([row.get('id_') for _, row in df.iterrows()])
 
-                    to_exclude.update(set(task.keys()))
-                    print("Excluding the task from {} (number of ids: {}).".format(version, len(task.keys())))
+                    to_exclude.update(df_ids)
+                    print("Excluding the task from {} (number of ids: {}).".format(version, len(df_ids)))
 
             ids = [id_ for id_ in ids if id_ not in to_exclude]
             print("Exclusion done (final number of ids: {})".format(len(ids)))
