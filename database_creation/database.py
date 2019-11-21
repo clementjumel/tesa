@@ -172,7 +172,8 @@ class Database:
         self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_size=100, csv_seed=1):
+    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_size=100, csv_seed=1,
+                        exclude_pilot=False):
         """
         Performs the processing of the aggregation queries.
 
@@ -183,6 +184,7 @@ class Database:
             debug: bool, whether or not to perform the debugging of the database.
             csv_size: int, the number of queries to write in the csv.
             csv_seed: int, the seed to use for the random processes.
+            exclude_pilot: bool, whether to exclude the queries from the pilot v2_0 and later.
         """
 
         if load:
@@ -199,7 +201,8 @@ class Database:
 
             self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
-            self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed)
+            self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed,
+                          exclude_pilot=exclude_pilot)
 
             if check_changes:
                 if old_queries == self.queries:
