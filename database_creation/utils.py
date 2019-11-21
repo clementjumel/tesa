@@ -718,6 +718,20 @@ class Query:
 
         return s
 
+    def get_context_html(self):
+        """
+        Returns the html version of the context.
+
+        Returns:
+            str, html version of the context.
+        """
+
+        s = '<td colspan=' + str(len(self.entities)) + '>'
+        s += self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
+        s += '</td>'
+
+        return s
+
     def get_context_readable(self):
         """
         Returns the readable version of the context.
@@ -750,7 +764,7 @@ class Query:
             'id_': self.id_,
             'entities': self.get_entities_html(),
             'generic_phrase': self.get_entities_phrase(),
-            'context': '<td colspan=' + str(len(self.entities)) + '>' + self.context + '</td>',
+            'context': self.get_context_html(),
             'entities_names': ', '.join(self.entities[:-1]) + ' and ' + self.entities[-1],
             'info': ''.join(['<td>' + self.summaries[entity_name] + '</td>' for entity_name in self.entities]),
             'title': self.get_title_html(),
