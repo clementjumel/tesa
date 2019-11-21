@@ -794,9 +794,6 @@ class Query:
 class Result:
     # region Class base methods
 
-    id_to_name = {'A1W4KDUGDWFN28': 'paul_b',
-                  'A0532418PLGOLBXSM6T': 'paul_n'}
-
     def __init__(self, id_, version, row):
         """
         Initializes the Result instance.
@@ -810,11 +807,11 @@ class Result:
         self.id_ = id_
         self.version = version
 
-        self.annotator = self.id_to_name[str(row.get('WorkerId'))]
-        self.answer1 = str(row.get('Answer.utterance_1'))
-        self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'None' else None
-        self.duration = str(row.get('WorkTimeInSeconds'))
-        self.bug = True if row.get('Answer.box_impossible.on') == 'true' else False
+        self.answer1 = str(row.get('Answer.utterance_1')) if str(row.get('Answer.utterance_1')) != 'nan' else None
+        self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'nan' else None
+        self.worker_id = str(row.get('WorkerId'))
+        self.duration = int(row.get('WorkTimeInSeconds'))
+        self.bug = bool(row.get('Answer.box_impossible.on'))
 
     def __str__(self):
         """
@@ -824,16 +821,9 @@ class Result:
             str, readable format of the instance.
         """
 
-        if not self.bug:
-            s = self.answer1
-            s += '/' + self.answer2 if self.answer2 else ''
-
-        else:
-            s = 'bug'
-            s += self.answer1 if self.answer1 != 'bug' else ''
-            s += '/' + self.answer2 if self.answer2 else ''
-
-        s += ' (' + self.annotator + ', ' + self.version + ')'
+        s = self.answer1 if self.answer1 else ''
+        s += '/' + self.answer2 if self.answer2 else ''
+        s += '(bug)' if self.bug else ''
 
         return s
 
