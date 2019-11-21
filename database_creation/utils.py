@@ -726,8 +726,11 @@ class Query:
             str, html version of the context.
         """
 
+        context = self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
+        context = context.replace('-LRB-', '(').replace('-RRB-', ')')
+
         s = '<td colspan=' + str(len(self.entities)) + '>'
-        s += self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
+        s += context
         s += '</td>'
 
         return s
@@ -740,7 +743,8 @@ class Query:
             str, readable version of the context.
         """
 
-        s = self.context
+        s = self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
+        s = s.replace('-LRB-', '(').replace('-RRB-', ')')
 
         s = sub(r'<span.*?>', ' [', s)
         s = sub(r'</span.*?>', ']', s)
