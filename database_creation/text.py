@@ -177,6 +177,7 @@ class Text:
         idx = 0
         entity_to_color = dict()
 
+        # TODO
         if len(tuple_.entities) > 8:
             raise Exception("Not enough colors, implement more of them!")
 
