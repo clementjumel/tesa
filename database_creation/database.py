@@ -9,6 +9,7 @@ from pickle import dump, load, PicklingError
 from pandas import DataFrame, read_csv
 from unidecode import unidecode
 from wikipedia import search, page, WikipediaException, DisambiguationError
+from xml.etree.ElementTree import ParseError
 
 import matplotlib.pyplot as plt
 
@@ -413,7 +414,12 @@ class Database:
         count, size = 0, len(self.articles)
         for id_ in self.articles:
             count = self.progression(count, self.modulo_articles, size, 'article')
-            self.articles[id_].compute_annotations()
+
+            try:
+                self.articles[id_].compute_annotations()
+            except ParseError:
+                print("Data is not clean, remove data {} and start again.".format(id_))
+                raise Exception
 
         self.write_debug(field='articles', method='annotations') if debug else None
 
