@@ -10,6 +10,7 @@ from pandas import DataFrame, read_csv
 from unidecode import unidecode
 from wikipedia import search, page, WikipediaException, DisambiguationError
 from xml.etree.ElementTree import ParseError
+from itertools import chain, combinations
 
 import matplotlib.pyplot as plt
 
@@ -1086,29 +1087,21 @@ class Database:
         return paths
 
     @staticmethod
-    def subtuples(l):
+    def subtuples(s):
         """
-        Compute all the possible sorted subtuples of len > 1 from a list.
+        Compute all the possible sorted subtuples of len between 2 and 6 from a set s.
 
         Args:
-            l: list, original list.
+            s: set, original set.
 
         Returns:
-            set, all the possible subtuples of len > 1 of l.
+            set, all the possible sorted subtuples.
         """
 
-        if len(l) < 2:
-            return set()
+        s = sorted(s)
+        min_len, max_len = 2, min(len(s), 6)
 
-        elif len(l) == 2 or len(l) > 10:
-            return {tuple(sorted(l))}
-
-        else:
-            res = {tuple(sorted(l))}
-            for x in l:
-                res = res.union(Database.subtuples([y for y in l if y != x]))
-
-            return res
+        return set(chain.from_iterable(combinations(s, r) for r in range(min_len, max_len + 1)))
 
     @staticmethod
     def plot_hist(fig, data, title, xlabel, log=False):
