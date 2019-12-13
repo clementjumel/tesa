@@ -11,6 +11,7 @@ from unidecode import unidecode
 from wikipedia import search, page, WikipediaException, DisambiguationError
 from xml.etree.ElementTree import ParseError
 from itertools import chain, combinations
+from re import findall
 
 import matplotlib.pyplot as plt
 
@@ -582,7 +583,12 @@ class Database:
                     preprocessed_name_1 = unidecode(name).lower().replace('.', '')
                     preprocessed_name_2 = ' '.join([word for word in preprocessed_name_1.split() if len(word) > 1])
 
-                    preprocessed_title_1 = unidecode(self.wikipedia['found'][name].title).lower().replace('.', '')
+                    title = self.wikipedia['found'][name].title
+                    before_parenthesis = findall(r'(.*?)\s*\(', title)
+                    before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
+                        else title
+
+                    preprocessed_title_1 = unidecode(before_parenthesis).lower().replace('.', '')
                     preprocessed_title_2 = ' '.join([word for word in preprocessed_title_1.split() if len(word) > 1])
 
                     if preprocessed_name_1 == preprocessed_title_1 or preprocessed_name_2 == preprocessed_title_2:
@@ -633,7 +639,7 @@ class Database:
 
                     while True:
                         try:
-                            answer = int(input("Which number is the good one? (0 for no-one)"))
+                            answer = int(input("Which number is the good one? (0 for giving up this example)"))
                             if answer in range(len(wiki_search) + 1):
                                 break
                             else:
@@ -641,7 +647,13 @@ class Database:
                         except ValueError:
                             print("Answer should be an int, try again.")
 
-                    if answer != 0:
+                    if answer == 0:
+                        del self.wikipedia['found'][name]
+                        self.wikipedia['not_found'].add(name)
+                        corrected.add(name)
+                        print("Considered not found.")
+
+                    else:
                         try:
                             p = page(wiki_search[answer - 1])
                             self.wikipedia['found'][name] = Wikipedia(p)
