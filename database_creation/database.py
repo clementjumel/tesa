@@ -599,35 +599,40 @@ class Database:
                 print("First step over, still {} to correct (on {})".format(len(to_correct),
                                                                             len(self.wikipedia['found'])))
 
-            if step == 2:
+            elif step == 2:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
 
                     while True:
-                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": is this good? [y/n/o]")
-                        if answer in ['y', 'n', 'o']:
+                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": is this good? [y/n/o/d]")
+                        if answer in ['y', 'n', 'o', 'd']:
                             break
                         else:
-                            print("Answer should be 'y', 'n' or 'o', try again.")
+                            print("Answer should be 'y' (yes), 'n' (no), 'o' (open) or 'd' (discard), try again.")
 
                     if answer == 'o':
                         while True:
-                            answer = input(self.wikipedia['found'][name].get_info() + ": is this good? [y/n]")
-                            if answer in ['y', 'n']:
+                            answer = input(self.wikipedia['found'][name].get_info() + ": is this good? [y/n/d]")
+                            if answer in ['y', 'n', 'd']:
                                 break
                             else:
-                                print("Answer should be 'y' or 'n', try again.")
+                                print("Answer should be 'y' (yes), 'n' (no) or 'd' (discard), try again.")
 
                     if answer == 'y':
                         self.wikipedia['found'][name].exact = True
+                        corrected.add(name)
+
+                    elif answer == 'd':
+                        del self.wikipedia['found'][name]
+                        self.wikipedia['not_found'].add(name)
                         corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
                 print("Second step over, still {} to correct (on {})".format(len(to_correct),
                                                                              len(self.wikipedia['found'])))
 
-            if step == 3:
+            elif step == 3:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
@@ -665,36 +670,7 @@ class Database:
                 print("Third step over, still {} to correct (on {})".format(len(to_correct),
                                                                             len(self.wikipedia['found'])))
 
-            if step == 4:
-                count, size = 0, len(to_correct)
-                for name in sorted(to_correct):
-                    count = self.progression(count, self.modulo_entities, size, 'to correct entity')
-
-                    while True:
-                        answer = input(name + '/' + self.wikipedia['found'][name].title + ": discard? [y/n/o]")
-                        if answer in ['y', 'n', 'o']:
-                            break
-                        else:
-                            print("Answer should be 'y', 'n' or 'o', try again.")
-
-                    if answer == 'o':
-                        while True:
-                            answer = input(self.wikipedia['found'][name].get_info() + ": discard? [y/n]")
-                            if answer in ['y', 'n']:
-                                break
-                            else:
-                                print("Answer should be 'y' or 'n', try again.")
-
-                    if answer == 'y':
-                        del self.wikipedia['found'][name]
-                        self.wikipedia['not_found'].add(name)
-                        corrected.add(name)
-
-                to_correct, corrected = to_correct.difference(corrected), set()
-                print("Fourth step over, still {} to correct (on {})".format(len(to_correct),
-                                                                             len(self.wikipedia['found'])))
-
-            if step == 5:
+            elif step == 4:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
                     count = self.progression(count, self.modulo_entities, size, 'to correct entity')
@@ -706,6 +682,9 @@ class Database:
                 to_correct, corrected = to_correct.difference(corrected), set()
                 print("Fifth step over, still {} to correct (on {})".format(len(to_correct),
                                                                             len(self.wikipedia['found'])))
+
+            else:
+                raise Exception("Wrong step specified.")
 
         except KeyboardInterrupt:
             print("Keyboard interruption, saving the results...")
