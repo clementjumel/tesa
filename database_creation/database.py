@@ -974,7 +974,7 @@ class Database:
         prefix, suffix = self.prefix_suffix()
 
         if file_name is not None:
-            file_name = prefix + folder_name + '/' + file_name + '.pkl'
+            file_name = prefix + folder_name + '/' + file_name + '.csv'
         else:
             file_name = attribute_name if limit is None else attribute_name + '_short'
             file_name = prefix + folder_name + '/' + file_name + suffix + '.csv'
