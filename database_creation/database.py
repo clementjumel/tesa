@@ -170,55 +170,46 @@ class Database:
             debug: bool, whether or not to perform the debugging of the database.
         """
 
-        self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia') if load else None
+        self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='task_creation/wikipedia') if load \
+            else None
         self.compute_wikipedia(load=load, debug=debug)
-        self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+        self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='task_creation/wikipedia')
 
     @Verbose("Processing the aggregation queries...")
-    def process_queries(self, load=False, check_changes=False, file_name=None, debug=False, csv_size=100, csv_seed=1,
-                        exclude_pilot=False):
+    def process_queries(self, load=False, file_name=None, debug=False, csv_size=100, csv_seed=1, exclude_seen=True):
         """
         Performs the processing of the aggregation queries.
 
         Args:
             load: bool, if True, load an existing file.
-            check_changes: bool, if not load, load the existing queries file and check if there are changes in the new.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
             debug: bool, whether or not to perform the debugging of the database.
             csv_size: int, the number of queries to write in the csv.
             csv_seed: int, the seed to use for the random processes.
-            exclude_pilot: bool, whether to exclude the queries from the pilot v2_0 and later.
+            exclude_seen: bool, whether to exclude the queries already in batches or not (not taking the pilot into
+            account).
         """
 
         if load:
             self.load_pkl(attribute_name='queries', file_name=file_name)
 
         else:
-            if check_changes:
-                try:
-                    self.load_pkl(attribute_name='queries', file_name=file_name)
-                except FileNotFoundError:
-                    check_changes = False
-                    print("Unable to check the changes: the queries file is missing.")
-            old_queries = self.queries
-
             self.compute_queries(debug=debug)
             self.save_pkl(attribute_name='queries', file_name=file_name)
             self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed,
-                          exclude_pilot=exclude_pilot)
-
-            if check_changes:
-                if old_queries == self.queries:
-                    print("\nNo change in the computed queries.")
-                else:
-                    print("\nThe queries have changed!")
+                          exclude_seen=exclude_seen)
 
     @Verbose("Processing the results...")
-    def process_results(self):
-        """ Process the results of an annotation task. """
+    def process_results(self, exclude_pilot=True):
+        """
+        Process the results of an annotation task.
 
-        self.compute_tasks()
-        self.compute_results()
+        Args:
+            exclude_pilot: whether or not to exclude the data from the pilot.
+        """
+
+        self.compute_tasks(exclude_pilot=exclude_pilot)
+        self.compute_results(exclude_pilot=exclude_pilot)
 
     @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -257,7 +248,7 @@ class Database:
                                                                          len(out_wikipedia['not_found'])))
 
         for in_name in in_names:
-            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
+            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='task_creation/wikipedia')
 
             print("File {}: {} found/{} not_found...".format(in_name,
                                                              len(in_wikipedia['found']),
@@ -269,7 +260,7 @@ class Database:
             print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
                                                                          len(out_wikipedia['not_found'])))
 
-        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
+        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='task_creation/wikipedia')
         self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
@@ -283,7 +274,7 @@ class Database:
         """
 
         self.compute_correction(step=step)
-        self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
+        self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='task_creation/wikipedia')
 
     # endregion
 
@@ -300,7 +291,8 @@ class Database:
         """
 
         articles = {}
-        root = '../databases/nyt_jingyun/'
+        prefix, _ = self.prefix_suffix()
+        root = prefix + '../nyt_annotated_corpus/'
 
         for data_path in self.paths():
             id_ = data_path.split('/')[-1].split('.')[0]
@@ -528,33 +520,49 @@ class Database:
 
     @Verbose("Computing the tasks...")
     @Attribute('tasks')
-    def compute_tasks(self):
-        """ Compute the tasks of the annotation. """
+    def compute_tasks(self, exclude_pilot=True):
+        """
+        Compute the tasks of the annotation.
+
+        Args:
+            exclude_pilot: whether or not to exclude the data from the pilot.
+        """
 
         tasks = dict()
+        prefix, _ = self.prefix_suffix()
 
-        for path in glob('../pilot/*/task/*.pkl'):
-            version = path.split('/')[2]
-            folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
+        for path in glob(prefix + 'task_answers/*/task/*.pkl'):
+            version = path.split('/')[-3]
 
-            tasks[version] = self.load_pkl(file_name=file_name, folder_name=folder_name)
+            if 'pilot' not in version or not exclude_pilot:
+                folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
+                tasks[version] = self.load_pkl(file_name=file_name, folder_name=folder_name)
 
         self.tasks = tasks
 
     @Verbose("Computing the results...")
     @Attribute('results')
-    def compute_results(self):
-        """ Compute the results of an annotation task. """
+    def compute_results(self, exclude_pilot=True):
+        """
+        Compute the results of an annotation task.
+
+        Args:
+            exclude_pilot: whether or not to exclude the data from the pilot.
+        """
 
         results = defaultdict(lambda: defaultdict(list))  # defaultdict of defaultdict of list
+        prefix, _ = self.prefix_suffix()
 
-        for path in glob('../pilot/*/results/*.csv'):
-            version = path.split('/')[2]
-            df = read_csv(path)
+        for path in glob(prefix + 'task_answers/*/results/*.csv'):
+            version = path.split('/')[-3]
 
-            for _, row in df.iterrows():
-                id_ = row.get('Input.id_')
-                results[version][id_].append(Result(id_, version, row))
+            if 'pilot' not in version or not exclude_pilot:
+                df = read_csv(path)
+                print("Object loaded from {}".format(path))
+
+                for _, row in df.iterrows():
+                    id_ = row.get('Input.id_')
+                    results[version][id_].append(Result(id_, version, row))
 
         self.results = results
 
@@ -863,7 +871,7 @@ class Database:
 
         return prefix, suffix
 
-    def save_pkl(self, attribute_name=None, obj=None, file_name=None, folder_name='queries'):
+    def save_pkl(self, attribute_name=None, obj=None, file_name=None, folder_name='task_creation/queries'):
         """
         Save an attribute (designated by its name) or an object into a file using pickle.
 
@@ -901,7 +909,7 @@ class Database:
         except PicklingError:
             print("Could not save (PicklingError).")
 
-    def load_pkl(self, attribute_name=None, file_name=None, folder_name='queries'):
+    def load_pkl(self, attribute_name=None, file_name=None, folder_name='task_creation/queries'):
         """
         Load an attribute (designated by its name) or an object from a file using pickle.
 
@@ -931,8 +939,8 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None, random_seed=None,
-                 exclude_pilot=False):
+    def save_csv(self, attribute_name=None, file_name=None, folder_name='task_creation/queries', limit=None,
+                 random_seed=None, exclude_seen=True):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
 
@@ -942,19 +950,21 @@ class Database:
             folder_name: str, name of the folder to save in.
             limit: int, maximum number of data to save; if None, save all of them.
             random_seed: int, the seed to use for the random processes.
-            exclude_pilot: bool, whether to exclude the queries from the pilot v2_0 and later.
+            exclude_seen: bool, whether to exclude the queries already in batches or not (not taking the pilot into
+            account).
         """
 
         obj = getattr(self, attribute_name)
         ids = sorted(obj.keys())
+        prefix, _ = self.prefix_suffix()
 
-        if exclude_pilot:
+        if exclude_seen:
             print("Excluding previous tasks (initial number of ids: {})".format(len(ids)))
             to_exclude = set()
 
-            for path in glob('../pilot/*/task/*.csv'):
-                version = path.split('/')[2]
-                if version not in ['v1_0', 'v1_1']:
+            for path in glob(prefix + 'task_answers/*/task/*.csv'):
+                version = path.split('/')[-3]
+                if 'pilot' not in version:
                     df = read_csv(path)
                     df_ids = set([row.get('id_') for _, row in df.iterrows()])
 
@@ -1056,7 +1066,9 @@ class Database:
             list, sorted file paths of the data of the articles.
         """
 
-        patterns = ['../databases/nyt_jingyun/data/' + str(year) + '/*/*/*.xml' for year in self.years]
+        prefix, _ = self.prefix_suffix()
+
+        patterns = [prefix + '../nyt_annotated_corpus/data/' + str(year) + '/*/*/*.xml' for year in self.years]
 
         paths = []
         for pattern in patterns:
