@@ -812,18 +812,20 @@ class Query:
 class Result:
     # region Class base methods
 
-    def __init__(self, id_, version, row):
+    def __init__(self, id_, version, batch, row):
         """
         Initializes the Result instance.
 
         Args:
             id_: str, id of the Result.
-            version: str, version of the pilot.
+            version: str, version of the task.
+            batch: str, batch of the task.
             row: panda.Series, whole data of the result.
         """
 
         self.id_ = id_
         self.version = version
+        self.batch = batch
 
         self.answer1 = str(row.get('Answer.utterance_1')) if str(row.get('Answer.utterance_1')) != 'nan' else None
         self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'nan' else None
@@ -841,7 +843,7 @@ class Result:
 
         s = self.answer1 if self.answer1 else ''
         s += '/' + self.answer2 if self.answer2 else ''
-        s += '(bug)' if self.bug else ''
+        s += '[bug]' if self.bug else ''
 
         return s
 
