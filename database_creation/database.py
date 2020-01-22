@@ -554,7 +554,7 @@ class Database:
         prefix, _ = self.prefix_suffix()
 
         for path in glob(prefix + 'task_answers/*/results/*.csv'):
-            version = path.split('/')[-3]
+            version, batch = path.split('/')[-3], path.split('/')[-1].replace('_complete.csv', '')
 
             if 'pilot' not in version or not exclude_pilot:
                 df = read_csv(path)
@@ -562,7 +562,7 @@ class Database:
 
                 for _, row in df.iterrows():
                     id_ = row.get('Input.id_')
-                    results[version][id_].append(Result(id_, version, row))
+                    results[version][id_].append(Result(id_=id_, version=version, batch=batch, row=row))
 
         self.results = results
 
