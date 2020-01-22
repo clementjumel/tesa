@@ -607,7 +607,7 @@ class Tuple:
 class Query:
     # region Class base methods
 
-    def __init__(self, id_, tuple_, article, context, version=None):
+    def __init__(self, id_, tuple_, article, context):
         """
         Initializes the Query instance.
 
@@ -616,11 +616,9 @@ class Query:
             tuple_: Tuple, Tuple of entities mentioned in the article.
             article: Article, article from where the query comes from.
             context: Context, context of the entities in the article.
-            version: str, version of the Query.
         """
 
         self.id_ = id_
-        self.version = version
 
         self.entities = [str(entity) for entity in tuple_.entities]
         self.entities_type_ = tuple_.type_
