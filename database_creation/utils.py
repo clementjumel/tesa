@@ -833,6 +833,8 @@ class Result:
         self.duration = int(row.get('WorkTimeInSeconds'))
         self.bug = bool(row.get('Answer.box_impossible.on'))
 
+        self.preprocessed_answers = self.get_preprocessed_answers()
+
     def __str__(self):
         """
         Overrides the builtin str method for the instances of Result.
@@ -846,6 +848,33 @@ class Result:
         s += '[bug]' if self.bug else ''
 
         return s
+
+    # endregion
+
+    # region Methods get_
+
+    def get_preprocessed_answers(self):
+        """
+        Preprocess the answers and return them as a list.
+
+        Returns:
+            list, preprocessed answers, in the order answer1 then answer2.
+        """
+
+        numbers = ['two', 'three', 'four', 'five', 'six']
+        preprocessed_answers = []
+
+        for answer in [self.answer1, self.answer2]:
+            if answer:
+                words = answer.lower().split()
+                words = words[1:] if words[0] == 'the' else words
+                words = words[1:] if words[0] in numbers else words
+
+                answer = ' '.join(words)
+
+                preprocessed_answers.append(answer) if answer not in preprocessed_answers else None
+
+        return preprocessed_answers
 
     # endregion
 
