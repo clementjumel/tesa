@@ -845,6 +845,7 @@ class Result:
 
         s = self.answer1 if self.answer1 else ''
         s += '/' + self.answer2 if self.answer2 else ''
+        s += ' [' + '/'.join(self.preprocessed_answers) + ']' if self.preprocessed_answers else ''
         s += '[bug]' if self.bug else ''
 
         return s
@@ -867,8 +868,8 @@ class Result:
         for answer in [self.answer1, self.answer2]:
             if answer:
                 words = answer.lower().split()
-                words = words[1:] if words[0] == 'the' else words
-                words = words[1:] if words[0] in numbers else words
+                words = words[1:] if words[0] == 'the' and len(words) > 1 else words
+                words = words[1:] if words[0] in numbers and len(words) > 1 else words
 
                 answer = ' '.join(words)
 
