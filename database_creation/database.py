@@ -531,12 +531,12 @@ class Database:
         tasks = dict()
         prefix, _ = self.prefix_suffix()
 
-        for path in glob(prefix + 'task_answers/*/task/*.pkl'):
+        for path in sorted(glob(prefix + 'task_answers/*/task/*.pkl')):
             version = path.split('/')[-3]
 
             if 'pilot' not in version or not exclude_pilot:
                 folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
-                tasks[version] = self.load_pkl(file_name=file_name, folder_name=folder_name)
+                tasks.update(self.load_pkl(file_name=file_name, folder_name=folder_name))
 
         self.tasks = tasks
 
@@ -550,10 +550,10 @@ class Database:
             exclude_pilot: whether or not to exclude the data from the pilot.
         """
 
-        results = defaultdict(lambda: defaultdict(list))  # defaultdict of defaultdict of list
+        results = defaultdict(list)
         prefix, _ = self.prefix_suffix()
 
-        for path in glob(prefix + 'task_answers/*/results/*.csv'):
+        for path in sorted(glob(prefix + 'task_answers/*/results/*.csv')):
             version, batch = path.split('/')[-3], path.split('/')[-1].replace('_complete.csv', '')
 
             if 'pilot' not in version or not exclude_pilot:
@@ -562,7 +562,7 @@ class Database:
 
                 for _, row in df.iterrows():
                     id_ = row.get('Input.id_')
-                    results[version][id_].append(Result(id_=id_, version=version, batch=batch, row=row))
+                    results[id_].append(Result(id_=id_, version=version, batch=batch, row=row))
 
         self.results = results
 
