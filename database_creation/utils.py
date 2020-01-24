@@ -875,6 +875,9 @@ class Result:
             if '.' in unpreprocessed_answer and ' are discussed' in unpreprocessed_answer.lower().split('.')[0]:
                 unpreprocessed_answer = '.'.join(unpreprocessed_answer.split('.')[1:])
 
+            if unpreprocessed_answer.isupper():
+                unpreprocessed_answer = unpreprocessed_answer.capitalize()
+
             if old != unpreprocessed_answer:
                 print('Correcting "{}" to "{}"'.format(old, unpreprocessed_answer))
 
@@ -884,7 +887,7 @@ class Result:
             while unpreprocessed_answer[0] == ' ':
                 unpreprocessed_answer = unpreprocessed_answer[1:]
 
-            answer = unpreprocessed_answer.capitalize()
+            answer = ' '.join([unpreprocessed_answer.split()[0].capitalize()] + unpreprocessed_answer.split()[1:])
             words = answer.lower().split()
 
             words = words[1:] if words[0] in articles and len(words) > 1 else words

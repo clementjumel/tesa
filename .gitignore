@@ -2,7 +2,5 @@
 database_creation/__pycache__/
 notebooks/.ipynb_checkpoints/
 
-databases/
-pilot/
-pre_trained_models/
+nyt_annotated_corpus/
 results/
