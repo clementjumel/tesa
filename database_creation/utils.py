@@ -898,7 +898,8 @@ class Result:
 
             if 'have' in preprocessed_answer.split() \
                     or 'are' in preprocessed_answer.split() \
-                    or preprocessed_answer == 'the':
+                    or preprocessed_answer == 'the' \
+                    or '/' in preprocessed_answer:
                 print('   Discarding "{}"'.format(answer))
             elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
                 answers.append(answer)
