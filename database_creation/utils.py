@@ -827,13 +827,11 @@ class Result:
         self.version = version
         self.batch = batch
 
-        self.answer1 = str(row.get('Answer.utterance_1')) if str(row.get('Answer.utterance_1')) != 'nan' else None
-        self.answer2 = str(row.get('Answer.utterance_2')) if str(row.get('Answer.utterance_2')) != 'nan' else None
         self.worker_id = str(row.get('WorkerId'))
         self.duration = int(row.get('WorkTimeInSeconds'))
         self.bug = bool(row.get('Answer.box_impossible.on'))
 
-        self.preprocessed_answers = self.get_preprocessed_answers()
+        self.answers, self.preprocessed_answers = self.get_answers(row)
 
     def __str__(self):
         """
@@ -843,39 +841,62 @@ class Result:
             str, readable format of the instance.
         """
 
-        s = self.answer1 if self.answer1 else ''
-        s += '/' + self.answer2 if self.answer2 else ''
-        s += ' [' + '/'.join(self.preprocessed_answers) + ']' if self.preprocessed_answers else ''
-        s += '[bug]' if self.bug else ''
-
-        return s
+        return '/'.join(self.answers)
 
     # endregion
 
     # region Methods get_
 
-    def get_preprocessed_answers(self):
+    @staticmethod
+    def get_answers(row):
         """
-        Preprocess the answers and return them as a list.
+        Return both the cleaned answers (remove artifacts) and the preprocessed answers and return them as lists.
+
+        Args:
+            row: panda.Series, whole data of the result.
 
         Returns:
-            list, preprocessed answers, in the order answer1 then answer2.
+            answers: list, cleaned answers.
+            preprocessed_answers: list, preprocessed answers.
         """
 
-        numbers = ['two', 'three', 'four', 'five', 'six']
-        preprocessed_answers = []
+        unpreprocessed_answers, answers, preprocessed_answers = [], [], []
+        articles, numbers = ['the'], ['two', 'three', 'four', 'five', 'six']
+        standard_answers = ['people', 'areas', 'organizations']
 
-        for answer in [self.answer1, self.answer2]:
-            if answer:
-                words = answer.lower().split()
-                words = words[1:] if words[0] == 'the' and len(words) > 1 else words
-                words = words[1:] if words[0] in numbers and len(words) > 1 else words
+        unpreprocessed_answers.append(str(row.get('Answer.utterance_1'))) \
+            if str(row.get('Answer.utterance_1')) != 'nan' else None
+        unpreprocessed_answers.append(str(row.get('Answer.utterance_2'))) \
+            if str(row.get('Answer.utterance_2')) != 'nan' else None
 
-                answer = ' '.join(words)
+        for unpreprocessed_answer in unpreprocessed_answers:
+            old = unpreprocessed_answer
 
-                preprocessed_answers.append(answer) if answer not in preprocessed_answers else None
+            if '.' in unpreprocessed_answer and ' are discussed' in unpreprocessed_answer.lower().split('.')[0]:
+                unpreprocessed_answer = '.'.join(unpreprocessed_answer.split('.')[1:])
 
-        return preprocessed_answers
+            if old != unpreprocessed_answer:
+                print('Correcting "{}" to "{}"'.format(old, unpreprocessed_answer))
+
+            while unpreprocessed_answer[-1] in ['.', ' ']:
+                unpreprocessed_answer = unpreprocessed_answer[:-1]
+
+            while unpreprocessed_answer[0] == ' ':
+                unpreprocessed_answer = unpreprocessed_answer[1:]
+
+            answer = unpreprocessed_answer.capitalize()
+            words = answer.lower().split()
+
+            words = words[1:] if words[0] in articles and len(words) > 1 else words
+            words = words[1:] if words[0] in numbers and len(words) > 1 else words
+
+            preprocessed_answer = ' '.join(words)
+
+            if preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
+                answers.append(answer)
+                preprocessed_answers.append(preprocessed_answer)
+
+        return answers, preprocessed_answers
 
     # endregion
 
