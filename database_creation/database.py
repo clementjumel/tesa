@@ -200,16 +200,19 @@ class Database:
                           exclude_seen=exclude_seen)
 
     @Verbose("Processing the results...")
-    def process_results(self, exclude_pilot=True):
+    def process_results(self, exclude_pilot=True, assignment_threshold=None):
         """
         Process the results of an annotation task.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
+            assignment_threshold: int, minimum number of assignments a worker has to have done.
         """
 
         self.compute_tasks(exclude_pilot=exclude_pilot)
         self.compute_results(exclude_pilot=exclude_pilot)
+
+        self.filter_results(assignment_threshold=assignment_threshold)
 
     @Verbose("Computing and displaying statistics...")
     def process_stats(self, type_):
@@ -835,6 +838,36 @@ class Database:
 
         self.min_articles = min_articles if min_articles is not None else self.min_articles
         self.min_queries = min_queries if min_queries is not None else self.min_queries
+
+    @Verbose("Filtering the results...")
+    def filter_results(self, assignment_threshold=None):
+        """
+        Filter out the results from workers that did not enough assignments.
+
+        Args:
+            assignment_threshold: int, minimum number of assignments a worker has to have done.
+        """
+
+        if assignment_threshold is None:
+            print("No threshold on the number of assignments.")
+            return
+
+        print("Criterion: at least {} assignments per worker.".format(assignment_threshold))
+        workers_count = defaultdict(list)
+
+        for id_, result_list in self.results.items():
+            for result in result_list:
+                workers_count[result.worker_id].append(id_)
+
+        count = 0
+        for worker_id, ids in workers_count.items():
+            if len(ids) < assignment_threshold:
+                for id_ in ids:
+                    self.results[id_] = [result for result in self.results[id_] if result.worker_id != worker_id]
+                    count += 1
+
+        print("Results filtered: {} results left ({} deleted).".format(sum([len(r) for _, r in self.results.items()]),
+                                                                       count))
 
     # endregion
 
