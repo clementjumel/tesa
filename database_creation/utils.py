@@ -832,6 +832,7 @@ class Result:
         self.bug = bool(row.get('Answer.box_impossible.on'))
 
         self.answers, self.preprocessed_answers = self.get_answers(row)
+        self.correct_inconsistencies()
 
     def __str__(self):
         """
@@ -841,7 +842,7 @@ class Result:
             str, readable format of the instance.
         """
 
-        return '/'.join(self.answers)
+        return '/'.join(self.answers) or '[bug]'
 
     # endregion
 
@@ -879,7 +880,7 @@ class Result:
                 unpreprocessed_answer = unpreprocessed_answer.capitalize()
 
             if old != unpreprocessed_answer:
-                print('Correcting "{}" to "{}"'.format(old, unpreprocessed_answer))
+                print('   Correcting "{}" to "{}"'.format(old, unpreprocessed_answer))
 
             while unpreprocessed_answer[-1] in ['.', ' ']:
                 unpreprocessed_answer = unpreprocessed_answer[:-1]
@@ -895,11 +896,28 @@ class Result:
 
             preprocessed_answer = ' '.join(words)
 
-            if preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
+            if 'have' in preprocessed_answer.split() \
+                    or 'are' in preprocessed_answer.split() \
+                    or preprocessed_answer == 'the':
+                print('   Discarding "{}"'.format(answer))
+            elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
                 answers.append(answer)
                 preprocessed_answers.append(preprocessed_answer)
 
         return answers, preprocessed_answers
+
+    # endregion
+
+    # region Other methods
+
+    def correct_inconsistencies(self):
+        """ Correct the NA reports inconsistencies by discarding answers when there is a reported bug. """
+
+        if not self.answers and not self.bug:
+            self.bug = True
+
+        elif self.answers and self.bug:
+            self.answers, self.preprocessed_answers = [], []
 
     # endregion
 
