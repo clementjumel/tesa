@@ -1,4 +1,5 @@
 from re import findall, sub
+from numpy.random import shuffle
 from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
@@ -919,6 +920,44 @@ class Result:
 
         elif self.answers and self.bug:
             self.answers, self.preprocessed_answers = [], []
+
+    # endregion
+
+
+class Task:
+    # region Class base methods
+
+    def __init__(self, query, answer, possible_answers):
+        """
+        Initializes the Task instance.
+
+        Args:
+            query: Query, initial Query of the annotation.
+            answer: str, gold standard answer of the query.
+            possible_answers: list of str, other choices of answer.
+        """
+
+        self.entities = query.entities
+        self.entities_type_ = query.entities_type_
+        self.summaries = query.summaries
+        self.title = query.title
+        self.context = query.context
+
+        self.answer = answer
+
+        possible_answers = [answer] + list(possible_answers)
+        shuffle(possible_answers)
+        self.possible_answers = possible_answers
+
+    def __str__(self):
+        """
+        Overrides the builtin str method for the instances of Task.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        return '/'.join(self.entities) + ': ' + '; '.join(self.possible_answers) + '?'
 
     # endregion
 
