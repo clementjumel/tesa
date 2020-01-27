@@ -825,7 +825,7 @@ class Annotation:
             id_: str, id of the corresponding Query.
             version: str, version of the Query.
             batch: str, batch of the Annotation.
-            row: panda.Series, whole data of the result.
+            row: panda.Series, whole data of the annotation.
         """
 
         self.id_ = id_
