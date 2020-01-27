@@ -53,8 +53,8 @@ class Article:
         self.title = title
         self.date = date
 
-    def compute_annotations(self):
-        """ Compute the annotated texts (content or summary) of the article. """
+    def compute_corpus_annotations(self):
+        """ Compute the annotated texts (content or summary) of the article from the corpus. """
 
         content_root = ElementTree.parse(self.content_path).getroot()
         summary_root = ElementTree.parse(self.summary_path).getroot()
