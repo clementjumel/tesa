@@ -606,6 +606,8 @@ class Tuple:
 
 
 class Query:
+    """ Query to gather annotations from the Mechanical Turk workers. """
+
     # region Class base methods
 
     def __init__(self, id_, tuple_, article, context):
@@ -810,17 +812,19 @@ class Query:
     # endregion
 
 
-class Result:
+class Annotation:
+    """ Annotation from the Mechanical Turk workers. """
+
     # region Class base methods
 
     def __init__(self, id_, version, batch, row):
         """
-        Initializes the Result instance.
+        Initializes the Annotation instance.
 
         Args:
-            id_: str, id of the Result.
-            version: str, version of the task.
-            batch: str, batch of the task.
+            id_: str, id of the corresponding Query.
+            version: str, version of the Query.
+            batch: str, batch of the Annotation.
             row: panda.Series, whole data of the result.
         """
 
@@ -837,7 +841,7 @@ class Result:
 
     def __str__(self):
         """
-        Overrides the builtin str method for the instances of Result.
+        Overrides the builtin str method for the instances of Annotation.
 
         Returns:
             str, readable format of the instance.
@@ -855,7 +859,7 @@ class Result:
         Return both the cleaned answers (remove artifacts) and the preprocessed answers and return them as lists.
 
         Args:
-            row: panda.Series, whole data of the result.
+            row: panda.Series, whole data of the annotation.
 
         Returns:
             answers: list, cleaned answers.
@@ -925,6 +929,8 @@ class Result:
 
 
 class Task:
+    """ Task for a model to solve. """
+
     # region Class base methods
 
     def __init__(self, query, answer, possible_answers):
