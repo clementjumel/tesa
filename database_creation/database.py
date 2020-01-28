@@ -1,7 +1,7 @@
-from database_creation.utils import Tuple, Wikipedia, Query, Result
+from database_creation.utils import Tuple, Wikipedia, Query, Annotation
 from database_creation.article import Article
 
-from numpy.random import seed, shuffle, choice
+from numpy.random import seed, choice
 from time import time
 from glob import glob
 from collections import defaultdict
@@ -12,8 +12,6 @@ from wikipedia import search, page, WikipediaException, DisambiguationError
 from xml.etree.ElementTree import ParseError
 from itertools import chain, combinations
 from re import findall
-
-import matplotlib.pyplot as plt
 
 
 class Database:
@@ -45,10 +43,10 @@ class Database:
         self.entities = None
         self.tuples = None
         self.wikipedia = None
+
         self.queries = None
-        self.stats = None
+        self.annotations = None
         self.tasks = None
-        self.results = None
 
         seed(random_seed)
 
@@ -199,32 +197,20 @@ class Database:
             self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed,
                           exclude_seen=exclude_seen)
 
-    @Verbose("Processing the results...")
-    def process_results(self, exclude_pilot=True, assignment_threshold=None):
+    @Verbose("Processing the annotations...")
+    def process_annotations(self, exclude_pilot=True, assignment_threshold=None):
         """
-        Process the results of an annotation task.
+        Process the annotations and the corresponding queries.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
             assignment_threshold: int, minimum number of assignments a worker has to have done.
         """
 
-        self.compute_tasks(exclude_pilot=exclude_pilot)
-        self.compute_results(exclude_pilot=exclude_pilot)
+        self.compute_annotated_queries(exclude_pilot=exclude_pilot)
+        self.compute_annotations(exclude_pilot=exclude_pilot)
 
-        self.filter_results(assignment_threshold=assignment_threshold)
-
-    @Verbose("Computing and displaying statistics...")
-    def process_stats(self, type_):
-        """
-        Compute and display the statistics of the database of the given type.
-
-        Args:
-            type_: str, type of the statistics, must be 'tuples', 'wikipedia' or 'contexts'.
-        """
-
-        getattr(self, 'compute_stats_' + type_)()
-        getattr(self, 'display_stats_' + type_)()
+        self.filter_annotations(assignment_threshold=assignment_threshold)
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -399,10 +385,10 @@ class Database:
 
         self.write_debug(field='tuples', method='tuples') if debug else None
 
-    @Verbose("Computing the articles' annotations...")
-    def compute_annotations(self, debug=False):
+    @Verbose("Computing the articles' annotations from the corpus...")
+    def compute_corpus_annotations(self, debug=False):
         """
-        Computes the annotations of the articles.
+        Computes the corpus annotations of the articles.
 
         Args:
             debug: bool, whether or not to perform the debugging of the database.
@@ -413,7 +399,7 @@ class Database:
             count = self.progression(count, self.modulo_articles, size, 'article')
 
             try:
-                self.articles[id_].compute_annotations()
+                self.articles[id_].compute_corpus_annotations()
             except ParseError:
                 print("Data is not clean, remove data {} and start again.".format(id_))
                 raise Exception
@@ -521,42 +507,42 @@ class Database:
 
         self.write_debug(field='queries', method='queries') if debug else None
 
-    @Verbose("Computing the tasks...")
-    @Attribute('tasks')
-    def compute_tasks(self, exclude_pilot=True):
+    @Verbose("Computing the annotated queries...")
+    @Attribute('queries')
+    def compute_annotated_queries(self, exclude_pilot=True):
         """
-        Compute the tasks of the annotation.
+        Compute the queries corresponding to the annotations.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
         """
 
-        tasks = dict()
+        queries = dict()
         prefix, _ = self.prefix_suffix()
 
-        for path in sorted(glob(prefix + 'task_answers/*/task/*.pkl')):
+        for path in sorted(glob(prefix + 'task_annotation/*/task/*.pkl')):
             version = path.split('/')[-3]
 
             if 'pilot' not in version or not exclude_pilot:
                 folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
-                tasks.update(self.load_pkl(file_name=file_name, folder_name=folder_name))
+                queries.update(self.load_pkl(file_name=file_name, folder_name=folder_name))
 
-        self.tasks = tasks
+        self.queries = queries
 
-    @Verbose("Computing the results...")
-    @Attribute('results')
-    def compute_results(self, exclude_pilot=True):
+    @Verbose("Computing the annotations...")
+    @Attribute('annotations')
+    def compute_annotations(self, exclude_pilot=True):
         """
-        Compute the results of an annotation task.
+        Compute the annotations of the Mechanical Turks.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
         """
 
-        results = defaultdict(list)
+        annotations = defaultdict(list)
         prefix, _ = self.prefix_suffix()
 
-        for path in sorted(glob(prefix + 'task_answers/*/results/*.csv')):
+        for path in sorted(glob(prefix + 'task_annotation/*/results/*.csv')):
             version, batch = path.split('/')[-3], path.split('/')[-1].replace('_complete.csv', '')
 
             if 'pilot' not in version or not exclude_pilot:
@@ -565,9 +551,9 @@ class Database:
 
                 for _, row in df.iterrows():
                     id_ = row.get('Input.id_')
-                    results[id_].append(Result(id_=id_, version=version, batch=batch, row=row))
+                    annotations[id_].append(Annotation(id_=id_, version=version, batch=batch, row=row))
 
-        self.results = results
+        self.annotations = annotations
 
     @Verbose("Computing the correction of the wikipedia information...")
     def compute_correction(self, step):
@@ -839,10 +825,10 @@ class Database:
         self.min_articles = min_articles if min_articles is not None else self.min_articles
         self.min_queries = min_queries if min_queries is not None else self.min_queries
 
-    @Verbose("Filtering the results...")
-    def filter_results(self, assignment_threshold=None):
+    @Verbose("Filtering the annotations...")
+    def filter_annotations(self, assignment_threshold=None):
         """
-        Filter out the results from workers that did not enough assignments.
+        Filter out the Annotations from workers that did not enough assignments.
 
         Args:
             assignment_threshold: int, minimum number of assignments a worker has to have done.
@@ -855,19 +841,20 @@ class Database:
         print("Criterion: at least {} assignments per worker.".format(assignment_threshold))
         workers_count = defaultdict(list)
 
-        for id_, result_list in self.results.items():
-            for result in result_list:
-                workers_count[result.worker_id].append(id_)
+        for id_, annotation_list in self.annotations.items():
+            for annotation in annotation_list:
+                workers_count[annotation.worker_id].append(id_)
 
         count = 0
         for worker_id, ids in workers_count.items():
             if len(ids) < assignment_threshold:
                 for id_ in ids:
-                    self.results[id_] = [result for result in self.results[id_] if result.worker_id != worker_id]
+                    self.annotations[id_] = [annotation for annotation in self.annotations[id_]
+                                             if annotation.worker_id != worker_id]
                     count += 1
 
-        print("Results filtered: {} results left ({} deleted).".format(sum([len(r) for _, r in self.results.items()]),
-                                                                       count))
+        print("Annotations filtered: {} left ({} deleted).".format(sum([len(a) for _, a in self.annotations.items()]),
+                                                                   count))
 
     # endregion
 
@@ -995,7 +982,7 @@ class Database:
             print("Excluding previous tasks (initial number of ids: {})".format(len(ids)))
             to_exclude = set()
 
-            for path in glob(prefix + 'task_answers/*/task/*.csv'):
+            for path in glob(prefix + 'task_annotation/*/task/*.csv'):
                 version = path.split('/')[-3]
                 if 'pilot' not in version:
                     df = read_csv(path)
@@ -1110,13 +1097,8 @@ class Database:
 
         if self.max_size is not None:
             if self.shuffle:
-                shuffle(paths)
-                paths = paths[:self.max_size]
+                paths = choice(a=paths, size=self.max_size, replace=False)
                 paths.sort()
-                ###
-                # paths = choice(a=paths, size=self.max_size, replace=False)
-                # paths.sort()
-                ###
             else:
                 paths = paths[:self.max_size]
 
@@ -1138,26 +1120,6 @@ class Database:
         min_len, max_len = 2, min(len(s), 6)
 
         return set(chain.from_iterable(combinations(s, r) for r in range(min_len, max_len + 1)))
-
-    @staticmethod
-    def plot_hist(fig, data, title, xlabel, log=False):
-        """
-        Plot the data as a histogram using matplotlib.pyplot. Print the data as well.
-
-        Args:
-            fig: int, index of the figure.
-            data: numpy.histogram, histogram of the data.
-            title: str, title of the figure.
-            xlabel: str, label of the x-axis.
-            log: bool, whether to use a logarithmic scale or not.
-        """
-
-        plt.figure(num=fig, figsize=(12, 4))
-
-        counts, bins = data
-        plt.hist(bins[:-1], bins, weights=counts, align='left', rwidth=.8, log=log)
-        plt.title(title)
-        plt.xlabel(xlabel)
 
     # endregion
 
