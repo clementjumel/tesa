@@ -933,14 +933,14 @@ class Task:
 
     # region Class base methods
 
-    def __init__(self, query, answer, possible_answers):
+    def __init__(self, query, positive_answers, negative_answers):
         """
         Initializes the Task instance.
 
         Args:
             query: Query, initial Query of the annotation.
-            answer: str, gold standard answer of the query.
-            possible_answers: list of str, other choices of answer.
+            positive_answers: list of str, gold standard answers of the query.
+            negative_answers: list of str, negative choices of answer.
         """
 
         self.entities = query.entities
@@ -949,11 +949,12 @@ class Task:
         self.title = query.title
         self.context = query.context
 
-        self.answer = answer
+        self.positive_answers = positive_answers
+        self.negative_answers = negative_answers
 
-        possible_answers = [answer] + list(possible_answers)
-        shuffle(possible_answers)
-        self.possible_answers = possible_answers
+        choices = positive_answers + negative_answers
+        shuffle(choices)
+        self.choices = choices
 
     def __str__(self):
         """
@@ -963,7 +964,7 @@ class Task:
             str, readable format of the instance.
         """
 
-        return '/'.join(self.entities) + ': ' + '; '.join(self.possible_answers) + '?'
+        return '/'.join(self.entities) + ': ' + '; '.join(self.choices) + '?'
 
     # endregion
 
