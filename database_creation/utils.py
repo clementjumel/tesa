@@ -1,8 +1,9 @@
 from re import findall, sub
-from numpy.random import shuffle
+from numpy.random import shuffle, choice
 from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
+from collections import defaultdict
 
 
 class Mention:
@@ -928,19 +929,19 @@ class Annotation:
     # endregion
 
 
-class Task:
-    """ Task for a model to solve. """
+class Sample:
+    """ Sample for the modeling Task. """
 
     # region Class base methods
 
     def __init__(self, query, positive_answers, negative_answers):
         """
-        Initializes the Task instance.
+        Initializes the Sample instance.
 
         Args:
             query: Query, initial Query of the annotation.
-            positive_answers: list of str, gold standard answers of the query.
-            negative_answers: list of str, negative choices of answer.
+            positive_answers: list of str, gold standard answers.
+            negative_answers: list of str, negative answers.
         """
 
         self.entities = query.entities
@@ -958,13 +959,150 @@ class Task:
 
     def __str__(self):
         """
+        Overrides the builtin str method for the instances of Sample.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        choices = []
+
+        for choice in self.choices:
+            if choice in self.positive_answers:
+                choices.append(choice + '[y]')
+            else:
+                choices.append(choice)
+
+        return '/'.join(self.entities) + ': ' + '; '.join(choices) + '?'
+
+    # endregion
+
+    # region Methods get_
+
+    def get_x(self):
+        """ Returns the x data of the Sample. """
+
+        x = {'entities': self.entities,
+             'summaries': self.summaries,
+             'article': self.title + ': ' + self.context,
+             'choices': self.choices}
+
+        return x
+
+    def get_y(self):
+        """ Returns the y data of the Sample. """
+
+        return [1 if choice in self.positive_answers else 0 for choice in self.choices]
+
+    # endregion
+
+
+class Task:
+    """ Modeling task. """
+
+    # region Class base methods
+
+    def __init__(self, queries, annotations, answers_threshold):
+        """
+        Initializes the Task instance.
+
+        Args:
+            queries: dict of Query, Queries of the annotations.
+            annotations: dict of list of Annotations, Annotations from the MT workers.
+            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
+        """
+
+        annotations = self.filter_annotations(annotations=annotations, answers_threshold=answers_threshold)
+
+        self.answers = self.get_answers(queries, annotations)
+        self.samples = self.get_samples(queries, annotations)
+
+    def __str__(self):
+        """
         Overrides the builtin str method for the instances of Task.
 
         Returns:
             str, readable format of the instance.
         """
 
-        return '/'.join(self.entities) + ': ' + '; '.join(self.choices) + '?'
+        return '\n'.join([str(sample) for sample in self.samples])
+
+    # endregion
+
+    # region Methods get_
+
+    @staticmethod
+    def get_answers(queries, annotations):
+        """
+        Returns the answers and their probabilities in the Task.
+
+        Args:
+            queries: dict of Query, Queries of the annotations.
+            annotations: dict of list of Annotations, Annotations from the MT workers.
+
+        Returns:
+            list, tuples (probability, answer, entities type) corresponding to the answers.
+        """
+
+        answers, cmpt = defaultdict(int), 0
+
+        for id_, annotation_list in annotations.items():
+            for annotation in annotation_list:
+                for answer in annotation.preprocessed_answers:
+                    answers[(answer, queries[id_].entities_type_)] += 1
+                    cmpt += 1
+
+        answers = sorted([(count/cmpt, key[0], key[1]) for key, count in answers.items()], reverse=True)
+
+        return answers
+
+    def get_samples(self, queries, annotations):
+        """
+        Returns the samples of the Task.
+
+        Args:
+            queries: dict of Query, Queries of the annotations.
+            annotations: dict of list of Annotations, Annotations from the MT workers.
+
+        Returns:
+            list, not randomized list of Samples.
+        """
+
+        samples = []
+
+        for id_, annotation_list in annotations.items():
+            query = queries[id_]
+            positive_answers = [answer for annotation in annotation_list for answer in annotation.preprocessed_answers]
+            negative_answers = choice(a=[answer for _, answer, entities_type_ in self.answers
+                                         if entities_type_ == query.entities_type_],
+                                      size=len(positive_answers),
+                                      replace=False,
+                                      p=[p for p, _, entities_type_ in self.answers
+                                         if entities_type_ == query.entities_type_])
+
+            samples.append(Sample(query=query, positive_answers=positive_answers, negative_answers=negative_answers))
+
+        return samples
+
+    # endregion
+
+    # region Other methods
+
+    @staticmethod
+    def filter_annotations(annotations, answers_threshold):
+        """
+        Returns the Annotations filtered from those which received less than answers_threshold answers.
+
+        Args:
+            annotations: dict of list of Annotations, Annotations from the MT workers.
+            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
+
+        Returns:
+            dict of list of Annotations, filtered Annotations from the MT workers.
+        """
+
+        return dict([(id_, annotation_list) for id_, annotation_list in annotations.items()
+                     if len([annotation for annotation in annotation_list if not annotation.bug]) >= answers_threshold])
 
     # endregion
 
