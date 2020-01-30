@@ -1,4 +1,4 @@
-from database_creation.utils import Tuple, Wikipedia, Query, Annotation
+from database_creation.utils import Tuple, Wikipedia, Query, Annotation, Task
 from database_creation.article import Article
 
 from numpy.random import seed, choice
@@ -46,7 +46,7 @@ class Database:
 
         self.queries = None
         self.annotations = None
-        self.tasks = None
+        self.task = None
 
         seed(random_seed)
 
@@ -197,10 +197,10 @@ class Database:
             self.save_csv(attribute_name='queries', file_name=file_name, limit=csv_size, random_seed=csv_seed,
                           exclude_seen=exclude_seen)
 
-    @Verbose("Processing the annotations...")
-    def process_annotations(self, exclude_pilot=True, assignment_threshold=None):
+    @Verbose("Processing the modeling task...")
+    def process_task(self, exclude_pilot=True, assignment_threshold=None):
         """
-        Process the annotations and the corresponding queries.
+        Process the annotations, the corresponding queries and the task.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
@@ -211,6 +211,8 @@ class Database:
         self.compute_annotations(exclude_pilot=exclude_pilot)
 
         self.filter_annotations(assignment_threshold=assignment_threshold)
+
+        self.compute_task()
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -554,6 +556,13 @@ class Database:
                     annotations[id_].append(Annotation(id_=id_, version=version, batch=batch, row=row))
 
         self.annotations = annotations
+
+    @Verbose("Computing the modeling task...")
+    @Attribute('task')
+    def compute_task(self,):
+        """ Compute the modeling task. """
+
+        self.task = Task(queries=self.queries, annotations=self.annotations)
 
     @Verbose("Computing the correction of the wikipedia information...")
     def compute_correction(self, step):
