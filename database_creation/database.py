@@ -198,13 +198,14 @@ class Database:
                           exclude_seen=exclude_seen)
 
     @Verbose("Processing the modeling task...")
-    def process_task(self, exclude_pilot=True, assignment_threshold=None):
+    def process_task(self, exclude_pilot=True, assignment_threshold=None, answers_threshold=2):
         """
         Process the annotations, the corresponding queries and the task.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
             assignment_threshold: int, minimum number of assignments a worker has to have done.
+            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
         """
 
         self.compute_annotated_queries(exclude_pilot=exclude_pilot)
@@ -212,7 +213,7 @@ class Database:
 
         self.filter_annotations(assignment_threshold=assignment_threshold)
 
-        self.compute_task()
+        self.compute_task(answers_threshold=answers_threshold)
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -559,10 +560,15 @@ class Database:
 
     @Verbose("Computing the modeling task...")
     @Attribute('task')
-    def compute_task(self,):
-        """ Compute the modeling task. """
+    def compute_task(self, answers_threshold):
+        """
+        Compute the modeling task.
 
-        self.task = Task(queries=self.queries, annotations=self.annotations)
+        Args:
+            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
+        """
+
+        self.task = Task(queries=self.queries, annotations=self.annotations, answers_threshold=answers_threshold)
 
     @Verbose("Computing the correction of the wikipedia information...")
     def compute_correction(self, step):
