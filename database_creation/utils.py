@@ -1044,15 +1044,14 @@ class Task:
             list, tuples (probability, answer, entities type) corresponding to the answers.
         """
 
-        answers, cmpt = defaultdict(int), 0
+        answers = defaultdict(int)
 
         for id_, annotation_list in annotations.items():
             for annotation in annotation_list:
                 for answer in annotation.preprocessed_answers:
                     answers[(answer, queries[id_].entities_type_)] += 1
-                    cmpt += 1
 
-        answers = sorted([(count/cmpt, key[0], key[1]) for key, count in answers.items()], reverse=True)
+        answers = sorted([(count, key[0], key[1]) for key, count in answers.items()], reverse=True)
 
         return answers
 
@@ -1072,17 +1071,33 @@ class Task:
 
         for id_, annotation_list in annotations.items():
             query = queries[id_]
-            positive_answers = [answer for annotation in annotation_list for answer in annotation.preprocessed_answers]
-            negative_answers = choice(a=[answer for _, answer, entities_type_ in self.answers
-                                         if entities_type_ == query.entities_type_],
-                                      size=len(positive_answers),
-                                      replace=False,
-                                      p=[p for p, _, entities_type_ in self.answers
-                                         if entities_type_ == query.entities_type_])
+            positive_answers = sorted(set([answer for annotation in annotation_list
+                                           for answer in annotation.preprocessed_answers]))
+
+            answers = [(count, answer) for count, answer, entities_type_ in self.answers
+                       if entities_type_ == query.entities_type_ and answer not in positive_answers]
+            total_count = sum([count for count, _ in answers])
+
+            negative_answers = list(choice(a=[answer for _, answer in answers],
+                                           size=len(positive_answers),
+                                           replace=False,
+                                           p=[count/total_count for count, _ in answers]))
 
             samples.append(Sample(query=query, positive_answers=positive_answers, negative_answers=negative_answers))
 
+        shuffle(samples)
+
         return samples
+
+    def get_data(self):
+        """
+        Returns the modeling Task, to feed to a model.
+
+        Returns:
+            list, Task and its Samples, ready to be analyzed.
+        """
+
+        return [(sample.get_x(), sample.get_y()) for sample in self.samples]
 
     # endregion
 
