@@ -206,6 +206,9 @@ class Database:
             exclude_pilot: whether or not to exclude the data from the pilot.
             assignment_threshold: int, minimum number of assignments a worker has to have done.
             answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
+
+        Returns:
+            list, returns the data of the task to feed to a model.
         """
 
         self.compute_annotated_queries(exclude_pilot=exclude_pilot)
@@ -214,6 +217,8 @@ class Database:
         self.filter_annotations(assignment_threshold=assignment_threshold)
 
         self.compute_task(answers_threshold=answers_threshold)
+
+        return self.task.get_data()
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -559,7 +564,6 @@ class Database:
         self.annotations = annotations
 
     @Verbose("Computing the modeling task...")
-    @Attribute('task')
     def compute_task(self, answers_threshold):
         """
         Compute the modeling task.
