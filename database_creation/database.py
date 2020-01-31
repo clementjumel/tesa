@@ -202,7 +202,7 @@ class Database:
                           exclude_seen=exclude_seen)
 
     @Verbose("Processing the modeling task...")
-    def process_task(self, exclude_pilot=True, assignment_threshold=None, answers_threshold=2):
+    def process_task(self, exclude_pilot=True, assignment_threshold=5, answers_threshold=2):
         """
         Process the annotations, the corresponding queries and the task.
 
