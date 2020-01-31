@@ -1,4 +1,5 @@
 from re import findall, sub
+from numpy import asarray
 from numpy.random import shuffle, choice
 from nltk import sent_tokenize
 from unidecode import unidecode
@@ -948,7 +949,7 @@ class Sample:
         self.entities_type_ = query.entities_type_
         self.summaries = query.summaries
         self.title = query.title
-        self.context = query.context
+        self.context = query.get_context_readable()
 
         self.positive_answers = positive_answers
         self.negative_answers = negative_answers
@@ -982,17 +983,17 @@ class Sample:
     def get_x(self):
         """ Returns the x data of the Sample. """
 
-        x = {'entities': self.entities,
-             'summaries': self.summaries,
-             'article': self.title + ': ' + self.context,
-             'choices': self.choices}
+        x = asarray([self.choices,
+                     ', '.join(self.entities),
+                     '; '.join([summary for _, summary in self.summaries.items()]),
+                     self.title + ': ' + self.context])
 
         return x
 
     def get_y(self):
         """ Returns the y data of the Sample. """
 
-        return [1 if choice in self.positive_answers else 0 for choice in self.choices]
+        return asarray([1 if choice in self.positive_answers else 0 for choice in self.choices])
 
     # endregion
 
@@ -1097,7 +1098,7 @@ class Task:
             list, Task and its Samples, ready to be analyzed.
         """
 
-        return [(sample.get_x(), sample.get_y()) for sample in self.samples]
+        return asarray([(sample.get_x(), sample.get_y()) for sample in self.samples])
 
     # endregion
 
