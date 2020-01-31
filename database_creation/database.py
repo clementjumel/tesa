@@ -87,8 +87,10 @@ class Database:
                 t0 = time()
 
                 print(self.message)
-                func(*args, **kwargs)
+                res = func(*args, **kwargs)
                 print("Done (elapsed time: {}s).\n".format(round(time() - t0)))
+
+                return res
 
             return f
 
@@ -112,11 +114,13 @@ class Database:
                 length = len(attribute) if attribute is not None else 0
                 print("Initial length of {}: {}".format(self.attribute, length))
 
-                func(*args, **kwargs)
+                res = func(*args, **kwargs)
 
                 attribute = getattr(slf, self.attribute)
                 length = len(attribute) if attribute is not None else 0
                 print("Final length of {}: {}".format(self.attribute, length))
+
+                return res
 
             return f
 
