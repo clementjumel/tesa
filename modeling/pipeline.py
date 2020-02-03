@@ -1,6 +1,6 @@
 from database_creation.database import Database
 
-from numpy import split, concatenate
+from numpy import split, concatenate, mean
 
 
 class Pipeline:
@@ -52,18 +52,24 @@ class Pipeline:
             model: models.Model, model to train.
         """
 
+        train_scores, test_scores = [], []
+
         if not self.use_k_fold:
             model.reset()
-            model.train(train_set=self.train_set)
-            model.test(test_set=self.test_set)
+            train_scores.append(model.train(train_set=self.train_set))
+            test_scores.append(model.test(test_set=self.test_set))
 
         else:
             for train_set, test_set in self.k_fold:
                 model.reset()
-                model.train(train_set=train_set)
-                model.test(test_set=test_set)
+                train_scores.append(model.train(train_set=train_set))
+                test_scores.append(model.test(test_set=test_set))
 
             model.train(train_set=self.train_set)
+
+            train_scores, test_scores = mean(train_scores, axis=0), mean(test_scores, axis=0)
+
+        return train_scores, test_scores
 
     def validate_model(self, model):
         """
@@ -73,7 +79,9 @@ class Pipeline:
             model: models.Model, model to train.
         """
 
-        model.test(test_set=self.valid_set)
+        validate_score = model.test(test_set=self.valid_set)
+
+        return validate_score
 
     # endregion
 
