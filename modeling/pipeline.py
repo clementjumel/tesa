@@ -11,7 +11,7 @@ class Pipeline:
         Initializes an instance of Pipeline.
 
         Args:
-            k_fold: bool, whether or not to use k-fold cross validation.
+            use_k_fold: bool, whether or not to use k-fold cross validation.
         """
 
         self.use_k_fold = use_k_fold
@@ -20,9 +20,8 @@ class Pipeline:
 
         self.train_set = None
         self.test_set = None
-        self.valid_set = None
-
         self.k_fold = None
+        self.valid_set = None
 
     # endregion
 
@@ -40,7 +39,7 @@ class Pipeline:
 
         self.compute_raw_data()
 
-        if not self.k_fold:
+        if not self.use_k_fold:
             self.compute_train_test(test_proportion=test_proportion, valid_proportion=valid_proportion)
         else:
             self.compute_k_fold(k=k, valid_proportion=valid_proportion)
@@ -115,9 +114,9 @@ class Pipeline:
         self.test_set = test_set
         self.valid_set = valid_set
 
-        print("Split into train ({}, {}%),".format(train_set[0].shape, round(100 * train_set[0].shape / n)) +
-              " test ({}, {}%)".format(test_set[0].shape, round(100 * test_set[0].shape / n)) +
-              " and valid({}, {}%) sets.".format(valid_set[0].shape, round(100 * valid_set[0].shape / n)))
+        print("Split into train ({}, {}%),".format(train_set[0].shape[0], round(100 * train_set[0].shape[0] / n)) +
+              " test ({}, {}%)".format(test_set[0].shape[0], round(100 * test_set[0].shape[0] / n)) +
+              " and valid ({}, {}%) sets.".format(valid_set[0].shape[0], round(100 * valid_set[0].shape[0] / n)))
 
     def compute_k_fold(self, k, valid_proportion):
         """
@@ -127,6 +126,8 @@ class Pipeline:
             k: int, number of folds to create.
             valid_proportion: float, fraction (between 0 and 1) of the data to keep in valid_set.
         """
+
+        assert k is not None and valid_proportion is not None
 
         n = len(self.raw_data)
         n_valid = round(valid_proportion * n)
@@ -156,9 +157,9 @@ class Pipeline:
         self.train_set = train_set_full
         self.valid_set = valid_set
 
-        print("Split into k-fold cross validation sets (train: {}, {}%,".format(s[0][0], round(100*s[0][0]/n)) +
-              " test: {}, {}%)".format(s[0][1], round(100*s[0][1]/n)) +
-              " and a valid set ({}, {}%).".format(valid_set[0].shape, round(100*valid_set[0].shape/n)))
+        print("Split into k-fold cross validation sets (train: {}, {}%,".format(s[0][0][0], round(100*s[0][0][0]/n)) +
+              " test: {}, {}%)".format(s[0][1][0], round(100*s[0][1][0]/n)) +
+              " and a valid set ({}, {}%).".format(valid_set[0].shape[0], round(100*valid_set[0].shape[0]/n)))
 
     # endregion
 
