@@ -984,8 +984,8 @@ class Sample:
         """ Returns the x data of the Sample. """
 
         x = asarray([self.choices,
-                     ', '.join(self.entities),
-                     '; '.join([summary for _, summary in self.summaries.items()]),
+                     self.entities,
+                     [summary for _, summary in self.summaries.items()],
                      self.title + ': ' + self.context])
 
         return x
