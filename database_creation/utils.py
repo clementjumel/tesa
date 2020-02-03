@@ -983,10 +983,10 @@ class Sample:
     def get_x(self):
         """ Returns the x data of the Sample. """
 
-        x = asarray([self.choices,
-                     self.entities,
-                     [summary for _, summary in self.summaries.items()],
-                     self.title + ': ' + self.context])
+        x = {'choices': self.choices,
+             'entities': self.entities,
+             'summaries': [summary for _, summary in self.summaries.items()],
+             'context': self.title + ': ' + self.context}
 
         return x
 
