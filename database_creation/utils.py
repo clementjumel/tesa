@@ -1080,7 +1080,7 @@ class Task:
             total_count = sum([count for count, _ in answers])
 
             negative_answers = list(choice(a=[answer for _, answer in answers],
-                                           size=len(positive_answers),
+                                           size=10-len(positive_answers),
                                            replace=False,
                                            p=[count/total_count for count, _ in answers]))
 
