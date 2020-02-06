@@ -87,4 +87,26 @@ def rank(grades):
 
     return rankdata([-grade for grade in grades], method='ordinal')
 
+
+def progression(count, modulo, size, text):
+    """
+    Prints progression's updates and update the count.
+
+    Args:
+        count: int, current count.
+        modulo: int, how often to print updates.
+        size: int, size of the element to count.
+        text: str, what to print at the beginning of the updates.
+
+    Returns:
+        int, incremented count of articles.
+    """
+
+    count += 1
+
+    if count % modulo == 0:
+        print("   " + text + " {}/{}...".format(count, size))
+
+    return count
+
 # endregion
