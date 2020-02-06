@@ -1056,13 +1056,14 @@ class Task:
 
         return answers
 
-    def get_samples(self, queries, annotations):
+    def get_samples(self, queries, annotations, use_all_samples=True):
         """
         Returns the samples of the Task.
 
         Args:
             queries: dict of Query, Queries of the annotations.
             annotations: dict of list of Annotations, Annotations from the MT workers.
+            use_all_samples: bool, whether or not to use all the samples as a choice.
 
         Returns:
             list, not randomized list of Samples.
@@ -1072,17 +1073,25 @@ class Task:
 
         for id_, annotation_list in annotations.items():
             query = queries[id_]
+
             positive_answers = sorted(set([answer for annotation in annotation_list
                                            for answer in annotation.preprocessed_answers]))
 
             answers = [(count, answer) for count, answer, entities_type_ in self.answers
                        if entities_type_ == query.entities_type_ and answer not in positive_answers]
-            total_count = sum([count for count, _ in answers])
 
-            negative_answers = list(choice(a=[answer for _, answer in answers],
-                                           size=10-len(positive_answers),
-                                           replace=False,
-                                           p=[count/total_count for count, _ in answers]))
+            if use_all_samples:
+                negative_answers = [answer for _, answer in answers]
+
+            else:
+                total_count = sum([count for count, _ in answers])
+                negative_answers = list(choice(a=[answer for _, answer in answers],
+                                               size=10-len(positive_answers),
+                                               replace=False,
+                                               p=[count/total_count for count, _ in answers]))
+
+            shuffle(positive_answers)
+            shuffle(negative_answers)
 
             samples.append(Sample(query=query, positive_answers=positive_answers, negative_answers=negative_answers))
 
