@@ -4,7 +4,7 @@ from collections import defaultdict
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-from modeling.utils import rank, ap, dcg, ndcg
+from modeling.utils import rank, progression, ap, dcg, ndcg
 
 
 class Model:
@@ -119,9 +119,11 @@ class Baseline(Model):
         scores = []
 
         x_train, y_train = train_set
-        assert len(x_train) == len(y_train)
+        count, size = 0, len(x_train)
 
         for i in range(len(x_train)):
+            count = progression(count, 100, size, 'sample')
+
             x, y_true = x_train[i], y_train[i]
 
             y_pred = self.pred(x)
@@ -145,9 +147,11 @@ class Baseline(Model):
         scores = []
 
         x_test, y_test = test_set
-        assert len(x_test) == len(y_test)
+        count, size = 0, len(x_test)
 
         for i in range(len(x_test)):
+            count = progression(count, 100, size, 'sample')
+
             x, y_true = x_test[i], y_test[i]
 
             y_pred = self.pred(x)
