@@ -4,6 +4,28 @@ from scipy.stats import rankdata
 
 # region Metrics
 
+def ap(y_pred, y_true):
+    """
+    Compute the AP (Averaged Precision).
+
+    Args:
+        y_pred: 1d np.array, labels predicted
+        y_true: 1d np.array, true labels.
+
+    Returns:
+        float, score of the data.
+    """
+
+    n = len(y_true)
+
+    def p(j):
+        """ Precision until the position of d_ij for q_i. """
+
+        return sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
+
+    return sum([p(j)*y_true[j] for j in range(n)])/sum(y_true)
+
+
 def dcg(y_pred, y_true, k):
     """
     Compute the DCG (Discounted Cumulative Gain) at k of the prediction.
@@ -46,28 +68,6 @@ def ndcg(y_pred, y_true, k):
     y_pred_perfect = rank(y_true)
 
     return dcg(y_pred, y_true, k)/dcg(y_pred_perfect, y_true, k)
-
-
-def ap(y_pred, y_true):
-    """
-    Compute the AP (Averaged Precision).
-
-    Args:
-        y_pred: 1d np.array, labels predicted
-        y_true: 1d np.array, true labels.
-
-    Returns:
-        float, score of the data.
-    """
-
-    n = len(y_true)
-
-    def p(j):
-        """ Precision until the position of d_ij for q_i. """
-
-        return sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
-
-    return sum([p(j)*y_true[j] for j in range(n)])/sum(y_true)
 
 # endregion
 
