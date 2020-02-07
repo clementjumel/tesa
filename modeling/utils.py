@@ -16,14 +16,20 @@ def ap(y_pred, y_true):
         float, score of the data.
     """
 
-    n = len(y_true)
+    n, s = len(y_true), sum(y_true)
+
+    if s == 0:
+        return 0
 
     def p(j):
         """ Precision until the position of d_ij for q_i. """
 
-        return sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
+        if y_pred[j]:
+            return sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
+        else:
+            return 0
 
-    return sum([p(j)*y_true[j] for j in range(n)])/sum(y_true)
+    return sum([p(j)*y_true[j] for j in range(n)])/s
 
 
 def ap_at_k(y_pred, y_true, k):
