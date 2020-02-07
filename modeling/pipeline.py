@@ -55,7 +55,6 @@ class Pipeline:
         train_scores, test_scores = [], []
 
         if not self.use_k_fold:
-            model.reset()
             train_scores.append(model.train(train_set=self.train_set))
             test_scores.append(model.test(test_set=self.test_set))
 
@@ -68,6 +67,7 @@ class Pipeline:
             model.train(train_set=self.train_set)
 
             train_scores, test_scores = mean(train_scores, axis=0), mean(test_scores, axis=0)
+            print("Mean score on the k-fold training: {}; testing: {}".format(mean(train_scores), mean(test_scores)))
 
         return train_scores, test_scores
 
