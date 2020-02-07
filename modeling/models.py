@@ -1,10 +1,10 @@
 from numpy.random import uniform
-from numpy import asarray
+from numpy import asarray, mean
 from collections import defaultdict
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-from modeling.utils import rank, progression, ap, dcg, ndcg
+from modeling.utils import rank, progression, ap, ap_at_k, dcg, ndcg
 
 
 class Model:
@@ -40,6 +40,9 @@ class Model:
 
         if self.metric == 'ap':
             return ap(y_pred, y_true)
+
+        if self.metric == 'ap_at_k':
+            return ap_at_k(y_pred, y_true, self.k)
 
         elif self.metric == 'dcg':
             return dcg(y_pred, y_true, self.k)
@@ -116,6 +119,8 @@ class Baseline(Model):
             1d-array, scores obtained during the training.
         """
 
+        print("Training of the model...")
+
         scores = []
 
         x_train, y_train = train_set
@@ -131,7 +136,10 @@ class Baseline(Model):
 
             self.update(x, y_true)
 
-        return asarray(scores)
+        scores = asarray(scores)
+        print("Mean training score: {}".format(round(float(mean(scores)), 4)))
+
+        return scores
 
     def test(self, test_set):
         """
@@ -143,6 +151,8 @@ class Baseline(Model):
         Returns:
             1d-array, scores obtained during the testing.
         """
+
+        print("Evaluation of the model...")
 
         scores = []
 
@@ -157,7 +167,10 @@ class Baseline(Model):
             y_pred = self.pred(x)
             scores.append(self.score(y_pred, y_true))
 
-        return asarray(scores)
+        scores = asarray(scores)
+        print("Mean testing score: {}".format(round(float(mean(scores)), 4)))
+
+        return scores
 
     # endregion
 
@@ -232,7 +245,8 @@ class FrequencyBaseline(Baseline):
         """
 
         for i in range(len(x['choices'])):
-            self.memory[x['choices'][i]] += y[i]
+            if y[i]:
+                self.memory[x['choices'][i]] += 1
 
     # endregion
 
@@ -303,9 +317,11 @@ class SummariesOverlapBaseline(NLPBaseline):
             choice_words = set([self.lemmatizer.lemmatize(word)
                                 for word in x['choices'][i].split() if word not in self.nltk_stopwords])
 
-            grade = len(choice_words.intersection([set([self.lemmatizer.lemmatize(word)
-                                                        for word in summary.split() if word not in self.nltk_stopwords])
-                                                   for summary in x['summaries']]))
+            sets = [set([self.lemmatizer.lemmatize(word)
+                         for word in summary.split() if word not in self.nltk_stopwords])
+                    for summary in x['summaries']]
+
+            grade = len(choice_words.intersection(*sets))
 
             x_grades.append(grade)
 
