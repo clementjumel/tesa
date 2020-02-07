@@ -26,6 +26,25 @@ def ap(y_pred, y_true):
     return sum([p(j)*y_true[j] for j in range(n)])/sum(y_true)
 
 
+def ap_at_k(y_pred, y_true, k):
+    """
+    Compute the AP (Averaged Precision) at k.
+
+    Args:
+        y_pred: 1d np.array, labels predicted
+        y_true: 1d np.array, true labels.
+        k: int, number of ranks to take into account.
+
+    Returns:
+        float, score of the data.
+    """
+
+    y_true = [y_true[i] for i in range(len(y_pred)) if y_pred[i] <= k]
+    y_pred = [y_pred[i] for i in range(len(y_pred)) if y_pred[i] <= k]
+
+    return ap(y_pred, y_true)
+
+
 def dcg(y_pred, y_true, k):
     """
     Compute the DCG (Discounted Cumulative Gain) at k of the prediction.
