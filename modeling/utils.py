@@ -12,7 +12,7 @@ def ap(y_pred, y_true):
         y_true: 1D torch.Tensor, true labels.
 
     Returns:
-        float, score of the data.
+        torch.Tensor, score of the data.
     """
 
     assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
@@ -23,7 +23,7 @@ def ap(y_pred, y_true):
 
     p = torch.tensor([sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j] for j in range(n)])
 
-    return float(torch.div(torch.dot(p, y_true), s))
+    return torch.div(torch.dot(p, y_true), s)
 
 
 def ap_at_k(y_pred, y_true, k):
@@ -36,7 +36,7 @@ def ap_at_k(y_pred, y_true, k):
         k: int, number of ranks to take into account.
 
     Returns:
-        float, score of the data.
+        torch.Tensor, score of the data.
     """
 
     assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
@@ -59,7 +59,7 @@ def dcg(y_pred, y_true, k):
         k: int, number of ranks to take into account.
 
     Returns:
-        float, score of the data.
+        torch.Tensor, score of the data.
     """
 
     assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
@@ -72,7 +72,7 @@ def dcg(y_pred, y_true, k):
     g = 2**y_true - 1
     d = torch.div(1., torch.log2(y_pred + 1))
 
-    return float(torch.dot(g, d))
+    return torch.dot(g, d)
 
 
 def ndcg(y_pred, y_true, k):
@@ -85,7 +85,7 @@ def ndcg(y_pred, y_true, k):
         k: int, number of ranks to take into account.
 
     Returns:
-        float, score of the data.
+        torch.Tensor, score of the data.
     """
 
     assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
