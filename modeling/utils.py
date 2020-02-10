@@ -1,5 +1,4 @@
-from math import log2
-from scipy.stats import rankdata
+import torch
 
 
 # region Metrics
@@ -9,27 +8,22 @@ def ap(y_pred, y_true):
     Compute the AP (Averaged Precision).
 
     Args:
-        y_pred: 1d np.array, labels predicted
-        y_true: 1d np.array, true labels.
+        y_pred: 1D torch.Tensor, labels predicted.
+        y_true: 1D torch.Tensor, true labels.
 
     Returns:
         float, score of the data.
     """
 
-    n, s = len(y_true), sum(y_true)
+    assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
 
+    n, s = len(y_pred), sum(y_true)
     if s == 0:
-        return 0
+        return 0.
 
-    def p(j):
-        """ Precision until the position of d_ij for q_i. """
+    p = torch.tensor([sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j] for j in range(n)])
 
-        if y_pred[j]:
-            return sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
-        else:
-            return 0
-
-    return sum([p(j)*y_true[j] for j in range(n)])/s
+    return float(torch.div(torch.dot(p, y_true), s))
 
 
 def ap_at_k(y_pred, y_true, k):
@@ -37,18 +31,22 @@ def ap_at_k(y_pred, y_true, k):
     Compute the AP (Averaged Precision) at k.
 
     Args:
-        y_pred: 1d np.array, labels predicted
-        y_true: 1d np.array, true labels.
+        y_pred: 1D torch.Tensor, labels predicted
+        y_true: 1D torch.Tensor, true labels.
         k: int, number of ranks to take into account.
 
     Returns:
         float, score of the data.
     """
 
-    y_true = [y_true[i] for i in range(len(y_pred)) if y_pred[i] <= k]
-    y_pred = [y_pred[i] for i in range(len(y_pred)) if y_pred[i] <= k]
+    assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
 
-    return ap(y_pred, y_true)
+    mask = torch.tensor(y_pred <= k)
+
+    y_true = y_true[mask]
+    y_pred = y_pred[mask]
+
+    return ap(y_pred=y_pred, y_true=y_true)
 
 
 def dcg(y_pred, y_true, k):
@@ -56,25 +54,25 @@ def dcg(y_pred, y_true, k):
     Compute the DCG (Discounted Cumulative Gain) at k of the prediction.
 
     Args:
-        y_pred: 1d np.array, labels predicted
-        y_true: 1d np.array, true labels.
+        y_pred: 1D torch.Tensor, labels predicted
+        y_true: 1D torch.Tensor, true labels.
         k: int, number of ranks to take into account.
 
     Returns:
         float, score of the data.
     """
 
-    def g(j):
-        """ Gain function. """
+    assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
 
-        return 2.**y_true[j] - 1.
+    mask = torch.tensor(y_pred <= k)
 
-    def d(j):
-        """ Position discount function. """
+    y_true = y_true[mask]
+    y_pred = y_pred[mask]
 
-        return 1./log2(1. + y_pred[j])
+    g = 2**y_true - 1
+    d = torch.div(1., torch.log2(y_pred + 1))
 
-    return sum([g(j)*d(j) for j in range(len(y_pred)) if y_pred[j] <= k])
+    return float(torch.dot(g, d))
 
 
 def ndcg(y_pred, y_true, k):
@@ -82,13 +80,15 @@ def ndcg(y_pred, y_true, k):
     Compute the NDCG (Normalized Discounted Cumulative Gain) at k of the prediction.
 
     Args:
-        y_pred: 1d np.array, labels predicted
-        y_true: 1d np.array, true labels.
+        y_pred: 1D torch.Tensor, labels predicted
+        y_true: 1D torch.Tensor, true labels.
         k: int, number of ranks to take into account.
 
     Returns:
         float, score of the data.
     """
+
+    assert len(y_pred.shape) == 1 and y_pred.shape == y_true.shape
 
     y_pred_perfect = rank(y_true)
 
@@ -101,16 +101,24 @@ def ndcg(y_pred, y_true, k):
 
 def rank(grades):
     """
-    Rank according to the grades (rank is 1 for highest grade).
+    Rank according to the grades (rank is 1 for highest grade). Deal with draws by assigning the best rank to the first
+    grade encountered.
 
     Args:
-        np.array, grades.
+        grades: 1D torch.Tensor, grades.
 
     Returns:
-        np.array, rank predictions.
+        1D torch.Tensor, rank predictions.
     """
 
-    return rankdata([-grade for grade in grades], method='ordinal')
+    assert len(grades.shape) == 1
+    n = len(grades)
+
+    sorter = torch.argsort(grades, descending=True)
+    inv = torch.zeros(n)
+    inv[sorter] = torch.arange(1., n+1.)
+
+    return inv
 
 
 def progression(count, modulo, size, text):
