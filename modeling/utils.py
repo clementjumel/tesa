@@ -19,8 +19,7 @@ def ap(y_pred, y_true):
     if s == 0:
         return torch.tensor([0.])
 
-    p = torch.tensor([sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j]
-                      for j in range(n)])
+    p = torch.tensor([sum([y_true[k] for k in range(n) if y_pred[k] <= y_pred[j]])/y_pred[j] for j in range(n)])
 
     return torch.div(torch.dot(p, y_true), s)
 
