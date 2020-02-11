@@ -124,8 +124,8 @@ def rank(grades):
 
 def flatten_tensors(y1, y2):
     """
-    Check the coherence of the shapes between the inputs, that they are either column or line tensors, and flatten them
-    if necessary.
+    Check the coherence of the shapes between the inputs, that they are either column or line tensors, detach and
+    flatten them if necessary.
 
     Args:
         y1: torch.Tensor, first tensor.
@@ -138,6 +138,9 @@ def flatten_tensors(y1, y2):
 
     assert y1.shape == y2.shape
     assert len(y1.shape) == 1 or (len(y1.shape) == 2 and y1.shape[1] == 1)
+
+    y1 = y1.detach()
+    y2 = y2.detach()
 
     if len(y1.shape) == 2:
         y1 = torch.reshape(y1, (-1,))
