@@ -964,6 +964,7 @@ class Sample:
 
         choices = positive_answers + negative_answers
         shuffle(choices)
+
         self.choices = choices
 
     def __str__(self):
