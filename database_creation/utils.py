@@ -5,6 +5,7 @@ from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
 from collections import defaultdict
+import torch
 
 
 class Mention:
@@ -1002,7 +1003,7 @@ class Sample:
     def get_y(self):
         """ Returns the y data of the Sample. """
 
-        return asarray([1 if choice in self.positive_answers else 0 for choice in self.choices])
+        return torch.tensor([1. if choice in self.positive_answers else 0. for choice in self.choices])
 
     # endregion
 
