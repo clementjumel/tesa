@@ -5,7 +5,7 @@ from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
 from collections import defaultdict
-import torch
+from torch import tensor
 
 
 class Mention:
@@ -991,7 +991,12 @@ class Sample:
     # region Methods get_
 
     def get_x(self):
-        """ Returns the x data of the Sample. """
+        """
+        Returns the x data of the Sample.
+
+        Returns:
+            dict, input of the Sample.
+        """
 
         x = {'choices': self.choices,
              'entities': self.entities,
@@ -1001,9 +1006,14 @@ class Sample:
         return x
 
     def get_y(self):
-        """ Returns the y data of the Sample. """
+        """
+        Returns the y data of the Sample.
 
-        return torch.tensor([1. if choice in self.positive_answers else 0. for choice in self.choices]).reshape((-1, 1))
+        Returns:
+            dict, output of the Sample.
+        """
+
+        return tensor([1. if choice in self.positive_answers else 0. for choice in self.choices])
 
     # endregion
 
