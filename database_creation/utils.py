@@ -5,7 +5,7 @@ from nltk import sent_tokenize
 from unidecode import unidecode
 from wikipedia import search, page, PageError, DisambiguationError
 from collections import defaultdict
-from torch import tensor
+import torch
 
 
 class Mention:
@@ -1013,7 +1013,10 @@ class Sample:
             dict, output of the Sample.
         """
 
-        return tensor([1. if choice in self.positive_answers else 0. for choice in self.choices])
+        y = torch.tensor([1 if choice in self.positive_answers else 0 for choice in self.choices])
+        y = y.type(dtype=torch.float)
+
+        return y
 
     # endregion
 
