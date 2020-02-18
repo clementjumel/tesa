@@ -1003,7 +1003,7 @@ class Sample:
     def get_y(self):
         """ Returns the y data of the Sample. """
 
-        return torch.tensor([1. if choice in self.positive_answers else 0. for choice in self.choices])
+        return torch.tensor([1. if choice in self.positive_answers else 0. for choice in self.choices]).reshape((-1, 1))
 
     # endregion
 
