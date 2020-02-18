@@ -17,11 +17,13 @@ class MLP(nn.Module):
 
         super(MLP, self).__init__()
 
-        self.activation = nn.ReLU()
         self.dropout = nn.Dropout(dropout)
 
         self.input_layer = nn.Linear(input_dim, hidden_dim)
+        self.input_activation = nn.ReLU()
+
         self.output_layer = nn.Linear(hidden_dim, output_dim)
+        self.output_activation = nn.Sigmoid()
 
     def forward(self, x):
         """
@@ -36,10 +38,10 @@ class MLP(nn.Module):
 
         x = self.dropout(x)
         x = self.input_layer(x)
-        x = self.activation(x)
+        x = self.input_activation(x)
 
         x = self.dropout(x)
         x = self.output_layer(x)
-        x = self.activation(x)
+        x = self.output_activation(x)
 
         return x
