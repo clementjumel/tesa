@@ -3,92 +3,90 @@ import torch
 
 # region Metrics
 
-def ap(y_rank, y_true):
+def ap(ranks, targets):
     """
-    Compute the AP (Averaged Precision) for line torch.Tensors.
+    Compute the Averaged Precision between the ranks and targets line Tensors.
 
     Args:
-        y_rank: torch.Tensor, rank predicted.
-        y_true: torch.Tensor, true labels.
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
 
     Returns:
         torch.Tensor, score of the data.
     """
 
-    n, s = len(y_rank), sum(y_true)
+    n, s = len(targets), sum(targets)
+
     if s == 0:
         return torch.tensor(0.)
 
-    p = torch.tensor([sum([y_true[k] for k in range(n) if y_rank[k] <= y_rank[j]])/y_rank[j] for j in range(n)])
+    p = torch.tensor([sum([targets[k] for k in range(n) if ranks[k] <= ranks[j]]) / ranks[j]
+                      for j in range(n)])
 
-    return torch.div(torch.dot(p, y_true), s)
+    return torch.div(torch.dot(p, targets), s)
 
 
-def ap_at_k(y_rank, y_true, k):
+def ap_at_k(ranks, targets, k):
     """
-    Compute the AP (Averaged Precision) at k for a line or column torch.Tensor.
+    Compute the Averaged Precision at k between the ranks and targets line Tensors.
 
     Args:
-        y_rank: torch.Tensor, rank predicted.
-        y_true: torch.Tensor, true labels.
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
         k: int, number of ranks to take into account.
 
     Returns:
         torch.Tensor, score of the data.
     """
 
-    y_rank, y_true = flatten_tensors(y_rank, y_true)
+    mask = ranks <= k
 
-    mask = torch.tensor(y_rank <= k)
+    ranks = ranks[mask]
+    targets = targets[mask]
 
-    y_rank = y_rank[mask]
-    y_true = y_true[mask]
-
-    return ap(y_rank=y_rank, y_true=y_true)
+    return ap(ranks=ranks, targets=targets)
 
 
-def dcg(y_rank, y_true, k):
+def dcg(ranks, targets, k):
     """
-    Compute the DCG (Discounted Cumulative Gain) at k for line torch.Tensors.
+    Compute the Discounted Cumulative Gain at k for the line Tensors ranks and targets.
 
     Args:
-        y_rank: torch.Tensor, rank predicted
-        y_true: torch.Tensor, true labels.
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
         k: int, number of ranks to take into account.
 
     Returns:
         torch.Tensor, score of the data.
     """
 
-    mask = torch.tensor(y_rank <= k)
+    mask = torch.tensor(ranks <= k)
 
-    y_rank = y_rank[mask]
-    y_true = y_true[mask]
+    ranks = ranks[mask]
+    targets = targets[mask]
 
-    g = 2**y_true - 1
-    d = torch.div(1., torch.log2(y_rank + 1))
+    g = 2 ** targets - 1
+    d = torch.div(1., torch.log2(ranks + 1))
 
     return torch.dot(g, d)
 
 
-def ndcg(y_rank, y_true, k):
+def ndcg(ranks, targets, k):
     """
-    Compute the NDCG (Normalized Discounted Cumulative Gain) at k for line or column torch.Tensors.
+    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets.
 
     Args:
-        y_rank: torch.Tensor, rank predicted
-        y_true: torch.Tensor, true labels.
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
         k: int, number of ranks to take into account.
 
     Returns:
         torch.Tensor, score of the data.
     """
 
-    y_rank, y_true = flatten_tensors(y_rank, y_true)
+    perfect_ranks = rank(targets)
 
-    y_rank_perfect = rank(y_true)
-
-    return dcg(y_rank, y_true, k)/dcg(y_rank_perfect, y_true, k)
+    return dcg(ranks, targets, k)/dcg(perfect_ranks, targets, k)
 
 # endregion
 
@@ -101,50 +99,42 @@ def rank(grades):
     grade encountered.
 
     Args:
-        grades: torch.Tensor, grades in line or column.
+        grades: torch.Tensor, grades for the batch in a line Tensor.
 
     Returns:
-        torch.Tensor, rank predictions, with the same shape as grades.
+        torch.Tensor, ranks corresponding to the grades in a line Tensor.
     """
-
-    shape = grades.shape
-
-    if len(shape) == 2:
-        grades = torch.reshape(grades, (-1,))
 
     n = len(grades)
 
     sorter = torch.argsort(grades, descending=True)
     inv = torch.zeros(n)
-    inv[sorter] = torch.arange(1., n+1.)
 
-    return torch.reshape(inv, shape=shape)
+    inv[sorter] = torch.arange(1., n + 1.)
 
-
-def flatten_tensors(y1, y2):
-    """
-    Check the coherence of the shapes between the inputs, that they are either column or line tensors, detach and
-    flatten them if necessary.
-
-    Args:
-        y1: torch.Tensor, first tensor.
-        y2: torch.Tensor, second tensor.
-
-    Returns:
-        y1: torch.Tensor, flattened first tensor.
-        y2: torch.Tensor, flattened second tensor.
-    """
-
-    y1 = y1.detach()
-    y2 = y2.detach()
-
-    assert y1.shape == y2.shape
-    assert len(y1.shape) == 1 or (len(y1.shape) == 2 and y1.shape[1] == 1)
-
-    if len(y1.shape) == 2:
-        y1 = torch.reshape(y1, (-1,))
-        y2 = torch.reshape(y2, (-1,))
-
-    return y1, y2
+    return inv
 
 # endregion
+
+
+def main():
+    size, k = 10, 4
+
+    targets = torch.tensor([0., 0., 1., 0., 0., 0., 1., 0., 0., 0.])
+
+    grades1 = torch.rand(size)
+    grades2 = torch.zeros(size)
+    grades3 = targets.clone()
+    grades4 = torch.rand(size)
+    grades4[2] = 1.
+    grades4[6] = -0.4
+    grades5 = torch.tensor([0.5, 0.5, 0.45, 0.5, 0, 0., -0.4, 0., 0., 0.])
+
+    for grades in [grades1, grades2, grades3, grades4, grades5]:
+        ranks = rank(grades)
+        print(ranks[2], ranks[6])
+        print(ap_at_k(ranks, targets, k))
+
+
+if __name__ == '__main__':
+    main()
