@@ -1,5 +1,4 @@
-from modeling.nn import MLP
-from modeling.utils import rank, ap_at_k
+from modeling.utils import rank
 
 from numpy import mean
 from collections import defaultdict
@@ -16,12 +15,17 @@ import torch
 class BaseModel:
     # region Class Initialization
 
-    def __init__(self):
-        """ Initializes an instance of Base Model. """
+    def __init__(self, score, k):
+        """
+        Initializes an instance of Base Model.
 
-        self.loss = torch.nn.MSELoss()
-        self.score = ap_at_k
-        self.k = 10
+        Args:
+            score: utils.score, score to use.
+            k: int, number of ranks to take into account.
+        """
+
+        self.score = score
+        self.k = k
 
         self.punctuation = str_punctuation
         self.stopwords = set(nltk_stopwords.words('english'))
@@ -31,7 +35,17 @@ class BaseModel:
 
     # region Main methods
 
-    def train(self, train_loader, valid_loader, n_epochs=1, n_updates=50):
+    def preview_data(self, data_loader):
+        """
+        Preview the data for the model.
+
+        Args:
+            data_loader: list, pairs of (inputs, targets) batches.
+        """
+
+        pass
+
+    def train(self, train_loader, valid_loader, n_epochs, n_updates):
         """
         Train the Model on train_loader and evaluate on valid_loader at each epoch.
 
@@ -42,21 +56,22 @@ class BaseModel:
             n_updates: int, number of batches between the updates.
 
         Returns:
-            train_losses: np.array, training losses, averaged between the epochs.
-            valid_losses: np.array, validation losses, averaged between the epochs.
-            valid_scores: np.array, validation scores, averaged between the epochs.
+            train_losses: list, training losses, each row corresponding to an epoch.
+            train_scores: list, training scores, each row corresponding to an epoch.
+            valid_losses: list, validation losses, each row corresponding to an epoch.
+            valid_scores: list, validation scores, each row corresponding to an epoch.
         """
 
         print("Training of the model...\n")
 
-        train_losses, valid_losses, valid_scores = [], [], []
+        train_losses, train_scores, valid_losses, valid_scores = [], [], [], []
 
         for epoch in range(n_epochs):
 
-            train_epoch_losses = self.train_epoch(data_loader=train_loader, n_updates=n_updates)
+            train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader, n_updates=n_updates)
             valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader, n_updates=n_updates)
 
-            train_losses.append(train_epoch_losses)
+            train_losses.append(train_epoch_losses), train_scores.append(train_epoch_scores)
             valid_losses.append(valid_epoch_losses), valid_scores.append(valid_epoch_scores)
 
             print('Epoch %d/%d: Validation Loss: %.3f Validation Score: %.3f' % (epoch + 1,
@@ -65,12 +80,9 @@ class BaseModel:
                                                                                  float(mean(valid_epoch_scores))))
             print('--------------------------------------------------------------')
 
-        train_losses = mean(train_losses, axis=0)
-        valid_losses, valid_scores = mean(valid_losses, axis=0), mean(valid_scores, axis=0)
+        return train_losses, train_scores, valid_losses, valid_scores
 
-        return train_losses, valid_losses, valid_scores
-
-    def test(self, test_loader, n_updates=50):
+    def test(self, test_loader, n_updates):
         """
         Evaluate the Model on test_loader.
 
@@ -79,15 +91,16 @@ class BaseModel:
             n_updates: int, number of batches between the updates.
 
         Returns:
-            losses: np.array, testing losses averaged between the epochs.
-            scores: np.array, testing scores averaged between the epochs.
+            losses: list, testing losses.
+            scores: list, testing scores.
         """
 
         print("Evaluation of the model...\n")
 
         losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates)
 
-        print('Test Loss: %.3f Test Score: %.3f' % (float(mean(losses)), float(mean(scores))))
+        print('Test Loss: %.3f Test Score: %.3f' % (float(mean(losses)), float(mean(scores)))) if losses is not None \
+            else print('Test Score: %.3f' % (float(mean(scores))))
 
         return losses, scores
 
@@ -100,7 +113,8 @@ class BaseModel:
             n_updates: int, number of batches between the updates.
 
         Returns:
-            np.array, training losses for the epoch.
+            losses: list, training losses for the epoch.
+            scores: list, training scores for the epoch.
         """
 
         pass
@@ -114,8 +128,8 @@ class BaseModel:
             n_updates: int, number of batches between the updates.
 
         Returns:
-            losses: np.array, testing losses for the epoch.
-            scores: np.array, testing scores for the epoch.
+            losses: list, testing losses for the epoch.
+            scores: list, testing scores for the epoch.
         """
 
         pass
@@ -312,25 +326,11 @@ class Baseline(BaseModel):
             n_updates: int, number of batches between the updates.
 
         Returns:
-            np.array, training losses for the epoch.
+            losses: list, training losses for the epoch.
+            scores: list, training scores for the epoch.
         """
 
-        losses = []
-        running_loss = 0.
-
-        for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-
-            features = self.features(inputs)
-            outputs = self.pred(features)
-
-            loss = self.loss(outputs, targets)
-            running_loss += loss.data.item()
-
-            if batch_idx % n_updates == 0 and batch_idx != 0:
-                losses.append(running_loss / n_updates)
-                running_loss = 0.
-
-        return losses
+        raise Exception("A baseline cannot be trained.")
 
     def test_epoch(self, data_loader, n_updates):
         """
@@ -341,30 +341,27 @@ class Baseline(BaseModel):
             n_updates: int, number of batches between the updates.
 
         Returns:
-            losses: np.array, testing losses for the epoch.
-            scores: np.array, testing scores for the epoch.
+            losses: list, testing losses for the epoch.
+            scores: list, testing scores for the epoch.
         """
 
-        losses, scores = [], []
-        running_loss, running_score = 0., 0.
+        scores = []
+        running_score = 0.
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
 
             features = self.features(inputs)
             outputs = self.pred(features)
 
-            loss = self.loss(outputs, targets)
-            running_loss += loss.data.item()
-
             ranks = rank(outputs)
             score = self.score(ranks, targets, self.k)
             running_score += score.data.item()
 
             if batch_idx % n_updates == 0 and batch_idx != 0:
-                losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
-                running_loss, running_score = 0., 0.
+                scores.append(running_score / n_updates)
+                running_score = 0.
 
-        return losses, scores
+        return None, scores
 
     # endregion
 
@@ -402,7 +399,12 @@ class RandomBaseline(Baseline):
             torch.Tensor, outputs of the prediction.
         """
 
-        return torch.rand(len(inputs['choices']))
+        grades = torch.rand(len(inputs['choices'])).reshape((-1, 1))
+
+        other = torch.ones_like(grades) - grades
+        pred = torch.cat((grades, other), dim=1)
+
+        return pred
 
     # endregion
 
@@ -412,39 +414,32 @@ class CountsBaseline(Baseline):
 
     # region Class initialization
 
-    def __init__(self):
-        """ Initializes an instance of Model. """
+    def __init__(self, score, k):
+        """
+        Initializes an instance of CountsBaseline Model.
 
-        super(CountsBaseline, self).__init__()
+        Args:
+            score: utils.score, score to use.
+            k: int, number of results to take into account.
+        """
 
-        self.memory = defaultdict(int)
+        super(CountsBaseline, self).__init__(score=score, k=k)
+
+        self.counts = defaultdict(int)
 
     # endregion
 
     # region Main methods
 
-    def train(self, train_loader, valid_loader, n_epochs=1, n_updates=50):
+    def preview_data(self, data_loader):
         """
-        Train the Model on train_loader and evaluate on valid_loader at each epoch.
+        Preview the data for the model.
 
         Args:
-            train_loader: list of (inputs, targets) batches, training inputs and outputs.
-            valid_loader: list of (inputs, targets) batches, valid inputs and outputs.
-            n_epochs: int, number of epochs to perform.
-            n_updates: int, number of batches between the updates.
-
-        Returns:
-            train_losses: np.array, training losses, averaged between the epochs.
-            valid_losses: np.array, validation losses, averaged between the epochs.
-            valid_scores: np.array, validation scores, averaged between the epochs.
+            data_loader: list, pairs of (inputs, targets) batches.
         """
 
-        self.learn_counts(data_loader=train_loader)
-
-        return super(CountsBaseline, self).train(train_loader=train_loader,
-                                                 valid_loader=valid_loader,
-                                                 n_epochs=n_epochs,
-                                                 n_updates=n_updates)
+        self.learn_counts(data_loader=data_loader)
 
     # endregion
 
@@ -461,8 +456,14 @@ class CountsBaseline(Baseline):
             torch.Tensor, outputs of the prediction.
         """
 
-        pred = torch.tensor([self.memory[choice] if choice in self.memory else 0 for choice in inputs['choices']])
-        pred = pred.type(dtype=torch.float)
+        grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
+
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        m = grades.max()
+        grades = grades if m == 0 else torch.div(grades, m)
+
+        other = torch.ones_like(grades) - grades
+        pred = torch.cat((grades, other), dim=1)
 
         return pred
 
@@ -480,7 +481,7 @@ class CountsBaseline(Baseline):
             choices = inputs['choices']
 
             for i in range(len(choices)):
-                self.memory[choices[i]] += targets[i].data.item()
+                self.counts[choices[i]] += targets[i].data.item()
 
     # endregion
 
@@ -507,9 +508,14 @@ class SummariesCountBaseline(Baseline):
                             for word in summary_words if word in choices_words[i]])])
                   for i in range(len(inputs['choices']))]
 
-        grades = torch.tensor(grades).type(dtype=torch.float)
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        m = grades.max()
+        grades = grades if m == 0 else torch.div(grades, m)
 
-        return torch.div(grades, grades.max())
+        other = torch.ones_like(grades) - grades
+        pred = torch.cat((grades, other), dim=1)
+
+        return pred
 
     # endregion
 
@@ -536,9 +542,14 @@ class SummariesOverlapBaseline(Baseline):
         grades = [len(choices_words[i].intersection(summaries_words))
                   for i in range(len(inputs['choices']))]
 
-        grades = torch.tensor(grades).type(dtype=torch.float)
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        m = grades.max()
+        grades = grades if m == 0 else torch.div(grades, m)
 
-        return torch.div(grades, grades.max())
+        other = torch.ones_like(grades) - grades
+        pred = torch.cat((grades, other), dim=1)
+
+        return pred
 
     # endregion
 
@@ -550,21 +561,25 @@ class SummariesOverlapBaseline(Baseline):
 class MLModel(BaseModel):
     # region Class initialization
 
-    def __init__(self):
-        """ Initializes an instance of the ML Model. """
+    def __init__(self, net, optimizer, loss, score, k):
+        """
+        Initializes an instance of the ML Model.
 
-        super(MLModel, self).__init__()
+        Args:
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            score: utils.score, score to use.
+            k: int, number of results to take into account.
+        """
 
-        self.input_dim = None
-        self.hidden_dim = 100
-        self.output_dim = 1
-        self.dropout = 0.2
-        self.lr = 1e-4
+        super(MLModel, self).__init__(score=score, k=k)
 
-        self.net = None
-        self.optimizer = None
+        self.net = net
+        self.optimizer = optimizer
+        self.loss = loss
 
-    # endregion
+    # endregions
 
     # region Main methods
 
@@ -577,30 +592,34 @@ class MLModel(BaseModel):
             n_updates: int, number of batches between the updates.
 
         Returns:
-            np.array, training losses for the epoch.
+            losses: list, training losses for the epoch.
+            scores: list, training scores for the epoch.
         """
 
-        losses = []
-        running_loss = 0.
+        losses, scores = [], []
+        running_loss, running_score = 0., 0.
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
 
             features = self.features(inputs)
 
             self.optimizer.zero_grad()
-            outputs = self.net(features).squeeze()
+            outputs = self.net(features)
 
             loss = self.loss(outputs, targets)
             loss.backward()
             self.optimizer.step()
-
             running_loss += loss.data.item()
 
-            if batch_idx % n_updates == 0 and batch_idx != 0:
-                losses.append(running_loss / n_updates)
-                running_loss = 0.
+            ranks = rank(outputs.detach())
+            score = self.score(ranks, targets, self.k)
+            running_score += score.data.item()
 
-        return losses
+            if batch_idx % n_updates == 0 and batch_idx != 0:
+                losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
+                running_loss, running_score = 0., 0.
+
+        return losses, scores
 
     def test_epoch(self, data_loader, n_updates):
         """
@@ -611,8 +630,8 @@ class MLModel(BaseModel):
             n_updates: int, number of batches between the updates.
 
         Returns:
-            losses: np.array, testing losses for the epoch.
-            scores: np.array, testing scores for the epoch.
+            losses: list, testing losses for the epoch.
+            scores: list, testing scores for the epoch.
         """
 
         self.net.eval()
@@ -623,7 +642,7 @@ class MLModel(BaseModel):
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
 
             features = self.features(inputs)
-            outputs = self.net(features).squeeze()
+            outputs = self.net(features)
 
             loss = self.loss(outputs.detach(), targets)
             running_loss += loss.data.item()
@@ -642,58 +661,43 @@ class MLModel(BaseModel):
 
     # endregion
 
-    # region Other methods
-
-    def initialize_network(self):
-        """ Initializes the mlp network. """
-
-        self.net = MLP(input_dim=self.input_dim,
-                       hidden_dim=self.hidden_dim,
-                       output_dim=self.output_dim,
-                       dropout=self.dropout)
-
-        self.optimizer = torch.optim.Adam(self.net.parameters(), lr=self.lr)
-
-    # endregion
-
 
 class BOWModel(MLModel):
     # region Class initialization
 
-    def __init__(self):
-        """ Initializes an instance of the Bag of words Model. """
+    def __init__(self, min_vocab_frequency, net, optimizer, loss, score, k):
+        """
+        Initializes an instance of the Bag of Word Model.
 
-        super(BOWModel, self).__init__()
+        Args:
+            min_vocab_frequency: int, minimum frequency for a word to be taken into account in the BOW.
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            score: utils.score, score to use.
+            k: int, number of results to take into account.
+        """
+
+        super(BOWModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score, k=k)
+
+        self.min_vocab_frequency = min_vocab_frequency
 
         self.choice_to_idx = dict()
         self.context_to_idx = dict()
-
-        self.min_vocab_frequency = 5
 
     # endregion
 
     # region Main methods
 
-    def train(self, train_loader, valid_loader, n_epochs=1, n_updates=50):
+    def preview_data(self, data_loader):
         """
-        Train the Model on train_loader and evaluate on valid_loader at each epoch.
+        Preview the data for the model.
 
         Args:
-            train_loader: list of (inputs, targets) batches, training inputs and outputs.
-            valid_loader: list of (inputs, targets) batches, valid inputs and outputs.
-            n_epochs: int, number of epochs to perform.
-            n_updates: int, number of batches between the updates.
-
-        Returns:
-            train_losses: np.array, training losses, averaged between the epochs.
-            valid_losses: np.array, validation losses, averaged between the epochs.
-            valid_scores: np.array, validation scores, averaged between the epochs.
+            data_loader: list, pairs of (inputs, targets) batches.
         """
 
-        self.learn_vocabulary(train_loader)
-        self.initialize_network()
-
-        return super(BOWModel, self).train(train_loader, valid_loader, n_epochs, n_updates)
+        self.learn_vocabulary(data_loader)
 
     # endregion
 
@@ -725,7 +729,7 @@ class BOWModel(MLModel):
                 if context_counts[word] >= self.min_vocab_frequency and word not in self.context_to_idx:
                     self.context_to_idx[word] = len(self.context_to_idx)
 
-        self.input_dim = len(self.choice_to_idx) + len(self.context_to_idx) + 2
+        print("Input size: %d" % (len(self.choice_to_idx) + len(self.context_to_idx) + 2))
 
     @staticmethod
     def to_idx(word, vocabulary_dict):
@@ -785,10 +789,19 @@ class BOWModel(MLModel):
 class EmbeddingModel(MLModel):
     # region Class initialization
 
-    def __init__(self):
-        """ Initializes an instance of the Embedding Model. """
+    def __init__(self, net, optimizer, loss, score, k):
+        """
+        Initializes an instance of the Embedding Model.
 
-        super(EmbeddingModel, self).__init__()
+        Args:
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            score: utils.score, score to use.
+            k: int, number of results to take into account.
+        """
+
+        super(EmbeddingModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score, k=k)
 
         self.general_embedding = None
         self.entity_embedding = None
@@ -798,8 +811,9 @@ class EmbeddingModel(MLModel):
         self.initialize_word2vec_embedding()
         self.initialize_freebase_embedding()
 
-        self.input_dim = self.general_embedding_dim + self.entity_embedding_dim + self.general_embedding_dim
-        self.initialize_network()
+        print("Input dimension: %d" % (self.general_embedding_dim +
+                                       self.entity_embedding_dim +
+                                       self.general_embedding_dim))
 
     # endregion
 
@@ -818,77 +832,101 @@ class EmbeddingModel(MLModel):
 
         n = len(inputs['choices'])
 
-        choices_words = self.get_choices_words(inputs)
         choices_embedding = torch.stack([self.get_average_embedding(words=words, is_entity=False)
-                                         for words in choices_words])
+                                         for words in self.get_choices_words(inputs)])
 
-        entities_words = [word for entity_words in self.get_entities_words(inputs) for word in entity_words]
-        entities_embedding = self.get_average_embedding(words=entities_words, is_entity=True)
-        entities_embedding = entities_embedding.unsqueeze(dim=0).expand((n, self.entity_embedding_dim))
+        entities_embedding = torch.stack([self.get_entity_embedding(words=words)
+                                          for words in self.get_entities_words(inputs)]).mean(dim=0)
+        entities_embedding = entities_embedding.expand((n, -1))
 
         context_words = self.get_context_words(inputs)
         summaries_words = [word for summary_words in self.get_summaries_words(inputs) for word in summary_words]
         other_words = context_words + summaries_words
-        other_embedding = self.get_average_embedding(words=other_words, is_entity=False)
-        other_embedding = other_embedding.unsqueeze(dim=0).expand((n, self.general_embedding_dim))
 
-        features = torch.cat([choices_embedding, entities_embedding, other_embedding], dim=1)
+        other_embedding = self.get_average_embedding(words=other_words, is_entity=False)
+        other_embedding = other_embedding.expand((n, -1))
+
+        features = torch.cat((choices_embedding, entities_embedding, other_embedding), dim=1)
 
         return features
 
     def initialize_word2vec_embedding(self):
         """ Initializes the Word2Vec embedding of dimension 300. """
 
-        self.general_embedding_dim = 300
+        print("Initializing the Word2Vec embedding...")
+
         self.general_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
                                                                          'GoogleNews-vectors-negative300.bin',
                                                                    binary=True)
-
-    # TODO
-    def initialize_glove_embedding(self):
-        pass
+        key = list(self.general_embedding.vocab.keys())[0]
+        self.general_embedding_dim = len(self.general_embedding[key])
 
     def initialize_freebase_embedding(self):
         """ Initializes the freebase embedding of dimension 1000. """
 
-        self.entity_embedding_dim = 1000
+        print("Initializing the FreeBase embedding...")
+
         self.entity_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
                                                                         'freebase-vectors-skipgram1000-en.bin',
                                                                   binary=True)
+        key = list(self.entity_embedding.vocab.keys())[0]
+        self.entity_embedding_dim = len(self.entity_embedding[key])
 
-    # TODO: change for entities
-    def get_word_embedding(self, word, is_entity=False):
+    def get_word_embedding(self, word, is_entity):
         """
-        Returns the embedding of a general word or an entity's word in a line Tensor.
+        Returns the general or entity embedding of a word in a line Tensor.
 
         Args:
             word: str, word to embed.
-            is_entity: bool, whether to use the entity_embedding or the general one.
+            is_entity: bool, whether to use the entity embedding or the general one.
 
         Returns:
             torch.Tensor, embedding of word.
         """
 
         embedding = self.general_embedding if not is_entity else self.entity_embedding
+        word = word if not is_entity else '/en/' + word
 
         return torch.tensor(embedding[word]) if word in embedding.vocab else None
 
-    def get_average_embedding(self, words, is_entity=False):
+    def get_average_embedding(self, words, is_entity):
         """
-        Returns the average embedding of general words or entities' words in a line Tensor.
+        Returns the average general or entity embedding of words in a line Tensor.
 
         Args:
             words: list, words to embed.
-            is_entity: bool, whether to use the entity_embedding or the general one.
+            is_entity: bool, whether to use the entity embedding or the general one.
 
         Returns:
             torch.Tensor, average embedding of the words.
         """
 
         embeddings = [self.get_word_embedding(word=word, is_entity=is_entity) for word in words]
-        average_embedding = torch.stack([embedding for embedding in embeddings if embedding is not None]).mean(dim=0)
+        embeddings = [embedding for embedding in embeddings if embedding is not None]
 
-        return average_embedding
+        if embeddings:
+            return torch.stack(embeddings).mean(dim=0)
+        else:
+            return torch.zeros(self.general_embedding_dim) if not is_entity else torch.zeros(self.entity_embedding_dim)
+
+    def get_entity_embedding(self, words):
+        """
+        Returns the embedding for several entity words as a line Tensor.
+
+        Args:
+            words: list, words to embed.
+
+        Returns:
+            torch.Tensor, embedding of the words
+        """
+
+        s = '/en/' + '_'.join(words)
+
+        if s in self.entity_embedding.vocab:
+            return torch.tensor(self.entity_embedding[s])
+
+        else:
+            return self.get_average_embedding(words=words, is_entity=True)
 
     # endregion
 
