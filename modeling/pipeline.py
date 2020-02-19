@@ -51,9 +51,7 @@ class Pipeline:
 
         else:
             train_sets, valid_sets, test_set, complete_train_set = \
-                self.get_k_fold_split(raw_data=raw_data,
-                                      k=k,
-                                      test_proportion=test_proportion)
+                self.get_k_fold_split(raw_data=raw_data, k=k, test_proportion=test_proportion)
 
             self.k_fold_loader = [(self.get_loader(data=train_sets[i], batch_size=batch_size, drop_last=drop_last),
                                    valid_sets[i]) for i in range(len(train_sets))]
@@ -71,6 +69,26 @@ class Pipeline:
         """
 
         model.preview_data(data_loader=self.train_loader)
+
+    def evaluate_baseline(self, model, n_updates=100):
+        """
+        Evaluate a baseline model on the training and validation sets.
+
+        Args:
+            model: models.Model, model to evaluate.
+            n_updates: int, number of batches between the updates.
+
+        Returns:
+            losses: np.array, evaluation losses.
+            scores: np.array, evaluation scores.
+        """
+
+        data_loader = self.train_loader + self.valid_loader
+
+        losses, scores = model.test(test_loader=data_loader, n_updates=n_updates)
+        losses, scores = asarray(losses), asarray(scores)
+
+        return losses, scores
 
     def train_model(self, model, n_epochs=1, n_updates=100):
         """
@@ -252,7 +270,7 @@ class Pipeline:
             drop_last: bool, whether or not to delete the last batch if incomplete.
 
         Returns:
-            data_loader: 2d-array, batched data samples, each line corresponding to (batch_inputs, batch_targets).
+            data_loader: list, pairs of (batch_inputs, batch_targets), batched data samples.
         """
 
         data_loader = []
@@ -273,7 +291,6 @@ class Pipeline:
                 cmpt += len(batch_targets)
 
         shuffle(data_loader)
-        data_loader = asarray(data_loader)
 
         return data_loader
 
