@@ -62,6 +62,16 @@ class Pipeline:
             self.valid_loader = []
             self.test_loader = test_set
 
+    def preview_data(self, model):
+        """
+        Preview the data for the model.
+
+        Args:
+            model: models.Model, model to train.
+        """
+
+        model.preview_data(data_loader=self.train_loader)
+
     def train_model(self, model, n_epochs=1, n_updates=50):
         """
         Train a model on the training set and compute the metrics on the validation sets.
