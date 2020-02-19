@@ -83,31 +83,35 @@ class Pipeline:
 
         Returns:
             total_train_losses: np.array, training losses, averaged between the epochs and between the runs.
+            total_train_scores: np.array, training scores, averaged between the epochs and between the runs.
             total_valid_losses: np.array, validation losses, averaged between the epochs and between the runs.
             total_valid_scores: np.array, validation scores, averaged between the epochs and between the runs.
         """
 
         if not self.use_k_fold:
-            total_train_losses, total_valid_losses, total_valid_scores = model.train(train_loader=self.train_loader,
-                                                                                     valid_loader=self.valid_loader,
-                                                                                     n_epochs=n_epochs,
-                                                                                     n_updates=n_updates)
+            total_train_losses, total_train_scores, total_valid_losses, total_valid_scores = \
+                model.train(train_loader=self.train_loader,
+                            valid_loader=self.valid_loader,
+                            n_epochs=n_epochs,
+                            n_updates=n_updates)
 
         else:
-            total_train_losses, total_valid_losses, total_valid_scores = [], [], []
+            total_train_losses, total_train_scores, total_valid_losses, total_valid_scores = [], [], [], []
 
             for train_loader, valid_loader in self.k_fold_loader:
                 model.reset()
 
-                train_losses, valid_losses, valid_scores = model.train(train_loader=train_loader,
-                                                                       valid_loader=valid_loader,
-                                                                       n_epochs=n_epochs,
-                                                                       n_updates=n_updates)
+                train_losses, train_scores, valid_losses, valid_scores = model.train(train_loader=train_loader,
+                                                                                     valid_loader=valid_loader,
+                                                                                     n_epochs=n_epochs,
+                                                                                     n_updates=n_updates)
                 total_train_losses.append(train_losses)
+                total_train_scores.append(train_scores)
                 total_valid_losses.append(valid_losses)
                 total_valid_scores.append(valid_scores)
 
             total_train_losses = mean(total_train_losses, axis=0)
+            total_train_scores = mean(total_train_scores, axis=0)
             total_valid_losses = mean(total_valid_losses, axis=0)
             total_valid_scores = mean(total_valid_scores, axis=0)
 
@@ -117,7 +121,7 @@ class Pipeline:
                         n_epochs=n_epochs,
                         n_updates=n_updates)
 
-        return total_train_losses, total_valid_losses, total_valid_scores
+        return total_train_losses, total_train_scores, total_valid_losses, total_valid_scores
 
     def test_model(self, model, n_updates=50):
         """
