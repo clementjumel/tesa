@@ -79,16 +79,15 @@ class Pipeline:
             n_updates: int, number of batches between the updates.
 
         Returns:
-            losses: np.array, evaluation losses.
             scores: np.array, evaluation scores.
         """
 
         data_loader = self.train_loader + self.valid_loader
 
-        losses, scores = model.test(test_loader=data_loader, n_updates=n_updates)
-        losses, scores = asarray(losses), asarray(scores)
+        _, scores = model.test(test_loader=data_loader, n_updates=n_updates)
+        scores = asarray(scores)
 
-        return losses, scores
+        return scores
 
     def train_model(self, model, n_epochs=1, n_updates=100):
         """
