@@ -1014,8 +1014,8 @@ class Sample:
             dict, output of the Sample.
         """
 
-        y = [[1, 0] if choice in self.positive_answers else [0, 1] for choice in self.choices]
-        y = torch.tensor(y, dtype=torch.float)
+        y = [1 if choice in self.positive_answers else 0 for choice in self.choices]
+        y = torch.tensor(y, dtype=torch.long)
 
         return y
 
