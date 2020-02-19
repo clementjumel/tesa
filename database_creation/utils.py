@@ -999,6 +999,7 @@ class Sample:
         """
 
         x = {'choices': self.choices,
+             'entities_type_': self.entities_type_,
              'entities': self.entities,
              'summaries': [summary for _, summary in self.summaries.items()],
              'context': self.title + ': ' + self.context}
@@ -1013,8 +1014,8 @@ class Sample:
             dict, output of the Sample.
         """
 
-        y = torch.tensor([1 if choice in self.positive_answers else 0 for choice in self.choices])
-        y = y.type(dtype=torch.float)
+        y = [[1, 0] if choice in self.positive_answers else [0, 1] for choice in self.choices]
+        y = torch.tensor(y, dtype=torch.float)
 
         return y
 
