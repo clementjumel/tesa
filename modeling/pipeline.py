@@ -286,7 +286,7 @@ class Pipeline:
 
                 batch_targets = targets[cmpt:cmpt + batch_size]
 
-                data_loader.append([batch_inputs, batch_targets])
+                data_loader.append((batch_inputs, batch_targets))
 
                 cmpt += len(batch_targets)
 
