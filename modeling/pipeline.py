@@ -82,7 +82,7 @@ class Pipeline:
             scores: np.array, evaluation scores.
         """
 
-        data_loader = self.train_loader + self.valid_loader
+        data_loader = concatenate((self.train_loader, self.valid_loader), axis=0)
 
         _, scores = model.test(test_loader=data_loader, n_updates=n_updates)
         scores = asarray(scores)
@@ -285,11 +285,12 @@ class Pipeline:
 
                 batch_targets = targets[cmpt:cmpt + batch_size]
 
-                data_loader.append((batch_inputs, batch_targets))
+                data_loader.append([batch_inputs, batch_targets])
 
                 cmpt += len(batch_targets)
 
         shuffle(data_loader)
+        data_loader = asarray(data_loader)
 
         return data_loader
 
