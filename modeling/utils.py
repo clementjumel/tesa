@@ -3,27 +3,108 @@ import torch
 
 # region Metrics
 
-def ap(ranks, targets):
+def precision_at_k(ranks, targets, k):
     """
-    Compute the Averaged Precision between the ranks and targets line Tensors.
+    Returns the precision at k, that is the fraction of answers retrieved by the first k ranks that are relevant. If
+    there is not relevant answer, returns None.
 
     Args:
         ranks: torch.Tensor, ranks predicted for the batch.
         targets: torch.Tensor, true labels for the batch.
+        k: int, number of ranks to take into account.
 
     Returns:
-        torch.Tensor, score of the data.
+        torch.tensor, score of the batch.
     """
 
-    n, s = len(targets), sum(targets)
+    if targets.sum() == 0:
+        return None
 
-    if s == 0:
-        return torch.tensor(0.)
+    mask = ranks <= k
+    targets = targets[mask]
 
-    p = torch.tensor([sum([targets[k] for k in range(n) if ranks[k] <= ranks[j]]) / ranks[j]
-                      for j in range(n)])
+    return targets.sum().type(dtype=torch.float)/float(k)
 
-    return torch.div(torch.dot(p, targets), s)
+
+def recall_at_k(ranks, targets, k):
+    """
+    Returns the recall at k, that is the fraction of relevant answers that are retrieved by the first k ranks. If
+    there is not relevant answer, returns None.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+        k: int, number of ranks to take into account.
+
+    Returns:
+        torch.tensor, score of the batch.
+    """
+
+    n_relevant = targets.sum()
+
+    if n_relevant == 0:
+        return None
+
+    mask = ranks <= k
+    targets = targets[mask]
+
+    return targets.sum().type(dtype=torch.float)/float(n_relevant)
+
+
+def best_rank(ranks, targets, k):
+    """
+    Returns the best rank of the relevant answers. If k is specified, consider only the first k ranks retrieved. If
+    there is not relevant answer, returns None.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+        k: int, number of ranks to take into account.
+
+    Returns:
+        torch.tensor, score of the batch.
+    """
+
+    if targets.sum() == 0:
+        return None
+
+    if k:
+        mask = ranks <= k
+        ranks = ranks[mask]
+        targets = targets[mask]
+
+    mask = targets > 0
+    ranks = ranks[mask]
+
+    return ranks.min().type(dtype=torch.float)
+
+
+def average_rank(ranks, targets, k):
+    """
+    Returns the average rank of the relevant answers. If k is specified, consider only the first k ranks retrieved. If
+    there is not relevant answer, returns None.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+        k: int, number of ranks to take into account.
+
+    Returns:
+        torch.tensor, score of the batch.
+    """
+
+    if targets.sum() == 0:
+        return None
+
+    if k:
+        mask = ranks <= k
+        ranks = ranks[mask]
+        targets = targets[mask]
+
+    mask = targets > 0
+    ranks = ranks[mask]
+
+    return ranks.type(dtype=torch.float).mean()
 
 
 def ap_at_k(ranks, targets, k):
@@ -45,6 +126,50 @@ def ap_at_k(ranks, targets, k):
     targets = targets[mask]
 
     return ap(ranks=ranks, targets=targets)
+
+
+def ap(ranks, targets):
+    """
+    Compute the Averaged Precision between the ranks and targets line Tensors.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+
+    Returns:
+        torch.Tensor, score of the data.
+    """
+
+    n, s = len(targets), sum(targets)
+
+    if s == 0:
+        return torch.tensor(0.)
+
+    else:
+        targets = targets.type(dtype=torch.float)
+
+        p = torch.tensor([sum([targets[k] for k in range(n) if ranks[k] <= ranks[j]]) / ranks[j]
+                          for j in range(n)])
+
+        return torch.div(torch.dot(p, targets), s)
+
+
+def ndcg(ranks, targets, k):
+    """
+    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+        k: int, number of ranks to take into account.
+
+    Returns:
+        torch.Tensor, score of the data.
+    """
+
+    perfect_ranks = rank(targets)
+
+    return dcg(ranks, targets, k)/dcg(perfect_ranks, targets, k)
 
 
 def dcg(ranks, targets, k):
@@ -70,54 +195,38 @@ def dcg(ranks, targets, k):
 
     return torch.dot(g, d)
 
-
-def ndcg(ranks, targets, k):
-    """
-    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        k: int, number of ranks to take into account.
-
-    Returns:
-        torch.Tensor, score of the data.
-    """
-
-    perfect_ranks = rank(targets)
-
-    return dcg(ranks, targets, k)/dcg(perfect_ranks, targets, k)
-
 # endregion
 
 
 # region Other methods
 
-def rank(grades):
+def rank(outputs):
     """
-    Rank according to the grades (rank is 1 for highest grade). Deal with draws by assigning the best rank to the first
-    grade encountered.
+    Rank according to the outputs (1 for highest grade). Deal with draws by assigning the best rank to the first
+    output encountered.
 
     Args:
-        grades: torch.Tensor, grades for the batch in a line Tensor.
+        outputs: torch.Tensor, (batch_size, 2) tensors outputs.
 
     Returns:
         torch.Tensor, ranks corresponding to the grades in a line Tensor.
     """
 
+    grades = outputs[:, 1]
     n = len(grades)
 
     sorter = torch.argsort(grades, descending=True)
-    inv = torch.zeros(n)
+    rank = torch.zeros(n)
 
-    inv[sorter] = torch.arange(1., n + 1.)
+    rank[sorter] = torch.arange(1, n + 1).type(dtype=torch.float)
 
-    return inv
+    return rank
 
 # endregion
 
 
 def main():
+    score = ap_at_k
     size, k = 10, 4
 
     targets = torch.tensor([0., 0., 1., 0., 0., 0., 1., 0., 0., 0.])
@@ -133,7 +242,7 @@ def main():
     for grades in [grades1, grades2, grades3, grades4, grades5]:
         ranks = rank(grades)
         print(ranks[2], ranks[6])
-        print(ap_at_k(ranks, targets, k))
+        print(score(ranks, targets, k))
 
 
 if __name__ == '__main__':
