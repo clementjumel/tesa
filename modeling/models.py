@@ -357,7 +357,7 @@ class Baseline(BaseModel):
             score = self.score(ranks, targets, self.k)
             running_score += score.data.item()
 
-            if batch_idx % n_updates == 0 and batch_idx != 0:
+            if (batch_idx + 1) % n_updates == 0:
                 scores.append(running_score / n_updates)
                 running_score = 0.
 
@@ -402,7 +402,7 @@ class RandomBaseline(Baseline):
         grades = torch.rand(len(inputs['choices'])).reshape((-1, 1))
 
         other = torch.ones_like(grades) - grades
-        pred = torch.cat((grades, other), dim=1)
+        pred = torch.cat((other, grades), dim=1)
 
         return pred
 
@@ -463,7 +463,7 @@ class CountsBaseline(Baseline):
         grades = grades if m == 0 else torch.div(grades, m)
 
         other = torch.ones_like(grades) - grades
-        pred = torch.cat((grades, other), dim=1)
+        pred = torch.cat((other, grades), dim=1)
 
         return pred
 
@@ -513,7 +513,7 @@ class SummariesCountBaseline(Baseline):
         grades = grades if m == 0 else torch.div(grades, m)
 
         other = torch.ones_like(grades) - grades
-        pred = torch.cat((grades, other), dim=1)
+        pred = torch.cat((other, grades), dim=1)
 
         return pred
 
@@ -547,7 +547,7 @@ class SummariesOverlapBaseline(Baseline):
         grades = grades if m == 0 else torch.div(grades, m)
 
         other = torch.ones_like(grades) - grades
-        pred = torch.cat((grades, other), dim=1)
+        pred = torch.cat((other, grades), dim=1)
 
         return pred
 
@@ -579,7 +579,7 @@ class MLModel(BaseModel):
         self.optimizer = optimizer
         self.loss = loss
 
-    # endregions
+    # endregion
 
     # region Main methods
 
@@ -615,7 +615,7 @@ class MLModel(BaseModel):
             score = self.score(ranks, targets, self.k)
             running_score += score.data.item()
 
-            if batch_idx % n_updates == 0 and batch_idx != 0:
+            if (batch_idx + 1) % n_updates == 0:
                 losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
                 running_loss, running_score = 0., 0.
 
@@ -651,7 +651,7 @@ class MLModel(BaseModel):
             score = self.score(ranks, targets, self.k)
             running_score += score.data.item()
 
-            if batch_idx % n_updates == 0 and batch_idx != 0:
+            if (batch_idx + 1) % n_updates == 0:
                 losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
                 running_loss, running_score = 0., 0.
 
