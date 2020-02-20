@@ -17,13 +17,13 @@ class MLP(nn.Module):
 
         super(MLP, self).__init__()
 
-        self.dropout = nn.Dropout(dropout)
-
         self.input_layer = nn.Linear(input_dim, hidden_dim)
         self.input_activation = nn.ReLU()
 
         self.output_layer = nn.Linear(hidden_dim, output_dim)
-        self.output_activation = nn.Sigmoid()
+        self.output_activation = nn.Softmax()
+
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
         """
