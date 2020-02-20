@@ -368,7 +368,7 @@ class Baseline(BaseModel):
             outputs = self.pred(features)
 
             ranks = rank(outputs)
-            score = self.score(ranks, targets, self.k)
+            score = self.score(ranks, targets)
 
             if score is not None:
                 running_score += score.data.item()
@@ -620,7 +620,7 @@ class MLModel(BaseModel):
             running_loss += loss.data.item()
 
             ranks = rank(outputs.detach())
-            score = self.score(ranks, targets, self.k)
+            score = self.score(ranks, targets)
 
             if score is not None:
                 running_score += score.data.item()
@@ -662,7 +662,7 @@ class MLModel(BaseModel):
             running_loss += loss.data.item()
 
             ranks = rank(outputs.detach())
-            score = self.score(ranks, targets, self.k)
+            score = self.score(ranks, targets)
 
             if score is not None:
                 running_score += score.data.item()
