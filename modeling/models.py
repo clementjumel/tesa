@@ -45,7 +45,7 @@ class BaseModel:
 
         pass
 
-    def train(self, train_loader, valid_loader, n_epochs, n_updates):
+    def train(self, train_loader, valid_loader, n_epochs, n_updates, is_regression):
         """
         Train the Model on train_loader and evaluate on valid_loader at each epoch.
 
@@ -54,6 +54,7 @@ class BaseModel:
             valid_loader: list of (inputs, targets) batches, valid inputs and outputs.
             n_epochs: int, number of epochs to perform.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             train_losses: list, training losses, each row corresponding to an epoch.
@@ -68,8 +69,12 @@ class BaseModel:
 
         for epoch in range(n_epochs):
 
-            train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader, n_updates=n_updates)
-            valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader, n_updates=n_updates)
+            train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader,
+                                                                      n_updates=n_updates,
+                                                                      is_regression=is_regression)
+            valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
+                                                                     n_updates=n_updates,
+                                                                     is_regression=is_regression)
 
             train_losses.append(train_epoch_losses), train_scores.append(train_epoch_scores)
             valid_losses.append(valid_epoch_losses), valid_scores.append(valid_epoch_scores)
@@ -82,13 +87,14 @@ class BaseModel:
 
         return train_losses, train_scores, valid_losses, valid_scores
 
-    def test(self, test_loader, n_updates):
+    def test(self, test_loader, n_updates, is_regression):
         """
         Evaluate the Model on test_loader.
 
         Args:
             test_loader: list of (inputs, targets) batches, testing inputs and outputs.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, testing losses.
@@ -97,20 +103,21 @@ class BaseModel:
 
         print("Evaluation of the model...\n")
 
-        losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates)
+        losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates, is_regression=is_regression)
 
         print('Test Loss: %.5f Test Score: %.5f' % (float(mean(losses)), float(mean(scores)))) if losses is not None \
             else print('Test Score: %.5f' % (float(mean(scores))))
 
         return losses, scores
 
-    def train_epoch(self, data_loader, n_updates):
+    def train_epoch(self, data_loader, n_updates, is_regression):
         """
         Trains the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, training losses for the epoch.
@@ -119,13 +126,14 @@ class BaseModel:
 
         pass
 
-    def test_epoch(self, data_loader, n_updates):
+    def test_epoch(self, data_loader, n_updates, is_regression):
         """
         Tests the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, testing losses for the epoch.
@@ -321,13 +329,14 @@ class Baseline(BaseModel):
 
     # region Main methods
 
-    def train_epoch(self, data_loader, n_updates):
+    def train_epoch(self, data_loader, n_updates, is_regression):
         """
         Trains the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, training losses for the epoch.
@@ -336,13 +345,14 @@ class Baseline(BaseModel):
 
         raise Exception("A baseline cannot be trained.")
 
-    def test_epoch(self, data_loader, n_updates):
+    def test_epoch(self, data_loader, n_updates, is_regression):
         """
         Tests the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, testing losses for the epoch.
@@ -350,7 +360,7 @@ class Baseline(BaseModel):
         """
 
         scores = []
-        running_score = 0.
+        running_score, n_running_score = 0., 0.
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
 
@@ -359,11 +369,14 @@ class Baseline(BaseModel):
 
             ranks = rank(outputs)
             score = self.score(ranks, targets, self.k)
-            running_score += score.data.item()
+
+            if score is not None:
+                running_score += score.data.item()
+                n_running_score += 1
 
             if (batch_idx + 1) % n_updates == 0:
-                scores.append(running_score / n_updates)
-                running_score = 0.
+                scores.append(running_score / n_running_score)
+                running_score, n_running_score = 0., 0.
 
         return None, scores
 
@@ -405,10 +418,7 @@ class RandomBaseline(Baseline):
 
         grades = torch.rand(len(inputs['choices'])).reshape((-1, 1))
 
-        other = torch.ones_like(grades) - grades
-        pred = torch.cat((other, grades), dim=1)
-
-        return pred
+        return grades
 
     # endregion
 
@@ -466,10 +476,7 @@ class CountsBaseline(Baseline):
         m = grades.max()
         grades = grades if m == 0 else torch.div(grades, m)
 
-        other = torch.ones_like(grades) - grades
-        pred = torch.cat((other, grades), dim=1)
-
-        return pred
+        return grades
 
     def learn_counts(self, data_loader):
         """
@@ -516,10 +523,7 @@ class SummariesCountBaseline(Baseline):
         m = grades.max()
         grades = grades if m == 0 else torch.div(grades, m)
 
-        other = torch.ones_like(grades) - grades
-        pred = torch.cat((other, grades), dim=1)
-
-        return pred
+        return grades
 
     # endregion
 
@@ -550,10 +554,7 @@ class SummariesOverlapBaseline(Baseline):
         m = grades.max()
         grades = grades if m == 0 else torch.div(grades, m)
 
-        other = torch.ones_like(grades) - grades
-        pred = torch.cat((other, grades), dim=1)
-
-        return pred
+        return grades
 
     # endregion
 
@@ -587,13 +588,14 @@ class MLModel(BaseModel):
 
     # region Main methods
 
-    def train_epoch(self, data_loader, n_updates):
+    def train_epoch(self, data_loader, n_updates, is_regression):
         """
         Trains the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, training losses for the epoch.
@@ -601,37 +603,43 @@ class MLModel(BaseModel):
         """
 
         losses, scores = [], []
-        running_loss, running_score = 0., 0.
+        running_loss, running_score, n_running_score = 0., 0., 0.
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-
             features = self.features(inputs)
 
             self.optimizer.zero_grad()
             outputs = self.net(features)
 
-            loss = self.loss(outputs, targets)
+            loss_targets = targets if not is_regression else targets.type(dtype=torch.float).reshape((-1, 1))
+            loss = self.loss(outputs, loss_targets)
+
             loss.backward()
             self.optimizer.step()
+
             running_loss += loss.data.item()
 
             ranks = rank(outputs.detach())
             score = self.score(ranks, targets, self.k)
-            running_score += score.data.item()
+
+            if score is not None:
+                running_score += score.data.item()
+                n_running_score += 1
 
             if (batch_idx + 1) % n_updates == 0:
-                losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
-                running_loss, running_score = 0., 0.
+                losses.append(running_loss / n_updates), scores.append(running_score / n_running_score)
+                running_loss, running_score, n_running_score = 0., 0., 0.
 
         return losses, scores
 
-    def test_epoch(self, data_loader, n_updates):
+    def test_epoch(self, data_loader, n_updates, is_regression):
         """
         Tests the model for one epoch on data_loader.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: list, testing losses for the epoch.
@@ -641,23 +649,28 @@ class MLModel(BaseModel):
         self.net.eval()
 
         losses, scores = [], []
-        running_loss, running_score = 0., 0.
+        running_loss, running_score, n_running_score = 0., 0., 0.
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-
             features = self.features(inputs)
+
             outputs = self.net(features)
 
-            loss = self.loss(outputs.detach(), targets)
+            loss_targets = targets if not is_regression else targets.type(dtype=torch.float).reshape((-1, 1))
+            loss = self.loss(outputs.detach(), loss_targets)
+
             running_loss += loss.data.item()
 
             ranks = rank(outputs.detach())
             score = self.score(ranks, targets, self.k)
-            running_score += score.data.item()
+
+            if score is not None:
+                running_score += score.data.item()
+                n_running_score += 1
 
             if (batch_idx + 1) % n_updates == 0:
-                losses.append(running_loss / n_updates), scores.append(running_score / n_updates)
-                running_loss, running_score = 0., 0.
+                losses.append(running_loss / n_updates), scores.append(running_score / n_running_score)
+                running_loss, running_score, n_running_score = 0., 0., 0.
 
         self.net.train()
 
@@ -814,8 +827,7 @@ class EmbeddingModel(MLModel):
 
         self.initialize_word2vec_embedding()
 
-        print("Input dimension: %d" % (self.general_embedding_dim +
-                                       self.general_embedding_dim))
+        print("Input dimension: %d" % (self.general_embedding_dim + self.general_embedding_dim))
 
     # endregion
 
