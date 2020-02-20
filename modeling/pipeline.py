@@ -87,14 +87,14 @@ class Pipeline:
             valid_scores: np.array, evaluation scores on the validation set.
         """
 
-        _, train_scores = model.test(test_loader=self.train_loader, n_updates=n_updates)
-        _, valid_scores = model.test(test_loader=self.valid_loader, n_updates=n_updates)
+        _, train_scores = model.test(test_loader=self.train_loader, n_updates=n_updates, is_regression=None)
+        _, valid_scores = model.test(test_loader=self.valid_loader, n_updates=n_updates, is_regression=None)
 
         train_scores, valid_scores = asarray(train_scores),  asarray(valid_scores)
 
         return train_scores, valid_scores
 
-    def train_model(self, model, n_epochs=1, n_updates=100):
+    def train_model(self, model, n_epochs=1, n_updates=100, is_regression=False):
         """
         Train a model on the training set and compute the metrics on the validation sets.
 
@@ -102,6 +102,7 @@ class Pipeline:
             model: models.Model, model to train.
             n_epochs: int, number of epochs to perform.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             total_train_losses: np.array, training losses, averaged between the runs.
@@ -114,7 +115,8 @@ class Pipeline:
             metrics = model.train(train_loader=self.train_loader,
                                   valid_loader=self.valid_loader,
                                   n_epochs=n_epochs,
-                                  n_updates=n_updates)
+                                  n_updates=n_updates,
+                                  is_regression=is_regression)
 
             total_train_losses, total_train_scores = asarray(metrics[0]), asarray(metrics[1])
             total_valid_losses, total_valid_scores = asarray(metrics[2]), asarray(metrics[3])
@@ -129,7 +131,8 @@ class Pipeline:
                 train_losses, train_scores, valid_losses, valid_scores = model.train(train_loader=train_loader,
                                                                                      valid_loader=valid_loader,
                                                                                      n_epochs=n_epochs,
-                                                                                     n_updates=n_updates)
+                                                                                     n_updates=n_updates,
+                                                                                     is_regression=is_regression)
 
                 total_train_losses.append(train_losses), total_train_scores.append(train_scores)
                 total_valid_losses.append(valid_losses), total_valid_scores.append(valid_scores)
@@ -142,24 +145,27 @@ class Pipeline:
             model.train(train_loader=self.train_loader,
                         valid_loader=self.valid_loader,
                         n_epochs=n_epochs,
-                        n_updates=n_updates)
+                        n_updates=n_updates,
+                        is_regression=is_regression)
 
         return total_train_losses, total_train_scores, total_valid_losses, total_valid_scores
 
-    def test_model(self, model, n_updates=100):
+    def test_model(self, model, n_updates=100, is_regression=False):
         """
         Evaluate the model on the test set.
 
         Args:
             model: models.Model, model to test.
             n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
 
         Returns:
             losses: np.array, testing losses.
             scores: np.array, testing scores.
         """
 
-        losses, scores = model.test(test_loader=self.test_loader, n_updates=n_updates)
+        losses, scores = model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
+
         losses, scores = asarray(losses), asarray(scores)
 
         return losses, scores
