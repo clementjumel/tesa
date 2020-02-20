@@ -15,17 +15,15 @@ import torch
 class BaseModel:
     # region Class Initialization
 
-    def __init__(self, score, k):
+    def __init__(self, score):
         """
         Initializes an instance of Base Model.
 
         Args:
             score: utils.score, score to use.
-            k: int, number of ranks to take into account.
         """
 
         self.score = score
-        self.k = k
 
         self.punctuation = str_punctuation
         self.stopwords = set(nltk_stopwords.words('english'))
@@ -428,16 +426,15 @@ class CountsBaseline(Baseline):
 
     # region Class initialization
 
-    def __init__(self, score, k):
+    def __init__(self, score):
         """
         Initializes an instance of CountsBaseline Model.
 
         Args:
             score: utils.score, score to use.
-            k: int, number of results to take into account.
         """
 
-        super(CountsBaseline, self).__init__(score=score, k=k)
+        super(CountsBaseline, self).__init__(score=score)
 
         self.counts = defaultdict(int)
 
@@ -566,7 +563,7 @@ class SummariesOverlapBaseline(Baseline):
 class MLModel(BaseModel):
     # region Class initialization
 
-    def __init__(self, net, optimizer, loss, score, k):
+    def __init__(self, net, optimizer, loss, score):
         """
         Initializes an instance of the ML Model.
 
@@ -575,10 +572,9 @@ class MLModel(BaseModel):
             optimizer: torch.optimizer, optimizer for the neural net.
             loss: torch.nn.Loss, loss to use.
             score: utils.score, score to use.
-            k: int, number of results to take into account.
         """
 
-        super(MLModel, self).__init__(score=score, k=k)
+        super(MLModel, self).__init__(score=score)
 
         self.net = net
         self.optimizer = optimizer
@@ -682,7 +678,7 @@ class MLModel(BaseModel):
 class BOWModel(MLModel):
     # region Class initialization
 
-    def __init__(self, min_vocab_frequency, net, optimizer, loss, score, k):
+    def __init__(self, min_vocab_frequency, net, optimizer, loss, score):
         """
         Initializes an instance of the Bag of Word Model.
 
@@ -692,10 +688,9 @@ class BOWModel(MLModel):
             optimizer: torch.optimizer, optimizer for the neural net.
             loss: torch.nn.Loss, loss to use.
             score: utils.score, score to use.
-            k: int, number of results to take into account.
         """
 
-        super(BOWModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score, k=k)
+        super(BOWModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score)
 
         self.min_vocab_frequency = min_vocab_frequency
 
@@ -806,7 +801,7 @@ class BOWModel(MLModel):
 class EmbeddingModel(MLModel):
     # region Class initialization
 
-    def __init__(self, net, optimizer, loss, score, k):
+    def __init__(self, net, optimizer, loss, score):
         """
         Initializes an instance of the Embedding Model.
 
@@ -815,10 +810,9 @@ class EmbeddingModel(MLModel):
             optimizer: torch.optimizer, optimizer for the neural net.
             loss: torch.nn.Loss, loss to use.
             score: utils.score, score to use.
-            k: int, number of results to take into account.
         """
 
-        super(EmbeddingModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score, k=k)
+        super(EmbeddingModel, self).__init__(net=net, optimizer=optimizer, loss=loss, score=score)
 
         self.general_embedding = None
         self.entity_embedding = None
