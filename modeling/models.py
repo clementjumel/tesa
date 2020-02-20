@@ -74,7 +74,7 @@ class BaseModel:
             train_losses.append(train_epoch_losses), train_scores.append(train_epoch_scores)
             valid_losses.append(valid_epoch_losses), valid_scores.append(valid_epoch_scores)
 
-            print('Epoch %d/%d: Validation Loss: %.3f Validation Score: %.3f' % (epoch + 1,
+            print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f' % (epoch + 1,
                                                                                  n_epochs,
                                                                                  float(mean(valid_epoch_losses)),
                                                                                  float(mean(valid_epoch_scores))))
@@ -99,8 +99,8 @@ class BaseModel:
 
         losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates)
 
-        print('Test Loss: %.3f Test Score: %.3f' % (float(mean(losses)), float(mean(scores)))) if losses is not None \
-            else print('Test Score: %.3f' % (float(mean(scores))))
+        print('Test Loss: %.5f Test Score: %.5f' % (float(mean(losses)), float(mean(scores)))) if losses is not None \
+            else print('Test Score: %.5f' % (float(mean(scores))))
 
         return losses, scores
 
@@ -262,23 +262,27 @@ class BaseModel:
         summaries_words = []
 
         for summary in inputs['summaries']:
-            summaries_words.append(self.get_words(s=summary,
-                                                  remove_stopwords=remove_stopwords,
-                                                  remove_punctuation=remove_punctuation,
-                                                  lower=lower,
-                                                  lemmatize=lemmatize))
+            if summary != 'No information found.':
+                summaries_words.append(self.get_words(s=summary,
+                                                      remove_stopwords=remove_stopwords,
+                                                      remove_punctuation=remove_punctuation,
+                                                      lower=lower,
+                                                      lemmatize=lemmatize))
+            else:
+                summaries_words.append([])
 
         return summaries_words
 
-    def get_full_context_words(self, inputs):
+    def get_other_words(self, inputs):
         """
-        Returns the words from the inputs' entities, contexts and summaries as a list.
+        Returns the "other" words from the inputs', that is the words of the fields that are not "choices" or
+        "entities_type_".
 
         Args:
             inputs: dict, inputs of the prediction.
 
         Returns:
-            list, words of the inputs' full context.
+            list, other words of the inputs'.
         """
 
         entities_words = [word for entity_words in self.get_entities_words(inputs) for word in entity_words]
@@ -721,9 +725,9 @@ class BOWModel(MLModel):
                 if choice not in self.choice_to_idx:
                     self.choice_to_idx[choice] = len(self.choice_to_idx)
 
-            full_context_words = self.get_full_context_words(inputs)
+            other_words = self.get_other_words(inputs)
 
-            for word in full_context_words:
+            for word in other_words:
                 context_counts[word] += 1
 
                 if context_counts[word] >= self.min_vocab_frequency and word not in self.context_to_idx:
@@ -809,10 +813,8 @@ class EmbeddingModel(MLModel):
         self.entity_embedding_dim = None
 
         self.initialize_word2vec_embedding()
-        self.initialize_freebase_embedding()
 
         print("Input dimension: %d" % (self.general_embedding_dim +
-                                       self.entity_embedding_dim +
                                        self.general_embedding_dim))
 
     # endregion
@@ -835,18 +837,10 @@ class EmbeddingModel(MLModel):
         choices_embedding = torch.stack([self.get_average_embedding(words=words, is_entity=False)
                                          for words in self.get_choices_words(inputs)])
 
-        entities_embedding = torch.stack([self.get_entity_embedding(words=words)
-                                          for words in self.get_entities_words(inputs)]).mean(dim=0)
-        entities_embedding = entities_embedding.expand((n, -1))
-
-        context_words = self.get_context_words(inputs)
-        summaries_words = [word for summary_words in self.get_summaries_words(inputs) for word in summary_words]
-        other_words = context_words + summaries_words
-
-        other_embedding = self.get_average_embedding(words=other_words, is_entity=False)
+        other_embedding = self.get_average_embedding(words=self.get_other_words(inputs), is_entity=False)
         other_embedding = other_embedding.expand((n, -1))
 
-        features = torch.cat((choices_embedding, entities_embedding, other_embedding), dim=1)
+        features = torch.cat((choices_embedding, other_embedding), dim=1)
 
         return features
 
