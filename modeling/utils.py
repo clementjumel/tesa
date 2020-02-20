@@ -206,13 +206,14 @@ def rank(outputs):
     output encountered.
 
     Args:
-        outputs: torch.Tensor, (batch_size, 2) tensors outputs.
+        outputs: torch.Tensor, (batch_size, 1 ou 2) tensors outputs.
 
     Returns:
         torch.Tensor, ranks corresponding to the grades in a line Tensor.
     """
 
-    grades = outputs[:, 1]
+    grades = outputs[:, -1]
+
     n = len(grades)
 
     sorter = torch.argsort(grades, descending=True)
