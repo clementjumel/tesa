@@ -1,6 +1,6 @@
 from database_creation.database import Database
 
-from numpy import split, concatenate, mean, asarray
+from numpy import split, concatenate, asarray
 from numpy.random import shuffle
 
 
@@ -81,19 +81,10 @@ class Pipeline:
         Args:
             model: models.Model, model to evaluate.
             n_updates: int, number of batches between the updates.
-
-        Returns:
-            train_scores: np.array, evaluation scores on the training set.
-            valid_scores: np.array, evaluation scores on the validation set.
         """
 
-        _, train_scores = model.test(test_loader=self.train_loader, n_updates=n_updates, is_regression=None)
-        _, valid_scores = model.test(test_loader=self.valid_loader, n_updates=n_updates, is_regression=None)
-
-        train_scores, valid_scores = asarray(train_scores),  asarray(valid_scores)
-
-        model.train_scores.append(train_scores), model.valid_scores.append(valid_scores)
-        return train_scores, valid_scores
+        model.test(test_loader=self.train_loader, n_updates=n_updates, is_regression=None, is_test=False)
+        model.test(test_loader=self.valid_loader, n_updates=n_updates, is_regression=None, is_test=False)
 
     def train_model(self, model, n_epochs=1, n_updates=100, is_regression=False):
         """
@@ -104,54 +95,23 @@ class Pipeline:
             n_epochs: int, number of epochs to perform.
             n_updates: int, number of batches between the updates.
             is_regression: bool, whether to use the regression set up for the task.
-
-        Returns:
-            total_train_losses: np.array, training losses, averaged between the runs.
-            total_train_scores: np.array, training scores, averaged between the runs.
-            total_valid_losses: np.array, validation losses, averaged between the runs.
-            total_valid_scores: np.array, validation scores, averaged between the runs.
         """
 
         if not self.use_k_fold:
-            metrics = model.train(train_loader=self.train_loader,
-                                  valid_loader=self.valid_loader,
-                                  n_epochs=n_epochs,
-                                  n_updates=n_updates,
-                                  is_regression=is_regression)
-
-            total_train_losses, total_train_scores = asarray(metrics[0]), asarray(metrics[1])
-            total_valid_losses, total_valid_scores = asarray(metrics[2]), asarray(metrics[3])
-
-        else:
-            total_train_losses, total_train_scores, total_valid_losses, total_valid_scores = [], [], [], []
-
-            for train_loader, valid_loader in self.k_fold_loader:
-
-                model.reset()
-
-                train_losses, train_scores, valid_losses, valid_scores = model.train(train_loader=train_loader,
-                                                                                     valid_loader=valid_loader,
-                                                                                     n_epochs=n_epochs,
-                                                                                     n_updates=n_updates,
-                                                                                     is_regression=is_regression)
-
-                total_train_losses.append(train_losses), total_train_scores.append(train_scores)
-                total_valid_losses.append(valid_losses), total_valid_scores.append(valid_scores)
-
-            total_train_losses, total_train_scores = mean(total_train_losses, axis=0), mean(total_train_scores, axis=0)
-            total_valid_losses, total_valid_scores = mean(total_valid_losses, axis=0), mean(total_valid_scores, axis=0)
-
-            model.reset()
-
             model.train(train_loader=self.train_loader,
                         valid_loader=self.valid_loader,
                         n_epochs=n_epochs,
                         n_updates=n_updates,
                         is_regression=is_regression)
 
-        model.train_losses.append(total_train_losses), model.train_scores.append(total_train_scores)
-        model.valid_losses.append(total_valid_losses), model.valid_scores.append(total_valid_scores)
-        return total_train_losses, total_train_scores, total_valid_losses, total_valid_scores
+        else:
+            for train_loader, valid_loader in self.k_fold_loader:
+                model.reset()
+                model.train(train_loader=train_loader,
+                            valid_loader=valid_loader,
+                            n_epochs=n_epochs,
+                            n_updates=n_updates,
+                            is_regression=is_regression)
 
     def test_model(self, model, n_updates=100, is_regression=False):
         """
@@ -161,18 +121,9 @@ class Pipeline:
             model: models.Model, model to test.
             n_updates: int, number of batches between the updates.
             is_regression: bool, whether to use the regression set up for the task.
-
-        Returns:
-            losses: np.array, testing losses.
-            scores: np.array, testing scores.
         """
 
-        losses, scores = model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
-
-        losses, scores = asarray(losses), asarray(scores)
-
-        model.test_losses.append(losses), model.test_scores.append(scores)
-        return losses, scores
+        model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression, is_test=True)
 
     # endregion
 
