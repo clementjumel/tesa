@@ -223,6 +223,28 @@ def rank(outputs):
 
     return rank
 
+
+def all_scores(ranks, targets):
+    """
+    Returns all the scores of the ranks and targets in a dictionary.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+
+    Returns:
+        dictionary, all the scores of the batch.
+    """
+
+    return {'precision_at_k': precision_at_k(ranks, targets),
+            'recall_at_k': recall_at_k(ranks, targets),
+            'best_rank': best_rank(ranks, targets),
+            'average_rank': average_rank(ranks, targets),
+            'reciprocal_best_rank': reciprocal_best_rank(ranks, targets),
+            'reciprocal_average_rank': reciprocal_average_rank(ranks, targets),
+            'average_precision': average_precision(ranks, targets),
+            'ndcg': ndcg(ranks, targets)}
+
 # endregion
 
 
