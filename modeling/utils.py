@@ -144,12 +144,13 @@ def average_precision(ranks, targets):
     if targets.sum() == 0:
         return None
 
-    ranks, targets = ranks.type(dtype=torch.float), targets.type(dtype=torch.float)
-    n, s = len(targets), sum(targets)
+    mask = targets > 0
+    ranks = ranks[mask].type(dtype=torch.float)
+    targets = targets[mask].type(dtype=torch.float)
 
-    p = torch.tensor([sum([targets[k] for k in range(n) if ranks[k] <= ranks[j]]) / ranks[j] for j in range(n)])
+    p_j = torch.tensor([sum((ranks <= ranks[j]))/ranks[j] for j in range(len(targets))])
 
-    return torch.dot(p, targets)/s
+    return p_j.mean()
 
 
 def ndcg(ranks, targets):
@@ -181,15 +182,14 @@ def ndcg(ranks, targets):
             torch.tensor, score of the batch.
         """
 
-        mask = torch.tensor(ranks <= k)
-
+        mask = ranks <= k
         ranks = ranks[mask]
         targets = targets[mask]
 
-        g = 2 ** targets - 1
-        d = torch.div(1., torch.log2(ranks + 1))
+        mask = targets > 0
+        ranks = ranks[mask].type(dtype=torch.float)
 
-        return torch.dot(g, d)
+        return torch.div(1., torch.log2(ranks + 1.)).sum()
 
     perfect_ranks = rank(targets.reshape((-1, 1)))
 
@@ -241,9 +241,9 @@ def main():
     grades5 = torch.tensor([0.5, 0.5, 0.45, 0.5, 0, 0., -0.4, 0., 0., 0.])
 
     for grades in [grades1, grades2, grades3, grades4, grades5]:
-        ranks = rank(grades)
+        ranks = rank(grades.reshape(-1,1))
         print(ranks[2], ranks[6])
-        print(score(ranks, targets, k))
+        print(score(ranks, targets))
 
 
 if __name__ == '__main__':
