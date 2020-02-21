@@ -92,6 +92,7 @@ class Pipeline:
 
         train_scores, valid_scores = asarray(train_scores),  asarray(valid_scores)
 
+        model.train_scores.append(train_scores), model.valid_scores.append(valid_scores)
         return train_scores, valid_scores
 
     def train_model(self, model, n_epochs=1, n_updates=100, is_regression=False):
@@ -148,6 +149,8 @@ class Pipeline:
                         n_updates=n_updates,
                         is_regression=is_regression)
 
+        model.train_losses.append(total_train_losses), model.train_scores.append(total_train_scores)
+        model.valid_losses.append(total_valid_losses), model.valid_scores.append(total_valid_scores)
         return total_train_losses, total_train_scores, total_valid_losses, total_valid_scores
 
     def test_model(self, model, n_updates=100, is_regression=False):
@@ -168,6 +171,7 @@ class Pipeline:
 
         losses, scores = asarray(losses), asarray(scores)
 
+        model.test_losses.append(losses), model.test_scores.append(scores)
         return losses, scores
 
     # endregion
