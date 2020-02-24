@@ -3,6 +3,30 @@ import torch
 
 # region Metrics
 
+def average_precision(ranks, targets):
+    """
+    Compute the Average Precision the ranks and targets line Tensors. If there is not relevant answer, returns None.
+
+    Args:
+        ranks: torch.Tensor, ranks predicted for the batch.
+        targets: torch.Tensor, true labels for the batch.
+
+    Returns:
+        torch.tensor, score of the batch.
+    """
+
+    if targets.sum() == 0:
+        return None
+
+    mask = targets > 0
+    ranks = ranks[mask].type(dtype=torch.float)
+    targets = targets[mask].type(dtype=torch.float)
+
+    p_j = torch.tensor([sum((ranks <= ranks[j]))/ranks[j] for j in range(len(targets))])
+
+    return p_j.mean()
+
+
 def precision_at_k(ranks, targets):
     """
     Returns the precision at k, that is the fraction of answers retrieved by the first k ranks that are relevant. If
@@ -127,30 +151,6 @@ def reciprocal_average_rank(ranks, targets):
     r = average_rank(ranks, targets)
 
     return 1./r if r is not None else None
-
-
-def average_precision(ranks, targets):
-    """
-    Compute the Average Precision the ranks and targets line Tensors. If there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    if targets.sum() == 0:
-        return None
-
-    mask = targets > 0
-    ranks = ranks[mask].type(dtype=torch.float)
-    targets = targets[mask].type(dtype=torch.float)
-
-    p_j = torch.tensor([sum((ranks <= ranks[j]))/ranks[j] for j in range(len(targets))])
-
-    return p_j.mean()
 
 
 def ndcg(ranks, targets):
