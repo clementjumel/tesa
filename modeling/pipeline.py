@@ -125,13 +125,14 @@ class Pipeline:
 
         model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression, is_test=True)
 
-    def explain_model(self, model, n_samples, is_regression=False):
+    def explain_model(self, model, n_samples, n_answers, is_regression=False):
         """
         Explain the answers of the model on the valid_set.
 
         Args:
             model: models.Model, model to test.
             n_samples: int, number of samples to explain.
+            n_answers: int, number of best answers to look at.
             is_regression: bool, whether to use the regression set up for the task.
         """
 
