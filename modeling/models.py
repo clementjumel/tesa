@@ -1,6 +1,7 @@
 import modeling.utils as utils
 
 from numpy import mean, arange
+from numpy.random import shuffle
 from collections import defaultdict
 from string import punctuation as str_punctuation
 from nltk.corpus import stopwords as nltk_stopwords
@@ -66,6 +67,7 @@ class BaseModel:
         train_losses, valid_losses, train_scores, valid_scores = [], [], defaultdict(list), defaultdict(list)
 
         for epoch in range(n_epochs):
+            shuffle(train_loader), shuffle(valid_loader)
 
             train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader,
                                                                       n_updates=n_updates,
@@ -101,6 +103,8 @@ class BaseModel:
         print("Evaluation of the model...\n")
 
         reference = self.scores_names[0]
+
+        shuffle(test_loader)
 
         losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates, is_regression=is_regression)
 
@@ -385,9 +389,9 @@ class BaseModel:
             for name in scores_names:
                 color, color_idx = colors[color_idx], color_idx + 1
 
-                ax2.plot(x1, train_scores[name], color=color, label=name)
-                ax2.plot(x2, valid_scores[name], color=color, label=name)
-                ax2.scatter(x2, valid_scores[name], color=color, s=50, marker='^')
+                ax2.plot(x1, train_scores[name], color=color, label='training ' + name)
+                ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
+                ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
             fig.legend()
 
