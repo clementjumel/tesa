@@ -125,19 +125,20 @@ class Pipeline:
 
         model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression, is_test=True)
 
-    def explain_model(self, model, display_explanations=True, n_samples=5, n_answers=10):
+    def explain_model(self, model, scores_names=None, display_explanations=True, n_samples=5, n_answers=10):
         """
         Explain the answers of the model on the valid_set.
 
         Args:
             model: models.Model, model to test.
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
             display_explanations: bool, whether or not to display the explanations.
             n_samples: int, number of samples to explain.
             n_answers: int, number of best answers to look at.
         """
 
-        model.explain(data_loader=self.valid_loader, display_explanations=display_explanations, n_samples=n_samples,
-                      n_answers=n_answers)
+        model.explain(data_loader=self.valid_loader, scores_names=scores_names,
+                      display_explanations=display_explanations, n_samples=n_samples, n_answers=n_answers)
 
     # endregion
 
