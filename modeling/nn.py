@@ -21,8 +21,8 @@ class MLP(nn.Module):
         self.input_layer = nn.Linear(input_dim, hidden_dim1)
         self.input_activation = nn.ReLU()
 
-        self.hidden_layer = nn.Linear(hidden_dim1, hidden_dim2)
-        self.hidden_activation = nn.ReLU()
+        self.hidden_layer = nn.Linear(hidden_dim1, hidden_dim2) if hidden_dim2 is not None else None
+        self.hidden_activation = nn.ReLU() if hidden_dim2 is not None else None
 
     def forward(self, x):
         """
@@ -36,11 +36,13 @@ class MLP(nn.Module):
         """
 
         x = self.dropout(x)
+
         x = self.input_layer(x)
         x = self.input_activation(x)
 
-        x = self.hidden_layer(x)
-        x = self.hidden_activation(x)
+        if self.hidden_layer is not None:
+            x = self.hidden_layer(x)
+            x = self.hidden_activation(x)
 
         x = self.output_layer(x)
         x = self.output_activation(x)
@@ -50,7 +52,7 @@ class MLP(nn.Module):
 
 class RegressionMLP(MLP):
 
-    def __init__(self, input_dim, hidden_dim1, hidden_dim2, dropout):
+    def __init__(self, input_dim, hidden_dim1, hidden_dim2=None, dropout=0):
         """
         Initialize an instance of the Regression MLP.
 
@@ -63,13 +65,15 @@ class RegressionMLP(MLP):
 
         super(RegressionMLP, self).__init__(input_dim, hidden_dim1, hidden_dim2, dropout)
 
-        self.output_layer = nn.Linear(hidden_dim2, 1)
+        output_dim = hidden_dim2 if hidden_dim2 is not None else hidden_dim1
+
+        self.output_layer = nn.Linear(output_dim, 1)
         self.output_activation = nn.Sigmoid()
 
 
 class ClassificationMLP(MLP):
 
-    def __init__(self, input_dim, hidden_dim1, hidden_dim2, dropout):
+    def __init__(self, input_dim, hidden_dim1, hidden_dim2=None, dropout=0):
         """
         Initialize an instance of the Regression MLP.
 
@@ -82,5 +86,7 @@ class ClassificationMLP(MLP):
 
         super(ClassificationMLP, self).__init__(input_dim, hidden_dim1, hidden_dim2, dropout)
 
-        self.output_layer = nn.Linear(hidden_dim2, 2)
+        output_dim = hidden_dim2 if hidden_dim2 is not None else hidden_dim1
+
+        self.output_layer = nn.Linear(output_dim, 2)
         self.output_activation = nn.Softmax(dim=1)
