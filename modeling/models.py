@@ -79,7 +79,7 @@ class BaseModel:
                     train_scores[name].append(train_epoch_scores[name])
                     valid_scores[name].append(valid_epoch_scores[name])
 
-                self.plot_metrics()
+                # self.plot()
 
                 print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f'
                       % (epoch + 1, n_epochs, float(mean(valid_epoch_losses)),
@@ -554,6 +554,50 @@ class BaseModel:
 
         pass
 
+    @staticmethod
+    def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names,
+             display_training_scores):
+        """
+        Plot a single figure for the corresponding data.
+
+        Args:
+            x1: list, first x-axis of the plot, for the losses.
+            x2: list, second x-axis of the plot, for the scores.
+            train_losses: list, training losses to plot.
+            valid_losses: list, validation losses to plot.
+            train_scores: dict, training scores to plot.
+            valid_scores: dict, validation scores to plot.
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
+            display_training_scores: bool, whether or not to display the training scores.
+        """
+
+        colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
+                  'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
+        color_idx = 0
+
+        fig, ax1 = plt.subplots(figsize=(16, 8))
+        ax1.set_xlabel('epochs')
+
+        color, color_idx = colors[color_idx], color_idx + 1
+        ax1.set_ylabel('loss', color=color)
+        ax1.set_yscale('log')
+        ax1.plot(x1, train_losses, color=color, label='training loss')
+        ax1.scatter(x2, valid_losses, color=color, label='validation loss', s=50, marker='^')
+        ax1.tick_params(axis='y', labelcolor=color)
+
+        ax2 = ax1.twinx()
+        ax2.set_ylabel('scores')
+
+        for name in scores_names:
+            color, color_idx = colors[color_idx], color_idx + 1
+
+            if display_training_scores:
+                ax2.plot(x1, train_scores[name], color=color, label='training ' + name)
+            ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
+            ax2.plot(x2, valid_scores[name], color=color, ls='--')
+
+        fig.legend()
+
     def plot_metrics(self, scores_names=None, align_experiments=False, display_training_scores=False):
         """
         Plot the metrics of the model registered during the experiments.
@@ -563,50 +607,6 @@ class BaseModel:
             align_experiments: bool, whether or not to align the data from different experiments.
             display_training_scores: bool, whether or not to display the training scores.
         """
-
-        def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names,
-                 display_training_scores):
-            """
-            Plot a single figure for the corresponding data.
-
-            Args:
-                x1: list, first x-axis of the plot, for the losses.
-                x2: list, second x-axis of the plot, for the scores.
-                train_losses: list, training losses to plot.
-                valid_losses: list, validation losses to plot.
-                train_scores: dict, training scores to plot.
-                valid_scores: dict, validation scores to plot.
-                scores_names: iterable, names of the scores to plot, if not, plot all of them.
-                display_training_scores: bool, whether or not to display the training scores.
-            """
-
-            colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
-                      'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
-            color_idx = 0
-
-            fig, ax1 = plt.subplots(figsize=(16, 8))
-            ax1.set_xlabel('epochs')
-
-            color, color_idx = colors[color_idx], color_idx + 1
-            ax1.set_ylabel('loss', color=color)
-            ax1.set_yscale('log')
-            ax1.plot(x1, train_losses, color=color, label='training loss')
-            ax1.scatter(x2, valid_losses, color=color, label='validation loss', s=50, marker='^')
-            ax1.tick_params(axis='y', labelcolor=color)
-
-            ax2 = ax1.twinx()
-            ax2.set_ylabel('scores')
-
-            for name in scores_names:
-                color, color_idx = colors[color_idx], color_idx + 1
-
-                if display_training_scores:
-                    ax2.plot(x1, train_scores[name], color=color, label='training ' + name)
-                ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
-                ax2.plot(x2, valid_scores[name], color=color, ls='--')
-
-            fig.legend()
-            fig.show()
 
         scores_names = scores_names if scores_names is not None else self.scores_names
         reference = scores_names[0]
@@ -640,14 +640,14 @@ class BaseModel:
                     total_valid_scores[name].extend(valid_scores[name])
 
             else:
-                plot(x1=x1, x2=x2, train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
-                     valid_scores=valid_scores, scores_names=scores_names,
-                     display_training_scores=display_training_scores)
+                self.plot(x1=x1, x2=x2, train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
+                          valid_scores=valid_scores, scores_names=scores_names,
+                          display_training_scores=display_training_scores)
 
         if align_experiments:
-            plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
-                 train_scores=total_train_scores, valid_scores=total_valid_scores, scores_names=scores_names,
-                 display_training_scores=display_training_scores)
+            self.plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
+                      train_scores=total_train_scores, valid_scores=total_valid_scores, scores_names=scores_names,
+                      display_training_scores=display_training_scores)
 
     def explain(self, data_loader, scores_names, display_explanations, n_samples, n_answers):
         """
