@@ -9,6 +9,7 @@ from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
 from gensim.models import KeyedVectors
 import torch
+from torch.nn.functional import cosine_similarity
 import matplotlib.pyplot as plt
 
 
@@ -35,19 +36,12 @@ class BaseModel:
         self.stopwords = set(nltk_stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
 
+        self.pretrained_embedding = None
+        self.pretrained_embedding_dim = None
+
     # endregion
 
     # region Main methods
-
-    def preview_data(self, data_loader):
-        """
-        Preview the data for the model.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
-
-        pass
 
     def train(self, train_loader, valid_loader, n_epochs, n_updates, is_regression):
         """
@@ -66,7 +60,19 @@ class BaseModel:
         reference = self.scores_names[0]
         train_losses, valid_losses, train_scores, valid_scores = [], [], defaultdict(list), defaultdict(list)
 
+        shuffle(valid_loader)
+
+        valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
+                                                                 n_updates=n_updates,
+                                                                 is_regression=is_regression)
+
+        valid_losses.append(valid_epoch_losses)
+        for name in self.scores_names:
+            valid_scores[name].append(valid_epoch_scores[name])
+        print('--------------------------------------------------------------')
+
         for epoch in range(n_epochs):
+
             shuffle(train_loader), shuffle(valid_loader)
 
             train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader,
@@ -76,6 +82,8 @@ class BaseModel:
             valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
                                                                      n_updates=n_updates,
                                                                      is_regression=is_regression)
+
+            self.update_lr_scheduler()
 
             train_losses.append(train_epoch_losses), valid_losses.append(valid_epoch_losses)
             for name in self.scores_names:
@@ -108,7 +116,7 @@ class BaseModel:
 
         losses, scores = self.test_epoch(data_loader=test_loader, n_updates=n_updates, is_regression=is_regression)
 
-        print('Test Loss: %.5f Test Score: %.5f' % (float(mean(losses)), float(mean(scores[reference]))))\
+        print('Test Loss: %.5f Test Score: %.5f' % (float(mean(losses)), float(mean(scores[reference])))) \
             if losses is not None else print('Test Score: %.5f' % (float(mean(scores[reference]))))
 
         if is_test:
@@ -120,6 +128,20 @@ class BaseModel:
             self.valid_losses.append(losses)
             for name in self.scores_names:
                 self.valid_scores[name].append(scores[name])
+
+    # endregion
+
+    # region Placeholder methods
+
+    def preview_data(self, data_loader):
+        """
+        Preview the data for the model.
+
+        Args:
+            data_loader: list, pairs of (inputs, targets) batches.
+        """
+
+        pass
 
     def train_epoch(self, data_loader, n_updates, is_regression):
         """
@@ -149,6 +171,60 @@ class BaseModel:
         Returns:
             epoch_losses: list, losses for the epoch.
             epoch_scores: dict, scores for the epoch as lists, mapped with the scores' names.
+        """
+
+        pass
+
+    def update_lr_scheduler(self):
+        """ Performs a step of the learning rate scheduler if there is one. """
+
+        pass
+
+    def features(self, inputs):
+        """
+        Computes the features of the inputs.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            dict, unchanged inputs of the batch.
+        """
+
+        pass
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        return torch.tensor(0)
+
+    def explanation(self, inputs):
+        """
+        Explain the model by returning some relevant information as a list of strings.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            list, information retrieved.
+        """
+
+        return ['' for _ in range(len(inputs['choices']))]
+
+    def display_metrics(self, scores_names=None):
+        """
+        Display the metrics of the model registered during the experiments.
+
+        Args:
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
         """
 
         pass
@@ -324,56 +400,187 @@ class BaseModel:
 
         return entities_words + context_words + summaries_words
 
+    def get_word_embedding(self, word):
+        """
+        Returns the pretrained embedding of a word in a line Tensor.
+
+        Args:
+            word: str, word to embed.
+
+        Returns:
+            torch.Tensor, embedding of word.
+        """
+
+        return torch.tensor(self.pretrained_embedding[word]) if word in self.pretrained_embedding.vocab else None
+
+    def get_average_embedding(self, words):
+        """
+        Returns the average pretrained embedding of words in a line Tensor.
+
+        Args:
+            words: list, words to embed.
+
+        Returns:
+            torch.Tensor, average embedding of the words.
+        """
+
+        embeddings = [self.get_word_embedding(word=word) for word in words]
+        embeddings = [embedding for embedding in embeddings if embedding is not None]
+
+        return torch.stack(embeddings).mean(dim=0) if embeddings \
+            else torch.zeros(self.pretrained_embedding_dim, dtype=torch.float)
+
+    def get_embedding_similarity(self, word1, word2):
+        """
+        Returns the embedding similarity between two words. If the embeddings don't exist, return None.
+
+        Args:
+            word1: str, first word to compare.
+            word2: str, second word to compare.
+
+        Returns:
+            float, similarity between word1 and word2.
+        """
+
+        embedding1, embedding2 = self.get_word_embedding(word1), self.get_word_embedding(word2)
+
+        return cosine_similarity(embedding1, embedding2, dim=0).item() \
+            if embedding1 is not None and embedding2 is not None else None
+
+    def get_max_embedding_similarity(self, words1, words2):
+        """
+        Returns the maximal embedding similarity between the words of words1 and words2. If it is not defined,
+        returns -1.
+
+        Args:
+            words1: list, first words to compare.
+            words2: list, second words to compare.
+
+        Returns:
+            float, similarity between words1 and words2.
+        """
+
+        similarities = [self.get_embedding_similarity(word1, word2) for word1 in words1 for word2 in words2]
+        similarities = [similarity for similarity in similarities if similarity is not None]
+
+        return max(similarities) if similarities else -1.
+
+    @staticmethod
+    def get_vocab_idx(s, vocab):
+        """
+        Returns the index of a string in the corresponding vocabulary dictionary.
+
+        Args:
+            s: str, element to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            int, index of the word in the dictionary.
+        """
+
+        return vocab[s] if s in vocab else len(vocab)
+
+    def get_bow(self, strings, vocab):
+        """
+        Returns the bow of the items, given the vocabulary, as a torch.Tensor.
+
+        Args:
+            strings: iterable, strings to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            torch.tensor, bow of the items in a line tensor.Tensor.
+        """
+
+        n = len(vocab) + 1
+        bow = torch.zeros(n, dtype=torch.float)
+
+        for s in strings:
+            idx = self.get_vocab_idx(s, vocab)
+            bow[idx] += 1.
+
+        return bow
+
+    def get_one_hot(self, strings, vocab):
+        """
+        Returns the one hot encoding of the items, given the vocabulary, as a torch.Tensor.
+
+        Args:
+            strings: iterable, strings to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            torch.tensor, one hot encoding of the items in a line tensor.Tensor.
+        """
+
+        n1, n2 = len(strings), len(vocab)
+        encoding = torch.zeros((n1, n2), dtype=torch.float)
+
+        for i, s in enumerate(strings):
+            j = self.get_vocab_idx(s, vocab)
+            encoding[i, j] += 1.
+
+        return encoding
+
     # endregion
 
     # region Other methods
 
+    def initialize_word2vec_embedding(self):
+        """ Initializes the Word2Vec pretrained embedding of dimension 300. """
+
+        print("Initializing the Word2Vec pretrained embedding...")
+
+        self.pretrained_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
+                                                                            'GoogleNews-vectors-negative300.bin',
+                                                                      binary=True)
+
+        key = list(self.pretrained_embedding.vocab.keys())[0]
+        self.pretrained_embedding_dim = len(self.pretrained_embedding[key])
+
     @staticmethod
-    def features(inputs):
+    def save_vocab_idx(s, vocab):
         """
-        Computes the features of the inputs.
+        Saves the string in the vocabulary dictionary.
 
         Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            dict, unchanged inputs of the batch.
+            s: str, element to retrieve.
+            vocab: dict, corresponding vocabulary.
         """
 
-        return inputs
+        if s not in vocab:
+            vocab[s] = len(vocab)
 
-    def plot_metrics(self, scores_names=None):
+    def plot_metrics(self, scores_names=None, align_experiments=False, display_training_scores=True):
         """
         Plot the metrics of the model registered during the experiments.
 
         Args:
             scores_names: iterable, names of the scores to plot, if not, plot all of them.
+            align_experiments: bool, whether or not to align the data from different experiments.
+            display_training_scores: bool, whether or not to display the training scores.
         """
 
-        scores_names = scores_names if scores_names is not None else self.scores_names
-        reference = scores_names[0]
+        def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names, display_training_scores):
+            """
+            Plot a single figure for the corresponding data.
 
-        colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
-                  'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
-        color_idx = 0
+            Args:
+                x1: list, first x-axis of the plot, for the losses.
+                x2: list, second x-axis of the plot, for the scores.
+                train_losses: list, training losses to plot.
+                valid_losses: list, validation losses to plot.
+                train_scores: dict, training scores to plot.
+                valid_scores: dict, validation scores to plot.
+                scores_names: iterable, names of the scores to plot, if not, plot all of them.
+                display_training_scores: bool, whether or not to display the training scores.
+            """
 
-        n_experiments = len(self.train_scores[reference])
+            colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
+                      'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
+            color_idx = 0
 
-        for i in range(n_experiments):
-            n_epochs = len(self.train_scores[reference][i])
-            n_points = len(self.train_scores[reference][i][0])
-
-            x1 = arange(0, n_epochs, 1. / n_points)
-            x2 = arange(1, n_epochs + 1)
-
-            train_losses = [x for epoch_losses in self.train_losses[i] for x in epoch_losses]
-            valid_losses = [mean(losses) for losses in self.valid_losses[i]]
-            train_scores = dict([(name, [x for epoch_scores in self.train_scores[name][i] for x in epoch_scores])
-                                 for name in scores_names])
-            valid_scores = dict([(name, [mean(scores) for scores in self.valid_scores[name][i]])
-                                 for name in scores_names])
-
-            fig, ax1 = plt.subplots(figsize=(15, 5))
+            fig, ax1 = plt.subplots(figsize=(16, 8))
             ax1.set_xlabel('epochs')
 
             color, color_idx = colors[color_idx], color_idx + 1
@@ -389,11 +596,87 @@ class BaseModel:
             for name in scores_names:
                 color, color_idx = colors[color_idx], color_idx + 1
 
-                ax2.plot(x1, train_scores[name], color=color, label='training ' + name)
+                if display_training_scores:
+                    ax2.plot(x1, train_scores[name], color=color, label='training ' + name)
                 ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
                 ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
             fig.legend()
+
+        scores_names = scores_names if scores_names is not None else self.scores_names
+        reference = scores_names[0]
+
+        n_experiments = len(self.train_scores[reference])
+
+        total_x1, total_x2, offset = [], [], 0
+        total_train_losses, total_valid_losses = [], []
+        total_train_scores, total_valid_scores = defaultdict(list), defaultdict(list)
+
+        for i in range(n_experiments):
+            n_epochs = len(self.train_scores[reference][i])
+            n_points = len(self.train_scores[reference][i][0])
+
+            x1 = list(arange(offset, offset + n_epochs, 1. / n_points))
+            x2 = list(arange(offset, offset + n_epochs + 1))
+            offset += n_epochs
+
+            train_losses = [x for epoch_losses in self.train_losses[i] for x in epoch_losses]
+            valid_losses = [mean(losses) for losses in self.valid_losses[i]]
+            train_scores = dict([(name, [x for epoch_scores in self.train_scores[name][i] for x in epoch_scores])
+                                 for name in scores_names])
+            valid_scores = dict([(name, [mean(scores) for scores in self.valid_scores[name][i]])
+                                 for name in scores_names])
+
+            if align_experiments:
+                total_x1.extend(x1), total_x2.extend(x2)
+                total_train_losses.extend(train_losses), total_valid_losses.extend(valid_losses)
+                for name in scores_names:
+                    total_train_scores[name].extend(train_scores[name])
+                    total_valid_scores[name].extend(valid_scores[name])
+
+            else:
+                plot(x1=x1, x2=x2, train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
+                     valid_scores=valid_scores, scores_names=scores_names,
+                     display_training_scores=display_training_scores)
+
+        if align_experiments:
+            plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
+                 train_scores=total_train_scores, valid_scores=total_valid_scores, scores_names=scores_names,
+                 display_training_scores=display_training_scores)
+
+    def explain(self, data_loader, scores_names, display_explanations, n_samples, n_answers):
+        """
+        Explain the model by displaying the samples and the reason of the prediction.
+
+        Args:
+            data_loader: list, pairs of (inputs, targets) batches.
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
+            display_explanations: bool, whether or not to display the explanations.
+            n_samples: int, number of samples to explain.
+            n_answers: int, number of best answers to look at.
+        """
+
+        scores_names = scores_names if scores_names is not None else self.scores_names
+
+        for batch_idx, (inputs, targets) in enumerate(data_loader[:n_samples]):
+            outputs, explanations = self.pred(inputs), self.explanation(inputs)
+
+            ranks = self.rank(outputs)
+            scores = self.get_scores(ranks, targets)
+
+            print('Entities (%s): %s\n' % (inputs['entities_type_'], ',  '.join(inputs['entities'])))
+
+            best_answers = [(ranks[i],
+                             inputs['choices'][i],
+                             [(name, scores[name][i]) for name in scores if name in scores_names],
+                             explanations[i])
+                            for i in range(len(inputs['choices']))]
+
+            best_answers = sorted(best_answers)[:n_answers]
+
+            for rank, choice, score, explanation in best_answers:
+                print('%d: %s (%s)' % (rank, choice, '; '.join([s[0]+': '+s[1] for s in score])))
+                print('   explanation:' + explanation) if display_explanations else None
 
     # endregion
 
@@ -441,9 +724,7 @@ class Baseline(BaseModel):
         running_scores, n_running_scores = defaultdict(float), defaultdict(float)
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-
-            features = self.features(inputs)
-            outputs = self.pred(features)
+            outputs = self.pred(inputs)
 
             ranks = self.rank(outputs)
             scores = self.get_scores(ranks, targets)
@@ -466,18 +747,23 @@ class Baseline(BaseModel):
 
     # region Other methods
 
-    def pred(self, inputs):
+    def display_metrics(self, scores_names=None):
         """
-        Predicts the outputs from the inputs.
+        Display the metrics of the model registered during the experiments.
 
         Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            torch.Tensor, outputs of the prediction.
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
         """
 
-        return torch.tensor(0)
+        scores_names = scores_names if scores_names is not None else self.scores_names
+
+        train_scores = dict([(name, mean(self.valid_scores[name][0])) for name in scores_names])
+        valid_scores = dict([(name, mean(self.valid_scores[name][1])) for name in scores_names])
+
+        for name in scores_names:
+            print('%s: training set %.5f validation set %.5f' % (name,
+                                                                 float(train_scores[name]),
+                                                                 float(valid_scores[name])))
 
     # endregion
 
@@ -534,7 +820,13 @@ class CountsBaseline(Baseline):
             data_loader: list, pairs of (inputs, targets) batches.
         """
 
-        self.learn_counts(data_loader=data_loader)
+        print("Learning answers counts...")
+
+        for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
+            choices = inputs['choices']
+
+            for i in range(len(choices)):
+                self.counts[choices[i]] += targets[i].data.item()
 
     # endregion
 
@@ -559,21 +851,20 @@ class CountsBaseline(Baseline):
 
         return grades
 
-    def learn_counts(self, data_loader):
+    def explanation(self, inputs):
         """
-        Learn the answers counts on the data_loader.
+                Explain the model by returning some relevant information as a list of strings.
 
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
+                Args:
+                    inputs: dict, inputs of the batch.
 
-        print("Learning answers counts...")
+                Returns:
+                    list, information retrieved.
+                """
 
-        for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-            choices = inputs['choices']
+        grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
 
-            for i in range(len(choices)):
-                self.counts[choices[i]] += targets[i].data.item()
+        return ['%s (%d)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
 
     # endregion
 
@@ -596,8 +887,7 @@ class SummariesCountBaseline(Baseline):
 
         choices_words, summaries_words = self.get_choices_words(inputs), self.get_summaries_words(inputs)
 
-        grades = [sum([len([word for summary_words in summaries_words
-                            for word in summary_words if word in choices_words[i]])])
+        grades = [len([word for summary_words in summaries_words for word in summary_words if word in choices_words[i]])
                   for i in range(len(inputs['choices']))]
 
         grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
@@ -606,11 +896,30 @@ class SummariesCountBaseline(Baseline):
 
         return grades
 
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_words, summaries_words = self.get_choices_words(inputs), self.get_summaries_words(inputs)
+
+        words = [', '.join([word for summary_words in summaries_words for word in summary_words
+                            if word in choices_words[i]])
+                 for i in range(len(inputs['choices']))]
+
+        return words
+
     # endregion
 
 
-class SummariesOverlapBaseline(Baseline):
-    """ NLP Baseline based on the count of words from choice that are in the overlap of the summaries. """
+class SummariesSoftOverlapBaseline(Baseline):
+    """ NLP Baseline based on the count of words from choice that are in the "soft" overlap of the summaries. """
 
     # region Other methods
 
@@ -637,6 +946,263 @@ class SummariesOverlapBaseline(Baseline):
 
         return grades
 
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+
+        words = [', '.join(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
+
+        return words
+
+    # endregion
+
+
+class SummariesHardOverlapBaseline(Baseline):
+    """ NLP Baseline based on the count of words from choice that are in the "hard" overlap of the summaries. """
+
+    # region Other methods
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = set.intersection(*summaries_words)
+
+        grades = [len(choices_words[i].intersection(summaries_words))
+                  for i in range(len(inputs['choices']))]
+
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        m = grades.max()
+        grades = grades if m == 0 else torch.div(grades, m)
+
+        return grades
+
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = set.intersection(*summaries_words)
+
+        words = [', '.join(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
+
+        return words
+
+    # endregion
+
+
+class ClosestAverageEmbedding(Baseline):
+    """ Baseline with predictions based on the average embedding proximity. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of ClosestEmbedding Model.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored.
+        """
+
+        super(ClosestAverageEmbedding, self).__init__(scores_names=scores_names)
+
+        self.initialize_word2vec_embedding()
+
+    # endregion
+
+    # region Other methods
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
+        other_embedding = self.get_average_embedding(self.get_other_words(inputs)).reshape((1, -1))
+
+        grades = cosine_similarity(choices_embedding, other_embedding, dim=1).reshape((-1, 1))
+
+        return grades
+
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
+        other_embedding = self.get_average_embedding(self.get_other_words(inputs)).reshape((1, -1))
+
+        grades = cosine_similarity(choices_embedding, other_embedding, dim=1)
+
+        return ['%s (%.5f)' % (inputs['choices'][i], grades[i].item()) for i in range(len(inputs['choices']))]
+
+    # endregion
+
+
+class ClosestHardOverlapEmbedding(Baseline):
+    """ Baseline with predictions based on the "hard" overlap embedding proximity. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of ClosestEmbedding Model.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored.
+        """
+
+        super(ClosestHardOverlapEmbedding, self).__init__(scores_names=scores_names)
+
+        self.initialize_word2vec_embedding()
+
+    # endregion
+
+    # region Other methods
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = set.intersection(*summaries_words)
+
+        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
+                  for i in range(len(inputs['choices']))]
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+
+        return grades
+
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = set.intersection(*summaries_words)
+
+        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
+                  for i in range(len(inputs['choices']))]
+
+        return ['%s (%.5f)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
+
+    # endregion
+
+
+class ClosestSoftOverlapEmbedding(Baseline):
+    """ Baseline with predictions based on the "soft" overlap embedding proximity. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of ClosestEmbedding Model.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored.
+        """
+
+        super(ClosestSoftOverlapEmbedding, self).__init__(scores_names=scores_names)
+
+        self.initialize_word2vec_embedding()
+
+    # endregion
+
+    # region Other methods
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+
+        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
+                  for i in range(len(inputs['choices']))]
+        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+
+        return grades
+
+    def explanation(self, inputs):
+        """
+                Explain the model by returning some relevant information as a list of strings.
+
+                Args:
+                    inputs: dict, inputs of the batch.
+
+                Returns:
+                    list, information retrieved.
+                """
+
+        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
+        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+
+        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
+                  for i in range(len(inputs['choices']))]
+
+        return ['%s (%.5f)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
+
     # endregion
 
 # endregion
@@ -647,13 +1213,14 @@ class SummariesOverlapBaseline(Baseline):
 class MLModel(BaseModel):
     # region Class initialization
 
-    def __init__(self, net, optimizer, loss, scores_names):
+    def __init__(self, net, optimizer, lr_scheduler, loss, scores_names):
         """
         Initializes an instance of the ML Model.
 
         Args:
             net: nn.Module, neural net to train.
-            optimizer: torch.optimizer, optimizer for the neural net.
+            optimizer: torch.optim.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
             loss: torch.nn.Loss, loss to use.
             scores_names: iterable, names of the scores to use, the first one being monitored.
         """
@@ -662,6 +1229,7 @@ class MLModel(BaseModel):
 
         self.net = net
         self.optimizer = optimizer
+        self.lr_scheduler = lr_scheduler
         self.loss = loss
 
     # endregion
@@ -770,28 +1338,78 @@ class MLModel(BaseModel):
 
     # endregion
 
+    # region Other methods
+
+    def pred(self, inputs):
+        """
+        Predicts the outputs from the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        self.net.eval()
+
+        features = self.features(inputs)
+        grades = self.net(features)
+
+        self.net.train()
+
+        return grades
+
+    def display_metrics(self, scores_names=None):
+        """
+        Display the metrics of the model registered during the experiments.
+
+        Args:
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
+        """
+
+        scores_names = scores_names if scores_names is not None else self.scores_names
+
+        train_scores = dict([(name, mean(self.train_scores[name][-1])) for name in scores_names])
+        valid_scores = dict([(name, mean(self.valid_scores[name][-1])) for name in scores_names])
+
+        for name in scores_names:
+            print('%s: training set %.5f validation set %.5f' % (name,
+                                                                 float(train_scores[name]),
+                                                                 float(valid_scores[name])))
+
+    def update_lr_scheduler(self):
+        """ Performs a step of the learning rate scheduler if there is one. """
+
+        self.lr_scheduler.step()
+
+    # endregion
+
 
 class BOWModel(MLModel):
     # region Class initialization
 
-    def __init__(self, min_vocab_frequency, net, optimizer, loss, scores_names):
+    def __init__(self, vocab_frequency_range, net, optimizer, lr_scheduler, loss, scores_names):
         """
         Initializes an instance of the Bag of Word Model.
 
         Args:
-            min_vocab_frequency: int, minimum frequency for a word to be taken into account in the BOW.
+            vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
             loss: torch.nn.Loss, loss to use.
             scores_names: iterable, names of the scores to use, the first one being monitored.
         """
 
-        super(BOWModel, self).__init__(net=net, optimizer=optimizer, loss=loss, scores_names=scores_names)
+        super(BOWModel, self).__init__(net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                                       scores_names=scores_names)
 
-        self.min_vocab_frequency = min_vocab_frequency
+        self.vocab_frequency_range = vocab_frequency_range
 
         self.choice_to_idx = dict()
-        self.context_to_idx = dict()
+        self.word_to_idx = dict()
+        self.word_counts = defaultdict(int)
 
     # endregion
 
@@ -805,58 +1423,27 @@ class BOWModel(MLModel):
             data_loader: list, pairs of (inputs, targets) batches.
         """
 
-        self.learn_vocabulary(data_loader)
-
-    # endregion
-
-    # region Other methods
-
-    def learn_vocabulary(self, data_loader):
-        """
-        Learns the vocabulary from data_loader.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
-
         print("Learning the vocabulary...")
-
-        context_counts = defaultdict(int)
 
         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
 
             for choice in inputs['choices']:
-                if choice not in self.choice_to_idx:
-                    self.choice_to_idx[choice] = len(self.choice_to_idx)
+                self.save_vocab_idx(choice, self.choice_to_idx)
 
             other_words = self.get_other_words(inputs)
 
             for word in other_words:
-                context_counts[word] += 1
+                self.word_counts[word] += 1
 
-                if context_counts[word] >= self.min_vocab_frequency and word not in self.context_to_idx:
-                    self.context_to_idx[word] = len(self.context_to_idx)
+        for word, count in self.word_counts.items():
+            if self.vocab_frequency_range[0] <= count <= self.vocab_frequency_range[1]:
+                self.save_vocab_idx(word, self.word_to_idx)
 
-        print("Input size: %d" % (len(self.choice_to_idx) + len(self.context_to_idx) + 2))
+        print("Input size: %d" % (len(self.choice_to_idx) + len(self.word_to_idx) + 1))
 
-    @staticmethod
-    def to_idx(word, vocabulary_dict):
-        """
-        Returns the index of a choice or a context word in the corresponding vocabulary dictionary.
+    # endregion
 
-        Args:
-            word: str, choice or context word to save.
-            vocabulary_dict: dict, corresponding vocabulary.
-
-        Returns:
-            int, index of the word in the dictionary.
-        """
-
-        if word in vocabulary_dict:
-            return vocabulary_dict[word]
-
-        else:
-            return len(vocabulary_dict)
+    # region Other methods
 
     def features(self, inputs):
         """
@@ -869,25 +1456,11 @@ class BOWModel(MLModel):
             torch.Tensor, features of the inputs.
         """
 
-        choices = inputs['choices']
+        one_hot = self.get_one_hot(strings=inputs['choices'], vocab=self.choice_to_idx)
+        bow = self.get_bow(strings=self.get_other_words(inputs), vocab=self.word_to_idx)
+        bow = torch.stack([bow for _ in range(len(inputs['choices']))])
 
-        n_lines = len(choices)
-        n_choices, n_context = len(self.choice_to_idx) + 1, len(self.context_to_idx) + 1
-
-        choices_one_hot = torch.zeros(size=(n_lines, n_choices), dtype=torch.float)
-        context_bow = torch.zeros(n_context, dtype=torch.float)
-
-        for i in range(n_lines):
-            j = self.to_idx(choices[i], self.choice_to_idx)
-            choices_one_hot[i, j] += 1.
-
-        context_idxs = [self.to_idx(word, self.context_to_idx) for word in self.get_context_words(inputs)]
-        for j in context_idxs:
-            context_bow[j] += 1.
-
-        context_bow = torch.stack([context_bow for _ in range(n_lines)])
-
-        features = torch.cat((choices_one_hot, context_bow), dim=1)
+        features = torch.cat((one_hot, bow), dim=1)
 
         return features
 
@@ -897,27 +1470,24 @@ class BOWModel(MLModel):
 class EmbeddingModel(MLModel):
     # region Class initialization
 
-    def __init__(self, net, optimizer, loss, scores_names):
+    def __init__(self, net, optimizer, lr_scheduler, loss, scores_names):
         """
         Initializes an instance of the Embedding Model.
 
         Args:
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
             loss: torch.nn.Loss, loss to use.
             scores_names: iterable, names of the scores to use, the first one being monitored.
         """
 
-        super(EmbeddingModel, self).__init__(net=net, optimizer=optimizer, loss=loss, scores_names=scores_names)
-
-        self.general_embedding = None
-        self.entity_embedding = None
-        self.general_embedding_dim = None
-        self.entity_embedding_dim = None
+        super(EmbeddingModel, self).__init__(net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                                             scores_names=scores_names)
 
         self.initialize_word2vec_embedding()
 
-        print("Input dimension: %d" % (self.general_embedding_dim + self.general_embedding_dim))
+        print("Input dimension: %d" % (2 * self.pretrained_embedding_dim))
 
     # endregion
 
@@ -936,284 +1506,15 @@ class EmbeddingModel(MLModel):
 
         n = len(inputs['choices'])
 
-        choices_embedding = torch.stack([self.get_average_embedding(words=words, is_entity=False)
+        choices_embedding = torch.stack([self.get_average_embedding(words=words)
                                          for words in self.get_choices_words(inputs)])
 
-        other_embedding = self.get_average_embedding(words=self.get_other_words(inputs), is_entity=False)
+        other_embedding = self.get_average_embedding(words=self.get_other_words(inputs))
         other_embedding = other_embedding.expand((n, -1))
 
         features = torch.cat((choices_embedding, other_embedding), dim=1)
 
         return features
-
-    def initialize_word2vec_embedding(self):
-        """ Initializes the Word2Vec embedding of dimension 300. """
-
-        print("Initializing the Word2Vec embedding...")
-
-        self.general_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                         'GoogleNews-vectors-negative300.bin',
-                                                                   binary=True)
-        key = list(self.general_embedding.vocab.keys())[0]
-        self.general_embedding_dim = len(self.general_embedding[key])
-
-    def initialize_freebase_embedding(self):
-        """ Initializes the freebase embedding of dimension 1000. """
-
-        print("Initializing the FreeBase embedding...")
-
-        self.entity_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                        'freebase-vectors-skipgram1000-en.bin',
-                                                                  binary=True)
-        key = list(self.entity_embedding.vocab.keys())[0]
-        self.entity_embedding_dim = len(self.entity_embedding[key])
-
-    def get_word_embedding(self, word, is_entity):
-        """
-        Returns the general or entity embedding of a word in a line Tensor.
-
-        Args:
-            word: str, word to embed.
-            is_entity: bool, whether to use the entity embedding or the general one.
-
-        Returns:
-            torch.Tensor, embedding of word.
-        """
-
-        embedding = self.general_embedding if not is_entity else self.entity_embedding
-        word = word if not is_entity else '/en/' + word
-
-        return torch.tensor(embedding[word]) if word in embedding.vocab else None
-
-    def get_average_embedding(self, words, is_entity):
-        """
-        Returns the average general or entity embedding of words in a line Tensor.
-
-        Args:
-            words: list, words to embed.
-            is_entity: bool, whether to use the entity embedding or the general one.
-
-        Returns:
-            torch.Tensor, average embedding of the words.
-        """
-
-        embeddings = [self.get_word_embedding(word=word, is_entity=is_entity) for word in words]
-        embeddings = [embedding for embedding in embeddings if embedding is not None]
-
-        if embeddings:
-            return torch.stack(embeddings).mean(dim=0)
-        else:
-            return torch.zeros(self.general_embedding_dim) if not is_entity else torch.zeros(self.entity_embedding_dim)
-
-    def get_entity_embedding(self, words):
-        """
-        Returns the embedding for several entity words as a line Tensor.
-
-        Args:
-            words: list, words to embed.
-
-        Returns:
-            torch.Tensor, embedding of the words
-        """
-
-        s = '/en/' + '_'.join(words)
-
-        if s in self.entity_embedding.vocab:
-            return torch.tensor(self.entity_embedding[s])
-
-        else:
-            return self.get_average_embedding(words=words, is_entity=True)
-
-    # endregion
-
-
-# TODO
-class EmbeddingModelBis(MLModel):
-    # region Class initialization
-
-    def __init__(self, net, optimizer, loss, scores_names):
-        """
-        Initializes an instance of the Embedding Model.
-
-        Args:
-            net: nn.Module, neural net to train.
-            optimizer: torch.optimizer, optimizer for the neural net.
-            loss: torch.nn.Loss, loss to use.
-            scores_names: iterable, names of the scores to use, the first one being monitored.
-        """
-
-        super(EmbeddingModelBis, self).__init__(net=net, optimizer=optimizer, loss=loss, scores_names=scores_names)
-
-        self.general_embedding = None
-        self.general_embedding_dim = None
-        self.entity_embedding = None
-        self.entity_embedding_dim = None
-
-        self.choice_to_idx = dict()
-
-        self.initialize_word2vec_embedding()
-
-    # endregion
-
-    # region Main methods
-
-    def preview_data(self, data_loader):
-        """
-        Preview the data for the model.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
-
-        self.learn_vocabulary(data_loader)
-
-    # endregion
-
-    # region Other methods
-
-    def learn_vocabulary(self, data_loader):
-        """
-        Learns the vocabulary from data_loader.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
-
-        print("Learning the vocabulary...")
-
-        for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
-
-            for choice in inputs['choices']:
-                if choice not in self.choice_to_idx:
-                    self.choice_to_idx[choice] = len(self.choice_to_idx)
-
-        print("Input size: %d" % (len(self.choice_to_idx) + self.general_embedding_dim))
-
-    @staticmethod
-    def to_idx(word, vocabulary_dict):
-        """
-        Returns the index of a choice or a context word in the corresponding vocabulary dictionary.
-
-        Args:
-            word: str, choice or context word to save.
-            vocabulary_dict: dict, corresponding vocabulary.
-
-        Returns:
-            int, index of the word in the dictionary.
-        """
-
-        if word in vocabulary_dict:
-            return vocabulary_dict[word]
-
-        else:
-            return len(vocabulary_dict)
-
-    def features(self, inputs):
-        """
-        Computes the features of the inputs.
-
-        Args:
-            inputs: dict, inputs of the prediction.
-
-        Returns:
-            torch.Tensor, features of the inputs.
-        """
-
-        choices = inputs['choices']
-        n = len(choices)
-        m = len(self.choice_to_idx)
-
-        choices_one_hot = torch.zeros(size=(n, m), dtype=torch.float)
-
-        for i in range(n):
-            j = self.to_idx(choices[i], self.choice_to_idx)
-            choices_one_hot[i, j] += 1.
-
-        # other_embedding = self.get_average_embedding(words=self.get_other_words(inputs), is_entity=False)
-        # other_embedding = other_embedding.expand((n, -1))
-
-        # features = torch.cat((choices_one_hot, other_embedding), dim=1)
-        features = choices_one_hot
-
-        return features
-
-    def initialize_word2vec_embedding(self):
-        """ Initializes the Word2Vec embedding of dimension 300. """
-
-        print("Initializing the Word2Vec embedding...")
-
-        self.general_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                         'GoogleNews-vectors-negative300.bin',
-                                                                   binary=True)
-        key = list(self.general_embedding.vocab.keys())[0]
-        self.general_embedding_dim = len(self.general_embedding[key])
-
-    def initialize_freebase_embedding(self):
-        """ Initializes the freebase embedding of dimension 1000. """
-
-        print("Initializing the FreeBase embedding...")
-
-        self.entity_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                        'freebase-vectors-skipgram1000-en.bin',
-                                                                  binary=True)
-        key = list(self.entity_embedding.vocab.keys())[0]
-        self.entity_embedding_dim = len(self.entity_embedding[key])
-
-    def get_word_embedding(self, word, is_entity):
-        """
-        Returns the general or entity embedding of a word in a line Tensor.
-
-        Args:
-            word: str, word to embed.
-            is_entity: bool, whether to use the entity embedding or the general one.
-
-        Returns:
-            torch.Tensor, embedding of word.
-        """
-
-        embedding = self.general_embedding if not is_entity else self.entity_embedding
-        word = word if not is_entity else '/en/' + word
-
-        return torch.tensor(embedding[word]) if word in embedding.vocab else None
-
-    def get_average_embedding(self, words, is_entity):
-        """
-        Returns the average general or entity embedding of words in a line Tensor.
-
-        Args:
-            words: list, words to embed.
-            is_entity: bool, whether to use the entity embedding or the general one.
-
-        Returns:
-            torch.Tensor, average embedding of the words.
-        """
-
-        embeddings = [self.get_word_embedding(word=word, is_entity=is_entity) for word in words]
-        embeddings = [embedding for embedding in embeddings if embedding is not None]
-
-        if embeddings:
-            return torch.stack(embeddings).mean(dim=0)
-        else:
-            return torch.zeros(self.general_embedding_dim) if not is_entity else torch.zeros(self.entity_embedding_dim)
-
-    def get_entity_embedding(self, words):
-        """
-        Returns the embedding for several entity words as a line Tensor.
-
-        Args:
-            words: list, words to embed.
-
-        Returns:
-            torch.Tensor, embedding of the words
-        """
-
-        s = '/en/' + '_'.join(words)
-
-        if s in self.entity_embedding.vocab:
-            return torch.tensor(self.entity_embedding[s])
-
-        else:
-            return self.get_average_embedding(words=words, is_entity=True)
 
     # endregion
 
