@@ -74,8 +74,6 @@ class BaseModel:
                                                                          n_updates=n_updates,
                                                                          is_regression=is_regression)
 
-                self.update_lr_scheduler()
-
                 train_losses.append(train_epoch_losses), valid_losses.append(valid_epoch_losses)
                 for name in self.scores_names:
                     train_scores[name].append(train_epoch_scores[name])
@@ -87,6 +85,7 @@ class BaseModel:
                       % (epoch + 1, n_epochs, float(mean(valid_epoch_losses)),
                          float(mean(valid_epoch_scores[reference]))))
 
+                self.update_lr_scheduler()
                 print('--------------------------------------------------------------')
 
             except KeyboardInterrupt:
@@ -669,19 +668,20 @@ class BaseModel:
             ranks = self.rank(outputs)
             scores = self.get_scores(ranks, targets)
 
-            print('Entities (%s): %s\n' % (inputs['entities_type_'], ',  '.join(inputs['entities'])))
+            print('\nEntities (%s): %s' % (inputs['entities_type_'], ',  '.join(inputs['entities'])))
+            print("Scores of the batch:", ', '.join(['%s: %.5f' % (name, scores[name].item())
+                                                     for name in scores if name in scores_names]))
 
             best_answers = [(ranks[i],
                              inputs['choices'][i],
-                             [(name, scores[name][i]) for name in scores if name in scores_names],
                              explanations[i])
                             for i in range(len(inputs['choices']))]
 
             best_answers = sorted(best_answers)[:n_answers]
 
-            for rank, choice, score, explanation in best_answers:
-                print('%d: %s (%s)' % (rank, choice, '; '.join([s[0] + ': ' + s[1] for s in score])))
-                print('   explanation:' + explanation) if display_explanations else None
+            for rank, choice, explanation in best_answers:
+                print('%d: %s' % (rank, choice))
+                print('      ' + explanation) if display_explanations and explanation else None
 
     # endregion
 
