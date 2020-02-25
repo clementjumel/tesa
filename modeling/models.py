@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 # region Base Model
 
 class BaseModel:
+    """ Base structure. """
+
     # region Class Initialization
 
     def __init__(self, scores_names):
@@ -41,7 +43,7 @@ class BaseModel:
 
     # endregion
 
-    # region Main methods
+    # region Learning methods
 
     def train(self, train_loader, valid_loader, n_epochs, n_updates, is_regression):
         """
@@ -60,38 +62,36 @@ class BaseModel:
         reference = self.scores_names[0]
         train_losses, valid_losses, train_scores, valid_scores = [], [], defaultdict(list), defaultdict(list)
 
-        shuffle(valid_loader)
-
-        valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
-                                                                 n_updates=n_updates,
-                                                                 is_regression=is_regression)
-
-        valid_losses.append(valid_epoch_losses)
-        for name in self.scores_names:
-            valid_scores[name].append(valid_epoch_scores[name])
-        print('--------------------------------------------------------------')
-
         for epoch in range(n_epochs):
+            try:
+                shuffle(train_loader), shuffle(valid_loader)
 
-            shuffle(train_loader), shuffle(valid_loader)
+                train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader,
+                                                                          n_updates=n_updates,
+                                                                          is_regression=is_regression)
 
-            train_epoch_losses, train_epoch_scores = self.train_epoch(data_loader=train_loader,
-                                                                      n_updates=n_updates,
-                                                                      is_regression=is_regression)
+                valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
+                                                                         n_updates=n_updates,
+                                                                         is_regression=is_regression)
 
-            valid_epoch_losses, valid_epoch_scores = self.test_epoch(data_loader=valid_loader,
-                                                                     n_updates=n_updates,
-                                                                     is_regression=is_regression)
+                self.update_lr_scheduler()
 
-            self.update_lr_scheduler()
+                train_losses.append(train_epoch_losses), valid_losses.append(valid_epoch_losses)
+                for name in self.scores_names:
+                    train_scores[name].append(train_epoch_scores[name])
+                    valid_scores[name].append(valid_epoch_scores[name])
 
-            train_losses.append(train_epoch_losses), valid_losses.append(valid_epoch_losses)
-            for name in self.scores_names:
-                train_scores[name].append(train_epoch_scores[name]), valid_scores[name].append(valid_epoch_scores[name])
+                self.plot_metrics()
 
-            print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f'
-                  % (epoch + 1, n_epochs, float(mean(valid_epoch_losses)), float(mean(valid_epoch_scores[reference]))))
-            print('--------------------------------------------------------------')
+                print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f'
+                      % (epoch + 1, n_epochs, float(mean(valid_epoch_losses)),
+                         float(mean(valid_epoch_scores[reference]))))
+
+                print('--------------------------------------------------------------')
+
+            except KeyboardInterrupt:
+                print("Keyboard interruption, exiting and saving all results except current epoch...")
+                break
 
         self.train_losses.append(train_losses), self.valid_losses.append(valid_losses)
         for name in self.scores_names:
@@ -129,20 +129,6 @@ class BaseModel:
             for name in self.scores_names:
                 self.valid_scores[name].append(scores[name])
 
-    # endregion
-
-    # region Placeholder methods
-
-    def preview_data(self, data_loader):
-        """
-        Preview the data for the model.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-        """
-
-        pass
-
     def train_epoch(self, data_loader, n_updates, is_regression):
         """
         Trains the model for one epoch on data_loader.
@@ -175,20 +161,12 @@ class BaseModel:
 
         pass
 
-    def update_lr_scheduler(self):
-        """ Performs a step of the learning rate scheduler if there is one. """
-
-        pass
-
-    def features(self, inputs):
+    def preview_data(self, data_loader):
         """
-        Computes the features of the inputs.
+        Preview the data for the model.
 
         Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            dict, unchanged inputs of the batch.
+            data_loader: list, pairs of (inputs, targets) batches.
         """
 
         pass
@@ -206,6 +184,19 @@ class BaseModel:
 
         return torch.tensor(0)
 
+    def features(self, inputs):
+        """
+        Computes the features of the inputs.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            dict, unchanged inputs of the batch.
+        """
+
+        pass
+
     def explanation(self, inputs):
         """
         Explain the model by returning some relevant information as a list of strings.
@@ -219,19 +210,10 @@ class BaseModel:
 
         return ['' for _ in range(len(inputs['choices']))]
 
-    def display_metrics(self, scores_names=None):
-        """
-        Display the metrics of the model registered during the experiments.
-
-        Args:
-            scores_names: iterable, names of the scores to plot, if not, plot all of them.
-        """
+    def update_lr_scheduler(self):
+        """ Performs a step of the learning rate scheduler if there is one. """
 
         pass
-
-    # endregion
-
-    # region Methods get_
 
     def get_scores(self, ranks, targets):
         """
@@ -246,6 +228,10 @@ class BaseModel:
         """
 
         return dict([(name, getattr(utils, name)(ranks, targets)) for name in self.scores_names])
+
+    # endregion
+
+    # region Words methods
 
     def get_words(self, s, remove_stopwords, remove_punctuation, lower, lemmatize):
         """
@@ -400,6 +386,96 @@ class BaseModel:
 
         return entities_words + context_words + summaries_words
 
+    # endregion
+
+    # region BOW & 1-hot encoding methods
+
+    @staticmethod
+    def save_vocab_idx(s, vocab):
+        """
+        Saves the string in the vocabulary dictionary.
+
+        Args:
+            s: str, element to retrieve.
+            vocab: dict, corresponding vocabulary.
+        """
+
+        if s not in vocab:
+            vocab[s] = len(vocab)
+
+    @staticmethod
+    def get_vocab_idx(s, vocab):
+        """
+        Returns the index of a string in the corresponding vocabulary dictionary.
+
+        Args:
+            s: str, element to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            int, index of the word in the dictionary.
+        """
+
+        return vocab[s] if s in vocab else len(vocab)
+
+    def get_bow(self, strings, vocab):
+        """
+        Returns the bow of the items, given the vocabulary, as a torch.Tensor.
+
+        Args:
+            strings: iterable, strings to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            torch.tensor, bow of the items in a line tensor.Tensor.
+        """
+
+        n = len(vocab) + 1
+        bow = torch.zeros(n, dtype=torch.float)
+
+        for s in strings:
+            idx = self.get_vocab_idx(s, vocab)
+            bow[idx] += 1.
+
+        return bow
+
+    def get_one_hot(self, strings, vocab):
+        """
+        Returns the one hot encoding of the items, given the vocabulary, as a torch.Tensor.
+
+        Args:
+            strings: iterable, strings to retrieve.
+            vocab: dict, corresponding vocabulary.
+
+        Returns:
+            torch.tensor, one hot encoding of the items in a line tensor.Tensor.
+        """
+
+        n1, n2 = len(strings), len(vocab)
+        encoding = torch.zeros((n1, n2), dtype=torch.float)
+
+        for i, s in enumerate(strings):
+            j = self.get_vocab_idx(s, vocab)
+            encoding[i, j] += 1.
+
+        return encoding
+
+    # endregion
+
+    # region Embedding methods
+
+    def initialize_word2vec_embedding(self):
+        """ Initializes the Word2Vec pretrained embedding of dimension 300. """
+
+        print("Initializing the Word2Vec pretrained embedding...")
+
+        self.pretrained_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
+                                                                            'GoogleNews-vectors-negative300.bin',
+                                                                      binary=True)
+
+        key = list(self.pretrained_embedding.vocab.keys())[0]
+        self.pretrained_embedding_dim = len(self.pretrained_embedding[key])
+
     def get_word_embedding(self, word):
         """
         Returns the pretrained embedding of a word in a line Tensor.
@@ -465,93 +541,21 @@ class BaseModel:
 
         return max(similarities) if similarities else -1.
 
-    @staticmethod
-    def get_vocab_idx(s, vocab):
-        """
-        Returns the index of a string in the corresponding vocabulary dictionary.
-
-        Args:
-            s: str, element to retrieve.
-            vocab: dict, corresponding vocabulary.
-
-        Returns:
-            int, index of the word in the dictionary.
-        """
-
-        return vocab[s] if s in vocab else len(vocab)
-
-    def get_bow(self, strings, vocab):
-        """
-        Returns the bow of the items, given the vocabulary, as a torch.Tensor.
-
-        Args:
-            strings: iterable, strings to retrieve.
-            vocab: dict, corresponding vocabulary.
-
-        Returns:
-            torch.tensor, bow of the items in a line tensor.Tensor.
-        """
-
-        n = len(vocab) + 1
-        bow = torch.zeros(n, dtype=torch.float)
-
-        for s in strings:
-            idx = self.get_vocab_idx(s, vocab)
-            bow[idx] += 1.
-
-        return bow
-
-    def get_one_hot(self, strings, vocab):
-        """
-        Returns the one hot encoding of the items, given the vocabulary, as a torch.Tensor.
-
-        Args:
-            strings: iterable, strings to retrieve.
-            vocab: dict, corresponding vocabulary.
-
-        Returns:
-            torch.tensor, one hot encoding of the items in a line tensor.Tensor.
-        """
-
-        n1, n2 = len(strings), len(vocab)
-        encoding = torch.zeros((n1, n2), dtype=torch.float)
-
-        for i, s in enumerate(strings):
-            j = self.get_vocab_idx(s, vocab)
-            encoding[i, j] += 1.
-
-        return encoding
-
     # endregion
 
-    # region Other methods
+    # region Display methods
 
-    def initialize_word2vec_embedding(self):
-        """ Initializes the Word2Vec pretrained embedding of dimension 300. """
-
-        print("Initializing the Word2Vec pretrained embedding...")
-
-        self.pretrained_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                            'GoogleNews-vectors-negative300.bin',
-                                                                      binary=True)
-
-        key = list(self.pretrained_embedding.vocab.keys())[0]
-        self.pretrained_embedding_dim = len(self.pretrained_embedding[key])
-
-    @staticmethod
-    def save_vocab_idx(s, vocab):
+    def display_metrics(self, scores_names=None):
         """
-        Saves the string in the vocabulary dictionary.
+        Display the metrics of the model registered during the experiments.
 
         Args:
-            s: str, element to retrieve.
-            vocab: dict, corresponding vocabulary.
+            scores_names: iterable, names of the scores to plot, if not, plot all of them.
         """
 
-        if s not in vocab:
-            vocab[s] = len(vocab)
+        pass
 
-    def plot_metrics(self, scores_names=None, align_experiments=False, display_training_scores=True):
+    def plot_metrics(self, scores_names=None, align_experiments=False, display_training_scores=False):
         """
         Plot the metrics of the model registered during the experiments.
 
@@ -561,7 +565,8 @@ class BaseModel:
             display_training_scores: bool, whether or not to display the training scores.
         """
 
-        def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names, display_training_scores):
+        def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names,
+                 display_training_scores):
             """
             Plot a single figure for the corresponding data.
 
@@ -617,7 +622,7 @@ class BaseModel:
             n_points = len(self.train_scores[reference][i][0])
 
             x1 = list(arange(offset, offset + n_epochs, 1. / n_points))
-            x2 = list(arange(offset, offset + n_epochs + 1))
+            x2 = list(arange(offset + 1, offset + n_epochs + 1))
             offset += n_epochs
 
             train_losses = [x for epoch_losses in self.train_losses[i] for x in epoch_losses]
@@ -675,7 +680,7 @@ class BaseModel:
             best_answers = sorted(best_answers)[:n_answers]
 
             for rank, choice, score, explanation in best_answers:
-                print('%d: %s (%s)' % (rank, choice, '; '.join([s[0]+': '+s[1] for s in score])))
+                print('%d: %s (%s)' % (rank, choice, '; '.join([s[0] + ': ' + s[1] for s in score])))
                 print('   explanation:' + explanation) if display_explanations else None
 
     # endregion
@@ -686,9 +691,9 @@ class BaseModel:
 # region Baselines
 
 class Baseline(BaseModel):
-    """ Base Baseline. """
+    """ Base structure for the Baselines. """
 
-    # region Main methods
+    # region Learning methods
 
     def train_epoch(self, data_loader, n_updates, is_regression):
         """
@@ -745,7 +750,7 @@ class Baseline(BaseModel):
 
     # endregion
 
-    # region Other methods
+    # region Display methods
 
     def display_metrics(self, scores_names=None):
         """
@@ -771,7 +776,7 @@ class Baseline(BaseModel):
 class RandomBaseline(Baseline):
     """ Baseline with random predictions. """
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -810,7 +815,7 @@ class CountsBaseline(Baseline):
 
     # endregion
 
-    # region Main methods
+    # region Learning methods
 
     def preview_data(self, data_loader):
         """
@@ -827,10 +832,6 @@ class CountsBaseline(Baseline):
 
             for i in range(len(choices)):
                 self.counts[choices[i]] += targets[i].data.item()
-
-    # endregion
-
-    # region Other methods
 
     def pred(self, inputs):
         """
@@ -853,14 +854,14 @@ class CountsBaseline(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
 
@@ -870,9 +871,9 @@ class CountsBaseline(Baseline):
 
 
 class SummariesCountBaseline(Baseline):
-    """ NLP Baseline based on the count of words from choice that are in summaries. """
+    """ Baseline based on the count of words from choice that are in one of the summaries. """
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -898,14 +899,14 @@ class SummariesCountBaseline(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_words, summaries_words = self.get_choices_words(inputs), self.get_summaries_words(inputs)
 
@@ -919,9 +920,9 @@ class SummariesCountBaseline(Baseline):
 
 
 class SummariesSoftOverlapBaseline(Baseline):
-    """ NLP Baseline based on the count of words from choice that are in the "soft" overlap of the summaries. """
+    """ Baseline based on the count of words from choice that are in the "soft" overlap of the summaries. """
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -948,14 +949,14 @@ class SummariesSoftOverlapBaseline(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
@@ -968,9 +969,9 @@ class SummariesSoftOverlapBaseline(Baseline):
 
 
 class SummariesHardOverlapBaseline(Baseline):
-    """ NLP Baseline based on the count of words from choice that are in the "hard" overlap of the summaries. """
+    """ Baseline based on the count of words from choice that are in the "hard" overlap of the summaries. """
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -998,14 +999,14 @@ class SummariesHardOverlapBaseline(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
@@ -1037,7 +1038,7 @@ class ClosestAverageEmbedding(Baseline):
 
     # endregion
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -1059,14 +1060,14 @@ class ClosestAverageEmbedding(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
         other_embedding = self.get_average_embedding(self.get_other_words(inputs)).reshape((1, -1))
@@ -1097,7 +1098,7 @@ class ClosestHardOverlapEmbedding(Baseline):
 
     # endregion
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -1122,14 +1123,14 @@ class ClosestHardOverlapEmbedding(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
@@ -1162,7 +1163,7 @@ class ClosestSoftOverlapEmbedding(Baseline):
 
     # endregion
 
-    # region Other methods
+    # region Learning methods
 
     def pred(self, inputs):
         """
@@ -1186,14 +1187,14 @@ class ClosestSoftOverlapEmbedding(Baseline):
 
     def explanation(self, inputs):
         """
-                Explain the model by returning some relevant information as a list of strings.
+        Explain the model by returning some relevant information as a list of strings.
 
-                Args:
-                    inputs: dict, inputs of the batch.
+        Args:
+            inputs: dict, inputs of the batch.
 
-                Returns:
-                    list, information retrieved.
-                """
+        Returns:
+            list, information retrieved.
+        """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
@@ -1211,6 +1212,8 @@ class ClosestSoftOverlapEmbedding(Baseline):
 # region ML Models
 
 class MLModel(BaseModel):
+    """ Base structure for the models. """
+
     # region Class initialization
 
     def __init__(self, net, optimizer, lr_scheduler, loss, scores_names):
@@ -1234,7 +1237,7 @@ class MLModel(BaseModel):
 
     # endregion
 
-    # region Main methods
+    # region Learning methods
 
     def train_epoch(self, data_loader, n_updates, is_regression):
         """
@@ -1336,10 +1339,6 @@ class MLModel(BaseModel):
 
         return epoch_losses, epoch_scores
 
-    # endregion
-
-    # region Other methods
-
     def pred(self, inputs):
         """
         Predicts the outputs from the inputs.
@@ -1360,6 +1359,15 @@ class MLModel(BaseModel):
 
         return grades
 
+    def update_lr_scheduler(self):
+        """ Performs a step of the learning rate scheduler if there is one. """
+
+        self.lr_scheduler.step()
+
+    # endregion
+
+    # region Display methods
+
     def display_metrics(self, scores_names=None):
         """
         Display the metrics of the model registered during the experiments.
@@ -1378,15 +1386,12 @@ class MLModel(BaseModel):
                                                                  float(train_scores[name]),
                                                                  float(valid_scores[name])))
 
-    def update_lr_scheduler(self):
-        """ Performs a step of the learning rate scheduler if there is one. """
-
-        self.lr_scheduler.step()
-
     # endregion
 
 
-class BOWModel(MLModel):
+class HalfBOWModel(MLModel):
+    """ Model that uses a 1-hot encoding for the choices and a BOW for the other words. """
+
     # region Class initialization
 
     def __init__(self, vocab_frequency_range, net, optimizer, lr_scheduler, loss, scores_names):
@@ -1402,8 +1407,8 @@ class BOWModel(MLModel):
             scores_names: iterable, names of the scores to use, the first one being monitored.
         """
 
-        super(BOWModel, self).__init__(net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
-                                       scores_names=scores_names)
+        super(HalfBOWModel, self).__init__(net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                                           scores_names=scores_names)
 
         self.vocab_frequency_range = vocab_frequency_range
 
@@ -1413,7 +1418,7 @@ class BOWModel(MLModel):
 
     # endregion
 
-    # region Main methods
+    # region Learning methods
 
     def preview_data(self, data_loader):
         """
@@ -1430,9 +1435,7 @@ class BOWModel(MLModel):
             for choice in inputs['choices']:
                 self.save_vocab_idx(choice, self.choice_to_idx)
 
-            other_words = self.get_other_words(inputs)
-
-            for word in other_words:
+            for word in self.get_other_words(inputs):
                 self.word_counts[word] += 1
 
         for word, count in self.word_counts.items():
@@ -1440,10 +1443,6 @@ class BOWModel(MLModel):
                 self.save_vocab_idx(word, self.word_to_idx)
 
         print("Input size: %d" % (len(self.choice_to_idx) + len(self.word_to_idx) + 1))
-
-    # endregion
-
-    # region Other methods
 
     def features(self, inputs):
         """
@@ -1456,9 +1455,12 @@ class BOWModel(MLModel):
             torch.Tensor, features of the inputs.
         """
 
+        n = len(inputs['choices'])
+
         one_hot = self.get_one_hot(strings=inputs['choices'], vocab=self.choice_to_idx)
+
         bow = self.get_bow(strings=self.get_other_words(inputs), vocab=self.word_to_idx)
-        bow = torch.stack([bow for _ in range(len(inputs['choices']))])
+        bow = bow.expand((n, -1))
 
         features = torch.cat((one_hot, bow), dim=1)
 
@@ -1467,7 +1469,85 @@ class BOWModel(MLModel):
     # endregion
 
 
+class FullBOWModel(MLModel):
+    """ Model that uses a BOW for the choice and the other words. """
+
+    # region Class initialization
+
+    def __init__(self, vocab_frequency_range, net, optimizer, lr_scheduler, loss, scores_names):
+        """
+        Initializes an instance of the Bag of Word Model.
+
+        Args:
+            vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            scores_names: iterable, names of the scores to use, the first one being monitored.
+        """
+
+        super(FullBOWModel, self).__init__(net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                                           scores_names=scores_names)
+
+        self.vocab_frequency_range = vocab_frequency_range
+
+        self.word_to_idx = dict()
+        self.word_counts = defaultdict(int)
+
+    # endregion
+
+    # region Learning methods
+
+    def preview_data(self, data_loader):
+        """
+        Preview the data for the model.
+
+        Args:
+            data_loader: list, pairs of (inputs, targets) batches.
+        """
+
+        print("Learning the vocabulary...")
+
+        for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=len(data_loader)):
+
+            for words in self.get_choices_words(inputs):
+                for word in words:
+                    self.word_counts[word] += 1
+
+            for word in self.get_other_words(inputs):
+                self.word_counts[word] += 1
+
+        for word, count in self.word_counts.items():
+            if self.vocab_frequency_range[0] <= count <= self.vocab_frequency_range[1]:
+                self.save_vocab_idx(word, self.word_to_idx)
+
+        print("Input size: %d" % (len(self.word_to_idx) + 1))
+
+    def features(self, inputs):
+        """
+        Computes the features of the inputs.
+
+        Args:
+            inputs: dict, inputs of the prediction.
+
+        Returns:
+            torch.Tensor, features of the inputs.
+        """
+
+        other_words = self.get_other_words(inputs)
+
+        features = [self.get_bow(words + other_words, self.word_to_idx) for words in self.get_choices_words(inputs)]
+        features = torch.stack(features)
+
+        return features
+
+    # endregion
+
+
 class EmbeddingModel(MLModel):
+    """ Model that uses an average embedding both for the choice words and the context words. """
+
     # region Class initialization
 
     def __init__(self, net, optimizer, lr_scheduler, loss, scores_names):
@@ -1491,7 +1571,7 @@ class EmbeddingModel(MLModel):
 
     # endregion
 
-    # region Other methods
+    # region Learning methods
 
     def features(self, inputs):
         """
