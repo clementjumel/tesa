@@ -1364,6 +1364,8 @@ class MLModel(BaseModel):
 
         self.lr_scheduler.step()
 
+        print("Learning rate decreasing to %s" % (self.optimizer.param_groups[0]['lr']))
+
     # endregion
 
     # region Display methods
