@@ -606,6 +606,7 @@ class BaseModel:
                 ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
             fig.legend()
+            fig.show()
 
         scores_names = scores_names if scores_names is not None else self.scores_names
         reference = scores_names[0]
@@ -674,14 +675,18 @@ class BaseModel:
 
             best_answers = [(ranks[i],
                              inputs['choices'][i],
+                             outputs[i].item(),
                              explanations[i])
                             for i in range(len(inputs['choices']))]
 
             best_answers = sorted(best_answers)[:n_answers]
 
-            for rank, choice, explanation in best_answers:
-                print('%d: %s' % (rank, choice))
-                print('      ' + explanation) if display_explanations and explanation else None
+            for rank, choice, output, explanation in best_answers:
+                if isinstance(output, int):
+                    print('%d: %s (%d)' % (rank, choice, output))
+                else:
+                    print('%d: %s (%.3f)' % (rank, choice, output))
+                print('   ' + explanation) if display_explanations and explanation else None
 
     # endregion
 
@@ -845,27 +850,9 @@ class CountsBaseline(Baseline):
         """
 
         grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
-
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
-        m = grades.max()
-        grades = grades if m == 0 else torch.div(grades, m)
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
-
-    def explanation(self, inputs):
-        """
-        Explain the model by returning some relevant information as a list of strings.
-
-        Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            list, information retrieved.
-        """
-
-        grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
-
-        return ['%s (%d)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
 
     # endregion
 
@@ -890,10 +877,7 @@ class SummariesCountBaseline(Baseline):
 
         grades = [len([word for summary_words in summaries_words for word in summary_words if word in choices_words[i]])
                   for i in range(len(inputs['choices']))]
-
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
-        m = grades.max()
-        grades = grades if m == 0 else torch.div(grades, m)
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
 
@@ -940,10 +924,7 @@ class SummariesSoftOverlapBaseline(Baseline):
 
         grades = [len(choices_words[i].intersection(summaries_words))
                   for i in range(len(inputs['choices']))]
-
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
-        m = grades.max()
-        grades = grades if m == 0 else torch.div(grades, m)
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
 
@@ -988,12 +969,8 @@ class SummariesHardOverlapBaseline(Baseline):
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
         summaries_words = set.intersection(*summaries_words)
 
-        grades = [len(choices_words[i].intersection(summaries_words))
-                  for i in range(len(inputs['choices']))]
-
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
-        m = grades.max()
-        grades = grades if m == 0 else torch.div(grades, m)
+        grades = [len(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
 
@@ -1058,24 +1035,6 @@ class ClosestAverageEmbedding(Baseline):
 
         return grades
 
-    def explanation(self, inputs):
-        """
-        Explain the model by returning some relevant information as a list of strings.
-
-        Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            list, information retrieved.
-        """
-
-        choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
-        other_embedding = self.get_average_embedding(self.get_other_words(inputs)).reshape((1, -1))
-
-        grades = cosine_similarity(choices_embedding, other_embedding, dim=1)
-
-        return ['%s (%.5f)' % (inputs['choices'][i], grades[i].item()) for i in range(len(inputs['choices']))]
-
     # endregion
 
 
@@ -1117,29 +1076,9 @@ class ClosestHardOverlapEmbedding(Baseline):
 
         grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
                   for i in range(len(inputs['choices']))]
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
-
-    def explanation(self, inputs):
-        """
-        Explain the model by returning some relevant information as a list of strings.
-
-        Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            list, information retrieved.
-        """
-
-        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
-        summaries_words = set.intersection(*summaries_words)
-
-        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
-                  for i in range(len(inputs['choices']))]
-
-        return ['%s (%.5f)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
 
     # endregion
 
@@ -1181,28 +1120,9 @@ class ClosestSoftOverlapEmbedding(Baseline):
 
         grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
                   for i in range(len(inputs['choices']))]
-        grades = torch.tensor(grades).type(dtype=torch.float).reshape((-1, 1))
+        grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
-
-    def explanation(self, inputs):
-        """
-        Explain the model by returning some relevant information as a list of strings.
-
-        Args:
-            inputs: dict, inputs of the batch.
-
-        Returns:
-            list, information retrieved.
-        """
-
-        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
-
-        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
-                  for i in range(len(inputs['choices']))]
-
-        return ['%s (%.5f)' % (inputs['choices'][i], grades[i]) for i in range(len(inputs['choices']))]
 
     # endregion
 
