@@ -74,7 +74,9 @@ class BaseModel:
                                                                          n_updates=n_updates,
                                                                          is_regression=is_regression)
 
-                train_losses.append(train_epoch_losses), valid_losses.append(valid_epoch_losses)
+                train_losses.append(train_epoch_losses)
+                valid_losses.append(valid_epoch_losses)
+
                 for name in self.scores_names:
                     train_scores[name].append(train_epoch_scores[name])
                     valid_scores[name].append(valid_epoch_scores[name])
@@ -93,9 +95,14 @@ class BaseModel:
                 print("Keyboard interruption, exiting and saving all results except current epoch...")
                 break
 
-        self.train_losses.append(train_losses), self.valid_losses.append(valid_losses)
-        for name in self.scores_names:
-            self.train_scores[name].append(train_scores[name]), self.valid_scores[name].append(valid_scores[name])
+        if train_losses and train_scores and valid_losses and valid_scores:
+
+            self.train_losses.append(train_losses)
+            self.valid_losses.append(valid_losses)
+
+            for name in self.scores_names:
+                self.train_scores[name].append(train_scores[name])
+                self.valid_scores[name].append(valid_scores[name])
 
     def test(self, test_loader, n_updates, is_regression, is_test):
         """
@@ -699,7 +706,10 @@ class BaseModel:
         scores_names = scores_names if scores_names is not None else self.scores_names
 
         for batch_idx, (inputs, targets) in enumerate(data_loader[:n_samples]):
-            outputs, explanations = self.pred(inputs), self.explanation(inputs)
+            outputs = self.pred(inputs)
+            outputs = outputs[:, -1].reshape((-1, 1)) if len(outputs.shape) == 2 else outputs
+
+            explanations = self.explanation(inputs)
 
             ranks = self.rank(outputs)
             scores = self.get_scores(ranks, targets)
@@ -1355,9 +1365,11 @@ class MLModel(BaseModel):
     def update_lr_scheduler(self):
         """ Performs a step of the learning rate scheduler if there is one. """
 
+        old_lr = self.optimizer.param_groups[0]['lr']
         self.lr_scheduler.step()
+        new_lr = self.optimizer.param_groups[0]['lr']
 
-        print("Learning rate decreasing to %s" % (self.optimizer.param_groups[0]['lr']))
+        print("Learning rate decreasing from %s to %s" % (old_lr, new_lr)) if old_lr != new_lr else None
 
     # endregion
 
