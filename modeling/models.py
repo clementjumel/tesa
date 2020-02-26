@@ -957,8 +957,7 @@ class SummariesSoftOverlapBaseline(Baseline):
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
 
-        grades = [len(choices_words[i].intersection(summaries_words))
-                  for i in range(len(inputs['choices']))]
+        grades = [len(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
         grades = torch.tensor(grades).reshape((-1, 1))
 
         return grades
@@ -1001,7 +1000,7 @@ class SummariesHardOverlapBaseline(Baseline):
         """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
         summaries_words = set.intersection(*summaries_words)
 
         grades = [len(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
@@ -1021,7 +1020,7 @@ class SummariesHardOverlapBaseline(Baseline):
         """
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
         summaries_words = set.intersection(*summaries_words)
 
         words = [', '.join(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
@@ -1105,15 +1104,35 @@ class ClosestHardOverlapEmbedding(Baseline):
             torch.Tensor, outputs of the prediction.
         """
 
-        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs)]
-        summaries_words = set.intersection(*summaries_words)
+        choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
 
-        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
-                  for i in range(len(inputs['choices']))]
-        grades = torch.tensor(grades).reshape((-1, 1))
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
+        summaries_words = set.intersection(*summaries_words)
+        summaries_embedding = self.get_average_embedding(summaries_words).reshape((1, -1))
+
+        grades = cosine_similarity(choices_embedding, summaries_embedding, dim=1).reshape((-1, 1))
 
         return grades
+
+    def explanation(self, inputs):
+        """
+        Explain the model by returning some relevant information as a list of strings.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            list, information retrieved.
+        """
+
+        choices_words = self.get_choices_words(inputs)
+
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
+        summaries_words = set.intersection(*summaries_words)
+
+        words = [', '.join(choices_words[i]) + '/' + ', '.join(summaries_words) for i in range(len(inputs['choices']))]
+
+        return words
 
     # endregion
 
@@ -1150,14 +1169,33 @@ class ClosestSoftOverlapEmbedding(Baseline):
             torch.Tensor, outputs of the prediction.
         """
 
-        choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
-        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+        choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
 
-        grades = [self.get_max_embedding_similarity(choices_words[i], summaries_words)
-                  for i in range(len(inputs['choices']))]
-        grades = torch.tensor(grades).reshape((-1, 1))
+        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+        summaries_embedding = self.get_average_embedding(summaries_words).reshape((1, -1))
+
+        grades = cosine_similarity(choices_embedding, summaries_embedding, dim=1).reshape((-1, 1))
 
         return grades
+
+    def explanation(self, inputs):
+        """
+        Explain the model by returning some relevant information as a list of strings.
+
+        Args:
+            inputs: dict, inputs of the batch.
+
+        Returns:
+            list, information retrieved.
+        """
+
+        choices_words = self.get_choices_words(inputs)
+
+        summaries_words = set([word for summary_words in self.get_summaries_words(inputs) for word in summary_words])
+
+        words = [', '.join(choices_words[i]) + '/' + ', '.join(summaries_words) for i in range(len(inputs['choices']))]
+
+        return words
 
     # endregion
 
