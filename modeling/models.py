@@ -1001,7 +1001,7 @@ class SummariesHardOverlapBaseline(Baseline):
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
-        summaries_words = set.intersection(*summaries_words)
+        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
 
         grades = [len(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
         grades = torch.tensor(grades).reshape((-1, 1))
@@ -1021,7 +1021,7 @@ class SummariesHardOverlapBaseline(Baseline):
 
         choices_words = [set(choice_words) for choice_words in self.get_choices_words(inputs)]
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
-        summaries_words = set.intersection(*summaries_words)
+        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
 
         words = [', '.join(choices_words[i].intersection(summaries_words)) for i in range(len(inputs['choices']))]
 
@@ -1107,7 +1107,7 @@ class ClosestHardOverlapEmbedding(Baseline):
         choices_embedding = torch.stack([self.get_average_embedding(words) for words in self.get_choices_words(inputs)])
 
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
-        summaries_words = set.intersection(*summaries_words)
+        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
         summaries_embedding = self.get_average_embedding(summaries_words).reshape((1, -1))
 
         grades = cosine_similarity(choices_embedding, summaries_embedding, dim=1).reshape((-1, 1))
@@ -1128,7 +1128,7 @@ class ClosestHardOverlapEmbedding(Baseline):
         choices_words = self.get_choices_words(inputs)
 
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(inputs) if summary_words]
-        summaries_words = set.intersection(*summaries_words)
+        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
 
         words = [', '.join(choices_words[i]) + '/' + ', '.join(summaries_words) for i in range(len(inputs['choices']))]
 
