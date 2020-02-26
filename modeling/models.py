@@ -79,7 +79,8 @@ class BaseModel:
                     train_scores[name].append(train_epoch_scores[name])
                     valid_scores[name].append(valid_epoch_scores[name])
 
-                # self.plot()
+                self.intermediate_plot(train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
+                                       valid_scores=valid_scores)
 
                 print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f'
                       % (epoch + 1, n_epochs, float(mean(valid_epoch_losses)),
@@ -598,7 +599,37 @@ class BaseModel:
 
         fig.legend()
 
-    def plot_metrics(self, scores_names=None, align_experiments=False, display_training_scores=False):
+    def intermediate_plot(self, train_losses, valid_losses, train_scores, valid_scores):
+        """
+        Plot the metrics of the model with the data provided.
+
+        Args:
+            train_losses: list, training losses to plot.
+            valid_losses: list, validation losses to plot.
+            train_scores: dict, training scores to plot.
+            valid_scores: dict, validation scores to plot.
+        """
+
+        scores_names = self.scores_names
+        reference = scores_names[0]
+
+        n_epochs = len(train_scores[reference])
+        n_points = len(train_scores[reference][0])
+
+        x1 = list(arange(0, n_epochs, 1. / n_points))
+        x2 = list(arange(1, n_epochs + 1))
+
+        train_losses = [x for epoch_losses in train_losses for x in epoch_losses]
+        valid_losses = [mean(losses) for losses in valid_losses]
+        train_scores = dict([(name, [x for epoch_scores in train_scores[name] for x in epoch_scores])
+                             for name in scores_names])
+        valid_scores = dict([(name, [mean(scores) for scores in valid_scores[name]])
+                             for name in scores_names])
+
+        self.plot(x1=x1, x2=x2, train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
+                  valid_scores=valid_scores, scores_names=scores_names, display_training_scores=False)
+
+    def final_plot(self, scores_names=None, align_experiments=False, display_training_scores=False):
         """
         Plot the metrics of the model registered during the experiments.
 
