@@ -1530,10 +1530,16 @@ class FullBOWModel(MLModel):
             torch.Tensor, features of the inputs.
         """
 
-        other_words = self.get_other_words(inputs)
+        n = len(inputs['choices'])
 
-        features = [self.get_bow(words + other_words, self.word_to_idx) for words in self.get_choices_words(inputs)]
-        features = torch.stack(features)
+        choices_embedding = [self.get_bow(words, self.word_to_idx) for words in self.get_choices_words(inputs)]
+        choices_embedding = torch.stack(choices_embedding)
+
+        other_words = self.get_other_words(inputs)
+        other_embedding = self.get_bow(other_words, self.word_to_idx)
+        other_embedding = other_embedding.expand((n, -1))
+
+        features = torch.add(input=choices_embedding, other=other_embedding)
 
         return features
 
