@@ -557,7 +557,7 @@ class BaseModel:
 
     @staticmethod
     def plot(x1, x2, train_losses, valid_losses, train_scores, valid_scores, scores_names,
-             display_training_scores):
+             display_training_scores, figsize=(14, 8), no_legend=False):
         """
         Plot a single figure for the corresponding data.
 
@@ -570,13 +570,15 @@ class BaseModel:
             valid_scores: dict, validation scores to plot.
             scores_names: iterable, names of the scores to plot, if not, plot all of them.
             display_training_scores: bool, whether or not to display the training scores.
+            figsize: tuple, size of the figure to plot.
+            no_legend: bool, if True, don't display the legend.
         """
 
         colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
                   'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
         color_idx = 0
 
-        fig, ax1 = plt.subplots(figsize=(16, 8))
+        fig, ax1 = plt.subplots(figsize=figsize)
         ax1.set_xlabel('epochs')
 
         color, color_idx = colors[color_idx], color_idx + 1
@@ -597,7 +599,8 @@ class BaseModel:
             ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
             ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
-        fig.legend()
+        fig.legend() if not no_legend else None
+        plt.show()
 
     def intermediate_plot(self, train_losses, valid_losses, train_scores, valid_scores):
         """
@@ -627,7 +630,8 @@ class BaseModel:
                              for name in scores_names])
 
         self.plot(x1=x1, x2=x2, train_losses=train_losses, valid_losses=valid_losses, train_scores=train_scores,
-                  valid_scores=valid_scores, scores_names=scores_names, display_training_scores=False)
+                  valid_scores=valid_scores, scores_names=scores_names, display_training_scores=False, figsize=(10, 4),
+                  no_legend=True)
 
     def final_plot(self, scores_names=None, align_experiments=False, display_training_scores=False):
         """
