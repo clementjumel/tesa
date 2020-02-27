@@ -606,7 +606,7 @@ class BaseModel:
             ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
             ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
-        fig.legend() if not no_legend else None
+        fig.legend(loc='upper center') if not no_legend else None
         plt.show()
 
     def intermediate_plot(self, train_losses, valid_losses, train_scores, valid_scores):
