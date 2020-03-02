@@ -101,44 +101,41 @@ class Pipeline:
                             n_updates=n_updates,
                             is_regression=is_regression)
 
-    def valid_model(self, model, n_updates=100, is_regression=False):
+    def valid_model(self, model, is_regression=False):
         """
         Evaluate a baseline model on the validation set.
 
         Args:
             model: models.Model, model to validate.
-            n_updates: int, number of batches between the updates.
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.valid(data_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
+        model.valid(data_loader=self.valid_loader, is_regression=is_regression)
 
-    def test_model(self, model, n_updates=100, is_regression=False):
+    def test_model(self, model, is_regression=False):
         """
         Evaluate the model on the test set.
 
         Args:
             model: models.Model, model to test.
-            n_updates: int, number of batches between the updates.
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.test(data_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
+        model.test(data_loader=self.test_loader, is_regression=is_regression)
 
-    def explain_model(self, model, scores_names=None, display_explanations=True, n_samples=5, n_answers=10):
+    def explain_model(self, model, scores_names=None, n_samples=5, n_answers=10):
         """
         Explain the answers of the model on the valid_set.
 
         Args:
             model: models.Model, model to test.
-            scores_names: iterable, names of the scores to plot, if not, plot all of them.
-            display_explanations: bool, whether or not to display the explanations.
+            scores_names: iterable, names of the scores to plot, if None, display all of them.
             n_samples: int, number of samples to explain.
             n_answers: int, number of best answers to look at.
         """
 
-        model.explain(data_loader=self.valid_loader, scores_names=scores_names,
-                      display_explanations=display_explanations, n_samples=n_samples, n_answers=n_answers)
+        model.explain(data_loader=self.valid_loader, scores_names=scores_names, n_samples=n_samples,
+                      n_answers=n_answers)
 
     # endregion
 
