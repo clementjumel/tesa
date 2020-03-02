@@ -111,7 +111,7 @@ class Pipeline:
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.valid(valid_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
+        model.valid(data_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
 
     def test_model(self, model, n_updates=100, is_regression=False):
         """
@@ -123,7 +123,7 @@ class Pipeline:
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
+        model.test(data_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
 
     def explain_model(self, model, scores_names=None, display_explanations=True, n_samples=5, n_answers=10):
         """
