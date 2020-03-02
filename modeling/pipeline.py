@@ -74,18 +74,6 @@ class Pipeline:
 
         model.preview_data(data_loader=data_loader)
 
-    def evaluate_baseline(self, model, n_updates=100):
-        """
-        Evaluate a baseline model on the training and validation sets.
-
-        Args:
-            model: models.Model, model to evaluate.
-            n_updates: int, number of batches between the updates.
-        """
-
-        model.test(test_loader=self.train_loader, n_updates=n_updates, is_regression=None, is_test=False)
-        model.test(test_loader=self.valid_loader, n_updates=n_updates, is_regression=None, is_test=False)
-
     def train_model(self, model, n_epochs=1, n_updates=100, is_regression=False):
         """
         Train a model on the training set and compute the metrics on the validation sets.
@@ -113,6 +101,18 @@ class Pipeline:
                             n_updates=n_updates,
                             is_regression=is_regression)
 
+    def validate_model(self, model, n_updates=100, is_regression=False):
+        """
+        Evaluate a baseline model on the validation set.
+
+        Args:
+            model: models.Model, model to validate.
+            n_updates: int, number of batches between the updates.
+            is_regression: bool, whether to use the regression set up for the task.
+        """
+
+        model.validate(valid_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
+
     def test_model(self, model, n_updates=100, is_regression=False):
         """
         Evaluate the model on the test set.
@@ -123,7 +123,7 @@ class Pipeline:
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression, is_test=True)
+        model.test(test_loader=self.test_loader, n_updates=n_updates, is_regression=is_regression)
 
     def explain_model(self, model, scores_names=None, display_explanations=True, n_samples=5, n_answers=10):
         """
