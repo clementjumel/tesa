@@ -101,7 +101,7 @@ class Pipeline:
                             n_updates=n_updates,
                             is_regression=is_regression)
 
-    def validate_model(self, model, n_updates=100, is_regression=False):
+    def valid_model(self, model, n_updates=100, is_regression=False):
         """
         Evaluate a baseline model on the validation set.
 
@@ -111,7 +111,7 @@ class Pipeline:
             is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.validate(valid_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
+        model.valid(valid_loader=self.valid_loader, n_updates=n_updates, is_regression=is_regression)
 
     def test_model(self, model, n_updates=100, is_regression=False):
         """
