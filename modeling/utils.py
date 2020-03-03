@@ -241,20 +241,15 @@ def dict_mean(d):
 
 def dict_append(d1, d2):
     """
-    Returns a dictionary with the elements of d2 appended to the elements of d1.
+    Append the elements of d2 to the elements of d1.
 
     Args:
         d1: dict, main dictionary.
         d2: dict, secondary dictionary, appended to the main dictionary.
-
-    Returns:
-        dict, new dictionary.
     """
 
     for key, item in d2.items():
         d1[key].append(item)
-
-    return d1
 
 # endregion
 
