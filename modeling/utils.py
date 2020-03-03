@@ -1,3 +1,4 @@
+from numpy import mean
 import torch
 
 
@@ -222,6 +223,20 @@ def rank(outputs):
     rank[sorter] = torch.arange(1, n + 1).type(dtype=torch.float)
 
     return rank
+
+
+def dict_mean(d):
+    """
+    Returns a dictionary with the mean of the lists of the dictionary d.
+
+    Args:
+        d: dict, input dictionary.
+
+    Returns:
+        dict, mean dictionary.
+    """
+
+    return {key: mean(item) for key, item in d.items()}
 
 # endregion
 
