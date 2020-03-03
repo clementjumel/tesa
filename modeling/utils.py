@@ -251,6 +251,20 @@ def dict_append(d1, d2):
     for key, item in d2.items():
         d1[key].append(item)
 
+
+def dict_remove_none(d):
+    """
+    Remove None from the input dictionary. If a list item is empty, replace it with [0.].
+
+    Args:
+        d: dict, input dictionary.
+    """
+
+    for key in d:
+        items = [item for item in d[key] if item is not None]
+        items = items or [0.]
+        d[key] = items
+
 # endregion
 
 
