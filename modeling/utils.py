@@ -192,7 +192,7 @@ def ndcg(ranks, targets):
 
         return torch.div(1., torch.log2(ranks + 1.)).sum()
 
-    perfect_ranks = rank(targets.reshape((-1, 1)))
+    perfect_ranks = ranking(targets.reshape((-1, 1)))
 
     return dcg(ranks, targets, k)/dcg(perfect_ranks, targets, k)
 
@@ -201,9 +201,9 @@ def ndcg(ranks, targets):
 
 # region Other methods
 
-def rank(outputs):
+def ranking(outputs):
     """
-    Rank according to the outputs (1 for highest grade). Deal with draws by assigning the best rank to the first
+    Ranks according to the outputs (1 for highest grade). Deal with draws by assigning the best rank to the first
     output encountered.
 
     Args:
@@ -218,11 +218,11 @@ def rank(outputs):
     n = len(grades)
 
     sorter = torch.argsort(grades, descending=True)
-    rank = torch.zeros(n)
+    ranks = torch.zeros(n)
 
-    rank[sorter] = torch.arange(1, n + 1).type(dtype=torch.float)
+    ranks[sorter] = torch.arange(1, n + 1).type(dtype=torch.float)
 
-    return rank
+    return ranks
 
 
 def dict_mean(d):
@@ -283,7 +283,7 @@ def main():
     grades5 = torch.tensor([0.5, 0.5, 0.45, 0.5, 0, 0., -0.4, 0., 0., 0.])
 
     for grades in [grades1, grades2, grades3, grades4, grades5]:
-        ranks = rank(grades.reshape(-1,1))
+        ranks = ranking(grades.reshape(-1,1))
         print(ranks[2], ranks[6])
         print(score(ranks, targets))
 
