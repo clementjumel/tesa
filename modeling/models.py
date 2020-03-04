@@ -8,7 +8,6 @@ from string import punctuation as str_punctuation
 from nltk.corpus import stopwords as nltk_stopwords
 from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
-from gensim.models import KeyedVectors
 import torch
 from torch.nn.functional import cosine_similarity
 from torch.utils.tensorboard import SummaryWriter
@@ -25,17 +24,23 @@ class BaseModel:
     punctuation = str_punctuation
     stopwords = set(nltk_stopwords.words('english'))
     lemmatizer = WordNetLemmatizer()
-    pretrained_embedding, pretrained_embedding_dim = None, None
 
-    def __init__(self, scores_names):
+    def __init__(self, scores_names, pretrained_model=None, pretrained_model_dim=None, tokenizer=None):
         """
         Initializes an instance of Base Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+            tokenizer: transformers.tokenizer, tokenizer.
         """
 
         self.scores_names, self.reference = scores_names, scores_names[0]
+
+        self.pretrained_model = pretrained_model
+        self.pretrained_model_dim = pretrained_model_dim
+        self.tokenizer = tokenizer
 
         self.train_losses, self.train_scores = [], defaultdict(list)
         self.valid_losses, self.valid_scores = [], defaultdict(list)
@@ -278,7 +283,7 @@ class BaseModel:
             torch.Tensor, outputs of the prediction.
         """
 
-        return torch.tensor(0)
+        pass
 
     def explanation(self, features):
         """
@@ -305,7 +310,13 @@ class BaseModel:
             dict, scores (float) of the batch mapped with the scores' names.
         """
 
-        return {name: getattr(utils, name)(ranks, targets).data.item() for name in self.scores_names}
+        score = {name: getattr(utils, name)(ranks, targets) for name in self.scores_names}
+
+        for name in self.scores_names:
+            if score[name] is not None:
+                score[name] = score[name].data.item()
+
+        return score
 
     # endregion
 
@@ -343,7 +354,8 @@ class BaseModel:
 
     # region Words methods
 
-    def get_words(self, s, remove_stopwords, remove_punctuation, lower, lemmatize):
+    @classmethod
+    def get_words(cls, s, remove_stopwords, remove_punctuation, lower, lemmatize):
         """
         Returns the words from the string s in a list, with various preprocessing.
 
@@ -359,15 +371,15 @@ class BaseModel:
         """
 
         if remove_punctuation:
-            s = s.translate(str.maketrans('', '', self.punctuation))
+            s = s.translate(str.maketrans('', '', cls.punctuation))
 
         words = s.split()
 
         if remove_stopwords:
-            words = [word for word in words if word.lower() not in self.stopwords]
+            words = [word for word in words if word.lower() not in cls.stopwords]
 
         if lemmatize:
-            words = [self.lemmatizer.lemmatize(word) for word in words]
+            words = [cls.lemmatizer.lemmatize(word) for word in words]
 
         if lower:
             words = [word.lower() for word in words]
@@ -572,27 +584,9 @@ class BaseModel:
 
     # endregion
 
-    # region Embedding methods
+    # region Word2Vec embedding methods
 
-    @classmethod
-    def initialize_word2vec_embedding(cls):
-        """ Initializes the Word2Vec pretrained embedding of dimension 300. """
-
-        print("Initializing the Word2Vec pretrained embedding...")
-
-        cls.pretrained_embedding = KeyedVectors.load_word2vec_format(fname='../modeling/pretrained_models/' +
-                                                                           'GoogleNews-vectors-negative300.bin',
-                                                                     binary=True)
-
-        key = list(cls.pretrained_embedding.vocab.keys())[0]
-        dim = len(cls.pretrained_embedding[key])
-
-        cls.pretrained_embedding_dim = dim
-
-        print("Done (embedding dimension: %d).\n" % dim)
-
-    @classmethod
-    def get_word_embedding(cls, word):
+    def get_word_embedding(self, word):
         """
         Returns the pretrained embedding of a word in a line Tensor.
 
@@ -603,7 +597,7 @@ class BaseModel:
             torch.Tensor, embedding of word.
         """
 
-        return torch.tensor(cls.pretrained_embedding[word]) if word in cls.pretrained_embedding.vocab else None
+        return torch.tensor(self.pretrained_model[word]) if word in self.pretrained_model.vocab else None
 
     def get_average_embedding(self, words):
         """
@@ -620,7 +614,7 @@ class BaseModel:
         embeddings = [embedding for embedding in embeddings if embedding is not None]
 
         return torch.stack(embeddings).mean(dim=0) if embeddings \
-            else torch.zeros(self.pretrained_embedding_dim, dtype=torch.float)
+            else torch.zeros(self.pretrained_model_dim, dtype=torch.float)
 
     def get_embedding_similarity(self, word1, word2):
         """
@@ -656,6 +650,71 @@ class BaseModel:
         similarities = [similarity for similarity in similarities if similarity is not None]
 
         return max(similarities) if similarities else -1.
+
+    # endregion
+
+    # TODO
+    # region Bert embedding methods
+
+    def get_bert_tokenize(self, text, segment):
+        """
+        Returns the tokens and segments lists (to tensorize) of the string text.
+
+        Args:
+            text: str, part of BERT input.
+            segment: int, index (0 or 1) for first or second part of the BERT input.
+
+        Returns:
+            tokens_tensor: torch.Tensor, indexes of the tokens.
+            segments_tensor: torch.Tensor, indexes of the segments.
+        """
+
+        text = '[CLS] ' + text + ' [SEP]' if segment == 0 else text + ' [SEP]'
+
+        tokenized_text = self.tokenizer.tokenize(text)
+        length = len(tokenized_text)
+
+        indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_text)
+        segments_ids = [segment for _ in range(length)]
+
+        tokens_tensor = torch.tensor([indexed_tokens])
+        segments_tensor = torch.tensor([segments_ids])
+
+        return tokens_tensor, segments_tensor
+
+    def get_bert_embedding(self, tokens_tensor, segments_tensor):
+        """
+        Returns the BERT embedding of the text.
+
+        Args:
+            tokens_tensor: torch.Tensor, representation of the tokens.
+            segments_tensor: torch.Tensor, representation of the segments.
+
+        Returns:
+            torch.Tensor, embedding of the tokens.
+        """
+
+        with torch.no_grad():
+            encoded_layer, _ = self.pretrained_model(tokens_tensor, segments_tensor, output_all_encoded_layers=False)
+
+        return encoded_layer[:, 0, :]
+
+    def get_bert_nsp_logits(self, tokens_tensor, segments_tensor):
+        """
+        Returns the BERT embedding of the text.
+
+        Args:
+            tokens_tensor: torch.Tensor, representation of the tokens.
+            segments_tensor: torch.Tensor, representation of the segments.
+
+        Returns:
+            torch.Tensor, embedding of the tokens.
+        """
+
+        with torch.no_grad():
+            logits = self.pretrained_model(tokens_tensor, segments_tensor)
+
+        return logits
 
     # endregion
 
@@ -838,8 +897,24 @@ class Baseline(BaseModel):
     # endregion
 
 
+# region Simple Baselines
+
 class RandomBaseline(Baseline):
     """ Baseline with random predictions. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of the Random Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+        """
+
+        super().__init__(scores_names=scores_names)
+
+    # endregion
 
     # region Learning methods
 
@@ -874,7 +949,7 @@ class CountsBaseline(Baseline):
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
         """
 
-        super().__init__(scores_names)
+        super().__init__(scores_names=scores_names)
 
         self.counts = defaultdict(int)
 
@@ -919,6 +994,20 @@ class CountsBaseline(Baseline):
 
 class SummariesCountBaseline(Baseline):
     """ Baseline based on the count of words from choice that are in one of the summaries. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of the Summaries Counts Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+        """
+
+        super().__init__(scores_names=scores_names)
+
+    # endregion
 
     # region Learning methods
 
@@ -968,6 +1057,20 @@ class SummariesCountBaseline(Baseline):
 class SummariesSoftOverlapBaseline(Baseline):
     """ Baseline based on the count of words from choice that are in the "soft" overlap of the summaries. """
 
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of the Summaries Soft Overlap Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+        """
+
+        super().__init__(scores_names=scores_names)
+
+    # endregion
+
     # region Learning methods
 
     def pred(self, features):
@@ -1013,6 +1116,20 @@ class SummariesSoftOverlapBaseline(Baseline):
 class SummariesHardOverlapBaseline(Baseline):
     """ Baseline based on the count of words from choice that are in the "hard" overlap of the summaries. """
 
+    # region Class initialization
+
+    def __init__(self, scores_names):
+        """
+        Initializes an instance of the Summaries Hard Overlap Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+        """
+
+        super().__init__(scores_names=scores_names)
+
+    # endregion
+
     # region Learning methods
 
     def pred(self, features):
@@ -1056,9 +1173,30 @@ class SummariesHardOverlapBaseline(Baseline):
 
     # endregion
 
+# endregion
+
+
+# region Word2Vec embedding Baselines
 
 class ClosestAverageEmbedding(Baseline):
     """ Baseline with predictions based on the average embedding proximity. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names, pretrained_model, pretrained_model_dim):
+        """
+        Initializes an instance of the Closest Average Embedding Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+        """
+
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim)
+
+    # endregion
 
     # region Learning methods
 
@@ -1086,6 +1224,23 @@ class ClosestAverageEmbedding(Baseline):
 
 class ClosestHardOverlapEmbedding(Baseline):
     """ Baseline with predictions based on the "hard" overlap embedding proximity. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names, pretrained_model, pretrained_model_dim):
+        """
+        Initializes an instance of the Closest Hard Overlap Embedding Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+        """
+
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim)
+
+    # endregion
 
     # region Learning methods
 
@@ -1138,6 +1293,23 @@ class ClosestHardOverlapEmbedding(Baseline):
 class ClosestSoftOverlapEmbedding(Baseline):
     """ Baseline with predictions based on the "soft" overlap embedding proximity. """
 
+    # region Class initialization
+
+    def __init__(self, scores_names, pretrained_model, pretrained_model_dim):
+        """
+        Initializes an instance of the Closest Soft Overlap Embedding Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+        """
+
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim)
+
+    # endregion
+
     # region Learning methods
 
     def pred(self, features):
@@ -1186,6 +1358,120 @@ class ClosestSoftOverlapEmbedding(Baseline):
 # endregion
 
 
+# TODO
+# region BERT embedding Baselines
+
+class BertEmbedding(Baseline):
+    """ Baseline with predictions based on the dot product of BERT embeddings. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names, pretrained_model, tokenizer):
+        """
+        Initializes an instance of the BERT Embedding Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            tokenizer: transformers.tokenizer, tokenizer.
+        """
+
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model, tokenizer=tokenizer)
+
+    # endregion
+
+    # region Learning methods
+
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        grades = []
+
+        text1 = features['context'] + ', '.join(features['entities']) + ', '.join(features['summaries'])
+        tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
+        embedding1 = self.get_bert_embedding(tokens_tensor1, segments_tensor1)
+
+        for i in range(len(features['choices'])):
+            text2 = features['choices'][i]
+            tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 0)
+            embedding2 = self.get_bert_embedding(tokens_tensor2, segments_tensor2)
+
+            grades.append(torch.dot(embedding1, embedding2).data.item())
+
+        grades = torch.tensor(grades).reshape((-1, 1))
+
+        return grades
+
+    # endregion
+
+
+class NSPBertEmbedding(Baseline):
+    """ Baseline with predictions based on Next Sentence Prediction BERT. """
+
+    # region Class initialization
+
+    def __init__(self, scores_names, pretrained_model, tokenizer):
+        """
+        Initializes an instance of the Next Sentence Prediction BERT Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            tokenizer: transformers.tokenizer, tokenizer.
+        """
+
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model, tokenizer=tokenizer)
+
+    # endregion
+
+    # region Learning methods
+
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+        """
+
+        grades = []
+
+        text1 = features['context'] + ', '.join(features['entities']) + ', '.join(features['summaries'])
+        tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
+
+        for i in range(len(features['choices'])):
+            text2 = features['choices'][i]
+            tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 1)
+
+            tokens_tensor = torch.cat((tokens_tensor1, tokens_tensor2), dim=1)
+            segments_tensor = torch.cat((segments_tensor1, segments_tensor2), dim=1)
+
+            logits = self.get_bert_nsp_logits(tokens_tensor, segments_tensor)
+
+            grades.append(logits[0, 0].data.item())
+
+        grades = torch.tensor(grades).reshape((-1, 1))
+
+        return grades
+
+    # endregion
+
+# endregion
+
+# endregion
+
+
 # region ML Models
 
 class MLModel(BaseModel):
@@ -1195,7 +1481,8 @@ class MLModel(BaseModel):
 
     model_name = None
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name):
+    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model=None,
+                 pretrained_model_dim=None, tokenizer=None):
         """
         Initializes an instance of the ML Model.
 
@@ -1206,9 +1493,13 @@ class MLModel(BaseModel):
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
             loss: torch.nn.Loss, loss to use.
             experiment_name: str, name of the experiment to save (if None, doesn't save the results in Tensorboard).
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+            tokenizer: transformers.tokenizer, tokenizer.
         """
 
-        super().__init__(scores_names)
+        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim, tokenizer=tokenizer)
 
         self.net = net
         self.optimizer = optimizer
@@ -1361,7 +1652,8 @@ class HalfBOWModel(MLModel):
             vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
         """
 
-        super().__init__(scores_names, net, optimizer, lr_scheduler, loss, experiment_name)
+        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                         experiment_name=experiment_name)
 
         self.vocab_frequency_range = vocab_frequency_range
 
@@ -1443,7 +1735,8 @@ class FullBOWModel(MLModel):
             vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
         """
 
-        super().__init__(scores_names, net, optimizer, lr_scheduler, loss, experiment_name)
+        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                         experiment_name=experiment_name)
 
         self.vocab_frequency_range = vocab_frequency_range
 
@@ -1509,7 +1802,31 @@ class FullBOWModel(MLModel):
 class EmbeddingModel(MLModel):
     """ Model that uses an average embedding both for the choice words and the context words. """
 
+    # region Class initialization
+
     model_name = 'embedding_linear'
+
+    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model,
+                 pretrained_model_dim):
+        """
+        Initializes an instance of the linear Embedding Model.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            experiment_name: str, name of the experiment to save (if None, doesn't save the results in Tensorboard).
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+        """
+
+        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                         experiment_name=experiment_name, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim)
+
+    # endregion
 
     # region Learning methods
 
@@ -1542,7 +1859,31 @@ class EmbeddingModel(MLModel):
 class EmbeddingBilinearModel(MLModel):
     """ Model that uses an average embedding both for the choice words and the context words. """
 
+    # region Class initialization
+
     model_name = 'embedding_bilinear'
+
+    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model,
+                 pretrained_model_dim):
+        """
+        Initializes an instance of the bilinear Embedding Model.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            net: nn.Module, neural net to train.
+            optimizer: torch.optimizer, optimizer for the neural net.
+            lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
+            loss: torch.nn.Loss, loss to use.
+            experiment_name: str, name of the experiment to save (if None, doesn't save the results in Tensorboard).
+            pretrained_model: unknown, pretrained embedding or model.
+            pretrained_model_dim: int, size of the pretrained embedding or model.
+        """
+
+        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
+                         experiment_name=experiment_name, pretrained_model=pretrained_model,
+                         pretrained_model_dim=pretrained_model_dim)
+
+    # endregion
 
     # region Learning methods
 
