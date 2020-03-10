@@ -60,17 +60,22 @@ class Pipeline:
             self.valid_loader = []
             self.test_loader = test_set
 
-    def preview_data(self, model, include_valid=False):
+    def preview_data(self, model, include_train=True, include_valid=False):
         """
         Preview the data for the model.
 
         Args:
             model: models.Model, model to train.
-            include_valid: bool, whether to include the valid loader during the preview.
+            include_train: bool, whether to include the train loader for the preview.
+            include_valid: bool, whether to include the valid loader for the preview.
         """
 
-        data_loader = self.train_loader if not include_valid \
-            else concatenate((self.train_loader, self.valid_loader), axis=0)
+        assert include_train or include_valid
+
+        if include_train and include_valid:
+            data_loader = concatenate((self.train_loader, self.valid_loader), axis=0)
+        else:
+            data_loader = self.train_loader if include_train else self.valid_loader
 
         model.preview_data(data_loader=data_loader)
 
