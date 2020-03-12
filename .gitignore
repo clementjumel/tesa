@@ -1,6 +1,7 @@
 .idea/
 database_creation/__pycache__/
 notebooks/.ipynb_checkpoints/
+notebooks/logs/
 notebooks/experiments/.ipynb_checkpoints/
 
 nyt_annotated_corpus/
