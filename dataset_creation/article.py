@@ -716,9 +716,9 @@ class Token:
 def main():
     from dataset_creation.miscellaneous import Tuple
 
-    article = Article('../databases/nyt_jingyun/data/2006/01/01/1728670.xml',
-                      '../databases/nyt_jingyun/content_annotated/2006content_annotated/1728670.txt.xml',
-                      '../databases/nyt_jingyun/summary_annotated/2006summary_annotated/1728670.txt.xml')
+    article = Article('../nyt_annotated_corpus/data/2006/01/01/1728670.xml',
+                      '../nyt_annotated_corpus/content_annotated/2006content_annotated/1728670.txt.xml',
+                      '../nyt_annotated_corpus/summary_annotated/2006summary_annotated/1728670.txt.xml')
 
     article.entities = article.get_entities()
 
