@@ -202,22 +202,16 @@ class Dataset:
                           exclude_seen=exclude_seen)
 
     @Verbose("Processing the modeling task...")
-    def process_task(self, exclude_pilot=True, assignment_threshold=5):
+    def process_task(self, exclude_pilot=True):
         """
-        Process the annotations, the corresponding queries and the task.
+        Process the annotations and the corresponding queries.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
-            assignment_threshold: int, minimum number of assignments a worker has to have done.
-
-        Returns:
-            list, returns the data of the task to feed to a model.
         """
 
         self.compute_annotated_queries(exclude_pilot=exclude_pilot)
         self.compute_annotations(exclude_pilot=exclude_pilot)
-
-        self.filter_annotations(assignment_threshold=assignment_threshold)
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -831,37 +825,6 @@ class Dataset:
 
         self.min_articles = min_articles if min_articles is not None else self.min_articles
         self.min_queries = min_queries if min_queries is not None else self.min_queries
-
-    @Verbose("Filtering the annotations...")
-    def filter_annotations(self, assignment_threshold=None):
-        """
-        Filter out the Annotations from workers that did not enough assignments.
-
-        Args:
-            assignment_threshold: int, minimum number of assignments a worker has to have done.
-        """
-
-        if assignment_threshold is None:
-            print("No threshold on the number of assignments.")
-            return
-
-        print("Criterion: at least {} assignments per worker.".format(assignment_threshold))
-        workers_count = defaultdict(list)
-
-        for id_, annotation_list in self.annotations.items():
-            for annotation in annotation_list:
-                workers_count[annotation.worker_id].append(id_)
-
-        count = 0
-        for worker_id, ids in workers_count.items():
-            if len(ids) < assignment_threshold:
-                for id_ in ids:
-                    self.annotations[id_] = [annotation for annotation in self.annotations[id_]
-                                             if annotation.worker_id != worker_id]
-                    count += 1
-
-        print("Annotations filtered: {} left ({} deleted).".format(sum([len(a) for _, a in self.annotations.items()]),
-                                                                   count))
 
     # endregion
 
