@@ -1,5 +1,5 @@
-from database_creation.utils import Tuple, Wikipedia, Query, Annotation, Task
-from database_creation.article import Article
+from dataset_creation.miscellaneous import Tuple, Wikipedia, Query, Annotation
+from dataset_creation.article import Article
 
 from numpy.random import seed, choice
 from time import time
@@ -14,14 +14,14 @@ from itertools import chain, combinations
 from re import findall
 
 
-class Database:
+class Dataset:
     # region Class initialization
 
     modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
 
     def __init__(self, years=(2006, 2007), max_size=None, shuffle=True, min_articles=1, min_queries=1, random_seed=0):
         """
-        Initializes an instance of Database.
+        Initializes an instance of Dataset.
 
         Args:
             years: list, years (int) of the database to analyse.
@@ -202,14 +202,13 @@ class Database:
                           exclude_seen=exclude_seen)
 
     @Verbose("Processing the modeling task...")
-    def process_task(self, exclude_pilot=True, assignment_threshold=5, answers_threshold=2):
+    def process_task(self, exclude_pilot=True, assignment_threshold=5):
         """
         Process the annotations, the corresponding queries and the task.
 
         Args:
             exclude_pilot: whether or not to exclude the data from the pilot.
             assignment_threshold: int, minimum number of assignments a worker has to have done.
-            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
 
         Returns:
             list, returns the data of the task to feed to a model.
@@ -219,10 +218,6 @@ class Database:
         self.compute_annotations(exclude_pilot=exclude_pilot)
 
         self.filter_annotations(assignment_threshold=assignment_threshold)
-
-        self.compute_task(answers_threshold=answers_threshold)
-
-        return self.task.get_data()
 
     @Verbose("Combining the wikipedia files...")
     def combine_wiki(self, current=True, in_names=tuple(['wikipedia_global']), out_name='wikipedia_global'):
@@ -566,17 +561,6 @@ class Database:
                     annotations[id_].append(Annotation(id_=id_, version=version, batch=batch, row=row))
 
         self.annotations = annotations
-
-    @Verbose("Computing the modeling task...")
-    def compute_task(self, answers_threshold):
-        """
-        Compute the modeling task.
-
-        Args:
-            answers_threshold: int, number of annotators that answers an annotation for it to be taken into account.
-        """
-
-        self.task = Task(queries=self.queries, annotations=self.annotations, answers_threshold=answers_threshold)
 
     @Verbose("Computing the correction of the wikipedia information...")
     def compute_correction(self, step):
@@ -1148,15 +1132,15 @@ class Database:
 
 
 def main():
-    database = Database(max_size=1000)
+    dataset = Dataset(max_size=1000)
 
-    database.preprocess_database()
-    database.process_articles()
-    database.process_wikipedia(load=True)
+    dataset.preprocess_database()
+    dataset.process_articles()
+    dataset.process_wikipedia(load=True)
 
-    database.correct_wiki()
+    dataset.correct_wiki()
 
-    database.process_queries(check_changes=True, csv_seed=1)
+    dataset.process_queries(check_changes=True, csv_seed=1)
 
 
 if __name__ == '__main__':
