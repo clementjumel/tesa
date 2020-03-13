@@ -1,5 +1,5 @@
 from database_creation.database import Database
-from database_creation.miscellaneous import Sample
+from database_creation.utils import Sample
 
 from collections import defaultdict
 from numpy import split, concatenate, asarray

@@ -1,4 +1,4 @@
-from database_creation.miscellaneous import Entity, Context, Mention
+from database_creation.utils import Entity, Context, Mention
 
 from xml.etree import ElementTree
 from copy import deepcopy
@@ -714,7 +714,7 @@ class Token:
 
 
 def main():
-    from database_creation.miscellaneous import Tuple
+    from database_creation.utils import Tuple
 
     article = Article('../nyt_annotated_corpus/data/2006/01/01/1728670.xml',
                       '../nyt_annotated_corpus/content_annotated/2006content_annotated/1728670.txt.xml',

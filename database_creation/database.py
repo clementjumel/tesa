@@ -1,4 +1,4 @@
-from database_creation.miscellaneous import Tuple, Wikipedia, Query, Annotation
+from database_creation.utils import Tuple, Wikipedia, Query, Annotation
 from database_creation.article import Article
 
 from numpy.random import seed, choice
