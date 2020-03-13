@@ -912,9 +912,9 @@ class Annotation:
 
             if 'have' in preprocessed_answer.split() \
                     or 'are' in preprocessed_answer.split() \
+                    or 'and' in preprocessed_answer.split() \
                     or preprocessed_answer == 'the' \
-                    or '/' in preprocessed_answer \
-                    or 'and' in preprocessed_answers:
+                    or '/' in preprocessed_answer:
                 print('   Discarding "{}"'.format(answer))
 
             elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
