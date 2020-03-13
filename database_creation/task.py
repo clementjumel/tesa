@@ -1,5 +1,5 @@
-from dataset_creation.dataset import Dataset
-from dataset_creation.miscellaneous import Sample
+from database_creation.database import Database
+from database_creation.miscellaneous import Sample
 
 from collections import defaultdict
 from numpy import split, concatenate, asarray
@@ -206,10 +206,10 @@ class Task:
             2d-array, raw sample from the task, each line corresponding to (inputs, targets)
         """
 
-        dataset = Dataset()
-        dataset.process_task()
+        database = Database()
+        database.process_task()
 
-        queries, annotations = dataset.queries, dataset.annotations
+        queries, annotations = database.queries, database.annotations
 
         annotations = self.filter_annotations(annotations=annotations,
                                               min_assignments=min_assignments,
