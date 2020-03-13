@@ -24,9 +24,9 @@ class Dataset:
         Initializes an instance of Dataset.
 
         Args:
-            years: list, years (int) of the database to analyse.
-            max_size: int, maximum number of articles in the database; if None, takes all articles.
-            shuffle: bool, whether to shuffle the articles selected in the database.
+            years: list, years (int) of the dataset to analyse.
+            max_size: int, maximum number of articles in the dataset; if None, takes all articles.
+            shuffle: bool, whether to shuffle the articles selected in the dataset.
             min_articles: int, minimum number of articles an entities' tuple must be in.
             min_queries: int, minimum number of Queries an entities' tuple must have.
             random_seed: int, the seed to use for the random processes.
@@ -52,7 +52,7 @@ class Dataset:
 
     def __str__(self):
         """
-        Overrides the builtin str method, customized for the instances of Database.
+        Overrides the builtin str method, customized for the instances of Dataset.
 
         Returns:
             str, readable format of the instance.
@@ -128,13 +128,13 @@ class Dataset:
 
     # region Main methods
 
-    @Verbose("Preprocessing the database...")
-    def preprocess_database(self, debug=False):
+    @Verbose("Preprocessing the dataset...")
+    def preprocess_dataset(self, debug=False):
         """
-        Performs the preprocessing of the database.
+        Performs the preprocessing of the dataset.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         self.compute_articles(debug=debug)
@@ -153,7 +153,7 @@ class Dataset:
         Performs the preprocessing of the articles.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         self.compute_annotations(debug=debug)
@@ -164,12 +164,12 @@ class Dataset:
     @Verbose("Processing the wikipedia information...")
     def process_wikipedia(self, load=False, file_name=None, debug=False):
         """
-        Performs the processing of the wikipedia information of the database.
+        Performs the processing of the wikipedia information of the dataset.
 
         Args:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='task_creation/wikipedia') if load \
@@ -185,7 +185,7 @@ class Dataset:
         Args:
             load: bool, if True, load an existing file.
             file_name: str, name of the wikipedia file to save or load; if None, deal with the standard files name.
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
             csv_size: int, the number of queries to write in the csv.
             csv_seed: int, the seed to use for the random processes.
             exclude_seen: bool, whether to exclude the queries already in batches or not (not taking the pilot into
@@ -270,14 +270,14 @@ class Dataset:
 
     # region Methods compute_
 
-    @Verbose("Computing the database' article...")
+    @Verbose("Computing the dataset' article...")
     @Attribute('articles')
     def compute_articles(self, debug=False):
         """
-        Computes and initializes the articles in the database.
+        Computes and initializes the articles in the dataset.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         articles = {}
@@ -303,7 +303,7 @@ class Dataset:
         Computes the metadata of the articles.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         count, size = 0, len(self.articles)
@@ -313,14 +313,14 @@ class Dataset:
 
         self.write_debug(field='articles', method='metadata') if debug else None
 
-    @Verbose("Computing the database' entities...")
+    @Verbose("Computing the dataset' entities...")
     @Attribute('entities')
     def compute_entities(self, debug=False):
         """
-        Compute the entities of the database.
+        Compute the entities of the dataset.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         self.entities = dict()
@@ -357,10 +357,10 @@ class Dataset:
     @Attribute('tuples')
     def compute_tuples(self, debug=False):
         """
-        Compute the Tuples of the database as a sorted list of Tuples (by number of articles).
+        Compute the Tuples of the dataset as a sorted list of Tuples (by number of articles).
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         ids = defaultdict(set)
@@ -392,7 +392,7 @@ class Dataset:
         Computes the corpus annotations of the articles.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         count, size = 0, len(self.articles)
@@ -413,7 +413,7 @@ class Dataset:
         Compute the contexts of the articles for each Tuple.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         count, size = 0, len(self.tuples)
@@ -438,7 +438,7 @@ class Dataset:
 
         Args:
             load: bool, if True, load an existing file.
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         wikipedia = {'found': dict(), 'not_found': set()} if not load else self.wikipedia
@@ -482,10 +482,10 @@ class Dataset:
     @Attribute('queries')
     def compute_queries(self, debug=False):
         """
-        Compute the Queries of the database.
+        Compute the Queries of the dataset.
 
         Args:
-            debug: bool, whether or not to perform the debugging of the database.
+            debug: bool, whether or not to perform the debugging of the dataset.
         """
 
         queries = dict()
@@ -691,11 +691,11 @@ class Dataset:
 
     # region Cleaning methods
 
-    @Verbose("Cleaning the database's articles...")
+    @Verbose("Cleaning the dataset's articles...")
     @Attribute('articles')
     def clean_articles(self, criterion=None, to_del=None, to_keep=None):
         """
-        Removes from the database the articles which meet the Article's criterion or whose ids are in to_del or are not
+        Removes from the dataset the articles which meet the Article's criterion or whose ids are in to_del or are not
         in to_keep.
 
         Args:
@@ -729,11 +729,11 @@ class Dataset:
         for id_ in to_del:
             del self.articles[id_]
 
-    @Verbose("Cleaning the database's tuples...")
+    @Verbose("Cleaning the dataset's tuples...")
     @Attribute('tuples')
     def clean_tuples(self, to_del=None, to_keep=None):
         """
-        Removes from the database the tuples whose names are in to_del or are not in to_keep.
+        Removes from the dataset the tuples whose names are in to_del or are not in to_keep.
 
         Args:
             to_del: set, names of the tuples that must be removed.
@@ -761,11 +761,11 @@ class Dataset:
         else:
             raise Exception("Either to_del or to_keep must be specified.")
 
-    @Verbose("Cleaning the database's entities...")
+    @Verbose("Cleaning the dataset's entities...")
     @Attribute('entities')
     def clean_entities(self, to_del=None, to_keep=None):
         """
-        Removes from the database the entities whose names are in to_del or are not in to_keep.
+        Removes from the dataset the entities whose names are in to_del or are not in to_keep.
 
         Args:
             to_del: set, names of the entities that must be removed.
@@ -988,7 +988,7 @@ class Dataset:
         Write the debugging of a method into a text file.
 
         Args:
-            field: str, field of the database we want to debug.
+            field: str, field of the dataset we want to debug.
             method: str, name of the method to debug.
         """
 
@@ -1050,7 +1050,7 @@ class Dataset:
 
     def paths(self):
         """
-        Compute the paths of the data files of the database.
+        Compute the paths of the data files of the dataset.
 
         Returns:
             list, sorted file paths of the data of the articles.
@@ -1097,7 +1097,7 @@ class Dataset:
 def main():
     dataset = Dataset(max_size=1000)
 
-    dataset.preprocess_database()
+    dataset.preprocess_dataset()
     dataset.process_articles()
     dataset.process_wikipedia(load=True)
 
