@@ -383,7 +383,7 @@ class Task:
         """
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("Filtering the annotations (initial number of annotations: %d)...".format(length))
+        print("Filtering the annotations (initial number of annotations: %d)..." % length)
 
         workers_count = defaultdict(list)
 
@@ -398,13 +398,13 @@ class Task:
                                                    if annotation.worker_id != worker_id]
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("First filter done (number of assignments): %d remaining...".format(length))
+        print("First filter done (number of assignments): %d remaining..." % length)
 
         annotations = {id_: annotation_list for id_, annotation_list in annotations.items()
                        if len([annotation for annotation in annotation_list if not annotation.bug]) >= min_answers}
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("Second filter done (number of answers): %d remaining.".format(length))
+        print("Second filter done (number of answers): %d remaining." % length)
 
         return annotations
 
@@ -452,11 +452,12 @@ class ContextFreeTask(Task):
     # region Methods get_
 
     @staticmethod
-    def get_annotations(annotations):
+    def get_annotations(queries, annotations):
         """
         Rework the annotations for the specificity of the Task.
 
         Args:
+            queries: dict of Query, Queries of the annotations.
             annotations: dict of list of Annotations, Annotations from the MT workers.
 
         Returns:
@@ -467,7 +468,7 @@ class ContextFreeTask(Task):
 
         for id_, annotation_list in annotations.items():
             for annotation in annotation_list:
-                entities_tuple = tuple(sorted(annotation.entities))
+                entities_tuple = tuple(sorted(queries[annotation.id_].entities))
                 new_annotations[entities_tuple].append(annotation)
 
         return new_annotations
@@ -484,7 +485,7 @@ class ContextFreeTask(Task):
             list, shuffled list of Samples.
         """
 
-        return super().get_samples(queries=queries, annotations=self.get_annotations(annotations))
+        return super().get_samples(queries=queries, annotations=self.get_annotations(queries, annotations))
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
