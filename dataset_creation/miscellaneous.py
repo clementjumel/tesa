@@ -944,13 +944,13 @@ class Sample:
 
     # region Class base methods
 
-    def __init__(self, queries, labeled_answers):
+    def __init__(self, queries, labelled_answers):
         """
         Initializes the Sample instance.
 
         Args:
             queries: list, initial Queries of the annotation.
-            labeled_answers: list, tuples answers as str with their integer labels (0 for negative answers).
+            labelled_answers: dict, answers and their labels (0 for negative answers).
         """
 
         entities, entities_type_, summaries, title, context = self.get_input_data(queries)
@@ -961,7 +961,7 @@ class Sample:
         self.title = title
         self.context = context
 
-        choices, labels = self.get_output_data(labeled_answers)
+        choices, labels = self.get_output_data(labelled_answers)
 
         self.choices = choices
         self.labels = labels
@@ -1011,22 +1011,24 @@ class Sample:
         return entities, entities_type_, summaries, title, context
 
     @staticmethod
-    def get_output_data(labeled_answers):
+    def get_output_data(labelled_answers):
         """
         Returns the choices and their labels of the examples as two shuffled lists.
 
         Args:
-            labeled_answers: list, tuples answers as str with their integer labels (0 for negative answers).
+            labelled_answers: dict, answers and their labels (0 for negative answers).
 
         Returns:
             choices: list, choices of the Sample.
             labels: list, corresponding labels of the Sample.
         """
 
-        shuffle(labeled_answers)
+        labelled_answers = [(answer, label) for answer, label in labelled_answers.items()]
+        labelled_answers = sorted(labelled_answers)
+        shuffle(labelled_answers)
 
-        choices = [labeled_answer[0] for labeled_answer in labeled_answers]
-        labels = [labeled_answer[1] for labeled_answer in labeled_answers]
+        choices = [labelled_answer[0] for labelled_answer in labelled_answers]
+        labels = [labelled_answer[1] for labelled_answer in labelled_answers]
 
         return choices, labels
 
