@@ -1,9 +1,11 @@
 .idea/
+nyt_annotated_corpus/
+results/
+
 database_creation/__pycache__/
+modeling/__pycache__/
+modeling/pretrained_models
+
 notebooks/.ipynb_checkpoints/
 notebooks/logs/
 notebooks/experiments/
-
-nyt_annotated_corpus/
-results/
-modeling/pretrained_models
