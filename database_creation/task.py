@@ -3,7 +3,7 @@ from database_creation.utils import Sample
 
 from collections import defaultdict
 from numpy import split, concatenate, asarray
-from numpy.random import shuffle
+from numpy.random import seed, shuffle
 
 
 class Task:
@@ -11,7 +11,7 @@ class Task:
     # region Class initialization
 
     def __init__(self, min_assignments=5, min_answers=2, test_proportion=0.25, valid_proportion=0.25, batch_size=32,
-                 drop_last=True, k_cross_validation=0):
+                 drop_last=True, k_cross_validation=0, random_seed=1):
         """
         Initializes an instance of the base Task.
 
@@ -23,6 +23,7 @@ class Task:
             batch_size: int, number of samples in each batch.
             drop_last: bool, whether or not to delete the last batch if incomplete.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
+            random_seed: int, the seed to use for the random processes.
         """
 
         self.use_cross_validation = bool(k_cross_validation)
@@ -30,6 +31,8 @@ class Task:
         self.train_loader = None
         self.valid_loader = None
         self.test_loader = None
+
+        seed(random_seed)
 
         self.compute_data(min_assignments=min_assignments,
                           min_answers=min_answers,
@@ -485,7 +488,8 @@ class ContextFreeTask(Task):
             list, shuffled list of Samples.
         """
 
-        return super().get_samples(queries=queries, annotations=self.get_annotations(queries, annotations))
+        return super().get_samples(queries=queries, annotations=self.get_annotations(queries=queries,
+                                                                                     annotations=annotations))
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
