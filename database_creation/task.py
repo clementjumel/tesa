@@ -519,8 +519,6 @@ class ContextFreeTask(Task):
 
 class ContextFreeSameTypeTask(ContextFreeTask):
 
-    # region Methods get_
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
         Returns the answers and their labels as a list of tuples.
@@ -544,12 +542,8 @@ class ContextFreeSameTypeTask(ContextFreeTask):
 
         return labelled_answers
 
-    # endregion
-
 
 class ContextDependentTask(Task):
-
-    # region Methods get_
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -574,12 +568,8 @@ class ContextDependentTask(Task):
 
         return labelled_answers
 
-    # endregion
-
 
 class ContextDependentSameTypeTask(ContextDependentTask):
-
-    # region Methods get_
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -604,12 +594,8 @@ class ContextDependentSameTypeTask(ContextDependentTask):
 
         return labelled_answers
 
-    # endregion
-
 
 class HybridTask(ContextDependentTask):
-
-    # region Methods get_
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -642,12 +628,8 @@ class HybridTask(ContextDependentTask):
 
         return labelled_answers
 
-    # endregion
-
 
 class HybridSameTypeTask(HybridTask):
-
-    # region Methods get_
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -675,13 +657,3 @@ class HybridSameTypeTask(HybridTask):
             labelled_answers[answer] = 2
 
         return labelled_answers
-
-    # endregion
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()
