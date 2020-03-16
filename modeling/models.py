@@ -17,19 +17,23 @@ from torch.utils.tensorboard import SummaryWriter
 class BaseModel:
     """ Base structure. """
 
-    def __init__(self, scores_names, pretrained_model=None, pretrained_model_dim=None, tokenizer=None, random_seed=1):
+    def __init__(self, scores_names, relevance_level, pretrained_model=None, pretrained_model_dim=None,
+                 tokenizer=None, random_seed=2):
         """
         Initializes an instance of Base Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             pretrained_model: unknown, pretrained embedding or model.
             pretrained_model_dim: int, size of the pretrained embedding or model.
             tokenizer: transformers.tokenizer, tokenizer.
             random_seed: int, the seed to use for the random processes.
         """
 
-        self.scores_names, self.reference = scores_names, scores_names[0]
+        self.scores_names = scores_names
+        self.reference_score = scores_names[0]
+        self.relevance_level = relevance_level
 
         self.pretrained_model = pretrained_model
         self.pretrained_model_dim = pretrained_model_dim
@@ -83,7 +87,7 @@ class BaseModel:
                 dict_append(train_scores, train_epoch_scores), dict_append(valid_scores, valid_epoch_score)
 
                 print('Epoch %d/%d: Validation Loss: %.5f Validation Score: %.5f'
-                      % (epoch+1, n_epochs, valid_epoch_loss, valid_epoch_score[self.reference]))
+                      % (epoch+1, n_epochs, valid_epoch_loss, valid_epoch_score[self.reference_score]))
 
                 self.update_lr_scheduler()
 
@@ -112,8 +116,8 @@ class BaseModel:
 
         loss, score = self.test_epoch(data_loader=data_loader, is_regression=is_regression)
 
-        print('Validation Loss: %.5f Validation Score: %.5f' % (loss, score[self.reference])) if loss is not None \
-            else print('Validation Score: %.5f' % (score[self.reference]))
+        print('Validation Loss: %.5f Validation Score: %.5f' % (loss, score[self.reference_score])) \
+            if loss is not None else print('Validation Score: %.5f' % (score[self.reference_score]))
 
         self.valid_losses.append(loss), dict_append(self.valid_scores, score)
 
@@ -132,8 +136,8 @@ class BaseModel:
 
         loss, score = self.test_epoch(data_loader=data_loader, is_regression=is_regression)
 
-        print('Test Loss: %.5f Test Score: %.5f' % (loss, score[self.reference])) if loss is not None \
-            else print('Test Score: %.5f' % (score[self.reference]))
+        print('Test Loss: %.5f Test Score: %.5f' % (loss, score[self.reference_score])) \
+            if loss is not None else print('Test Score: %.5f' % (score[self.reference_score]))
 
         self.test_losses.append(loss), dict_append(self.test_scores, score)
 
@@ -295,7 +299,8 @@ class BaseModel:
             dict, scores (float) of the batch mapped with the scores' names.
         """
 
-        score = {name: getattr(metrics, name)(ranks, targets) for name in self.scores_names}
+        score = {name: getattr(metrics, name)(ranks=ranks, targets=targets, relevance_level=self.relevance_level)
+                 for name in self.scores_names}
 
         for name in self.scores_names:
             if score[name] is not None:
@@ -692,7 +697,7 @@ class BaseModel:
         return torch.stack(embeddings).mean(dim=0) if embeddings \
             else torch.zeros(self.pretrained_model_dim, dtype=torch.float)
 
-    def get_average_similarity(self, words_lists, words):
+    def get_average_embedding_similarity(self, words_lists, words):
         """
         Returns the similarities between the average embeddings of the lists of words of words_lists and the average
         embedding of words.
@@ -777,102 +782,177 @@ class BaseModel:
 
         return logits
 
+    def get_bert_similarity(self, words_lists, words):
+        """
+        Returns the similarities between the BERT embeddings of the lists of words of words_lists and the average
+        embedding of words.
+
+        Args:
+            words_lists: list, first words to compare, as a list of list of words.
+            words: list, second words to compare, as a list of words.
+
+        Returns:
+            torch.tensor, similarities in a column tensor.
+        """
+
+        # TODO
+        pass
+
+# TODO
+# class BertEmbedding(Baseline):
+#     """ Baseline with predictions based on the dot product of BERT embeddings. """
+#
+#     def pred(self, features):
+#         """
+#         Predicts the outputs from the features.
+#
+#         Args:
+#             features: dict or torch.Tensor, features of the batch.
+#
+#         Returns:
+#             torch.Tensor, outputs of the prediction.
+#         """
+#
+#         grades = []
+#
+#         text1 = features['context'] + ', '.join(features['entities']) + self.get_summaries_string(features)
+#         tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
+#         embedding1 = self.get_bert_embedding(tokens_tensor1, segments_tensor1)
+#
+#         for i in range(len(features['choices'])):
+#             text2 = features['choices'][i]
+#             tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 0)
+#             embedding2 = self.get_bert_embedding(tokens_tensor2, segments_tensor2)
+#
+#             grades.append(torch.dot(embedding1, embedding2).data.item())
+#
+#         grades = torch.tensor(grades).reshape((-1, 1))
+#
+#         return grades
+
+
+
+# class NextSentencePredictionBert(Baseline):
+#     """ Baseline with predictions based on Next Sentence Prediction BERT. """
+#
+#     def pred(self, features):
+#         """
+#         Predicts the outputs from the features.
+#
+#         Args:
+#             features: dict or torch.Tensor, features of the batch.
+#
+#         Returns:
+#             torch.Tensor, outputs of the prediction.
+#         """
+#
+#         grades = []
+#
+#         text1 = features['context'] + ', '.join(features['entities']) + self.get_summaries_string(features)
+#         tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
+#
+#         for i in range(len(features['choices'])):
+#             text2 = features['choices'][i]
+#             tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 1)
+#
+#             tokens_tensor = torch.cat((tokens_tensor1, tokens_tensor2), dim=1)
+#             segments_tensor = torch.cat((segments_tensor1, segments_tensor2), dim=1)
+#
+#             p = self.get_bert_next_sentence_probability(tokens_tensor, segments_tensor)
+#
+#             grades.append(p)
+#
+#         grades = torch.tensor(grades).reshape((-1, 1))
+#
+#         return grades
+
     # endregion
 
     # region Display methods
 
-    def display_metrics(self, scores_names=None, valid=True, test=False):
+    def display_metrics(self, valid=True, test=False):
         """
         Display the validation or test metrics of the model registered during the last experiment.
 
         Args:
-            scores_names: iterable, names of the scores to plot, if not, plot all of them.
             valid: bool, whether or not to display the validation scores.
             test: bool, whether or not to display the test scores.
         """
 
-        scores_names = scores_names if scores_names is not None else self.scores_names
         to_copy = ''
 
         if valid:
             print("\nScores evaluated on the validation set:")
-            score = {name: self.valid_scores[name][-1] for name in scores_names}
+            score = {name: self.valid_scores[name][-1] for name in self.scores_names}
 
             for name, s in score.items():
                 print('%s: %.5f' % (name, s))
 
-            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in scores_names]) + ' &  '
+            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names]) + ' &  '
 
         if test:
             print("\nScores evaluated on the test set:")
-            score = {name: self.test_scores[name][-1] for name in scores_names}
+            score = {name: self.test_scores[name][-1] for name in self.scores_names}
 
             for name, s in score.items():
                 print('%s: %.5f' % (name, s))
 
             to_copy += '\n' if to_copy else ''
-            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in scores_names]) + ' &  '
+            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names]) + ' &  '
 
+        print("\nLatex code for scores:\n" + to_copy)
         copy(to_copy)
 
-    def final_plot(self, scores_names=None):
+    def plot(self, x1, x2, train_losses, valid_losses, valid_scores):
         """
-        Plot the metrics of the model registered during the experiments.
+        Plot a single figure for the corresponding data.
 
         Args:
-            scores_names: iterable, names of the scores to plot, if not, plot all of them.
+            x1: list, first x-axis of the plot, for the losses.
+            x2: list, second x-axis of the plot, for the scores.
+            train_losses: list, training losses to plot.
+            valid_losses: list, validation losses to plot.
+            valid_scores: dict, validation scores to plot.
         """
 
-        def plot(x1, x2, train_losses, valid_losses, valid_scores, scores_names):
-            """
-            Plot a single figure for the corresponding data.
+        color_idx = 0
+        colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
+                  'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
 
-            Args:
-                x1: list, first x-axis of the plot, for the losses.
-                x2: list, second x-axis of the plot, for the scores.
-                train_losses: list, training losses to plot.
-                valid_losses: list, validation losses to plot.
-                valid_scores: dict, validation scores to plot.
-                scores_names: iterable, names of the scores to plot, if not, plot all of them.
-            """
+        fig, ax1 = plt.subplots(figsize=(14, 8))
+        ax1.set_xlabel('epochs')
 
-            color_idx = 0
-            colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
-                      'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
+        color, color_idx = colors[color_idx], color_idx + 1
+        ax1.set_ylabel('loss', color=color)
+        ax1.set_yscale('log')
+        ax1.plot(x1, train_losses, color=color, label='training loss')
+        ax1.scatter(x2, valid_losses, color=color, label='validation loss', s=50, marker='^')
+        ax1.tick_params(axis='y', labelcolor=color)
 
-            fig, ax1 = plt.subplots(figsize=(14, 8))
-            ax1.set_xlabel('epochs')
+        ax2 = ax1.twinx()
+        ax2.set_ylabel('scores')
 
+        for name in self.scores_names:
             color, color_idx = colors[color_idx], color_idx + 1
-            ax1.set_ylabel('loss', color=color)
-            ax1.set_yscale('log')
-            ax1.plot(x1, train_losses, color=color, label='training loss')
-            ax1.scatter(x2, valid_losses, color=color, label='validation loss', s=50, marker='^')
-            ax1.tick_params(axis='y', labelcolor=color)
 
-            ax2 = ax1.twinx()
-            ax2.set_ylabel('scores')
+            ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
+            ax2.plot(x2, valid_scores[name], color=color, ls='--')
 
-            for name in scores_names:
-                color, color_idx = colors[color_idx], color_idx + 1
+        fig.legend(loc='upper center')
+        plt.show()
 
-                ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
-                ax2.plot(x2, valid_scores[name], color=color, ls='--')
+    def final_plot(self):
+        """ Plot the metrics of the model registered during the experiments. """
 
-            fig.legend(loc='upper center')
-            plt.show()
-
-        scores_names = scores_names if scores_names is not None else self.scores_names
-
-        n_experiments = len(self.train_scores[self.reference])
+        n_experiments = len(self.train_scores[self.reference_score])
 
         total_x1, total_x2, offset = [], [], 0
         total_train_losses, total_valid_losses = [], []
         total_valid_scores = defaultdict(list)
 
         for i in range(n_experiments):
-            n_epochs = len(self.train_scores[self.reference][i])
-            n_points = len(self.train_scores[self.reference][i][0])
+            n_epochs = len(self.train_scores[self.reference_score][i])
+            n_points = len(self.train_scores[self.reference_score][i][0])
 
             x1 = list(arange(offset, offset + n_epochs, 1. / n_points))
             x2 = list(arange(offset + 1, offset + n_epochs + 1))
@@ -880,40 +960,39 @@ class BaseModel:
 
             train_losses = [x for epoch_losses in self.train_losses[i] for x in epoch_losses]
             valid_losses = self.valid_losses[i]
-            valid_scores = {name: self.valid_scores[name][i] for name in scores_names}
+            valid_scores = {name: self.valid_scores[name][i] for name in self.scores_names}
 
             total_x1.extend(x1), total_x2.extend(x2)
             total_train_losses.extend(train_losses), total_valid_losses.extend(valid_losses)
-            for name in scores_names:
+            for name in self.scores_names:
                 total_valid_scores[name].extend(valid_scores[name])
 
-        plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
-             valid_scores=total_valid_scores, scores_names=scores_names)
+        self.plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
+                  valid_scores=total_valid_scores)
 
-    def explain(self, data_loader, scores_names, n_samples, n_answers):
+    def explain(self, data_loader, n_samples, n_answers):
         """
         Explain the model by displaying the samples and the reason of the prediction.
 
         Args:
             data_loader: list, pairs of (inputs, targets) batches.
-            scores_names: iterable, names of the scores to plot, if not, plot all of them.
             n_samples: int, number of samples to explain.
             n_answers: int, number of best answers to look at.
         """
-
-        scores_names = scores_names if scores_names is not None else self.scores_names
 
         for batch_idx, (inputs, targets) in enumerate(data_loader[:n_samples]):
             features = self.features(inputs)
 
             outputs, explanations = self.pred(features)
             outputs = outputs[:, -1].reshape((-1, 1)) if len(outputs.shape) == 2 else outputs
+            explanations = ['' for _ in range(len(inputs['choices']))] if explanations is None else explanations
 
             ranks = ranking(outputs)
             score = self.get_score(ranks, targets)
 
             print('\nEntities (%s): %s' % (inputs['entities_type_'], ',  '.join(inputs['entities'])))
-            print("Scores:", ', '.join(['%s: %.5f' % (name, score[name]) for name in score if name in scores_names]))
+            print("Scores:", ', '.join(['%s: %.5f' % (name, score[name])
+                                        for name in score if name in self.scores_names]))
 
             best_answers = [(ranks[i], inputs['choices'][i], outputs[i].item(), explanations[i], targets[i].item())
                             for i in range(len(inputs['choices']))]
@@ -943,15 +1022,16 @@ class BaseModel:
 class Baseline(BaseModel):
     """ Base structure for the Baselines. """
 
-    def __init__(self, scores_names):
+    def __init__(self, scores_names, relevance_level):
         """
         Initializes an instance of the Baseline.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
         """
 
-        super().__init__(scores_names=scores_names)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level)
 
     def test_batch(self, features, targets, is_regression):
         """
@@ -977,20 +1057,41 @@ class Baseline(BaseModel):
 class EmbeddingBaseline(Baseline):
     """ Base structure for the Baselines using embeddings. """
 
-    def __init__(self, scores_names, pretrained_model, pretrained_model_dim):
+    def __init__(self, scores_names, relevance_level, pretrained_model, pretrained_model_dim):
         """
         Initializes an instance of the Embedding Baseline.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             pretrained_model: unknown, pretrained embedding or model.
             pretrained_model_dim: int, size of the pretrained embedding or model.
         """
 
-        super().__init__(scores_names=scores_names)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level)
 
         self.pretrained_model = pretrained_model
         self.pretrained_model_dim = pretrained_model_dim
+
+
+class BertBaseline(Baseline):
+    """ Base structure for the Baselines using BERT. """
+
+    def __init__(self, scores_names, relevance_level, pretrained_model, tokenizer):
+        """
+        Initializes an instance of the BERT Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
+            pretrained_model: unknown, pretrained embedding or model.
+            tokenizer: transformers.tokenizer, tokenizer.
+        """
+
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level)
+
+        self.pretrained_model = pretrained_model
+        self.tokenizer = tokenizer
 
 # endregion
 
@@ -1020,15 +1121,16 @@ class RandomBaseline(Baseline):
 class FrequencyBaseline(Baseline):
     """ Baseline based on answers' overall frequency. """
 
-    def __init__(self, scores_names):
+    def __init__(self, scores_names, relevance_level):
         """
         Initializes an instance of the Frequency Baseline.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
         """
 
-        super().__init__(scores_names=scores_names)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level)
 
         self.counts = defaultdict(int)
 
@@ -1162,7 +1264,7 @@ class SummariesAverageEmbeddingBaseline(EmbeddingBaseline):
         choices_words = self.get_choices_words(features)
         summaries_words = [word for summary_words in self.get_summaries_words(features) for word in summary_words]
 
-        similarity = self.get_average_similarity(words_lists=choices_words, words=summaries_words)
+        similarity = self.get_average_embedding_similarity(words_lists=choices_words, words=summaries_words)
 
         return similarity, None
 
@@ -1187,7 +1289,7 @@ class SummariesOverlapAverageEmbeddingBaseline(EmbeddingBaseline):
         summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(features) if summary_words]
         summaries_words = set.intersection(*summaries_words) if summaries_words else set()
 
-        similarity = self.get_average_similarity(words_lists=choices_words, words=summaries_words)
+        similarity = self.get_average_embedding_similarity(words_lists=choices_words, words=summaries_words)
 
         return similarity, None
 
@@ -1218,6 +1320,56 @@ class ActivatedSummariesBaseline(Baseline):
         explanations = ['/'.join([', '.join(summary) for summary in summaries]) for summaries in activated_summaries]
 
         return counts, explanations
+
+
+class SummariesBertBaseline(BertBaseline):
+    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all the summaries. """
+
+    # TODO
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+            explanations: str, explanations of the prediction, optional.
+        """
+
+        choices_words = self.get_choices_words(features)
+        summaries_words = [word for summary_words in self.get_summaries_words(features) for word in summary_words]
+
+        similarity = self.get_bert_similarity(words_lists=choices_words, words=summaries_words)
+
+        return similarity, None
+
+
+class SummariesOverlapBertBaseline(BertBaseline):
+    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all summaries'
+    overlap. """
+
+    # TODO
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+            explanations: str, explanations of the prediction, optional.
+        """
+
+        choices_words = self.get_choices_words(features)
+        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(features) if summary_words]
+        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
+
+        similarity = self.get_bert_similarity(words_lists=choices_words, words=summaries_words)
+
+        return similarity, None
 
 # endregion
 
@@ -1288,7 +1440,31 @@ class ContextAverageEmbeddingBaseline(EmbeddingBaseline):
         choices_words = self.get_choices_words(features)
         context_words = self.get_context_words(features)
 
-        similarity = self.get_average_similarity(words_lists=choices_words, words=context_words)
+        similarity = self.get_average_embedding_similarity(words_lists=choices_words, words=context_words)
+
+        return similarity, None
+
+
+class ContextBertBaseline(BertBaseline):
+    """ Baseline with predictions based on the Bert embedding similarity between the choice and the context. """
+
+    # TODO
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+            explanations: str, explanations of the prediction, optional.
+        """
+
+        choices_words = self.get_choices_words(features)
+        context_words = self.get_context_words(features)
+
+        similarity = self.get_bert_similarity(words_lists=choices_words, words=context_words)
 
         return similarity, None
 
@@ -1389,7 +1565,7 @@ class SummariesContextAverageEmbeddingBaseline(EmbeddingBaseline):
         choices_words = self.get_choices_words(features)
         other_words = self.get_other_words(features)
 
-        similarity = self.get_average_similarity(words_lists=choices_words, words=other_words)
+        similarity = self.get_average_embedding_similarity(words_lists=choices_words, words=other_words)
 
         return similarity, None
 
@@ -1416,123 +1592,64 @@ class SummariesOverlapContextAverageEmbeddingBaseline(EmbeddingBaseline):
         other_words = set.intersection(*other_words) if other_words else set()
         other_words.update(set(self.get_context_words(features)))
 
-        similarity = self.get_average_similarity(words_lists=choices_words, words=other_words)
+        similarity = self.get_average_embedding_similarity(words_lists=choices_words, words=other_words)
+
+        return similarity, None
+
+
+class SummariesContextBertBaseline(BertBaseline):
+    """ Baseline with prediction based on the BERT's similarity between the choice and all summaries and the
+    context. """
+
+    # TODO
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+            explanations: str, explanations of the prediction, optional.
+        """
+
+        choices_words = self.get_choices_words(features)
+        other_words = self.get_other_words(features)
+
+        similarity = self.get_bert_similarity(words_lists=choices_words, words=other_words)
+
+        return similarity, None
+
+
+class SummariesOverlapContextBertBaseline(BertBaseline):
+    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all summaries'
+    overlap and the context. """
+
+    # TODO
+    def pred(self, features):
+        """
+        Predicts the outputs from the features.
+
+        Args:
+            features: dict or torch.Tensor, features of the batch.
+
+        Returns:
+            torch.Tensor, outputs of the prediction.
+            explanations: str, explanations of the prediction, optional.
+        """
+
+        choices_words = self.get_choices_words(features)
+
+        other_words = [set(summary_words) for summary_words in self.get_summaries_words(features) if summary_words]
+        other_words = set.intersection(*other_words) if other_words else set()
+        other_words.update(set(self.get_context_words(features)))
+
+        similarity = self.get_bert_similarity(words_lists=choices_words, words=other_words)
 
         return similarity, None
 
 # endregion
-
-
-# # region BERT embedding Baselines
-# # TODO
-#
-# class BertEmbedding(Baseline):
-#     """ Baseline with predictions based on the dot product of BERT embeddings. """
-#
-#     # region Class initialization
-#
-#     def __init__(self, scores_names, pretrained_model, tokenizer):
-#         """
-#         Initializes an instance of the BERT Embedding Baseline.
-#
-#         Args:
-#             scores_names: iterable, names of the scores to use, the first one being monitored during training.
-#             pretrained_model: unknown, pretrained embedding or model.
-#             tokenizer: transformers.tokenizer, tokenizer.
-#         """
-#
-#         super().__init__(scores_names=scores_names, pretrained_model=pretrained_model, tokenizer=tokenizer)
-#
-#     # endregion
-#
-#     # region Learning methods
-#
-#     def pred(self, features):
-#         """
-#         Predicts the outputs from the features.
-#
-#         Args:
-#             features: dict or torch.Tensor, features of the batch.
-#
-#         Returns:
-#             torch.Tensor, outputs of the prediction.
-#         """
-#
-#         grades = []
-#
-#         text1 = features['context'] + ', '.join(features['entities']) + self.get_summaries_string(features)
-#         tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
-#         embedding1 = self.get_bert_embedding(tokens_tensor1, segments_tensor1)
-#
-#         for i in range(len(features['choices'])):
-#             text2 = features['choices'][i]
-#             tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 0)
-#             embedding2 = self.get_bert_embedding(tokens_tensor2, segments_tensor2)
-#
-#             grades.append(torch.dot(embedding1, embedding2).data.item())
-#
-#         grades = torch.tensor(grades).reshape((-1, 1))
-#
-#         return grades
-#
-#     # endregion
-#
-#
-# class NextSentencePredictionBert(Baseline):
-#     """ Baseline with predictions based on Next Sentence Prediction BERT. """
-#
-#     # region Class initialization
-#
-#     def __init__(self, scores_names, pretrained_model, tokenizer):
-#         """
-#         Initializes an instance of the Next Sentence Prediction BERT Baseline.
-#
-#         Args:
-#             scores_names: iterable, names of the scores to use, the first one being monitored during training.
-#             pretrained_model: unknown, pretrained embedding or model.
-#             tokenizer: transformers.tokenizer, tokenizer.
-#         """
-#
-#         super().__init__(scores_names=scores_names, pretrained_model=pretrained_model, tokenizer=tokenizer)
-#
-#     # endregion
-#
-#     # region Learning methods
-#
-#     def pred(self, features):
-#         """
-#         Predicts the outputs from the features.
-#
-#         Args:
-#             features: dict or torch.Tensor, features of the batch.
-#
-#         Returns:
-#             torch.Tensor, outputs of the prediction.
-#         """
-#
-#         grades = []
-#
-#         text1 = features['context'] + ', '.join(features['entities']) + self.get_summaries_string(features)
-#         tokens_tensor1, segments_tensor1 = self.get_bert_tokenize(text1, 0)
-#
-#         for i in range(len(features['choices'])):
-#             text2 = features['choices'][i]
-#             tokens_tensor2, segments_tensor2 = self.get_bert_tokenize(text2, 1)
-#
-#             tokens_tensor = torch.cat((tokens_tensor1, tokens_tensor2), dim=1)
-#             segments_tensor = torch.cat((segments_tensor1, segments_tensor2), dim=1)
-#
-#             p = self.get_bert_next_sentence_probability(tokens_tensor, segments_tensor)
-#
-#             grades.append(p)
-#
-#         grades = torch.tensor(grades).reshape((-1, 1))
-#
-#         return grades
-#
-#     # endregion
-#
-# # endregion
 
 # endregion
 
@@ -1543,13 +1660,14 @@ class MLModel(BaseModel):
     """ Base structure for the ML models. """
     model_name = None
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model=None,
-                 pretrained_model_dim=None, tokenizer=None):
+    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+                 pretrained_model=None, pretrained_model_dim=None, tokenizer=None):
         """
         Initializes an instance of the ML Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optim.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
@@ -1560,7 +1678,7 @@ class MLModel(BaseModel):
             tokenizer: transformers.tokenizer, tokenizer.
         """
 
-        super().__init__(scores_names=scores_names, pretrained_model=pretrained_model,
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, pretrained_model=pretrained_model,
                          pretrained_model_dim=pretrained_model_dim, tokenizer=tokenizer)
 
         self.net = net
@@ -1692,12 +1810,14 @@ class HalfBOWModel(MLModel):
     """ Model that uses a 1-hot encoding for the choices and a BOW for the other words. """
     model_name = 'half_bow'
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, vocab_frequency_range):
+    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+                 vocab_frequency_range):
         """
         Initializes an instance of the Bag of Word Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
@@ -1706,8 +1826,8 @@ class HalfBOWModel(MLModel):
             vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
         """
 
-        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
-                         experiment_name=experiment_name)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, net=net, optimizer=optimizer,
+                         lr_scheduler=lr_scheduler, loss=loss, experiment_name=experiment_name)
 
         self.vocab_frequency_range = vocab_frequency_range
 
@@ -1770,12 +1890,14 @@ class FullBOWModel(MLModel):
     """ Model that uses a BOW for the choice and the other words. """
     model_name = 'full_bow'
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, vocab_frequency_range):
+    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+                 vocab_frequency_range):
         """
         Initializes an instance of the Bag of Word Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
@@ -1784,8 +1906,8 @@ class FullBOWModel(MLModel):
             vocab_frequency_range: tuple, pair (min, max) for the frequency for a word to be taken into account.
         """
 
-        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
-                         experiment_name=experiment_name)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, net=net, optimizer=optimizer,
+                         lr_scheduler=lr_scheduler, loss=loss, experiment_name=experiment_name)
 
         self.vocab_frequency_range = vocab_frequency_range
 
@@ -1850,13 +1972,14 @@ class EmbeddingModel(MLModel):
     """ Model that uses an average embedding both for the choice words and the context words. """
     model_name = 'embedding_linear'
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model,
-                 pretrained_model_dim):
+    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+                 pretrained_model, pretrained_model_dim):
         """
         Initializes an instance of the linear Embedding Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
@@ -1866,9 +1989,9 @@ class EmbeddingModel(MLModel):
             pretrained_model_dim: int, size of the pretrained embedding or model.
         """
 
-        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
-                         experiment_name=experiment_name, pretrained_model=pretrained_model,
-                         pretrained_model_dim=pretrained_model_dim)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, net=net, optimizer=optimizer,
+                         lr_scheduler=lr_scheduler, loss=loss, experiment_name=experiment_name,
+                         pretrained_model=pretrained_model, pretrained_model_dim=pretrained_model_dim)
 
     def features(self, inputs):
         """
@@ -1898,13 +2021,14 @@ class EmbeddingBilinearModel(MLModel):
     """ Model that uses an average embedding both for the choice words and the context words. """
     model_name = 'embedding_bilinear'
 
-    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, pretrained_model,
-                 pretrained_model_dim):
+    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+                 pretrained_model, pretrained_model_dim):
         """
         Initializes an instance of the bilinear Embedding Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
@@ -1914,9 +2038,9 @@ class EmbeddingBilinearModel(MLModel):
             pretrained_model_dim: int, size of the pretrained embedding or model.
         """
 
-        super().__init__(scores_names=scores_names, net=net, optimizer=optimizer, lr_scheduler=lr_scheduler, loss=loss,
-                         experiment_name=experiment_name, pretrained_model=pretrained_model,
-                         pretrained_model_dim=pretrained_model_dim)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, net=net, optimizer=optimizer,
+                         lr_scheduler=lr_scheduler, loss=loss, experiment_name=experiment_name,
+                         pretrained_model=pretrained_model, pretrained_model_dim=pretrained_model_dim)
 
     def features(self, inputs):
         """
@@ -1940,5 +2064,10 @@ class EmbeddingBilinearModel(MLModel):
         features1, features2 = choices_embedding, other_embedding
 
         return features1, features2
+
+
+class BertModel(MLModel):
+    # TODO
+    pass
 
 # endregion
