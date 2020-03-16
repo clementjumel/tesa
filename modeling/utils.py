@@ -19,9 +19,9 @@ def ranking(outputs):
     n = len(grades)
 
     sorter = torch.argsort(grades, descending=True)
-    ranks = torch.zeros(n)
+    ranks = torch.zeros(n, dtype=torch.long)
 
-    ranks[sorter] = torch.arange(1, n + 1).type(dtype=torch.float)
+    ranks[sorter] = torch.arange(1, n + 1)
 
     return ranks
 
