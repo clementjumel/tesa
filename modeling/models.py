@@ -8,7 +8,6 @@ from string import punctuation as str_punctuation
 from nltk.corpus import stopwords as nltk_stopwords
 from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
-from pyperclip import copy
 import matplotlib.pyplot as plt
 import torch
 from torch.utils.tensorboard import SummaryWriter
@@ -879,9 +878,13 @@ class BaseModel:
         Args:
             valid: bool, whether or not to display the validation scores.
             test: bool, whether or not to display the test scores.
+
+        Returns:
+            latex_code_valid: str, code latex for the validation scores.
+            latex_code_test: str, code latex for the testing scores.
         """
 
-        to_copy = ''
+        latex_code_valid, latex_code_test = '', ''
 
         if valid:
             print("\nScores evaluated on the validation set:")
@@ -890,7 +893,7 @@ class BaseModel:
             for name, s in score.items():
                 print('%s: %.5f' % (name, s))
 
-            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names]) + ' &  '
+            latex_code_valid = ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names])
 
         if test:
             print("\nScores evaluated on the test set:")
@@ -899,11 +902,9 @@ class BaseModel:
             for name, s in score.items():
                 print('%s: %.5f' % (name, s))
 
-            to_copy += '\n' if to_copy else ''
-            to_copy += ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names]) + ' &  '
+            latex_code_test = ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names])
 
-        print("\nLatex code for scores:\n" + to_copy)
-        copy(to_copy)
+        return latex_code_valid, latex_code_test
 
     def plot(self, x1, x2, train_losses, valid_losses, valid_scores):
         """
