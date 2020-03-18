@@ -299,7 +299,9 @@ class BaseModel:
             dict, scores (float) of the batch mapped with the scores' names.
         """
 
-        score = {name: getattr(metrics, name)(ranks=ranks, targets=targets, relevance_level=self.relevance_level)
+        score = {name: getattr(metrics, name)(ranks=ranks.clone(),
+                                              targets=targets.clone(),
+                                              relevance_level=self.relevance_level)
                  for name in self.scores_names}
 
         for name in self.scores_names:
