@@ -151,7 +151,7 @@ def update_latex_code(model, valid=True, test=False):
     latex_code_valid, latex_code_test = model.display_metrics(valid=valid, test=test, silent=True)
     latex_code = latex_code_valid or latex_code_test
 
-    line = name + latex_code + r'\\'
+    line = name + latex_code + r' \\'
     LATEX_CODE += line + '\n'
 
 
