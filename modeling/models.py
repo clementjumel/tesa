@@ -871,13 +871,14 @@ class BaseModel:
 
     # region Display methods
 
-    def display_metrics(self, valid=True, test=False):
+    def display_metrics(self, valid=True, test=False, silent=False):
         """
         Display the validation or test metrics of the model registered during the last experiment.
 
         Args:
             valid: bool, whether or not to display the validation scores.
             test: bool, whether or not to display the test scores.
+            silent: bool, whether to print or not the results.
 
         Returns:
             latex_code_valid: str, code latex for the validation scores.
@@ -887,22 +888,24 @@ class BaseModel:
         latex_code_valid, latex_code_test = '', ''
 
         if valid:
-            print("\nScores evaluated on the validation set:")
+            print("\nScores evaluated on the validation set:") if not silent else None
             score = {name: self.valid_scores[name][-1] for name in self.scores_names}
 
-            for name, s in score.items():
-                print('%s: %.5f' % (name, s))
+            if not silent:
+                for name, s in score.items():
+                    print('%s: %.5f' % (name, s))
 
-            latex_code_valid = ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names])
+            latex_code_valid = ' & ' + ' & '.join([str(round(score[name], 5))[1:] for name in self.scores_names])
 
         if test:
-            print("\nScores evaluated on the test set:")
+            print("\nScores evaluated on the test set:") if not silent else None
             score = {name: self.test_scores[name][-1] for name in self.scores_names}
 
-            for name, s in score.items():
-                print('%s: %.5f' % (name, s))
+            if not silent:
+                for name, s in score.items():
+                    print('%s: %.5f' % (name, s))
 
-            latex_code_test = ' & ' + ' & '.join([str(round(score[name], 5)) for name in self.scores_names])
+            latex_code_test = ' & ' + ' & '.join([str(round(score[name], 5))[1:] for name in self.scores_names])
 
         return latex_code_valid, latex_code_test
 
