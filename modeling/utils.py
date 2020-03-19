@@ -84,7 +84,7 @@ SCORE_TO_LATEX_NAME = {
     'reciprocal_best_rank': r'\shortstack{recip.\\best\\rank}',
     'reciprocal_average_rank': r'\shortstack{recip.\\av.\\rank}',
     'ndcg_at_10': r'\shortstack{ndcg\\@10}',
-    'ndcg_at_100': r'\shortstack{ndcg\\@10à}'
+    'ndcg_at_100': r'\shortstack{ndcg\\@100}'
 }
 
 MODEL_TO_LATEX_NAME = {
