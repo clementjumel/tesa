@@ -154,6 +154,12 @@ def update_latex_code(model, valid=True, test=False):
     line = name + latex_code + r'\\'
     LATEX_CODE += line + '\n'
 
+
+def display_latex_code():
+    """ Display the global variable LATEX_CODE. """
+
+    print(LATEX_CODE)
+
 # endregion
 
 
