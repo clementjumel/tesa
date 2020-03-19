@@ -155,8 +155,12 @@ def update_latex_code(model, valid=True, test=False):
     LATEX_CODE += line + '\n'
 
 
-def display_latex_code():
-    """ Display the global variable LATEX_CODE. """
+def end_latex_code():
+    """ Ends and display the global variable LATEX_CODE. """
+
+    global LATEX_CODE
+
+    LATEX_CODE += r'\end{tabular}'
 
     print(LATEX_CODE)
 
