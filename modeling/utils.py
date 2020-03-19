@@ -131,7 +131,7 @@ def init_latex_code(scores_names):
     LATEX_CODE += line + '\n'
 
 
-def update_latex_code(model, valid, test):
+def update_latex_code(model, valid=True, test=False):
     """
     Updates the global variable LATEX_CODE with the scores of display_metrics of the model.
 
