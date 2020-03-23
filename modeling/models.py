@@ -11,6 +11,7 @@ from tqdm import tqdm_notebook as tqdm
 import matplotlib.pyplot as plt
 import torch
 from torch.utils.tensorboard import SummaryWriter
+from fairseq.data.data_utils import collate_tokens
 
 
 class BaseModel:
@@ -718,7 +719,7 @@ class BaseModel:
 
     # endregion
 
-    # region Bert embedding methods
+    # region BERT methods
 
     # TODO
     def get_bert_tokenize(self, text, segment):
@@ -832,7 +833,6 @@ class BaseModel:
 #         return grades
 
 
-
 # class NextSentencePredictionBert(Baseline):
 #     """ Baseline with predictions based on Next Sentence Prediction BERT. """
 #
@@ -866,6 +866,12 @@ class BaseModel:
 #         grades = torch.tensor(grades).reshape((-1, 1))
 #
 #         return grades
+
+    # endregion
+
+    # region BART methods
+
+    # TODO
 
     # endregion
 
@@ -1028,7 +1034,7 @@ class BaseModel:
 class Baseline(BaseModel):
     """ Base structure for the Baselines. """
 
-    def __init__(self, scores_names, relevance_level):
+    def __init__(self, scores_names, relevance_level=1):
         """
         Initializes an instance of the Baseline.
 
@@ -1063,15 +1069,15 @@ class Baseline(BaseModel):
 class EmbeddingBaseline(Baseline):
     """ Base structure for the Baselines using embeddings. """
 
-    def __init__(self, scores_names, relevance_level, pretrained_model, pretrained_model_dim):
+    def __init__(self, scores_names, pretrained_model, pretrained_model_dim, relevance_level=1):
         """
         Initializes an instance of the Embedding Baseline.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
-            relevance_level: int, minimum label to consider a choice as relevant.
             pretrained_model: unknown, pretrained embedding or model.
             pretrained_model_dim: int, size of the pretrained embedding or model.
+            relevance_level: int, minimum label to consider a choice as relevant.
         """
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level)
@@ -1080,24 +1086,42 @@ class EmbeddingBaseline(Baseline):
         self.pretrained_model_dim = pretrained_model_dim
 
 
-class BertBaseline(Baseline):
+class BERTBaseline(Baseline):
     """ Base structure for the Baselines using BERT. """
 
-    def __init__(self, scores_names, relevance_level, pretrained_model, tokenizer):
+    def __init__(self, scores_names, pretrained_model, tokenizer, relevance_level=1):
         """
         Initializes an instance of the BERT Baseline.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
-            relevance_level: int, minimum label to consider a choice as relevant.
             pretrained_model: unknown, pretrained embedding or model.
             tokenizer: transformers.tokenizer, tokenizer.
+            relevance_level: int, minimum label to consider a choice as relevant.
         """
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level)
 
         self.pretrained_model = pretrained_model
         self.tokenizer = tokenizer
+
+
+class BARTBaseline(Baseline):
+    """ Base structure for the Baselines using BART. """
+
+    def __init__(self, scores_names, pretrained_model, relevance_level=1):
+        """
+        Initializes an instance of the BERT Baseline.
+
+        Args:
+            scores_names: iterable, names of the scores to use, the first one being monitored during training.
+            pretrained_model: unknown, pretrained embedding or model.
+            relevance_level: int, minimum label to consider a choice as relevant.
+        """
+
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level)
+
+        self.pretrained_model = pretrained_model
 
 # endregion
 
@@ -1328,54 +1352,34 @@ class ActivatedSummariesBaseline(Baseline):
         return counts, explanations
 
 
-class SummariesBertBaseline(BertBaseline):
-    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all the summaries. """
+class SummariesBERTSimilarityBaseline(BERTBaseline):
+    """ Baseline with prediction based on BERT's encoding similarity between the choice and all the summaries. """
 
     # TODO
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
-
-        Args:
-            features: dict or torch.Tensor, features of the batch.
-
-        Returns:
-            torch.Tensor, outputs of the prediction.
-            explanations: str, explanations of the prediction, optional.
-        """
-
-        choices_words = self.get_choices_words(features)
-        summaries_words = [word for summary_words in self.get_summaries_words(features) for word in summary_words]
-
-        similarity = self.get_bert_similarity(words_lists=choices_words, words=summaries_words)
-
-        return similarity, None
+    pass
 
 
-class SummariesOverlapBertBaseline(BertBaseline):
-    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all summaries'
-    overlap. """
+class SummariesOverlapBERTSimilarityBaseline(BERTBaseline):
+    """ Baseline with prediction based on BERT's encoding similarity between the choice and the overvalp between
+    all the summaries. """
 
     # TODO
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
+    pass
 
-        Args:
-            features: dict or torch.Tensor, features of the batch.
 
-        Returns:
-            torch.Tensor, outputs of the prediction.
-            explanations: str, explanations of the prediction, optional.
-        """
+class SummariesBARTMNLIBaseline(BARTBaseline):
+    """ Baseline with prediction based on the BART's MNLI prediction the choice and all the summaries. """
 
-        choices_words = self.get_choices_words(features)
-        summaries_words = [set(summary_words) for summary_words in self.get_summaries_words(features) if summary_words]
-        summaries_words = set.intersection(*summaries_words) if summaries_words else set()
+    # TODO
+    pass
 
-        similarity = self.get_bert_similarity(words_lists=choices_words, words=summaries_words)
 
-        return similarity, None
+class SummariesOverlapBARTMNLIBaseline(BARTBaseline):
+    """ Baseline with prediction based on the BART's MNLI prediction the choice and the overlap between
+    all the summaries. """
+
+    # TODO
+    pass
 
 # endregion
 
@@ -1451,28 +1455,18 @@ class ContextAverageEmbeddingBaseline(EmbeddingBaseline):
         return similarity, None
 
 
-class ContextBertBaseline(BertBaseline):
-    """ Baseline with predictions based on the Bert embedding similarity between the choice and the context. """
+class ContextBERTSimilarityBaseline(BERTBaseline):
+    """ Baseline with predictions based on BERT's encoding similarity between the choice and the context. """
 
     # TODO
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
+    pass
 
-        Args:
-            features: dict or torch.Tensor, features of the batch.
 
-        Returns:
-            torch.Tensor, outputs of the prediction.
-            explanations: str, explanations of the prediction, optional.
-        """
+class ContextBARTMNLIBaseline(BARTBaseline):
+    """ Baseline with prediction based on the BART's MNLI prediction the choice and the context. """
 
-        choices_words = self.get_choices_words(features)
-        context_words = self.get_context_words(features)
-
-        similarity = self.get_bert_similarity(words_lists=choices_words, words=context_words)
-
-        return similarity, None
+    # TODO
+    pass
 
 # endregion
 
@@ -1603,57 +1597,36 @@ class SummariesOverlapContextAverageEmbeddingBaseline(EmbeddingBaseline):
         return similarity, None
 
 
-class SummariesContextBertBaseline(BertBaseline):
-    """ Baseline with prediction based on the BERT's similarity between the choice and all summaries and the
+class SummariesContextBERTSimilarityBaseline(BERTBaseline):
+    """ Baseline with prediction based on BERT's encoding similarity between the choice and all summaries and the
     context. """
 
     # TODO
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
-
-        Args:
-            features: dict or torch.Tensor, features of the batch.
-
-        Returns:
-            torch.Tensor, outputs of the prediction.
-            explanations: str, explanations of the prediction, optional.
-        """
-
-        choices_words = self.get_choices_words(features)
-        other_words = self.get_other_words(features)
-
-        similarity = self.get_bert_similarity(words_lists=choices_words, words=other_words)
-
-        return similarity, None
+    pass
 
 
-class SummariesOverlapContextBertBaseline(BertBaseline):
-    """ Baseline with prediction based on the BERT's embeddings similarity between the choice and all summaries'
+class SummariesOverlapContextBERTBaseline(BERTBaseline):
+    """ Baseline with prediction based on BERT's encoding similarity between the choice and all summaries'
     overlap and the context. """
 
     # TODO
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
+    pass
 
-        Args:
-            features: dict or torch.Tensor, features of the batch.
 
-        Returns:
-            torch.Tensor, outputs of the prediction.
-            explanations: str, explanations of the prediction, optional.
-        """
+class SummariesContextBARTMNLIBaseline(BARTBaseline):
+    """ Baseline with prediction based on BART's MNLI prediction between the choice and all summaries and the
+    context. """
 
-        choices_words = self.get_choices_words(features)
+    # TODO
+    pass
 
-        other_words = [set(summary_words) for summary_words in self.get_summaries_words(features) if summary_words]
-        other_words = set.intersection(*other_words) if other_words else set()
-        other_words.update(set(self.get_context_words(features)))
 
-        similarity = self.get_bert_similarity(words_lists=choices_words, words=other_words)
+class SummariesOverlapContextBARTMNLIBaseline(BARTBaseline):
+    """ Baseline with prediction based on BART's MNLI prediction between the choice and all summaries'
+    overlap and the context. """
 
-        return similarity, None
+    # TODO
+    pass
 
 # endregion
 
@@ -1666,19 +1639,19 @@ class MLModel(BaseModel):
     """ Base structure for the ML models. """
     model_name = None
 
-    def __init__(self, scores_names, relevance_level, net, optimizer, lr_scheduler, loss, experiment_name,
+    def __init__(self, scores_names, net, optimizer, lr_scheduler, loss, experiment_name, relevance_level=1,
                  pretrained_model=None, pretrained_model_dim=None, tokenizer=None):
         """
         Initializes an instance of the ML Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
-            relevance_level: int, minimum label to consider a choice as relevant.
             net: nn.Module, neural net to train.
             optimizer: torch.optim.optimizer, optimizer for the neural net.
             lr_scheduler: torch.optim.lr_scheduler, learning rate scheduler for the neural net.
             loss: torch.nn.Loss, loss to use.
             experiment_name: str, name of the experiment to save (if None, doesn't save the results in Tensorboard).
+            relevance_level: int, minimum label to consider a choice as relevant.
             pretrained_model: unknown, pretrained embedding or model.
             pretrained_model_dim: int, size of the pretrained embedding or model.
             tokenizer: transformers.tokenizer, tokenizer.
@@ -2070,10 +2043,5 @@ class EmbeddingBilinearModel(MLModel):
         features1, features2 = choices_embedding, other_embedding
 
         return features1, features2
-
-
-class BertModel(MLModel):
-    # TODO
-    pass
 
 # endregion
