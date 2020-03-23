@@ -567,7 +567,7 @@ class ContextDependentTask(Task):
         return labelled_answers
 
 
-class ContextDependentSameTypeTask(ContextDependentTask):
+class ContextDependentSameTypeTask(Task):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -593,7 +593,7 @@ class ContextDependentSameTypeTask(ContextDependentTask):
         return labelled_answers
 
 
-class HybridTask(ContextDependentTask):
+class FullHybridTask(Task):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -627,7 +627,37 @@ class HybridTask(ContextDependentTask):
         return labelled_answers
 
 
-class HybridSameTypeTask(HybridTask):
+class HybridTask(Task):
+
+    def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
+        """
+        Returns the answers and their labels as a list of tuples.
+
+        Args:
+            sample_queries: list of queries, queries of the Sample.
+            sample_annotations: list of annotations, annotations of the Sample.
+            queries: dict of Query, Queries of the annotations.
+            annotations: dict of Annotations, all the annotations.
+
+        Returns:
+            dict, answers and their labels (0 for negative answers).
+        """
+
+        answers = self.get_answers_all(annotations=annotations)
+        labelled_answers = {answer: 0 for answer in answers}
+
+        answers = self.get_answers_same_tuple(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        for answer in answers:
+            labelled_answers[answer] = 1
+
+        answers = self.get_answers_sample(sample_annotations=sample_annotations)
+        for answer in answers:
+            labelled_answers[answer] = 2
+
+        return labelled_answers
+
+
+class HybridSameTypeTask(Task):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
