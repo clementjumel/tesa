@@ -4,11 +4,11 @@ from database_creation.utils import Sample
 from collections import defaultdict
 from numpy import split, concatenate, asarray
 from numpy.random import seed, shuffle
+from pickle import dump, load
 
 
 class Task:
-
-    # region Class initialization
+    task_name = None
 
     def __init__(self, min_assignments=5, min_answers=2, test_proportion=0.25, valid_proportion=0.25, batch_size=32,
                  drop_last=True, k_cross_validation=0, random_seed=1):
@@ -41,8 +41,6 @@ class Task:
                           test_proportion=test_proportion,
                           valid_proportion=valid_proportion,
                           k_cross_validation=k_cross_validation)
-
-    # endregion
 
     # region Main methods
 
@@ -172,9 +170,10 @@ class Task:
                                   valid_sets[i]) for i in range(len(train_sets))]
             self.test_loader = test_set
 
-            print("Split into k-fold cross validation sets (train: %d, %d percents," % (s[0][0][0], 100*s[0][0][0]/n) +
-                  " valid: %d, %d percents)" % (s[0][1][0], 100*s[0][1][0]/n) +
-                  " and a test set (%d, %d percents)." % (test_set.shape[0], 100*test_set.shape[0]/n))
+            print("Split into k-fold cross validation sets",
+                  "(train: %d, %d percents," % (s[0][0][0], 100 * s[0][0][0] / n),
+                  "valid: %d, %d percents)" % (s[0][1][0], 100 * s[0][1][0] / n),
+                  "and a test set (%d, %d percents)." % (test_set.shape[0], 100 * test_set.shape[0] / n))
 
         else:
             n_valid = round(valid_proportion * n)
@@ -187,9 +186,9 @@ class Task:
             self.valid_loader = valid_set
             self.test_loader = test_set
 
-            print("Split into train (%d, %d percents)," % (train_set.shape[0], 100*train_set.shape[0]/n) +
-                  " valid (%d, %d percents)" % (valid_set.shape[0], 100*valid_set.shape[0]/n) +
-                  " and test (%d, %d) percents." % (test_set.shape[0], 100*test_set.shape[0]/n))
+            print("Split into train (%d, %d percents)," % (train_set.shape[0], 100 * train_set.shape[0] / n),
+                  "valid (%d, %d percents)" % (valid_set.shape[0], 100 * valid_set.shape[0] / n),
+                  "and test (%d, %d) percents." % (test_set.shape[0], 100 * test_set.shape[0] / n))
 
     # endregion
 
@@ -445,10 +444,48 @@ class Task:
 
         return data_loader
 
+    def save_pkl(self, folder_path):
+        """
+        Save the Task using pickle in [folder_path][self.task_name].pkl.
+
+        Args:
+            folder_path: str, path of the folder to save in.
+        """
+
+        file_name = folder_path + self.task_name + '.pkl'
+
+        with open(file_name, 'wb') as f:
+            dump(obj=self, file=f, protocol=-1)
+
+        print("Task saved at %s." % file_name)
+
+    @staticmethod
+    def load_pkl(task_name, folder_path):
+        """
+        Load a Task using pickle from [folder_path][task_name].pkl
+
+        Args:
+            task_name: str, name of the Task to load.
+            folder_path: str, path of the folder to save in.
+
+        Returns:
+            Task, loaded object.
+        """
+
+        file_name = folder_path + task_name + '.pkl'
+
+        with open(file_name, 'rb') as f:
+            task = load(f)
+
+        print("Task loaded from %s" % file_name)
+
+        return task
+
     # endregion
 
 
 class ContextFreeTask(Task):
+    task_name = 'context_free'
 
     # region Methods get_
 
@@ -516,6 +553,7 @@ class ContextFreeTask(Task):
 
 
 class ContextFreeSameTypeTask(ContextFreeTask):
+    task_name = 'context_free_same_type'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -542,6 +580,7 @@ class ContextFreeSameTypeTask(ContextFreeTask):
 
 
 class ContextDependentTask(Task):
+    task_name = 'context_dependent'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -568,6 +607,7 @@ class ContextDependentTask(Task):
 
 
 class ContextDependentSameTypeTask(Task):
+    task_name = 'context_dependent_same_type'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -594,6 +634,7 @@ class ContextDependentSameTypeTask(Task):
 
 
 class FullHybridTask(Task):
+    task_name = 'full_hybrid'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -628,6 +669,7 @@ class FullHybridTask(Task):
 
 
 class HybridTask(Task):
+    task_name = 'hybrid'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -658,6 +700,7 @@ class HybridTask(Task):
 
 
 class HybridSameTypeTask(Task):
+    task_name = 'hybrid_same_type'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -685,3 +728,56 @@ class HybridSameTypeTask(Task):
             labelled_answers[answer] = 2
 
         return labelled_answers
+
+
+if __name__ == '__main__':
+    # Names of the subclasses of Task
+    class_names = ['ContextFreeTask',
+                   'ContextFreeSameTypeTask',
+                   'ContextDependentTask',
+                   'ContextDependentSameTypeTask',
+                   'FullHybridTask',
+                   'HybridTask',
+                   'HybridSameTypeTask']
+
+    # Global parameters of the task
+    min_assignments = 5
+    min_answers = 2
+    batch_size = 32
+    drop_last = False
+    k_cross_validation = 0
+    random_seed = 1
+
+    # Parameters dependent on the training set-up
+    test_proportion = 0.25
+    valid_proportion = 0.25
+    folder_path = '../saved_tasks/training/'
+
+    for class_name in class_names:
+        task = eval(class_name)(min_assignments=min_assignments,
+                                min_answers=min_answers,
+                                test_proportion=test_proportion,
+                                valid_proportion=valid_proportion,
+                                batch_size=batch_size,
+                                drop_last=drop_last,
+                                k_cross_validation=k_cross_validation,
+                                random_seed=random_seed)
+
+        task.save_pkl(folder_path=folder_path)
+
+    # Parameters dependent on the evaluation set-up
+    test_proportion = 0.5
+    valid_proportion = 0.5
+    folder_path = '../saved_tasks/evaluation/'
+
+    for class_name in class_names:
+        task = eval(class_name)(min_assignments=min_assignments,
+                                min_answers=min_answers,
+                                test_proportion=test_proportion,
+                                valid_proportion=valid_proportion,
+                                batch_size=batch_size,
+                                drop_last=drop_last,
+                                k_cross_validation=k_cross_validation,
+                                random_seed=random_seed)
+
+        task.save_pkl(folder_path=folder_path)
