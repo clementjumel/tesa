@@ -11,7 +11,7 @@ class Task:
     task_name = None
 
     def __init__(self, min_assignments=5, min_answers=2, test_proportion=0.25, valid_proportion=0.25, batch_size=32,
-                 drop_last=True, k_cross_validation=0, random_seed=1):
+                 drop_last=True, k_cross_validation=0, root='', random_seed=1):
         """
         Initializes an instance of the base Task.
 
@@ -23,6 +23,7 @@ class Task:
             batch_size: int, number of samples in each batch.
             drop_last: bool, whether or not to delete the last batch if incomplete.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
+            root: str, path to the root of the project.
             random_seed: int, the seed to use for the random processes.
         """
 
@@ -40,7 +41,8 @@ class Task:
                           drop_last=drop_last,
                           test_proportion=test_proportion,
                           valid_proportion=valid_proportion,
-                          k_cross_validation=k_cross_validation)
+                          k_cross_validation=k_cross_validation,
+                          root=root)
 
     # region Main methods
 
@@ -129,7 +131,7 @@ class Task:
     # region Methods compute_
 
     def compute_data(self, min_assignments, min_answers, batch_size, drop_last, test_proportion, valid_proportion,
-                     k_cross_validation):
+                     k_cross_validation, root):
         """
         Compute the learnable data loaders by processing the Dataset.
 
@@ -141,11 +143,15 @@ class Task:
             test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
             valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
             k_cross_validation: int, number of folds to create.
+            root: str, path to the root of the project.
         """
 
-        raw_data = self.get_raw_data(min_assignments=min_assignments, min_answers=min_answers)
+        raw_data = self.get_raw_data(min_assignments=min_assignments, min_answers=min_answers, root=root)
 
         n = len(raw_data)
+        if not n:
+            raise Exception("No data imported.")
+
         n_test = round(test_proportion * n)
 
         if self.use_cross_validation:
@@ -194,19 +200,20 @@ class Task:
 
     # region Methods get_
 
-    def get_raw_data(self, min_assignments, min_answers):
+    def get_raw_data(self, min_assignments, min_answers, root):
         """
         Returns the raw data using the methods from Dataset.
 
         Args:
             min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
             min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
+            root: str, path to the root of the project.
 
         Returns:
             2d-array, raw sample from the task, each line corresponding to (inputs, targets)
         """
 
-        database = Database()
+        database = Database(root=root)
         database.process_task()
 
         queries, annotations = database.queries, database.annotations
