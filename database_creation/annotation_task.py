@@ -1,5 +1,5 @@
 from database_creation.utils import Tuple, Wikipedia, Query, Annotation
-from database_creation.annotated_article import Article
+from database_creation.nyt_article import Article
 
 from numpy.random import seed, choice
 from time import time
@@ -14,14 +14,12 @@ from itertools import chain, combinations
 from re import findall
 
 
-class Database:
-    # region Class initialization
+class AnnotationTask:
 
-    modulo_articles, modulo_tuples, modulo_entities = 500, 1000, 100
-
-    def __init__(self, years=(2006, 2007), max_size=None, shuffle=True, min_articles=1, min_queries=1, random_seed=0):
+    def __init__(self, years=(2006, 2007), max_size=None, shuffle=True, min_articles=1, min_queries=1, root='',
+                 random_seed=0):
         """
-        Initializes an instance of Database.
+        Initializes an instance of AnnotationTask.
 
         Args:
             years: list, years (int) of the database to analyse.
@@ -29,6 +27,7 @@ class Database:
             shuffle: bool, whether to shuffle the articles selected in the database.
             min_articles: int, minimum number of articles an entities' tuple must be in.
             min_queries: int, minimum number of Queries an entities' tuple must have.
+            root: str, path to the root of the project.
             random_seed: int, the seed to use for the random processes.
         """
 
@@ -38,6 +37,11 @@ class Database:
         self.min_articles = min_articles
         self.min_queries = min_queries
         self.random_seed = random_seed
+        self.root = root
+
+        self.modulo_articles = 500
+        self.modulo_tuples = 1000
+        self.modulo_entities = 100
 
         self.articles = None
         self.entities = None
@@ -49,24 +53,6 @@ class Database:
         self.task = None
 
         seed(random_seed)
-
-    def __str__(self):
-        """
-        Overrides the builtin str method, customized for the instances of Database.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        s = "Years: " + ', '.join([str(year) for year in self.years]) + '\n'
-        s += "Max size: " + str(self.max_size) + '\n'
-        s += "Shuffle: " + str(self.shuffle) + '\n'
-        s += "Min articles: " + str(self.min_articles) + '\n'
-        s += "Min queries: " + str(self.min_queries)
-
-        return s
-
-    # endregion
 
     # region Decorators
 
@@ -172,10 +158,9 @@ class Database:
             debug: bool, whether or not to perform the debugging of the database.
         """
 
-        self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='task_creation/wikipedia') if load \
-            else None
+        self.load_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia') if load else None
         self.compute_wikipedia(load=load, debug=debug)
-        self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='task_creation/wikipedia')
+        self.save_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
     def process_queries(self, load=False, file_name=None, debug=False, csv_size=100, csv_seed=1, exclude_seen=True):
@@ -238,7 +223,7 @@ class Database:
                                                                          len(out_wikipedia['not_found'])))
 
         for in_name in in_names:
-            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='task_creation/wikipedia')
+            in_wikipedia = self.load_pkl(file_name=in_name, folder_name='wikipedia')
 
             print("File {}: {} found/{} not_found...".format(in_name,
                                                              len(in_wikipedia['found']),
@@ -250,7 +235,7 @@ class Database:
             print("Global file updated: {} found/{} not_found.\n".format(len(out_wikipedia['found']),
                                                                          len(out_wikipedia['not_found'])))
 
-        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='task_creation/wikipedia')
+        self.save_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
         self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
@@ -264,7 +249,7 @@ class Database:
         """
 
         self.compute_correction(step=step)
-        self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='task_creation/wikipedia')
+        self.save_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
 
     # endregion
 
@@ -281,8 +266,7 @@ class Database:
         """
 
         articles = {}
-        prefix, _ = self.prefix_suffix()
-        root = prefix + '../nyt_annotated_corpus/'
+        root = self.root + '/nyt_annotated_corpus/'
 
         for data_path in self.paths():
             id_ = data_path.split('/')[-1].split('.')[0]
@@ -521,8 +505,9 @@ class Database:
         queries = dict()
         prefix, _ = self.prefix_suffix()
 
-        for path in sorted(glob(prefix + 'task_annotation/*/task/*.pkl')):
-            version = path.split('/')[-3]
+        for path in sorted(glob(prefix + 'annotations/*/task/*.pkl')):
+            path = path.split(prefix)[1]
+            version = path.split('/')[1]
 
             if 'pilot' not in version or not exclude_pilot:
                 folder_name, file_name = '/'.join(path.split('/')[:-1]), path.split('/')[-1].split('.pkl')[0]
@@ -543,11 +528,12 @@ class Database:
         annotations = defaultdict(list)
         prefix, _ = self.prefix_suffix()
 
-        for path in sorted(glob(prefix + 'task_annotation/*/results/*.csv')):
-            version, batch = path.split('/')[-3], path.split('/')[-1].replace('_complete.csv', '')
+        for path in sorted(glob(prefix + 'annotations/*/results/*.csv')):
+            path = path.split(prefix)[1]
+            version, batch = path.split('/')[1], path.split('/')[-1].replace('_complete.csv', '')
 
             if 'pilot' not in version or not exclude_pilot:
-                df = read_csv(path)
+                df = read_csv(prefix + path)
                 print("Object loaded from {}".format(path))
 
                 for _, row in df.iterrows():
@@ -839,7 +825,7 @@ class Database:
             suffix: str, ending of the name of the file (after the basic name of the file).
         """
 
-        prefix, suffix = '../results/', ''
+        prefix, suffix = self.root + 'results/annotation_task/', ''
 
         if self.max_size is None:
             suffix += '_sizemax'
@@ -861,7 +847,7 @@ class Database:
 
         return prefix, suffix
 
-    def save_pkl(self, attribute_name=None, obj=None, file_name=None, folder_name='task_creation/queries'):
+    def save_pkl(self, attribute_name=None, obj=None, file_name=None, folder_name='queries'):
         """
         Save an attribute (designated by its name) or an object into a file using pickle.
 
@@ -899,7 +885,7 @@ class Database:
         except PicklingError as err:
             print("Could not save (PicklingError):", err)
 
-    def load_pkl(self, attribute_name=None, file_name=None, folder_name='task_creation/queries'):
+    def load_pkl(self, attribute_name=None, file_name=None, folder_name='queries'):
         """
         Load an attribute (designated by its name) or an object from a file using pickle.
 
@@ -929,7 +915,7 @@ class Database:
             print("Object loaded from {}".format(file_name))
             return obj
 
-    def save_csv(self, attribute_name=None, file_name=None, folder_name='task_creation/queries', limit=None,
+    def save_csv(self, attribute_name=None, file_name=None, folder_name='queries', limit=None,
                  random_seed=None, exclude_seen=True):
         """
         Save a dictionary attribute to a .csv using pandas DataFrame.
@@ -1056,9 +1042,7 @@ class Database:
             list, sorted file paths of the data of the articles.
         """
 
-        prefix, _ = self.prefix_suffix()
-
-        patterns = [prefix + '../nyt_annotated_corpus/data/' + str(year) + '/*/*/*.xml' for year in self.years]
+        patterns = [self.root + 'nyt_annotated_corpus/data/' + str(year) + '/*/*/*.xml' for year in self.years]
 
         paths = []
         for pattern in patterns:
