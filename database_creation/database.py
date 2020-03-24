@@ -1,5 +1,5 @@
 from database_creation.utils import Tuple, Wikipedia, Query, Annotation
-from database_creation.article import Article
+from database_creation.annotated_article import Article
 
 from numpy.random import seed, choice
 from time import time
@@ -896,8 +896,8 @@ class Database:
             else:
                 print("Object saved at {}.".format(file_name))
 
-        except PicklingError:
-            print("Could not save (PicklingError).")
+        except PicklingError as err:
+            print("Could not save (PicklingError):", err)
 
     def load_pkl(self, attribute_name=None, file_name=None, folder_name='task_creation/queries'):
         """
@@ -1092,19 +1092,3 @@ class Database:
         return set(chain.from_iterable(combinations(s, r) for r in range(min_len, max_len + 1)))
 
     # endregion
-
-
-def main():
-    database = Database(max_size=1000)
-
-    database.preprocess_database()
-    database.process_articles()
-    database.process_wikipedia(load=True)
-
-    database.correct_wiki()
-
-    database.process_queries(check_changes=True, csv_seed=1)
-
-
-if __name__ == '__main__':
-    main()
