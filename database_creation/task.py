@@ -751,7 +751,7 @@ if __name__ == '__main__':
     # Parameters dependent on the training set-up
     test_proportion = 0.25
     valid_proportion = 0.25
-    folder_path = '../saved_tasks/training/'
+    folder_path = '../results/modeling_tasks/training/'
 
     for class_name in class_names:
         task = eval(class_name)(min_assignments=min_assignments,
@@ -768,7 +768,7 @@ if __name__ == '__main__':
     # Parameters dependent on the evaluation set-up
     test_proportion = 0.5
     valid_proportion = 0.5
-    folder_path = '../saved_tasks/evaluation/'
+    folder_path = '../results/modeling_tasks/evaluation/'
 
     for class_name in class_names:
         task = eval(class_name)(min_assignments=min_assignments,
