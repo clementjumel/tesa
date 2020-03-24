@@ -1,4 +1,4 @@
-from database_creation.database import Database
+from database_creation.annotation_task import AnnotationTask
 from database_creation.utils import Sample
 
 from collections import defaultdict
@@ -7,13 +7,13 @@ from numpy.random import seed, shuffle
 from pickle import dump, load
 
 
-class Task:
+class ModelingTask:
     task_name = None
 
     def __init__(self, min_assignments=5, min_answers=2, test_proportion=0.25, valid_proportion=0.25, batch_size=32,
                  drop_last=True, k_cross_validation=0, root='', random_seed=1):
         """
-        Initializes an instance of the base Task.
+        Initializes an instance of the base ModelingTask.
 
         Args:
             min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
@@ -213,10 +213,10 @@ class Task:
             2d-array, raw sample from the task, each line corresponding to (inputs, targets)
         """
 
-        database = Database(root=root)
-        database.process_task()
+        annotation_task = AnnotationTask(root=root)
+        annotation_task.process_task()
 
-        queries, annotations = database.queries, database.annotations
+        queries, annotations = annotation_task.queries, annotation_task.annotations
 
         annotations = self.filter_annotations(annotations=annotations,
                                               min_assignments=min_assignments,
@@ -491,7 +491,7 @@ class Task:
     # endregion
 
 
-class ContextFreeTask(Task):
+class ContextFreeTask(ModelingTask):
     task_name = 'context_free'
 
     # region Methods get_
@@ -586,7 +586,7 @@ class ContextFreeSameTypeTask(ContextFreeTask):
         return labelled_answers
 
 
-class ContextDependentTask(Task):
+class ContextDependentTask(ModelingTask):
     task_name = 'context_dependent'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
@@ -613,7 +613,7 @@ class ContextDependentTask(Task):
         return labelled_answers
 
 
-class ContextDependentSameTypeTask(Task):
+class ContextDependentSameTypeTask(ModelingTask):
     task_name = 'context_dependent_same_type'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
@@ -640,7 +640,7 @@ class ContextDependentSameTypeTask(Task):
         return labelled_answers
 
 
-class FullHybridTask(Task):
+class FullHybridTask(ModelingTask):
     task_name = 'full_hybrid'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
@@ -675,7 +675,7 @@ class FullHybridTask(Task):
         return labelled_answers
 
 
-class HybridTask(Task):
+class HybridTask(ModelingTask):
     task_name = 'hybrid'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
@@ -706,7 +706,7 @@ class HybridTask(Task):
         return labelled_answers
 
 
-class HybridSameTypeTask(Task):
+class HybridSameTypeTask(ModelingTask):
     task_name = 'hybrid_same_type'
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
