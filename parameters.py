@@ -53,6 +53,9 @@ SCORES_NAMES = [
     'ndcg_at_100',
 ]
 
+EXPLAIN_SAMPLES = 5
+EXPLAIN_CHOICES = 10
+
 # region Baselines parameters
 # TODO
 # endregion
