@@ -1,9 +1,17 @@
 # region Miscellaneous
 
 verbose = True
+save = True
 
-evaluation_folder_path = 'results/modeling_task/evaluation_split/'
-training_folder_path = 'results/modeling_task/training_split/'
+# endregion
+
+# region Paths
+
+modeling_task_for_baselines_path = 'results/modeling_task/baselines_split/'
+modeling_task_for_models_path = 'results/modeling_task/models_split/'
+
+baselines_results_path = 'results/baselines/'
+models_results_path = 'results/models/'
 
 # endregion
 
