@@ -1,59 +1,63 @@
 # region Miscellaneous
-
-verbose = True
-save = True
-
+VERBOSE = True
+SAVE = True
 # endregion
 
 # region Paths
+MODELING_TASK_FOR_BASELINES_PATH = "results/modeling_task/baselines_split/"
+MODELING_TASK_FOR_MODELS_PATH = "results/modeling_task/models_split/"
 
-modeling_task_for_baselines_path = 'results/modeling_task/baselines_split/'
-modeling_task_for_models_path = 'results/modeling_task/models_split/'
-
-baselines_results_path = 'results/baselines/'
-models_results_path = 'results/models/'
-
+BASELINES_RESULTS_PATH = 'results/baselines/'
+MODELS_RESULTS_PATH = 'results/models/'
 # endregion
 
 # region Annotation task parameters
-
 # TODO
-
 # endregion
 
 # region Modeling task parameters
+MODELING_TASK_NAMES = [
+    'ContextFreeTask',
+    'ContextFreeSameTypeTask',
+    'ContextDependentTask',
+    'ContextDependentSameTypeTask',
+    'FullHybridTask',
+    'HybridTask',
+    'HybridSameTypeTask'
+]
 
-modeling_task_names = ['ContextFreeTask',
-                       'ContextFreeSameTypeTask',
-                       'ContextDependentTask',
-                       'ContextDependentSameTypeTask',
-                       'FullHybridTask',
-                       'HybridTask',
-                       'HybridSameTypeTask']
+MIN_ASSIGNMENTS = 5
+MIN_ANSWERS = 2
+BATCH_SIZE = 64
+DROP_LAST = False
+K_CROSS_VALIDATION = 0
+MODELING_TASK_SEED = 1
 
-min_assignments = 5
-min_answers = 2
-batch_size = 32
-drop_last = False
-k_cross_validation = 0
-modeling_task_random_seed = 1
+BASELINES_SPLIT_VALID_PROPORTION = 0.5
+BASELINES_SPLIT_TEST_PROPORTION = 0.5
 
-evaluation_test_proportion = 0.5
-evaluation_valid_proportion = 0.5
-
-training_test_proportion = 0.25
-training_valid_proportion = 0.25
-
+MODELS_SPLIT_VALID_PROPORTION = 0.25
+MODELS_SPLIT_TEST_PROPORTION = 0.25
 # endregion
 
+# region Modeling parameters
+SCORES_NAMES = [
+    'average_precision',
+    'precision_at_10',
+    'precision_at_100',
+    'recall_at_10',
+    'recall_at_100',
+    'reciprocal_best_rank',
+    'reciprocal_average_rank',
+    'ndcg_at_10',
+    'ndcg_at_100',
+]
+
 # region Baselines parameters
-
 # TODO
-
 # endregion
 
 # region Models parameters
-
 # TODO
-
+# endregion
 # endregion
