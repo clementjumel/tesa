@@ -1,27 +1,36 @@
 import database_creation.modeling_task as modeling_task
-import parameters as p
 
-for class_name in p.modeling_task_names:
-    # Saves with only validation and test split (for baseline evaluations)
-    task = getattr(modeling_task, class_name)(min_assignments=p.min_assignments,
-                                              min_answers=p.min_answers,
-                                              test_proportion=p.evaluation_test_proportion,
-                                              valid_proportion=p.evaluation_valid_proportion,
-                                              batch_size=p.batch_size,
-                                              drop_last=p.drop_last,
-                                              k_cross_validation=p.k_cross_validation,
-                                              random_seed=p.modeling_task_random_seed)
+from parameters import \
+    MODELING_TASK_NAMES, MIN_ASSIGNMENTS, MIN_ANSWERS, BATCH_SIZE, DROP_LAST, K_CROSS_VALIDATION, MODELING_TASK_SEED, \
+    BASELINES_SPLIT_VALID_PROPORTION, BASELINES_SPLIT_TEST_PROPORTION,  MODELS_SPLIT_VALID_PROPORTION, \
+    MODELS_SPLIT_TEST_PROPORTION, MODELING_TASK_FOR_BASELINES_PATH, MODELING_TASK_FOR_MODELS_PATH
 
-    task.save_pkl(folder_path=p.evaluation_folder_path)
 
-    # Saves with train, validation and test split (for model training)
-    task = getattr(modeling_task, class_name)(min_assignments=p.min_assignments,
-                                              min_answers=p.min_answers,
-                                              test_proportion=p.training_test_proportion,
-                                              valid_proportion=p.training_valid_proportion,
-                                              batch_size=p.batch_size,
-                                              drop_last=p.drop_last,
-                                              k_cross_validation=p.k_cross_validation,
-                                              random_seed=p.modeling_task_random_seed)
+def main():
+    """ Creates and saves the modeling tasks. """
 
-    task.save_pkl(folder_path=p.training_folder_path)
+    for class_name in MODELING_TASK_NAMES:
+        # Saves with only validation and test split (for baseline evaluations)
+        task = getattr(modeling_task, class_name)(min_assignments=MIN_ASSIGNMENTS,
+                                                  min_answers=MIN_ANSWERS,
+                                                  test_proportion=BASELINES_SPLIT_TEST_PROPORTION,
+                                                  valid_proportion=BASELINES_SPLIT_VALID_PROPORTION,
+                                                  random_seed=MODELING_TASK_SEED)
+
+        task.save_pkl(folder_path=MODELING_TASK_FOR_BASELINES_PATH)
+
+        # Saves with train, validation and test split (for model training)
+        task = getattr(modeling_task, class_name)(min_assignments=MIN_ASSIGNMENTS,
+                                                  min_answers=MIN_ANSWERS,
+                                                  test_proportion=MODELS_SPLIT_TEST_PROPORTION,
+                                                  valid_proportion=MODELS_SPLIT_VALID_PROPORTION,
+                                                  random_seed=MODELING_TASK_SEED,
+                                                  batch_size=BATCH_SIZE,
+                                                  drop_last=DROP_LAST,
+                                                  k_cross_validation=K_CROSS_VALIDATION)
+
+        task.save_pkl(folder_path=MODELING_TASK_FOR_MODELS_PATH)
+
+
+if __name__ == '__main__':
+    main()
