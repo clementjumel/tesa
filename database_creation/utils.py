@@ -1041,9 +1041,9 @@ class Sample:
         """
 
         x = {'choices': self.choices,
-             'entities_type_': self.entities_type_,
              'entities': self.entities,
-             'summaries': [summary for _, summary in self.summaries.items()],
+             'entities_type': self.entities_type_,
+             'wikipedia': [summary for _, summary in self.summaries.items()],
              'context': self.title + ': ' + self.context}
 
         return x
