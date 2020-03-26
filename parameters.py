@@ -1,4 +1,6 @@
-# region Paths
+# region Miscellaneous
+
+verbose = True
 
 evaluation_folder_path = 'results/modeling_task/evaluation_split/'
 training_folder_path = 'results/modeling_task/training_split/'
