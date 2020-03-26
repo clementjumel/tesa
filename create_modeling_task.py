@@ -1,52 +1,27 @@
 import database_creation.modeling_task as modeling_task
+import parameters as p
 
-# Names of the subclasses of modeling_task.Task
-class_names = ['ContextFreeTask',
-               'ContextFreeSameTypeTask',
-               'ContextDependentTask',
-               'ContextDependentSameTypeTask',
-               'FullHybridTask',
-               'HybridTask',
-               'HybridSameTypeTask']
+for class_name in p.modeling_task_names:
+    # Saves with only validation and test split (for baseline evaluations)
+    task = getattr(modeling_task, class_name)(min_assignments=p.min_assignments,
+                                              min_answers=p.min_answers,
+                                              test_proportion=p.evaluation_test_proportion,
+                                              valid_proportion=p.evaluation_valid_proportion,
+                                              batch_size=p.batch_size,
+                                              drop_last=p.drop_last,
+                                              k_cross_validation=p.k_cross_validation,
+                                              random_seed=p.modeling_task_random_seed)
 
-# Global parameters of the task
-min_assignments = 5
-min_answers = 2
-batch_size = 32
-drop_last = False
-k_cross_validation = 0
-random_seed = 1
+    task.save_pkl(folder_path=p.evaluation_folder_path)
 
-# Parameters dependent on the training set-up
-test_proportion = 0.25
-valid_proportion = 0.25
-folder_path = 'results/modeling_task/training_split/'
+    # Saves with train, validation and test split (for model training)
+    task = getattr(modeling_task, class_name)(min_assignments=p.min_assignments,
+                                              min_answers=p.min_answers,
+                                              test_proportion=p.training_test_proportion,
+                                              valid_proportion=p.training_valid_proportion,
+                                              batch_size=p.batch_size,
+                                              drop_last=p.drop_last,
+                                              k_cross_validation=p.k_cross_validation,
+                                              random_seed=p.modeling_task_random_seed)
 
-for class_name in class_names:
-    task = getattr(modeling_task, class_name)(min_assignments=min_assignments,
-                                              min_answers=min_answers,
-                                              test_proportion=test_proportion,
-                                              valid_proportion=valid_proportion,
-                                              batch_size=batch_size,
-                                              drop_last=drop_last,
-                                              k_cross_validation=k_cross_validation,
-                                              random_seed=random_seed)
-
-    task.save_pkl(folder_path=folder_path)
-
-# Parameters dependent on the evaluation set-up
-test_proportion = 0.5
-valid_proportion = 0.5
-folder_path = 'results/modeling_task/evaluation_split/'
-
-for class_name in class_names:
-    task = getattr(modeling_task, class_name)(min_assignments=min_assignments,
-                                              min_answers=min_answers,
-                                              test_proportion=test_proportion,
-                                              valid_proportion=valid_proportion,
-                                              batch_size=batch_size,
-                                              drop_last=drop_last,
-                                              k_cross_validation=k_cross_validation,
-                                              random_seed=random_seed)
-
-    task.save_pkl(folder_path=folder_path)
+    task.save_pkl(folder_path=p.training_folder_path)
