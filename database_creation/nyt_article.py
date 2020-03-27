@@ -8,7 +8,6 @@ from nltk.corpus import stopwords as nltk_stopwords
 
 
 class Article:
-    # region Class initialization
 
     def __init__(self, data_path, content_path, summary_path):
         """
@@ -30,18 +29,6 @@ class Article:
         self.content = None
         self.summary = None
         self.contexts = None
-
-    def __str__(self):
-        """
-        Overrides the builtin str method, customized for the instances of Article.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        return '\n'.join([self.title, str(self.summary), str(self.content)])
-
-    # endregion
 
     # region Methods compute_
 
@@ -171,8 +158,6 @@ class Article:
 
     # endregion
 
-    # region Methods criterion_
-
     def criterion_content(self):
         """
         Check if an article's content file exists.
@@ -189,13 +174,11 @@ class Article:
         except FileNotFoundError:
             return True
 
-    # endregion
-
     # region Methods debug_
 
     def debug_articles(self):
         """
-        Returns a string showing the debugging of an article.
+        Returns a string showing, for each article, the data path retrieved.
 
         Returns:
             str, debugging of the article.
@@ -205,7 +188,7 @@ class Article:
 
     def debug_metadata(self):
         """
-        Returns a string showing the debugging of an article.
+        Returns a string showing, for each article, the metadata retrieved.
 
         Returns:
             str, debugging of the article.
@@ -215,7 +198,7 @@ class Article:
 
     def debug_article_entities(self):
         """
-        Returns a string showing the debugging of an article.
+        Returns a string showing, for each article, the entities retrieved.
 
         Returns:
             str, debugging of the article.
@@ -231,7 +214,7 @@ class Article:
 
     def debug_annotations(self):
         """
-        Returns a string showing the debugging of an article.
+        Returns a string showing, for each article, the coreference chains.
 
         Returns:
             str, debugging of the article.
@@ -252,7 +235,7 @@ class Article:
 
     def debug_contexts(self):
         """
-        Returns a string showing the debugging of an article.
+        Returns a string showing, for each article, the potential contexts retrieved.
 
         Returns:
             str, debugging of the article.
@@ -273,7 +256,6 @@ class Article:
 
 
 class Text:
-    # region Class initialization
 
     def __init__(self, root, entities):
         """
@@ -286,18 +268,6 @@ class Text:
 
         self.sentences = self.get_sentences(root)
         self.coreferences = self.get_coreferences(root, entities)
-
-    def __str__(self):
-        """
-        Overrides the builtin str method, customized for the instances of Text.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        return ' '.join([str(sentence) for _, sentence in self.sentences.items()])
-
-    # endregion
 
     # region Methods get_
 
@@ -427,8 +397,6 @@ class Text:
 
     # endregion
 
-    # region Other methods
-
     def highlight(self, sentences, tuple_):
         """
         Highlight (put in bold) the mentions of the entities of the Tuple in the sentences.
@@ -488,11 +456,8 @@ class Text:
 
                 idx += 1
 
-    # endregion
-
 
 class Sentence:
-    # region Class initialization
 
     def __init__(self, sentence_element):
         """
@@ -505,36 +470,6 @@ class Sentence:
         self.tokens = None
 
         self.compute_tokens(sentence_element)
-
-    def __str__(self):
-        """
-        Overrides the builtin str method, customized for the instances of Sentence.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        s, start = '', True
-
-        for _, token in self.tokens.items():
-            if start:  # Beginning of the sentence
-                if token.criterion_punctuation():
-                    s += str(token)
-                else:
-                    s += str(token)[0].capitalize() + str(token)[1:]
-                    start = False
-
-            else:
-                if not token.criterion_punctuation():
-                    s += ' '
-
-                s += str(token)
-
-        return s
-
-    # endregion
-
-    # region Methods compute_
 
     def compute_tokens(self, sentence_element):
         """
@@ -551,11 +486,8 @@ class Sentence:
 
         self.tokens = tokens
 
-    # endregion
-
 
 class Coreference:
-    # region Class initialization
 
     def __init__(self, element, entities):
         """
@@ -574,20 +506,6 @@ class Coreference:
         self.compute_annotations(element)
         self.compute_entity(entities)
         self.compute_sentences()
-
-    def __str__(self):
-        """
-        Overrides the builtin str method, customized for the instances of Coreference.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        entity = '[' + self.entity + '] ' if self.entity is not None else ''
-
-        return entity + '; '.join([str(mention) for mention in [self.representative] + self.mentions])
-
-    # endregion
 
     # region Methods compute_
 
@@ -632,8 +550,6 @@ class Coreference:
         if len(matches) == 1:
             self.entity = matches.pop()
 
-        return
-
     def compute_sentences(self):
         """ Compute the indexes of the sentences of the coreference chain. """
 
@@ -643,7 +559,6 @@ class Coreference:
 
 
 class Token:
-    # region Class initialization
 
     punctuation = [p for p in string_punctuation] + ["''", '``']
     stopwords = set(nltk_stopwords.words('english'))
@@ -679,10 +594,6 @@ class Token:
 
         return s
 
-    # endregion
-
-    # region Methods compute_
-
     def compute_annotations(self, token_element):
         """
         Compute the annotations (word, lemma, Part Of Speech tag and Named-Entity Recognition) of the token.
@@ -695,8 +606,6 @@ class Token:
         self.lemma = token_element.find('lemma').text
         self.pos = token_element.find('POS').text
         self.ner = token_element.find('NER').text
-
-    # endregion
 
     # region Methods criterion_
 
@@ -711,25 +620,3 @@ class Token:
         return True if self.lemma in self.stopwords else False
 
     # endregion
-
-
-def main():
-    from database_creation.utils import Tuple
-
-    article = Article('../nyt_annotated_corpus/data/2006/01/01/1728670.xml',
-                      '../nyt_annotated_corpus/content_annotated/2006content_annotated/1728670.txt.xml',
-                      '../nyt_annotated_corpus/summary_annotated/2006summary_annotated/1728670.txt.xml')
-
-    article.entities = article.get_entities()
-
-    article.compute_metadata()
-    article.compute_corpus_annotations()
-    article.compute_contexts(tuple_=Tuple(id_='0', entities=tuple(article.entities)))
-
-    print(article)
-
-    return
-
-
-if __name__ == '__main__':
-    main()
