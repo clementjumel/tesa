@@ -7,7 +7,6 @@ from torch import tensor, long
 
 
 class Mention:
-    # region Class base methods
 
     def __init__(self, text, sentence, start, end):
         """
@@ -35,13 +34,10 @@ class Mention:
 
         return self.text
 
-    # endregion
-
 
 class Context:
-    # region Class base methods
 
-    def __init__(self, sentences=None, type_=None):
+    def __init__(self, sentences, type_):
         """
         Initializes the Context instance.
 
@@ -67,11 +63,8 @@ class Context:
 
         return s
 
-    # endregion
-
 
 class Entity:
-    # region Class base methods
 
     def __init__(self, original_name, type_):
         """
@@ -121,10 +114,6 @@ class Entity:
             return False
 
         return True
-
-    # endregion
-
-    # region Methods compute_
 
     def compute_name(self):
         """ Compute the names and the extra info of the entity. """
@@ -238,10 +227,6 @@ class Entity:
         self.possible_names = possible_names
         self.extra_info = in_parenthesis
 
-    # endregion
-
-    # region Methods get_
-
     def get_wiki(self):
         """
         Returns the wikipedia information of the entity.
@@ -260,10 +245,6 @@ class Entity:
 
         return Wikipedia(p)
 
-    # endregion
-
-    # region Methods debug_
-
     def debug_entities(self):
         """
         Returns a string showing the debugging of an entity.
@@ -278,9 +259,56 @@ class Entity:
 
         return s
 
-    # endregion
+    def update_info(self, entity):
+        """
+        Updates the information (plausible & possible names, extra info) of the current entity with another one.
 
-    # region Other methods
+        Args:
+            entity: Entity, new entity to take into account.
+        """
+
+        assert self.__eq__(entity)
+
+        if self.original_name != entity.original_name:
+            names1 = set([self.name] + list(self.plausible_names) + list(self.possible_names))
+            names2 = set([entity.name] + list(entity.plausible_names) + list(entity.possible_names))
+
+            if len(names1) != len(names2):
+                e = self if len(names1) > len(names2) else entity
+                self.plausible_names = e.plausible_names
+                self.possible_names = e.possible_names
+
+            self.extra_info.update(entity.extra_info)
+
+    # region Matching methods
+
+    def not_match(self, string):
+        """
+        Check if a string must not be compared to the entity.
+
+        Args:
+            string: str, string to check.
+
+        Returns:
+            bool, True iff the string must not be compared to the entity.
+        """
+
+        words = string.lower().split()
+
+        if self.type_ == 'person':
+            if 'and' in words:
+                return True
+
+        elif self.type_ == 'location':
+            pass
+
+        elif self.type_ == 'org':
+            pass
+
+        else:
+            raise Exception("Wrong type of entity: {}".format(self.type_))
+
+        return False
 
     def match_entity(self, entity, flexible=False):
         """
@@ -405,60 +433,10 @@ class Entity:
         else:
             return None
 
-    def update_info(self, entity):
-        """
-        Updates the information (plausible & possible names, extra info) of the current entity with another one.
-
-        Args:
-            entity: Entity, new entity to take into account.
-        """
-
-        assert self.__eq__(entity)
-
-        if self.original_name != entity.original_name:
-            names1 = set([self.name] + list(self.plausible_names) + list(self.possible_names))
-            names2 = set([entity.name] + list(entity.plausible_names) + list(entity.possible_names))
-
-            if len(names1) != len(names2):
-                e = self if len(names1) > len(names2) else entity
-                self.plausible_names = e.plausible_names
-                self.possible_names = e.possible_names
-
-            self.extra_info.update(entity.extra_info)
-
-    def not_match(self, string):
-        """
-        Check if a string must not be compared to the entity.
-
-        Args:
-            string: str, string to check.
-
-        Returns:
-            bool, True iff the string must not be compared to the entity.
-        """
-
-        words = string.lower().split()
-
-        if self.type_ == 'person':
-            if 'and' in words:
-                return True
-
-        elif self.type_ == 'location':
-            pass
-
-        elif self.type_ == 'org':
-            pass
-
-        else:
-            raise Exception("Wrong type of entity: {}".format(self.type_))
-
-        return False
-
     # endregion
 
 
 class Wikipedia:
-    # region Class base methods
 
     info_length = 600
 
@@ -492,10 +470,6 @@ class Wikipedia:
 
         return "No information found." if self.summary is None else self.get_info()
 
-    # endregion
-
-    # region Methods get_
-
     def get_info(self):
         """
         Returns the information of the Wikipedia object.
@@ -524,10 +498,6 @@ class Wikipedia:
 
         return info
 
-    # endregion
-
-    # region Methods debug_
-
     def debug_wikipedia(self):
         """
         Returns a string showing the debugging of a wikipedia information.
@@ -538,11 +508,8 @@ class Wikipedia:
 
         return ' (' + self.title + '): ' + str(self)[:150] + '...'
 
-    # endregion
-
 
 class Tuple:
-    # region Class base methods
 
     def __init__(self, id_, entities, article_ids=None, query_ids=None):
         """
@@ -572,10 +539,6 @@ class Tuple:
 
         return ', '.join([str(entity) for entity in self.entities[:-1]]) + ' and ' + str(self.entities[-1])
 
-    # endregion
-
-    # region Methods get_
-
     def get_type(self):
         """
         Returns the type of the Tuple.
@@ -589,10 +552,6 @@ class Tuple:
 
         return types.pop()
 
-    # endregion
-
-    # region Methods debug_
-
     def debug_tuples(self):
         """
         Returns a string showing the debugging of a tuple.
@@ -603,13 +562,9 @@ class Tuple:
 
         return ' (' + self.type_ + '): in ' + str(len(self.article_ids)) + ' articles'
 
-    # endregion
-
 
 class Query:
     """ Query to gather annotations from the Mechanical Turk workers. """
-
-    # region Class base methods
 
     def __init__(self, id_, tuple_, article, context):
         """
@@ -635,29 +590,28 @@ class Query:
         self.context = str(context)
         self.context_type_ = context.type_
 
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Query.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        d = self.to_readable()
-
-        return d['entities'] + ':\n' + d['context'] + '\n'
-
-    def __eq__(self, obj):
-        """
-        Overrides the builtin equals method for the instances of Query.
-
-        Returns:
-            bool, whether or not the two objects are equal.
-        """
-
-        return isinstance(obj, Query) and self.to_html() == obj.to_html() and self.to_readable() == obj.to_readable()
-
-    # endregion
+    # TODO: remove
+    # def __str__(self):
+    #     """
+    #     Overrides the builtin str method for the instances of Query.
+    #
+    #     Returns:
+    #         str, readable format of the instance.
+    #     """
+    #
+    #     d = self.to_readable()
+    #
+    #     return d['entities'] + ':\n' + d['context'] + '\n'
+    #
+    # def __eq__(self, obj):
+    #     """
+    #     Overrides the builtin equals method for the instances of Query.
+    #
+    #     Returns:
+    #         bool, whether or not the two objects are equal.
+    #     """
+    #
+    #     return isinstance(obj, Query) and self.to_html() == obj.to_html() and self.to_readable() == obj.to_readable()
 
     # region Methods get_
 
@@ -806,8 +760,6 @@ class Query:
 
     # endregion
 
-    # region Methods debug_
-
     def debug_queries(self):
         """
         Returns a string showing the debugging of an query.
@@ -816,17 +768,15 @@ class Query:
             str, debugging of the query.
         """
 
-        return str(self)
+        d = self.to_readable()
 
-    # endregion
+        return d['entities'] + ':\n' + d['context'] + '\n'
 
 
 class Annotation:
     """ Annotation from the Mechanical Turk workers. """
 
-    # region Class base methods
-
-    def __init__(self, id_, version, batch, row):
+    def __init__(self, id_, version, batch, row, silent):
         """
         Initializes the Annotation instance.
 
@@ -835,6 +785,7 @@ class Annotation:
             version: str, version of the Query.
             batch: str, batch of the Annotation.
             row: panda.Series, whole data of the annotation.
+            silent: bool, silence option.
         """
 
         self.id_ = id_
@@ -845,30 +796,18 @@ class Annotation:
         self.duration = int(row.get('WorkTimeInSeconds'))
         self.bug = bool(row.get('Answer.box_impossible.on'))
 
-        self.answers, self.preprocessed_answers = self.get_answers(row)
+        self.answers, self.preprocessed_answers = self.get_answers(row=row, silent=silent)
+
         self.correct_inconsistencies()
 
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Annotation.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        return '/'.join(self.answers) or '[bug]'
-
-    # endregion
-
-    # region Methods get_
-
     @staticmethod
-    def get_answers(row):
+    def get_answers(row, silent):
         """
         Return both the cleaned answers (remove artifacts) and the preprocessed answers and return them as lists.
 
         Args:
             row: panda.Series, whole data of the annotation.
+            silent: bool, silence option.
 
         Returns:
             answers: list, cleaned answers.
@@ -894,7 +833,7 @@ class Annotation:
                 unpreprocessed_answer = unpreprocessed_answer.capitalize()
 
             if old != unpreprocessed_answer:
-                print('   Correcting "{}" to "{}"'.format(old, unpreprocessed_answer))
+                print('   Correcting "%s" to "%s"' % (old, unpreprocessed_answer)) if not silent else None
 
             while unpreprocessed_answer[-1] in ['.', ' ']:
                 unpreprocessed_answer = unpreprocessed_answer[:-1]
@@ -910,22 +849,16 @@ class Annotation:
 
             preprocessed_answer = ' '.join(words)
 
-            if 'have' in preprocessed_answer.split() \
-                    or 'are' in preprocessed_answer.split() \
-                    or 'and' in preprocessed_answer.split() \
-                    or preprocessed_answer == 'the' \
+            if 'have' in preprocessed_answer.split() or 'are' in preprocessed_answer.split() \
+                    or 'and' in preprocessed_answer.split() or preprocessed_answer == 'the' \
                     or '/' in preprocessed_answer:
-                print('   Discarding "{}"'.format(answer))
+                print('   Discarding "%s"' % answer) if not silent else None
 
             elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
                 answers.append(answer)
                 preprocessed_answers.append(preprocessed_answer)
 
         return answers, preprocessed_answers
-
-    # endregion
-
-    # region Other methods
 
     def correct_inconsistencies(self):
         """ Correct the NA reports inconsistencies by discarding answers when there is a reported bug. """
@@ -936,13 +869,9 @@ class Annotation:
         elif self.answers and self.bug:
             self.answers, self.preprocessed_answers = [], []
 
-    # endregion
-
 
 class Sample:
     """ Sample for the modeling Task. """
-
-    # region Class base methods
 
     def __init__(self, queries, labelled_answers):
         """
@@ -953,11 +882,11 @@ class Sample:
             labelled_answers: dict, answers and their labels (0 for negative answers).
         """
 
-        entities, entities_type_, summaries, title, context = self.get_input_data(queries)
+        entities, entities_type_, wikipedia, title, context = self.get_input_data(queries)
 
         self.entities = entities
         self.entities_type_ = entities_type_
-        self.summaries = summaries
+        self.wikipedia = wikipedia
         self.title = title
         self.context = context
 
@@ -965,18 +894,6 @@ class Sample:
 
         self.choices = choices
         self.labels = labels
-
-    def __str__(self):
-        """
-        Overrides the builtin str method for the instances of Sample.
-
-        Returns:
-            str, readable format of the instance.
-        """
-
-        return str(self.get_x()) + '\n' + str(self.get_y())
-
-    # endregion
 
     # region Methods get_
 
@@ -991,7 +908,7 @@ class Sample:
         Returns:
             entities: list, entities of the sample, as strings.
             entities_type_: str, type of the entities.
-            summaries: list, Wikipedia summaries of the Sample.
+            wikipedia: dict, entities and Wikipedia summaries of the Sample.
             title: str, title(s) of the article(s) of the queries.
             context: str, context(s) of the article(s) of the queries.
         """
@@ -1003,12 +920,12 @@ class Sample:
         entities_type_ = queries[0].entities_type_
 
         assert len(set([', '.join(query.summaries) for query in queries])) == 1
-        summaries = queries[0].summaries
+        wikipedia = queries[0].summaries
 
         title = ' / '.join([query.title for query in queries])
         context = ' / '.join([query.get_context_readable() for query in queries])
 
-        return entities, entities_type_, summaries, title, context
+        return entities, entities_type_, wikipedia, title, context
 
     @staticmethod
     def get_output_data(labelled_answers):
@@ -1043,7 +960,7 @@ class Sample:
         x = {'choices': self.choices,
              'entities': self.entities,
              'entities_type': self.entities_type_,
-             'wikipedia': [summary for _, summary in self.summaries.items()],
+             'wikipedia': [w for _, w in self.wikipedia.items()],
              'context': self.title + ': ' + self.context}
 
         return x
@@ -1061,11 +978,3 @@ class Sample:
         return y
 
     # endregion
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()
