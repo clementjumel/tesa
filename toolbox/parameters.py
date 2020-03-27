@@ -10,6 +10,11 @@ YEARS = [2006, 2007]
 SHORT = False
 RANDOM = None
 ANNOTATION_TASK_SEED = 0
+
+LOAD_WIKI = True
+
+TASK_BATCHES = 1
+TASK_BATCH_SIZE = 400
 # endregion
 
 # region Modeling task parameters
