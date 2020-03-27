@@ -1,3 +1,5 @@
+from toolbox.paths import PRETRAINED_MODELS_PATH
+
 from argparse import ArgumentParser
 from gensim.models import KeyedVectors
 from torch.hub import load as torch_hub_load
@@ -36,17 +38,20 @@ def get_pretrained_model(pretrained_model_name, root=''):
         pretrained_model_dim: int, dimension of the pretrained model.
     """
 
-    if pretrained_model_name == "word2vec":
-        fname = root + "modeling/pretrained_models/GoogleNews-vectors-negative300.bin"
+    pretrained_model_names = ["word2vec", "bart_mnli"]
+
+    if pretrained_model_name == pretrained_model_names[0]:
+        fname = root + PRETRAINED_MODELS_PATH + "GoogleNews-vectors-negative300.bin"
 
         pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
         pretrained_model_dim = 300
 
-    elif pretrained_model_name == "bart_mnli":
+    elif pretrained_model_name == pretrained_model_names[1]:
         pretrained_model = torch_hub_load("pytorch/fairseq", "bart.large.mnli")
         pretrained_model_dim = None
 
     else:
-        raise Exception("Wrong pretrained model name specified: %s" % pretrained_model_name)
+        raise Exception("Wrong pretrained model name specified: %s (must be in %s)." % (pretrained_model_name,
+                                                                                        str(pretrained_model_names)))
 
     return pretrained_model, pretrained_model_dim
