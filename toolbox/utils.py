@@ -23,6 +23,31 @@ def parse_arguments():
     return args
 
 
+def get_experiment_name(args, save):
+    """
+    Returns the experiment's name given the arguments passed to the script and the save option. If SAVE and no
+    experiment name is given, raise an error.
+
+    Args:
+        args: dict, arguments passed to the script.
+        save: bool, saving option.
+
+    Returns:
+        str, name of the experiment's name.
+    """
+
+    if save and "experiment_name" in args:
+        experiment_name = args['experiment_name']
+
+    elif save and "experiment_name" not in args:
+        raise Exception("No experiment_name specified, cannot save.")
+
+    else:
+        experiment_name = None
+
+    return experiment_name
+
+
 def get_pretrained_model(args, silent, folder_path, root=''):
     """
     Returns the pretrained model and its dimension, if relevant, given the arguments of the script.
