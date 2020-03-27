@@ -7,6 +7,7 @@ SAVE = True
 
 # region Annotation task parameters
 YEARS = [2006, 2007]
+MAX_TUPLE_SIZE = 6
 SHORT = False
 RANDOM = None
 WRITE_DEBUG = True
