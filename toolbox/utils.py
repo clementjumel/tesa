@@ -1,5 +1,3 @@
-from toolbox.paths import PRETRAINED_MODELS_PATH
-
 from argparse import ArgumentParser
 from gensim.models import KeyedVectors
 from torch.hub import load as torch_hub_load
@@ -25,12 +23,13 @@ def parse_arguments():
     return args
 
 
-def get_pretrained_model(pretrained_model_name, root=''):
+def get_pretrained_model(pretrained_model_name, folder_path, root=''):
     """
     Returns the pretrained model and its dimension, if relevant.
 
     Args:
         pretrained_model_name: str, name of the pretrained_model.
+        folder_path: str, path to the pretrained_models folder.
         root: str, path to the root of the project.
 
     Returns:
@@ -41,7 +40,7 @@ def get_pretrained_model(pretrained_model_name, root=''):
     pretrained_model_names = ["word2vec", "bart_mnli"]
 
     if pretrained_model_name == pretrained_model_names[0]:
-        fname = root + PRETRAINED_MODELS_PATH + "GoogleNews-vectors-negative300.bin"
+        fname = root + folder_path + "GoogleNews-vectors-negative300.bin"
 
         pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
         pretrained_model_dim = 300
