@@ -19,16 +19,6 @@ CORRECT_WIKI = True
 # endregion
 
 # region Modeling task parameters
-MODELING_TASK_NAMES = [
-    'ContextFree',
-    # 'ContextFreeSameType',
-    # 'ContextDependent',
-    # 'ContextDependentSameType',
-    # 'FullHybrid',
-    # 'Hybrid',
-    # 'HybridSameType'
-]
-
 MIN_ASSIGNMENTS = 5
 MIN_ANSWERS = 2
 
