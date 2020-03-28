@@ -3,6 +3,7 @@
 # region Miscellaneous
 SILENT = False
 SAVE = True
+EXCLUDE_PILOT = False
 # endregion
 
 # region Annotation task parameters
@@ -20,7 +21,6 @@ CORRECT_WIKI = True
 
 TASK_BATCHES = 1
 TASK_BATCH_SIZE = 400
-EXCLUDE_PILOT_ANNOTATION = False
 # endregion
 
 # region Modeling task parameters
@@ -36,7 +36,6 @@ MODELING_TASK_NAMES = [
 
 MIN_ASSIGNMENTS = 5
 MIN_ANSWERS = 2
-EXCLUDE_PILOT_MODELING = False
 
 BATCH_SIZE = 64
 DROP_LAST = False
