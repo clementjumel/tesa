@@ -86,7 +86,7 @@ class AnnotationTask:
 
                 res = func(*args, **kwargs)
 
-                getattr(slf, "print")("Done; elapsed time: %is.\n".format(round(time() - t0)))
+                getattr(slf, "print")("Done; elapsed time: %is.\n" % round(time() - t0))
 
                 return res
 
@@ -1046,7 +1046,7 @@ class AnnotationTask:
                     corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                self.print("Fifth step over, remaining: %i/%i.".format(len(to_correct), len(self.wikipedia['found'])))
+                self.print("Fifth step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
             else:
                 raise Exception("Wrong step specified.")
