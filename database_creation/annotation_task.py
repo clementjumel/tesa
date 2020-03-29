@@ -939,6 +939,9 @@ class AnnotationTask:
 
         self.print("Entities to correct: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
+        if step is None:
+            raise Exception("There are entities to correct, precise a step.")
+
         try:
             if step == 1:
                 count, size = 0, len(to_correct)
