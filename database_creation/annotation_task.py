@@ -80,14 +80,13 @@ class AnnotationTask:
                 """ Decorated function. """
 
                 slf = args[0]
-                silent = getattr(slf, "silent")
 
                 t0 = time()
-                print(self.message) if not silent else None
+                getattr(slf, "print")(self.message)
 
                 res = func(*args, **kwargs)
 
-                print("Done; elapsed time: %is.\n".format(round(time() - t0))) if not silent else None
+                getattr(slf, "print")("Done; elapsed time: %is.\n".format(round(time() - t0)))
 
                 return res
 
@@ -108,19 +107,18 @@ class AnnotationTask:
                 """ Decorated function. """
 
                 slf = args[0]
-                silent = getattr(slf, "silent")
 
                 attribute = getattr(slf, self.attribute)
                 length = len(attribute) if attribute is not None else 0
 
-                print("Initial length of %s: %i." % (self.attribute, length)) if not silent else None
+                getattr(slf, "print")("Initial length of %s: %i." % (self.attribute, length))
 
                 res = func(*args, **kwargs)
 
                 attribute = getattr(slf, self.attribute)
                 length = len(attribute) if attribute is not None else 0
 
-                print("Final length of %s: %i." % (self.attribute, length)) if not silent else None
+                getattr(slf, "print")("Final length of %s: %i." % (self.attribute, length))
 
                 return res
 
@@ -232,38 +230,32 @@ class AnnotationTask:
         out_wikipedia = {'found': dict(), 'not_found': set()}
 
         if current:
-            if not self.silent:
-                print("Current wikipedia information: %i found/%i not_found..." % (len(self.wikipedia['found']),
-                                                                                   len(self.wikipedia['not_found'])))
+            self.print("Current wikipedia information: %i found/%i not_found..." % (len(self.wikipedia['found']),
+                                                                                    len(self.wikipedia['not_found'])))
 
             for type_ in ['found', 'not_found']:
                 out_wikipedia[type_].update(self.wikipedia[type_])
 
-            if not self.silent:
-                print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
-                                                                         len(out_wikipedia['not_found'])))
+            self.print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
+                                                                          len(out_wikipedia['not_found'])))
 
         for in_name in in_names:
             in_wikipedia = self.load_obj_pkl(file_name=in_name, folder_name='wikipedia')
 
-            if not self.silent:
-                print("File %s: %i found/%i not_found..." % (in_name,
-                                                             len(in_wikipedia['found']),
-                                                             len(in_wikipedia['not_found'])))
+            self.print("File %s: %i found/%i not_found..." % (in_name, len(in_wikipedia['found']),
+                                                              len(in_wikipedia['not_found'])))
 
             for type_ in ['found', 'not_found']:
                 out_wikipedia[type_].update(in_wikipedia[type_])
 
-            if not self.silent:
-                print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
-                                                                         len(out_wikipedia['not_found'])))
+            self.print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
+                                                                          len(out_wikipedia['not_found'])))
 
         if self.save:
             self.save_obj_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
 
         else:
-            if not self.silent:
-                print("Warning, the changes were not saved.")
+            self.print("Warning, the changes were not saved.")
 
         self.wikipedia = out_wikipedia
 
@@ -283,8 +275,7 @@ class AnnotationTask:
             self.save_attr_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
 
         else:
-            if not self.silent:
-                print("Warning, the changes were not saved.")
+            self.print("Warning, the changes were not saved.")
 
     # endregion
 
@@ -355,18 +346,16 @@ class AnnotationTask:
                 entities = article.get_entities()
             except AssertionError:
                 entities = []
-                if not self.silent:
-                    print("Several entities have the same name (%s); ignoring them..." %
-                          '; '.join(article.get_vanilla_entities()))
+                self.print("Several entities have the same name (%s); ignoring them..." %
+                           '; '.join(article.get_vanilla_entities()))
 
             for entity in entities:
                 if str(entity) in self.entities:
                     try:
                         self.entities[str(entity)].update_info(entity)
                     except AssertionError:
-                        if not self.silent:
-                            print("%s corresponds to both %s and %s, ignoring the later..." %
-                                  (str(entity), entity.type_, self.entities[str(entity)].type_))
+                        self.print("%s corresponds to both %s and %s, ignoring the later..." %
+                                   (str(entity), entity.type_, self.entities[str(entity)].type_))
 
                 else:
                     self.entities[str(entity)] = entity
@@ -435,8 +424,7 @@ class AnnotationTask:
                 self.articles[id_].compute_corpus_annotations()
 
             except ParseError:
-                print("Data is not clean, remove data %s and start again." % id_)
-                raise Exception
+                raise Exception("Data is not clean, remove data %s and start again." % id_)
 
         if self.debug:
             self.write_debug(field='articles', method='annotations')
@@ -473,8 +461,7 @@ class AnnotationTask:
 
         wikipedia = self.wikipedia if load else {'found': dict(), 'not_found': set()}
 
-        if not self.silent:
-            print("Initial entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
+        self.print("Initial entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
 
         try:
             count, size = 0, len(self.entities)
@@ -503,11 +490,9 @@ class AnnotationTask:
                 entity.wiki = wiki
 
         except (KeyboardInterrupt, WikipediaException) as err:
-            if not self.silent:
-                print("An error occurred, saving the loaded information and leaving... (%s)" % err)
+            self.print("An error occurred, saving the loaded information and leaving... (%s)" % str(err))
 
-        if not self.silent:
-            print("Final entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
+        self.print("Final entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
 
         self.wikipedia = wikipedia
 
@@ -584,8 +569,7 @@ class AnnotationTask:
             if 'pilot' not in version or not exclude_pilot:
                 df = read_csv(self.results_path + path)
 
-                if not self.silent:
-                    print("%s loaded from %s" % (batch, path))
+                self.print("%s loaded from %s" % (batch, path))
 
                 for _, row in df.iterrows():
                     id_ = row.get('Input.id_')
@@ -615,16 +599,14 @@ class AnnotationTask:
         to_del = set()
 
         if criterion is not None and to_keep is None:
-            if not self.silent:
-                print("Criterion: %s" % [line for line in criterion.__doc__.splitlines() if line][0][8:])
+            self.print("Criterion: %s" % [line for line in criterion.__doc__.splitlines() if line][0][8:])
 
             for id_ in self.articles:
                 if criterion(self.articles[id_]):
                     to_del.add(id_)
 
         elif criterion is None and to_keep is not None:
-            if not self.silent:
-                print("Criterion: keep only the designated articles.")
+            self.print("Criterion: keep only the designated articles.")
 
             for id_ in self.articles:
                 if id_ not in to_keep:
@@ -646,8 +628,7 @@ class AnnotationTask:
             to_keep: set, names of the tuples that must be kept.
         """
 
-        if not self.silent:
-            print("Criterion: keep only the designated tuples.")
+        self.print("Criterion: keep only the designated tuples.")
 
         tuples = self.tuples
         self.tuples = []
@@ -666,8 +647,7 @@ class AnnotationTask:
             to_keep: set, names of the entities that must be kept.
         """
 
-        if not self.silent:
-            print("Criterion: keep only the designated entities.")
+        self.print("Criterion: keep only the designated entities.")
 
         to_del = set()
 
@@ -760,11 +740,10 @@ class AnnotationTask:
             with open(file_name, "wb") as file:
                 dump(obj=obj, file=file, protocol=-1)
 
-            if not self.silent:
-                print("Object saved at %s." % file_name)
+            self.print("Object saved at %s." % file_name)
 
         except PicklingError as err:
-            print("Could not save (PicklingError), moving on:", err)
+            self.print("Could not save (PicklingError), moving on: %s" % str(err))
 
     def load_attr_pkl(self, attribute_name, file_name, folder_name):
         """
@@ -795,8 +774,7 @@ class AnnotationTask:
         with open(file_name, 'rb') as file:
             obj = load(file=file)
 
-        if not self.silent:
-            print("Object loaded from %s." % file_name)
+        self.print("Object loaded from %s." % file_name)
 
         return obj
 
@@ -829,8 +807,7 @@ class AnnotationTask:
                     idx = int(batch.split("_")[-1])
                     idxs.add(idx)
 
-                if not self.silent:
-                    print("Reading %s from results/queries/ folder (%i queries)." % (batch, len(df_ids)))
+                self.print("Reading %s from results/queries/ folder (%i queries)." % (batch, len(df_ids)))
 
         for path in glob(self.results_path + "task_annotation/*/task/*.csv"):
             version = path.split("/")[-3]
@@ -846,8 +823,7 @@ class AnnotationTask:
                     idx = int(batch.split("_")[-1])
                     idxs.add(idx)
 
-                if not self.silent:
-                    print("Reading existing batch %s from %s (%i queries)." % (batch, version, len(df_ids)))
+                self.print("Reading existing batch %s from %s (%i queries)." % (batch, version, len(df_ids)))
 
         return ids, idxs
 
@@ -866,11 +842,10 @@ class AnnotationTask:
         all_ids = set(self.queries.keys())
         ids = all_ids.difference(existing_ids)
 
-        if not self.silent:
-            print("Removing %i existing queries from the %i total queries; %i remaining queries." %
-                  (len(existing_ids), len(all_ids), len(ids)))
+        self.print("Removing %i existing queries from the %i total queries; %i remaining queries." %
+                   (len(existing_ids), len(all_ids), len(ids)))
 
-        batches_ids = choice(a=sorted(ids), size=batches*batch_size, replace=False)
+        batches_ids = choice(a=sorted(ids), size=batches * batch_size, replace=False)
         batches_ids = np_split(batches_ids, batches)
 
         starting_idx = max(existing_batches) + 1
@@ -887,8 +862,7 @@ class AnnotationTask:
 
             df.to_csv(file_name, index=False)
 
-            if not self.silent:
-                print("batch_%s saved at %s." % (batch_idx, file_name))
+            self.print("batch_%s saved at %s." % (batch_idx, file_name))
 
     def write_debug(self, field, method):
         """
@@ -927,15 +901,19 @@ class AnnotationTask:
                 with open(file_name, "w") as f:
                     f.writelines(lines)
 
-            if not self.silent:
-                print("Debugging Written in %s..." % file_name)
+            self.print("Debugging Written in %s..." % file_name)
 
     # endregion
 
     # region Other methods
 
-    @staticmethod
-    def progression(count, modulo, size, text):
+    def print(self, s):
+        """ Prints the element s if not in silent mode. """
+
+        if not self.silent:
+            print(s)
+
+    def progression(self, count, modulo, size, text):
         """
         Prints progression's updates and update the count.
 
@@ -952,7 +930,7 @@ class AnnotationTask:
         count += 1
 
         if count % modulo == 0:
-            print("   " + text + " {}/{}...".format(count, size))
+            self.print("    %s %i/%i..." % (text, count, size))
 
         return count
 
@@ -968,11 +946,13 @@ class AnnotationTask:
         corrected = set()
 
         if not to_correct:
-            if not self.silent:
-                print("All the %i entities are exact, no correction to be made." % len(self.wikipedia['found']))
+            self.print("All the %i entities are exact, no correction to be made." % len(self.wikipedia['found']))
             return
 
-        print("Entities to correct: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+        if self.silent:
+            raise Exception("Remove silent mode to correct the wikipedia information.")
+
+        self.print("Entities to correct: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
         try:
             if step == 1:
@@ -997,7 +977,7 @@ class AnnotationTask:
                         corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                print("First step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print("First step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
             elif step == 2:
                 count, size = 0, len(to_correct)
@@ -1010,7 +990,7 @@ class AnnotationTask:
                         if answer in ["y", "n", "o", "d"]:
                             break
                         else:
-                            print('Answer should be "y" (yes), "n" (no), "o" (open) or "d" (discard), try again.')
+                            self.print('Answer should be "y" (yes), "n" (no), "o" (open) or "d" (discard), try again.')
 
                     if answer == "o":
                         while True:
@@ -1018,7 +998,7 @@ class AnnotationTask:
                             if answer in ["y", "n", "d"]:
                                 break
                             else:
-                                print('Answer should be "y" (yes), "n" (no) or "d" (discard), try again.')
+                                self.print('Answer should be "y" (yes), "n" (no) or "d" (discard), try again.')
 
                     if answer == "y":
                         self.wikipedia['found'][name].exact = True
@@ -1030,7 +1010,7 @@ class AnnotationTask:
                         corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                print("Second step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print("Second step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
             elif step == 3:
                 count, size = 0, len(to_correct)
@@ -1039,9 +1019,9 @@ class AnnotationTask:
                                              text='to correct entity')
 
                     wiki_search = search(name)
-                    print("Wikipedia search for %s:" % name)
+                    self.print("Wikipedia search for %s:" % name)
                     for cmpt, title in enumerate(wiki_search):
-                        print("%s: %s" % (str(cmpt + 1), + title))
+                        self.print("%s: %s" % (str(cmpt + 1), + title))
 
                     while True:
                         try:
@@ -1049,15 +1029,15 @@ class AnnotationTask:
                             if answer in range(len(wiki_search) + 1):
                                 break
                             else:
-                                print("Answer should be between 0 and the length of the wikipedia search, try again.")
+                                self.print("Answer should be between 0 and the length of the search, try again.")
                         except ValueError:
-                            print("Answer should be an int, try again.")
+                            self.print("Answer should be an int, try again.")
 
                     if answer == 0:
                         del self.wikipedia['found'][name]
                         self.wikipedia['not_found'].add(name)
                         corrected.add(name)
-                        print("Considered not found.")
+                        self.print("Considered not found.")
 
                     else:
                         try:
@@ -1065,10 +1045,10 @@ class AnnotationTask:
                             self.wikipedia['found'][name] = Wikipedia(p)
 
                         except DisambiguationError:
-                            print("Search is still ambiguous, moving on to the next one...")
+                            self.print("Search is still ambiguous, moving on to the next one...")
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                print("Third step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print("Third step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
 
             elif step == 4:
                 count, size = 0, len(to_correct)
@@ -1081,12 +1061,12 @@ class AnnotationTask:
                     corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                print("Fifth step over, remaining: %i/%i.".format(len(to_correct), len(self.wikipedia['found'])))
+                self.print("Fifth step over, remaining: %i/%i.".format(len(to_correct), len(self.wikipedia['found'])))
 
             else:
                 raise Exception("Wrong step specified.")
 
         except KeyboardInterrupt:
-            print("Keyboard interruption, saving the results...")
+            self.print("Keyboard interruption, saving the results...")
 
     # endregion
