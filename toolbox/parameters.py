@@ -1,8 +1,6 @@
 """ Parameters of the various scripts. """
 
 # region Miscellaneous
-SILENT = False
-SAVE = False
 EXCLUDE_PILOT = False
 # endregion
 
@@ -10,14 +8,13 @@ EXCLUDE_PILOT = False
 YEARS = [2006, 2007]
 MAX_TUPLE_SIZE = 6
 RANDOM = True
-DEBUG = True
 
 LOAD_WIKI = True
 WIKIPEDIA_FILE_NAME = "wikipedia_global"
 CORRECT_WIKI = True
 
 ANNOTATION_TASK_SEED_1 = 0
-ANNOTATION_TASK_SEED_2 = 0
+ANNOTATION_TASK_SEED_2 = 1
 # endregion
 
 # region Modeling task parameters
