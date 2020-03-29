@@ -833,7 +833,7 @@ class Annotation:
                 unpreprocessed_answer = unpreprocessed_answer.capitalize()
 
             if old != unpreprocessed_answer:
-                print('   Correcting "%s" to "%s"' % (old, unpreprocessed_answer)) if not silent else None
+                print('Correcting "%s" to "%s"' % (old, unpreprocessed_answer)) if not silent else None
 
             while unpreprocessed_answer[-1] in ['.', ' ']:
                 unpreprocessed_answer = unpreprocessed_answer[:-1]
@@ -852,7 +852,7 @@ class Annotation:
             if 'have' in preprocessed_answer.split() or 'are' in preprocessed_answer.split() \
                     or 'and' in preprocessed_answer.split() or preprocessed_answer == 'the' \
                     or '/' in preprocessed_answer:
-                print('   Discarding "%s"' % answer) if not silent else None
+                print('Discarding "%s"' % answer) if not silent else None
 
             elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
                 answers.append(answer)
