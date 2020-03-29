@@ -679,7 +679,7 @@ class AnnotationTask:
 
         suffix = ['_short' if self.short else None,
                   '_random' if self.random else None,
-                  '_seed_' + str(self.random_seed) if self.random_seed is not None else None]
+                  '_seed' + str(self.random_seed) if self.random_seed != 0 else None]
 
         suffix = [s for s in suffix if s is not None]
         suffix = ''.join(suffix)
