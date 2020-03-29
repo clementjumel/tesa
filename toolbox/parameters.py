@@ -1,9 +1,5 @@
 """ Parameters of the various scripts. """
 
-# region Miscellaneous
-EXCLUDE_PILOT = False
-# endregion
-
 # region Annotation task parameters
 YEARS = [2006, 2007]
 MAX_TUPLE_SIZE = 6
@@ -12,6 +8,8 @@ RANDOM = True
 LOAD_WIKI = True
 WIKIPEDIA_FILE_NAME = "wikipedia_global"
 CORRECT_WIKI = True
+
+EXCLUDE_PILOT = False
 
 ANNOTATION_TASK_SEED_1 = 0
 ANNOTATION_TASK_SEED_2 = 1
@@ -23,9 +21,9 @@ MIN_ANSWERS = 2
 
 BATCH_SIZE = 64
 DROP_LAST = False
-CROSS_VALIDATION = None
+CROSS_VALIDATION = 0
 
-MODELING_TASK_SEED = 1
+MODELING_TASK_SEED = 2
 
 BASELINES_SPLIT_VALID_PROPORTION = 0.5
 BASELINES_SPLIT_TEST_PROPORTION = 0.5
