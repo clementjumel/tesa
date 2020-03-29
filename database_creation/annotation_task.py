@@ -40,7 +40,7 @@ class AnnotationTask:
         self.years = years
         self.max_tuple_size = max_tuple_size
         self.short = short
-        self.random = random
+        self.random = random if short else None
         self.debug = debug
         self.random_seed = random_seed
         self.save = save
