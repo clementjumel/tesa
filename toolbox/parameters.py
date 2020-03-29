@@ -2,20 +2,22 @@
 
 # region Miscellaneous
 SILENT = False
-SAVE = True
+SAVE = False
 EXCLUDE_PILOT = False
 # endregion
 
 # region Annotation task parameters
 YEARS = [2006, 2007]
 MAX_TUPLE_SIZE = 6
-RANDOM = None
+RANDOM = True
 DEBUG = True
-ANNOTATION_TASK_SEED = 0
 
 LOAD_WIKI = True
 WIKIPEDIA_FILE_NAME = "wikipedia_global"
 CORRECT_WIKI = True
+
+ANNOTATION_TASK_SEED_1 = 0
+ANNOTATION_TASK_SEED_2 = 0
 # endregion
 
 # region Modeling task parameters
