@@ -161,9 +161,7 @@ class AnnotationTask:
             self.load_attr_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
         self.compute_wikipedia(load=load)
-
-        if self.save:
-            self.save_attr_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+        self.save_attr_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
 
     @Verbose("Processing the aggregation queries...")
     def process_queries(self, load):
@@ -179,9 +177,7 @@ class AnnotationTask:
 
         else:
             self.compute_queries()
-
-            if self.save:
-                self.save_attr_pkl(attribute_name='queries', file_name=None, folder_name='queries')
+            self.save_attr_pkl(attribute_name='queries', file_name=None, folder_name='queries')
 
     @Verbose("Processing the annotations batches...")
     def process_annotation_batches(self, batches, batch_size, exclude_pilot):
@@ -197,11 +193,10 @@ class AnnotationTask:
 
         existing_ids, existing_batches = self.read_existing_batches(exclude_pilot=exclude_pilot)
 
-        if self.save:
-            self.save_annotation_batches(batches=batches,
-                                         batch_size=batch_size,
-                                         existing_ids=existing_ids,
-                                         existing_batches=existing_batches)
+        self.save_annotation_batches(batches=batches,
+                                     batch_size=batch_size,
+                                     existing_ids=existing_ids,
+                                     existing_batches=existing_batches)
 
     @Verbose("Processing the modeling task...")
     def process_task(self, exclude_pilot):
@@ -251,12 +246,7 @@ class AnnotationTask:
             self.print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
                                                                           len(out_wikipedia['not_found'])))
 
-        if self.save:
-            self.save_obj_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
-
-        else:
-            self.print("Warning, the changes were not saved.")
-
+        self.save_obj_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
         self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
@@ -270,12 +260,7 @@ class AnnotationTask:
         """
 
         self.correction(step=step)
-
-        if self.save:
-            self.save_attr_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
-
-        else:
-            self.print("Warning, the changes were not saved.")
+        self.save_attr_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
 
     # endregion
 
@@ -315,8 +300,7 @@ class AnnotationTask:
 
         self.articles = articles
 
-        if self.debug:
-            self.write_debug(field='articles', method='articles')
+        self.write_debug(field='articles', method='articles')
 
     @Verbose("Computing the articles' metadata...")
     def compute_metadata(self):
@@ -328,8 +312,7 @@ class AnnotationTask:
 
             self.articles[id_].compute_metadata()
 
-        if self.debug:
-            self.write_debug(field='articles', method='metadata')
+        self.write_debug(field='articles', method='metadata')
 
     @Verbose("Computing the database' entities...")
     @Attribute('entities')
@@ -362,9 +345,8 @@ class AnnotationTask:
 
             article.entities = [self.entities[name] for name in [str(entity) for entity in entities]]
 
-        if self.debug:
-            self.write_debug(field='articles', method='article_entities')
-            self.write_debug(field='entities', method='entities')
+        self.write_debug(field='articles', method='article_entities')
+        self.write_debug(field='entities', method='entities')
 
     @Verbose("Computing the entity tuples...")
     @Attribute('tuples')
@@ -409,8 +391,7 @@ class AnnotationTask:
                              article_ids=ids[tuple_])
                        for rank, tuple_ in enumerate(ranking)]
 
-        if self.debug:
-            self.write_debug(field='tuples', method='tuples')
+        self.write_debug(field='tuples', method='tuples')
 
     @Verbose("Computing the articles' annotations from the corpus...")
     def compute_corpus_annotations(self):
@@ -426,8 +407,7 @@ class AnnotationTask:
             except ParseError:
                 raise Exception("Data is not clean, remove data %s and start again." % id_)
 
-        if self.debug:
-            self.write_debug(field='articles', method='annotations')
+        self.write_debug(field='articles', method='annotations')
 
     @Verbose("Computing the contexts...")
     def compute_contexts(self):
@@ -447,8 +427,7 @@ class AnnotationTask:
 
             tuple_.query_ids = query_ids
 
-        if self.debug:
-            self.write_debug(field='articles', method='contexts')
+        self.write_debug(field='articles', method='contexts')
 
     @Verbose("Computing the Wikipedia information...")
     def compute_wikipedia(self, load):
@@ -496,8 +475,7 @@ class AnnotationTask:
 
         self.wikipedia = wikipedia
 
-        if self.debug:
-            self.write_debug(field='wikipedia', method='wikipedia')
+        self.write_debug(field='wikipedia', method='wikipedia')
 
     @Verbose("Computing the Queries...")
     @Attribute('queries')
@@ -522,8 +500,7 @@ class AnnotationTask:
 
         self.queries = queries
 
-        if self.debug:
-            self.write_debug(field='queries', method='queries')
+        self.write_debug(field='queries', method='queries')
 
     @Verbose("Computing the annotated queries...")
     @Attribute('queries')
@@ -736,14 +713,18 @@ class AnnotationTask:
 
         file_name = self.results_path + folder_name + "/" + file_name + ".pkl"
 
-        try:
-            with open(file_name, "wb") as file:
-                dump(obj=obj, file=file, protocol=-1)
+        if self.save:
+            try:
+                with open(file_name, "wb") as file:
+                    dump(obj=obj, file=file, protocol=-1)
 
-            self.print("Object saved at %s." % file_name)
+                self.print("Object saved at %s." % file_name)
 
-        except PicklingError as err:
-            self.print("Could not save (PicklingError), moving on: %s" % str(err))
+            except PicklingError as err:
+                self.print("Could not save (PicklingError), moving on: %s" % str(err))
+
+        else:
+            self.print("Not saving %s (not in save mode)." % file_name)
 
     def load_attr_pkl(self, attribute_name, file_name, folder_name):
         """
@@ -860,9 +841,12 @@ class AnnotationTask:
             batch_idx = "0" + str(batch_idx) if 0 <= batch_idx < 10 else str(batch_idx)
             file_name = self.results_path + "queries/batch_" + batch_idx + ".csv"
 
-            df.to_csv(file_name, index=False)
+            if self.save:
+                df.to_csv(file_name, index=False)
+                self.print("batch_%s saved at %s." % (batch_idx, file_name))
 
-            self.print("batch_%s saved at %s." % (batch_idx, file_name))
+            else:
+                self.print("Not saving %s (not in save mode).")
 
     def write_debug(self, field, method):
         """
@@ -873,35 +857,36 @@ class AnnotationTask:
             method: str, name of the method to debug.
         """
 
-        if field == "articles":
-            lines = [[id_, getattr(article, "debug_" + method)()] for id_, article in self.articles.items()]
+        if self.debug:
+            if field == "articles":
+                lines = [[id_, getattr(article, "debug_" + method)()] for id_, article in self.articles.items()]
 
-        elif field == "entities":
-            lines = [[name, entity.debug_entities()] for name, entity in self.entities.items()]
+            elif field == "entities":
+                lines = [[name, entity.debug_entities()] for name, entity in self.entities.items()]
 
-        elif field == "tuples":
-            lines = [[str(tuple_), tuple_.debug_tuples()] for tuple_ in self.tuples]
+            elif field == "tuples":
+                lines = [[str(tuple_), tuple_.debug_tuples()] for tuple_ in self.tuples]
 
-        elif field == "wikipedia":
-            lines = [[name, wikipedia.debug_wikipedia()] for name, wikipedia in self.wikipedia['found'].items()] \
-                    + [[name, ": not found"] for name in self.wikipedia['not_found']]
+            elif field == "wikipedia":
+                lines = [[name, wikipedia.debug_wikipedia()] for name, wikipedia in self.wikipedia['found'].items()] \
+                        + [[name, ": not found"] for name in self.wikipedia['not_found']]
 
-        elif field == "queries":
-            lines = [[id_, query.debug_queries()] for id_, query in self.queries.items()]
+            elif field == "queries":
+                lines = [[id_, query.debug_queries()] for id_, query in self.queries.items()]
 
-        else:
-            raise Exception("Wrong field/method specified: %s/%s." % (field, method))
+            else:
+                raise Exception("Wrong field/method specified: %s/%s." % (field, method))
 
-        lines = [line[0] + line[1] + '\n' for line in lines if line[1]]
+            lines = [line[0] + line[1] + '\n' for line in lines if line[1]]
 
-        if lines:
-            file_name = self.results_path + "debug/" + method + ".txt"
+            if lines:
+                file_name = self.results_path + "debug/" + method + ".txt"
 
-            if self.save:
-                with open(file_name, "w") as f:
-                    f.writelines(lines)
+                if self.save:
+                    with open(file_name, "w") as f:
+                        f.writelines(lines)
 
-            self.print("Debugging Written in %s..." % file_name)
+                self.print("Debugging Written in %s..." % file_name)
 
     # endregion
 
