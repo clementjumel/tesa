@@ -1,6 +1,7 @@
 .idea/
 nyt_annotated_corpus/
 results/
+old/
 
 database_creation/__pycache__/
 modeling/__pycache__/
