@@ -143,7 +143,7 @@ class AnnotationTask:
     def process_articles(self):
         """ Performs the preprocessing of the articles. """
 
-        self.compute_annotations()
+        self.compute_corpus_annotations()
         self.compute_contexts()
         self.filter_no_query()
 
