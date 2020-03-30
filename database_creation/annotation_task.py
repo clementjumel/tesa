@@ -204,7 +204,7 @@ class AnnotationTask:
         Process the annotations and the corresponding queries.
 
         Args:
-            exclude_pilot: whether or not to exclude the data from the pilot.
+            exclude_pilot: bool, whether or not to exclude the data from the pilot.
         """
 
         self.compute_annotated_queries(exclude_pilot=exclude_pilot)
@@ -509,7 +509,7 @@ class AnnotationTask:
         Compute the queries corresponding to the annotations.
 
         Args:
-            exclude_pilot: whether or not to exclude the data from the pilot.
+            exclude_pilot: bool, whether or not to exclude the data from the pilot.
         """
 
         queries = dict()
@@ -518,7 +518,7 @@ class AnnotationTask:
             path = path.split(self.results_path)[1]
             version = path.split('/')[1]
 
-            if 'pilot' not in version or not exclude_pilot:
+            if not exclude_pilot or 'pilot' not in version:
                 folder_name = '/'.join(path.split('/')[:-1])
                 file_name = path.split('/')[-1].split('.pkl')[0]
 
@@ -533,7 +533,7 @@ class AnnotationTask:
         Compute the annotations of the Mechanical Turks.
 
         Args:
-            exclude_pilot: whether or not to exclude the data from the pilot.
+            exclude_pilot: bool, whether or not to exclude the data from the pilot.
         """
 
         annotations = defaultdict(list)
@@ -543,7 +543,7 @@ class AnnotationTask:
             version = path.split('/')[1]
             batch = path.split('/')[-1].replace('_complete.csv', '')
 
-            if 'pilot' not in version or not exclude_pilot:
+            if not exclude_pilot or 'pilot' not in version:
                 df = read_csv(self.results_path + path)
 
                 self.print("%s loaded from %s" % (batch, path))
