@@ -533,6 +533,18 @@ class Coreference:
         self.compute_entity(entities)
         self.compute_sentences()
 
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Coreference.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        entity = '[' + self.entity + '] ' if self.entity is not None else ''
+
+        return entity + '; '.join([str(mention) for mention in [self.representative] + self.mentions])
+
     # region Methods compute_
 
     def compute_annotations(self, element):
