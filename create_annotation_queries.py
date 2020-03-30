@@ -3,7 +3,7 @@ from database_creation.annotation_task import AnnotationTask
 from argparse import ArgumentParser
 
 from toolbox.parameters import \
-    YEARS, MAX_TUPLE_SIZE, RANDOM, ANNOTATION_TASK_SEED_1, LOAD_WIKI, WIKIPEDIA_FILE_NAME, CORRECT_WIKI
+    YEARS, MAX_TUPLE_SIZE, RANDOM, ANNOTATION_TASK_SEED, LOAD_WIKI, WIKIPEDIA_FILE_NAME, CORRECT_WIKI
 
 from toolbox.paths import NYT_ANNOTATED_CORPUS_PATH, ANNOTATION_TASK_RESULTS_PATH
 
@@ -43,7 +43,7 @@ def main():
                                      short=short,
                                      random=RANDOM,
                                      debug=debug,
-                                     random_seed=ANNOTATION_TASK_SEED_1,
+                                     random_seed=ANNOTATION_TASK_SEED,
                                      save=save,
                                      silent=silent,
                                      corpus_path=NYT_ANNOTATED_CORPUS_PATH,
