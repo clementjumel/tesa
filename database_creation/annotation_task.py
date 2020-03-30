@@ -829,7 +829,7 @@ class AnnotationTask:
         batches_ids = choice(a=sorted(ids), size=batches * batch_size, replace=False)
         batches_ids = np_split(batches_ids, batches)
 
-        starting_idx = max(existing_batches) + 1
+        starting_idx = max(existing_batches) + 1 if existing_batches else 0
 
         for batch in range(batches):
             batch_ids = batches_ids[batch]
