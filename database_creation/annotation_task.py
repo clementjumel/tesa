@@ -677,14 +677,7 @@ class AnnotationTask:
             str, ending of the name of the file (after the basic name of the file).
         """
 
-        suffix = ['_short' if self.short else None,
-                  '_random' if self.random else None,
-                  '_seed' + str(self.random_seed) if self.random_seed != 0 else None]
-
-        suffix = [s for s in suffix if s is not None]
-        suffix = ''.join(suffix)
-
-        return suffix
+        return '_short' if self.short else ''
 
     def save_attr_pkl(self, attribute_name, file_name, folder_name):
         """
