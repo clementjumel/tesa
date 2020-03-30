@@ -460,7 +460,7 @@ class ModelingTask:
         """
 
         class_name = self.__class__.__name__
-        class_name = "_".join(findall(r'[A-Z][^A-Z]*', class_name))
+        class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
         file_name = folder_path + class_name + '.pkl'
 
