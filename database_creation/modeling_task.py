@@ -465,8 +465,8 @@ class ModelingTask:
         file_name = folder_path + class_name + '.pkl'
 
         if self.save:
-            with open(file_name, 'wb') as f:
-                dump(obj=self, file=f, protocol=-1)
+            with open(file_name, 'wb') as file:
+                dump(obj=self, file=file, protocol=-1)
 
             self.print("Task saved at %s." % file_name)
 
