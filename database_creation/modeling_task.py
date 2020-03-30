@@ -8,45 +8,58 @@ from pickle import dump, load
 
 
 class ModelingTask:
-    task_name = None
 
-    def __init__(self, min_assignments=5, min_answers=2, test_proportion=0.25, valid_proportion=0.25, batch_size=32,
-                 drop_last=True, k_cross_validation=0, root='', random_seed=1):
+    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
+                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, root=''):
         """
         Initializes an instance of the base ModelingTask.
 
         Args:
             min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
             min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
-            test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
-            valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
+            exclude_pilot: bool, whether or not to exclude the data from the pilot.
+            annotation_results_path: str, path to the annotation results folder
             batch_size: int, number of samples in each batch.
             drop_last: bool, whether or not to delete the last batch if incomplete.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
-            root: str, path to the root of the project.
+            valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
+            test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
             random_seed: int, the seed to use for the random processes.
+            save: bool, saving option.
+            silent: bool, silent option.
+            root: str, path to the root of the project.
         """
 
-        self.use_cross_validation = bool(k_cross_validation)
+        self.min_assignments = min_assignments
+        self.min_answers = min_answers
+        self.exclude_pilot = exclude_pilot
+        self.annotation_results_path = annotation_results_path
+        self.batch_size = batch_size
+        self.drop_last = drop_last
+        self.k_cross_validation = k_cross_validation
+        self.valid_proportion = valid_proportion
+        self.test_proportion = test_proportion
+        self.random_seed = random_seed
+        self.save = save
+        self.silent = silent
+        self.root = root
 
+        self.unprocessed_data = None
         self.train_loader = None
         self.valid_loader = None
         self.test_loader = None
 
         seed(random_seed)
 
-        self.compute_data(min_assignments=min_assignments,
-                          min_answers=min_answers,
-                          batch_size=batch_size,
-                          drop_last=drop_last,
-                          test_proportion=test_proportion,
-                          valid_proportion=valid_proportion,
-                          k_cross_validation=k_cross_validation,
-                          root=root)
-
     # region Main methods
 
-    def preview_data(self, model, include_train=True, include_valid=False):
+    def process_data_loaders(self):
+        """ Process the data of the annotations to create the data loaders. """
+
+        self.compute_unprocessed_data()
+        self.compute_data_loaders()
+
+    def preview_data(self, model, include_train, include_valid):
         """
         Preview the data for the model.
 
@@ -60,175 +73,163 @@ class ModelingTask:
 
         if include_train and include_valid:
             data_loader = concatenate((self.train_loader, self.valid_loader), axis=0)
+        elif include_train:
+            data_loader = self.train_loader
         else:
-            data_loader = self.train_loader if include_train else self.valid_loader
+            data_loader = self.valid_loader
 
-        model.preview_data(data_loader=data_loader)
+        model.preview_data(data_loader)
 
-    def train_model(self, model, n_epochs=1, n_updates=100, is_regression=False):
+    def train_model(self, model):
         """
         Train a model on the training set and compute the metrics on the validation sets.
 
         Args:
             model: models.Model, model to train.
-            n_epochs: int, number of epochs to perform.
-            n_updates: int, number of batches between the updates.
-            is_regression: bool, whether to use the regression set up for the task.
         """
 
-        if not self.use_cross_validation:
+        if not self.k_cross_validation:
             model.train(train_loader=self.train_loader,
-                        valid_loader=self.valid_loader,
-                        n_epochs=n_epochs,
-                        n_updates=n_updates,
-                        is_regression=is_regression)
+                        valid_loader=self.valid_loader)
 
         else:
-            for train_loader, valid_loader in self.train_loader:
+            for train_loader, valid_loader in zip(self.train_loader, self.valid_loader):
                 model.reset()
                 model.train(train_loader=train_loader,
-                            valid_loader=valid_loader,
-                            n_epochs=n_epochs,
-                            n_updates=n_updates,
-                            is_regression=is_regression)
+                            valid_loader=valid_loader)
 
-    def valid_model(self, model, is_regression=False):
+    def valid_model(self, model):
         """
         Evaluate a baseline model on the validation set.
 
         Args:
             model: models.Model, model to validate.
-            is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.valid(data_loader=self.valid_loader, is_regression=is_regression)
+        model.valid(self.valid_loader)
 
-    def test_model(self, model, is_regression=False):
+    def test_model(self, model):
         """
         Evaluate the model on the test set.
 
         Args:
             model: models.Model, model to test.
-            is_regression: bool, whether to use the regression set up for the task.
         """
 
-        model.test(data_loader=self.test_loader, is_regression=is_regression)
+        model.test(self.test_loader)
 
-    def explain_model(self, model, n_samples=5, n_answers=10):
+    def explain_model(self, model):
         """
         Explain the answers of the model on the valid_set.
 
         Args:
             model: models.Model, model to test.
-            n_samples: int, number of samples to explain.
-            n_answers: int, number of best answers to look at.
         """
 
-        model.explain(data_loader=self.valid_loader, n_samples=n_samples, n_answers=n_answers)
+        model.explain(self.valid_loader)
 
     # endregion
 
     # region Methods compute_
 
-    def compute_data(self, min_assignments, min_answers, batch_size, drop_last, test_proportion, valid_proportion,
-                     k_cross_validation, root):
-        """
-        Compute the learnable data loaders by processing the Dataset.
+    def compute_unprocessed_data(self):
+        """ Computes the unprocessed annotations data as a 2d-array. """
 
-        Args:
-            min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
-            min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
-            batch_size: int, number of samples in each batch.
-            drop_last: bool, whether or not to delete the last batch if incomplete.
-            test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
-            valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
-            k_cross_validation: int, number of folds to create.
-            root: str, path to the root of the project.
-        """
+        annotation_task = AnnotationTask(silent=self.silent,
+                                         results_path=self.annotation_results_path,
+                                         root=self.root,
+                                         years=None,
+                                         max_tuple_size=None,
+                                         short=None,
+                                         random=None,
+                                         debug=None,
+                                         random_seed=None,
+                                         save=None,
+                                         corpus_path=None)
 
-        raw_data = self.get_raw_data(min_assignments=min_assignments, min_answers=min_answers, root=root)
+        annotation_task.process_task(exclude_pilot=self.exclude_pilot)
 
-        n = len(raw_data)
+        queries = annotation_task.queries
+        annotations = self.filter_annotations(annotation_task.annotations)
+
+        samples = self.get_samples(queries=queries, annotations=annotations)
+
+        unprocessed_data = asarray([(sample.get_x(), sample.get_y()) for sample in samples])
+        n = unprocessed_data.shape[0]
+
         if not n:
             raise Exception("No data imported.")
+        else:
+            self.print("Unprocessed data imported (%i samples)." % n)
+            self.unprocessed_data = unprocessed_data
 
-        n_test = round(test_proportion * n)
+    def compute_data_loaders(self):
+        """ Compute the data loaders. """
 
-        if self.use_cross_validation:
-            n_test += (n - n_test) % k_cross_validation
+        k = self.k_cross_validation
+        n = self.unprocessed_data.shape[0]
+        n_test = round(self.test_proportion * n)
 
-            test_set, complete_train_set = split(raw_data, [n_test])
+        if not k:
+            n_valid = round(self.valid_proportion * n)
+            n_train = n - n_test - n_valid
 
-            k_splits = split(complete_train_set, k_cross_validation)
+            assert 0 <= n_train <= n and 0 <= n_valid <= n and 0 <= n_test <= n
+
+            train_set, valid_set, test_set = split(self.unprocessed_data, [n_train, n_train + n_valid])
+
+            assert n_train == train_set.shape[0] and n_valid == valid_set.shape[0] and n_test == test_set.shape[0]
+
+            train_loader = self.to_loader(train_set)
+            valid_loader = valid_set
+            test_loader = test_set
+
+            self.print("Split into train (%i, %i%%), valid (%i, %i%%) and test (%i, %i%%) data loaders." %
+                       (n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
+
+            self.train_loader = train_loader
+            self.valid_loader = valid_loader
+            self.test_loader = test_loader
+
+        else:
+            n_test += (n - n_test) % k
+
+            test_set, cross_validation_set = split(self.unprocessed_data, [n_test])
+            cross_validation_split = split(cross_validation_set, k)
+
             train_sets, valid_sets = [], []
+            n_trains, n_valids = set(), set()
 
-            for i in range(k_cross_validation):
-                valid_set = k_splits[i]
-                train_set = concatenate([k_splits[j] for j in range(k_cross_validation) if j != i])
+            for i in range(k):
+                valid_set = cross_validation_split[i]
+                train_set = concatenate([cross_validation_split[j] for j in range(k) if j != i])
 
                 train_sets.append(train_set)
                 valid_sets.append(valid_set)
 
-            s = list(set([(train_sets[i].shape, valid_sets[i].shape) for i in range(len(train_sets))]))
-            assert len(s) == 1
+                n_trains.add(train_set.shape[0])
+                n_valids.add(valid_set.shape[0])
 
-            self.train_loader = [(self.to_loader(data=train_sets[i], batch_size=batch_size, drop_last=drop_last),
-                                  valid_sets[i]) for i in range(len(train_sets))]
-            self.test_loader = test_set
+            assert len(n_trains) == 1 and len(n_valids) == 1
 
-            print("Split into k-fold cross validation sets",
-                  "(train: %d, %d percents," % (s[0][0][0], 100 * s[0][0][0] / n),
-                  "valid: %d, %d percents)" % (s[0][1][0], 100 * s[0][1][0] / n),
-                  "and a test set (%d, %d percents)." % (test_set.shape[0], 100 * test_set.shape[0] / n))
+            n_train, n_valid = n_trains.pop(), n_valids.pop()
 
-        else:
-            n_valid = round(valid_proportion * n)
-            n_train = n - n_test - n_valid
-            assert n_train >= 0 and n_valid >= 0 and n_test >= 0
+            train_loader = [self.to_loader(train_set) for train_set in train_sets]
+            valid_loader = valid_sets
+            test_loader = test_set
 
-            train_set, valid_set, test_set = split(raw_data, [n_train, n_train + n_valid])
+            self.print("Split into %i-fold cross validation sets (train: %i, %i%%; valid: %i, %i%%; test: %i, %i%%)." %
+                       (k, n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
 
-            self.train_loader = self.to_loader(data=train_set, batch_size=batch_size, drop_last=drop_last)
-            self.valid_loader = valid_set
-            self.test_loader = test_set
+            self.train_loader = train_loader
+            self.valid_loader = valid_loader
+            self.test_loader = test_loader
 
-            print("Split into train (%d, %d percents)," % (train_set.shape[0], 100 * train_set.shape[0] / n),
-                  "valid (%d, %d percents)" % (valid_set.shape[0], 100 * valid_set.shape[0] / n),
-                  "and test (%d, %d) percents." % (test_set.shape[0], 100 * test_set.shape[0] / n))
+        self.unprocessed_data = None
 
     # endregion
 
     # region Methods get_
-
-    def get_raw_data(self, min_assignments, min_answers, root):
-        """
-        Returns the raw data using the methods from Dataset.
-
-        Args:
-            min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
-            min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
-            root: str, path to the root of the project.
-
-        Returns:
-            2d-array, raw sample from the task, each line corresponding to (inputs, targets)
-        """
-
-        annotation_task = AnnotationTask(root=root)
-        annotation_task.process_task()
-
-        queries, annotations = annotation_task.queries, annotation_task.annotations
-
-        annotations = self.filter_annotations(annotations=annotations,
-                                              min_assignments=min_assignments,
-                                              min_answers=min_answers)
-
-        samples = self.get_samples(queries=queries, annotations=annotations)
-
-        raw_data = asarray([(sample.get_x(), sample.get_y()) for sample in samples])
-
-        print("Raw data imported ({} samples).".format(raw_data.shape[0]))
-
-        return raw_data
 
     def get_samples(self, queries, annotations):
         """
@@ -374,23 +375,26 @@ class ModelingTask:
 
     # region Other methods
 
-    @staticmethod
-    def filter_annotations(annotations, min_assignments, min_answers):
+    def print(self, s):
+        """ Prints the element s if not in silent mode. """
+
+        if not self.silent:
+            print(s)
+
+    def filter_annotations(self, annotations):
         """
         Returns the Annotations filtered from those with not enough answers or with workers having not done enough
         assignments.
 
         Args:
             annotations: dict of list of Annotations, Annotations from the MT workers.
-            min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
-            min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
 
         Returns:
             dict of list of Annotations, filtered Annotations from the MT workers.
         """
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("Filtering the annotations (initial number of annotations: %d)..." % length)
+        self.print("Filtering the annotations (initial number of annotations: %i)..." % length)
 
         workers_count = defaultdict(list)
 
@@ -399,31 +403,28 @@ class ModelingTask:
                 workers_count[annotation.worker_id].append(annotation_id_)
 
         for worker_id, annotation_ids in workers_count.items():
-            if len(annotation_ids) < min_assignments:
+            if len(annotation_ids) < self.min_assignments:
                 for annotation_id_ in annotation_ids:
                     annotations[annotation_id_] = [annotation for annotation in annotations[annotation_id_]
                                                    if annotation.worker_id != worker_id]
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("First filter done (number of assignments): %d remaining..." % length)
+        self.print("First filter done (number of assignments): %i remaining..." % length)
 
         annotations = {id_: annotation_list for id_, annotation_list in annotations.items()
-                       if len([annotation for annotation in annotation_list if not annotation.bug]) >= min_answers}
+                       if len([annotation for annotation in annotation_list if not annotation.bug]) >= self.min_answers}
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        print("Second filter done (number of answers): %d remaining." % length)
+        self.print("Second filter done (number of answers): %i remaining." % length)
 
         return annotations
 
-    @staticmethod
-    def to_loader(data, batch_size, drop_last):
+    def to_loader(self, data):
         """
         Returns the loader of the data.
 
         Args:
             data: 2d-array, data samples, each line corresponding to (inputs, targets).
-            batch_size: int, number of samples in each batch.
-            drop_last: bool, whether or not to delete the last batch if incomplete.
 
         Returns:
             data_loader: list, pairs of (batch_inputs, batch_targets), batched data samples.
@@ -432,15 +433,13 @@ class ModelingTask:
         data_loader = []
 
         for inputs, targets in data:
-
             n = len(inputs['choices'])
             cmpt = 0
 
-            while (drop_last and cmpt + batch_size <= n) or (not drop_last and cmpt + 1 <= n):
+            while (self.drop_last and cmpt + self.batch_size <= n) or (not self.drop_last and cmpt + 1 <= n):
                 batch_inputs = dict([(key, item) for key, item in inputs.items() if key != 'choices'])
-                batch_inputs['choices'] = inputs['choices'][cmpt:cmpt + batch_size]
-
-                batch_targets = targets[cmpt:cmpt + batch_size]
+                batch_inputs['choices'] = inputs['choices'][cmpt:cmpt + self.batch_size]
+                batch_targets = targets[cmpt:cmpt + self.batch_size]
 
                 data_loader.append([batch_inputs, batch_targets])
 
@@ -453,51 +452,53 @@ class ModelingTask:
 
     def save_pkl(self, folder_path):
         """
-        Save the Task using pickle in [folder_path][self.task_name].pkl.
+        Save the Task using pickle in [folder_path][lowered class name].pkl.
 
         Args:
             folder_path: str, path of the folder to save in.
         """
 
-        file_name = folder_path + self.task_name + '.pkl'
+        file_name = folder_path + self.__class__.__name__.lower() + '.pkl'
 
-        with open(file_name, 'wb') as f:
-            dump(obj=self, file=f, protocol=-1)
+        if self.save:
+            with open(file_name, 'wb') as f:
+                dump(obj=self, file=f, protocol=-1)
 
-        print("Task saved at %s." % file_name)
+            self.print("Task saved at %s." % file_name)
 
-    @staticmethod
-    def load_pkl(task_name, folder_path):
+        else:
+            self.print("Not saving %s (not in save mode)." % file_name)
+
+    def load_pkl(self, task_name, folder_path):
         """
-        Load a Task using pickle from [folder_path][task_name].pkl
+        Load a Task using pickle from [folder_path][task_name.lower()].pkl
 
         Args:
             task_name: str, name of the Task to load.
-            folder_path: str, path of the folder to save in.
+            folder_path: str, path of the folder to load from.
 
         Returns:
             Task, loaded object.
         """
 
-        file_name = folder_path + task_name + '.pkl'
+        file_name = folder_path + task_name.lower() + '.pkl'
 
-        with open(file_name, 'rb') as f:
-            task = load(f)
+        with open(file_name, 'rb') as file:
+            task = load(file)
 
-        print("Task loaded from %s" % file_name)
+        self.print("Task loaded from %s." % file_name)
 
         return task
 
     # endregion
 
 
-class ContextFreeTask(ModelingTask):
-    task_name = 'context_free'
+class ContextFree(ModelingTask):
 
     # region Methods get_
 
     @staticmethod
-    def get_annotations(queries, annotations):
+    def rework_annotations(queries, annotations):
         """
         Rework the annotations for the specificity of the Task.
 
@@ -530,8 +531,9 @@ class ContextFreeTask(ModelingTask):
             list, shuffled list of Samples.
         """
 
-        return super().get_samples(queries=queries, annotations=self.get_annotations(queries=queries,
-                                                                                     annotations=annotations))
+        annotations = self.rework_annotations(queries=queries, annotations=annotations)
+
+        return super().get_samples(queries=queries, annotations=annotations)
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -559,8 +561,7 @@ class ContextFreeTask(ModelingTask):
     # endregion
 
 
-class ContextFreeSameTypeTask(ContextFreeTask):
-    task_name = 'context_free_same_type'
+class ContextFreeSameType(ContextFree):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -586,8 +587,7 @@ class ContextFreeSameTypeTask(ContextFreeTask):
         return labelled_answers
 
 
-class ContextDependentTask(ModelingTask):
-    task_name = 'context_dependent'
+class ContextDependent(ModelingTask):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -613,8 +613,7 @@ class ContextDependentTask(ModelingTask):
         return labelled_answers
 
 
-class ContextDependentSameTypeTask(ModelingTask):
-    task_name = 'context_dependent_same_type'
+class ContextDependentSameType(ModelingTask):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -640,8 +639,7 @@ class ContextDependentSameTypeTask(ModelingTask):
         return labelled_answers
 
 
-class FullHybridTask(ModelingTask):
-    task_name = 'full_hybrid'
+class FullHybrid(ModelingTask):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -675,8 +673,7 @@ class FullHybridTask(ModelingTask):
         return labelled_answers
 
 
-class HybridTask(ModelingTask):
-    task_name = 'hybrid'
+class Hybrid(ModelingTask):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -706,8 +703,7 @@ class HybridTask(ModelingTask):
         return labelled_answers
 
 
-class HybridSameTypeTask(ModelingTask):
-    task_name = 'hybrid_same_type'
+class HybridSameType(ModelingTask):
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
