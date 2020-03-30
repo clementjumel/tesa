@@ -485,7 +485,7 @@ class ModelingTask:
             Task, loaded object.
         """
 
-        file_name = folder_path + task_name.lower() + '.pkl'
+        file_name = folder_path + task_name + '.pkl'
 
         with open(file_name, 'rb') as file:
             task = load(file)
