@@ -846,7 +846,7 @@ class AnnotationTask:
                 self.print("batch_%s saved at %s." % (batch_idx, file_name))
 
             else:
-                self.print("Not saving %s (not in save mode).")
+                self.print("Not saving %s (not in save mode)." % file_name)
 
     def write_debug(self, field, method):
         """
