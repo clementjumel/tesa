@@ -86,7 +86,7 @@ class AnnotationTask:
 
                 res = func(*args, **kwargs)
 
-                getattr(slf, "print")("Done; elapsed time: %is.\n" % round(time() - t0))
+                getattr(slf, "print")("Done. Elapsed time: %is.\n" % round(time() - t0))
 
                 return res
 
