@@ -471,6 +471,32 @@ class Sentence:
 
         self.compute_tokens(sentence_element)
 
+    def __str__(self):
+        """
+        Overrides the builtin str method, customized for the instances of Sentence.
+
+        Returns:
+            str, readable format of the instance.
+        """
+
+        s, start = '', True
+
+        for _, token in self.tokens.items():
+            if start:  # Beginning of the sentence
+                if token.criterion_punctuation():
+                    s += str(token)
+                else:
+                    s += str(token)[0].capitalize() + str(token)[1:]
+                    start = False
+
+            else:
+                if not token.criterion_punctuation():
+                    s += ' '
+
+                s += str(token)
+
+        return s
+
     def compute_tokens(self, sentence_element):
         """
         Compute the tokens of the sentence.
