@@ -5,6 +5,7 @@ from collections import defaultdict
 from numpy import split, concatenate, asarray
 from numpy.random import seed, shuffle
 from pickle import dump, load
+from re import findall
 
 
 class ModelingTask:
@@ -458,7 +459,10 @@ class ModelingTask:
             folder_path: str, path of the folder to save in.
         """
 
-        file_name = folder_path + self.__class__.__name__.lower() + '.pkl'
+        class_name = self.__class__.__name__
+        class_name = "_".join(findall(r'[A-Z][^A-Z]*', class_name))
+
+        file_name = folder_path + class_name + '.pkl'
 
         if self.save:
             with open(file_name, 'wb') as f:
