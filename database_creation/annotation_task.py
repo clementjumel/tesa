@@ -790,7 +790,7 @@ class AnnotationTask:
 
                 self.print("Reading %s from results/queries/ folder (%i queries)." % (batch, len(df_ids)))
 
-        for path in glob(self.results_path + "task_annotation/*/task/*.csv"):
+        for path in glob(self.results_path + "annotations/*/task/*.csv"):
             version = path.split("/")[-3]
             batch = path.split("/")[-1].split(".")[0]
 
