@@ -12,7 +12,8 @@ class ModelingTask:
     relevance_level = None
 
     def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
-                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, root=''):
+                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path,
+                 root=''):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -29,6 +30,7 @@ class ModelingTask:
             random_seed: int, the seed to use for the random processes.
             save: bool, saving option.
             silent: bool, silent option.
+            results_path: str, path to the folder to save the task in.
             root: str, path to the root of the project.
         """
 
@@ -44,6 +46,7 @@ class ModelingTask:
         self.random_seed = random_seed
         self.save = save
         self.silent = silent
+        self.results_path = results_path
         self.root = root
 
         self.unprocessed_data = None
@@ -62,15 +65,18 @@ class ModelingTask:
 
         self.compute_unprocessed_data()
         self.compute_data_loaders()
+        self.save_pkl()
 
-    def shorten(self):
-        """ Shorten the data_loaders by keeping only the first batch for each. """
+    def process_short_task(self, size):
+        """
+        Shorten the data_loaders by keeping only the [size] first batches for each.
 
-        self.train_loader = self.train_loader[1:2]
-        self.valid_loader = self.valid_loader[1:2]
-        self.test_loader = self.test_loader[1:2]
+        Args:
+            size: int, number of batches to keep for each loader.
+        """
 
-        self.short = True
+        self.compute_shorten_loaders(size=size)
+        self.save_pkl()
 
     def preview_data(self, model, include_train, include_valid):
         """
@@ -173,7 +179,7 @@ class ModelingTask:
         if not n:
             raise Exception("No data imported.")
         else:
-            self.print("Unprocessed data imported (%i samples)." % n)
+            self.print("Unprocessed data imported (%i samples).\n" % n)
             self.unprocessed_data = unprocessed_data
 
     def compute_data_loaders(self):
@@ -239,6 +245,22 @@ class ModelingTask:
             self.test_loader = test_loader
 
         self.unprocessed_data = None
+
+    def compute_shorten_loaders(self, size):
+        """
+        Shorten the data loaders by keeping only their [size] first batches.
+
+        Args:
+            size: int, number of batches to keep for each loader.
+        """
+
+        self.train_loader = self.train_loader[1:size + 1]
+        self.valid_loader = self.valid_loader[1:size + 1]
+        self.test_loader = self.test_loader[1:size + 1]
+
+        self.short = True
+
+        self.print("Data_loaders shorten to keep only the first %i batches.\n" % size)
 
     # endregion
 
@@ -463,20 +485,15 @@ class ModelingTask:
 
         return data_loader
 
-    def save_pkl(self, folder_path):
-        """
-        Save the Task using pickle in [folder_path][lowered class name].pkl.
-
-        Args:
-            folder_path: str, path of the folder to save in.
-        """
+    def save_pkl(self):
+        """ Save the Task using pickle in [self.root][self.results_path][class name]['_short' if relevant].pkl. """
 
         class_name = self.__class__.__name__
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
         suffix = "_short" if self.short else ""
 
-        file_name = folder_path + class_name + suffix + '.pkl'
+        file_name = self.root + self.results_path + class_name + suffix + '.pkl'
 
         if self.save:
             with open(file_name, 'wb') as file:
