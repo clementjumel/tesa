@@ -51,6 +51,8 @@ class ModelingTask:
         self.valid_loader = None
         self.test_loader = None
 
+        self.short = False
+
         seed(random_seed)
 
     # region Main methods
@@ -463,7 +465,9 @@ class ModelingTask:
         class_name = self.__class__.__name__
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
-        file_name = folder_path + class_name + '.pkl'
+        suffix = "_short" if self.short else ""
+
+        file_name = folder_path + class_name + suffix + '.pkl'
 
         if self.save:
             with open(file_name, 'wb') as file:
