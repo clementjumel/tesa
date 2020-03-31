@@ -1,4 +1,5 @@
 import database_creation.modeling_task as modeling_task
+from toolbox.utils import to_class_name
 
 from argparse import ArgumentParser
 
@@ -36,7 +37,7 @@ def main():
 
     args = parse_arguments()
 
-    task_name = "".join([word.capitalize() for word in args['task'].split("_")])
+    task_name = to_class_name(args['task'])
     batch_size = args['size']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
     save = not args['no_save']
