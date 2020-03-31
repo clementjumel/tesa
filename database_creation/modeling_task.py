@@ -160,6 +160,7 @@ class ModelingTask:
                                          years=None,
                                          max_tuple_size=None,
                                          short=None,
+                                         short_size=None,
                                          random=None,
                                          debug=None,
                                          random_seed=None,
