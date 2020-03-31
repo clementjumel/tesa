@@ -43,6 +43,7 @@ def main():
     annotation_task = AnnotationTask(years=YEARS,
                                      max_tuple_size=MAX_TUPLE_SIZE,
                                      short=short,
+                                     short_size=None,
                                      random=RANDOM,
                                      debug=None,
                                      random_seed=ANNOTATION_TASK_SEED,
