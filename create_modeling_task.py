@@ -4,7 +4,8 @@ from toolbox.utils import to_class_name
 from argparse import ArgumentParser
 
 from toolbox.parameters import \
-    MIN_ASSIGNMENTS, MIN_ANSWERS, EXCLUDE_PILOT, DROP_LAST, K_CROSS_VALIDATION, MODELING_TASK_SEED, \
+    MIN_ASSIGNMENTS, MIN_ANSWERS, EXCLUDE_PILOT, DROP_LAST, K_CROSS_VALIDATION, \
+    MODELING_TASK_SHORT_SIZE, MODELING_TASK_SEED, \
     BASELINES_SPLIT_VALID_PROPORTION, BASELINES_SPLIT_TEST_PROPORTION, \
     MODELS_SPLIT_VALID_PROPORTION, MODELS_SPLIT_TEST_PROPORTION
 
@@ -23,6 +24,7 @@ def parse_arguments():
 
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
     ap.add_argument("-s", "--size", default=64, type=int, help="Size of the batches to generate.")
+    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
@@ -39,6 +41,7 @@ def main():
 
     task_name = to_class_name(args['task'])
     batch_size = args['size']
+    short = args['short']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
     save = not args['no_save']
     silent = args['silent']
@@ -55,10 +58,13 @@ def main():
                                              test_proportion=BASELINES_SPLIT_TEST_PROPORTION,
                                              random_seed=MODELING_TASK_SEED,
                                              save=save,
-                                             silent=silent)
+                                             silent=silent,
+                                             results_path=MODELING_TASK_FOR_BASELINES_PATH)
 
     task.process_data_loaders()
-    task.save_pkl(folder_path=MODELING_TASK_FOR_BASELINES_PATH)
+
+    if short:
+        task.process_short_task(size=MODELING_TASK_SHORT_SIZE)
 
     # Saves with train, validation and test split (for model training)
     task = getattr(modeling_task, task_name)(min_assignments=MIN_ASSIGNMENTS,
@@ -72,10 +78,13 @@ def main():
                                              test_proportion=MODELS_SPLIT_TEST_PROPORTION,
                                              random_seed=MODELING_TASK_SEED,
                                              save=save,
-                                             silent=silent)
+                                             silent=silent,
+                                             results_path=MODELING_TASK_FOR_MODELS_PATH)
 
     task.process_data_loaders()
-    task.save_pkl(folder_path=MODELING_TASK_FOR_MODELS_PATH)
+
+    if short:
+        task.process_short_task(size=MODELING_TASK_SHORT_SIZE)
 
 
 if __name__ == '__main__':
