@@ -17,7 +17,7 @@ from re import findall
 
 class AnnotationTask:
 
-    def __init__(self, years, max_tuple_size, short, random, debug, random_seed, save, silent, corpus_path,
+    def __init__(self, years, max_tuple_size, short, short_size, random, debug, random_seed, save, silent, corpus_path,
                  results_path, root=''):
         """
         Initializes an instance of AnnotationTask, which creates the queries asked to the annotation workers and gathers
@@ -26,8 +26,9 @@ class AnnotationTask:
         Args:
             years: it, years (int) of the database to analyse.
             max_tuple_size: int, maximum size of the entities tuple to compute.
-            short: bool, if True, limit the dataset to 10 000 initial articles.
-            random: bool, if short, whether to pick the 10 000 at random or take the first ones.
+            short: bool, if True, limit the dataset to [short_size] initial articles.
+            short_size: int, number of initial articles to keep in shorten corpus.
+            random: bool, if short, whether to pick the articles at random or take the first ones.
             debug: bool, whether to, for each step, write its effect in a text file.
             random_seed: int, the seed to use for the random processes of numpy.
             save: bool, saving option.
@@ -40,6 +41,7 @@ class AnnotationTask:
         self.years = years
         self.max_tuple_size = max_tuple_size
         self.short = short
+        self.short_size = short_size
         self.random = random if short else None
         self.debug = debug
         self.random_seed = random_seed
@@ -276,13 +278,11 @@ class AnnotationTask:
         paths = [path for pattern in patterns for path in glob(pattern)]
 
         if self.short:
-            max_size = 10000
-
             if not self.random:
                 paths.sort()
-                paths = paths[:max_size]
+                paths = paths[:self.short_size]
             else:
-                paths = choice(a=paths, size=max_size, replace=False)
+                paths = choice(a=paths, size=self.short_size, replace=False)
                 paths.sort()
         else:
             paths.sort()
