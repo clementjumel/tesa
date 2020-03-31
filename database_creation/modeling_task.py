@@ -185,7 +185,7 @@ class ModelingTask:
             valid_loader = valid_set
             test_loader = test_set
 
-            self.print("Split into train (%i, %i%%), valid (%i, %i%%) and test (%i, %i%%) data loaders." %
+            self.print("Split into train (%i, %i%%), valid (%i, %i%%) and test (%i, %i%%) data loaders.\n" %
                        (n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
 
             self.train_loader = train_loader
@@ -219,7 +219,7 @@ class ModelingTask:
             valid_loader = valid_sets
             test_loader = test_set
 
-            self.print("Split into %i-fold cross validation sets (train: %i, %i%%; valid: %i, %i%%; test: %i, %i%%)." %
+            self.print("Split into %i-fold cross validation sets (train %i, %i%%; valid %i, %i%%; test %i, %i%%).\n" %
                        (k, n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
 
             self.train_loader = train_loader
@@ -416,7 +416,7 @@ class ModelingTask:
                        if len([annotation for annotation in annotation_list if not annotation.bug]) >= self.min_answers}
 
         length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-        self.print("Second filter done (number of answers): %i remaining." % length)
+        self.print("Second filter done (number of answers): %i remaining.\n" % length)
 
         return annotations
 
@@ -468,10 +468,10 @@ class ModelingTask:
             with open(file_name, 'wb') as file:
                 dump(obj=self, file=file, protocol=-1)
 
-            self.print("Task saved at %s." % file_name)
+            self.print("Task saved at %s.\n" % file_name)
 
         else:
-            self.print("Not saving %s (not in save mode)." % file_name)
+            self.print("Not saving %s (not in save mode).\n" % file_name)
 
     def load_pkl(self, task_name, folder_path):
         """
