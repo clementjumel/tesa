@@ -473,27 +473,6 @@ class ModelingTask:
         else:
             self.print("Not saving %s (not in save mode).\n" % file_name)
 
-    def load_pkl(self, task_name, folder_path):
-        """
-        Load a Task using pickle from [folder_path][task_name.lower()].pkl
-
-        Args:
-            task_name: str, name of the Task to load.
-            folder_path: str, path of the folder to load from.
-
-        Returns:
-            Task, loaded object.
-        """
-
-        file_name = folder_path + task_name + '.pkl'
-
-        with open(file_name, 'rb') as file:
-            task = load(file)
-
-        self.print("Task loaded from %s." % file_name)
-
-        return task
-
     # endregion
 
 
