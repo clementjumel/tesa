@@ -22,6 +22,7 @@ def parse_arguments():
     ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
     ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
     ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
+    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
 
     args = vars(ap.parse_args())
 
@@ -50,6 +51,10 @@ def main():
     model_name = to_class_name(args['model'])
     experiment_name = args['experiment']
     pretrained_model_name = args['pretrained']
+    short = args['short']
+
+    if short:
+        task_name += '_short'
 
     task = load_task(task_name=task_name, folder_path=MODELING_TASK_FOR_BASELINES_PATH)
 
