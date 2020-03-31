@@ -255,13 +255,18 @@ class ModelingTask:
             size: int, number of batches to keep for each loader.
         """
 
-        self.train_loader = self.train_loader[1:size + 1]
-        self.valid_loader = self.valid_loader[1:size + 1]
+        if not self.k_cross_validation:
+            self.train_loader = self.train_loader[1:size + 1]
+            self.valid_loader = self.valid_loader[1:size + 1]
+        else:
+            self.train_loader = [train_loader[1:size + 1] for train_loader in self.train_loader]
+            self.valid_loader = [valid_loader[1:size + 1] for valid_loader in self.valid_loader]
+
         self.test_loader = self.test_loader[1:size + 1]
 
         self.short = True
 
-        self.print("Data_loaders shorten to keep only the first %i batches.\n" % size)
+        self.print("Data_loaders shorten to keep only the first %i batch(es).\n" % size)
 
     # endregion
 
