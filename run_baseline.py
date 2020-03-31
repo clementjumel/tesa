@@ -20,8 +20,8 @@ def parse_arguments():
 
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
     ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
+    ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
     ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
-    ap.add_argument("-e", "--experiment", type=str, help="Name of the experiment; if None, don't save.")
 
     args = vars(ap.parse_args())
 
@@ -48,8 +48,8 @@ def main():
 
     task_name = args['task']
     model_name = to_class_name(args['model'])
-    pretrained_model_name = args['pretrained']
     experiment_name = args['experiment']
+    pretrained_model_name = args['pretrained']
 
     task = load_task(task_name=task_name, folder_path=MODELING_TASK_FOR_BASELINES_PATH)
 
