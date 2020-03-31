@@ -4,7 +4,7 @@ from database_creation.utils import Sample
 from collections import defaultdict
 from numpy import split, concatenate, asarray
 from numpy.random import seed, shuffle
-from pickle import dump, load
+from pickle import dump
 from re import findall
 
 
