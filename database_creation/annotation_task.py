@@ -879,7 +879,7 @@ class AnnotationTask:
                     with open(file_name, "w") as f:
                         f.writelines(lines)
 
-                self.print("Debugging Written in %s..." % file_name)
+                    self.print("Debugging Written in %s..." % file_name)
 
     # endregion
 
