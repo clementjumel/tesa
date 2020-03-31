@@ -9,6 +9,7 @@ from re import findall
 
 
 class ModelingTask:
+    relevance_level = None
 
     def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
                  k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, root=''):
@@ -477,6 +478,7 @@ class ModelingTask:
 
 
 class ContextFree(ModelingTask):
+    relevance_level = 1
 
     # region Methods get_
 
@@ -545,6 +547,7 @@ class ContextFree(ModelingTask):
 
 
 class ContextFreeSameType(ContextFree):
+    relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -571,6 +574,7 @@ class ContextFreeSameType(ContextFree):
 
 
 class ContextDependent(ModelingTask):
+    relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -597,6 +601,7 @@ class ContextDependent(ModelingTask):
 
 
 class ContextDependentSameType(ModelingTask):
+    relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -623,6 +628,7 @@ class ContextDependentSameType(ModelingTask):
 
 
 class FullHybrid(ModelingTask):
+    relevance_level = 2
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -657,6 +663,7 @@ class FullHybrid(ModelingTask):
 
 
 class Hybrid(ModelingTask):
+    relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
@@ -687,6 +694,7 @@ class Hybrid(ModelingTask):
 
 
 class HybridSameType(ModelingTask):
+    relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         """
