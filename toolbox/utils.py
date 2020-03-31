@@ -1,39 +1,50 @@
+from pickle import load
 from gensim.models import KeyedVectors
-from torch.hub import load as torch_hub_load
+from fairseq.models.bart import BARTModel
 
 
-def get_experiment_name(args, save):
+def to_class_name(name):
     """
-    Returns the experiment's name given the arguments passed to the script and the save option. If SAVE and no
-    experiment name is given, raise an error.
+    For a name of the format 'abc_efg', returns the corresponding Class name, of the format 'AbcEfg'.
 
     Args:
-        args: dict, arguments passed to the script.
-        save: bool, saving option.
+        name: str, name of the class in format 'abc_efg'.
 
     Returns:
-        str, name of the experiment's name.
+        str, name of the class in format 'AbcEfg'.
     """
 
-    if save and "experiment_name" in args:
-        experiment_name = args['experiment_name']
-
-    elif save and "experiment_name" not in args:
-        raise Exception("No experiment_name specified, cannot save.")
-
-    else:
-        experiment_name = None
-
-    return experiment_name
+    return "".join([word.capitalize() for word in name.split("_")])
 
 
-def get_pretrained_model(args, silent, folder_path, root=''):
+def load_task(task_name, folder_path):
     """
-    Returns the pretrained model and its dimension, if relevant, given the arguments of the script.
+    Load a Task using pickle from [folder_path][task_name].pkl
 
     Args:
-        args: dict, arguments passed to the script.
-        silent: bool, silence option.
+        task_name: str, name of the Task to load (eg 'context_free').
+        folder_path: str, path of the folder to load from.
+
+    Returns:
+        database_creation.modeling_task.Task, loaded object.
+    """
+
+    file_name = folder_path + task_name + '.pkl'
+
+    with open(file_name, 'rb') as file:
+        task = load(file)
+
+    print("Task loaded from %s.\n" % file_name)
+
+    return task
+
+
+def get_pretrained_model(pretrained_model_name, folder_path, root=''):
+    """
+    Returns the pretrained model and its dimension, if relevant.
+
+    Args:
+        pretrained_model_name: str, name of the model.
         folder_path: str, path to the pretrained_models folder.
         root: str, path to the root of the project.
 
@@ -42,11 +53,10 @@ def get_pretrained_model(args, silent, folder_path, root=''):
         pretrained_model_dim: int, dimension of the pretrained model.
     """
 
-    if "pretrained_model_name" not in args:
+    if "pretrained_model_name" is None:
         pretrained_model, pretrained_model_dim = None, None
 
     else:
-        pretrained_model_name = args['pretrained_model_name']
         pretrained_model_names = ["word2vec", "bart_mnli"]
 
         if pretrained_model_name == pretrained_model_names[0]:
@@ -55,13 +65,16 @@ def get_pretrained_model(args, silent, folder_path, root=''):
             pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
             pretrained_model_dim = 300
 
-            print("Word2Vec embedding loaded.") if not silent else None
+            print("Word2Vec embedding loaded.\n")
 
         elif pretrained_model_name == pretrained_model_names[1]:
-            pretrained_model = torch_hub_load("pytorch/fairseq", "bart.large.mnli")
+            file_name = root + folder_path + "bart.large.mnli"
+
+            pretrained_model = BARTModel.from_pretrained(file_name, checkpoint_file='model.pt')
+            pretrained_model.eval()
             pretrained_model_dim = None
 
-            print("Pretrained BART mnli loaded.") if not silent else None
+            print("Pretrained BART.mnli loaded.\n")
 
         else:
             raise Exception("Wrong pretrained model name: %s (valid names are %s)." % (pretrained_model_name,
