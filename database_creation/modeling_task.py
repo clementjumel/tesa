@@ -63,6 +63,15 @@ class ModelingTask:
         self.compute_unprocessed_data()
         self.compute_data_loaders()
 
+    def shorten(self):
+        """ Shorten the data_loaders by keeping only the first batch for each. """
+
+        self.train_loader = self.train_loader[1:2]
+        self.valid_loader = self.valid_loader[1:2]
+        self.test_loader = self.test_loader[1:2]
+
+        self.short = True
+
     def preview_data(self, model, include_train, include_valid):
         """
         Preview the data for the model.
