@@ -43,7 +43,6 @@ class ModelingTask:
         self.k_cross_validation = k_cross_validation
         self.valid_proportion = valid_proportion
         self.test_proportion = test_proportion
-        self.random_seed = random_seed
         self.save = save
         self.silent = silent
         self.results_path = results_path
