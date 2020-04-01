@@ -3,7 +3,7 @@ from toolbox.utils import to_class_name, load_task, get_pretrained_model
 
 from argparse import ArgumentParser
 
-from toolbox.parameters import SCORES_NAMES
+from toolbox.parameters import SCORES_NAMES, MODELS_RANDOM_SEED
 
 from toolbox.paths import PRETRAINED_MODELS_PATH, MODELING_TASK_FOR_BASELINES_PATH
 
@@ -53,10 +53,7 @@ def main():
     pretrained_model_name = args['pretrained']
     short = args['short']
 
-    if short:
-        task_name += '_short'
-
-    task = load_task(task_name=task_name, folder_path=MODELING_TASK_FOR_BASELINES_PATH)
+    task = load_task(task_name=task_name, folder_path=MODELING_TASK_FOR_BASELINES_PATH, short=short)
 
     pretrained_model, pretrained_model_dim = get_pretrained_model(pretrained_model_name=pretrained_model_name,
                                                                   folder_path=PRETRAINED_MODELS_PATH)
@@ -65,7 +62,8 @@ def main():
                                         relevance_level=task.relevance_level,
                                         experiment_name=experiment_name,
                                         pretrained_model=pretrained_model,
-                                        pretrained_model_dim=pretrained_model_dim)
+                                        pretrained_model_dim=pretrained_model_dim,
+                                        random_seed=MODELS_RANDOM_SEED)
 
     play_baseline(task=task,
                   model=model)
