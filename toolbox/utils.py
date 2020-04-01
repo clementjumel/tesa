@@ -17,7 +17,7 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def load_task(task_name, folder_path, short):
+def load_task(task_name, folder_path, short, root=""):
     """
     Load a Task using pickle from [folder_path][task_name].pkl
 
@@ -25,6 +25,7 @@ def load_task(task_name, folder_path, short):
         task_name: str, name of the Task to load (eg 'context_free').
         folder_path: str, path of the folder to load from.
         short: bool, whether to load the shorten task or not.
+        root: str, path to the root of the project.
 
     Returns:
         database_creation.modeling_task.Task, loaded object.
@@ -32,7 +33,7 @@ def load_task(task_name, folder_path, short):
 
     suffix = "_short" if short else ""
 
-    file_name = folder_path + task_name + suffix + '.pkl'
+    file_name = root + folder_path + task_name + suffix + '.pkl'
 
     with open(file_name, 'rb') as file:
         task = load(file)
