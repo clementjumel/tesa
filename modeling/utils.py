@@ -1,4 +1,4 @@
-from numpy import mean
+from numpy import mean, std
 import torch
 
 
@@ -24,20 +24,6 @@ def ranking(outputs):
     ranks[sorter] = torch.arange(1, n + 1)
 
     return ranks
-
-
-def dict_mean(d):
-    """
-    Returns a dictionary with the mean of the lists of the dictionary d.
-
-    Args:
-        d: dict, input dictionary.
-
-    Returns:
-        dict, mean dictionary.
-    """
-
-    return {key: mean(item) for key, item in d.items()}
 
 
 def dict_append(d1, d2):
@@ -78,3 +64,31 @@ def dict_remove_none(d):
     for key in d:
         items = [item for item in d[key] if item is not None]
         d[key] = items
+
+
+def dict_mean(d):
+    """
+    Returns a dictionary with the mean of the lists of the dictionary d.
+
+    Args:
+        d: dict, input dictionary.
+
+    Returns:
+        dict, mean dictionary.
+    """
+
+    return {key: mean(item) for key, item in d.items()}
+
+
+def dict_std(d):
+    """
+    Returns a dictionary with the standard deviation of the lists of the dictionary d.
+
+    Args:
+        d: dict, input dictionary.
+
+    Returns:
+        dict, standard deviation dictionary.
+    """
+
+    return {key: std(item) for key, item in d.items()}
