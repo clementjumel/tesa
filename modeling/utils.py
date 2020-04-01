@@ -53,9 +53,23 @@ def dict_append(d1, d2):
         d1[key].append(item)
 
 
+def list_remove_none(l):
+    """
+    Removes None from the list l.
+
+    Args:
+        l: list, initial list to process.
+
+    Returns:
+        list, final list, without None.
+    """
+
+    return [item for item in l if item is not None]
+
+
 def dict_remove_none(d):
     """
-    Remove None from the input dictionary. If a list item is empty, replace it with [0.].
+    Removes None from the input dictionary.
 
     Args:
         d: dict, input dictionary.
@@ -63,5 +77,4 @@ def dict_remove_none(d):
 
     for key in d:
         items = [item for item in d[key] if item is not None]
-        items = items or [0.]
         d[key] = items
