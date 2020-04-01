@@ -44,7 +44,6 @@ class AnnotationTask:
         self.short_size = short_size
         self.random = random if short else None
         self.debug = debug
-        self.random_seed = random_seed
         self.save = save
         self.silent = silent
         self.corpus_path = corpus_path
