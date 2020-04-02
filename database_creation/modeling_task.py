@@ -37,7 +37,7 @@ class ModelingTask:
         self.min_assignments = min_assignments
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
-        self.annotation_results_path = root + annotation_results_path
+        self.annotation_results_path = root + str(annotation_results_path)
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.k_cross_validation = k_cross_validation
@@ -45,7 +45,7 @@ class ModelingTask:
         self.test_proportion = test_proportion
         self.save = save
         self.silent = silent
-        self.results_path = root + results_path
+        self.results_path = root + str(results_path)
 
         self.unprocessed_data = None
         self.train_loader = None
