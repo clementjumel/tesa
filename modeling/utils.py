@@ -2,10 +2,10 @@ from numpy import mean, std
 import torch
 
 
-def ranking(outputs):
+def get_ranks(outputs):
     """
-    Ranks according to the outputs (1 for highest grade). Deal with draws by assigning the best rank to the first
-    output encountered.
+    Returns the ranks according to the outputs (1 for highest grade). Deal with draws by assigning the best rank to the
+    first output encountered.
 
     Args:
         outputs: torch.Tensor, (batch_size, 1 ou 2) tensors outputs.
