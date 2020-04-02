@@ -17,13 +17,14 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def load_task(task_name, batch_size, short, folder_path, root=""):
+def load_task(task_name, batch_size, cross_validation, short, folder_path, root=""):
     """
     Load a Task using pickle from [folder_path][task_name].pkl
 
     Args:
         task_name: str, name of the Task to load (eg 'context_free').
         batch_size: int, size of the batches of the modeling task.
+        cross_validation: bool, cross-validation option.
         short: bool, whether to load the shorten task or not.
         folder_path: str, path of the folder to load from.
         root: str, path to the root of the project.
@@ -33,6 +34,7 @@ def load_task(task_name, batch_size, short, folder_path, root=""):
     """
 
     suffix = "_bs" + str(batch_size)
+    suffix += "_cv" if cross_validation else ""
     suffix += "_short" if short else ""
 
     file_name = root + folder_path + task_name + suffix + '.pkl'
