@@ -37,6 +37,8 @@ def load_task(task_name, batch_size, cross_validation, short, folder_path, root=
     suffix += "_cv" if cross_validation else ""
     suffix += "_short" if short else ""
 
+    task_name = "".join(task_name.split("_"))
+
     file_name = root + folder_path + task_name + suffix + '.pkl'
 
     with open(file_name, 'rb') as file:
