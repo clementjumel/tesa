@@ -10,3 +10,5 @@ PRETRAINED_MODELS_PATH = "modeling/pretrained_models/"
 
 BASELINES_RESULTS_PATH = 'results/baselines/'
 MODELS_RESULTS_PATH = 'results/models/'
+
+TENSORBOARD_LOGS_PATH = "tensorboard_logs/"
