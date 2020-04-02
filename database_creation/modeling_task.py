@@ -37,7 +37,7 @@ class ModelingTask:
         self.min_assignments = min_assignments
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
-        self.annotation_results_path = annotation_results_path
+        self.annotation_results_path = root + annotation_results_path
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.k_cross_validation = k_cross_validation
@@ -45,8 +45,7 @@ class ModelingTask:
         self.test_proportion = test_proportion
         self.save = save
         self.silent = silent
-        self.results_path = results_path
-        self.root = root
+        self.results_path = root + results_path
 
         self.unprocessed_data = None
         self.train_loader = None
@@ -156,7 +155,6 @@ class ModelingTask:
 
         annotation_task = AnnotationTask(silent=self.silent,
                                          results_path=self.annotation_results_path,
-                                         root=self.root,
                                          years=None,
                                          max_tuple_size=None,
                                          short=None,
@@ -497,7 +495,7 @@ class ModelingTask:
         return data_loader
 
     def save_pkl(self):
-        """ Save the Task using pickle in [self.root][self.results_path][class name]['_short' if relevant].pkl. """
+        """ Save the Task using pickle in [self.results_path][class name]['_short' if relevant].pkl. """
 
         class_name = self.__class__.__name__
         class_name = "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
@@ -506,7 +504,7 @@ class ModelingTask:
         suffix += "_cv" if self.k_cross_validation else ""
         suffix += "_short" if self.short else ""
 
-        file_name = self.root + self.results_path + class_name + suffix + '.pkl'
+        file_name = self.results_path + class_name + suffix + '.pkl'
 
         if self.save:
             with open(file_name, 'wb') as file:
