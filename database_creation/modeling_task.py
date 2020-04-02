@@ -500,7 +500,7 @@ class ModelingTask:
         """ Save the Task using pickle in [self.root][self.results_path][class name]['_short' if relevant].pkl. """
 
         class_name = self.__class__.__name__
-        class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
+        class_name = "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
         suffix = "_bs" + str(self.batch_size)
         suffix += "_cv" if self.k_cross_validation else ""
