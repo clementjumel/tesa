@@ -11,9 +11,9 @@ from re import findall
 class ModelingTask:
     relevance_level = None
 
-    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
-                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path,
-                 root=''):
+    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, all_batches, batch_size,
+                 drop_last, k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent,
+                 results_path, root=''):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -21,7 +21,8 @@ class ModelingTask:
             min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
             min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
             exclude_pilot: bool, whether or not to exclude the data from the pilot.
-            annotation_results_path: str, path to the annotation results folder
+            annotation_results_path: str, path to the annotation results folder.
+            all_batches: bool, whether to divide all the data loaders into small batches or not.
             batch_size: int, number of samples in each batch.
             drop_last: bool, whether or not to delete the last batch if incomplete.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
@@ -38,6 +39,7 @@ class ModelingTask:
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
         self.annotation_results_path = annotation_results_path
+        self.all_batches = all_batches
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.k_cross_validation = k_cross_validation
@@ -200,8 +202,8 @@ class ModelingTask:
             assert n_train == train_set.shape[0] and n_valid == valid_set.shape[0] and n_test == test_set.shape[0]
 
             train_loader = self.to_loader(train_set)
-            valid_loader = valid_set
-            test_loader = test_set
+            valid_loader = self.to_loader(valid_set) if self.all_batches else valid_set
+            test_loader = self.to_loader(test_set) if self.all_batches else test_set
 
             self.print("Split into train (%i, %i%%), valid (%i, %i%%) and test (%i, %i%%) data loaders.\n" %
                        (n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
@@ -234,8 +236,8 @@ class ModelingTask:
             n_train, n_valid = n_trains.pop(), n_valids.pop()
 
             train_loader = [self.to_loader(train_set) for train_set in train_sets]
-            valid_loader = valid_sets
-            test_loader = test_set
+            valid_loader = [self.to_loader(valid_set) for valid_set in valid_sets] if self.all_batches else valid_sets
+            test_loader = self.to_loader(test_set) if self.all_batches else test_set
 
             self.print("Split into %i-fold cross validation sets (train %i, %i%%; valid %i, %i%%; test %i, %i%%).\n" %
                        (k, n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
@@ -467,7 +469,7 @@ class ModelingTask:
             data: 2d-array, data samples, each line corresponding to (inputs, targets).
 
         Returns:
-            data_loader: list, pairs of (batch_inputs, batch_targets), batched data samples.
+            data_loader: 2d-array, batched data samples, each line being a pair of (batch_inputs, batch_targets).
         """
 
         data_loader = []
@@ -496,7 +498,8 @@ class ModelingTask:
         class_name = self.__class__.__name__
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
-        suffix = "_short" if self.short else ""
+        suffix = "_batched" if self.all_batches else ""
+        suffix += "_short" if self.short else ""
 
         file_name = self.root + self.results_path + class_name + suffix + '.pkl'
 
