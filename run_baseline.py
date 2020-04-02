@@ -22,6 +22,7 @@ def parse_arguments():
     ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
     ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
     ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
+    ap.add_argument("--all_batches", action='store_true', help="Batches for all task loaders option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
 
     args = vars(ap.parse_args())
@@ -51,9 +52,13 @@ def main():
     model_name = to_class_name(args['model'])
     experiment_name = args['experiment']
     pretrained_model_name = args['pretrained']
+    all_batches = args['all_batches']
     short = args['short']
 
-    task = load_task(task_name=task_name, folder_path=MODELING_TASK_FOR_BASELINES_PATH, short=short)
+    task = load_task(task_name=task_name,
+                     folder_path=MODELING_TASK_FOR_BASELINES_PATH,
+                     all_batches=all_batches,
+                     short=short)
 
     pretrained_model, pretrained_model_dim = get_pretrained_model(pretrained_model_name=pretrained_model_name,
                                                                   folder_path=PRETRAINED_MODELS_PATH)
