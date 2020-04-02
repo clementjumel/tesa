@@ -26,6 +26,7 @@ def parse_arguments():
     ap.add_argument("-s", "--size", default=64, type=int, help="Size of the batches to generate.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
+    ap.add_argument("--all_batches", action='store_true', help="Batches for all loaders option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
@@ -43,6 +44,7 @@ def main():
     batch_size = args['size']
     short = args['short']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
+    all_batches = args['all_batches']
     save = not args['no_save']
     silent = args['silent']
 
@@ -51,8 +53,9 @@ def main():
                                              min_answers=MIN_ANSWERS,
                                              exclude_pilot=EXCLUDE_PILOT,
                                              annotation_results_path=ANNOTATION_TASK_RESULTS_PATH,
-                                             batch_size=None,
-                                             drop_last=None,
+                                             all_batches=all_batches,
+                                             batch_size=batch_size,
+                                             drop_last=DROP_LAST,
                                              k_cross_validation=None,
                                              valid_proportion=BASELINES_SPLIT_VALID_PROPORTION,
                                              test_proportion=BASELINES_SPLIT_TEST_PROPORTION,
@@ -71,6 +74,7 @@ def main():
                                              min_answers=MIN_ANSWERS,
                                              exclude_pilot=EXCLUDE_PILOT,
                                              annotation_results_path=ANNOTATION_TASK_RESULTS_PATH,
+                                             all_batches=all_batches,
                                              batch_size=batch_size,
                                              drop_last=DROP_LAST,
                                              k_cross_validation=k_cross_validation,
