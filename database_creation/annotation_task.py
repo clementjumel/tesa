@@ -46,9 +46,8 @@ class AnnotationTask:
         self.debug = debug
         self.save = save
         self.silent = silent
-        self.corpus_path = corpus_path
-        self.results_path = results_path
-        self.root = root
+        self.corpus_path = root + corpus_path
+        self.results_path = root + results_path
 
         self.articles = None
         self.entities = None
@@ -272,8 +271,7 @@ class AnnotationTask:
     def compute_articles(self):
         """ Computes and initializes the articles in the database. """
 
-        corpus_root = self.root + self.corpus_path
-        patterns = [corpus_root + 'data/' + str(year) + '/*/*/*.xml' for year in self.years]
+        patterns = [self.corpus_path + 'data/' + str(year) + '/*/*/*.xml' for year in self.years]
         paths = [path for pattern in patterns for path in glob(pattern)]
 
         if self.short:
@@ -292,8 +290,8 @@ class AnnotationTask:
             id_ = data_path.split('/')[-1].split('.')[0]
             year = data_path.split('/')[-4]
 
-            content_path = corpus_root + 'content_annotated/' + str(year) + 'content_annotated/' + id_ + '.txt.xml'
-            summary_path = corpus_root + 'summary_annotated/' + str(year) + 'summary_annotated/' + id_ + '.txt.xml'
+            content_path = self.corpus_path + 'content_annotated/' + str(year) + 'content_annotated/' + id_ + '.txt.xml'
+            summary_path = self.corpus_path + 'summary_annotated/' + str(year) + 'summary_annotated/' + id_ + '.txt.xml'
 
             articles[id_] = Article(data_path=data_path, content_path=content_path, summary_path=summary_path)
 
