@@ -502,7 +502,7 @@ class ModelingTask:
         class_name = self.__class__.__name__
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
-        suffix = "_batch" + str(self.batch_size)
+        suffix = "_bs" + str(self.batch_size)
         suffix += "_short" if self.short else ""
 
         file_name = self.root + self.results_path + class_name + suffix + '.pkl'
