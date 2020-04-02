@@ -884,11 +884,11 @@ class AnnotationTask:
 
     # region Other methods
 
-    def print(self, s):
-        """ Prints the element s if not in silent mode. """
+    def print(self, *args):
+        """ Prints only if not in silent mode. """
 
         if not self.silent:
-            print(s)
+            print(*args)
 
     def progression(self, count, modulo, size, text):
         """
