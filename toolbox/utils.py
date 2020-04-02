@@ -32,7 +32,7 @@ def load_task(task_name, batch_size, short, folder_path, root=""):
         database_creation.modeling_task.Task, loaded object.
     """
 
-    suffix = "_batch" + str(batch_size)
+    suffix = "_bs" + str(batch_size)
     suffix += "_short" if short else ""
 
     file_name = root + folder_path + task_name + suffix + '.pkl'
