@@ -24,9 +24,9 @@ def parse_arguments():
 
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
     ap.add_argument("-s", "--size", default=64, type=int, help="Size of the batches to generate.")
+    ap.add_argument("--all_batches", action='store_true', help="Batches for all loaders option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
-    ap.add_argument("--all_batches", action='store_true', help="Batches for all loaders option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
@@ -42,9 +42,9 @@ def main():
 
     task_name = to_class_name(args['task'])
     batch_size = args['size']
+    all_batches = args['all_batches']
     short = args['short']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
-    all_batches = args['all_batches']
     save = not args['no_save']
     silent = args['silent']
 
