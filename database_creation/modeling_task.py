@@ -503,6 +503,7 @@ class ModelingTask:
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
         suffix = "_bs" + str(self.batch_size)
+        suffix += "_cv" if self.k_cross_validation else ""
         suffix += "_short" if self.short else ""
 
         file_name = self.root + self.results_path + class_name + suffix + '.pkl'
