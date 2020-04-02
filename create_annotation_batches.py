@@ -19,7 +19,7 @@ def parse_arguments():
     ap = ArgumentParser()
 
     ap.add_argument("-b", "--batches", required=True, type=int, help="Number of batches to generate.")
-    ap.add_argument("-s", "--size", required=True, type=int, help="Size of the batches to generate.")
+    ap.add_argument("-bs", "--batch_size", required=True, type=int, help="Size of the batches to generate.")
     ap.add_argument("--short", action='store_true', help="Shorten corpus option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
@@ -35,7 +35,7 @@ def main():
     args = parse_arguments()
 
     batches = args['batches']
-    batch_size = args['size']
+    batch_size = args['batch_size']
     short = args['short']
     save = not args['no_save']
     silent = args['silent']
