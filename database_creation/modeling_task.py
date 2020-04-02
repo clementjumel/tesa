@@ -2,7 +2,7 @@ from database_creation.annotation_task import AnnotationTask
 from database_creation.utils import Sample
 
 from collections import defaultdict
-from numpy import split, concatenate, asarray
+from numpy import asarray, split, concatenate
 from numpy.random import seed, shuffle
 from pickle import dump
 from re import findall
@@ -11,9 +11,9 @@ from re import findall
 class ModelingTask:
     relevance_level = None
 
-    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, all_batches, batch_size,
-                 drop_last, k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent,
-                 results_path, root=''):
+    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
+                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path,
+                 root=''):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -22,7 +22,6 @@ class ModelingTask:
             min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
             exclude_pilot: bool, whether or not to exclude the data from the pilot.
             annotation_results_path: str, path to the annotation results folder.
-            all_batches: bool, whether to divide all the data loaders into small batches or not.
             batch_size: int, number of samples in each batch.
             drop_last: bool, whether or not to delete the last batch if incomplete.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
@@ -39,7 +38,6 @@ class ModelingTask:
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
         self.annotation_results_path = annotation_results_path
-        self.all_batches = all_batches
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.k_cross_validation = k_cross_validation
@@ -92,12 +90,13 @@ class ModelingTask:
         assert include_train or include_valid
 
         if include_train and include_valid:
-            data_loader = concatenate((self.train_loader, self.valid_loader), axis=0)
+            data_loader = concatenate((self.train_loader, self.valid_loader))
         elif include_train:
             data_loader = self.train_loader
         else:
             data_loader = self.valid_loader
 
+        shuffle(data_loader)
         model.preview_data(data_loader)
 
     def train_model(self, model):
@@ -181,7 +180,7 @@ class ModelingTask:
         if not n:
             raise Exception("No data imported.")
         else:
-            self.print("Unprocessed data imported (%i samples).\n" % n)
+            self.print("Unprocessed data imported (%i ranking task).\n" % n)
             self.unprocessed_data = unprocessed_data
 
     def compute_data_loaders(self):
@@ -201,16 +200,13 @@ class ModelingTask:
 
             assert n_train == train_set.shape[0] and n_valid == valid_set.shape[0] and n_test == test_set.shape[0]
 
-            train_loader = self.to_loader(train_set)
-            valid_loader = self.to_loader(valid_set) if self.all_batches else valid_set
-            test_loader = self.to_loader(test_set) if self.all_batches else test_set
+            self.train_loader = self.to_loader(train_set)
+            self.valid_loader = self.to_loader(valid_set)
+            self.test_loader = self.to_loader(test_set)
 
-            self.print("Split into train (%i, %i%%), valid (%i, %i%%) and test (%i, %i%%) data loaders.\n" %
-                       (n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
+            train_loader, valid_loader, test_loader = self.train_loader, self.valid_loader,  self.test_loader
 
-            self.train_loader = train_loader
-            self.valid_loader = valid_loader
-            self.test_loader = test_loader
+            self.print("Data loaders computed:")
 
         else:
             n_test += (n - n_test) % k
@@ -222,8 +218,8 @@ class ModelingTask:
             n_trains, n_valids = set(), set()
 
             for i in range(k):
-                valid_set = cross_validation_split[i]
                 train_set = concatenate([cross_validation_split[j] for j in range(k) if j != i])
+                valid_set = cross_validation_split[i]
 
                 train_sets.append(train_set)
                 valid_sets.append(valid_set)
@@ -235,39 +231,45 @@ class ModelingTask:
 
             n_train, n_valid = n_trains.pop(), n_valids.pop()
 
-            train_loader = [self.to_loader(train_set) for train_set in train_sets]
-            valid_loader = [self.to_loader(valid_set) for valid_set in valid_sets] if self.all_batches else valid_sets
-            test_loader = self.to_loader(test_set) if self.all_batches else test_set
+            self.train_loader = [self.to_loader(train_set) for train_set in train_sets]
+            self.valid_loader = [self.to_loader(valid_set) for valid_set in valid_sets]
+            self.test_loader = self.to_loader(test_set)
 
-            self.print("Split into %i-fold cross validation sets (train %i, %i%%; valid %i, %i%%; test %i, %i%%).\n" %
-                       (k, n_train, 100 * n_train / n, n_valid, 100 * n_valid / n, n_test, 100 * n_test / n))
+            train_loader, valid_loader, test_loader = self.train_loader[0], self.valid_loader[0], self.test_loader
 
-            self.train_loader = train_loader
-            self.valid_loader = valid_loader
-            self.test_loader = test_loader
+            self.print("Data loaders for %i-fold cross validation computed:" % k)
+
+        m_train = sum([len(ranking_task) for ranking_task in train_loader])
+        m_valid = sum([len(ranking_task) for ranking_task in valid_loader])
+        m_test = sum([len(ranking_task) for ranking_task in test_loader])
+
+        self.print("   train: %i ranking tasks (%i%%), %i batches,\n" % (n_train, 100 * n_train / n, m_train),
+                   "  valid: %i ranking tasks (%i%%), %i batches,\n" % (n_valid, 100 * n_valid / n, m_valid),
+                   "  test: %i ranking tasks (%i%%), %i batches.\n" % (n_test, 100 * n_test / n, m_test))
 
         self.unprocessed_data = None
 
     def compute_shorten_loaders(self, size):
         """
-        Shorten the data loaders by keeping only their [size] first batches.
+        Shorten the data loaders by keeping only their [size] first batches of the first ranking task.
 
         Args:
             size: int, number of batches to keep for each loader.
         """
 
         if not self.k_cross_validation:
-            self.train_loader = self.train_loader[1:size + 1]
-            self.valid_loader = self.valid_loader[1:size + 1]
-        else:
-            self.train_loader = [train_loader[1:size + 1] for train_loader in self.train_loader]
-            self.valid_loader = [valid_loader[1:size + 1] for valid_loader in self.valid_loader]
+            self.train_loader = self.train_loader[0:1][0:size]
+            self.valid_loader = self.valid_loader[0:1][0:size]
 
-        self.test_loader = self.test_loader[1:size + 1]
+        else:
+            self.train_loader = [train_loader[0:1][0:size] for train_loader in self.train_loader]
+            self.valid_loader = [valid_loader[0:1][0:size] for valid_loader in self.valid_loader]
+
+        self.test_loader = self.test_loader[0:1][0:size]
 
         self.short = True
 
-        self.print("Data_loaders shorten to keep only the first %i batch(es).\n" % size)
+        self.print("Data_loaders shorten to keep only the first %i batch(es) of the first ranking task.\n" % size)
 
     # endregion
 
@@ -417,11 +419,11 @@ class ModelingTask:
 
     # region Other methods
 
-    def print(self, s):
-        """ Prints the element s if not in silent mode. """
+    def print(self, *args):
+        """ Prints only if not in silent mode. """
 
         if not self.silent:
-            print(s)
+            print(*args)
 
     def filter_annotations(self, annotations):
         """
@@ -469,7 +471,7 @@ class ModelingTask:
             data: 2d-array, data samples, each line corresponding to (inputs, targets).
 
         Returns:
-            data_loader: 2d-array, batched data samples, each line being a pair of (batch_inputs, batch_targets).
+            list, list of ranking task, which are lists of batches (batch_inputs, batch_targets).
         """
 
         data_loader = []
@@ -477,18 +479,20 @@ class ModelingTask:
         for inputs, targets in data:
             n = len(inputs['choices'])
             cmpt = 0
+            ranking_task = []
 
             while (self.drop_last and cmpt + self.batch_size <= n) or (not self.drop_last and cmpt + 1 <= n):
                 batch_inputs = dict([(key, item) for key, item in inputs.items() if key != 'choices'])
                 batch_inputs['choices'] = inputs['choices'][cmpt:cmpt + self.batch_size]
                 batch_targets = targets[cmpt:cmpt + self.batch_size]
 
-                data_loader.append([batch_inputs, batch_targets])
-
+                ranking_task.append((batch_inputs, batch_targets))
                 cmpt += len(batch_targets)
 
+            shuffle(ranking_task)
+            data_loader.append(ranking_task)
+
         shuffle(data_loader)
-        data_loader = asarray(data_loader)
 
         return data_loader
 
@@ -498,7 +502,7 @@ class ModelingTask:
         class_name = self.__class__.__name__
         class_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
 
-        suffix = "_batched" if self.all_batches else ""
+        suffix = "_batch" + str(self.batch_size)
         suffix += "_short" if self.short else ""
 
         file_name = self.root + self.results_path + class_name + suffix + '.pkl'
