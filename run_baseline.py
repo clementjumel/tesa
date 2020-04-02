@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 
 from toolbox.parameters import SCORES_NAMES, MODELS_RANDOM_SEED
 
-from toolbox.paths import PRETRAINED_MODELS_PATH, MODELING_TASK_FOR_BASELINES_PATH
+from toolbox.paths import PRETRAINED_MODELS_PATH, MODELING_TASK_FOR_BASELINES_PATH, TENSORBOARD_LOGS_PATH
 
 
 def parse_arguments():
@@ -60,9 +60,10 @@ def main():
 
     model = getattr(models, model_name)(scores_names=SCORES_NAMES,
                                         relevance_level=task.relevance_level,
-                                        experiment_name=experiment_name,
                                         pretrained_model=pretrained_model,
                                         pretrained_model_dim=pretrained_model_dim,
+                                        tensorboard_logs_path=TENSORBOARD_LOGS_PATH,
+                                        experiment_name=experiment_name,
                                         random_seed=MODELS_RANDOM_SEED)
 
     play_baseline(task=task,
