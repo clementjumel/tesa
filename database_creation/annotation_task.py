@@ -46,8 +46,8 @@ class AnnotationTask:
         self.debug = debug
         self.save = save
         self.silent = silent
-        self.corpus_path = root + corpus_path
-        self.results_path = root + results_path
+        self.corpus_path = root + str(corpus_path)
+        self.results_path = root + str(results_path)
 
         self.articles = None
         self.entities = None
