@@ -26,19 +26,6 @@ def get_ranks(outputs):
     return ranks
 
 
-def dict_append(d1, d2):
-    """
-    Append the elements of d2 to the elements of d1.
-
-    Args:
-        d1: dict, main dictionary.
-        d2: dict, secondary dictionary, appended to the main dictionary.
-    """
-
-    for key, item in d2.items():
-        d1[key].append(item)
-
-
 def list_remove_none(l):
     """
     Removes None from the list l.
@@ -53,17 +40,17 @@ def list_remove_none(l):
     return [item for item in l if item is not None]
 
 
-def dict_remove_none(d):
+def dict_append(d1, d2):
     """
-    Removes None from the input dictionary.
+    Append the elements of d2 to the elements of d1.
 
     Args:
-        d: dict, input dictionary.
+        d1: dict, main dictionary.
+        d2: dict, secondary dictionary, appended to the main dictionary.
     """
 
-    for key in d:
-        items = [item for item in d[key] if item is not None]
-        d[key] = items
+    for key, item in d2.items():
+        d1[key].append(item)
 
 
 def dict_mean(d):
