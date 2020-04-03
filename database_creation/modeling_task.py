@@ -136,15 +136,15 @@ class ModelingTask:
 
         model.test(self.test_loader)
 
-    def explain_model(self, model):
+    def show_model(self, model):
         """
-        Explain the answers of the model on the valid_set.
+        Show the answers of the model on the valid_set.
 
         Args:
             model: models.Model, model to test.
         """
 
-        model.explain(self.valid_loader)
+        model.show(self.valid_loader)
 
     # endregion
 
