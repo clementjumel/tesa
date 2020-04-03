@@ -6,7 +6,7 @@ ANNOTATION_TASK_RESULTS_PATH = "results/annotation_task/"
 MODELING_TASK_FOR_BASELINES_PATH = "results/modeling_task/baselines_split/"
 MODELING_TASK_FOR_MODELS_PATH = "results/modeling_task/models_split/"
 
-PRETRAINED_MODELS_PATH = "modeling/pretrained_models/"
+PRETRAINED_MODELS_PATH = "pretrained_models/"
 
 BASELINES_RESULTS_PATH = 'results/baselines/'
 MODELS_RESULTS_PATH = 'results/models/'
