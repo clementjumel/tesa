@@ -63,7 +63,7 @@ def get_pretrained_model(pretrained_model_name, folder_path, root=''):
         pretrained_model_dim: int, dimension of the pretrained model.
     """
 
-    if "pretrained_model_name" is None:
+    if pretrained_model_name is None:
         pretrained_model, pretrained_model_dim = None, None
 
     else:
