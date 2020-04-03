@@ -1,4 +1,4 @@
-from modeling.utils import ranking
+from modeling.utils import get_ranking
 
 import torch
 
