@@ -1,4 +1,4 @@
-from modeling.utils import get_ranking
+from modeling.utils import get_ranks
 
 import torch
 
@@ -228,7 +228,7 @@ def ndcg_at_k(ranks, targets, relevance_level, k):
 
     del relevance_level
 
-    perfect_ranks = ranking(targets.reshape((-1, 1)))
+    perfect_ranks = get_ranks(targets.reshape((-1, 1)))
 
     mask1, mask2 = ranks <= k, perfect_ranks <= k
     ranks, perfect_ranks = ranks[mask1], perfect_ranks[mask2]
