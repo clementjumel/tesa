@@ -19,11 +19,12 @@ def parse_arguments():
     ap = ArgumentParser()
 
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
-    ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
-    ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
-    ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
-    ap.add_argument("--all_batches", action='store_true', help="Batches for all task loaders option.")
+    ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
+    ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
+    ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
+    ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
+    ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
 
     args = vars(ap.parse_args())
 
@@ -49,16 +50,18 @@ def main():
     args = parse_arguments()
 
     task_name = args['task']
-    model_name = to_class_name(args['model'])
-    experiment_name = args['experiment']
-    pretrained_model_name = args['pretrained']
-    all_batches = args['all_batches']
+    batch_size = args['batch_size']
+    cross_validation = args['cross_validation']
     short = args['short']
+    model_name = to_class_name(args['model'])
+    pretrained_model_name = args['pretrained']
+    experiment_name = args['experiment']
 
     task = load_task(task_name=task_name,
-                     folder_path=MODELING_TASK_FOR_BASELINES_PATH,
-                     all_batches=all_batches,
-                     short=short)
+                     batch_size=batch_size,
+                     cross_validation=cross_validation,
+                     short=short,
+                     folder_path=MODELING_TASK_FOR_BASELINES_PATH)
 
     pretrained_model, pretrained_model_dim = get_pretrained_model(pretrained_model_name=pretrained_model_name,
                                                                   folder_path=PRETRAINED_MODELS_PATH)
