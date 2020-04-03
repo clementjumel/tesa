@@ -1,6 +1,7 @@
 from pickle import load
 from gensim.models import KeyedVectors
 from fairseq.models.bart import BARTModel
+import torch
 
 
 def to_class_name(name):
@@ -82,6 +83,10 @@ def get_pretrained_model(pretrained_model_name, folder_path, root=''):
 
             pretrained_model = BARTModel.from_pretrained(file_name, checkpoint_file='model.pt')
             pretrained_model.eval()
+
+            if torch.cuda.is_available():
+                pretrained_model.cuda()
+
             pretrained_model_dim = None
 
             print("Pretrained BART.mnli loaded.\n")
