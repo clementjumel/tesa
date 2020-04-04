@@ -1,3 +1,15 @@
+"""
+Script to create the Queries for the annotations.
+
+Usages:
+    tests:
+        python create_annotation_queries.py --short --debug --no_save
+        python create_annotation_queries.py --short --debug
+    regular usages:
+        python create_annotation_queries.py
+        python create_annotation_queries.py --silent
+"""
+
 from database_creation.annotation_task import AnnotationTask
 
 from argparse import ArgumentParser

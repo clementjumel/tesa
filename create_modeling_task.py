@@ -1,3 +1,16 @@
+"""
+Script to create the modeling task to be solved by models.
+
+Usages:
+    tests:
+        python create_modeling_task.py -t context_free --short --no_save
+        python create_modeling_task.py -t context_dependent_same_type -bs 32 --no_save --silent
+        python create_modeling_task.py -t hybrid --short --cross_validation --no_save
+    regular usages:
+        python create_modeling_task.py -t context_free --short
+        python create_modeling_task.py -t context_free --short --silent
+"""
+
 import database_creation.modeling_task as modeling_task
 from toolbox.utils import to_class_name
 

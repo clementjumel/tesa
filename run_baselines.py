@@ -1,3 +1,13 @@
+"""
+Script to run baselines on a task.
+
+Usages:
+    tests:
+        python run_baselines.py -t context_free -m random -e test_script
+        python run_baselines.py -t context_free -m summaries_average_embedding -p word2vec -e test_script
+        python run_baselines.py -t context_free --short -m summaries_bart_mnli -p bart_mnli -e test_script
+"""
+
 import modeling.models as models
 from toolbox.utils import to_class_name, load_task, get_pretrained_model
 

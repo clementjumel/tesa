@@ -1,3 +1,15 @@
+"""
+Script to create the annotation batches from the Queries saved.
+
+Usages:
+    tests:
+        python create_annotation_batches.py -b 1 -bs 10 --short --no_save
+        python create_annotation_batches.py -b 1 -bs 10 --no_save
+    regular usages:
+        python create_annotation_batches.py -b 10 -bs 400
+        python create_annotation_batches.py -b 10 -bs 400 --silent
+"""
+
 from database_creation.annotation_task import AnnotationTask
 
 from argparse import ArgumentParser

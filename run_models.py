@@ -1,3 +1,10 @@
+"""
+Script to run models on a task.
+
+Usages:
+    # TODO
+"""
+
 import modeling.models as models
 from toolbox.utils import to_class_name, load_task, get_pretrained_model
 
