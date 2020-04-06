@@ -20,14 +20,9 @@ DROP_LAST = False
 K_CROSS_VALIDATION = 5
 MODELING_TASK_SHORT_SIZE = 1
 MODELING_TASK_SEED = 1
-
-BASELINES_SPLIT_VALID_PROPORTION = 0.5
-BASELINES_SPLIT_TEST_PROPORTION = 0.5
-MODELS_SPLIT_VALID_PROPORTION = 0.25
-MODELS_SPLIT_TEST_PROPORTION = 0.25
 # endregion
 
-# region Modeling parameters
+# region Baselines parameters
 SCORES_NAMES = [
     'average_precision',
     # 'precision_at_10',
@@ -39,13 +34,7 @@ SCORES_NAMES = [
     'ndcg_at_10',
     # 'ndcg_at_100',
 ]
-
-MODELS_RANDOM_SEED = 2
-
 SHOW_RANKINGS = 5
 SHOW_CHOICES = 10
-
-EPOCHS = 1
-UPDATE_EVERY = 100
-REGRESSION = False
+BASELINES_RANDOM_SEED = 2
 # endregion
