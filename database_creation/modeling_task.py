@@ -6,14 +6,14 @@ from numpy import asarray, split, concatenate
 from numpy.random import seed, shuffle
 from pickle import dump
 from re import findall
+from csv import writer
 
 
 class ModelingTask:
     relevance_level = None
 
     def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
-                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path,
-                 root=''):
+                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -31,13 +31,12 @@ class ModelingTask:
             save: bool, saving option.
             silent: bool, silent option.
             results_path: str, path to the folder to save the task in.
-            root: str, path to the root of the project.
         """
 
         self.min_assignments = min_assignments
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
-        self.annotation_results_path = root + str(annotation_results_path)
+        self.annotation_results_path = annotation_results_path
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.k_cross_validation = k_cross_validation
@@ -45,7 +44,7 @@ class ModelingTask:
         self.test_proportion = test_proportion
         self.save = save
         self.silent = silent
-        self.results_path = root + str(results_path)
+        self.results_path = results_path
 
         self.unprocessed_data = None
         self.train_loader = None
@@ -64,6 +63,11 @@ class ModelingTask:
         self.compute_unprocessed_data()
         self.compute_data_loaders()
         self.save_pkl()
+
+    def process_rte_like(self):
+        """ Saves the data_loaders in .tsv files with a similar format as the RTE task of GLUE. """
+
+        self.save_rte_like()
 
     def process_short_task(self, size):
         """
@@ -415,6 +419,120 @@ class ModelingTask:
 
     # endregion
 
+    # region File methods
+
+    def class_name(self):
+        """ Returns the standardized name of the class. """
+
+        return "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', self.__class__.__name__)])
+
+    def suffix(self, full):
+        """
+        Returns the standard suffix of a file_name, either short or full.
+
+        Args:
+            full: bool, whether or not to compute the full prefix.
+        """
+
+        train_proportion = 1 - self.valid_proportion - self.test_proportion
+        suffix = "_%.2f_%.2f_%.2f" % (train_proportion, self.valid_proportion, self.test_proportion)
+
+        if full:
+            suffix += "_bs" + str(self.batch_size)
+            suffix += "_cv" if self.k_cross_validation else ""
+            suffix += "_short" if self.short else ""
+
+        return suffix
+
+    def save_pkl(self):
+        """ Save the Task using pickle in [self.results_path]. """
+
+        file_name = self.results_path + self.class_name() + self.suffix(full=True) + '.pkl'
+
+        if self.save:
+            with open(file_name, 'wb') as file:
+                dump(obj=self, file=file, protocol=-1)
+
+            self.print("Task saved at %s.\n" % file_name)
+
+        else:
+            self.print("Not saving %s (not in save mode).\n" % file_name)
+
+    def save_rte_like(self):
+        """ Saves the data loaders similarly to GLUE's RTE task. """
+
+        def to_tsv(data_loader, file_name):
+            """
+            Saves a data_loader in a .tsv file similar to RTE's ones.
+
+            Args:
+                data_loader: list, list of ranking task, which are lists of batches (batch_inputs, batch_targets).
+                file_name: str, name of the file to save in.
+            """
+
+            def to_context_sentence(inputs):
+                """
+                Returns a string representing the context of the inputs.
+
+                Args:
+                    inputs: dict, inputs of the data.
+
+                Returns:
+                    str, sentence representing the context of the input.
+                """
+
+                sentence = ""
+
+                for wikipedia in inputs['wikipedia']:
+                    if wikipedia != "No information found.":
+                        sentence += wikipedia
+
+                sentence += " "
+                sentence += inputs['context']
+
+                return sentence
+
+            with open(file_name, 'wt') as file:
+                tsv_writer = writer(file, delimiter='\t')
+                tsv_writer.writerow(['index', 'sentence1', 'sentence2', 'label'])
+                index = 0
+
+                for ranking_task in data_loader:
+                    for inputs, targets in ranking_task:
+                        sentence1 = to_context_sentence(inputs)
+
+                        for choice, target in zip(inputs['choices'], target):
+                            sentence2 = choice
+                            label = "entailment" if target else "not_entailment"
+
+                            tsv_writer.writerow([str(index), sentence1, sentence2, label])
+                            index += 1
+
+        folder_name = self.class_name() + self.suffix(full=False)
+
+        file_name = folder_name + "train.tsv"
+        if self.save:
+            to_tsv(data_loader=self.train_loader, file_name=file_name)
+            self.print("Data loader saved in %s." % file_name)
+        else:
+            self.print("Not saving %s (not in save mode)." % file_name)
+
+        file_name = folder_name + "dev.tsv"
+        if self.save:
+            to_tsv(data_loader=self.valid_loader, file_name=file_name)
+            self.print("Data loader saved in %s." % file_name)
+        else:
+            self.print("Not saving %s (not in save mode)." % file_name)
+
+        file_name = folder_name + "test.tsv"
+        if self.save:
+            to_tsv(data_loader=self.test_loader, file_name=file_name)
+            self.print("Data loader saved in %s.\n" % file_name)
+        else:
+            self.print("Not saving %s (not in save mode).\n" % file_name)
+
+    # endregion
+
     # region Other methods
 
     def print(self, *args):
@@ -493,27 +611,6 @@ class ModelingTask:
         shuffle(data_loader)
 
         return data_loader
-
-    def save_pkl(self):
-        """ Save the Task using pickle in [self.results_path][class name]['_short' if relevant].pkl. """
-
-        class_name = self.__class__.__name__
-        class_name = "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', class_name)])
-
-        suffix = "_bs" + str(self.batch_size)
-        suffix += "_cv" if self.k_cross_validation else ""
-        suffix += "_short" if self.short else ""
-
-        file_name = self.results_path + class_name + suffix + '.pkl'
-
-        if self.save:
-            with open(file_name, 'wb') as file:
-                dump(obj=self, file=file, protocol=-1)
-
-            self.print("Task saved at %s.\n" % file_name)
-
-        else:
-            self.print("Not saving %s (not in save mode).\n" % file_name)
 
     # endregion
 
