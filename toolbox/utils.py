@@ -36,7 +36,7 @@ def load_task(task_name, valid_proportion, test_proportion, batch_size, cross_va
     """
 
     train_proportion = 1 - valid_proportion - test_proportion
-    suffix = "%.2f-%.2f-%.2f" % (train_proportion, valid_proportion, test_proportion)
+    suffix = "_%.2f-%.2f-%.2f" % (train_proportion, valid_proportion, test_proportion)
 
     suffix += "_bs" + str(batch_size)
     suffix += "_cv" if cross_validation else ""
