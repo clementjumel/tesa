@@ -1,15 +1,13 @@
-"""" Paths of various folders, from the root of the project. """
+"""" Paths of various folders (starting from the root of the project). """
 
+# region Data to load
 NYT_ANNOTATED_CORPUS_PATH = "nyt_annotated_corpus/"
-ANNOTATION_TASK_RESULTS_PATH = "results/annotation_task/"
-
-MODELING_TASK_FOR_BASELINES_PATH = "results/modeling_task/baselines_split/"
-MODELING_TASK_FOR_MODELS_PATH = "results/modeling_task/models_split/"
-
 PRETRAINED_MODELS_PATH = "pretrained_models/"
+# endregion
 
+# region Results folders
+ANNOTATION_TASK_RESULTS_PATH = "results/annotation_task/"
+MODELING_TASK_RESULTS_PATH = "results/modeling_task/"
 BASELINES_RESULTS_PATH = 'results/baselines/'
-MODELS_RESULTS_PATH = 'results/models/'
-
-TENSORBOARD_LOGS_BASELINES_PATH = "results/baselines/tensorboard_logs/"
-TENSORBOARD_LOGS_MODELS_PATH = "results/models/tensorboard_logs/"
+TENSORBOARD_LOGS_PATH = "results/baselines/tensorboard_logs/"
+# endregion
