@@ -5,7 +5,7 @@ Usages:
     tests:
         python create_modeling_task.py -t context_free --short --no_save
         python create_modeling_task.py -t context_dependent_same_type -bs 32 --no_save --silent
-        python create_modeling_task.py -t hybrid -vp 0.5 -tp 0.5--short --cross_validation --no_save
+        python create_modeling_task.py -t hybrid -vp 0.5 -tp 0.5 --short --cross_validation --no_save
     regular usages:
         python create_modeling_task.py -t context_free --short --rte
         python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5 --short --rte
