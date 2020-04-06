@@ -18,12 +18,14 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def load_task(task_name, batch_size, cross_validation, short, folder_path):
+def load_task(task_name, valid_proportion, test_proportion, batch_size, cross_validation, short, folder_path):
     """
     Load a Task using pickle from [folder_path][task_name].pkl
 
     Args:
         task_name: str, name of the Task to load (eg 'context_free').
+        valid_proportion: float, proportion of the validation set.
+        test_proportion: float, proportion of the validation set.
         batch_size: int, size of the batches of the modeling task.
         cross_validation: bool, cross-validation option.
         short: bool, whether to load the shorten task or not.
@@ -33,7 +35,10 @@ def load_task(task_name, batch_size, cross_validation, short, folder_path):
         database_creation.modeling_task.Task, loaded object.
     """
 
-    suffix = "_bs" + str(batch_size)
+    train_proportion = 1 - valid_proportion - test_proportion
+    suffix = "%.2f-%.2f-%.2f" % (train_proportion, valid_proportion, test_proportion)
+
+    suffix += "_bs" + str(batch_size)
     suffix += "_cv" if cross_validation else ""
     suffix += "_short" if short else ""
 
