@@ -508,7 +508,7 @@ class ModelingTask:
                             tsv_writer.writerow([str(index), sentence1, sentence2, label])
                             index += 1
 
-        folder_name = self.class_name() + self.suffix(full=False)
+        folder_name = self.class_name() + self.suffix(full=False) + "/"
 
         file_name = folder_name + "train.tsv"
         if self.save:
