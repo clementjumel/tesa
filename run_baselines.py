@@ -4,9 +4,7 @@ Script to run baselines on a task.
 Usages:
     tests:
         python run_baselines.py -t context_free -vp 0.5 -tp 0.5 -m random -e test_script
-        python run_baselines.py -t context_free -vp 0.5 -tp 0.5 -m summaries_average_embedding -p word2vec
-            -e test_script
-        python run_baselines.py -t context_free -vp 0.5 -tp 0.5 --short -m summaries_bart_mnli -p bart_mnli
+        python run_baselines.py -t context_free -vp 0.5 -tp 0.5 -m summaries_average_embedding -p word2vec \
             -e test_script
 """
 
