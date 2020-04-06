@@ -9,7 +9,8 @@ Usages:
         python create_modeling_task.py -t hybrid -tp 0.2 --short --cross_validation --no_save
     regular usages:
         python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5
-        python create_modeling_task.py -t context_free --rte-like
+        python create_modeling_task.py -t context_free --rte_like
+        python create_modeling_task.py -t context_free_same_type --rte_like
 """
 
 import database_creation.modeling_task as modeling_task
