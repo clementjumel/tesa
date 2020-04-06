@@ -18,7 +18,7 @@ from re import findall
 class AnnotationTask:
 
     def __init__(self, years, max_tuple_size, short, short_size, random, debug, random_seed, save, silent, corpus_path,
-                 results_path, root=''):
+                 results_path):
         """
         Initializes an instance of AnnotationTask, which creates the queries asked to the annotation workers and gathers
         their answers.
@@ -35,7 +35,6 @@ class AnnotationTask:
             silent: bool, silence option.
             corpus_path: str, path to the NYT annotated corpus.
             results_path: str, path to the results folder
-            root: str, path to the root of the project.
         """
 
         self.years = years
@@ -46,8 +45,8 @@ class AnnotationTask:
         self.debug = debug
         self.save = save
         self.silent = silent
-        self.corpus_path = root + str(corpus_path)
-        self.results_path = root + str(results_path)
+        self.corpus_path = corpus_path
+        self.results_path = results_path
 
         self.articles = None
         self.entities = None
