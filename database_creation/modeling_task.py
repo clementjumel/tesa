@@ -435,7 +435,7 @@ class ModelingTask:
         """
 
         train_proportion = 1 - self.valid_proportion - self.test_proportion
-        suffix = "_%.2f_%.2f_%.2f" % (train_proportion, self.valid_proportion, self.test_proportion)
+        suffix = "_%.2f-%.2f-%.2f" % (train_proportion, self.valid_proportion, self.test_proportion)
 
         if full:
             suffix += "_bs" + str(self.batch_size)
