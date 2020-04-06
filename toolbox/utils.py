@@ -18,7 +18,7 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def load_task(task_name, batch_size, cross_validation, short, folder_path, root=""):
+def load_task(task_name, batch_size, cross_validation, short, folder_path):
     """
     Load a Task using pickle from [folder_path][task_name].pkl
 
@@ -28,7 +28,6 @@ def load_task(task_name, batch_size, cross_validation, short, folder_path, root=
         cross_validation: bool, cross-validation option.
         short: bool, whether to load the shorten task or not.
         folder_path: str, path of the folder to load from.
-        root: str, path to the root of the project.
 
     Returns:
         database_creation.modeling_task.Task, loaded object.
@@ -40,7 +39,7 @@ def load_task(task_name, batch_size, cross_validation, short, folder_path, root=
 
     task_name = "".join(task_name.split("_"))
 
-    file_name = root + folder_path + task_name + suffix + '.pkl'
+    file_name = folder_path + task_name + suffix + '.pkl'
 
     with open(file_name, 'rb') as file:
         task = load(file)
@@ -50,14 +49,13 @@ def load_task(task_name, batch_size, cross_validation, short, folder_path, root=
     return task
 
 
-def get_pretrained_model(pretrained_model_name, folder_path, root=''):
+def get_pretrained_model(pretrained_model_name, folder_path):
     """
     Returns the pretrained model and its dimension, if relevant.
 
     Args:
         pretrained_model_name: str, name of the model.
         folder_path: str, path to the pretrained_models folder.
-        root: str, path to the root of the project.
 
     Returns:
         pretrained_model: unknown type, various pretrained model or embedding.
@@ -71,7 +69,7 @@ def get_pretrained_model(pretrained_model_name, folder_path, root=''):
         pretrained_model_names = ["word2vec", "bart_mnli"]
 
         if pretrained_model_name == pretrained_model_names[0]:
-            fname = root + folder_path + "GoogleNews-vectors-negative300.bin"
+            fname = folder_path + "GoogleNews-vectors-negative300.bin"
 
             pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
             pretrained_model_dim = 300
@@ -79,7 +77,7 @@ def get_pretrained_model(pretrained_model_name, folder_path, root=''):
             print("Word2Vec embedding loaded.\n")
 
         elif pretrained_model_name == pretrained_model_names[1]:
-            file_name = root + folder_path + "bart.large.mnli"
+            file_name = folder_path + "bart.large.mnli"
 
             pretrained_model = BARTModel.from_pretrained(file_name, checkpoint_file='model.pt')
             pretrained_model.eval()
