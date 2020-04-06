@@ -35,8 +35,10 @@ def load_task(task_name, valid_proportion, test_proportion, batch_size, cross_va
         database_creation.modeling_task.Task, loaded object.
     """
 
-    train_proportion = 1 - valid_proportion - test_proportion
-    suffix = "_%.2f-%.2f-%.2f" % (train_proportion, valid_proportion, test_proportion)
+    train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
+    valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
+    test_proportion = ("%.2f" % test_proportion).split(".")[1]
+    suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
     suffix += "_bs" + str(batch_size)
     suffix += "_cv" if cross_validation else ""

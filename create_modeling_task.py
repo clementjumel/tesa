@@ -5,10 +5,11 @@ Usages:
     tests:
         python create_modeling_task.py -t context_free --short --no_save
         python create_modeling_task.py -t context_dependent_same_type -bs 32 --no_save --silent
-        python create_modeling_task.py -t hybrid -vp 0.5 -tp 0.5 --short --cross_validation --no_save
+        python create_modeling_task.py -t full_hybrid -vp 0.5 -tp 0.5 --rte_like --no_save
+        python create_modeling_task.py -t hybrid -tp 0.2 --short --cross_validation --no_save
     regular usages:
-        python create_modeling_task.py -t context_free --short --rte
-        python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5 --short --rte
+        python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5
+        python create_modeling_task.py -t context_free --rte-like
 """
 
 import database_creation.modeling_task as modeling_task

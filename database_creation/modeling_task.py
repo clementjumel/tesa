@@ -7,6 +7,7 @@ from numpy.random import seed, shuffle
 from pickle import dump
 from re import findall
 from csv import writer
+import os
 
 
 class ModelingTask:
@@ -434,8 +435,10 @@ class ModelingTask:
             full: bool, whether or not to compute the full prefix.
         """
 
-        train_proportion = 1 - self.valid_proportion - self.test_proportion
-        suffix = "_%.2f-%.2f-%.2f" % (train_proportion, self.valid_proportion, self.test_proportion)
+        train_proportion = ("%.2f" % (1 - self.valid_proportion - self.test_proportion)).split(".")[1]
+        valid_proportion =("%.2f" % self.valid_proportion).split(".")[1]
+        test_proportion = ("%.2f" % self.test_proportion).split(".")[1]
+        suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
         if full:
             suffix += "_bs" + str(self.batch_size)
@@ -501,14 +504,17 @@ class ModelingTask:
                     for inputs, targets in ranking_task:
                         sentence1 = to_context_sentence(inputs)
 
-                        for choice, target in zip(inputs['choices'], target):
+                        for choice, target in zip(inputs['choices'], targets):
                             sentence2 = choice
                             label = "entailment" if target else "not_entailment"
 
                             tsv_writer.writerow([str(index), sentence1, sentence2, label])
                             index += 1
 
-        folder_name = self.class_name() + self.suffix(full=False) + "/"
+        folder_name = self.results_path + self.class_name() + self.suffix(full=False) + "/"
+
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
 
         file_name = folder_name + "train.tsv"
         if self.save:
