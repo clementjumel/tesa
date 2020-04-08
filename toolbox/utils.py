@@ -1,7 +1,4 @@
 from pickle import load
-from gensim.models import KeyedVectors
-from fairseq.models.bart import BARTModel
-import torch
 
 
 def to_class_name(name):
