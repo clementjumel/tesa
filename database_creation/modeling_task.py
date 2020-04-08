@@ -3,7 +3,7 @@ from database_creation.utils import Sample
 
 from collections import defaultdict
 from numpy import asarray, split, concatenate
-from numpy.random import seed, shuffle
+from numpy.random import seed, shuffle, choice
 from pickle import dump
 from re import findall
 from csv import writer
@@ -13,12 +13,15 @@ import os
 class ModelingTask:
     relevance_level = None
 
-    def __init__(self, min_assignments, min_answers, exclude_pilot, annotation_results_path, batch_size, drop_last,
-                 k_cross_validation, valid_proportion, test_proportion, random_seed, save, silent, results_path):
+    def __init__(self, ranking_size, min_assignments, min_answers, exclude_pilot, annotation_results_path,
+                 batch_size, drop_last, k_cross_validation, valid_proportion, test_proportion, random_seed, save,
+                 silent, results_path):
         """
         Initializes an instance of the base ModelingTask.
 
         Args:
+            ranking_size: int, total number of choices to compute; if None, computes all of them; if 0, computes
+                only the positive examples.
             min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
             min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
             exclude_pilot: bool, whether or not to exclude the data from the pilot.
@@ -34,6 +37,7 @@ class ModelingTask:
             results_path: str, path to the folder to save the task in.
         """
 
+        self.ranking_size = ranking_size
         self.min_assignments = min_assignments
         self.min_answers = min_answers
         self.exclude_pilot = exclude_pilot
@@ -69,6 +73,12 @@ class ModelingTask:
         """ Saves the data_loaders in .tsv files with a similar format as the RTE task of GLUE. """
 
         self.save_rte_like()
+
+    # TODO
+    def process_summaries_like(self):
+        """  """
+
+        self.save_summaries_like()
 
     def process_short_task(self, size):
         """
@@ -301,6 +311,8 @@ class ModelingTask:
                                                          queries=queries,
                                                          annotations=annotations)
 
+            labelled_answers = self.filter_ranking_size(labelled_answers)
+
             samples.append(Sample(queries=sample_queries, labelled_answers=labelled_answers))
 
         shuffle(samples)
@@ -322,6 +334,35 @@ class ModelingTask:
         """
 
         return dict()
+
+    def filter_ranking_size(self, labelled_answers):
+        """
+        Returns a filtered version of labelled answers with the same format, depending of self.ranking_size: if it is
+        None: don't do anything, if it is 0, remove all the negative answers, otherwise, remove negative answers to keep
+        only self.ranking_size total answers.
+
+        Args:
+            labelled_answers: dict, answers and their labels (0 for negative answers).
+        """
+
+        if self.ranking_size is None:
+            pass
+
+        else:
+            negative_answers = sorted([key for key, value in labelled_answers.items() if value == 0])
+            labelled_answers = {key: value for key, value in labelled_answers.items() if value > 0}
+
+            if self.ranking_size:
+                n = len(labelled_answers)
+
+                if n > self.ranking_size:
+                    raise Exception("Too small ranking size, some gold standard answers will be lost.")
+
+                else:
+                    negative_answers = {answer: 0 for answer in choice(a=negative_answers, size=self.ranking_size - n)}
+                    labelled_answers.update(negative_answers)
+
+        return labelled_answers
 
     @staticmethod
     def get_answers_all(annotations):
@@ -441,6 +482,7 @@ class ModelingTask:
         suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
         if full:
+            suffix += "_rs" + str(self.ranking_size) if self.ranking_size is not None else ""
             suffix += "_bs" + str(self.batch_size)
             suffix += "_cv" if self.k_cross_validation else ""
             suffix += "_short" if self.short else ""
@@ -536,6 +578,12 @@ class ModelingTask:
             self.print("Data loader saved in %s.\n" % file_name)
         else:
             self.print("Not saving %s (not in save mode).\n" % file_name)
+
+    # TODO
+    def save_summaries_like(self):
+        """  """
+
+        pass
 
     # endregion
 
@@ -649,35 +697,11 @@ class ContextFree(ModelingTask):
         return new_annotations
 
     def get_samples(self, queries, annotations):
-        """
-        Returns the samples of the Task.
-
-        Args:
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of list of Annotations, Annotations from the MT workers.
-
-        Returns:
-            list, shuffled list of Samples.
-        """
-
         annotations = self.rework_annotations(queries=queries, annotations=annotations)
 
         return super().get_samples(queries=queries, annotations=annotations)
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -694,19 +718,6 @@ class ContextFreeSameType(ContextFree):
     relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -721,19 +732,6 @@ class ContextDependent(ModelingTask):
     relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -748,19 +746,6 @@ class ContextDependentSameType(ModelingTask):
     relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -775,19 +760,6 @@ class FullHybrid(ModelingTask):
     relevance_level = 2
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -810,19 +782,6 @@ class Hybrid(ModelingTask):
     relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
@@ -841,19 +800,6 @@ class HybridSameType(ModelingTask):
     relevance_level = 1
 
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        """
-        Returns the answers and their labels as a list of tuples.
-
-        Args:
-            sample_queries: list of queries, queries of the Sample.
-            sample_annotations: list of annotations, annotations of the Sample.
-            queries: dict of Query, Queries of the annotations.
-            annotations: dict of Annotations, all the annotations.
-
-        Returns:
-            dict, answers and their labels (0 for negative answers).
-        """
-
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
 
