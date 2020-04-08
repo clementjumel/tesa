@@ -69,16 +69,15 @@ class ModelingTask:
         self.compute_data_loaders()
         self.save_pkl()
 
-    def process_rte_like(self):
-        """ Saves the data_loaders in .tsv files with a similar format as the RTE task of GLUE. """
+    def process_dataset_like(self, like):
+        """
+        Saves the data_loaders like the RTE or CNN/DM dataset formated for BART finetuning.
 
-        self.save_rte_like()
+        Args:
+            like: str, name of the dataset to copy.
+        """
 
-    # TODO
-    def process_summaries_like(self):
-        """  """
-
-        self.save_summaries_like()
+        self.save_like(like)
 
     def process_short_task(self, size):
         """
@@ -217,7 +216,7 @@ class ModelingTask:
             self.valid_loader = self.to_loader(valid_set)
             self.test_loader = self.to_loader(test_set)
 
-            train_loader, valid_loader, test_loader = self.train_loader, self.valid_loader,  self.test_loader
+            train_loader, valid_loader, test_loader = self.train_loader, self.valid_loader, self.test_loader
 
             self.print("Data loaders computed:")
 
@@ -477,7 +476,7 @@ class ModelingTask:
         """
 
         train_proportion = ("%.2f" % (1 - self.valid_proportion - self.test_proportion)).split(".")[1]
-        valid_proportion =("%.2f" % self.valid_proportion).split(".")[1]
+        valid_proportion = ("%.2f" % self.valid_proportion).split(".")[1]
         test_proportion = ("%.2f" % self.test_proportion).split(".")[1]
         suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
@@ -503,87 +502,91 @@ class ModelingTask:
         else:
             self.print("Not saving %s (not in save mode).\n" % file_name)
 
-    def save_rte_like(self):
-        """ Saves the data loaders similarly to GLUE's RTE task. """
+    def save_like(self, like):
+        """
+        Saves the data_loaders like the RTE or CNN/DM dataset formated for BART finetuning.
 
-        def to_tsv(data_loader, file_name):
-            """
-            Saves a data_loader in a .tsv file similar to RTE's ones.
+        Args:
+            like: str, name of the dataset to copy.
+        """
 
-            Args:
-                data_loader: list, list of ranking task, which are lists of batches (batch_inputs, batch_targets).
-                file_name: str, name of the file to save in.
-            """
-
-            def to_context_sentence(inputs):
-                """
-                Returns a string representing the context of the inputs.
-
-                Args:
-                    inputs: dict, inputs of the data.
-
-                Returns:
-                    str, sentence representing the context of the input.
-                """
-
-                sentence = ""
-
-                for wikipedia in inputs['wikipedia']:
-                    if wikipedia != "No information found.":
-                        sentence += wikipedia
-
-                sentence += " "
-                sentence += inputs['context']
-
-                return sentence
-
-            with open(file_name, 'wt') as file:
-                tsv_writer = writer(file, delimiter='\t')
-                tsv_writer.writerow(['index', 'sentence1', 'sentence2', 'label'])
-                index = 0
-
-                for ranking_task in data_loader:
-                    for inputs, targets in ranking_task:
-                        sentence1 = to_context_sentence(inputs)
-
-                        for choice, target in zip(inputs['choices'], targets):
-                            sentence2 = choice
-                            label = "entailment" if target else "not_entailment"
-
-                            tsv_writer.writerow([str(index), sentence1, sentence2, label])
-                            index += 1
-
-        folder_name = self.results_path + self.class_name() + self.suffix(full=False) + "/"
+        folder_name = self.results_path + self.class_name() + self.suffix(False) + "/"
 
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
 
-        file_name = folder_name + "train.tsv"
-        if self.save:
-            to_tsv(data_loader=self.train_loader, file_name=file_name)
-            self.print("Data loader saved in %s." % file_name)
+        self.save_loader_like(data_loader=self.train_loader,
+                              data_loader_name="train",
+                              folder_name=folder_name,
+                              like=like)
+
+        self.save_loader_like(data_loader=self.valid_loader,
+                              data_loader_name="valid",
+                              folder_name=folder_name,
+                              like=like)
+
+        self.save_loader_like(data_loader=self.test_loader,
+                              data_loader_name="test",
+                              folder_name=folder_name,
+                              like=like)
+
+    def save_loader_like(self, data_loader, data_loader_name, folder_name, like):
+        """
+        Saves a data loader in a file by copying the format of like.
+
+        Args:
+            data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
+            data_loader_name: str, name of the data loader.
+            folder_name: str, path of the folder to file in.
+            like: str, name of the method to copy.
+        """
+
+        assert like in ["rte", "cnn_dm"]
+
+        if like == "rte":
+            if data_loader_name == "valid":
+                data_loader_name = "dev"
+            file_names = [data_loader_name + ".tsv"]
+
         else:
-            self.print("Not saving %s (not in save mode)." % file_name)
+            if data_loader_name == "valid":
+                data_loader_name = "val"
+            file_names = [data_loader_name + ".source", data_loader_name + ".target"]
 
-        file_name = folder_name + "dev.tsv"
         if self.save:
-            to_tsv(data_loader=self.valid_loader, file_name=file_name)
-            self.print("Data loader saved in %s." % file_name)
+            if like == "rte":
+                with open(folder_name + file_names[0], 'wt') as file:
+                    tsv_writer = writer(file, delimiter='\t')
+                    tsv_writer.writerow(['index', 'sentence1', 'sentence2', 'label'])
+                    index = 0
+
+                    for ranking_task in data_loader:
+                        for inputs, targets in ranking_task:
+                            sentence1 = self.context_to_string(inputs)
+
+                            for choice, target in zip(inputs['choices'], targets):
+                                sentence2 = choice
+                                label = "entailment" if target else "not_entailment"
+
+                                tsv_writer.writerow([str(index), sentence1, sentence2, label])
+                                index += 1
+
+            else:
+                with open(folder_name + file_names[0], "wt") as source_file, \
+                        open(folder_name + file_names[1], "wt") as target_file:
+                    for ranking_task in data_loader:
+                        for inputs, targets in ranking_task:
+                            source = self.context_to_string(inputs)
+
+                            for choice, target in zip(inputs['choices'], targets):
+                                if target:
+                                    source_file.write(source + "\n")
+                                    target_file.write(choice + "\n")
+
+            self.print("File(s) %s saved in %s." % (" & ".join(file_names), folder_name))
+
         else:
-            self.print("Not saving %s (not in save mode)." % file_name)
-
-        file_name = folder_name + "test.tsv"
-        if self.save:
-            to_tsv(data_loader=self.test_loader, file_name=file_name)
-            self.print("Data loader saved in %s.\n" % file_name)
-        else:
-            self.print("Not saving %s (not in save mode).\n" % file_name)
-
-    # TODO
-    def save_summaries_like(self):
-        """  """
-
-        pass
+            self.print("File(s) %s not saved in %s (not in save mode)." % (" & ".join(file_names), folder_name))
 
     # endregion
 
@@ -665,6 +668,25 @@ class ModelingTask:
         shuffle(data_loader)
 
         return data_loader
+
+    @staticmethod
+    def context_to_string(inputs):
+        """
+        Returns the context as a string with the wikipedia information followed by the article's context.
+
+        Args:
+            inputs: dict, inputs of a batch.
+        """
+
+        context_elements = []
+
+        for wikipedia in inputs['wikipedia']:
+            if wikipedia != "No information found.":
+                context_elements.append(wikipedia)
+
+        context_elements.append(inputs['context'])
+
+        return " ".join(context_elements)
 
     # endregion
 
