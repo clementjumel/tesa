@@ -358,7 +358,10 @@ class ModelingTask:
                     raise Exception("Too small ranking size, some answers will be lost (should be at least %i)." % n)
 
                 else:
-                    negative_answers = {answer: 0 for answer in choice(a=negative_answers, size=self.ranking_size - n)}
+                    negative_answers = {answer: 0 for answer in choice(a=negative_answers,
+                                                                       size=self.ranking_size - n,
+                                                                       replace=False)}
+
                     labelled_answers.update(negative_answers)
 
         return labelled_answers
