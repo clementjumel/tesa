@@ -2,16 +2,16 @@
 Script to run baselines on a task.
 
 Usages:
-    tests:
-        python run_baselines.py -t context_free -vp 0.5 -tp 0.5 -m random -e test_script
-        python run_baselines.py -t context_free -vp 0.5 -tp 0.5 -m summaries_average_embedding -p word2vec \
-            -e test_script
+    python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m random
+    python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m frequency
+    python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
 """
 
 import modeling.models as models
-from toolbox.utils import to_class_name, load_task, get_pretrained_model
+from toolbox.utils import to_class_name, load_task
 
 from argparse import ArgumentParser
+from gensim.models import KeyedVectors
 
 from toolbox.parameters import SCORES_NAMES, BASELINES_RANDOM_SEED
 
@@ -31,16 +31,39 @@ def parse_arguments():
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
     ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
     ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
+    ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
-    ap.add_argument("-p", "--pretrained", type=str, help="Name of the pretrained model, if any.")
-    ap.add_argument("-e", "--experiment", required=True, type=str, help="Name of the experiment.")
+    ap.add_argument("-w", "--word2vec", action="store_true", help="Load Word2Vec embedding.")
+    ap.add_argument("-e", "--experiment", default=None, type=str, help="Name of the experiment.")
 
     args = vars(ap.parse_args())
 
     return args
+
+
+def get_word2vec(folder_path):
+    """
+    Returns the pretrained word2vec embedding and its dimension.
+
+    Args:
+        folder_path: str, path to the pretrained_models folder.
+
+    Returns:
+        pretrained_model: gensim.KeyedVector, pretrained embedding.
+        pretrained_model_dim: int, dimension of the embedding.
+    """
+
+    fname = folder_path + "GoogleNews-vectors-negative300.bin"
+
+    pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
+    pretrained_model_dim = 300
+
+    print("Word2Vec embedding loaded.\n")
+
+    return pretrained_model, pretrained_model_dim
 
 
 def play_baseline(task, model):
@@ -52,8 +75,14 @@ def play_baseline(task, model):
         model: models.Baseline, baseline to evaluate.
     """
 
-    task.preview_data(model=model, include_train=False, include_valid=True)
-    task.valid_model(model=model)
+    model.preview(task.train_loader)
+    model.preview(task.valid_loader)
+
+    print("Evaluation on the train_loader...")
+    model.valid(task.train_loader)
+
+    print("Evaluation on the valid_loader...")
+    model.valid(task.valid_loader)
 
 
 def main():
@@ -64,23 +93,24 @@ def main():
     task_name = args['task']
     valid_proportion = args['valid_proportion']
     test_proportion = args['test_proportion']
+    ranking_size = args['ranking_size']
     batch_size = args['batch_size']
     cross_validation = args['cross_validation']
     short = args['short']
     model_name = to_class_name(args['model'])
-    pretrained_model_name = args['pretrained']
+    word2vec = args['word2vec']
     experiment_name = args['experiment']
 
     task = load_task(task_name=task_name,
                      valid_proportion=valid_proportion,
                      test_proportion=test_proportion,
+                     ranking_size=ranking_size,
                      batch_size=batch_size,
                      cross_validation=cross_validation,
                      short=short,
                      folder_path=MODELING_TASK_RESULTS_PATH)
 
-    pretrained_model, pretrained_model_dim = get_pretrained_model(pretrained_model_name=pretrained_model_name,
-                                                                  folder_path=PRETRAINED_MODELS_PATH)
+    pretrained_model, pretrained_model_dim = get_word2vec(PRETRAINED_MODELS_PATH) if word2vec else None, None
 
     model = getattr(models, model_name)(scores_names=SCORES_NAMES,
                                         relevance_level=task.relevance_level,
