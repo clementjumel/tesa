@@ -113,7 +113,7 @@ def main():
                      short=short,
                      folder_path=MODELING_TASK_RESULTS_PATH)
 
-    pretrained_model, pretrained_model_dim = get_word2vec(PRETRAINED_MODELS_PATH) if word2vec else None, None
+    pretrained_model, pretrained_model_dim = get_word2vec(PRETRAINED_MODELS_PATH) if word2vec else (None, None)
 
     model = getattr(models, model_name)(scores_names=SCORES_NAMES,
                                         relevance_level=task.relevance_level,
