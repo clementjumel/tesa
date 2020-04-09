@@ -20,14 +20,11 @@ Usages:
 
 import database_creation.modeling_task as modeling_task
 from toolbox.utils import to_class_name, add_task_argument
+from toolbox.parameters import MIN_ASSIGNMENTS, MIN_ANSWERS, EXCLUDE_PILOT, DROP_LAST, K_CROSS_VALIDATION, \
+    MODELING_TASK_SHORT_SIZE, MODELING_TASK_SEED
+from toolbox.paths import ANNOTATION_TASK_RESULTS_PATH, MODELING_TASK_RESULTS_PATH
 
 from argparse import ArgumentParser
-
-from toolbox.parameters import \
-    MIN_ASSIGNMENTS, MIN_ANSWERS, EXCLUDE_PILOT, DROP_LAST, K_CROSS_VALIDATION, \
-    MODELING_TASK_SHORT_SIZE, MODELING_TASK_SEED
-
-from toolbox.paths import ANNOTATION_TASK_RESULTS_PATH, MODELING_TASK_RESULTS_PATH
 
 
 def parse_arguments():
@@ -54,42 +51,31 @@ def main():
 
     args = parse_arguments()
 
-    task_name = to_class_name(args['task'])
-    valid_proportion = args['valid_proportion']
-    test_proportion = args['test_proportion']
-    ranking_size = args['ranking_size']
-    batch_size = args['batch_size']
-    short = args['short']
-    k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
-    rte_like = args['rte_like']
-    cnndm_like = args['cnndm_like']
-    save = not args['no_save']
-    silent = args['silent']
-
-    task = getattr(modeling_task, task_name)(ranking_size=ranking_size,
-                                             min_assignments=MIN_ASSIGNMENTS,
-                                             min_answers=MIN_ANSWERS,
-                                             exclude_pilot=EXCLUDE_PILOT,
-                                             annotation_results_path=ANNOTATION_TASK_RESULTS_PATH,
-                                             batch_size=batch_size,
-                                             drop_last=DROP_LAST,
-                                             k_cross_validation=k_cross_validation,
-                                             valid_proportion=valid_proportion,
-                                             test_proportion=test_proportion,
-                                             random_seed=MODELING_TASK_SEED,
-                                             save=save,
-                                             silent=silent,
-                                             results_path=MODELING_TASK_RESULTS_PATH)
+    task = getattr(modeling_task, to_class_name(args['task']))(ranking_size=args['ranking_size'],
+                                                               min_assignments=MIN_ASSIGNMENTS,
+                                                               min_answers=MIN_ANSWERS,
+                                                               exclude_pilot=EXCLUDE_PILOT,
+                                                               annotation_results_path=ANNOTATION_TASK_RESULTS_PATH,
+                                                               batch_size=args['batch_size'],
+                                                               drop_last=DROP_LAST,
+                                                               k_cross_validation=
+                                                               int(args['cross_validation']) * K_CROSS_VALIDATION,
+                                                               valid_proportion=args['valid_proportion'],
+                                                               test_proportion=args['test_proportion'],
+                                                               random_seed=MODELING_TASK_SEED,
+                                                               save=not args['no_save'],
+                                                               silent=args['silent'],
+                                                               results_path=MODELING_TASK_RESULTS_PATH)
 
     task.process_data_loaders()
 
-    if rte_like:
+    if args['rte_like']:
         task.process_dataset_like("rte")
 
-    if cnndm_like:
+    if args['cnndm_like']:
         task.process_dataset_like("cnndm")
 
-    if short:
+    if args['short']:
         task.process_short_task(size=MODELING_TASK_SHORT_SIZE)
 
 
