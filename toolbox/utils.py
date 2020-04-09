@@ -56,9 +56,9 @@ def load_task(task_name, valid_proportion, test_proportion, ranking_size, batch_
     return task
 
 
-def parse_task_argument(ap):
+def add_task_argument(ap):
     """
-    Add to ap the parsing arguments relative to the modeling task.
+    Add to the argument parser the parsing arguments relative to the modeling task.
 
     Args:
         ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
