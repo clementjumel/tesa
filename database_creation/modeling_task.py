@@ -499,7 +499,7 @@ class ModelingTask:
 
                             for choice, target in zip(inputs['choices'], targets):
                                 sentence2 = choice
-                                label = "entailment" if target else "not_entailment"
+                                label = "aggregation" if target else "not_aggregation"
 
                                 tsv_writer.writerow([str(index), sentence1, sentence2, label])
                                 index += 1
