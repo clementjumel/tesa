@@ -3,7 +3,7 @@ nyt_annotated_corpus/
 results/
 old/
 pretrained_models/
-
+fairseq/
 
 database_creation/__pycache__/
 modeling/__pycache__/
