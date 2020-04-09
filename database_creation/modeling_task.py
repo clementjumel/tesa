@@ -440,8 +440,13 @@ class ModelingTask:
 
         folder_name = self.results_path + self.class_name() + self.suffix() + "/"
 
-        if self.save and not os.path.exists(folder_name):
-            os.makedirs(folder_name)
+        if self.save:
+            if not os.path.exists(folder_name):
+                os.makedirs(folder_name)
+
+            folder_name += like + "/"
+            if not os.path.exists(folder_name):
+                os.makedirs(folder_name)
 
         self.save_loader_like(data_loader=self.train_loader,
                               data_loader_name="train",
