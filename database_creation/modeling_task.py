@@ -545,7 +545,7 @@ class ModelingTask:
             like: str, name of the method to copy.
         """
 
-        assert like in ["rte", "cnn_dm"]
+        assert like in ["rte", "cnndm"]
 
         if like == "rte":
             if data_loader_name == "valid":
