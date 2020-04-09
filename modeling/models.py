@@ -78,7 +78,6 @@ class BaseModel:
             data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
         """
 
-        print("Validation of the model...")
         epoch_losses, epoch_scores = self.evaluate_epoch(data_loader=data_loader)
 
         self.valid_losses.append(epoch_losses)
@@ -94,7 +93,6 @@ class BaseModel:
             data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
         """
 
-        print("Testing of the model...")
         epoch_losses, epoch_scores = self.evaluate_epoch(data_loader=data_loader)
 
         self.test_losses.append(epoch_losses)
