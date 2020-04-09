@@ -2,8 +2,8 @@
 Script to run Models on a ModelingTask.
 
 Usages:
-    python run_baselines.py -t context_free_same_type -m frequency
-    python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
+    python run_models.py -t context_free_same_type -m frequency
+    python run_models.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
 """
 
 import modeling.models as models
