@@ -19,7 +19,7 @@ Usages:
 """
 
 import database_creation.modeling_task as modeling_task
-from toolbox.utils import to_class_name
+from toolbox.utils import to_class_name, parse_task_argument
 
 from argparse import ArgumentParser
 
@@ -40,13 +40,7 @@ def parse_arguments():
 
     ap = ArgumentParser()
 
-    ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
-    ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
-    ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
-    ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
-    ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches to generate.")
-    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
-    ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
+    parse_task_argument(ap)
     ap.add_argument("--rte_like", action='store_true', help="RTE-like saving option.")
     ap.add_argument("--cnndm_like", action='store_true', help="CNN/DM-like saving option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
