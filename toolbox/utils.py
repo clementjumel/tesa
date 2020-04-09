@@ -54,3 +54,20 @@ def load_task(task_name, valid_proportion, test_proportion, ranking_size, batch_
     print("Task loaded from %s.\n" % file_name)
 
     return task
+
+
+def parse_task_argument(ap):
+    """
+    Add to ap the parsing arguments relative to the modeling task.
+
+    Args:
+        ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
+    """
+
+    ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
+    ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
+    ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
+    ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
+    ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
+    ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
+    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
