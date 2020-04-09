@@ -124,3 +124,22 @@ def get_trained_model(args, folder_path):
 
     else:
         raise Exception("Must chose between word2vec and BART.")
+
+
+def play(task, model):
+    """
+    Performs the preview and the evaluation of a model.
+
+    Args:
+        task: modeling_task.ModelingTask, task to evaluate the model on.
+        model: models.BaseModel, model to evaluate.
+    """
+
+    model.preview(task.train_loader)
+    model.preview(task.valid_loader)
+
+    print("Evaluation on the train_loader...")
+    model.valid(task.train_loader)
+
+    print("Evaluation on the valid_loader...")
+    model.valid(task.valid_loader)
