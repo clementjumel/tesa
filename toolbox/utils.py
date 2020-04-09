@@ -39,7 +39,7 @@ def load_task(task_name, valid_proportion, test_proportion, ranking_size, batch_
     test_proportion = ("%.2f" % test_proportion).split(".")[1]
     suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
-    suffix += "_rs" + str(ranking_size)
+    suffix += "_rs" + str(ranking_size) if ranking_size is not None else ""
     suffix += "_bs" + str(batch_size)
     suffix += "_cv" if cross_validation else ""
     suffix += "_short" if short else ""
