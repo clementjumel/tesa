@@ -2,16 +2,19 @@
 Script to create the modeling task to be solved by models.
 
 Usages:
-    # TODO
     tests:
-        python create_modeling_task.py -t context_free --short --no_save
-        python create_modeling_task.py -t context_dependent_same_type -bs 32 --no_save --silent
-        python create_modeling_task.py -t full_hybrid -vp 0.5 -tp 0.5 --rte_like --no_save
-        python create_modeling_task.py -t hybrid -tp 0.2 --short --cross_validation --no_save
+        python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5 --no_save
+        python create_modeling_task.py -t context_free_same_type -rs 0 --no_save
+        python create_modeling_task.py -t hybrid -rs 64 -bs 32 --no_save
+        python create_modeling_task.py -t hybrid_same_type --short --no_save
+        python create_modeling_task.py -t full_hybrid --cross_validation --no_save
+        python create_modeling_task.py -t context_dependent --rte_like --cnndm_like --no_save
+        python create_modeling_task.py -t context_dependent_same_type -vp 0.1 -tp 0.1 -rs 32 -bs 16 --short \
+            --cross_validation --rte_like --cnndm_like --no_save
+        python create_modeling_task.py -t context_dependent_same_type -vp 0.1 -tp 0.1 -rs 32 -bs 16 --short \
+            --cross_validation --rte_like --cnndm_like --silent --no_save
     regular usages:
-        python create_modeling_task.py -t context_free -vp 0.5 -tp 0.5
-        python create_modeling_task.py -t context_free --rte_like
-        python create_modeling_task.py -t context_free_same_type --rte_like
+        python create_modeling_task.py -t context_free_same_type -rs 32 -bs 16 --short --rte_like --cnndm_like
 """
 
 import database_creation.modeling_task as modeling_task
@@ -91,7 +94,7 @@ def main():
         task.process_dataset_like("rte")
 
     if cnndm_like:
-        task.process_dataset_like("cnn_dm")
+        task.process_dataset_like("cnndm")
 
     if short:
         task.process_short_task(size=MODELING_TASK_SHORT_SIZE)
