@@ -2,6 +2,7 @@
 Script to create the modeling task to be solved by models.
 
 Usages:
+    # TODO
     tests:
         python create_modeling_task.py -t context_free --short --no_save
         python create_modeling_task.py -t context_dependent_same_type -bs 32 --no_save --silent
@@ -38,10 +39,12 @@ def parse_arguments():
     ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
     ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
     ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
+    ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches to generate.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
-    ap.add_argument("--rte_like", action='store_true', help="RTE like saving option.")
+    ap.add_argument("--rte_like", action='store_true', help="RTE-like saving option.")
+    ap.add_argument("--cnn_dm_like", action='store_true', help="CNN/DM-like saving option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
@@ -58,14 +61,17 @@ def main():
     task_name = to_class_name(args['task'])
     valid_proportion = args['valid_proportion']
     test_proportion = args['test_proportion']
+    ranking_size = args['ranking_size']
     batch_size = args['batch_size']
     short = args['short']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
     rte_like = args['rte_like']
+    cnn_dm_like = args['cnn_dm_like']
     save = not args['no_save']
     silent = args['silent']
 
-    task = getattr(modeling_task, task_name)(min_assignments=MIN_ASSIGNMENTS,
+    task = getattr(modeling_task, task_name)(ranking_size=ranking_size,
+                                             min_assignments=MIN_ASSIGNMENTS,
                                              min_answers=MIN_ANSWERS,
                                              exclude_pilot=EXCLUDE_PILOT,
                                              annotation_results_path=ANNOTATION_TASK_RESULTS_PATH,
@@ -82,7 +88,10 @@ def main():
     task.process_data_loaders()
 
     if rte_like:
-        task.process_rte_like()
+        task.process_dataset_like("rte")
+
+    if cnn_dm_like:
+        task.process_dataset_like("cnn_dm")
 
     if short:
         task.process_short_task(size=MODELING_TASK_SHORT_SIZE)
