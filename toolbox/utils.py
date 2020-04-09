@@ -106,24 +106,48 @@ def get_trained_model(args, folder_path):
         return None
 
     elif use_word2vec and not use_bart:
-        fname = folder_path + "GoogleNews-vectors-negative300.bin"
-        word2vec = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
-
-        print("Word2Vec embedding loaded.\n")
-
-        return word2vec
+        return get_word2vec(folder_path)
 
     elif not use_word2vec and use_bart:
-        bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
-                                         checkpoint_file=bart_checkpoint,
-                                         data_name_or_path=data_path)
-
-        print("BART loaded.\n")
-
-        return bart
+        return get_bart(folder_path=folder_path, bart_checkpoint=bart_checkpoint, data_path=data_path)
 
     else:
         raise Exception("Must chose between word2vec and BART.")
+
+
+def get_word2vec(folder_path):
+    """
+    Returns the word2vec embedding.
+
+    Args:
+        folder_path: str, path to the pretrained models.
+    """
+
+    fname = folder_path + "GoogleNews-vectors-negative300.bin"
+    word2vec = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
+
+    print("Word2Vec embedding loaded.\n")
+
+    return word2vec
+
+
+def get_bart(folder_path, bart_checkpoint, data_path):
+    """
+    Returns a pretrained BART model.
+
+    Args:
+        folder_path: str, path to BART's checkpoints.
+        bart_checkpoint: str, name of BART's checkpoints.
+        data_path: str, path to the data.
+    """
+
+    bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
+                                     checkpoint_file=bart_checkpoint,
+                                     data_name_or_path=data_path)
+
+    print("BART loaded.\n")
+
+    return bart
 
 
 def play(task, model):
