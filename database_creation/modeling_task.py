@@ -401,31 +401,25 @@ class ModelingTask:
 
         return "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', self.__class__.__name__)])
 
-    def suffix(self, full):
-        """
-        Returns the standard suffix of a file_name, either short or full.
-
-        Args:
-            full: bool, whether or not to compute the full prefix.
-        """
+    def suffix(self):
+        """ Returns the standard suffix of a file_name as a string. """
 
         train_proportion = ("%.2f" % (1 - self.valid_proportion - self.test_proportion)).split(".")[1]
         valid_proportion = ("%.2f" % self.valid_proportion).split(".")[1]
         test_proportion = ("%.2f" % self.test_proportion).split(".")[1]
         suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
-        if full:
-            suffix += "_rs" + str(self.ranking_size) if self.ranking_size is not None else ""
-            suffix += "_bs" + str(self.batch_size)
-            suffix += "_cv" if self.k_cross_validation else ""
-            suffix += "_short" if self.short else ""
+        suffix += "_rs" + str(self.ranking_size) if self.ranking_size is not None else ""
+        suffix += "_bs" + str(self.batch_size)
+        suffix += "_cv" if self.k_cross_validation else ""
+        suffix += "_short" if self.short else ""
 
         return suffix
 
     def save_pkl(self):
         """ Save the Task using pickle in [self.results_path]. """
 
-        file_name = self.results_path + self.class_name() + self.suffix(full=True) + '.pkl'
+        file_name = self.results_path + self.class_name() + self.suffix() + '.pkl'
 
         if self.save:
             with open(file_name, 'wb') as file:
@@ -444,7 +438,7 @@ class ModelingTask:
             like: str, name of the dataset to copy.
         """
 
-        folder_name = self.results_path + self.class_name() + self.suffix(False) + "/"
+        folder_name = self.results_path + self.class_name() + self.suffix() + "/"
 
         if self.save and not os.path.exists(folder_name):
             os.makedirs(folder_name)
