@@ -11,14 +11,11 @@ Usages:
 """
 
 from database_creation.annotation_task import AnnotationTask
+from toolbox.parameters import YEARS, MAX_TUPLE_SIZE, RANDOM, ANNOTATION_TASK_SHORT_SIZE, ANNOTATION_TASK_SEED, \
+    LOAD_WIKI, WIKIPEDIA_FILE_NAME, CORRECT_WIKI
+from toolbox.paths import NYT_ANNOTATED_CORPUS_PATH, ANNOTATION_TASK_RESULTS_PATH
 
 from argparse import ArgumentParser
-
-from toolbox.parameters import \
-    YEARS, MAX_TUPLE_SIZE, RANDOM, ANNOTATION_TASK_SHORT_SIZE, ANNOTATION_TASK_SEED, \
-    LOAD_WIKI, WIKIPEDIA_FILE_NAME, CORRECT_WIKI
-
-from toolbox.paths import NYT_ANNOTATED_CORPUS_PATH, ANNOTATION_TASK_RESULTS_PATH
 
 
 def parse_arguments():
@@ -36,9 +33,7 @@ def parse_arguments():
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
-    args = vars(ap.parse_args())
-
-    return args
+    return vars(ap.parse_args())
 
 
 def main():
@@ -46,20 +41,15 @@ def main():
 
     args = parse_arguments()
 
-    short = args['short']
-    debug = args['debug']
-    save = not args['no_save']
-    silent = args['silent']
-
     annotation_task = AnnotationTask(years=YEARS,
                                      max_tuple_size=MAX_TUPLE_SIZE,
-                                     short=short,
+                                     short=args['short'],
                                      short_size=ANNOTATION_TASK_SHORT_SIZE,
                                      random=RANDOM,
-                                     debug=debug,
+                                     debug=args['debug'],
                                      random_seed=ANNOTATION_TASK_SEED,
-                                     save=save,
-                                     silent=silent,
+                                     save=not args['no_save'],
+                                     silent=args['silent'],
                                      corpus_path=NYT_ANNOTATED_CORPUS_PATH,
                                      results_path=ANNOTATION_TASK_RESULTS_PATH)
 
