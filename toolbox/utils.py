@@ -71,3 +71,22 @@ def add_task_argument(ap):
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
+
+
+def inputs_to_context(inputs):
+    """
+    Returns the context of a ranking task as a string with the wikipedia information followed by the article's context.
+
+    Args:
+        inputs: dict, inputs of a batch.
+    """
+
+    context_elements = []
+
+    for wikipedia in inputs['wikipedia']:
+        if wikipedia != "No information found.":
+            context_elements.append(wikipedia)
+
+    context_elements.append(inputs['context'])
+
+    return " ".join(context_elements)
