@@ -3,7 +3,8 @@ from database_creation.utils import Sample
 
 from collections import defaultdict
 from numpy import asarray, split, concatenate
-from numpy.random import seed, shuffle, choice
+from numpy.random import seed, shuffle
+from numpy.random import choice as rdm_choice
 from pickle import dump
 from re import findall
 from csv import writer
@@ -358,9 +359,9 @@ class ModelingTask:
                     raise Exception("Too small ranking size, some answers will be lost (should be at least %i)." % n)
 
                 else:
-                    negative_answers = {answer: 0 for answer in choice(a=negative_answers,
-                                                                       size=self.ranking_size - n,
-                                                                       replace=False)}
+                    negative_answers = {answer: 0 for answer in rdm_choice(a=negative_answers,
+                                                                           size=self.ranking_size - n,
+                                                                           replace=False)}
 
                     labelled_answers.update(negative_answers)
 
