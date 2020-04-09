@@ -43,24 +43,18 @@ def parse_arguments():
 
 def get_word2vec(folder_path):
     """
-    Returns the pretrained word2vec embedding and its dimension.
+    Returns the pretrained word2vec embedding.
 
     Args:
         folder_path: str, path to the pretrained_models folder.
-
-    Returns:
-        pretrained_model: gensim.KeyedVector, pretrained embedding.
-        pretrained_model_dim: int, dimension of the embedding.
     """
 
     fname = folder_path + "GoogleNews-vectors-negative300.bin"
-
-    pretrained_model = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
-    pretrained_model_dim = 300
+    word2vec_embedding = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
 
     print("Word2Vec embedding loaded.\n")
 
-    return pretrained_model, pretrained_model_dim
+    return word2vec_embedding
 
 
 def play_baseline(task, model):
@@ -107,12 +101,11 @@ def main():
                      short=short,
                      folder_path=MODELING_TASK_RESULTS_PATH)
 
-    pretrained_model, pretrained_model_dim = get_word2vec(PRETRAINED_MODELS_PATH) if word2vec else (None, None)
+    word2vec_embedding = get_word2vec(PRETRAINED_MODELS_PATH) if word2vec else None
 
     model = getattr(models, model_name)(scores_names=SCORES_NAMES,
                                         relevance_level=task.relevance_level,
-                                        pretrained_model=pretrained_model,
-                                        pretrained_model_dim=pretrained_model_dim,
+                                        trained_model=word2vec_embedding,
                                         tensorboard_logs_path=TENSORBOARD_LOGS_PATH,
                                         experiment_name=experiment_name,
                                         random_seed=BASELINES_RANDOM_SEED)
