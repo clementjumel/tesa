@@ -11,7 +11,7 @@ Usages:
 """
 
 import modeling.models as models
-from toolbox.utils import to_class_name, load_task
+from toolbox.utils import to_class_name, load_task, parse_task_argument
 
 from argparse import ArgumentParser
 from gensim.models import KeyedVectors
@@ -31,13 +31,7 @@ def parse_arguments():
 
     ap = ArgumentParser()
 
-    ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
-    ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
-    ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
-    ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
-    ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
-    ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
-    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
+    parse_task_argument(ap)
     ap.add_argument("-m", "--model", required=True, type=str, help="Name of the model.")
     ap.add_argument("-w", "--word2vec", action="store_true", help="Load Word2Vec embedding.")
     ap.add_argument("-e", "--experiment", default=None, type=str, help="Name of the experiment.")
