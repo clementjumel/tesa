@@ -60,7 +60,7 @@ class BaseModel:
 
     # region Training pipeline methods
 
-    def preview_data(self, data_loader):
+    def preview(self, data_loader):
         """
         Preview the data for the model.
 
