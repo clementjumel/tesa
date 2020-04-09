@@ -15,24 +15,25 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def load_task(task_name, valid_proportion, test_proportion, ranking_size, batch_size, cross_validation, short,
-              folder_path):
+def load_task(args, folder_path):
     """
-    Load a Task using pickle from [folder_path][task_name].pkl
+    Load a Task using pickle from the folder_path, depending on the arguments passed in args.
 
     Args:
-        task_name: str, name of the Task to load (eg 'context_free').
-        valid_proportion: float, proportion of the validation set.
-        test_proportion: float, proportion of the validation set.
-        batch_size: int, size of the batches of the modeling task.
-        ranking_size: int, size of the rankings.
-        cross_validation: bool, cross-validation option.
-        short: bool, whether to load the shorten task or not.
+        args: dict, arguments passed to the script.
         folder_path: str, path of the folder to load from.
 
     Returns:
         database_creation.modeling_task.Task, loaded object.
     """
+
+    task_name = args['task']
+    valid_proportion = args['valid_proportion']
+    test_proportion = args['test_proportion']
+    ranking_size = args['ranking_size']
+    batch_size = args['batch_size']
+    cross_validation = args['cross_validation']
+    short = args['short']
 
     train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
     valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
