@@ -4,6 +4,7 @@ results/
 old/
 pretrained_models/
 fairseq/
+fairseq/.gitignore
 
 database_creation/__pycache__/
 modeling/__pycache__/
