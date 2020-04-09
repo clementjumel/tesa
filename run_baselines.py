@@ -2,6 +2,9 @@
 Script to run baselines on a task.
 
 Usages:
+    python run_baselines.py -t context_free_same_type -m random
+    python run_baselines.py -t context_free_same_type -m frequency
+    python run_baselines.py -t context_free_same_type -m summaries_average_embedding --word2vec
     python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m random
     python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m frequency
     python run_baselines.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
