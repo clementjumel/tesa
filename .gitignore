@@ -12,3 +12,4 @@ modeling/pretrained_models
 notebooks/.ipynb_checkpoints/
 notebooks/logs/
 notebooks/experiments/
+/fairseq/dict.txt
