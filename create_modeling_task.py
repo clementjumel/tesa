@@ -19,7 +19,7 @@ Usages:
 """
 
 import database_creation.modeling_task as modeling_task
-from toolbox.utils import to_class_name, parse_task_argument
+from toolbox.utils import to_class_name, add_task_argument
 
 from argparse import ArgumentParser
 
@@ -40,7 +40,7 @@ def parse_arguments():
 
     ap = ArgumentParser()
 
-    parse_task_argument(ap)
+    add_task_argument(ap)
     ap.add_argument("--rte_like", action='store_true', help="RTE-like saving option.")
     ap.add_argument("--cnndm_like", action='store_true', help="CNN/DM-like saving option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
