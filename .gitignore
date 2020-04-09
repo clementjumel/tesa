@@ -3,7 +3,6 @@ nyt_annotated_corpus/
 results/
 old/
 pretrained_models/
-fairseq/
 
 database_creation/__pycache__/
 modeling/__pycache__/
@@ -12,4 +11,3 @@ modeling/pretrained_models
 notebooks/.ipynb_checkpoints/
 notebooks/logs/
 notebooks/experiments/
-/fairseq/dict.txt
