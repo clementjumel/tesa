@@ -39,16 +39,14 @@ def parse_arguments():
     """
 
     ap = ArgumentParser()
-
     add_task_argument(ap)
+
     ap.add_argument("--rte_like", action='store_true', help="RTE-like saving option.")
     ap.add_argument("--cnndm_like", action='store_true', help="CNN/DM-like saving option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
-    args = vars(ap.parse_args())
-
-    return args
+    return vars(ap.parse_args())
 
 
 def main():
