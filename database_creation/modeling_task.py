@@ -1,5 +1,6 @@
 from database_creation.annotation_task import AnnotationTask
 from database_creation.utils import Sample
+from toolbox.utils import inputs_to_context
 
 from collections import defaultdict
 from numpy import asarray, split, concatenate
@@ -495,7 +496,7 @@ class ModelingTask:
 
                     for ranking_task in data_loader:
                         for inputs, targets in ranking_task:
-                            sentence1 = self.context_to_string(inputs)
+                            sentence1 = inputs_to_context(inputs)
 
                             for choice, target in zip(inputs['choices'], targets):
                                 sentence2 = choice
@@ -509,7 +510,7 @@ class ModelingTask:
                         open(folder_name + file_names[1], "wt") as target_file:
                     for ranking_task in data_loader:
                         for inputs, targets in ranking_task:
-                            source = self.context_to_string(inputs)
+                            source = inputs_to_context(inputs)
 
                             for choice, target in zip(inputs['choices'], targets):
                                 if target:
@@ -601,25 +602,6 @@ class ModelingTask:
         shuffle(data_loader)
 
         return data_loader
-
-    @staticmethod
-    def context_to_string(inputs):
-        """
-        Returns the context as a string with the wikipedia information followed by the article's context.
-
-        Args:
-            inputs: dict, inputs of a batch.
-        """
-
-        context_elements = []
-
-        for wikipedia in inputs['wikipedia']:
-            if wikipedia != "No information found.":
-                context_elements.append(wikipedia)
-
-        context_elements.append(inputs['context'])
-
-        return " ".join(context_elements)
 
     # endregion
 
