@@ -725,7 +725,7 @@ class Frequency(BaseModel):
 
     # region Training pipeline method
 
-    def preview_data(self, data_loader):
+    def preview(self, data_loader):
         print("Learning answers counts...")
 
         for ranking_task in tqdm(data_loader, total=len(data_loader)):
