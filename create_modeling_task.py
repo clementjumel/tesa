@@ -44,7 +44,7 @@ def parse_arguments():
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--rte_like", action='store_true', help="RTE-like saving option.")
-    ap.add_argument("--cnn_dm_like", action='store_true', help="CNN/DM-like saving option.")
+    ap.add_argument("--cnndm_like", action='store_true', help="CNN/DM-like saving option.")
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
 
@@ -66,7 +66,7 @@ def main():
     short = args['short']
     k_cross_validation = int(args['cross_validation']) * K_CROSS_VALIDATION
     rte_like = args['rte_like']
-    cnn_dm_like = args['cnn_dm_like']
+    cnndm_like = args['cnndm_like']
     save = not args['no_save']
     silent = args['silent']
 
@@ -90,7 +90,7 @@ def main():
     if rte_like:
         task.process_dataset_like("rte")
 
-    if cnn_dm_like:
+    if cnndm_like:
         task.process_dataset_like("cnn_dm")
 
     if short:
