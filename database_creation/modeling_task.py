@@ -270,14 +270,14 @@ class ModelingTask:
         """
 
         if not self.k_cross_validation:
-            self.train_loader = self.train_loader[0:1][0:size]
-            self.valid_loader = self.valid_loader[0:1][0:size]
+            self.train_loader = [self.train_loader[0][0:size]]
+            self.valid_loader = [self.valid_loader[0][0:size]]
 
         else:
-            self.train_loader = [train_loader[0:1][0:size] for train_loader in self.train_loader]
-            self.valid_loader = [valid_loader[0:1][0:size] for valid_loader in self.valid_loader]
+            self.train_loader = [[train_loader[0][0:size]] for train_loader in self.train_loader]
+            self.valid_loader = [[valid_loader[0][0:size]] for valid_loader in self.valid_loader]
 
-        self.test_loader = self.test_loader[0:1][0:size]
+        self.test_loader = [self.test_loader[0][0:size]]
 
         self.short = True
 
