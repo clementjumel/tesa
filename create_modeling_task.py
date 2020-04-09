@@ -14,8 +14,8 @@ Usages:
         python create_modeling_task.py -t context_dependent_same_type -vp 0.1 -tp 0.1 -rs 32 -bs 16 --short \
             --cross_validation --rte_like --cnndm_like --silent --no_save
     regular usages:
+        python create_modeling_task.py -t context_free_same_type --short
         python create_modeling_task.py -t context_free_same_type -rs 32 -bs 16 --short --rte_like --cnndm_like
-        python create_modeling_task.py -t context_free_same_type -bs 64 --short
 """
 
 import database_creation.modeling_task as modeling_task
