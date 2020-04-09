@@ -516,7 +516,7 @@ class ModelingTask:
 
         folder_name = self.results_path + self.class_name() + self.suffix(False) + "/"
 
-        if not os.path.exists(folder_name):
+        if self.save and not os.path.exists(folder_name):
             os.makedirs(folder_name)
 
         self.save_loader_like(data_loader=self.train_loader,
