@@ -141,9 +141,14 @@ def get_bart(folder_path, bart_checkpoint, data_path):
         data_path: str, path to the data.
     """
 
-    bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
-                                     checkpoint_file=bart_checkpoint,
-                                     data_name_or_path=data_path)
+    if data_path is not None:
+        bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
+                                         checkpoint_file=bart_checkpoint,
+                                         data_name_or_path=data_path)
+
+    else:
+        bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
+                                         checkpoint_file=bart_checkpoint)
 
     print("BART loaded.\n")
 
