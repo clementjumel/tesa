@@ -4,6 +4,8 @@ Script to run Models on a ModelingTask.
 Usages:
     python run_models.py -t context_free_same_type -m frequency
     python run_models.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
+    python run_models.py -t context_free_same_type -rs 32 -bs 16 --short -m classifier_bart --bart \
+        -mp results/models/rte_vanilla -bc checkpoint1.pt -dp results/preprocessed_data/RTE-bin_vanilla
 """
 
 import modeling.models as models
