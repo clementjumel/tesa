@@ -1,5 +1,6 @@
 from modeling import metrics
 from modeling.utils import get_ranks, list_remove_none, dict_append, dict_mean, dict_std
+from toolbox.utils import inputs_to_context
 
 from numpy import arange, mean, std
 from numpy.random import seed, shuffle
@@ -19,16 +20,15 @@ import torch
 class BaseModel:
     """ Model structure. """
 
-    def __init__(self, scores_names, relevance_level, pretrained_model, pretrained_model_dim, tensorboard_logs_path,
-                 experiment_name, random_seed, root=""):
+    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
+                 random_seed, root=""):
         """
         Initializes an instance of Model.
 
         Args:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
             relevance_level: int, minimum label to consider a choice as relevant.
-            pretrained_model: unknown, pretrained embedding or model.
-            pretrained_model_dim: int, size of the pretrained embedding or model.
+            trained_model: unknown, pretrained embedding or model.
             tensorboard_logs_path: str, path to the tensorboard logs folder.
             experiment_name: str, if not None, name of the folder to save the tensorboard in.
             random_seed: int, the seed to use for the random processes.
@@ -37,8 +37,7 @@ class BaseModel:
 
         self.scores_names = scores_names
         self.relevance_level = relevance_level
-        self.pretrained_model = pretrained_model
-        self.pretrained_model_dim = pretrained_model_dim
+        self.trained_model = trained_model
 
         self.train_losses, self.train_scores = [], defaultdict(list)
         self.valid_losses, self.valid_scores = [], defaultdict(list)
@@ -140,7 +139,7 @@ class BaseModel:
         ranking_outputs, ranking_targets = [], []
 
         for inputs, targets in ranking:
-            outputs = self.evaluate_batch(inputs=inputs, targets=targets)
+            outputs = self.pred(inputs)
             ranking_outputs.append(outputs), ranking_targets.append(targets)
 
         ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(ranking_targets)
@@ -150,42 +149,12 @@ class BaseModel:
 
         return None, batch_score
 
-    def evaluate_batch(self, inputs, targets):
+    def pred(self, inputs):
         """
-        Evaluate the model on a batch.
-
-        Args:
-            inputs: dict, inputs of a batch of the data.
-            targets: torch.Tensor, targets of a batch of the data.
-
-        Returns:
-            torch.tensor, outputs of the model on a batch.
-        """
-
-        features = self.features(inputs)
-        outputs = self.pred(features)
-
-        return outputs
-
-    def features(self, inputs):
-        """
-        Returns the features of the inputs.
+        Predicts the batch outputs from its inputs.
 
         Args:
             inputs: dict, inputs of a batch.
-
-        Returns:
-            dict , features of a batch.
-        """
-
-        return inputs
-
-    def pred(self, features):
-        """
-        Predicts the outputs from the features.
-
-        Args:
-            features: dict, features of a batch.
 
         Returns:
             torch.Tensor, outputs of the prediction in a column Tensor.
@@ -322,13 +291,13 @@ class BaseModel:
 
         return words
 
-    def get_choices_words(self, features, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=False,
+    def get_choices_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=False,
                           setten=False):
         """
         Returns the words from the inputs' choices as a list of list.
 
         Args:
-            features: dict, features of the inputs.
+            inputs: dict, inputs of a batch.
             remove_stopwords: bool, whether to remove the stopwords or not.
             remove_punctuation: bool, whether to remove the punctuation or not.
             lower: bool, whether to remove the capitals or not.
@@ -341,7 +310,7 @@ class BaseModel:
 
         choices_words = []
 
-        for choice in features['choices']:
+        for choice in inputs['choices']:
             choices_words.append(self.get_words(s=choice,
                                                 remove_stopwords=remove_stopwords,
                                                 remove_punctuation=remove_punctuation,
@@ -353,13 +322,13 @@ class BaseModel:
 
         return choices_words
 
-    def get_entities_words(self, features, remove_stopwords=False, remove_punctuation=True, lower=True, lemmatize=False,
+    def get_entities_words(self, inputs, remove_stopwords=False, remove_punctuation=True, lower=True, lemmatize=False,
                            flatten=False):
         """
         Returns the words from the inputs' entities as a list of list.
 
         Args:
-            features: dict, features of the inputs.
+            inputs: dict, inputs of a batch.
             remove_stopwords: bool, whether to remove the stopwords or not.
             remove_punctuation: bool, whether to remove the punctuation or not.
             lower: bool, whether to remove the capitals or not.
@@ -372,7 +341,7 @@ class BaseModel:
 
         entities_words = []
 
-        for entity in features['entities']:
+        for entity in inputs['entities']:
             entities_words.append(self.get_words(s=entity,
                                                  remove_stopwords=remove_stopwords,
                                                  remove_punctuation=remove_punctuation,
@@ -384,13 +353,13 @@ class BaseModel:
 
         return entities_words
 
-    def get_context_words(self, features, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
+    def get_context_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
                           setten=False):
         """
         Returns the words from the inputs' context as a list.
 
         Args:
-            features: dict, features of the inputs.
+            inputs: dict, inputs of a batch.
             remove_stopwords: bool, whether to remove the stopwords or not.
             remove_punctuation: bool, whether to remove the punctuation or not.
             lower: bool, whether to remove the capitals or not.
@@ -401,7 +370,7 @@ class BaseModel:
             list, words of the inputs' context.
         """
 
-        context_words = self.get_words(s=features['context'],
+        context_words = self.get_words(s=inputs['context'],
                                        remove_stopwords=remove_stopwords,
                                        remove_punctuation=remove_punctuation,
                                        lower=lower,
@@ -413,28 +382,25 @@ class BaseModel:
         return context_words
 
     @staticmethod
-    def get_wikipedia_string(features):
+    def get_wikipedia_string(inputs):
         """
         Returns a string with the wikipedia summaries that are not empty.
 
         Args:
-            features: dict, features of the inputs.
-
-        Returns:
-            str, wikipedia summaries without the empty ones.
+            inputs: dict, inputs of a batch.
         """
 
-        summaries = [wikipedia for wikipedia in features['wikipedia'] if wikipedia != 'No information found.']
+        summaries = [wikipedia for wikipedia in inputs['wikipedia'] if wikipedia != 'No information found.']
 
         return ' '.join(summaries)
 
-    def get_wikipedia_words(self, features, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
+    def get_wikipedia_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
                             flatten=False, setten=False):
         """
         Returns the words from the inputs' wikipedia summaries as a list of list.
 
         Args:
-            features: dict, features of the inputs.
+            inputs: dict, inputs of a batch.
             remove_stopwords: bool, whether to remove the stopwords or not.
             remove_punctuation: bool, whether to remove the punctuation or not.
             lower: bool, whether to remove the capitals or not.
@@ -448,7 +414,7 @@ class BaseModel:
 
         wikipedia_words = []
 
-        for wikipedia in features['wikipedia']:
+        for wikipedia in inputs['wikipedia']:
             if wikipedia != "No information found.":
                 wikipedia_words.append(self.get_words(s=wikipedia,
                                                       remove_stopwords=remove_stopwords,
@@ -469,21 +435,18 @@ class BaseModel:
 
         return wikipedia_words
 
-    def get_other_words(self, features, setten=False):
+    def get_other_words(self, inputs, setten=False):
         """
-        Returns the words from the inputs' entities, context and wikipedia summaries.
+        Returns the words from the inputs' entities, context and wikipedia summaries, in a list.
 
         Args:
-            features: dict, features of the inputs.
+            inputs: dict, inputs of a batch.
             setten: bool, whether or not to return the results as a set.
-
-        Returns:
-            list, other words of the inputs'.
         """
 
-        entities_words = self.get_entities_words(features=features, flatten=True)
-        context_words = self.get_context_words(features=features)
-        wikipedia_words = self.get_wikipedia_words(features=features, flatten=True)
+        entities_words = self.get_entities_words(inputs, flatten=True)
+        context_words = self.get_context_words(inputs)
+        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
 
         other_words = entities_words + context_words + wikipedia_words
 
@@ -506,9 +469,8 @@ class BaseModel:
         """
 
         counted_words = [[word for word in words if word in words_list] for words_list in words_lists]
-        counts = torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
-        return counts
+        return torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
     @staticmethod
     def get_sets_counts(words_sets, words):
@@ -524,9 +486,8 @@ class BaseModel:
         """
 
         counted_words = [words_set.intersection(words) for words_set in words_sets]
-        counts = torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
-        return counts
+        return torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
     # endregion
 
@@ -543,7 +504,7 @@ class BaseModel:
             torch.Tensor, embedding of word.
         """
 
-        return torch.tensor(self.pretrained_model[word]) if word in self.pretrained_model.vocab else None
+        return torch.tensor(self.trained_model[word]) if word in self.trained_model.vocab else None
 
     def get_average_embedding(self, words):
         """
@@ -556,11 +517,17 @@ class BaseModel:
             torch.Tensor, average embedding of the words.
         """
 
-        embeddings = [self.get_word_embedding(word=word) for word in words]
+        embeddings = [self.get_word_embedding(word) for word in words]
         embeddings = [embedding for embedding in embeddings if embedding is not None]
 
-        return torch.stack(embeddings).mean(dim=0) if embeddings \
-            else torch.zeros(self.pretrained_model_dim, dtype=torch.float)
+        if embeddings:
+            return torch.stack(embeddings).mean(dim=0)
+
+        else:
+            word = list(self.trained_model.vocab)[0]
+            embedding = self.get_word_embedding(word)
+
+            return torch.zeros_like(embedding, dtype=torch.float)
 
     def get_average_embedding_similarity(self, words_lists, words):
         """
@@ -622,10 +589,10 @@ class BaseModel:
         fig.legend(loc='upper center')
         plt.show()
 
+    # TODO
     def final_plot(self):
         """ Plot the metrics of the model. """
 
-        # TODO: correct
         reference = self.scores_names[0]
         n_experiments = len(self.train_scores[reference])
 
@@ -653,6 +620,7 @@ class BaseModel:
         self.plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
                   valid_scores=total_valid_scores)
 
+    # TODO
     def show(self, data_loader, show_rankings, show_choices):
         """
         Show the model results on different rankings.
@@ -664,11 +632,9 @@ class BaseModel:
         """
 
         for ranking_idx, ranking_task in enumerate(data_loader[:show_rankings]):
-            # TODO
             pass
-            # features = self.features(inputs)
-            #
-            # outputs, explanations = self.pred(features)
+
+            # outputs, explanations = self.pred(inputs)
             # outputs = outputs[:, -1].reshape((-1, 1)) if len(outputs.shape) == 2 else outputs
             # explanations = ['' for _ in range(len(inputs['choices']))] if explanations is None else explanations
             #
@@ -707,23 +673,21 @@ class BaseModel:
 class Random(BaseModel):
     """ Baseline with random predictions. """
 
-    def pred(self, features):
-        return torch.rand(len(features['choices'])).reshape((-1, 1))
+    def pred(self, inputs):
+        return torch.rand(len(inputs['choices'])).reshape((-1, 1))
 
 
 class Frequency(BaseModel):
     """ Baseline based on answers' overall frequency. """
 
-    def __init__(self, scores_names, relevance_level, pretrained_model, pretrained_model_dim, tensorboard_logs_path,
-                 experiment_name, random_seed, root=""):
+    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
+                 random_seed, root=""):
 
-        super().__init__(scores_names=scores_names, relevance_level=relevance_level, pretrained_model=pretrained_model,
-                         pretrained_model_dim=pretrained_model_dim, tensorboard_logs_path=tensorboard_logs_path,
-                         experiment_name=experiment_name, random_seed=random_seed, root=root)
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
+                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
+                         random_seed=random_seed, root=root)
 
         self.counts = defaultdict(int)
-
-    # region Training pipeline method
 
     def preview(self, data_loader):
         print("Learning answers counts...")
@@ -734,11 +698,10 @@ class Frequency(BaseModel):
                 for i in range(len(choices)):
                     self.counts[choices[i]] += targets[i].data.item()
 
-    def pred(self, features):
-        grades = [self.counts[choice] if choice in self.counts else 0 for choice in features['choices']]
-        return torch.tensor(grades).reshape((-1, 1))
+    def pred(self, inputs):
+        grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
 
-    # endregion
+        return torch.tensor(grades).reshape((-1, 1))
 
 # endregion
 
@@ -748,9 +711,9 @@ class Frequency(BaseModel):
 class SummariesCount(BaseModel):
     """ Baseline based on the count of words of the summaries that are in the choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        wikipedia_words = self.get_wikipedia_words(features, flatten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
 
         return self.get_lists_counts(words_lists=choices_words, words=wikipedia_words)
 
@@ -758,9 +721,9 @@ class SummariesCount(BaseModel):
 class SummariesUniqueCount(BaseModel):
     """ Baseline based on the count of unique words of all the summaries that are in choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features, setten=True)
-        wikipedia_words = self.get_wikipedia_words(features, flatten=True, setten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs, setten=True)
+        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True, setten=True)
 
         return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
 
@@ -768,10 +731,10 @@ class SummariesUniqueCount(BaseModel):
 class SummariesOverlap(BaseModel):
     """ Baseline based on the count of words from choice that are in the overlap of all the summaries. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features, setten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(features, setten=True) if words]
+        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
         wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
 
         return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
@@ -780,9 +743,9 @@ class SummariesOverlap(BaseModel):
 class ActivatedSummaries(BaseModel):
     """ Baseline based on the number of summaries that have words matching the answer. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        wikipedia_words = self.get_wikipedia_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        wikipedia_words = self.get_wikipedia_words(inputs)
 
         activated_summaries = [[set(choice_words).intersection(set(summary_words)) for summary_words in wikipedia_words]
                                for choice_words in choices_words]
@@ -794,9 +757,9 @@ class ActivatedSummaries(BaseModel):
 class SummariesAverageEmbedding(BaseModel):
     """ Baseline with predictions based on the average embedding proximity between the choice and all the summaries. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        wikipedia_words = self.get_wikipedia_words(features, flatten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=wikipedia_words)
 
@@ -805,32 +768,13 @@ class SummariesOverlapAverageEmbedding(BaseModel):
     """ Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
     summaries. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(features, setten=True) if words]
+        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
         wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=wikipedia_words)
-
-
-class SummariesBartMnli(BaseModel):
-    """ Baseline with prediction based on BART's prediction between the choice and all the summaries. """
-
-    def pred(self, features):
-        wikipedia = self.get_wikipedia_string(features)
-        choices = features['choices']
-
-        batch_of_pairs = [(wikipedia, choice) for choice in choices]
-        batch = collate_tokens([self.pretrained_model.encode(pair[0], pair[1]) for pair in batch_of_pairs],
-                               pad_idx=1)
-
-        if torch.cuda.is_available():
-            batch.cuda()
-
-        logprobs = self.pretrained_model.predict('mnli', batch)
-
-        return logprobs[:, 2].reshape((-1, 1))
 
 # endregion
 
@@ -840,9 +784,9 @@ class SummariesBartMnli(BaseModel):
 class ContextCount(BaseModel):
     """ Baseline based on the count of words of the context that are in the choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        context_words = self.get_context_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        context_words = self.get_context_words(inputs)
 
         return self.get_lists_counts(words_lists=choices_words, words=context_words)
 
@@ -850,9 +794,9 @@ class ContextCount(BaseModel):
 class ContextUniqueCount(BaseModel):
     """ Baseline based on the count of unique words of the context that are in choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features, setten=True)
-        context_words = self.get_context_words(features, setten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs, setten=True)
+        context_words = self.get_context_words(inputs, setten=True)
 
         return self.get_sets_counts(words_sets=choices_words, words=context_words)
 
@@ -860,30 +804,11 @@ class ContextUniqueCount(BaseModel):
 class ContextAverageEmbedding(BaseModel):
     """ Baseline with predictions based on the average embedding proximity between the choice and the context. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        context_words = self.get_context_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        context_words = self.get_context_words(inputs)
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=context_words)
-
-
-class ContextBartMnli(BaseModel):
-    """ Baseline with prediction based on BART's prediction between the choice and the context. """
-
-    def pred(self, features):
-        context = features['context']
-        choices = features['choices']
-
-        batch_of_pairs = [(context, choice) for choice in choices]
-        batch = collate_tokens([self.pretrained_model.encode(pair[0], pair[1]) for pair in batch_of_pairs],
-                               pad_idx=1)
-
-        if torch.cuda.is_available():
-            batch.cuda()
-
-        logprobs = self.pretrained_model.predict('mnli', batch)
-
-        return logprobs[:, 2].reshape((-1, 1))
 
 # endregion
 
@@ -893,9 +818,9 @@ class ContextBartMnli(BaseModel):
 class SummariesContextCount(BaseModel):
     """ Baseline based on the count of words of the summaries and the context that are in the choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        other_words = self.get_other_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        other_words = self.get_other_words(inputs)
 
         return self.get_lists_counts(words_lists=choices_words, words=other_words)
 
@@ -903,9 +828,9 @@ class SummariesContextCount(BaseModel):
 class SummariesContextUniqueCount(BaseModel):
     """ Baseline based on the count of unique words of all the summaries and the context that are in choice. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features, setten=True)
-        other_words = self.get_other_words(features, setten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs, setten=True)
+        other_words = self.get_other_words(inputs, setten=True)
 
         return self.get_sets_counts(words_sets=choices_words, words=other_words)
 
@@ -914,12 +839,12 @@ class SummariesContextOverlap(BaseModel):
     """ Baseline based on the count of words from choice that are in the overlap of all the summaries or in the
     context. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features, setten=True)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(features, setten=True) if words]
+        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
         wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
-        wikipedia_words.update(self.get_context_words(features, setten=True))
+        wikipedia_words.update(self.get_context_words(inputs, setten=True))
 
         return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
 
@@ -928,9 +853,9 @@ class SummariesContextAverageEmbedding(BaseModel):
     """ Baseline with predictions based on the average embedding proximity between the choice and all the summaries and
     the context. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
-        other_words = self.get_other_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
+        other_words = self.get_other_words(inputs)
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=other_words)
 
@@ -939,42 +864,58 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
     """ Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
     summaries and the context. """
 
-    def pred(self, features):
-        choices_words = self.get_choices_words(features)
+    def pred(self, inputs):
+        choices_words = self.get_choices_words(inputs)
 
-        other_words = [words for words in self.get_wikipedia_words(features, setten=True) if words]
+        other_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
         other_words = set.intersection(*other_words) if other_words else set()
-        other_words.update(self.get_context_words(features, setten=True))
+        other_words.update(self.get_context_words(inputs, setten=True))
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=other_words)
 
+# endregion
 
-class SummariesContextBartMnli(BaseModel):
-    """ Baseline with prediction based on BART's prediction between the choice and the context and the wikipedia
-    information. """
+# endregion
 
-    def pred(self, features):
-        wikipedia = self.get_wikipedia_string(features)
-        context = features['context']
-        choices = features['choices']
 
-        batch_of_pairs = [(wikipedia + context, choice) for choice in choices]
-        batch = collate_tokens([self.pretrained_model.encode(pair[0], pair[1]) for pair in batch_of_pairs],
-                               pad_idx=1)
+# region BART
+
+class ClassificationBart(BaseModel):
+    """ BART trained as a classifier. """
+
+    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
+                 random_seed, root=""):
+
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
+                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
+                         random_seed=random_seed, root=root)
+
+        self.label_fn = lambda label: self.trained_model.task.label_dictionary.string(
+            [label + self.trained_model.task.label_dictionary.nspecial])
+        ###
+        print(self.label_fn)
+        raise Exception
+        ###
+
+    # TODO
+    def pred(self, inputs):
+        sentence1 = inputs_to_context(inputs)
+        batch_encoding = [self.trained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
+
+        batch_tokens = collate_tokens(values=batch_encoding, pad_idx=1)
 
         if torch.cuda.is_available():
-            batch.cuda()
+            batch_tokens.cuda()
 
-        logprobs = self.pretrained_model.predict('mnli', batch)
+        logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
+        prediction = logprobs.argmax().item()
+        prediction_label = self.label_fn(prediction)
 
-        return logprobs[:, 2].reshape((-1, 1))
+        # return logprobs[:, 2].reshape((-1, 1))
 
 # endregion
 
-# endregion
 
-
-# TODO: deal with
 # class MLModel(BaseModel):
 #     """ Base structure for the ML models. """
 #     model_name = None
@@ -1079,9 +1020,8 @@ class SummariesContextBartMnli(BaseModel):
 #         running_loss, running_score = [], defaultdict(list)
 #
 #         for batch_idx, (inputs, targets) in tqdm(enumerate(data_loader), total=n_batches):
-#             features = self.features(inputs)
 #
-#             batch_loss, batch_score = self.train_batch(features, targets, is_regression)
+#             batch_loss, batch_score = self.train_batch(inputs, targets, is_regression)
 #
 #             running_loss.append(batch_loss), dict_append(running_score, batch_score)
 #
@@ -1097,7 +1037,7 @@ class SummariesContextBartMnli(BaseModel):
 #
 #         return epoch_losses, epoch_scores
 #
-#     def train_batch(self, features, targets, is_regression):
+#     def train_batch(self, inputs, targets, is_regression):
 #         """
 #         Perform the training on a batch of features.
 #
