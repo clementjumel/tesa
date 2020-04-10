@@ -5,7 +5,7 @@ Usages:
     python run_models.py -t context_free_same_type -m frequency
     python run_models.py -t context_free_same_type -rs 32 -bs 16 -m summaries_average_embedding --word2vec
     python run_models.py -t context_free_same_type -rs 32 -bs 16 --short -m classifier_bart --bart \
-        -mp results/models/rte_vanilla -bc checkpoint1.pt -dp results/preprocessed_data/RTE-bin_vanilla
+        -bp results/models/RTE-bin_vanilla -cf checkpoints/checkpoint1.pt
 """
 
 import modeling.models as models
@@ -31,9 +31,8 @@ def parse_arguments():
     ap.add_argument("-e", "--experiment", default=None, type=str, help="Name of the experiment.")
     ap.add_argument("-w", "--word2vec", action="store_true", help="Load Word2Vec embedding.")
     ap.add_argument("-b", "--bart", action="store_true", help="Load a BART model.")
-    ap.add_argument("-mp", "--model_path", default=None, type=str, help="Path to the trained model's folder.")
-    ap.add_argument("-bc", "--bart_checkpoint", default=None, type=str, help="Name of BART's checkpoint file.")
-    ap.add_argument("-dp", "--data_path", default=None, type=str, help="Path to the data of the experiment.")
+    ap.add_argument("-bp", "--bin_path", default=None, type=str, help="Path to bin folder (preprocessed data).")
+    ap.add_argument("-cf", "--checkpoint_file", default=None, type=str, help="Name of BART's checkpoint file.")
 
     return vars(ap.parse_args())
 
