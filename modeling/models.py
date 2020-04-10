@@ -880,8 +880,8 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
 
 # region BART
 
-class ClassificationBart(BaseModel):
-    """ BART trained as a classifier. """
+class ClassifierBart(BaseModel):
+    """ BART finetuned as a classifier between aggregation and not aggregation. """
 
     def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
                  random_seed, root=""):
@@ -890,28 +890,32 @@ class ClassificationBart(BaseModel):
                          tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
                          random_seed=random_seed, root=root)
 
-        self.label_fn = lambda label: self.trained_model.task.label_dictionary.string(
-            [label + self.trained_model.task.label_dictionary.nspecial])
-        ###
-        print(self.label_fn)
-        raise Exception
-        ###
+        labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
+                                                                   self.trained_model.task.label_dictionary.nspecial])
+                  for i in range(2)]
 
-    # TODO
+        assert ("aggregation" in labels) ^ ("entailment" in labels)
+        label = "aggregation" if "aggregation" in labels else "entailment"
+
+        self.idx = labels.index(label)
+
     def pred(self, inputs):
         sentence1 = inputs_to_context(inputs)
         batch_encoding = [self.trained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
 
-        batch_tokens = collate_tokens(values=batch_encoding, pad_idx=1)
-
-        if torch.cuda.is_available():
-            batch_tokens.cuda()
+        batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
 
         logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
-        prediction = logprobs.argmax().item()
-        prediction_label = self.label_fn(prediction)
 
-        # return logprobs[:, 2].reshape((-1, 1))
+        return logprobs[:, self.idx].reshape((-1, 1))
+
+
+class GeneratorBart(BaseModel):
+    """ BART finetuned as a generator of aggregation. """
+
+    def pred(self, inputs):
+        # TODO
+        pass
 
 # endregion
 
