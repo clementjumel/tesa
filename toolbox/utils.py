@@ -101,7 +101,6 @@ def get_trained_model(args, folder_path):
     use_bart = args['bart']
     folder_path = args['model_path'] or folder_path
     bart_checkpoint = args['bart_checkpoint']
-    data_path = args['data_path']
 
     if not use_word2vec and not use_bart:
         return None
@@ -110,7 +109,7 @@ def get_trained_model(args, folder_path):
         return get_word2vec(folder_path)
 
     elif not use_word2vec and use_bart:
-        return get_bart(folder_path=folder_path, bart_checkpoint=bart_checkpoint, data_path=data_path)
+        return get_bart(folder_path=folder_path, bart_checkpoint=bart_checkpoint)
 
     else:
         raise Exception("Must chose between word2vec and BART.")
@@ -132,24 +131,17 @@ def get_word2vec(folder_path):
     return word2vec
 
 
-def get_bart(folder_path, bart_checkpoint, data_path):
+def get_bart(folder_path, bart_checkpoint):
     """
-    Returns a pretrained BART model.
+    Returns a pretrained BART model..
 
     Args:
-        folder_path: str, path to BART's checkpoints.
-        bart_checkpoint: str, name of BART's checkpoints.
-        data_path: str, path to the data.
+        folder_path: str, path to BART's preprocessed data.
+        bart_checkpoint: str, path to BART's checkpoints, starting from the preprocessed data folder.
     """
 
-    if data_path is not None:
-        bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
-                                         checkpoint_file=bart_checkpoint,
-                                         data_name_or_path=data_path)
-
-    else:
-        bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
-                                         checkpoint_file=bart_checkpoint)
+    bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
+                                     checkpoint_file=bart_checkpoint)
 
     if torch.cuda.is_available():
         bart.cuda()
