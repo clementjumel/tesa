@@ -1,6 +1,7 @@
 from pickle import load
 from gensim.models import KeyedVectors
 from fairseq.models.bart import BARTModel
+import torch
 
 
 def to_class_name(name):
@@ -150,7 +151,13 @@ def get_bart(folder_path, bart_checkpoint, data_path):
         bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
                                          checkpoint_file=bart_checkpoint)
 
-    print("BART loaded.\n")
+    if torch.cuda.is_available():
+        bart.cuda()
+        print("Using BART on GPU...")
+
+    bart.eval()
+
+    print("BART loaded (in evaluation mode).\n")
 
     return bart
 
