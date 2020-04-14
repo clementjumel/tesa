@@ -101,7 +101,7 @@ def get_trained_model(args, folder_path):
 
     use_word2vec = args['word2vec']
     use_bart = args['bart']
-    folder_path = args['bart_path'] or folder_path
+    folder_path = args['trained_path'] or folder_path
     checkpoint_file = args['checkpoint_file']
 
     if not use_word2vec and not use_bart:
