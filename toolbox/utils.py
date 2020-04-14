@@ -1,6 +1,4 @@
 from pickle import load
-from gensim.models import KeyedVectors
-from fairseq.models.bart import BARTModel
 import torch
 
 
@@ -42,7 +40,7 @@ def add_task_argument(ap):
     ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
     ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
-    ap.add_argument("-tp", "--task_path", default=None, type=str, help="Path to the task folder.")
+    ap.add_argument("--task_path", default=None, type=str, help="Path to the task folder.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
 
@@ -125,6 +123,8 @@ def get_word2vec(folder_path):
         folder_path: str, path to the pretrained models.
     """
 
+    from gensim.models import KeyedVectors
+
     fname = folder_path + "GoogleNews-vectors-negative300.bin"
     word2vec = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
 
@@ -141,6 +141,8 @@ def get_bart(folder_path, checkpoint_file):
         folder_path: str, path to BART's model, containing the checkpoint.
         checkpoint_file: str, name of BART's checkpoint file (starting from BART's folder).
     """
+
+    from fairseq.models.bart import BARTModel
 
     bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
                                      checkpoint_file=checkpoint_file)
