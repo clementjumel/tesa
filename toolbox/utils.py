@@ -156,22 +156,3 @@ def get_bart(folder_path, checkpoint_file):
     print("BART loaded (in evaluation mode).\n")
 
     return bart
-
-
-def play(task, model):
-    """
-    Performs the preview and the evaluation of a model.
-
-    Args:
-        task: modeling_task.ModelingTask, task to evaluate the model on.
-        model: models.BaseModel, model to evaluate.
-    """
-
-    model.preview(task.train_loader)
-    model.preview(task.valid_loader)
-
-    print("Evaluation on the train_loader...")
-    model.valid(task.train_loader)
-
-    print("Evaluation on the valid_loader...")
-    model.valid(task.valid_loader)
