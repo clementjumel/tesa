@@ -9,7 +9,7 @@ Usages:
 """
 
 import modeling.models as models
-from toolbox.utils import to_class_name, add_task_argument, load_task, get_trained_model, play
+from toolbox.utils import to_class_name, add_task_argument, load_task, get_trained_model
 from toolbox.parameters import SCORES_NAMES, MODELS_RANDOM_SEED
 from toolbox.paths import PRETRAINED_MODELS_PATH, MODELING_TASK_RESULTS_PATH, TENSORBOARD_LOGS_PATH
 
