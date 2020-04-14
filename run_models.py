@@ -31,7 +31,7 @@ def parse_arguments():
     ap.add_argument("-e", "--experiment", default=None, type=str, help="Name of the experiment.")
     ap.add_argument("-w", "--word2vec", action="store_true", help="Load Word2Vec embedding.")
     ap.add_argument("-b", "--bart", action="store_true", help="Load a BART model.")
-    ap.add_argument("-bp", "--bin_path", default=None, type=str, help="Path to bin folder (preprocessed data).")
+    ap.add_argument("-tp", "--trained_path", default=None, type=str, help="Path to the trained model folder.")
     ap.add_argument("-cf", "--checkpoint_file", default=None, type=str, help="Name of BART's checkpoint file.")
 
     return vars(ap.parse_args())
