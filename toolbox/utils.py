@@ -44,6 +44,7 @@ def add_task_argument(ap):
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
+    ap.add_argument("--task_path", default=None, type=str, help="Path to the task folder.")
 
 
 def load_task(args, folder_path):
@@ -65,6 +66,7 @@ def load_task(args, folder_path):
     batch_size = args['batch_size']
     cross_validation = args['cross_validation']
     short = args['short']
+    folder_path = args['task_path'] or folder_path
 
     train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
     valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
