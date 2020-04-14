@@ -29,7 +29,7 @@ def inputs_to_context(inputs):
     return " ".join(context_elements)
 
 
-def add_task_argument(ap):
+def vadd_task_argument(ap):
     """
     Add to the argument parser the parsing arguments relative to the modeling task.
 
@@ -42,9 +42,9 @@ def add_task_argument(ap):
     ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
     ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
     ap.add_argument("-bs", "--batch_size", default=64, type=int, help="Size of the batches of the task.")
+    ap.add_argument("-tp", "--task_path", default=None, type=str, help="Path to the task folder.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
-    ap.add_argument("--task_path", default=None, type=str, help="Path to the task folder.")
 
 
 def load_task(args, folder_path):
@@ -64,9 +64,9 @@ def load_task(args, folder_path):
     test_proportion = args['test_proportion']
     ranking_size = args['ranking_size']
     batch_size = args['batch_size']
+    folder_path = args['task_path'] or folder_path
     cross_validation = args['cross_validation']
     short = args['short']
-    folder_path = args['task_path'] or folder_path
 
     train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
     valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
