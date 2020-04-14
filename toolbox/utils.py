@@ -29,7 +29,7 @@ def inputs_to_context(inputs):
     return " ".join(context_elements)
 
 
-def vadd_task_argument(ap):
+def add_task_argument(ap):
     """
     Add to the argument parser the parsing arguments relative to the modeling task.
 
@@ -101,7 +101,7 @@ def get_trained_model(args, folder_path):
 
     use_word2vec = args['word2vec']
     use_bart = args['bart']
-    folder_path = args['bin_path'] or folder_path
+    folder_path = args['bart_path'] or folder_path
     checkpoint_file = args['checkpoint_file']
 
     if not use_word2vec and not use_bart:
@@ -111,7 +111,7 @@ def get_trained_model(args, folder_path):
         return get_word2vec(folder_path)
 
     elif not use_word2vec and use_bart:
-        return get_bart(bin_path=folder_path, checkpoint_file=checkpoint_file)
+        return get_bart(folder_path=folder_path, checkpoint_file=checkpoint_file)
 
     else:
         raise Exception("Must chose between word2vec and BART.")
@@ -133,16 +133,16 @@ def get_word2vec(folder_path):
     return word2vec
 
 
-def get_bart(bin_path, checkpoint_file):
+def get_bart(folder_path, checkpoint_file):
     """
-    Returns a pretrained BART model..
+    Returns a pretrained BART model.
 
     Args:
-        bin_path: str, path to BART's preprocessed data.
-        checkpoint_file: str, name of BART's checkpoint file (starting from the bin folder).
+        folder_path: str, path to BART's model, containing the checkpoint.
+        checkpoint_file: str, name of BART's checkpoint file (starting from BART's folder).
     """
 
-    bart = BARTModel.from_pretrained(model_name_or_path=bin_path,
+    bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
                                      checkpoint_file=checkpoint_file)
 
     if torch.cuda.is_available():
