@@ -53,7 +53,7 @@ def main():
                                                           experiment_name=args['experiment'],
                                                           random_seed=MODELS_RANDOM_SEED)
 
-    play(task=task, model=model)
+    model.play(task)
 
 
 if __name__ == '__main__':
