@@ -742,7 +742,7 @@ class AnnotationTask:
         file_name = self.results_path + folder_name + "/" + file_name + ".pkl"
 
         with open(file_name, 'rb') as file:
-            obj = load(file=file)
+            obj = load(file)
 
         self.print("Object loaded from %s." % file_name)
 
