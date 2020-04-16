@@ -26,27 +26,6 @@ def get_ranks(outputs):
     return ranks
 
 
-def inputs_to_context(inputs):
-    """
-    Returns the context of a ranking task as a string with the wikipedia information followed by the article's context.
-
-    Args:
-        inputs: dict, inputs of a batch.
-    """
-
-    context_elements = []
-
-    for wikipedia in inputs['wikipedia']:
-        if wikipedia != "No information found.":
-            context_elements.append(wikipedia)
-
-    context_elements.append(inputs['context'])
-
-    return " ".join(context_elements)
-
-
-# region Built-in objects method
-
 def list_remove_none(l):
     """
     Removes None from the list l.
@@ -100,5 +79,3 @@ def dict_std(d):
     """
 
     return {key: std(item) for key, item in d.items()}
-
-# endregion
