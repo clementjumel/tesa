@@ -46,6 +46,7 @@ def inputs_to_context(inputs):
 
 
 # region Built-in objects method
+
 def list_remove_none(l):
     """
     Removes None from the list l.
@@ -99,4 +100,5 @@ def dict_std(d):
     """
 
     return {key: std(item) for key, item in d.items()}
+
 # endregion
