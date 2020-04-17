@@ -108,8 +108,13 @@ class RankingTask:
 
         return labelled_answers
 
+    def to_loader(self):
+        """ Returns the RankingTask as a list of pairs (inputs, targets) for each batch. """
+
+        return [(inputs, targets) for inputs, targets in zip(self.input_batches(), self.target_batches())]
+
     def input_batches(self):
-        """ Returns the input batches of the RakingTask as a list of dict (one dict of each batch). """
+        """ Returns the input batches of the RakingTask as a list of dict (one dict for each batch). """
 
         generic_inputs = {'entities': self.entities,
                           'entities_type': self.entities_type,
