@@ -1,17 +1,18 @@
-from numpy.random import shuffle
+from numpy.random import shuffle, choice
 import torch
 
 
 class RankingTask:
     """ Class for a single Ranking Task. """
 
-    def __init__(self, queries, labelled_answers):
+    def __init__(self, queries, labelled_answers, ranking_size):
         """
         Initializes the RankingTask instance.
 
         Args:
             queries: list, initial Queries of the annotation (corresponding to different NYT articles).
             labelled_answers: dict, answers and their labels (0 for negative answers).
+            ranking_size: int, number of choices to compute for each ranking task.
         """
 
         self.entities = self.get_entities(queries)
@@ -19,6 +20,8 @@ class RankingTask:
         self.wiki_articles = self.get_wiki_articles(queries)
         self.nyt_titles = self.get_nyt_titles(queries)
         self.nyt_contexts = self.get_nyt_contexts(queries)
+
+        labelled_answers = self.filter_answers(labelled_answers=labelled_answers, ranking_size=ranking_size)
 
         self.choices, self.labels = self.get_choices_labels(labelled_answers)
 
@@ -79,6 +82,28 @@ class RankingTask:
     # endregion
 
     # region Other methods
+
+    @staticmethod
+    def filter_answers(labelled_answers, ranking_size):
+        """ Return labelled_answers limited to self.ranking_size number of possible answers. If self.ranking_size is
+        None, don't do anything; is it is 0, compute only the positive answers (for generation task). """
+
+        if ranking_size is not None:
+            negative_answers = sorted([key for key, value in labelled_answers.items() if value == 0])
+            labelled_answers = {key: value for key, value in labelled_answers.items() if value > 0}
+
+            if ranking_size:
+                n = len(labelled_answers)
+                if n > ranking_size:
+                    raise Exception("Too small ranking size, some answers will be lost (should be at least %i)." % n)
+
+                negative_answers = {answer: 0 for answer in choice(a=negative_answers,
+                                                                   size=ranking_size - n,
+                                                                   replace=False)}
+
+                labelled_answers.update(negative_answers)
+
+        return labelled_answers
 
     def inputs(self):
         """ Returns the inputs of the RakingTask in a dict. """
