@@ -26,6 +26,75 @@ def get_ranks(outputs):
     return ranks
 
 
+def format_context(ranking_task, context_format):
+    """
+    Return the context formated depending on context_format.
+
+    Args:
+        ranking_task: list of (inputs, targets) batches.
+        context_format: str, version of the context format to use.
+    """
+
+    inputs, targets = ranking_task[0]
+
+    if context_format == "v0":  # No separation token
+        context_items = []
+
+        for wiki_article in inputs['wiki_articles']:
+            if wiki_article:
+                context_items.append(wiki_article)
+
+        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+            context_items.extend([nyt_title + ':', nyt_context])
+
+        return " ".join(context_items)
+
+    elif context_format == "v1":  # [W] wiki1 [W] wiki2 [C] article1 [C] article2 [CLS]
+        context_items = []
+
+        for wiki_article in inputs['wiki_articles']:
+            if wiki_article:
+                context_items.extend(["[W]", wiki_article])
+
+        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+            context_items.extend(["[C]", nyt_title + ":", nyt_context])
+
+        context_items.append("[CLS]")
+        return " ".join(context_items)
+
+    elif context_format == "v2":  # [W] wiki1 [W] wiki2 [T] title1 [C] context1 [T] title2 [C] context2 [CLS]
+        context_items = []
+
+        for wiki_article in inputs['wiki_articles']:
+            if wiki_article:
+                context_items.extend(["[W]", wiki_article])
+
+        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+            context_items.extend(["[T]", nyt_title, "[C]", nyt_context])
+
+        context_items.append("[CLS]")
+        return " ".join(context_items)
+
+    elif context_format == "v3":  # [W] wiki1 [W] wiki2 [T] all titles [C] all contexts [CLS]
+        context_items = []
+
+        for wiki_article in inputs['wiki_articles']:
+            if wiki_article:
+                context_items.extend(["[W]", wiki_article])
+
+        context_items.append("[T]")
+        context_items.extend(inputs['nyt_titles'])
+
+        context_items.append("[C]")
+        context_items.append(inputs['nyt_contexts'])
+
+        context_items.append("[CLS]")
+        return " ".join(context_items)
+
+    else:
+        raise Exception("Context format not implemented: %s." % context_format)
+
+
 def list_remove_none(l):
     """
     Removes None from the list l.
