@@ -26,16 +26,21 @@ def get_ranks(outputs):
     return ranks
 
 
-def format_context(ranking_task, context_format):
+def format_context(ranking_or_inputs, context_format):
     """
     Return the context formated depending on context_format.
 
     Args:
-        ranking_task: list of (inputs, targets) batches.
+        ranking_or_inputs: list of (inputs, targets) batches, or just an inputs batch.
         context_format: str, version of the context format to use.
     """
 
-    inputs, targets = ranking_task[0]
+    if isinstance(ranking_or_inputs, list):  # ranking_or_inputs is a ranking
+        inputs, _ = ranking_or_inputs[0]
+    else:  # ranking_or_inputs is some inputs
+        inputs = ranking_or_inputs
+
+    assert isinstance(inputs, dict)
 
     if context_format == "v0":  # No separation token
         context_items = []
