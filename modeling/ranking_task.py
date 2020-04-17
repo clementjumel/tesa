@@ -1,11 +1,12 @@
 from numpy.random import shuffle, choice
+from numpy import asarray, arange, split
 import torch
 
 
 class RankingTask:
     """ Class for a single Ranking Task. """
 
-    def __init__(self, queries, labelled_answers, ranking_size):
+    def __init__(self, queries, labelled_answers, ranking_size, batch_size):
         """
         Initializes the RankingTask instance.
 
@@ -13,16 +14,19 @@ class RankingTask:
             queries: list, initial Queries of the annotation (corresponding to different NYT articles).
             labelled_answers: dict, answers and their labels (0 for negative answers).
             ranking_size: int, number of choices to compute for each ranking task.
+            batch_size: int, number of samples in each batch.
         """
 
+        self.ranking_size = ranking_size
+        self.batch_size = batch_size
+
         self.entities = self.get_entities(queries)
-        self.entities_type_ = self.get_entities_type(queries)
+        self.entities_type = self.get_entities_type(queries)
         self.wiki_articles = self.get_wiki_articles(queries)
         self.nyt_titles = self.get_nyt_titles(queries)
         self.nyt_contexts = self.get_nyt_contexts(queries)
 
-        labelled_answers = self.filter_answers(labelled_answers=labelled_answers, ranking_size=ranking_size)
-
+        labelled_answers = self.filter_answers(labelled_answers)
         self.choices, self.labels = self.get_choices_labels(labelled_answers)
 
     # region Methods get_
@@ -83,41 +87,52 @@ class RankingTask:
 
     # region Other methods
 
-    @staticmethod
-    def filter_answers(labelled_answers, ranking_size):
+    def filter_answers(self, labelled_answers):
         """ Return labelled_answers limited to self.ranking_size number of possible answers. If self.ranking_size is
         None, don't do anything; is it is 0, compute only the positive answers (for generation task). """
 
-        if ranking_size is not None:
+        if self.ranking_size is not None:
             negative_answers = sorted([key for key, value in labelled_answers.items() if value == 0])
             labelled_answers = {key: value for key, value in labelled_answers.items() if value > 0}
 
-            if ranking_size:
+            if self.ranking_size:
                 n = len(labelled_answers)
-                if n > ranking_size:
+                if n > self.ranking_size:
                     raise Exception("Too small ranking size, some answers will be lost (should be at least %i)." % n)
 
                 negative_answers = {answer: 0 for answer in choice(a=negative_answers,
-                                                                   size=ranking_size - n,
+                                                                   size=self.ranking_size - n,
                                                                    replace=False)}
 
                 labelled_answers.update(negative_answers)
 
         return labelled_answers
 
-    def inputs(self):
-        """ Returns the inputs of the RakingTask in a dict. """
+    def input_batches(self):
+        """ Returns the input batches of the RakingTask as a list of dict (one dict of each batch). """
 
-        return {'choices': self.choices,
-                'entities': self.entities,
-                'entities_type': self.entities_type_,
-                'wiki_articles': self.wiki_articles,
-                'nyt_titles': self.nyt_titles,
-                'nyt_contexts': self.nyt_contexts}
+        generic_inputs = {'entities': self.entities,
+                          'entities_type': self.entities_type,
+                          'wiki_articles': self.wiki_articles,
+                          'nyt_titles': self.nyt_titles,
+                          'nyt_contexts': self.nyt_contexts}
 
-    def targets(self):
-        """ Returns the targets of the RankingTask in a line torch.Tensor of type torch.long. """
+        idxs = arange(self.batch_size, len(self.choices), self.batch_size)
+        input_batches = [{'choices': list(choices)} for choices in split(asarray(self.choices), idxs)]
 
-        return torch.tensor(self.labels, dtype=torch.long)
+        for input_batch in input_batches:
+            input_batch.update(generic_inputs)
+
+        shuffle(input_batches)
+        return input_batches
+
+    def target_batches(self):
+        """ Returns the target batches of the RankingTask in a list of line torch.Tensors of type torch.long. """
+
+        idxs = arange(self.batch_size, len(self.labels), self.batch_size)
+        target_batches = [torch.tensor(labels, dtype=torch.long) for labels in split(asarray(self.labels), idxs)]
+
+        shuffle(target_batches)
+        return target_batches
 
     # endregion
