@@ -1,4 +1,5 @@
 from modeling.ranking_task import RankingTask
+from modeling.utils import format_context
 
 from collections import defaultdict
 from numpy import asarray, split, concatenate
@@ -313,7 +314,7 @@ class ModelingTask:
         """
 
         rows = []
-        sentence1 = self.get_formated_context(ranking_task)
+        sentence1 = format_context(ranking_task=ranking_task, context_format=self.context_format)
 
         for inputs, targets in ranking_task:
             for choice, target in zip(inputs['choices'], targets):
@@ -333,7 +334,7 @@ class ModelingTask:
         """
 
         source_rows, target_rows = [], []
-        source = self.get_formated_context(ranking_task)
+        source = format_context(ranking_task=ranking_task, context_format=self.context_format)
 
         for inputs, targets in ranking_task:
             for choice, target in zip(inputs['choices'], targets):
@@ -342,73 +343,6 @@ class ModelingTask:
                     target_rows.append(choice)
 
         return source_rows, target_rows
-
-    def get_formated_context(self, ranking_task):
-        """
-        Returns the context formated depending on self.context_format.
-
-        Args:
-            ranking_task: list of (inputs, targets) batches.
-        """
-
-        inputs, targets = ranking_task[0]
-
-        if self.context_format == "v0":  # No separation token
-            context_items = []
-
-            for wiki_article in inputs['wiki_articles']:
-                if wiki_article:
-                    context_items.append(wiki_article)
-
-            for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-                context_items.extend([nyt_title + ':', nyt_context])
-
-            return " ".join(context_items)
-
-        elif self.context_format == "v1":  # [W] wiki1 [W] wiki2 [C] article1 [C] article2 [CLS]
-            context_items = []
-
-            for wiki_article in inputs['wiki_articles']:
-                if wiki_article:
-                    context_items.extend(["[W]", wiki_article])
-
-            for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-                context_items.extend(["[C]", nyt_title + ":", nyt_context])
-
-            context_items.append("[CLS]")
-            return " ".join(context_items)
-
-        elif self.context_format == "v2":  # [W] wiki1 [W] wiki2 [T] title1 [C] context1 [T] title2 [C] context2 [CLS]
-            context_items = []
-
-            for wiki_article in inputs['wiki_articles']:
-                if wiki_article:
-                    context_items.extend(["[W]", wiki_article])
-
-            for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-                context_items.extend(["[T]", nyt_title, "[C]", nyt_context])
-
-            context_items.append("[CLS]")
-            return " ".join(context_items)
-
-        elif self.context_format == "v3":  # [W] wiki1 [W] wiki2 [T] all titles [C] all contexts [CLS]
-            context_items = []
-
-            for wiki_article in inputs['wiki_articles']:
-                if wiki_article:
-                    context_items.extend(["[W]", wiki_article])
-
-            context_items.append("[T]")
-            context_items.extend(inputs['nyt_titles'])
-
-            context_items.append("[C]")
-            context_items.append(inputs['nyt_contexts'])
-
-            context_items.append("[CLS]")
-            return " ".join(context_items)
-
-        else:
-            raise Exception("Context format not implemented: %s." % self.context_format)
 
     # endregion
 
