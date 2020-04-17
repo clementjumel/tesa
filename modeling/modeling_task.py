@@ -314,7 +314,7 @@ class ModelingTask:
         """
 
         rows = []
-        sentence1 = format_context(ranking_task=ranking_task, context_format=self.context_format)
+        sentence1 = format_context(ranking_task, context_format=self.context_format)
 
         for inputs, targets in ranking_task:
             for choice, target in zip(inputs['choices'], targets):
@@ -334,7 +334,7 @@ class ModelingTask:
         """
 
         source_rows, target_rows = [], []
-        source = format_context(ranking_task=ranking_task, context_format=self.context_format)
+        source = format_context(ranking_task, context_format=self.context_format)
 
         for inputs, targets in ranking_task:
             for choice, target in zip(inputs['choices'], targets):
