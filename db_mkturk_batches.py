@@ -4,7 +4,7 @@ database_creation script to create the annotation batches (for Amazon mkturk) fr
 Usages:
     tests:
         python db_mkturk_batches.py -b 1 -bs 10 --short --no_save
-        python db_mkturk_batches.py -b 1 -bs 10 --no_save
+        python db_mkturk_batches.py -b 2 -bs 10 --no_save
     regular usages:
         python db_mkturk_batches.py -b 10 -bs 400
         python db_mkturk_batches.py -b 10 -bs 400 --silent
