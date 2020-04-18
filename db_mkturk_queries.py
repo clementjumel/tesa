@@ -22,8 +22,8 @@ def parse_arguments():
 
     ap = standard_parser()
 
+    ap.add_argument("--short", action='store_true', help="Shorten corpus option.")
     ap.add_argument("--debug", action='store_true', help="Corpus' articles debugging option.")
-    ap.add_argument("--no_save", action='store_true', help="No save option.")
 
     return ap.parse_args()
 
