@@ -1,4 +1,5 @@
 from pickle import load
+from argparse import ArgumentParser
 import torch
 
 
@@ -8,16 +9,14 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def add_options_arguments(ap):
-    """
-    Add to the argument parser the parsing arguments relative to the options (no_save and silent).
+def standard_parser():
+    """ Create an argument parser, add the parsing arguments relative to the options and return it. """
 
-    Args:
-        ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
-    """
-
+    ap = ArgumentParser()
     ap.add_argument("--no_save", action='store_true', help="No save option.")
     ap.add_argument("--silent", action='store_true', help="Silence option.")
+
+    return ap
 
 
 def add_task_arguments(ap):
