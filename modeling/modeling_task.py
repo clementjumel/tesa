@@ -1,5 +1,5 @@
 from modeling.ranking_task import RankingTask
-from modeling.utils import format_context
+from modeling.utils import format_context, format_choices
 
 from collections import defaultdict
 from numpy import asarray, split, concatenate
@@ -14,8 +14,8 @@ from os.path import exists
 class ModelingTask:
     relevance_level = None
 
-    def __init__(self, ranking_size, batch_size, context_format, k_cross_validation, valid_proportion, test_proportion,
-                 random_seed, save, silent, results_path, annotation_task_results_path):
+    def __init__(self, ranking_size, batch_size, context_format, choices_format, k_cross_validation, valid_proportion,
+                 test_proportion, random_seed, save, silent, results_path, annotation_task_results_path):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -23,6 +23,7 @@ class ModelingTask:
             ranking_size: int, number of choices to compute for each ranking task.
             batch_size: int, number of samples in each batch.
             context_format: str, version of the context format to encode the inputs in a string.
+            choices_format: str, version of the choices format to encode the choices in strings.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
             valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
             test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
@@ -36,6 +37,7 @@ class ModelingTask:
         self.ranking_size = ranking_size
         self.batch_size = batch_size
         self.context_format = context_format
+        self.choices_format = choices_format
         self.k_cross_validation = k_cross_validation
         self.valid_proportion = valid_proportion
         self.test_proportion = test_proportion
@@ -335,12 +337,10 @@ class ModelingTask:
 
         source_rows, target_rows = [], []
         source = format_context(ranking_task, context_format=self.context_format)
+        choices = format_choices(ranking_task, choices_format=self.choices_format)
 
-        for inputs, targets in ranking_task:
-            for choice, target in zip(inputs['choices'], targets):
-                if target:
-                    source_rows.append(source)
-                    target_rows.append(choice)
+        for choice in choices:
+            source_rows.append(source), target_rows.append(choice)
 
         return source_rows, target_rows
 
@@ -363,7 +363,8 @@ class ModelingTask:
 
         suffix += "_rs" + str(self.ranking_size) if self.ranking_size is not None else ""
         suffix += "_bs" + str(self.batch_size)
-        suffix += "_cf" + self.context_format
+        suffix += "_co-" + self.context_format
+        suffix += "_ch-" + self.choices_format
         suffix += "_cv" if self.k_cross_validation else ""
 
         return suffix
