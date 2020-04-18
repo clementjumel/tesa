@@ -8,7 +8,7 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def add_optional_arguments(ap):
+def add_options_arguments(ap):
     """
     Add to the argument parser the parsing arguments relative to the options (no_save and silent).
 
