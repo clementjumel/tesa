@@ -1,6 +1,5 @@
+from modeling.utils import get_ranks, format_context, list_remove_none, dict_append, dict_mean, dict_std
 from modeling import metrics
-from modeling.utils import get_ranks, list_remove_none, dict_append, dict_mean, dict_std
-from toolbox.utils import inputs_to_context
 
 from numpy import arange, mean, std
 from numpy.random import seed, shuffle
@@ -13,6 +12,9 @@ from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
 from torch.utils.tensorboard import SummaryWriter
 from fairseq.data.data_utils import collate_tokens
+from os import makedirs
+from os.path import exists
+
 import matplotlib.pyplot as plt
 import torch
 
@@ -47,6 +49,7 @@ class BaseModel:
         self.stopwords = set(nltk_stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
 
+        self.experiment_name = experiment_name
         self.writer = None
 
         if experiment_name is not None:
@@ -58,6 +61,22 @@ class BaseModel:
         seed(random_seed), torch.manual_seed(random_seed)
 
     # region Training pipeline methods
+
+    def play(self, task):
+        """
+        Performs the preview and the evaluation of a model on the task.
+
+        Args:
+            task: modeling_task.ModelingTask, task to evaluate the model on.
+        """
+
+        self.preview(task.train_loader)
+
+        print("Evaluation on the train_loader...")
+        self.valid(task.train_loader)
+
+        print("Evaluation on the valid_loader...")
+        self.valid(task.valid_loader)
 
     def preview(self, data_loader):
         """
@@ -293,20 +312,7 @@ class BaseModel:
 
     def get_choices_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=False,
                           setten=False):
-        """
-        Returns the words from the inputs' choices as a list of list.
-
-        Args:
-            inputs: dict, inputs of a batch.
-            remove_stopwords: bool, whether to remove the stopwords or not.
-            remove_punctuation: bool, whether to remove the punctuation or not.
-            lower: bool, whether to remove the capitals or not.
-            lemmatize: bool, whether or not to lemmatize the words or not.
-            setten: bool, whether or not to return the results as a list of set.
-
-        Returns:
-            list, words lists of the inputs' choices.
-        """
+        """ Returns the words from the inputs' choices as a list of list (or sets, if setten). """
 
         choices_words = []
 
@@ -324,20 +330,7 @@ class BaseModel:
 
     def get_entities_words(self, inputs, remove_stopwords=False, remove_punctuation=True, lower=True, lemmatize=False,
                            flatten=False):
-        """
-        Returns the words from the inputs' entities as a list of list.
-
-        Args:
-            inputs: dict, inputs of a batch.
-            remove_stopwords: bool, whether to remove the stopwords or not.
-            remove_punctuation: bool, whether to remove the punctuation or not.
-            lower: bool, whether to remove the capitals or not.
-            lemmatize: bool, whether or not to lemmatize the words or not.
-            flatten: bool, whether or not to flatten the output list.
-
-        Returns:
-            list, words lists of the inputs' entities.
-        """
+        """ Returns the words from the inputs' entities as a list of list (or a list, if flatten). """
 
         entities_words = []
 
@@ -355,26 +348,22 @@ class BaseModel:
 
     def get_context_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
                           setten=False):
-        """
-        Returns the words from the inputs' context as a list.
+        """ Returns the words from the inputs' NYT titles and contexts as a list (or set, if setten). """
 
-        Args:
-            inputs: dict, inputs of a batch.
-            remove_stopwords: bool, whether to remove the stopwords or not.
-            remove_punctuation: bool, whether to remove the punctuation or not.
-            lower: bool, whether to remove the capitals or not.
-            lemmatize: bool, whether or not to lemmatize the words or not.
-            setten: bool, whether or not to return the results as a list of set.
+        context_words = []
 
-        Returns:
-            list, words of the inputs' context.
-        """
+        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+            context_words.extend(self.get_words(s=nyt_title,
+                                                remove_stopwords=remove_stopwords,
+                                                remove_punctuation=remove_punctuation,
+                                                lower=lower,
+                                                lemmatize=lemmatize))
 
-        context_words = self.get_words(s=inputs['context'],
-                                       remove_stopwords=remove_stopwords,
-                                       remove_punctuation=remove_punctuation,
-                                       lower=lower,
-                                       lemmatize=lemmatize)
+            context_words.extend(self.get_words(s=nyt_context,
+                                                remove_stopwords=remove_stopwords,
+                                                remove_punctuation=remove_punctuation,
+                                                lower=lower,
+                                                lemmatize=lemmatize))
 
         if setten:
             context_words = set(context_words)
@@ -382,73 +371,48 @@ class BaseModel:
         return context_words
 
     @staticmethod
-    def get_wikipedia_string(inputs):
-        """
-        Returns a string with the wikipedia summaries that are not empty.
+    def get_wikis_str(inputs):
+        """ Returns a string with the wikipedia articles. """
 
-        Args:
-            inputs: dict, inputs of a batch.
-        """
+        return ' '.join([wiki_article for wiki_article in inputs['wiki_articles'] if wiki_article])
 
-        summaries = [wikipedia for wikipedia in inputs['wikipedia'] if wikipedia != 'No information found.']
+    def get_wikis_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
+                        flatten=False, setten=False):
+        """ Return the words from the inputs' wikipedia articles as a list of list (or a list if flatten, or a list of
+        set if setten, or a set if both). """
 
-        return ' '.join(summaries)
+        wikis_words = []
 
-    def get_wikipedia_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
-                            flatten=False, setten=False):
-        """
-        Returns the words from the inputs' wikipedia summaries as a list of list.
-
-        Args:
-            inputs: dict, inputs of a batch.
-            remove_stopwords: bool, whether to remove the stopwords or not.
-            remove_punctuation: bool, whether to remove the punctuation or not.
-            lower: bool, whether to remove the capitals or not.
-            lemmatize: bool, whether or not to lemmatize the words or not.
-            flatten: bool, whether or not to flatten the result.
-            setten: bool, whether or not to return the results as a set or a list of set.
-
-        Returns:
-            list, words lists of the inputs' wikipedia summaries.
-        """
-
-        wikipedia_words = []
-
-        for wikipedia in inputs['wikipedia']:
-            if wikipedia != "No information found.":
-                wikipedia_words.append(self.get_words(s=wikipedia,
-                                                      remove_stopwords=remove_stopwords,
-                                                      remove_punctuation=remove_punctuation,
-                                                      lower=lower,
-                                                      lemmatize=lemmatize))
+        for wiki_article in inputs['wiki_articles']:
+            if wiki_article:
+                wikis_words.append(self.get_words(s=wiki_article,
+                                                  remove_stopwords=remove_stopwords,
+                                                  remove_punctuation=remove_punctuation,
+                                                  lower=lower,
+                                                  lemmatize=lemmatize))
             else:
-                wikipedia_words.append([])
+                wikis_words.append([])
 
         if flatten:
-            wikipedia_words = [word for words in wikipedia_words for word in words]
+            wikis_words = [word for words in wikis_words for word in words]
             if setten:
-                wikipedia_words = set(wikipedia_words)
+                wikis_words = set(wikis_words)
 
         else:
             if setten:
-                wikipedia_words = [set(words) for words in wikipedia_words]
+                wikis_words = [set(words) for words in wikis_words]
 
-        return wikipedia_words
+        return wikis_words
 
     def get_other_words(self, inputs, setten=False):
-        """
-        Returns the words from the inputs' entities, context and wikipedia summaries, in a list.
-
-        Args:
-            inputs: dict, inputs of a batch.
-            setten: bool, whether or not to return the results as a set.
-        """
+        """ Return the words from the inputs' entities, NYT articles and wikipedia articles, in a list (or a set, if
+        setten). """
 
         entities_words = self.get_entities_words(inputs, flatten=True)
         context_words = self.get_context_words(inputs)
-        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
+        wikis_words = self.get_wikis_words(inputs, flatten=True)
 
-        other_words = entities_words + context_words + wikipedia_words
+        other_words = entities_words + context_words + wikis_words
 
         if setten:
             other_words = set(other_words)
@@ -469,7 +433,6 @@ class BaseModel:
         """
 
         counted_words = [[word for word in words if word in words_list] for words_list in words_lists]
-
         return torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
     @staticmethod
@@ -486,7 +449,6 @@ class BaseModel:
         """
 
         counted_words = [words_set.intersection(words) for words_set in words_sets]
-
         return torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
     # endregion
@@ -694,13 +656,11 @@ class Frequency(BaseModel):
 
         for ranking_task in tqdm(data_loader, total=len(data_loader)):
             for inputs, targets in ranking_task:
-                choices = inputs['choices']
-                for i in range(len(choices)):
-                    self.counts[choices[i]] += targets[i].data.item()
+                for choice, target in zip(inputs['choices'], targets):
+                    self.counts[choice] += target.data.item()
 
     def pred(self, inputs):
         grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
-
         return torch.tensor(grades).reshape((-1, 1))
 
 # endregion
@@ -713,9 +673,9 @@ class SummariesCount(BaseModel):
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
-        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
+        wikis_words = self.get_wikis_words(inputs, flatten=True)
 
-        return self.get_lists_counts(words_lists=choices_words, words=wikipedia_words)
+        return self.get_lists_counts(words_lists=choices_words, words=wikis_words)
 
 
 class SummariesUniqueCount(BaseModel):
@@ -723,9 +683,9 @@ class SummariesUniqueCount(BaseModel):
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
-        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True, setten=True)
+        wikis_words = self.get_wikis_words(inputs, flatten=True, setten=True)
 
-        return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
+        return self.get_sets_counts(words_sets=choices_words, words=wikis_words)
 
 
 class SummariesOverlap(BaseModel):
@@ -734,10 +694,10 @@ class SummariesOverlap(BaseModel):
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
-        wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
+        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = set.intersection(*wikis_words) if wikis_words else set()
 
-        return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
+        return self.get_sets_counts(words_sets=choices_words, words=wikis_words)
 
 
 class ActivatedSummaries(BaseModel):
@@ -745,13 +705,13 @@ class ActivatedSummaries(BaseModel):
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
-        wikipedia_words = self.get_wikipedia_words(inputs)
+        wikis_words = self.get_wikis_words(inputs)
 
-        activated_summaries = [[set(choice_words).intersection(set(summary_words)) for summary_words in wikipedia_words]
-                               for choice_words in choices_words]
-        activated_summaries = [[summary for summary in summaries if summary] for summaries in activated_summaries]
+        activated_wikis = [[set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
+                           for choice_words in choices_words]
+        activated_wikis = [[wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis]
 
-        return torch.tensor([len(summaries) for summaries in activated_summaries]).reshape((-1, 1))
+        return torch.tensor([len(wikis) for wikis in activated_wikis]).reshape((-1, 1))
 
 
 class SummariesAverageEmbedding(BaseModel):
@@ -759,9 +719,9 @@ class SummariesAverageEmbedding(BaseModel):
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
-        wikipedia_words = self.get_wikipedia_words(inputs, flatten=True)
+        wikis_words = self.get_wikis_words(inputs, flatten=True)
 
-        return self.get_average_embedding_similarity(words_lists=choices_words, words=wikipedia_words)
+        return self.get_average_embedding_similarity(words_lists=choices_words, words=wikis_words)
 
 
 class SummariesOverlapAverageEmbedding(BaseModel):
@@ -771,10 +731,11 @@ class SummariesOverlapAverageEmbedding(BaseModel):
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
-        wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
+        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = set.intersection(*wikis_words) if wikis_words else set()
 
-        return self.get_average_embedding_similarity(words_lists=choices_words, words=wikipedia_words)
+        return self.get_average_embedding_similarity(words_lists=choices_words, words=wikis_words)
+
 
 # endregion
 
@@ -842,11 +803,11 @@ class SummariesContextOverlap(BaseModel):
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikipedia_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
-        wikipedia_words = set.intersection(*wikipedia_words) if wikipedia_words else set()
-        wikipedia_words.update(self.get_context_words(inputs, setten=True))
+        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = set.intersection(*wikis_words) if wikis_words else set()
+        wikis_words.update(self.get_context_words(inputs, setten=True))
 
-        return self.get_sets_counts(words_sets=choices_words, words=wikipedia_words)
+        return self.get_sets_counts(words_sets=choices_words, words=wikis_words)
 
 
 class SummariesContextAverageEmbedding(BaseModel):
@@ -867,7 +828,7 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
 
-        other_words = [words for words in self.get_wikipedia_words(inputs, setten=True) if words]
+        other_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
         other_words = set.intersection(*other_words) if other_words else set()
         other_words.update(self.get_context_words(inputs, setten=True))
 
@@ -881,14 +842,22 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
 # region BART
 
 class ClassifierBart(BaseModel):
-    """ BART finetuned as a classifier between aggregation and not aggregation. """
+    """ BART finetuned as a classifier between aggregation and not_aggregation. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
-                 random_seed, root=""):
+    def __init__(self, context_format, scores_names, relevance_level, trained_model, tensorboard_logs_path,
+                 experiment_name, random_seed, root=""):
+        """
+        Initialize an instance of ClassifierBart.
+
+        Args:
+            context_format: str, version of the context format to encode the inputs in a string.
+        """
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
                          tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
                          random_seed=random_seed, root=root)
+
+        self.context_format = context_format
 
         labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
                                                                    self.trained_model.task.label_dictionary.nspecial])
@@ -900,9 +869,8 @@ class ClassifierBart(BaseModel):
         self.idx = labels.index(label)
 
     def pred(self, inputs):
-        sentence1 = inputs_to_context(inputs)
+        sentence1 = format_context(inputs, context_format=self.context_format)
         batch_encoding = [self.trained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
-
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
 
         logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
@@ -913,9 +881,59 @@ class ClassifierBart(BaseModel):
 class GeneratorBart(BaseModel):
     """ BART finetuned as a generator of aggregation. """
 
-    def pred(self, inputs):
-        # TODO
-        pass
+    def __init__(self, context_format, scores_names, relevance_level, trained_model, tensorboard_logs_path,
+                 experiment_name, random_seed, root=""):
+        """
+        Initialize an instance of GeneratorBart.
+
+        Args:
+            context_format: str, version of the context format to encode the inputs in a string.
+        """
+
+        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
+                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
+                         random_seed=random_seed, root=root)
+
+        self.context_format = context_format
+        self.trained_model.half()
+
+    def play(self, task):
+        print("Evaluation on the train_loader...")
+        self.generate_hypothesis(task.train_loader, fname='train.hypo')
+
+        print("Evaluation on the valid_loader...")
+        self.generate_hypothesis(task.valid_loader, fname="valid.hypo")
+
+    def generate_hypothesis(self, data_loader, fname):
+        """
+        Generate the hypothesis of BART on the data_loader and write them in ./experiment_name/fname if experiment_name
+        is not None.
+
+        Args:
+            data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
+            fname: str, name of the file to write in.
+        """
+
+        if self.experiment_name is not None and not exists(self.experiment_name):
+            makedirs(self.experiment_name)
+
+        n_rankings = len(data_loader)
+        shuffle(data_loader)
+
+        for _, ranking in tqdm(enumerate(data_loader), total=n_rankings):
+            source = format_context(ranking, context_format=self.context_format)
+
+            with torch.no_grad():
+                hypotheses_batch = self.trained_model.sample([source],
+                                                             beam=1,
+                                                             lenpen=0.9,
+                                                             max_len_b=140,
+                                                             min_len=1,
+                                                             no_repeat_ngram_size=3)
+
+            if self.experiment_name is not None:
+                with open(self.experiment_name + "/" + fname, 'a') as file:
+                    file.writelines([source] + hypotheses_batch + [''])
 
 # endregion
 
