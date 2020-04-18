@@ -42,9 +42,9 @@ def format_context(ranking_or_inputs, context_format):
 
     assert isinstance(inputs, dict)
 
-    if context_format == "v0":  # No separation token
-        context_items = []
+    context_items = []
 
+    if context_format == "v0":  # No separation token
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.append(wiki_article)
@@ -52,11 +52,7 @@ def format_context(ranking_or_inputs, context_format):
         for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
             context_items.extend([nyt_title + ':', nyt_context])
 
-        return " ".join(context_items)
-
     elif context_format == "v1":  # [W] wiki1 [W] wiki2 [C] article1 [C] article2 [CLS]
-        context_items = []
-
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.extend(["[W]", wiki_article])
@@ -65,11 +61,8 @@ def format_context(ranking_or_inputs, context_format):
             context_items.extend(["[C]", nyt_title + ":", nyt_context])
 
         context_items.append("[CLS]")
-        return " ".join(context_items)
 
     elif context_format == "v2":  # [W] wiki1 [W] wiki2 [T] title1 [C] context1 [T] title2 [C] context2 [CLS]
-        context_items = []
-
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.extend(["[W]", wiki_article])
@@ -78,11 +71,8 @@ def format_context(ranking_or_inputs, context_format):
             context_items.extend(["[T]", nyt_title, "[C]", nyt_context])
 
         context_items.append("[CLS]")
-        return " ".join(context_items)
 
     elif context_format == "v3":  # [W] wiki1 [W] wiki2 [T] all titles [C] all contexts [CLS]
-        context_items = []
-
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.extend(["[W]", wiki_article])
@@ -94,10 +84,36 @@ def format_context(ranking_or_inputs, context_format):
         context_items.append(inputs['nyt_contexts'])
 
         context_items.append("[CLS]")
-        return " ".join(context_items)
 
     else:
         raise Exception("Context format not implemented: %s." % context_format)
+
+    return " ".join(context_items)
+
+
+def format_targets(ranking, targets_format):
+    """
+    Returns the generation targets as a list of str, depending on targets_format.
+
+    Args:
+        ranking: list of (inputs, targets) batches
+        targets_format: str, version of the targets format to use.
+    """
+
+    valid_choices = []
+    for inputs, targets in ranking:
+        for choice, target in zip(inputs['choices'], targets):
+            if target:
+                valid_choices.append(choice)
+
+    if targets_format == "v0":  # one target per valid choice
+        return valid_choices
+
+    elif targets_format == "v1":  # all valid choices in one target, separated with separation tokens.
+        return ["[G] " + " [G] ".join(valid_choices)]
+
+    else:
+        raise Exception("Targets format not implemented: %s." % targets_format)
 
 
 def list_remove_none(l):
