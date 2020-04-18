@@ -8,26 +8,19 @@ def to_class_name(name):
     return "".join([word.capitalize() for word in name.split("_")])
 
 
-def inputs_to_context(inputs):
+def add_optional_arguments(ap):
     """
-    Returns the context of a ranking task as a string with the wikipedia information followed by the article's context.
+    Add to the argument parser the parsing arguments relative to the options (no_save and silent).
 
     Args:
-        inputs: dict, inputs of a batch.
+        ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
     """
 
-    context_elements = []
-
-    for wikipedia in inputs['wikipedia']:
-        if wikipedia != "No information found.":
-            context_elements.append(wikipedia)
-
-    context_elements.append(inputs['context'])
-
-    return " ".join(context_elements)
+    ap.add_argument("--no_save", action='store_true', help="No save option.")
+    ap.add_argument("--silent", action='store_true', help="Silence option.")
 
 
-def add_task_argument(ap):
+def add_task_arguments(ap):
     """
     Add to the argument parser the parsing arguments relative to the modeling task.
 
