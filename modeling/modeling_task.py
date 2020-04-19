@@ -367,8 +367,8 @@ class ModelingTask:
 
         suffix += "_rs" + str(self.ranking_size) if self.ranking_size is not None else ""
         suffix += "_bs" + str(self.batch_size)
-        suffix += "_cf-" + self.context_format
-        suffix += "_tf-" + self.targets_format
+        suffix += "_cf-" + self.context_format if self.context_format is not None else ""
+        suffix += "_tf-" + self.targets_format if self.targets_format is not None else ""
         suffix += "_cv" if self.k_cross_validation else ""
 
         return suffix
