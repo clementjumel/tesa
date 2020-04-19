@@ -95,10 +95,10 @@ def save_pkl(annotations, queries, path, args):
             dump(obj=queries, file=queries_file, protocol=-1)
 
             if not args.silent:
-                print("Files %s & %s saved at %s." % (annotations_fname, queries_fname, path))
+                print("Files annotations.pkl & queries.pkl saved at %s." % path)
 
     elif not args.silent:
-        print("Files %s & %s not saved at %s (not in save mode)." % (annotations_fname, queries_fname, path))
+        print("Files annotations.pkl & queries.pkl not saved at %s (not in save mode)." % path)
 
 
 def main():
