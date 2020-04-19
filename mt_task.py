@@ -4,12 +4,12 @@ modeling_task script to create the modeling task to be solved by models.
 Usages:
     tests:
         python mt_task.py -t context_free_same_type --no_save
-        python mt_task.py -t context_free_same_type -rs 0 -cf v0 -tf v0 --generation --no_save
-        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 --classification --no_save
+        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 -tf v0 --classification --no_save
+        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 -tf v0 --generation --no_save
     regular usages:
         python mt_task.py -t context_free_same_type
-        python mt_task.py -t context_free_same_type -rs 0 -cf v0 -tf v0 --generation
-        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 --classification
+        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 -tf v0 --classification
+        python mt_task.py -t context_free_same_type -rs 32 -bs 16 -cf v0 -tf v0 --generation
 """
 
 import modeling.modeling_task as modeling_task
