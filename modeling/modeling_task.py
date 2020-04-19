@@ -94,8 +94,12 @@ class ModelingTask:
     def compute_ranking_tasks(self):
         """ Compute the RankingTasks of the ModelingTask, and split them into the data_loaders. """
 
-        annotations = load(self.annotation_task_results_path + "annotations/annotations.pkl")
-        queries = load(self.annotation_task_results_path + "annotations/queries.pkl")
+        annotations_fname = self.annotation_task_results_path + "annotations/annotations.pkl"
+        queries_fname = self.annotation_task_results_path + "annotations/queries.pkl"
+
+        with open(annotations_fname, 'rb') as annotations_file, open(queries_fname, 'rb') as queries_file:
+            annotations = load(annotations_file)
+            queries = load(queries_file)
 
         self.print("Annotations and queries loaded from %s/annotations/." % self.annotation_task_results_path)
 
