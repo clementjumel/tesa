@@ -59,7 +59,7 @@ class ModelingTask:
 
         self.compute_ranking_tasks()
 
-        self.makedirs('')
+        self.makedirs(self.results_path)
         self.save_pkl()
 
     def process_classification_task(self, folder_path):
@@ -380,8 +380,6 @@ class ModelingTask:
         Args:
             folder_name: str, path of the folder to create.
         """
-
-        folder_name = self.results_path + folder_name
 
         if self.save:
             if not exists(folder_name):
