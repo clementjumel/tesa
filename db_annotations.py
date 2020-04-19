@@ -3,7 +3,7 @@ Script to save the annotated queries and the annotations.
 
 Usages:
     tests:
-        python db_annotations.py --no_save --silent
+        python db_annotations.py --no_save
     regular usage:
         python db_annotations.py
 """
