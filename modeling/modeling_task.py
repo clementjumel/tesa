@@ -70,7 +70,7 @@ class ModelingTask:
             folder_path: str, path of the folder to create, starting from <self.results_path>.
         """
 
-        folder_path = folder_path + self.class_name() + self.suffix() + "/classification_task/"
+        folder_path = folder_path + self.class_name() + self.suffix() + "/classification/"
 
         self.makedirs(folder_path)
         self.save_classification_task(folder_path)
@@ -84,7 +84,7 @@ class ModelingTask:
 
         """
 
-        folder_path = folder_path + self.class_name() + self.suffix() + "/generation_task/"
+        folder_path = folder_path + self.class_name() + self.suffix() + "/generation/"
 
         self.makedirs(folder_path)
         self.save_generation_task(folder_path)
