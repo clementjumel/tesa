@@ -81,7 +81,7 @@ def format_context(ranking_or_inputs, context_format):
         context_items.extend(inputs['nyt_titles'])
 
         context_items.append("[C]")
-        context_items.append(inputs['nyt_contexts'])
+        context_items.extend(inputs['nyt_contexts'])
 
         context_items.append("[CLS]")
 
