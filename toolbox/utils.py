@@ -35,6 +35,7 @@ def add_task_arguments(ap):
     ap.add_argument("--task_path", default=None, type=str, help="Path to the task folder.")
     ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
     ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
+    ap.add_argument("--full_task_name", default=None, type=str, help="Full name of the task (.pkl) to load.")
 
 
 def load_task(args, folder_path):
@@ -42,35 +43,40 @@ def load_task(args, folder_path):
     Load a Task using pickle from the folder_path, depending on the arguments passed in args.
 
     Args:
-        args: dict, arguments passed to the script.
+        args: argparse.ArgumentParser, arguments passed to the script.
         folder_path: str, path of the folder to load from.
 
     Returns:
         database_creation.modeling_task.Task, loaded object.
     """
 
-    task_name = args['task']
-    valid_proportion = args['valid_proportion']
-    test_proportion = args['test_proportion']
-    ranking_size = args['ranking_size']
-    batch_size = args['batch_size']
-    folder_path = args['task_path'] or folder_path
-    cross_validation = args['cross_validation']
-    short = args['short']
+    task_name = args.task
+    valid_proportion = args.valid_proportion
+    test_proportion = args.test_proportion
+    ranking_size = args.ranking_size
+    batch_size = args.batch_size
+    folder_path = args.task_path or folder_path
+    cross_validation = args.cross_validation
+    short = args.short
+    full_task_name = args.full_task_name
 
-    train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
-    valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
-    test_proportion = ("%.2f" % test_proportion).split(".")[1]
-    suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
+    if full_task_name is None:
+        train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
+        valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
+        test_proportion = ("%.2f" % test_proportion).split(".")[1]
+        suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
 
-    suffix += "_rs" + str(ranking_size) if ranking_size is not None else ""
-    suffix += "_bs" + str(batch_size)
-    suffix += "_cv" if cross_validation else ""
-    suffix += "_short" if short else ""
+        suffix += "_rs" + str(ranking_size) if ranking_size is not None else ""
+        suffix += "_bs" + str(batch_size)
+        suffix += "_cv" if cross_validation else ""
+        suffix += "_short" if short else ""
 
-    task_name = "".join(task_name.split("_"))
+        task_name = "".join(task_name.split("_"))
 
-    file_name = folder_path + task_name + suffix + '.pkl'
+        file_name = folder_path + task_name + suffix + '.pkl'
+
+    else:
+        file_name = full_task_name
 
     with open(file_name, 'rb') as file:
         task = load(file)
