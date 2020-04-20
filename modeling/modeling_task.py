@@ -101,7 +101,7 @@ class ModelingTask:
             annotations = load(annotations_file)
             queries = load(queries_file)
 
-        self.print("Annotations and queries loaded from %s/annotations/." % self.annotation_task_results_path)
+        self.print("Annotations and queries loaded from %sannotations/." % self.annotation_task_results_path)
 
         annotations = self.get_reordered_annotations(queries=queries, annotations=annotations)
 
