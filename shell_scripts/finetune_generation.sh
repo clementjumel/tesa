@@ -21,9 +21,8 @@ cp $PRETRAINED_MODELS_PATH/$2.tar.gz $SLURM_TMPDIR
 cd $SLURM_TMPDIR
 tar -xvf $2.tar.gz
 
-rm -r "$MODELS_PATH/$1/$3"
-mkdir "$MODELS_PATH/$1/$3"
-mkdir "$MODELS_PATH/$1/$3/tensorboard_logs"
+rm -r "$MODELS_PATH/$1/$2/$3"
+mkdir -p "$MODELS_PATH/$1/$2/$3/tensorboard_logs"
 
 TOTAL_NUM_UPDATES=200 # Default: 20000
 WARMUP_UPDATES=5  # Default: 500
