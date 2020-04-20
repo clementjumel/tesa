@@ -457,6 +457,8 @@ class ModelingTask:
                 all_source_rows.extend(source_rows), all_target_rows.extend(target_rows)
 
             shuffle(all_source_rows), shuffle(all_target_rows)
+            all_source_rows = [row + '\n' for row in all_source_rows]
+            all_target_rows = [row + '\n' for row in all_target_rows]
 
             if self.save:
                 with open(file_name_pair[0], 'wt') as source_file, open(file_name_pair[1], 'wt') as target_file:
