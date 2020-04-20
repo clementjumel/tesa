@@ -27,7 +27,7 @@ def add_task_arguments(ap):
         ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
     """
 
-    ap.add_argument("-t", "--task", required=True, type=str, help="Name of the modeling task version.")
+    ap.add_argument("-t", "--task", default=None, type=str, help="Name of the modeling task version.")
     ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
     ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
     ap.add_argument("-rs", "--ranking_size", default=None, type=int, help="Size of the ranking tasks.")
