@@ -18,7 +18,7 @@ RESULTS_PATH="$MODELS_PATH/$TASK/$1/$2/$3"
 module load miniconda
 source activate nlp
 
-cp -r "$PREPROCESSED_DATA_PATH/$TASK/$1" $SLURM_TMPDIR
+cp -r "$PREPROCESSED_DATA_PATH/$TASK/$1-bin" $SLURM_TMPDIR
 cp $PRETRAINED_MODELS_PATH/$2.tar.gz $SLURM_TMPDIR
 cd $SLURM_TMPDIR
 tar -xvf $2.tar.gz
@@ -34,7 +34,7 @@ LR=3e-05
 TOTAL_NUM_UPDATES=4470 # Default: 20000
 WARMUP_UPDATES=112  # Default: 500
 
-CUDA_VISIBLE_DEVICES=0,1 python $FAIRSEQ_PATH/train.py $1 \
+CUDA_VISIBLE_DEVICES=0,1 python $FAIRSEQ_PATH/train.py "$1-bin" \
     --max-epoch $MAX_EPOCHS \
     --max-sentences $MAX_SENTENCES \
     --max-tokens $MAX_TOKENS \
