@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=eval_gen
-#SBATCH --partition=main
+#SBATCH --partition=unkillable
 #SBATCH --gres=gpu:1
-#SBATCH --mem-per-gpu=32G
-#SBATCH --time=5:00:00
+#SBATCH --mem-per-gpu=16G
+#SBATCH --time=3:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/evaluate_generation-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/evaluate_generation-%j.out
 
@@ -31,12 +31,16 @@ python $MASTER_THESIS_PATH/mt_models.py \
           --checkpoint_file $4 \
           --model generator_bart;
 
+rm $RESULTS_PATH/train.source
 rm $RESULTS_PATH/train.hypo
 rm $RESULTS_PATH/train.goal
+rm $RESULTS_PATH/valid.source
 rm $RESULTS_PATH/valid.hypo
 rm $RESULTS_PATH/valid.goal
 
+cp train.source $RESULTS_PATH
 cp train.hypo $RESULTS_PATH
 cp train.goal $RESULTS_PATH
+cp valid.source $RESULTS_PATH
 cp valid.hypo $RESULTS_PATH
 cp valid.goal $RESULTS_PATH

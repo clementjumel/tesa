@@ -27,14 +27,12 @@ rm -r $RESULTS_PATH
 mkdir -p $RESULTS_PATH/tensorboard_logs
 
 MAX_EPOCHS=5  # Defautl: 10
-MAX_SENTENCES=4  # Default: 32
-MAX_TOKENS=1024  # Default: 1024; works: 512
-UPDATE_FREQ=8  # Default: 1
+MAX_SENTENCES=32  # Default: 32
+MAX_TOKENS=512  # Default: 1024; works: 512
+UPDATE_FREQ=1  # Default: 1
 LR=1e-05
-#TODO
-TOTAL_NUM_UPDATES=10180  # Default: 1018
-WARMUP_UPDATES=610  # Default: 61
-###
+TOTAL_NUM_UPDATES=80410  # Default: 1018
+WARMUP_UPDATES=4824  # Default: 61
 
 CUDA_VISIBLE_DEVICES=0,1 python $FAIRSEQ_PATH/train.py "$1-bin" \
     --max-epoch $MAX_EPOCHS \
@@ -71,6 +69,6 @@ CUDA_VISIBLE_DEVICES=0,1 python $FAIRSEQ_PATH/train.py "$1-bin" \
     --best-checkpoint-metric accuracy \
     --maximize-best-checkpoint-metric \
     --skip-invalid-size-inputs-valid-test \
+    --disable-validation \
     --find-unused-parameters;
-    #--disable-validation \
     #--fp16 --fp16-init-scale 4 --threshold-loss-scale 1 --fp16-scale-window 128 \
