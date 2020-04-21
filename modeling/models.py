@@ -905,9 +905,8 @@ class GeneratorBart(BaseModel):
         shuffle(data_loader)
 
         for _, ranking in tqdm(enumerate(data_loader), total=n_rankings):
+            sources = [format_context(ranking, context_format=self.context_format)]
             goals = format_targets(ranking, targets_format=self.targets_format)
-            source = format_context(ranking, context_format=self.context_format)
-            sources = [source for _ in range(len(goals))]
 
             with torch.no_grad():
                 hypotheses_batch = self.trained_model.sample(sources,
@@ -917,15 +916,11 @@ class GeneratorBart(BaseModel):
                                                              min_len=1,
                                                              no_repeat_ngram_size=3)
 
-            sources = [source + '\n' for source in sources] + ['\n']
-            goals = [goal + '\n' for goal in goals] + ['\n']
-            hypotheses_batch = [hypo + '\n' for hypo in hypotheses_batch] + ['\n']
-
             with open(fname + ".source", 'a') as source_file, open(fname + ".hypo", 'a') as hypo_file, \
                     open(fname + ".goal", 'a') as goal_file:
-                source_file.writelines(sources)
-                goal_file.writelines(goals)
-                hypo_file.writelines(hypotheses_batch)
+                source_file.writelines(sources + ['\n'])
+                goal_file.writelines(goals + ['\n'])
+                hypo_file.writelines(hypotheses_batch + ['\n'])
 
 # endregion
 
