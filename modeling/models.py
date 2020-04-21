@@ -1,4 +1,4 @@
-from modeling.utils import get_ranks, format_context, list_remove_none, dict_append, dict_mean, dict_std
+from modeling.utils import *
 from modeling import metrics
 
 from numpy import arange, mean, std
@@ -12,9 +12,6 @@ from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
 from torch.utils.tensorboard import SummaryWriter
 from fairseq.data.data_utils import collate_tokens
-from os import makedirs
-from os.path import exists
-
 import matplotlib.pyplot as plt
 import torch
 
@@ -22,7 +19,7 @@ import torch
 class BaseModel:
     """ Model structure. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
+    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path, experiment_name,
                  random_seed, root=""):
         """
         Initializes an instance of Model.
@@ -31,6 +28,7 @@ class BaseModel:
             scores_names: iterable, names of the scores to use, the first one being monitored during training.
             relevance_level: int, minimum label to consider a choice as relevant.
             trained_model: unknown, pretrained embedding or model.
+            task_name: str, name of the task to run.
             tensorboard_logs_path: str, path to the tensorboard logs folder.
             experiment_name: str, if not None, name of the folder to save the tensorboard in.
             random_seed: int, the seed to use for the random processes.
@@ -49,14 +47,21 @@ class BaseModel:
         self.stopwords = set(nltk_stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
 
-        self.experiment_name = experiment_name
         self.writer = None
+        self.context_format = None
+        self.targets_format = None
 
         if experiment_name is not None:
             model_name = self.__class__.__name__
             model_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', model_name)])
 
             self.writer = SummaryWriter(root + tensorboard_logs_path + experiment_name + "/" + model_name)
+
+        if task_name is not None:
+            if "_cf-" in task_name:
+                self.context_format = task_name.split("_cf-")[1][:2]
+            if "_tf-" in task_name:
+                self.targets_format = task_name.split("_tf-")[1][:2]
 
         seed(random_seed), torch.manual_seed(random_seed)
 
@@ -642,12 +647,12 @@ class Random(BaseModel):
 class Frequency(BaseModel):
     """ Baseline based on answers' overall frequency. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, tensorboard_logs_path, experiment_name,
+    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path, experiment_name,
                  random_seed, root=""):
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
-                         random_seed=random_seed, root=root)
+                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
+                         experiment_name=experiment_name, random_seed=random_seed, root=root)
 
         self.counts = defaultdict(int)
 
@@ -735,7 +740,6 @@ class SummariesOverlapAverageEmbedding(BaseModel):
         wikis_words = set.intersection(*wikis_words) if wikis_words else set()
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=wikis_words)
-
 
 # endregion
 
@@ -844,29 +848,20 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
 class ClassifierBart(BaseModel):
     """ BART finetuned as a classifier between aggregation and not_aggregation. """
 
-    def __init__(self, context_format, scores_names, relevance_level, trained_model, tensorboard_logs_path,
+    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path,
                  experiment_name, random_seed, root=""):
-        """
-        Initialize an instance of ClassifierBart.
-
-        Args:
-            context_format: str, version of the context format to encode the inputs in a string.
-        """
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
-                         random_seed=random_seed, root=root)
-
-        self.context_format = context_format
+                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
+                         experiment_name=experiment_name, random_seed=random_seed, root=root)
 
         labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
                                                                    self.trained_model.task.label_dictionary.nspecial])
                   for i in range(2)]
 
-        assert ("aggregation" in labels) ^ ("entailment" in labels)
-        label = "aggregation" if "aggregation" in labels else "entailment"
+        assert "aggregation" in labels
 
-        self.idx = labels.index(label)
+        self.idx = labels.index("aggregation")
 
     def pred(self, inputs):
         sentence1 = format_context(inputs, context_format=self.context_format)
@@ -881,59 +876,56 @@ class ClassifierBart(BaseModel):
 class GeneratorBart(BaseModel):
     """ BART finetuned as a generator of aggregation. """
 
-    def __init__(self, context_format, scores_names, relevance_level, trained_model, tensorboard_logs_path,
+    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path,
                  experiment_name, random_seed, root=""):
-        """
-        Initialize an instance of GeneratorBart.
-
-        Args:
-            context_format: str, version of the context format to encode the inputs in a string.
-        """
 
         super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         tensorboard_logs_path=tensorboard_logs_path, experiment_name=experiment_name,
-                         random_seed=random_seed, root=root)
+                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
+                         experiment_name=experiment_name, random_seed=random_seed, root=root)
 
-        self.context_format = context_format
         self.trained_model.half()
 
     def play(self, task):
         print("Evaluation on the train_loader...")
-        self.generate_hypothesis(task.train_loader, fname='train.hypo')
+        self.generate_hypothesis(task.train_loader, fname='train')
 
         print("Evaluation on the valid_loader...")
-        self.generate_hypothesis(task.valid_loader, fname="valid.hypo")
+        self.generate_hypothesis(task.valid_loader, fname="valid")
 
     def generate_hypothesis(self, data_loader, fname):
         """
-        Generate the hypothesis of BART on the data_loader and write them in ./experiment_name/fname if experiment_name
-        is not None.
+        Generate the hypothesis of BART on the data_loader and write them in some files.
 
         Args:
             data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
             fname: str, name of the file to write in.
         """
 
-        if self.experiment_name is not None and not exists(self.experiment_name):
-            makedirs(self.experiment_name)
-
         n_rankings = len(data_loader)
         shuffle(data_loader)
 
         for _, ranking in tqdm(enumerate(data_loader), total=n_rankings):
+            goals = format_targets(ranking, targets_format=self.targets_format)
             source = format_context(ranking, context_format=self.context_format)
+            sources = [source for _ in range(len(goals))]
 
             with torch.no_grad():
-                hypotheses_batch = self.trained_model.sample([source],
+                hypotheses_batch = self.trained_model.sample(sources,
                                                              beam=1,
                                                              lenpen=0.9,
                                                              max_len_b=140,
                                                              min_len=1,
                                                              no_repeat_ngram_size=3)
 
-            if self.experiment_name is not None:
-                with open(self.experiment_name + "/" + fname, 'a') as file:
-                    file.writelines([source] + hypotheses_batch + [''])
+            sources = [source + '\n' for source in sources] + ['\n']
+            goals = [goal + '\n' for goal in goals] + ['\n']
+            hypotheses_batch = [hypo + '\n' for hypo in hypotheses_batch] + ['\n']
+
+            with open(fname + ".source", 'a') as source_file, open(fname + ".hypo", 'a') as hypo_file, \
+                    open(fname + ".goal", 'a') as goal_file:
+                source_file.writelines(sources)
+                goal_file.writelines(goals)
+                hypo_file.writelines(hypotheses_batch)
 
 # endregion
 
