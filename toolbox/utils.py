@@ -101,10 +101,10 @@ def get_trained_model(args, folder_path):
         folder_path: str, path of the folder to load from (if not in the arguments).
     """
 
-    use_word2vec = args['word2vec']
-    use_bart = args['bart']
-    folder_path = args['trained_path'] or folder_path
-    checkpoint_file = args['checkpoint_file']
+    use_word2vec = args.word2vec
+    use_bart = args.bart
+    folder_path = args.trained_path or folder_path
+    checkpoint_file = args.checkpoint_file
 
     if not use_word2vec and not use_bart:
         return None
