@@ -1,11 +1,11 @@
+.idea/
+__pycache__/
+.ipynb_checkpoints/
+old/
 
-
-nyt_annotated_corpus/
-/old/
-pretrained_models/
-
-notebooks/.ipynb_checkpoints/
-notebooks/logs/
-
-results/
-!results/annotation_task/wikipedia/
+/nyt_annotated_corpus/
+/pretrained_models/
+/results/
+!/results/annotation_task/wikipedia/
+/fairseq/
+!/fairseq/fairseq/models/bart/hub_interface.py
