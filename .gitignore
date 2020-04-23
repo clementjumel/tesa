@@ -5,7 +5,17 @@ old/
 
 /nyt_annotated_corpus/
 /pretrained_models/
-/results/
+
+/results/*
+!/results/annotation_task/
+/results/annotation_task/*
 !/results/annotation_task/wikipedia/
-/fairseq/
+
+/fairseq/*
+!/fairseq/fairseq/
+/fairseq/fairseq/*
+!/fairseq/fairseq/models/
+/fairseq/fairseq/models/*
+!/fairseq/fairseq/models/bart/
+/fairseq/fairseq/models/bart/*
 !/fairseq/fairseq/models/bart/hub_interface.py
