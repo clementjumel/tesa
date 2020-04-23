@@ -4,7 +4,6 @@ database_creation/__pycache__/
 modeling/__pycache__/
 toolbox/__pycache__/
 
-fairseq/
 nyt_annotated_corpus/
 old/
 pretrained_models/
