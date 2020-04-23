@@ -1,11 +1,7 @@
-.idea/
-__pycache__/
-database_creation/__pycache__/
-modeling/__pycache__/
-toolbox/__pycache__/
+
 
 nyt_annotated_corpus/
-old/
+/old/
 pretrained_models/
 
 notebooks/.ipynb_checkpoints/
