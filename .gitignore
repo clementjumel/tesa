@@ -11,9 +11,5 @@ pretrained_models/
 notebooks/.ipynb_checkpoints/
 notebooks/logs/
 
-results/annotation_task/annotations/
-results/annotation_task/debug/
-results/annotation_task/queries/
-results/finetuning_data/
-results/modeling_task/
-results/models/
+results/
+!results/annotation_task/wikipedia/
