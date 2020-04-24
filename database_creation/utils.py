@@ -588,29 +588,6 @@ class Query:
         self.context = str(context)
         self.context_type_ = context.type_
 
-    # TODO: remove
-    # def __str__(self):
-    #     """
-    #     Overrides the builtin str method for the instances of Query.
-    #
-    #     Returns:
-    #         str, readable format of the instance.
-    #     """
-    #
-    #     d = self.to_readable()
-    #
-    #     return d['entities'] + ':\n' + d['context'] + '\n'
-    #
-    # def __eq__(self, obj):
-    #     """
-    #     Overrides the builtin equals method for the instances of Query.
-    #
-    #     Returns:
-    #         bool, whether or not the two objects are equal.
-    #     """
-    #
-    #     return isinstance(obj, Query) and self.to_html() == obj.to_html() and self.to_readable() == obj.to_readable()
-
     # region Methods get_
 
     def get_entities_phrase(self):
