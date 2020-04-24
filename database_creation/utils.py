@@ -771,7 +771,7 @@ class Annotation:
         self.duration = int(row.get('WorkTimeInSeconds'))
         self.bug = bool(row.get('Answer.box_impossible.on'))
 
-        self.answers, self.preprocessed_answers = self.get_answers(row=row, silent=silent)
+        self.entities, self.answers, self.preprocessed_answers = self.get_answers(row=row, silent=silent)
 
         self.correct_inconsistencies()
 
@@ -788,6 +788,8 @@ class Annotation:
             answers: list, cleaned answers.
             preprocessed_answers: list, preprocessed answers.
         """
+
+        entities = row.get("Input.entities_names")
 
         unpreprocessed_answers, answers, preprocessed_answers = [], [], []
         articles, numbers = ['the'], ['two', 'three', 'four', 'five', 'six']
@@ -833,7 +835,7 @@ class Annotation:
                 answers.append(answer)
                 preprocessed_answers.append(preprocessed_answer)
 
-        return answers, preprocessed_answers
+        return entities, answers, preprocessed_answers
 
     def correct_inconsistencies(self):
         """ Correct the NA reports inconsistencies by discarding answers when there is a reported bug. """
