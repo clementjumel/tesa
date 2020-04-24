@@ -4,11 +4,11 @@ modeling_task script to create the modeling task to be solved by models.
 Usages:
     tests:
         python mt_task.py -t context_free_same_type --no_save
-        python mt_task.py -t context_free_same_type -rs 32 -bs 8 --classification -cf v0 -tf v0 --no_save
-        python mt_task.py -t context_free_same_type -rs 32 -bs 8 --generation -cf v0 -tf v0 --no_save
+        python mt_task.py -t context_free_same_type --classification -cf v0 --no_save
+        python mt_task.py -t context_free_same_type --generation -cf v0 -tf v0 --no_save
     regular usages:
-        python mt_task.py -t context_free_same_type -rs 32 -bs 8 --classification -cf v0
-        python mt_task.py -t context_free_same_type -rs 32 -bs 8 --generation -cf v0 -tf v0
+        python mt_task.py -t context_free_same_type --classification -cf v0
+        python mt_task.py -t context_free_same_type --generation -cf v0 -tf v0
 """
 
 import modeling.modeling_task as modeling_task
@@ -22,11 +22,6 @@ def parse_arguments():
 
     ap = standard_parser()
     add_task_arguments(ap)
-
-    ap.add_argument("--generation", action='store_true', help="Generation finetuning option.")
-    ap.add_argument("--classification", action='store_true', help="Classification finetuning option.")
-    ap.add_argument("-cf", "--context_format", default=None, type=str, help="Version of the context_format.")
-    ap.add_argument("-tf", "--targets_format", default=None, type=str, help="Version of the targets_format.")
 
     return ap.parse_args()
 
