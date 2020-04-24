@@ -5,7 +5,7 @@ Usages:
     tests:
         python db_annotations.py --no_save
     regular usage:
-        python db_annotations.py --silent
+        python db_annotations.py
 """
 
 from database_creation.annotation_task import AnnotationTask
