@@ -111,7 +111,10 @@ class RankingTask:
     def to_loader(self):
         """ Returns the RankingTask as a list of pairs (inputs, targets) for each batch. """
 
-        return [(inputs, targets) for inputs, targets in zip(self.input_batches(), self.target_batches())]
+        loader = [(inputs, targets) for inputs, targets in zip(self.input_batches(), self.target_batches())]
+        shuffle(loader)
+
+        return loader
 
     def input_batches(self):
         """ Returns the input batches of the RakingTask as a list of dict (one dict for each batch). """
@@ -128,7 +131,6 @@ class RankingTask:
         for input_batch in input_batches:
             input_batch.update(generic_inputs)
 
-        shuffle(input_batches)
         return input_batches
 
     def target_batches(self):
@@ -137,7 +139,6 @@ class RankingTask:
         idxs = arange(self.batch_size, len(self.labels), self.batch_size)
         target_batches = [torch.tensor(labels, dtype=torch.long) for labels in split(asarray(self.labels), idxs)]
 
-        shuffle(target_batches)
         return target_batches
 
     # endregion
