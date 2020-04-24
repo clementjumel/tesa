@@ -456,9 +456,10 @@ class ModelingTask:
                 source_rows, target_rows = self.get_generation_rows(ranking_task)
                 all_source_rows.extend(source_rows), all_target_rows.extend(target_rows)
 
-            shuffle(all_source_rows), shuffle(all_target_rows)
-            all_source_rows = [row + '\n' for row in all_source_rows]
-            all_target_rows = [row + '\n' for row in all_target_rows]
+            all_rows = [(source_row, target_row) for source_row, target_row in zip(all_source_rows, all_target_rows)]
+            shuffle(all_rows)
+            all_source_rows = [source_row + '\n' for source_row, _ in all_rows]
+            all_target_rows = [target_row + '\n' for _, target_row in all_rows]
 
             if self.save:
                 with open(file_name_pair[0], 'wt') as source_file, open(file_name_pair[1], 'wt') as target_file:
