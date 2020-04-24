@@ -16,6 +16,7 @@ TASK=classification
 RESULTS_PATH="$MODELS_PATH/$TASK/$1/$2/$3"
 
 module load miniconda
+source activate base
 source activate nlp
 
 cp -r "$PREPROCESSED_DATA_PATH/$TASK/$1-bin" $SLURM_TMPDIR
@@ -71,4 +72,3 @@ CUDA_VISIBLE_DEVICES=0,1 python $FAIRSEQ_PATH/train.py "$1-bin" \
     --skip-invalid-size-inputs-valid-test \
     --disable-validation \
     --find-unused-parameters;
-    #--fp16 --fp16-init-scale 4 --threshold-loss-scale 1 --fp16-scale-window 128 \
