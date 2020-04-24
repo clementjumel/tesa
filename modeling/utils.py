@@ -44,7 +44,7 @@ def format_context(ranking_or_inputs, context_format):
 
     context_items = []
 
-    if context_format == "v0":  # No separation token
+    if context_format == "v0":  # (no separation token) wikis, articles, entities
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.append(wiki_article)
@@ -52,38 +52,18 @@ def format_context(ranking_or_inputs, context_format):
         for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
             context_items.extend([nyt_title + ':', nyt_context])
 
-    elif context_format == "v1":  # [W] wiki1 [W] wiki2 [C] article1 [C] article2 [CLS]
+        context_items.append(', '.join(inputs['entities']))
+
+    elif context_format == "v1":  # § wiki1 § wiki2 £ article1 £ article2 µ entity1 µ entity2
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
-                context_items.extend(["[W]", wiki_article])
+                context_items.extend(["§", wiki_article])
 
         for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-            context_items.extend(["[C]", nyt_title + ":", nyt_context])
+            context_items.extend(["£", nyt_title + ":", nyt_context])
 
-        context_items.append("[CLS]")
-
-    elif context_format == "v2":  # [W] wiki1 [W] wiki2 [T] title1 [C] context1 [T] title2 [C] context2 [CLS]
-        for wiki_article in inputs['wiki_articles']:
-            if wiki_article:
-                context_items.extend(["[W]", wiki_article])
-
-        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-            context_items.extend(["[T]", nyt_title, "[C]", nyt_context])
-
-        context_items.append("[CLS]")
-
-    elif context_format == "v3":  # [W] wiki1 [W] wiki2 [T] all titles [C] all contexts [CLS]
-        for wiki_article in inputs['wiki_articles']:
-            if wiki_article:
-                context_items.extend(["[W]", wiki_article])
-
-        context_items.append("[T]")
-        context_items.extend(inputs['nyt_titles'])
-
-        context_items.append("[C]")
-        context_items.extend(inputs['nyt_contexts'])
-
-        context_items.append("[CLS]")
+        for entity in inputs['entities']:
+            context_items.extend(["µ", entity])
 
     else:
         raise Exception("Context format not implemented: %s." % context_format)
@@ -110,7 +90,7 @@ def format_targets(ranking, targets_format):
         return valid_choices
 
     elif targets_format == "v1":  # all valid choices in one target, separated with separation tokens.
-        return ["[G] " + " [G] ".join(valid_choices)]
+        return ["∂ " + " ∂ ".join(valid_choices)]
 
     else:
         raise Exception("Targets format not implemented: %s." % targets_format)
