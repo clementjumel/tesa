@@ -855,6 +855,8 @@ class ClassifierBart(BaseModel):
                          task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
                          experiment_name=experiment_name, random_seed=random_seed, root=root)
 
+        self.max_size = 900
+
         labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
                                                                    self.trained_model.task.label_dictionary.nspecial])
                   for i in range(2)]
@@ -865,10 +867,17 @@ class ClassifierBart(BaseModel):
 
     def pred(self, inputs):
         sentence1 = format_context(inputs, context_format=self.context_format)
+
+        n_tokens = len(sentence1.split())
+        if n_tokens >= self.max_size:
+            sentence1 = ' '.join(sentence1.split()[-self.max_size:])
+            print("Too long input (%i tokens), truncated to %i tokens." % (n_tokens, len(sentence1.split())))
+
         batch_encoding = [self.trained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
 
-        logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
+        with torch.no_grad():
+            logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
 
         return logprobs[:, self.idx].reshape((-1, 1))
 
