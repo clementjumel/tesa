@@ -2,8 +2,9 @@
 #SBATCH --job-name=evaluate
 #SBATCH --partition=main
 #SBATCH --gres=gpu:1
+#SBATCH --mem=10G
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=1:00:00
+#SBATCH --time=4:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/evaluate-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/evaluate-%j.out
 
@@ -47,6 +48,14 @@ do
 
   cp "$RESULTS_PATH/$CHECKPOINT.pt" $BART
 
+  if [ $TASK_TYPE == "classification" ]
+  then
+    cp -r "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input0" \
+          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input1" \
+          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/label" \
+          $BART
+  fi
+
   echo ""
   echo "Evaluating checkpoint:"
   echo $CHECKPOINT
@@ -54,11 +63,6 @@ do
 
   if [ $TASK_TYPE == "classification" ]
   then
-    cp -r "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input0" \
-          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input1" \
-          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/label" \
-          $BART
-
     python $MASTER_THESIS_PATH/mt_models.py \
           --full_task_name $MODELING_TASK.pkl \
           --bart \

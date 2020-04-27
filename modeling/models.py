@@ -855,7 +855,7 @@ class ClassifierBart(BaseModel):
                          task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
                          experiment_name=experiment_name, random_seed=random_seed, root=root)
 
-        self.max_size = 900
+        self.max_size = 800
 
         labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
                                                                    self.trained_model.task.label_dictionary.nspecial])

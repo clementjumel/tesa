@@ -3,7 +3,7 @@
 #SBATCH --partition=main
 #SBATCH --gres=gpu:1
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=10:00:00
+#SBATCH --time=12:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/finetune-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/finetune-%j.out
 
