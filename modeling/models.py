@@ -924,13 +924,13 @@ class GeneratorBart(BaseModel):
                                                           min_len=self.min_len,
                                                           no_repeat_ngram_size=self.no_repeat_ngram_size)[0]
 
-            with open(path_join(self.results_path, fname + ".source", 'a')) as source_file:
+            with open(path_join(self.results_path, fname + ".source"), 'a') as source_file:
                 source_file.write(str(idx) + ' - ' + source + '\n')
-            with open(path_join(self.results_path, fname + ".targets", 'a')) as targets_file:
+            with open(path_join(self.results_path, fname + ".targets"), 'a') as targets_file:
                 targets_file.write(str(idx) + ' - ' + ', '.join(targets) + '\n')
-            with open(path_join(self.results_path, fname + ".entities", 'a')) as entities_file:
+            with open(path_join(self.results_path, fname + ".entities"), 'a') as entities_file:
                 entities_file.write(str(idx) + ' - ' + ', '.join(entities) + '\n')
-            with open(path_join(self.results_path, fname + ".hypotheses", 'a')) as hypotheses_file:
+            with open(path_join(self.results_path, fname + ".hypotheses"), 'a') as hypotheses_file:
                 hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo[0], 2 ** hypo[1])
                                                                     for hypo in hypotheses]) + '\n')
 
