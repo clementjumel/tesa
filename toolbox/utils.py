@@ -34,22 +34,22 @@ def add_task_arguments(ap):
                     type=str, required=True,
                     help="Name of the modeling task version.")
     ap.add_argument("-vp", "--valid_proportion",
-                    type=float, default=DEFAULT_VALID_PROPORTION,
+                    type=float, default=VALID_PROPORTION,
                     help="Proportion of the validation set.")
     ap.add_argument("-tp", "--test_proportion",
-                    type=float, default=DEFAULT_TEST_PROPORTION,
+                    type=float, default=TEST_PROPORTION,
                     help="Proportion of the test set.")
     ap.add_argument("-rs", "--ranking_size",
-                    type=int, default=DEFAULT_RANKING_SIZE,
+                    type=int, default=RANKING_SIZE,
                     help="Size of the ranking tasks.")
     ap.add_argument("-bs", "--batch_size",
-                    type=int, default=DEFAULT_BATCH_SIZE,
+                    type=int, default=BATCH_SIZE,
                     help="Size of the batches of the task.")
     ap.add_argument("-cf", "--context_format",
-                    type=str, default=DEFAULT_CONTEXT_FORMAT,
+                    type=str, default=CONTEXT_FORMAT,
                     help="Version of the context format.")
     ap.add_argument("-tf", "--targets_format",
-                    type=str, default=DEFAULT_TARGETS_FORMAT,
+                    type=str, default=TARGETS_FORMAT,
                     help="Version of the targets format.")
     ap.add_argument("--task_path",
                     type=str, default=MODELING_TASK_RESULTS_PATH,
@@ -76,6 +76,9 @@ def add_model_arguments(ap):
     ap.add_argument("-m", "--model",
                     type=str, required=True,
                     help="Name of the model.")
+    ap.add_argument("-sn", "--score_names",
+                    type=list, default=SCORES_NAMES,
+                    help="Names of the scores to use.")
     ap.add_argument("-e", "--experiment",
                     type=str, default=None,
                     help="Name of the experiment.")
