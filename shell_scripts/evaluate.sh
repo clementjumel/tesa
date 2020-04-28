@@ -15,6 +15,8 @@ EXPERIMENT=$4
 CHECKPOINT_START=$5
 CHEKCPOINT_STEP=$6
 CHECKPOINT_END=$7
+CONTEXT_FORMAT=$8
+TARGETS_FORMAT=$9
 
 MASTER_THESIS_PATH=/network/home/jumelcle/master_thesis
 PRETRAINED_MODELS_PATH=/network/tmp1/jumelcle/pretrained_models
@@ -64,32 +66,26 @@ do
   if [ $TASK_TYPE == "classification" ]
   then
     python $MASTER_THESIS_PATH/run_model.py \
+          --task_path "" \
+          --context_format $CONTEXT_FORMAT \
           --model classifier_bart \
           --bart \
-          --pretrained_path $BART/ \
+          --pretrained_path $BART \
           --checkpoint_file $CHECKPOINT.pt \
           --show;
 
   elif [ $TASK_TYPE == "generation" ]
   then
-    python $MASTER_THESIS_PATH/run_model.py \
-          --model generator_bart \
-          --bart \
-          --trained_path $BART/ \
-          --checkpoint_file $CHECKPOINT.pt;
-
     rm -rf $RESULTS_PATH/$CHECKPOINT
     mkdir $RESULTS_PATH/$CHECKPOINT
 
-    mv train.source $RESULTS_PATH/$CHECKPOINT
-    mv train.targets $RESULTS_PATH/$CHECKPOINT
-    mv train.entities $RESULTS_PATH/$CHECKPOINT
-    mv train.hypotheses $RESULTS_PATH/$CHECKPOINT
-
-    mv valid.source $RESULTS_PATH/$CHECKPOINT
-    mv valid.targets $RESULTS_PATH/$CHECKPOINT
-    mv valid.entities $RESULTS_PATH/$CHECKPOINT
-    mv valid.hypotheses $RESULTS_PATH/$CHECKPOINT
+    python $MASTER_THESIS_PATH/run_model.py \
+          --task_path "" \
+          --model generator_bart \
+          --bart \
+          --pretrained_path $BART \
+          --checkpoint_file $CHECKPOINT.pt \
+          --results_path $RESULTS_PATH/$CHECKPOINT;
   fi
 
   rm "$BART/$CHECKPOINT.pt"
