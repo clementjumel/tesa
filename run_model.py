@@ -8,7 +8,7 @@ Usages:
 """
 
 from toolbox.parsers import standard_parser, add_task_arguments, add_model_arguments
-from toolbox.utils import load_task, get_trained_model, to_class_name
+from toolbox.utils import load_task, get_pretrained_model, to_class_name
 import modeling.models as models
 
 
@@ -28,11 +28,9 @@ def main():
     args = parse_arguments()
 
     task = load_task(args)
-    trained_model = get_trained_model(args)
+    pretrained_model = get_pretrained_model(args)
 
-    model = getattr(models, to_class_name(args.model))(trained_model=trained_model,
-                                                       relevance_level=task.relevance_level,
-                                                       args=args)
+    model = getattr(models, to_class_name(args.model))(args=args, pretrained_model=pretrained_model)
 
     model.play(task)
 
