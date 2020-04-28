@@ -115,7 +115,7 @@ def add_model_arguments(ap):
     ap.add_argument("--bart_max_len_b",
                     type=int, default=BART_MAX_LEN_B,
                     help="Parameter max_len_b for generator BART.")
-    ap.add_argument("--min_len",
+    ap.add_argument("--bart_min_len",
                     type=int, default=BART_MIN_LEN,
                     help="Parameter bart_min_len for generator BART.")
     ap.add_argument("--bart_no_repeat_ngram_size",
