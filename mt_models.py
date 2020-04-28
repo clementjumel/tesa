@@ -8,7 +8,7 @@ Usages:
 
 import modeling.models as models
 from toolbox.utils import to_class_name, standard_parser, add_task_arguments, load_task, get_trained_model
-from toolbox.parameters import SCORES_NAMES, MODELS_RANDOM_SEED
+from toolbox.parameters import SCORES_NAMES, MODELS_RANDOM_SEED, SHOW_RANKINGS, SHOW_CHOICES
 from toolbox.paths import PRETRAINED_MODELS_PATH, MODELING_TASK_RESULTS_PATH, TENSORBOARD_LOGS_PATH
 
 
@@ -48,7 +48,10 @@ def main():
                                         experiment_name=args.experiment,
                                         random_seed=MODELS_RANDOM_SEED)
 
-    model.play(task=task, show=args.show)
+    model.play(task=task)
+
+    if args.show:
+        model.show(task=task, show_rankings=SHOW_RANKINGS, show_choices=SHOW_CHOICES)
 
 
 if __name__ == '__main__':
