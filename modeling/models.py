@@ -97,39 +97,46 @@ class BaseModel:
         shuffle(data_loader)
 
         for ranking_idx, ranking in enumerate(data_loader[:show_rankings]):
-            choices, outputs, targets = [], [], []
+            ranking_choices, ranking_outputs, ranking_targets = [], [], []
 
             for inputs, targets in ranking:
-                choices.extend(inputs['choices'])
-                outputs.extend(self.pred(inputs).squeeze().tolist())
-                targets.extend(targets.squeeze().tolist())
+                outputs = self.pred(inputs)
 
-            ranks = get_ranks(outputs)
-            batch_score = self.get_score(ranks=ranks, targets=targets)
+                ranking_choices.extend(inputs['choices'])
+                ranking_outputs.append(outputs)
+                ranking_targets.append(targets)
+
+            ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(ranking_targets)
+
+            ranking_ranks = get_ranks(ranking_outputs)
+            batch_score = self.get_score(ranks=ranking_ranks, targets=ranking_targets)
 
             print("Ranking %i/%i: " % (ranking_idx + 1, show_rankings))
 
             inputs, _ = ranking[0]
-            print("Entities (%s): %s" % (inputs['entities_type'], inputs['entities']))
+            print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
 
             if self.context_format is not None:
                 print("Context:\n%s" % format_context(inputs, context_format=self.context_format))
 
             print("\nScores:")
             for score_name in self.scores_names:
-                print("%s: %.4f" % (score_name, batch_score[score_name]))
+                print("%s: %.3f" % (score_name, batch_score[score_name]))
 
-            results = zip(ranks, choices, outputs, targets)
+            results = zip(ranking_ranks.squeeze().tolist(),
+                          ranking_choices,
+                          ranking_outputs.squeeze().tolist(),
+                          ranking_targets.squeeze().tolist())
             results = sorted(results, key=lambda x: x[0])
 
             print("\nGold standards (rank: choice (output/target):")
             for result in results:
                 if result[3]:
-                    print("%i: %s (%.4f/%i)" % result)
+                    print("%i: %s (%.2f/%i)" % result)
 
             print("\nTop %i results (rank: choice (output/target):" % show_choices)
             for result in results[:show_choices]:
-                print("%i: %s (%.4f/%i)" % result)
+                print("%i: %s (%.2f/%i)" % result)
 
             print()
 

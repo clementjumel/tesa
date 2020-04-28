@@ -32,7 +32,7 @@ SCORES_NAMES = [
     'ndcg_at_10',
     # 'ndcg_at_100',
 ]
-SHOW_RANKINGS = 5
+SHOW_RANKINGS = 10
 SHOW_CHOICES = 10
 MODELS_RANDOM_SEED = 2
 # endregion
