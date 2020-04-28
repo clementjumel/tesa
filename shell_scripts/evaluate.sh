@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=4:00:00
+#SBATCH --time=5:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/evaluate-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/evaluate-%j.out
 
@@ -40,6 +40,14 @@ source activate nlp
 tar -xf "$PRETRAINED_MODELS_PATH/$BART.tar.gz" -C $SLURM_TMPDIR
 cp "$MODELING_TASKS_PATH/$MODELING_TASK.pkl" $SLURM_TMPDIR
 
+if [ $TASK_TYPE == "classification" ]
+then
+  cp -r "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input0" \
+        "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input1" \
+        "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/label" \
+        $SLURM_TMPDIR/$BART
+fi
+
 cd $SLURM_TMPDIR
 
 for i in $(eval echo "{$CHECKPOINT_START..$CHEKCPOINT_STEP..$CHECKPOINT_END}")
@@ -48,14 +56,6 @@ do
 
   cp "$RESULTS_PATH/$CHECKPOINT.pt" $BART
 
-  if [ $TASK_TYPE == "classification" ]
-  then
-    cp -r "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input0" \
-          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/input1" \
-          "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$MODELING_TASK-bin/label" \
-          $BART
-  fi
-
   echo ""
   echo "Evaluating checkpoint:"
   echo $CHECKPOINT
@@ -63,22 +63,20 @@ do
 
   if [ $TASK_TYPE == "classification" ]
   then
-    python $MASTER_THESIS_PATH/mt_models.py \
-          --full_task_name $MODELING_TASK.pkl \
-          --bart \
-          --trained_path $BART/ \
-          --checkpoint_file $CHECKPOINT.pt \
+    python $MASTER_THESIS_PATH/run_model.py \
           --model classifier_bart \
+          --bart \
+          --pretrained_path $BART/ \
+          --checkpoint_file $CHECKPOINT.pt \
           --show;
 
   elif [ $TASK_TYPE == "generation" ]
   then
-    python $MASTER_THESIS_PATH/mt_models.py \
-          --full_task_name $MODELING_TASK.pkl \
+    python $MASTER_THESIS_PATH/run_model.py \
+          --model generator_bart \
           --bart \
           --trained_path $BART/ \
-          --checkpoint_file $CHECKPOINT.pt \
-          --model generator_bart;
+          --checkpoint_file $CHECKPOINT.pt;
 
     rm -rf $RESULTS_PATH/$CHECKPOINT
     mkdir $RESULTS_PATH/$CHECKPOINT
@@ -94,6 +92,7 @@ do
     mv valid.hypotheses $RESULTS_PATH/$CHECKPOINT
   fi
 
+  rm "$BART/$CHECKPOINT.pt"
   echo "$CHECKPOINT evaluated"
 done
 
