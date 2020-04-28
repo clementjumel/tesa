@@ -30,7 +30,7 @@ class BaseModel:
         """
 
         self.scores_names = args.scores_names
-        self.max_context_size = args.max_context_size
+        self.context_max_size = args.context_max_size
         self.context_format = args.context_format
         self.targets_format = args.targets_format
         self.pretrained_model = pretrained_model
@@ -116,7 +116,7 @@ class BaseModel:
 
             if self.context_format is not None:
                 print("Context:\n%s" % format_context(inputs, context_format=self.context_format,
-                                                      max_context_size=self.max_context_size))
+                                                      context_max_size=self.context_max_size))
 
             print("\nScores:")
             for score_name in self.scores_names:
@@ -866,7 +866,7 @@ class ClassifierBart(BaseModel):
         self.idx = labels.index("aggregation")
 
     def pred(self, inputs):
-        sentence1 = format_context(inputs, context_format=self.context_format, max_context_size=self.max_context_size)
+        sentence1 = format_context(inputs, context_format=self.context_format, context_max_size=self.context_max_size)
 
         batch_encoding = [self.pretrained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
@@ -912,7 +912,7 @@ class GeneratorBart(BaseModel):
         shuffle(data_loader)
 
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
-            source = format_context(ranking, context_format=self.context_format, max_context_size=self.max_context_size)
+            source = format_context(ranking, context_format=self.context_format, context_max_size=self.context_max_size)
             targets = format_targets(ranking, targets_format=self.targets_format)
             entities = ranking[0][0]['entities']
 
