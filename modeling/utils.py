@@ -26,13 +26,14 @@ def get_ranks(outputs):
     return ranks
 
 
-def format_context(ranking_or_inputs, context_format):
+def format_context(ranking_or_inputs, context_format, max_context_size):
     """
     Return the context formated depending on context_format.
 
     Args:
         ranking_or_inputs: list of (inputs, targets) batches, or just an inputs batch.
         context_format: str, version of the context format to use.
+        max_context_size: int, maximum number of tokens in the context.
     """
 
     if isinstance(ranking_or_inputs, list):  # ranking_or_inputs is a ranking
@@ -68,7 +69,14 @@ def format_context(ranking_or_inputs, context_format):
     else:
         raise Exception("Context format not implemented: %s." % context_format)
 
-    return " ".join(context_items)
+    context = " ".join(context_items)
+
+    context_words = context.split()
+    if len(context_words) > max_context_size:
+        context_words = context_words[-max_context_size:]
+        context = " ".join(context_words)
+
+    return context
 
 
 def format_targets(ranking, targets_format):
