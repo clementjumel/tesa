@@ -8,8 +8,16 @@ def standard_parser():
     """ Create an argument parser, add the parsing arguments relative to the options and return it. """
 
     ap = ArgumentParser()
-    ap.add_argument("--no_save", action='store_true', help="No save option.")
-    ap.add_argument("--silent", action='store_true', help="Silence option.")
+
+    ap.add_argument("--root",
+                    type=str, default="",
+                    help="Path to the root of the project.")
+    ap.add_argument("--no_save",
+                    action='store_true',
+                    help="No save option.")
+    ap.add_argument("--silent",
+                    action='store_true',
+                    help="Silence option.")
 
     return ap
 
