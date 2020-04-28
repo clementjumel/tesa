@@ -103,7 +103,7 @@ def get_bart(folder_path, checkpoint_file):
 
     from fairseq.models.bart import BARTModel
 
-    bart = BARTModel.from_pretrained(model_name_or_path=folder_path,
+    bart = BARTModel.from_pretrained(model_name_or_path=folder_path + '/',
                                      checkpoint_file=checkpoint_file)
 
     if torch.cuda.is_available():
