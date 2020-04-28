@@ -37,7 +37,7 @@ def add_task_arguments(ap):
     """
 
     ap.add_argument("-t", "--task",
-                    type=str, required=True,
+                    type=str, default=TASK_NAME,
                     help="Name of the modeling task version.")
     ap.add_argument("-vp", "--valid_proportion",
                     type=float, default=VALID_PROPORTION,
@@ -82,7 +82,7 @@ def add_model_arguments(ap):
     ap.add_argument("-m", "--model",
                     type=str, required=True,
                     help="Name of the model.")
-    ap.add_argument("-sn", "--score_names",
+    ap.add_argument("--scores_names",
                     type=list, default=SCORES_NAMES,
                     help="Names of the scores to use.")
     ap.add_argument("--context_max_size",
