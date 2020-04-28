@@ -51,8 +51,8 @@ def load_task(args):
     return task
 
 
-def get_trained_model(args):
-    """ Returns the trained model (word2vec embedding or bart). """
+def get_pretrained_model(args):
+    """ Returns the pretrained model (word2vec embedding or bart). """
 
     use_word2vec = args.word2vec
     use_bart = args.bart
