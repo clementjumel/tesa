@@ -82,12 +82,24 @@ def add_model_arguments(ap):
     ap.add_argument("-e", "--experiment",
                     type=str, default=None,
                     help="Name of the experiment.")
+    ap.add_argument("--tensorboard_logs_path",
+                    type=str, default=TENSORBOARD_LOGS_PATH,
+                    help="Path of the tensorboard logs folder.")
     ap.add_argument("--pretrained_path",
                     type=str, default=PRETRAINED_MODELS_PATH,
                     help="Path to the pretrained model folder.")
     ap.add_argument("--checkpoint_file",
                     type=str, default=None,
                     help="Name of BART's checkpoint file.")
+    ap.add_argument("--model_random_seed",
+                    type=int, default=MODELS_RANDOM_SEED,
+                    help="Random seed of the model.")
+    ap.add_argument("--show_rankings",
+                    type=int, default=SHOW_RANKINGS,
+                    help="Number of rankings to show.")
+    ap.add_argument("--show_choices",
+                    type=int, default=SHOW_CHOICES,
+                    help="Number of choices to show per ranking.")
     ap.add_argument("--word2vec",
                     action="store_true",
                     help="Load Word2Vec embedding.")
