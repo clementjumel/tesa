@@ -27,7 +27,8 @@ CONTEXT_FORMAT = 'v0'
 TARGETS_FORMAT = None
 # endregion
 
-# region Baselines parameters
+# region Models parameters
+CONTEXT_MAX_SIZE = 800
 SHOW_RANKINGS = 10
 SHOW_CHOICES = 10
 
