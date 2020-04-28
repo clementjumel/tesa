@@ -1,22 +1,15 @@
+"""
+Metrics to evaluate the performance on the ranking task. The methods take two torch.Tensor as arguments (the ranks
+predicted and the targets), and return the corresponding score in a torch.Tensor.
+"""
+
 from modeling.utils import get_ranks
 
 import torch
 
 
-def average_precision(ranks, targets, relevance_level):
-    """
-    Compute the Average Precision the ranks and targets line Tensors. If there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    mask = targets >= relevance_level
+def average_precision(ranks, targets):
+    mask = targets > 0
     ranks = ranks[mask]
     n = len(ranks)
 
@@ -30,24 +23,7 @@ def average_precision(ranks, targets, relevance_level):
         return torch.div(torch.ge(ranks2, ranks1).sum(dim=1).type(torch.float), ranks.type(torch.float)).mean()
 
 
-def precision_at_k(ranks, targets, relevance_level, k):
-    """
-    Returns the precision at k, that is the fraction of answers retrieved by the first k ranks that are relevant. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-        k: int, number of ranks to take into account.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    mask = targets < relevance_level
-    targets[mask] = 0
-
+def precision_at_k(ranks, targets, k):
     if targets.sum() == 0:
         return None
 
@@ -61,60 +37,16 @@ def precision_at_k(ranks, targets, relevance_level, k):
         return torch.div(targets.sum().type(torch.float), k)
 
 
-def precision_at_10(ranks, targets, relevance_level):
-    """
-    Returns the precision at k, that is the fraction of answers retrieved by the first k ranks that are relevant. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return precision_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=10)
+def precision_at_10(ranks, targets):
+    return precision_at_k(ranks=ranks, targets=targets, k=10)
 
 
-def precision_at_100(ranks, targets, relevance_level):
-    """
-    Returns the precision at k, that is the fraction of answers retrieved by the first k ranks that are relevant. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return precision_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=100)
+def precision_at_100(ranks, targets):
+    return precision_at_k(ranks=ranks, targets=targets, k=100)
 
 
-def recall_at_k(ranks, targets, relevance_level, k):
-    """
-    Returns the recall at k, that is the fraction of relevant answers that are retrieved by the first k ranks. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-        k: int, number of ranks to take into account.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    mask = targets < relevance_level
-    targets[mask] = 0
-    targets[~mask] = 1
+def recall_at_k(ranks, targets, k):
     n = targets.sum()
-
     if n == 0:
         return None
 
@@ -125,56 +57,15 @@ def recall_at_k(ranks, targets, relevance_level, k):
         return torch.div(targets.sum().type(torch.float), n)
 
 
-def recall_at_10(ranks, targets, relevance_level):
-    """
-    Returns the recall at k, that is the fraction of relevant answers that are retrieved by the first k ranks. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return recall_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=10)
+def recall_at_10(ranks, targets):
+    return recall_at_k(ranks=ranks, targets=targets, k=10)
 
 
-def recall_at_100(ranks, targets, relevance_level):
-    """
-    Returns the recall at k, that is the fraction of relevant answers that are retrieved by the first k ranks. If
-    there is not relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return recall_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=100)
+def recall_at_100(ranks, targets):
+    return recall_at_k(ranks=ranks, targets=targets, k=100)
 
 
-def reciprocal_best_rank(ranks, targets, relevance_level):
-    """
-    Returns the reciprocal best rank of the relevant answers. If there is no relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    mask = targets < relevance_level
-    targets[mask] = 0
-
+def reciprocal_best_rank(ranks, targets):
     if targets.sum() == 0:
         return None
 
@@ -185,22 +76,7 @@ def reciprocal_best_rank(ranks, targets, relevance_level):
         return ranks.min().type(torch.float).reciprocal()
 
 
-def reciprocal_average_rank(ranks, targets, relevance_level):
-    """
-    Returns the reciprocal average rank of the relevant answers. If there is no relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    mask = targets < relevance_level
-    targets[mask] = 0
-
+def reciprocal_average_rank(ranks, targets):
     if targets.sum() == 0:
         return None
 
@@ -211,23 +87,7 @@ def reciprocal_average_rank(ranks, targets, relevance_level):
         return ranks.type(torch.float).mean().reciprocal()
 
 
-def ndcg_at_k(ranks, targets, relevance_level, k):
-    """
-    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets. If there is not
-    relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-        k: int, number of ranks to take into account.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    del relevance_level
-
+def ndcg_at_k(ranks, targets, k):
     perfect_ranks = get_ranks(targets.reshape((-1, 1)))
 
     mask1, mask2 = ranks <= k, perfect_ranks <= k
@@ -243,35 +103,9 @@ def ndcg_at_k(ranks, targets, relevance_level, k):
     return torch.div(torch.dot(g1.type(torch.float), d1), torch.dot(g2.type(torch.float), d2))
 
 
-def ndcg_at_10(ranks, targets, relevance_level):
-    """
-    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets. If there is not
-    relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return ndcg_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=10)
+def ndcg_at_10(ranks, targets):
+    return ndcg_at_k(ranks=ranks, targets=targets, k=10)
 
 
-def ndcg_at_100(ranks, targets, relevance_level):
-    """
-    Compute the Normalized Discounted Cumulative Gain at k for the line Tensors ranks and targets. If there is not
-    relevant answer, returns None.
-
-    Args:
-        ranks: torch.Tensor, ranks predicted for the batch.
-        targets: torch.Tensor, true labels for the batch.
-        relevance_level: int, minimum label to consider a choice as relevant.
-
-    Returns:
-        torch.tensor, score of the batch.
-    """
-
-    return ndcg_at_k(ranks=ranks, targets=targets, relevance_level=relevance_level, k=100)
+def ndcg_at_100(ranks, targets):
+    return ndcg_at_k(ranks=ranks, targets=targets, k=100)
