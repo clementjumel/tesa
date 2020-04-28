@@ -15,6 +15,9 @@ def standard_parser():
     ap.add_argument("--root",
                     type=str, default="",
                     help="Path to the root of the project.")
+    ap.add_argument("--results_path",
+                    type=str, default=None,
+                    help="Path to the result folder.")
     ap.add_argument("--no_save",
                     action='store_true',
                     help="No save option.")
@@ -85,9 +88,6 @@ def add_model_arguments(ap):
     ap.add_argument("--context_max_size",
                     type=int, default=CONTEXT_MAX_SIZE,
                     help="Maximum number of tokens in the context.")
-    ap.add_argument("-e", "--experiment",
-                    type=str, default=None,
-                    help="Name of the experiment.")
     ap.add_argument("--tensorboard_logs_path",
                     type=str, default=TENSORBOARD_LOGS_PATH,
                     help="Path of the tensorboard logs folder.")
@@ -112,6 +112,9 @@ def add_model_arguments(ap):
     ap.add_argument("--bart",
                     action="store_true",
                     help="Load a BART model.")
+    ap.add_argument("--tensorboard",
+                    action="store_true",
+                    help="Option to use tensorboard.")
     ap.add_argument("--show",
                     action="store_true",
                     help="Option to show some results.")
