@@ -1,12 +1,13 @@
 """ Parameters of the various scripts. """
 
+RANDOM_SEED = 2345
+
 # region Annotation task parameters
 YEARS = [2006, 2007]
 MAX_TUPLE_SIZE = 6
 RANDOM = True
 EXCLUDE_PILOT = False
 ANNOTATION_TASK_SHORT_SIZE = 10000
-ANNOTATION_TASK_SEED = 0
 
 LOAD_WIKI = True
 WIKIPEDIA_FILE_NAME = "wikipedia_global"
@@ -17,7 +18,6 @@ CORRECT_WIKI = True
 MIN_ASSIGNMENTS = 5
 MIN_ANSWERS = 2
 K_CROSS_VALIDATION = 5
-MODELING_TASK_SEED = 1
 
 VALID_PROPORTION = 0.25
 TEST_PROPORTION = 0.25
@@ -30,7 +30,6 @@ TARGETS_FORMAT = None
 # region Baselines parameters
 SHOW_RANKINGS = 10
 SHOW_CHOICES = 10
-MODELS_RANDOM_SEED = 2
 
 SCORES_NAMES = [
     'average_precision',
