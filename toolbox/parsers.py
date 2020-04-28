@@ -82,6 +82,9 @@ def add_model_arguments(ap):
     ap.add_argument("-sn", "--score_names",
                     type=list, default=SCORES_NAMES,
                     help="Names of the scores to use.")
+    ap.add_argument("--context_max_size",
+                    type=int, default=CONTEXT_MAX_SIZE,
+                    help="Maximum number of tokens in the context.")
     ap.add_argument("-e", "--experiment",
                     type=str, default=None,
                     help="Name of the experiment.")
