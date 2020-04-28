@@ -9,6 +9,9 @@ def standard_parser():
 
     ap = ArgumentParser()
 
+    ap.add_argument("--random_seed",
+                    type=int, default=RANDOM_SEED,
+                    help="Random seed for numpy and torch.")
     ap.add_argument("--root",
                     type=str, default="",
                     help="Path to the root of the project.")
