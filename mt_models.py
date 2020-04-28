@@ -3,6 +3,7 @@ modeling_task script to run Models on a task.
 
 Usages:
     python mt_models.py -t context_free_same_type -rs 32 -bs 8 -cf v0 -m frequency
+    python mt_models.py -t context_free_same_type -rs 32 -bs 8 -cf v0 -m frequency --show
     python mt_models.py -t context_free_same_type -rs 32 -bs 8 -cf v0 -m summaries_average_embedding --word2vec
 """
 
