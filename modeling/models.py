@@ -12,6 +12,7 @@ from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
 from torch.utils.tensorboard import SummaryWriter
 from fairseq.data.data_utils import collate_tokens
+from os.path import join as join_path
 import matplotlib.pyplot as plt
 import torch
 
@@ -19,25 +20,20 @@ import torch
 class BaseModel:
     """ Model structure. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path, experiment_name,
-                 random_seed, root=""):
+    def __init__(self, args, pretrained_model):
         """
         Initializes an instance of Model.
 
         Args:
-            scores_names: iterable, names of the scores to use, the first one being monitored during training.
-            relevance_level: int, minimum label to consider a choice as relevant.
-            trained_model: unknown, pretrained embedding or model.
-            task_name: str, name of the task to run.
-            tensorboard_logs_path: str, path to the tensorboard logs folder.
-            experiment_name: str, if not None, name of the folder to save the tensorboard in.
-            random_seed: int, the seed to use for the random processes.
-            root: str, path to the root of the project.
+            args: argparse.ArgumentParser, arguments passed to the script.
+            pretrained_model: unknown, pretrained word embedding or BART.
         """
 
-        self.scores_names = scores_names
-        self.relevance_level = relevance_level
-        self.trained_model = trained_model
+        self.scores_names = args.scores_names
+        self.max_context_size = args.max_context_size
+        self.context_format = args.context_format
+        self.targets_format = args.targets_format
+        self.pretrained_model = pretrained_model
 
         self.train_losses, self.train_scores = [], defaultdict(list)
         self.valid_losses, self.valid_scores = [], defaultdict(list)
@@ -48,32 +44,31 @@ class BaseModel:
         self.lemmatizer = WordNetLemmatizer()
 
         self.writer = None
-        self.context_format = None
-        self.targets_format = None
 
-        if experiment_name is not None:
+        if args.tensorboard:
+            root = args.root
+            tensorboard_logs_path = args.tensorboard_logs_path
             model_name = self.__class__.__name__
             model_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', model_name)])
 
-            self.writer = SummaryWriter(root + tensorboard_logs_path + experiment_name + "/" + model_name)
+            self.writer = SummaryWriter(join_path(root, tensorboard_logs_path, model_name))
 
-        if task_name is not None:
-            if "_cf-" in task_name:
-                self.context_format = task_name.split("_cf-")[1][:2]
-            if "_tf-" in task_name:
-                self.targets_format = task_name.split("_tf-")[1][:2]
-
-        seed(random_seed), torch.manual_seed(random_seed)
+        seed(args.random_seed), torch.manual_seed(args.random_seed)
 
     # region Training pipeline methods
 
-    def play(self, task):
+    def play(self, task, args):
         """
         Performs the preview and the evaluation of a model on the task.
 
         Args:
             task: modeling_task.ModelingTask, task to evaluate the model on.
+            args: argparse.ArgumentParser, arguments passed to the script.
         """
+
+        show = args.show
+        show_rankings = args.show_rankings
+        show_choices = args.show_choices
 
         self.preview(task.train_loader)
 
@@ -82,6 +77,9 @@ class BaseModel:
 
         print("Evaluation on the valid_loader...")
         self.valid(task.valid_loader)
+
+        if show:
+            self.show(task, show_rankings=show_rankings, show_choices=show_choices)
 
     def show(self, task, show_rankings, show_choices):
         """
@@ -117,7 +115,8 @@ class BaseModel:
             print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
 
             if self.context_format is not None:
-                print("Context:\n%s" % format_context(inputs, context_format=self.context_format))
+                print("Context:\n%s" % format_context(inputs, context_format=self.context_format,
+                                                      max_context_size=self.max_context_size))
 
             print("\nScores:")
             for score_name in self.scores_names:
@@ -263,8 +262,7 @@ class BaseModel:
 
         for name in self.scores_names:
             score = getattr(metrics, name)(ranks=ranks.clone(),
-                                           targets=targets.clone(),
-                                           relevance_level=self.relevance_level)
+                                           targets=targets.clone())
 
             score_dict[name] = score.data.item()
 
@@ -528,7 +526,7 @@ class BaseModel:
             torch.Tensor, embedding of word.
         """
 
-        return torch.tensor(self.trained_model[word]) if word in self.trained_model.vocab else None
+        return torch.tensor(self.pretrained_model[word]) if word in self.pretrained_model.vocab else None
 
     def get_average_embedding(self, words):
         """
@@ -548,7 +546,7 @@ class BaseModel:
             return torch.stack(embeddings).mean(dim=0)
 
         else:
-            word = list(self.trained_model.vocab)[0]
+            word = list(self.pretrained_model.vocab)[0]
             embedding = self.get_word_embedding(word)
 
             return torch.zeros_like(embedding, dtype=torch.float)
@@ -661,12 +659,8 @@ class Random(BaseModel):
 class Frequency(BaseModel):
     """ Baseline based on answers' overall frequency. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path, experiment_name,
-                 random_seed, root=""):
-
-        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
-                         experiment_name=experiment_name, random_seed=random_seed, root=root)
+    def __init__(self, args, pretrained_model):
+        super().__init__(args=args, pretrained_model=pretrained_model)
 
         self.counts = defaultdict(int)
 
@@ -862,36 +856,23 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
 class ClassifierBart(BaseModel):
     """ BART finetuned as a classifier between aggregation and not_aggregation. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path,
-                 experiment_name, random_seed, root=""):
+    def __init__(self, args, pretrained_model):
+        super().__init__(args=args, pretrained_model=pretrained_model)
 
-        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
-                         experiment_name=experiment_name, random_seed=random_seed, root=root)
-
-        self.max_size = 800
-
-        labels = [self.trained_model.task.label_dictionary.string([torch.tensor([i]) +
-                                                                   self.trained_model.task.label_dictionary.nspecial])
-                  for i in range(2)]
-
-        assert "aggregation" in labels
+        bart = self.pretrained_model
+        labels = [bart.task.label_dictionary.string([torch.tensor([0]) + bart.task.label_dictionary.nspecial]),
+                  bart.task.label_dictionary.string([torch.tensor([1]) + bart.task.label_dictionary.nspecial])]
 
         self.idx = labels.index("aggregation")
 
     def pred(self, inputs):
-        sentence1 = format_context(inputs, context_format=self.context_format)
+        sentence1 = format_context(inputs, context_format=self.context_format, max_context_size=self.max_context_size)
 
-        n_tokens = len(sentence1.split())
-        if n_tokens >= self.max_size:
-            sentence1 = ' '.join(sentence1.split()[-self.max_size:])
-            print("Too long input (%i tokens), truncated to %i tokens." % (n_tokens, len(sentence1.split())))
-
-        batch_encoding = [self.trained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
+        batch_encoding = [self.pretrained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
 
         with torch.no_grad():
-            logprobs = self.trained_model.predict('sentence_classification_head', batch_tokens)
+            logprobs = self.pretrained_model.predict('sentence_classification_head', batch_tokens)
 
         return logprobs[:, self.idx].reshape((-1, 1))
 
@@ -899,28 +880,26 @@ class ClassifierBart(BaseModel):
 class GeneratorBart(BaseModel):
     """ BART finetuned as a generator of aggregation. """
 
-    def __init__(self, scores_names, relevance_level, trained_model, task_name, tensorboard_logs_path,
-                 experiment_name, random_seed, root=""):
-        super().__init__(scores_names=scores_names, relevance_level=relevance_level, trained_model=trained_model,
-                         task_name=task_name, tensorboard_logs_path=tensorboard_logs_path,
-                         experiment_name=experiment_name, random_seed=random_seed, root=root)
+    def __init__(self, args, pretrained_model):
+        super().__init__(args=args, pretrained_model=pretrained_model)
 
-        self.trained_model.half()
+        self.pretrained_model.half()
 
-        self.beam = 10
-        self.lenpen = 1.0
-        self.max_len_b = 200
-        self.min_len = 1
-        self.no_repeat_ngram_size = 2
+        self.beam = args.bart_beam
+        self.lenpen = args.bart_lenpen
+        self.max_len_b = args.bart_len_b
+        self.min_len = args.bart_min_len
+        self.no_repeat_ngram_size = args.bart_no_repeat_ngram_size
+        self.results_path = args.results_path
 
-    def play(self, task):
+    def play(self, task, args):
         print("Evaluation on the train_loader...")
-        self.generate_hypothesis(task.train_loader, fname='train')
+        self.bart_valid(task.train_loader, fname="train")
 
         print("Evaluation on the valid_loader...")
-        self.generate_hypothesis(task.valid_loader, fname="valid")
+        self.bart_valid(task.valid_loader, fname="valid")
 
-    def generate_hypothesis(self, data_loader, fname):
+    def bart_valid(self, data_loader, fname):
         """
         Generate the hypothesis of BART on the data_loader and write them in some files.
 
@@ -933,26 +912,26 @@ class GeneratorBart(BaseModel):
         shuffle(data_loader)
 
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
-            source = format_context(ranking, context_format=self.context_format)
+            source = format_context(ranking, context_format=self.context_format, max_context_size=self.max_context_size)
             targets = format_targets(ranking, targets_format=self.targets_format)
             entities = ranking[0][0]['entities']
 
             with torch.no_grad():
-                hypotheses = self.trained_model.sample([source],
-                                                       beam=self.beam,
-                                                       lenpen=self.lenpen,
-                                                       max_len_b=self.max_len_b,
-                                                       min_len=self.min_len,
-                                                       no_repeat_ngram_size=self.no_repeat_ngram_size)[0]
+                hypotheses = self.pretrained_model.sample([source],
+                                                          beam=self.beam,
+                                                          lenpen=self.lenpen,
+                                                          max_len_b=self.max_len_b,
+                                                          min_len=self.min_len,
+                                                          no_repeat_ngram_size=self.no_repeat_ngram_size)[0]
 
-            with open(fname + ".source", 'a') as source_file, \
-                    open(fname + ".targets", 'a') as targets_file, \
-                    open(fname + ".entities", 'a') as entities_file, \
-                    open(fname + ".hypotheses", 'a') as hypotheses_file:
+            with open(join_path(self.results_path, fname + ".source", 'a')) as source_file:
                 source_file.write(str(idx) + ' - ' + source + '\n')
+            with open(join_path(self.results_path, fname + ".targets", 'a')) as targets_file:
                 targets_file.write(str(idx) + ' - ' + ', '.join(targets) + '\n')
+            with open(join_path(self.results_path, fname + ".entities", 'a')) as entities_file:
                 entities_file.write(str(idx) + ' - ' + ', '.join(entities) + '\n')
-                hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo[0], 2**hypo[1])
+            with open(join_path(self.results_path, fname + ".hypotheses", 'a')) as hypotheses_file:
+                hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo[0], 2 ** hypo[1])
                                                                     for hypo in hypotheses]) + '\n')
 
 # endregion
