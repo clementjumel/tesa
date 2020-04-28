@@ -12,7 +12,7 @@ from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm_notebook as tqdm
 from torch.utils.tensorboard import SummaryWriter
 from fairseq.data.data_utils import collate_tokens
-from os.path import join as join_path
+from os.path import join as path_join
 import matplotlib.pyplot as plt
 import torch
 
@@ -51,7 +51,7 @@ class BaseModel:
             model_name = self.__class__.__name__
             model_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', model_name)])
 
-            self.writer = SummaryWriter(join_path(root, tensorboard_logs_path, model_name))
+            self.writer = SummaryWriter(path_join(root, tensorboard_logs_path, model_name))
 
         seed(args.random_seed), torch.manual_seed(args.random_seed)
 
@@ -924,13 +924,13 @@ class GeneratorBart(BaseModel):
                                                           min_len=self.min_len,
                                                           no_repeat_ngram_size=self.no_repeat_ngram_size)[0]
 
-            with open(join_path(self.results_path, fname + ".source", 'a')) as source_file:
+            with open(path_join(self.results_path, fname + ".source", 'a')) as source_file:
                 source_file.write(str(idx) + ' - ' + source + '\n')
-            with open(join_path(self.results_path, fname + ".targets", 'a')) as targets_file:
+            with open(path_join(self.results_path, fname + ".targets", 'a')) as targets_file:
                 targets_file.write(str(idx) + ' - ' + ', '.join(targets) + '\n')
-            with open(join_path(self.results_path, fname + ".entities", 'a')) as entities_file:
+            with open(path_join(self.results_path, fname + ".entities", 'a')) as entities_file:
                 entities_file.write(str(idx) + ' - ' + ', '.join(entities) + '\n')
-            with open(join_path(self.results_path, fname + ".hypotheses", 'a')) as hypotheses_file:
+            with open(path_join(self.results_path, fname + ".hypotheses", 'a')) as hypotheses_file:
                 hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo[0], 2 ** hypo[1])
                                                                     for hypo in hypotheses]) + '\n')
 
