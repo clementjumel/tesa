@@ -1,4 +1,5 @@
 from pickle import load
+from os.path import join as path_join
 import torch
 
 
@@ -41,7 +42,8 @@ def load_task(args):
     suffix += "_cv" if cross_validation else ""
 
     task_name = "".join(task_name.split("_"))
-    file_name = folder_path + task_name + suffix + '.pkl'
+
+    file_name = path_join(folder_path, task_name + suffix + '.pkl')
 
     with open(file_name, 'rb') as file:
         task = load(file)
@@ -82,7 +84,7 @@ def get_word2vec(folder_path):
 
     from gensim.models import KeyedVectors
 
-    fname = folder_path + "GoogleNews-vectors-negative300.bin"
+    fname = path_join(folder_path, "GoogleNews-vectors-negative300.bin")
     word2vec = KeyedVectors.load_word2vec_format(fname=fname, binary=True)
 
     print("Word2Vec embedding loaded.\n")
