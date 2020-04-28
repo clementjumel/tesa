@@ -32,7 +32,7 @@ def main():
 
     model = getattr(models, to_class_name(args.model))(args=args, pretrained_model=pretrained_model)
 
-    model.play(task)
+    model.play(task=task, args=args)
 
 
 if __name__ == '__main__':
