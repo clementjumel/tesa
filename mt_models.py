@@ -24,6 +24,7 @@ def parse_arguments():
     ap.add_argument("-e", "--experiment", default=None, type=str, help="Name of the experiment.")
     ap.add_argument("--trained_path", default=None, type=str, help="Path to the trained model folder.")
     ap.add_argument("--checkpoint_file", default=None, type=str, help="Name of BART's checkpoint file.")
+    ap.add_argument("--show", action="store_true", help="Option to show some results.")
 
     return ap.parse_args()
 
@@ -47,7 +48,7 @@ def main():
                                         experiment_name=args.experiment,
                                         random_seed=MODELS_RANDOM_SEED)
 
-    model.play(task)
+    model.play(task=task, show=args.show)
 
 
 if __name__ == '__main__':

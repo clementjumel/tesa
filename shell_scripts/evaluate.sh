@@ -68,7 +68,8 @@ do
           --bart \
           --trained_path $BART/ \
           --checkpoint_file $CHECKPOINT.pt \
-          --model classifier_bart;
+          --model classifier_bart \
+          --show;
 
   elif [ $TASK_TYPE == "generation" ]
   then
