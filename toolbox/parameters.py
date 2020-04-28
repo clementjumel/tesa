@@ -40,6 +40,7 @@ SCORES_NAMES = [
     # 'ndcg_at_100',
 ]
 
+TASK_NAME = "context_free_same_type"
 CONTEXT_MAX_SIZE = 800
 SHOW_RANKINGS = 10
 SHOW_CHOICES = 10
