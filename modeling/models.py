@@ -83,6 +83,56 @@ class BaseModel:
         print("Evaluation on the valid_loader...")
         self.valid(task.valid_loader)
 
+    def show(self, task, show_rankings, show_choices):
+        """
+        Show the model results on different rankings.
+
+        Args:
+            task: modeling_task.ModelingTask, task to evaluate the model on.
+            show_rankings: int, number of rankings to show.
+            show_choices: int, number of best choices to show.
+        """
+
+        data_loader = task.valid_loader
+        shuffle(data_loader)
+
+        for ranking_idx, ranking in enumerate(data_loader[:show_rankings]):
+            choices, outputs, targets = [], [], []
+
+            for inputs, targets in ranking:
+                choices.extend(inputs['choices'])
+                outputs.extend(self.pred(inputs).squeeze().tolist())
+                targets.extend(targets.squeeze().tolist())
+
+            ranks = get_ranks(outputs)
+            batch_score = self.get_score(ranks=ranks, targets=targets)
+
+            print("Ranking %i/%i: " % (ranking_idx + 1, show_rankings))
+
+            inputs, _ = ranking[0]
+            print("Entities (%s): %s" % (inputs['entities_type'], inputs['entities']))
+
+            if self.context_format is not None:
+                print("Context:\n%s" % format_context(inputs, context_format=self.context_format))
+
+            print("\nScores:")
+            for score_name in self.scores_names:
+                print("%s: %.4f" % (score_name, batch_score[score_name]))
+
+            results = zip(ranks, choices, outputs, targets)
+            results = sorted(results, key=lambda x: x[0])
+
+            print("\nGold standards (rank: choice (output/target):")
+            for result in results:
+                if result[3]:
+                    print("%i: %s (%.4f/%i)" % result)
+
+            print("\nTop %i results (rank: choice (output/target):" % show_choices)
+            for result in results[:show_choices]:
+                print("%i: %s (%.4f/%i)" % result)
+
+            print()
+
     def preview(self, data_loader):
         """
         Preview the data for the model.
@@ -516,7 +566,7 @@ class BaseModel:
 
     # endregion
 
-    # region Display methods
+    # region Plot methods
 
     def plot(self, x1, x2, train_losses, valid_losses, valid_scores):
         """
@@ -586,49 +636,6 @@ class BaseModel:
 
         self.plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
                   valid_scores=total_valid_scores)
-
-    # TODO
-    def show(self, data_loader, show_rankings, show_choices):
-        """
-        Show the model results on different rankings.
-
-        Args:
-            data_loader: list, pairs of (inputs, targets) batches.
-            show_rankings: int, number of rankings to show.
-            show_choices: int, number of best choices to show.
-        """
-
-        for ranking_idx, ranking_task in enumerate(data_loader[:show_rankings]):
-            pass
-
-            # outputs, explanations = self.pred(inputs)
-            # outputs = outputs[:, -1].reshape((-1, 1)) if len(outputs.shape) == 2 else outputs
-            # explanations = ['' for _ in range(len(inputs['choices']))] if explanations is None else explanations
-            #
-            # ranks = get_ranks(outputs)
-            # score = self.get_score(ranks, targets)
-            #
-            # print('\nEntities (%s): %s' % (inputs['entities_type_'], ',  '.join(inputs['entities'])))
-            # print("Scores:", ', '.join(['%s: %.5f' % (name, score[name])
-            #                             for name in score if name in self.scores_names]))
-            #
-            # best_answers = [(ranks[i], inputs['choices'][i], outputs[i].item(), explanations[i], targets[i].item())
-            #                 for i in range(len(inputs['choices']))]
-            #
-            # first_answers = sorted(best_answers)[:n_answers]
-            # true_answers = [answer for answer in sorted(best_answers) if answer[4]][:n_answers]
-            #
-            # print("\nTop ranked answers:")
-            # for rank, choice, output, explanation, target in first_answers:
-            #     print('%d (%d): %s (%d)' % (rank, target, choice, output)) if isinstance(output, int) \
-            #         else print('%d (%d): %s (%.3f)' % (rank, target, choice, output))
-            #     print('   ' + explanation) if explanation else None
-            #
-            # print("\nGold/silver standard answers:")
-            # for rank, choice, output, explanation, target in true_answers:
-            #     print('%d (%d): %s (%d)' % (rank, target, choice, output)) if isinstance(output, int) \
-            #         else print('%d (%d): %s (%.3f)' % (rank, target, choice, output))
-            #     print('   ' + explanation) if explanation else None
 
     # endregion
 
