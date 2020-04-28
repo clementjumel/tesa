@@ -1,3 +1,6 @@
+from toolbox.parameters import *
+from toolbox.paths import *
+
 from pickle import load
 from argparse import ArgumentParser
 import torch
@@ -24,31 +27,81 @@ def add_task_arguments(ap):
     Add to the argument parser the parsing arguments relative to the modeling task.
 
     Args:
-        ap: argparse.ArgumentParser, argument parser to update with the modeling task relative arguments.
+        ap: argparse.ArgumentParser, argument parser to update with the arguments.
     """
 
-    ap.add_argument("-t", "--task", default=None, type=str, help="Name of the modeling task version.")
-    ap.add_argument("-vp", "--valid_proportion", default=0.25, type=float, help="Proportion of the validation set.")
-    ap.add_argument("-tp", "--test_proportion", default=0.25, type=float, help="Proportion of the test set.")
-    ap.add_argument("-rs", "--ranking_size", default=24, type=int, help="Size of the ranking tasks.")
-    ap.add_argument("-bs", "--batch_size", default=4, type=int, help="Size of the batches of the task.")
-    ap.add_argument("-cf", "--context_format", default=None, type=str, help="Version of the context format.")
-    ap.add_argument("-tf", "--targets_format", default=None, type=str, help="Version of the targets format.")
-    ap.add_argument("--generation", action='store_true', help="Generation finetuning option.")
-    ap.add_argument("--classification", action='store_true', help="Classification finetuning option.")
-    ap.add_argument("--task_path", default=None, type=str, help="Path to the task folder.")
-    ap.add_argument("--cross_validation", action='store_true', help="Cross validation option.")
-    ap.add_argument("--short", action='store_true', help="Shorten modeling task option.")
-    ap.add_argument("--full_task_name", default=None, type=str, help="Full name of the task (.pkl) to load.")
+    ap.add_argument("-t", "--task",
+                    type=str, required=True,
+                    help="Name of the modeling task version.")
+    ap.add_argument("-vp", "--valid_proportion",
+                    type=float, default=DEFAULT_VALID_PROPORTION,
+                    help="Proportion of the validation set.")
+    ap.add_argument("-tp", "--test_proportion",
+                    type=float, default=DEFAULT_TEST_PROPORTION,
+                    help="Proportion of the test set.")
+    ap.add_argument("-rs", "--ranking_size",
+                    type=int, default=DEFAULT_RANKING_SIZE,
+                    help="Size of the ranking tasks.")
+    ap.add_argument("-bs", "--batch_size",
+                    type=int, default=DEFAULT_BATCH_SIZE,
+                    help="Size of the batches of the task.")
+    ap.add_argument("-cf", "--context_format",
+                    type=str, default=DEFAULT_CONTEXT_FORMAT,
+                    help="Version of the context format.")
+    ap.add_argument("-tf", "--targets_format",
+                    type=str, default=DEFAULT_TARGETS_FORMAT,
+                    help="Version of the targets format.")
+    ap.add_argument("--task_path",
+                    type=str, default=MODELING_TASK_RESULTS_PATH,
+                    help="Path to the task folder.")
+    ap.add_argument("--cross_validation",
+                    action='store_true',
+                    help="Cross validation option.")
+    ap.add_argument("--generation",
+                    action='store_true',
+                    help="Generation finetuning option.")
+    ap.add_argument("--classification",
+                    action='store_true',
+                    help="Classification finetuning option.")
 
 
-def load_task(args, folder_path):
+def add_model_arguments(ap):
     """
-    Load a Task using pickle from the folder_path, depending on the arguments passed in args.
+    Add to the argument parser the parsing arguments relative to the model.
+
+    Args:
+        ap: argparse.ArgumentParser, argument parser to update with the arguments.
+    """
+
+    ap.add_argument("-m", "--model",
+                    type=str, required=True,
+                    help="Name of the model.")
+    ap.add_argument("-e", "--experiment",
+                    type=str, default=None,
+                    help="Name of the experiment.")
+    ap.add_argument("--pretrained_path",
+                    type=str, default=PRETRAINED_MODELS_PATH,
+                    help="Path to the pretrained model folder.")
+    ap.add_argument("--checkpoint_file",
+                    type=str, default=None,
+                    help="Name of BART's checkpoint file.")
+    ap.add_argument("--word2vec",
+                    action="store_true",
+                    help="Load Word2Vec embedding.")
+    ap.add_argument("--bart",
+                    action="store_true",
+                    help="Load a BART model.")
+    ap.add_argument("--show",
+                    action="store_true",
+                    help="Option to show some results.")
+
+
+def load_task(args):
+    """
+    Load a Task using pickle, depending on the arguments passed in args.
 
     Args:
         args: argparse.ArgumentParser, arguments passed to the script.
-        folder_path: str, path of the folder to load from.
 
     Returns:
         database_creation.modeling_task.Task, loaded object.
@@ -61,30 +114,22 @@ def load_task(args, folder_path):
     batch_size = args.batch_size
     context_format = args.context_format
     targets_format = args.targets_format
-    folder_path = args.task_path or folder_path
+    folder_path = args.task_path
     cross_validation = args.cross_validation
-    short = args.short
-    full_task_name = args.full_task_name
 
-    if full_task_name is None:
-        train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
-        valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
-        test_proportion = ("%.2f" % test_proportion).split(".")[1]
-        suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
+    train_proportion = ("%.2f" % (1 - valid_proportion - test_proportion)).split(".")[1]
+    valid_proportion = ("%.2f" % valid_proportion).split(".")[1]
+    test_proportion = ("%.2f" % test_proportion).split(".")[1]
 
-        suffix += "_rs" + str(ranking_size) if ranking_size is not None else ""
-        suffix += "_bs" + str(batch_size)
-        suffix += "_cf-" + context_format if context_format is not None else ""
-        suffix += "_tf-" + targets_format if targets_format is not None else ""
-        suffix += "_cv" if cross_validation else ""
-        suffix += "_short" if short else ""
+    suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
+    suffix += "_rs" + str(ranking_size) if ranking_size is not None else ""
+    suffix += "_bs" + str(batch_size)
+    suffix += "_cf-" + context_format if context_format is not None else ""
+    suffix += "_tf-" + targets_format if targets_format is not None else ""
+    suffix += "_cv" if cross_validation else ""
 
-        task_name = "".join(task_name.split("_"))
-
-        file_name = folder_path + task_name + suffix + '.pkl'
-
-    else:
-        file_name = full_task_name
+    task_name = "".join(task_name.split("_"))
+    file_name = folder_path + task_name + suffix + '.pkl'
 
     with open(file_name, 'rb') as file:
         task = load(file)
@@ -94,18 +139,12 @@ def load_task(args, folder_path):
     return task
 
 
-def get_trained_model(args, folder_path):
-    """
-    Returns the trained model (word2vec embedding or bart).
-
-    Args:
-        args: dict, arguments passed to the script.
-        folder_path: str, path of the folder to load from (if not in the arguments).
-    """
+def get_trained_model(args):
+    """ Returns the trained model (word2vec embedding or bart). """
 
     use_word2vec = args.word2vec
     use_bart = args.bart
-    folder_path = args.trained_path or folder_path
+    folder_path = args.pretrained_path
     checkpoint_file = args.checkpoint_file
 
     if not use_word2vec and not use_bart:
