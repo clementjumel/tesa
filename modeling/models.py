@@ -887,7 +887,7 @@ class GeneratorBart(BaseModel):
 
         self.beam = args.bart_beam
         self.lenpen = args.bart_lenpen
-        self.max_len_b = args.bart_len_b
+        self.max_len_b = args.bart_max_len_b
         self.min_len = args.bart_min_len
         self.no_repeat_ngram_size = args.bart_no_repeat_ngram_size
         self.results_path = args.results_path
