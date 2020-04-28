@@ -28,10 +28,6 @@ TARGETS_FORMAT = None
 # endregion
 
 # region Models parameters
-CONTEXT_MAX_SIZE = 800
-SHOW_RANKINGS = 10
-SHOW_CHOICES = 10
-
 SCORES_NAMES = [
     'average_precision',
     # 'precision_at_10',
@@ -43,4 +39,14 @@ SCORES_NAMES = [
     'ndcg_at_10',
     # 'ndcg_at_100',
 ]
+
+CONTEXT_MAX_SIZE = 800
+SHOW_RANKINGS = 10
+SHOW_CHOICES = 10
+
+BART_BEAM = 10
+BART_LENPEN = 1.0
+BART_MAX_LEN_B = 200
+BART_MIN_LEN = 1
+BART_NO_REPEAT_NGRAM_SIZE = 2
 # endregion
