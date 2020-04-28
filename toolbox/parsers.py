@@ -95,7 +95,7 @@ def add_model_arguments(ap):
                     type=str, default=None,
                     help="Name of BART's checkpoint file.")
     ap.add_argument("--model_random_seed",
-                    type=int, default=MODELS_RANDOM_SEED,
+                    type=int, default=RANDOM_SEED,
                     help="Random seed of the model.")
     ap.add_argument("--show_rankings",
                     type=int, default=SHOW_RANKINGS,
