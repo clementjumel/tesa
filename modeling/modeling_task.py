@@ -12,10 +12,9 @@ from os.path import exists
 
 
 class ModelingTask:
-    relevance_level = None
-
-    def __init__(self, ranking_size, batch_size, context_format, targets_format, k_cross_validation, valid_proportion,
-                 test_proportion, random_seed, save, silent, results_path, annotation_task_results_path):
+    def __init__(self, ranking_size, batch_size, context_format, targets_format, context_max_size, k_cross_validation,
+                 valid_proportion, test_proportion, random_seed, save, silent, results_path,
+                 annotation_task_results_path):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -24,6 +23,7 @@ class ModelingTask:
             batch_size: int, number of samples in each batch.
             context_format: str, version of the context format to encode the inputs in a string.
             targets_format: str, version of the targets format to encode the target choices in strings.
+            context_max_size: int, maximum number of tokens in the formatted context.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
             valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
             test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
@@ -38,6 +38,7 @@ class ModelingTask:
         self.batch_size = batch_size
         self.context_format = context_format
         self.targets_format = targets_format
+        self.context_max_size = context_max_size
         self.k_cross_validation = k_cross_validation
         self.valid_proportion = valid_proportion
         self.test_proportion = test_proportion
@@ -320,7 +321,10 @@ class ModelingTask:
         """
 
         rows = []
-        sentence1 = format_context(ranking_task, context_format=self.context_format)
+
+        sentence1 = format_context(ranking_task,
+                                   context_format=self.context_format,
+                                   context_max_size=self.context_max_size)
 
         for inputs, targets in ranking_task:
             for choice, target in zip(inputs['choices'], targets):
@@ -340,7 +344,11 @@ class ModelingTask:
         """
 
         source_rows, target_rows = [], []
-        source = format_context(ranking_task, context_format=self.context_format)
+
+        source = format_context(ranking_task,
+                                context_format=self.context_format,
+                                context_max_size=self.context_max_size)
+
         targets = format_targets(ranking_task, targets_format=self.targets_format)
 
         for target in targets:
@@ -480,8 +488,6 @@ class ModelingTask:
 
 
 class ContextFree(ModelingTask):
-    relevance_level = 1
-
     @staticmethod
     def get_reordered_annotations(queries, annotations):
         new_annotations = defaultdict(list)
@@ -505,8 +511,6 @@ class ContextFree(ModelingTask):
 
 
 class ContextFreeSameType(ContextFree):
-    relevance_level = 1
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
@@ -519,8 +523,6 @@ class ContextFreeSameType(ContextFree):
 
 
 class ContextDependent(ModelingTask):
-    relevance_level = 1
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
@@ -533,8 +535,6 @@ class ContextDependent(ModelingTask):
 
 
 class ContextDependentSameType(ModelingTask):
-    relevance_level = 1
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
@@ -547,8 +547,6 @@ class ContextDependentSameType(ModelingTask):
 
 
 class FullHybrid(ModelingTask):
-    relevance_level = 2
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
@@ -569,8 +567,6 @@ class FullHybrid(ModelingTask):
 
 
 class Hybrid(ModelingTask):
-    relevance_level = 1
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
@@ -587,8 +583,6 @@ class Hybrid(ModelingTask):
 
 
 class HybridSameType(ModelingTask):
-    relevance_level = 1
-
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
         answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
         labelled_answers = {answer: 0 for answer in answers}
