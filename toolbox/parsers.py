@@ -57,6 +57,9 @@ def add_task_arguments(ap):
     ap.add_argument("-tf", "--targets_format",
                     type=str, default=TARGETS_FORMAT,
                     help="Version of the targets format.")
+    ap.add_argument("--context_max_size",
+                    type=int, default=CONTEXT_MAX_SIZE,
+                    help="Maximum number of tokens in the context.")
     ap.add_argument("--task_path",
                     type=str, default=MODELING_TASK_RESULTS_PATH,
                     help="Path to the task folder.")
@@ -85,9 +88,6 @@ def add_model_arguments(ap):
     ap.add_argument("--scores_names",
                     type=list, default=SCORES_NAMES,
                     help="Names of the scores to use.")
-    ap.add_argument("--context_max_size",
-                    type=int, default=CONTEXT_MAX_SIZE,
-                    help="Maximum number of tokens in the context.")
     ap.add_argument("--tensorboard_logs_path",
                     type=str, default=TENSORBOARD_LOGS_PATH,
                     help="Path of the tensorboard logs folder.")
