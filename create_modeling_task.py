@@ -1,19 +1,20 @@
 """
-modeling_task script to create the modeling task to be solved by models.
+Script to create the modeling task to be solved by models.
 
 Usages:
     tests:
-        python mt_task.py -t context_free_same_type --no_save
-        python mt_task.py -t context_free_same_type --classification -cf v0 --no_save
-        python mt_task.py -t context_free_same_type --generation -cf v0 -tf v0 --no_save
+        python create_modeling_task.py -t context_free_same_type --no_save
+        python create_modeling_task.py -t context_free_same_type --classification -cf v0 --no_save
+        python create_modeling_task.py -t context_free_same_type --generation -cf v0 -tf v0 --no_save
     regular usages:
-        python mt_task.py -t context_free_same_type --classification -cf v0
-        python mt_task.py -t context_free_same_type --generation -cf v0 -tf v0
+        python create_modeling_task.py -t context_free_same_type --classification -cf v0
+        python create_modeling_task.py -t context_free_same_type --generation -cf v0 -tf v0
 """
 
 import modeling.modeling_task as modeling_task
-from toolbox.utils import standard_parser, add_task_arguments, to_class_name
-from toolbox.parameters import K_CROSS_VALIDATION, MODELING_TASK_SEED
+from toolbox.parsers import standard_parser, add_task_arguments
+from toolbox.utils import to_class_name
+from toolbox.parameters import K_CROSS_VALIDATION, RANDOM_SEED
 from toolbox.paths import ANNOTATION_TASK_RESULTS_PATH, MODELING_TASK_RESULTS_PATH, FINETUNING_DATA_PATH
 
 
@@ -36,10 +37,11 @@ def main():
                                              batch_size=args.batch_size,
                                              context_format=args.context_format,
                                              targets_format=args.targets_format,
+                                             context_max_size=args.context_max_size,
                                              k_cross_validation=int(args.cross_validation) * K_CROSS_VALIDATION,
                                              valid_proportion=args.valid_proportion,
                                              test_proportion=args.test_proportion,
-                                             random_seed=MODELING_TASK_SEED,
+                                             random_seed=RANDOM_SEED,
                                              save=not args.no_save,
                                              silent=args.silent,
                                              results_path=MODELING_TASK_RESULTS_PATH,
