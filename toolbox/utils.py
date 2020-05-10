@@ -27,6 +27,7 @@ def load_task(args):
     batch_size = args.batch_size
     context_format = args.context_format
     targets_format = args.targets_format
+    root = args.root
     folder_path = args.task_path
     cross_validation = args.cross_validation
 
@@ -43,7 +44,7 @@ def load_task(args):
 
     task_name = "".join(task_name.split("_"))
 
-    file_name = path_join(folder_path, task_name + suffix + '.pkl')
+    file_name = path_join(root, folder_path, task_name + suffix + '.pkl')
 
     with open(file_name, 'rb') as file:
         task = load(file)
