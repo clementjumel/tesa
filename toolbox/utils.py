@@ -59,8 +59,11 @@ def get_pretrained_model(args):
 
     use_word2vec = args.word2vec
     use_bart = args.bart
+    root = args.root
     folder_path = args.pretrained_path
     checkpoint_file = args.checkpoint_file
+
+    folder_path = path_join(root, folder_path)
 
     if not use_word2vec and not use_bart:
         return None
