@@ -128,7 +128,9 @@ class BARTHubInterface(nn.Module):
         input = [self.encode(sentence) for sentence in sentences]
         targets = [self.encode(target) for target in targets]
 
-        return self.generate_scorer(input, targets, beam, verbose, **kwargs)
+        scores = self.generate_scorer(input, targets, beam, verbose, **kwargs)
+
+        return [[(self.decode(x['tokens']), x['score']) for x in targets_scores] for targets_scores in scores]
 
     def generate(self, tokens: List[torch.LongTensor], beam: int = 5, verbose: bool = False, **kwargs) -> list:
         sample = self._build_sample(tokens)
@@ -139,7 +141,7 @@ class BARTHubInterface(nn.Module):
         for k, v in kwargs.items():
             setattr(gen_args, k, v)
         generator = self.task.build_generator([self.model], gen_args)
-        translations = self.task.inference_step(
+        hypos = self.task.inference_step(
             generator,
             [self.model],
             sample,
@@ -150,7 +152,6 @@ class BARTHubInterface(nn.Module):
             src_str_with_unk = self.string(tokens)
             logger.info('S\t{}'.format(src_str_with_unk))
 
-        hypos = [x[:] for x in translations]  # Process all predictions
         hypos = [v for _, v in sorted(zip(sample['id'].tolist(), hypos))]
         return hypos
 
@@ -170,14 +171,14 @@ class BARTHubInterface(nn.Module):
             scorer,
             [self.model],
             sample,
-            prefix_tokens=sample['net_input']['src_tokens'].new_zeros((len(tokens), 1)).fill_(
-                self.task.source_dictionary.bos()),
+            prefix_tokens=sample['net_input']['src_tokens'].new_zeros((len(tokens), 1)).fill_(self.task.source_dictionary.bos()),
         )
 
         if verbose:
             src_str_with_unk = self.string(tokens)
             logger.info('S\t{}'.format(src_str_with_unk))
 
+        scores = [v for _, v in sorted(zip(sample['id'].tolist(), scores))]
         return scores
 
     def extract_features(self, tokens: torch.LongTensor, return_all_hiddens: bool = False) -> torch.Tensor:
