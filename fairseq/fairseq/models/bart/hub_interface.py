@@ -122,16 +122,21 @@ class BARTHubInterface(nn.Module):
         hypos = self.generate(input, beam, verbose, **kwargs)
 
         assert len(hypos) == 1
-        return [(self.decode(x['tokens']), x['score'].exp().item()) for x in hypos[0]]
+        hypos = hypos[0]
+
+        return [(self.decode(x['tokens']), x['score'].exp().item()) for x in hypos]
 
     def sample_scorer(self, sentences: List[str], targets: List[str], beam: int = 1, verbose: bool = False, **kwargs) \
             -> list:
         input = [self.encode(sentence) for sentence in sentences]
         targets = [self.encode(target) for target in targets]
-
         scores = self.generate_scorer(input, targets, beam, verbose, **kwargs)
 
-        return [[(self.decode(x['tokens']), x['score'].exp().item()) for x in targets_scores] for targets_scores in scores]
+        for i in range(len(scores)):
+            assert len(scores[i]) == 1
+            scores[i] = scores[i][0]
+
+        return [(self.decode(x['tokens']), x['score'].exp().item()) for x in scores]
 
     def generate(self, tokens: List[torch.LongTensor], beam: int = 5, verbose: bool = False, **kwargs) -> list:
         sample = self._build_sample(tokens)
