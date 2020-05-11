@@ -121,7 +121,8 @@ class BARTHubInterface(nn.Module):
         input = [self.encode(sentence) for sentence in sentences]
         hypos = self.generate(input, beam, verbose, **kwargs)
 
-        return [[(self.decode(x['tokens']), x['score'].exp().item()) for x in beam_hypos] for beam_hypos in hypos]
+        assert len(hypos) == 1
+        return [(self.decode(x['tokens']), x['score'].exp().item()) for x in hypos[0]]
 
     def sample_scorer(self, sentences: List[str], targets: List[str], beam: int = 1, verbose: bool = False, **kwargs) \
             -> list:
