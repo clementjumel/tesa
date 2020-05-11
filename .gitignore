@@ -20,7 +20,7 @@ old/
 !/fairseq/fairseq/models/bart/
 /fairseq/fairseq/models/bart/*
 !/fairseq/fairseq/models/bart/hub_interface.py
-# Don't ignore translation_from_pretrained_bart.py
+# Don't ignore translation.py
 !/fairseq/fairseq/tasks/
 /fairseq/fairseq/tasks/*
-!/fairseq/fairseq/tasks/translation_from_pretrained_bart.py
+!/fairseq/fairseq/tasks/translation.py
