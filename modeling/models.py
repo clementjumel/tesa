@@ -893,15 +893,16 @@ class GeneratorBart(BaseModel):
         self.results_path = args.results_path
 
     def play(self, task, args):
-        print("Evaluation on the train_loader...")
-        self.bart_valid(task.train_loader, fname="train")
+        print("Generation on train and valid loaders...")
+        self.generate(task.train_loader, fname="train")
+        self.generate(task.valid_loader, fname="valid")
 
-        print("Evaluation on the valid_loader...")
-        self.bart_valid(task.valid_loader, fname="valid")
+        super().play(task=task, args=args)
 
-    def bart_valid(self, data_loader, fname):
+    def generate(self, data_loader, fname):
         """
-        Generate the hypothesis of BART on the data_loader and write them in some files.
+        Generate the hypothesis of BART on the data_loader and write them in some files. Also evaluate the probabilities
+        of the gold standards.
 
         Args:
             data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
@@ -912,9 +913,12 @@ class GeneratorBart(BaseModel):
         shuffle(data_loader)
 
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
-            source = format_context(ranking, context_format=self.context_format, context_max_size=self.context_max_size)
-            targets = format_targets(ranking, targets_format=self.targets_format)
             entities = ranking[0][0]['entities']
+            source = format_context(ranking,
+                                    context_format=self.context_format,
+                                    context_max_size=self.context_max_size)
+            targets = format_targets(ranking,
+                                     targets_format=self.targets_format)
 
             with torch.no_grad():
                 hypotheses = self.pretrained_model.sample([source],
@@ -922,16 +926,48 @@ class GeneratorBart(BaseModel):
                                                           lenpen=self.lenpen,
                                                           max_len_b=self.max_len_b,
                                                           min_len=self.min_len,
-                                                          no_repeat_ngram_size=self.no_repeat_ngram_size)[0]
+                                                          no_repeat_ngram_size=self.no_repeat_ngram_size)
+
+                scores = self.pretrained_model.sample_scorer([source for _ in range(len(targets))],
+                                                             targets,
+                                                             beam=self.beam,
+                                                             lenpen=self.lenpen,
+                                                             max_len_b=self.max_len_b,
+                                                             min_len=self.min_len,
+                                                             no_repeat_ngram_size=self.no_repeat_ngram_size)
+
+            assert targets == [target for target, _ in scores]
 
             with open(path_join(self.results_path, fname + ".source"), 'a') as source_file:
                 source_file.write(str(idx) + ' - ' + source + '\n')
+
             with open(path_join(self.results_path, fname + ".targets"), 'a') as targets_file:
-                targets_file.write(str(idx) + ' - ' + ', '.join(targets) + '\n')
+                targets_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (target, prob)
+                                                                 for target, prob in scores]) + '\n')
+
             with open(path_join(self.results_path, fname + ".entities"), 'a') as entities_file:
                 entities_file.write(str(idx) + ' - ' + ', '.join(entities) + '\n')
+
             with open(path_join(self.results_path, fname + ".hypotheses"), 'a') as hypotheses_file:
-                hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo[0], 2 ** hypo[1])
-                                                                    for hypo in hypotheses]) + '\n')
+                hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo, prob)
+                                                                    for hypo, prob in hypotheses]) + '\n')
+
+    def pred(self, inputs):
+        source = format_context(inputs,
+                                context_format=self.context_format,
+                                context_max_size=self.context_max_size)
+
+        with torch.no_grad():
+            scores = self.pretrained_model.sample_scorer([source for _ in range(len(inputs['choices']))],
+                                                         inputs['choices'],
+                                                         beam=self.beam,
+                                                         lenpen=self.lenpen,
+                                                         max_len_b=self.max_len_b,
+                                                         min_len=self.min_len,
+                                                         no_repeat_ngram_size=self.no_repeat_ngram_size)
+
+        assert inputs['choices'] == [choice for choice, _ in scores]
+
+        return torch.tensor([prob for _, prob in scores]).reshape((-1, 1))
 
 # endregion
