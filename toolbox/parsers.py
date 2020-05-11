@@ -121,6 +121,9 @@ def add_model_arguments(ap):
     ap.add_argument("--bart_no_repeat_ngram_size",
                     type=int, default=BART_NO_REPEAT_NGRAM_SIZE,
                     help="Parameter no_repeat_ngram_size for generator BART.")
+    ap.add_argument("--generative_ranking",
+                    action="store_true",
+                    help="Rank the ranking task for generative models.")
     ap.add_argument("--word2vec",
                     action="store_true",
                     help="Load Word2Vec embedding.")
