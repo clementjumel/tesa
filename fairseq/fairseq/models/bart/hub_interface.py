@@ -102,18 +102,37 @@ class BARTHubInterface(nn.Module):
         )
         return sample
 
-    def sample(self, sentences: List[str], beam: int = 1, verbose: bool = False, **kwargs) -> str:
+    def _build_sample_scorer(self, src_tokens: List[torch.LongTensor], tgt_tokens: List[torch.LongTensor]):
+        # assert torch.is_tensor(src_tokens)
+        dataset = self.task.build_dataset_for_inference(
+            src_tokens,
+            [x.numel() for x in src_tokens],
+        )
+        sample = dataset.collater(dataset)
+
+        tgt_tokens = torch.cat([tgt.unsqueeze(0) for tgt in tgt_tokens])
+        sample['net_input']['prev_output_tokens'] = tgt_tokens
+
+        sample = utils.apply_to_sample(
+            lambda tensor: tensor.to(self.device),
+            sample
+        )
+        return sample
+
+    def sample(self, sentences: List[str], beam: int = 1, verbose: bool = False, **kwargs) -> list:
         input = [self.encode(sentence) for sentence in sentences]
         hypos = self.generate(input, beam, verbose, **kwargs)
 
-        # Custom code
-        # Old:
-        # return [self.decode(x['tokens']) for x in hypos]
-        # New:
         return [[(self.decode(x['tokens']), x['score']) for x in beam_hypos] for beam_hypos in hypos]
-        # End of custom code
 
-    def generate(self, tokens: List[torch.LongTensor], beam: int = 5, verbose: bool = False, **kwargs) -> torch.LongTensor:
+    def sample_scorer(self, sentences: List[str], targets: List[str], beam: int = 1, verbose: bool = False, **kwargs) \
+            -> list:
+        input = [self.encode(sentence) for sentence in sentences]
+        targets = [self.encode(target) for target in targets]
+
+        return self.generate_scorer(input, targets, beam, verbose, **kwargs)
+
+    def generate(self, tokens: List[torch.LongTensor], beam: int = 5, verbose: bool = False, **kwargs) -> list:
         sample = self._build_sample(tokens)
 
         # build generator using current args as well as any kwargs
@@ -133,18 +152,35 @@ class BARTHubInterface(nn.Module):
             src_str_with_unk = self.string(tokens)
             logger.info('S\t{}'.format(src_str_with_unk))
 
-        def getarg(name, default):
-            return getattr(gen_args, name, getattr(self.args, name, default))
-
-        # Custom code
-        # Old:
-        # hypos = [x[0] for x in translations]  # Process top predictions
-        # New:
         hypos = [x[:] for x in translations]  # Process all predictions
-        # End of custom cod
-
         hypos = [v for _, v in sorted(zip(sample['id'].tolist(), hypos))]
         return hypos
+
+    def generate_scorer(self, tokens: List[torch.LongTensor], targets: List[torch.LongTensor], beam: int = 5,
+                        verbose: bool = False, **kwargs) -> list:
+        sample = self._build_sample_scorer(tokens, targets)
+
+        # build generator using current args as well as any kwargs
+        gen_args = copy.copy(self.args)
+        gen_args.score_reference = True  # Load a SequenceScorer instead of a SequenceGenerator
+        gen_args.beam = beam
+        for k, v in kwargs.items():
+            setattr(gen_args, k, v)
+
+        scorer = self.task.build_generator([self.model], gen_args)
+        scores = self.task.inference_step(
+            scorer,
+            [self.model],
+            sample,
+            prefix_tokens=sample['net_input']['src_tokens'].new_zeros((len(tokens), 1)).fill_(
+                self.task.source_dictionary.bos()),
+        )
+
+        if verbose:
+            src_str_with_unk = self.string(tokens)
+            logger.info('S\t{}'.format(src_str_with_unk))
+
+        return scores
 
     def extract_features(self, tokens: torch.LongTensor, return_all_hiddens: bool = False) -> torch.Tensor:
         if tokens.dim() == 1:
