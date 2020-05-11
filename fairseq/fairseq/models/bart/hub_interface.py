@@ -104,15 +104,13 @@ class BARTHubInterface(nn.Module):
 
     def _build_sample_scorer(self, src_tokens: List[torch.LongTensor], tgt_tokens: List[torch.LongTensor]):
         # assert torch.is_tensor(src_tokens)
-        dataset = self.task.build_dataset_for_inference(
+        dataset = self.task.build_dataset_for_inference_scorer(
             src_tokens,
             [x.numel() for x in src_tokens],
+            tgt_tokens,
+            [x.numel() for x in tgt_tokens],
         )
         sample = dataset.collater(dataset)
-
-        tgt_tokens = torch.cat([tgt.unsqueeze(0) for tgt in tgt_tokens])
-        sample['net_input']['prev_output_tokens'] = tgt_tokens
-
         sample = utils.apply_to_sample(
             lambda tensor: tensor.to(self.device),
             sample
