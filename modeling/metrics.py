@@ -41,10 +41,6 @@ def precision_at_10(ranks, targets):
     return precision_at_k(ranks=ranks, targets=targets, k=10)
 
 
-def precision_at_100(ranks, targets):
-    return precision_at_k(ranks=ranks, targets=targets, k=100)
-
-
 def recall_at_k(ranks, targets, k):
     n = targets.sum()
     if n == 0:
@@ -59,10 +55,6 @@ def recall_at_k(ranks, targets, k):
 
 def recall_at_10(ranks, targets):
     return recall_at_k(ranks=ranks, targets=targets, k=10)
-
-
-def recall_at_100(ranks, targets):
-    return recall_at_k(ranks=ranks, targets=targets, k=100)
 
 
 def reciprocal_best_rank(ranks, targets):
@@ -105,7 +97,3 @@ def ndcg_at_k(ranks, targets, k):
 
 def ndcg_at_10(ranks, targets):
     return ndcg_at_k(ranks=ranks, targets=targets, k=10)
-
-
-def ndcg_at_100(ranks, targets):
-    return ndcg_at_k(ranks=ranks, targets=targets, k=100)
