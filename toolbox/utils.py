@@ -6,7 +6,7 @@ import torch
 def to_class_name(name):
     """ For a name of the format 'abc_efg', returns the corresponding Class name, of the format 'AbcEfg'. """
 
-    return "".join([word.capitalize() for word in name.split("_")])
+    return "".join([word.capitalize() for word in name.split("-")])
 
 
 def load_task(args):
@@ -41,8 +41,6 @@ def load_task(args):
     suffix += "_cf-" + context_format if context_format is not None else ""
     suffix += "_tf-" + targets_format if targets_format is not None else ""
     suffix += "_cv" if cross_validation else ""
-
-    task_name = "".join(task_name.split("_"))
 
     file_name = path_join(root, folder_path, task_name + suffix + '.pkl')
 
