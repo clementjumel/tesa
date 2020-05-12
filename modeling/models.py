@@ -131,11 +131,11 @@ class BaseModel:
             print("\nGold standards (rank: choice (output/target):")
             for result in results:
                 if result[3]:
-                    print("%i: %s (%.2f/%i)" % result)
+                    print("%i: %s (%.3f/%i)" % result)
 
             print("\nTop %i results (rank: choice (output/target):" % show_choices)
             for result in results[:show_choices]:
-                print("%i: %s (%.2f/%i)" % result)
+                print("%i: %s (%.3f/%i)" % result)
 
             print()
 
