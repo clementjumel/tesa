@@ -3,12 +3,10 @@ Script to create the modeling task to be solved by models.
 
 Usages:
     tests:
-        python create_modeling_task.py -t context_free_same_type --no_save
-        python create_modeling_task.py -t context_free_same_type --classification -cf v0 --no_save
-        python create_modeling_task.py -t context_free_same_type --generation -cf v0 -tf v0 --no_save
+        python create_modeling_task.py -t context-free-same-type --classification --generation --no_save
     regular usages:
-        python create_modeling_task.py -t context_free_same_type --classification -cf v0
-        python create_modeling_task.py -t context_free_same_type --generation -cf v0 -tf v0
+        python create_modeling_task.py -t context-free-same-type --classification --generation
+        python create_modeling_task.py -t context-dependent-same-type --generation --generation
 """
 
 import modeling.modeling_task as modeling_task
