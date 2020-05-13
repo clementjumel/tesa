@@ -363,7 +363,7 @@ class ModelingTask:
     def class_name(self):
         """ Returns the standardized name of the class. """
 
-        return "".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', self.__class__.__name__)])
+        return "-".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', self.__class__.__name__)])
 
     def suffix(self):
         """ Returns the standard suffix of a file_name as a string. """
