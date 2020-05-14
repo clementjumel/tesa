@@ -23,31 +23,28 @@ VALID_PROPORTION = 0.25
 TEST_PROPORTION = 0.25
 RANKING_SIZE = 24
 BATCH_SIZE = 4
-CONTEXT_FORMAT = 'v0'
-TARGETS_FORMAT = None
+CONTEXT_FORMAT = 'v1'
+TARGETS_FORMAT = 'v0'
 # endregion
 
 # region Models parameters
 SCORES_NAMES = [
     'average_precision',
-    # 'precision_at_10',
-    # 'precision_at_100',
+    'precision_at_10',
     'recall_at_10',
-    # 'recall_at_100',
+    'ndcg_at_10',
     'reciprocal_best_rank',
     'reciprocal_average_rank',
-    'ndcg_at_10',
-    # 'ndcg_at_100',
 ]
 
-TASK_NAME = "context_free_same_type"
-CONTEXT_MAX_SIZE = 800
-SHOW_RANKINGS = 10
+TASK_NAME = "context-free-same-type"
+CONTEXT_MAX_SIZE = 750
+SHOW_RANKINGS = 5
 SHOW_CHOICES = 10
 
 BART_BEAM = 10
 BART_LENPEN = 1.0
-BART_MAX_LEN_B = 200
+BART_MAX_LEN_B = 100
 BART_MIN_LEN = 1
-BART_NO_REPEAT_NGRAM_SIZE = 2
+BART_NO_REPEAT_NGRAM_SIZE = 1
 # endregion
