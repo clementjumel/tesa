@@ -26,7 +26,7 @@ def get_ranks(outputs):
     return ranks
 
 
-def format_context(ranking_or_inputs, context_format, context_max_size):
+def format_context(ranking_or_inputs, context_format, context_max_size=None):
     """
     Return the context formated depending on context_format.
 
@@ -72,7 +72,7 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
     context = " ".join(context_items)
 
     context_words = context.split()
-    if len(context_words) > context_max_size:
+    if context_max_size is not None and len(context_words) > context_max_size:
         context_words = context_words[-context_max_size:]
         context = " ".join(context_words)
 
