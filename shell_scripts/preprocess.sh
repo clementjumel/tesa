@@ -24,7 +24,7 @@ MASTER_THESIS_PATH=/network/home/jumelcle/master_thesis
 FINETUNING_DATA_PATH=/network/tmp1/jumelcle/results/finetuning_data
 PREPROCESSED_DATA_PATH=/network/tmp1/jumelcle/results/preprocessed_data
 
-# Recover the full task file name
+# Recover full paths/names
 FULL_TASK="$TASK"_"$TRAIN_PROPORTION"-"$VALID_PROPORTION"-"$TEST_PROPORTION"_rs"$RANKING_SIZE"_bs"$BATCH_SIZE"_cf-"$CONTEXT_FORMAT"_tf-"$TARGETS_FORMAT"
 
 # Print the parameters
