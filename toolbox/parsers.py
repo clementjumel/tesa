@@ -132,4 +132,4 @@ def add_model_arguments(ap):
                     help="Option to use tensorboard.")
     ap.add_argument("--show",
                     action="store_true",
-                    help="Option to show some results.")
+                    help="Option to show some examples instead of ranking.")
