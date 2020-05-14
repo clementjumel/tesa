@@ -23,7 +23,7 @@ class ModelingTask:
             batch_size: int, number of samples in each batch.
             context_format: str, version of the context format to encode the inputs in a string.
             targets_format: str, version of the targets format to encode the target choices in strings.
-            context_max_size: int, maximum number of tokens in the formatted context.
+            context_max_size: int, maximum number of tokens in the formatted context for classifier BART.
             k_cross_validation: int, number of folds to use in k-fold cross validation (if 0, doesn't use k-fold).
             valid_proportion: float, fraction (between 0 and 1) of the data to keep in the valid set.
             test_proportion: float, fraction (between 0 and 1) of the data to keep in the test set.
@@ -346,8 +346,7 @@ class ModelingTask:
         source_rows, target_rows = [], []
 
         source = format_context(ranking_task,
-                                context_format=self.context_format,
-                                context_max_size=self.context_max_size)
+                                context_format=self.context_format)
 
         targets = format_targets(ranking_task, targets_format=self.targets_format)
 
