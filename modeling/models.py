@@ -70,15 +70,16 @@ class BaseModel:
         show_rankings = args.show_rankings
         show_choices = args.show_choices
 
-        self.preview(task.train_loader)
+        if not show:
+            self.preview(task.train_loader)
 
-        print("Evaluation on the train_loader...")
-        self.valid(task.train_loader)
+            print("Evaluation on the train_loader...")
+            self.valid(task.train_loader)
 
-        print("Evaluation on the valid_loader...")
-        self.valid(task.valid_loader)
+            print("Evaluation on the valid_loader...")
+            self.valid(task.valid_loader)
 
-        if show:
+        else:
             self.show(task, show_rankings=show_rankings, show_choices=show_choices)
 
     def show(self, task, show_rankings, show_choices):
@@ -897,11 +898,25 @@ class GeneratorBart(BaseModel):
         self.results_path = args.results_path
 
     def play(self, task, args):
-        print("Generation on train and valid loaders...")
-        self.generate(task.train_loader, fname="train")
-        self.generate(task.valid_loader, fname="valid")
+        show = args.show
+        show_rankings = args.show_rankings
+        show_choices = args.show_choices
 
-        super().play(task=task, args=args)
+        if not show:
+            self.preview(task.train_loader)
+
+            print("Evaluation on the train_loader...")
+            self.valid(task.train_loader)
+
+            print("Evaluation on the valid_loader...")
+            self.valid(task.valid_loader)
+
+        else:
+            print("Generation on train and valid loaders...")
+            self.generate(task.train_loader, fname="train")
+            self.generate(task.valid_loader, fname="valid")
+
+            self.show(task, show_rankings=show_rankings, show_choices=show_choices)
 
     def generate(self, data_loader, fname):
         """
