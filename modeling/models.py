@@ -115,7 +115,8 @@ class BaseModel:
             print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
 
             if self.context_format is not None:
-                print("Context:\n%s" % format_context(inputs, context_format=self.context_format,
+                print("Context:\n%s" % format_context(inputs,
+                                                      context_format=self.context_format,
                                                       context_max_size=self.context_max_size))
 
             print("\nScores:")
@@ -866,7 +867,9 @@ class ClassifierBart(BaseModel):
         self.idx = labels.index("aggregation")
 
     def pred(self, inputs):
-        sentence1 = format_context(inputs, context_format=self.context_format, context_max_size=self.context_max_size)
+        sentence1 = format_context(inputs,
+                                   context_format=self.context_format,
+                                   context_max_size=self.context_max_size)
 
         batch_encoding = [self.pretrained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
@@ -885,6 +888,7 @@ class GeneratorBart(BaseModel):
 
         self.pretrained_model.half()
 
+        self.context_max_size = None
         self.beam = args.bart_beam
         self.lenpen = args.bart_lenpen
         self.max_len_b = args.bart_max_len_b
@@ -915,8 +919,7 @@ class GeneratorBart(BaseModel):
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
             entities = ranking[0][0]['entities']
             source = format_context(ranking,
-                                    context_format=self.context_format,
-                                    context_max_size=self.context_max_size)
+                                    context_format=self.context_format)
             targets = format_targets(ranking,
                                      targets_format=self.targets_format)
 
@@ -954,8 +957,7 @@ class GeneratorBart(BaseModel):
 
     def pred(self, inputs):
         source = format_context(inputs,
-                                context_format=self.context_format,
-                                context_max_size=self.context_max_size)
+                                context_format=self.context_format)
 
         with torch.no_grad():
             scores = self.pretrained_model.sample_scorer([source for _ in range(len(inputs['choices']))],
