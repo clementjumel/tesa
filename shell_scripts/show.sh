@@ -60,6 +60,9 @@ fi
 # Move to SLURM temporary directory
 cd $SLURM_TMPDIR
 
+# Makes sure we don't compute *.pt if there is no checkpoint file
+shopt -s nullglob
+
 for FULL_CHECKPOINT in $RESULTS_PATH/*.pt
 do
   # Load the checkpoint

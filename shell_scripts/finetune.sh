@@ -73,7 +73,7 @@ then
       --total-num-update $TOTAL_NUM_UPDATES \
       --warmup-updates $WARMUP_UPDATES \
       --restore-file $BART/model.pt \
-      --save-dir $RESULTS_PATH \
+      --save-dir $RESULTS_PATH \
       --tensorboard-logdir $RESULTS_PATH/tensorboard_logs \
       --no-last-checkpoints \
       --task sentence_prediction \
