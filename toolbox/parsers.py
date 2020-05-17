@@ -88,13 +88,18 @@ def add_task_arguments(ap):
     ap.add_argument("--cross_validation",
                     action='store_true',
                     help="Cross validation option.")
+    ap.add_argument("--k_cross_validation",
+                    type=int, default=K_CROSS_VALIDATION,
+                    help="Number of folds for cross validation.")
     ap.add_argument("--generation",
                     action='store_true',
                     help="Generation finetuning option.")
     ap.add_argument("--classification",
                     action='store_true',
                     help="Classification finetuning option.")
-
+    ap.add_argument("--finetuning_data_path",
+                    type=str, default=FINETUNING_DATA_PATH,
+                    help="Path to the finetuning data folder.")
 
 def add_model_arguments(ap):
     """
