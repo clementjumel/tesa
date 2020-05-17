@@ -28,6 +28,25 @@ def standard_parser():
     return ap
 
 
+def add_annotations_arguments(ap):
+    """
+    Add to the argument parser the parsing arguments relative to the annotations.
+
+    Args:
+        ap: argparse.ArgumentParser, argument parser to update with the arguments.
+    """
+
+    ap.add_argument("--min_assignments",
+                    type=int, default=MIN_ASSIGNMENTS,
+                    help="Minimum number of assignments an annotator has to have done not be filtered out.")
+    ap.add_argument("--min_answers",
+                    type=int, default=MIN_ANSWERS,
+                    help="Minimum number of actual answers an annotation task has to have not be filtered out.")
+    ap.add_argument("--exclude_pilot",
+                    type=bool, default=EXCLUDE_PILOT,
+                    help="Whether or not to exclude the pilot.")
+
+
 def add_task_arguments(ap):
     """
     Add to the argument parser the parsing arguments relative to the modeling task.
