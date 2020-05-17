@@ -1,17 +1,15 @@
 """
-Script to save the annotated queries and the annotations.
+Script to preprocess and save the annotated queries and the annotations.
 
 Usages:
     tests:
-        python db_annotations.py --no_save
+        python preprocess_annotations.py --no_save
     regular usage:
-        python db_annotations.py
+        python preprocess_annotations.py
 """
 
 from database_creation.annotation_task import AnnotationTask
-from toolbox.utils import standard_parser
-from toolbox.parameters import MIN_ASSIGNMENTS, MIN_ANSWERS, EXCLUDE_PILOT
-from toolbox.paths import ANNOTATION_TASK_RESULTS_PATH
+from toolbox.parsers import standard_parser, add_annotations_arguments
 
 from collections import defaultdict
 from pickle import dump
@@ -22,20 +20,24 @@ from os.path import exists
 def parse_arguments():
     """ Use arparse to parse the input arguments and return it as a argparse.ArgumentParser. """
 
-    return standard_parser().parse_args()
+    ap = standard_parser()
+    add_annotations_arguments(ap)
+
+    return ap.parse_args()
 
 
-def filter_annotations(annotations, min_assignments, min_answers, args):
+def filter_annotations(annotations, args):
     """
     Remove the annotations which don't meet the two criteria (annotations with not enough answers and answers from
     workers that didn't do enough assignments) and return them.
 
     Args:
         annotations: dict of list of Annotations, Annotations from the MT workers.
-        min_assignments: int, minimum number of assignments a worker has to have done to be taken into account.
-        min_answers: int, minimum number of annotators that answers an annotation for it to be taken into account.
         args: argparse.ArgumentParser, parser object that contains the options of a script.
     """
+
+    min_assignments = args.min_assignments
+    min_answers = args.min_answers
 
     length = sum([len(annotation_list) for _, annotation_list in annotations.items()])
 
@@ -70,17 +72,17 @@ def filter_annotations(annotations, min_assignments, min_answers, args):
     return annotations
 
 
-def save_pkl(annotations, queries, path, args):
+def save_pkl(annotations, queries, args):
     """
     Saves the annotations and the queries using pickle.
 
     Args:
         annotations: dict of list of Annotations, Annotations from the MT workers.
         queries: dict of Queries, Queries of the annotations.
-        path: str, path of the folder to save in.
         args: argparse.ArgumentParser, parser object that contains the options of a script.
     """
 
+    path = args.annotations_path + "annotations/"
     annotations_fname = path + "annotations.pkl"
     queries_fname = path + "queries.pkl"
 
@@ -107,7 +109,7 @@ def main():
     args = parse_arguments()
 
     annotation_task = AnnotationTask(silent=args.silent,
-                                     results_path=ANNOTATION_TASK_RESULTS_PATH,
+                                     results_path=args.annotations_path,
                                      years=None,
                                      max_tuple_size=None,
                                      short=None,
@@ -118,17 +120,14 @@ def main():
                                      save=None,
                                      corpus_path=None)
 
-    annotation_task.process_task(exclude_pilot=EXCLUDE_PILOT)
+    annotation_task.process_task(exclude_pilot=args.exclude_pilot)
 
     queries = annotation_task.queries
     annotations = annotation_task.annotations
 
-    annotations = filter_annotations(annotations=annotations,
-                                     min_assignments=MIN_ASSIGNMENTS,
-                                     min_answers=MIN_ANSWERS,
-                                     args=args)
+    annotations = filter_annotations(annotations, args=args)
 
-    save_pkl(queries=queries, annotations=annotations, path=ANNOTATION_TASK_RESULTS_PATH + "annotations/", args=args)
+    save_pkl(queries=queries, annotations=annotations, args=args)
 
 
 if __name__ == '__main__':
