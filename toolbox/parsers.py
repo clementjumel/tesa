@@ -45,6 +45,9 @@ def add_annotations_arguments(ap):
     ap.add_argument("--exclude_pilot",
                     type=bool, default=EXCLUDE_PILOT,
                     help="Whether or not to exclude the pilot.")
+    ap.add_argument("--annotations_path",
+                    type=str, default=ANNOTATION_TASK_RESULTS_PATH,
+                    help="Path to the annotation task results folder.")
 
 
 def add_task_arguments(ap):
