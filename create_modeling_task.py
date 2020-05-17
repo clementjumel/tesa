@@ -10,16 +10,15 @@ Usages:
 """
 
 import modeling.modeling_task as modeling_task
-from toolbox.parsers import standard_parser, add_task_arguments
+from toolbox.parsers import standard_parser, add_annotations_arguments, add_task_arguments
 from toolbox.utils import to_class_name
-from toolbox.parameters import K_CROSS_VALIDATION, RANDOM_SEED
-from toolbox.paths import ANNOTATION_TASK_RESULTS_PATH, MODELING_TASK_RESULTS_PATH, FINETUNING_DATA_PATH
 
 
 def parse_arguments():
     """ Use arparse to parse the input arguments and return it as a argparse.ArgumentParser. """
 
     ap = standard_parser()
+    add_annotations_arguments(ap)
     add_task_arguments(ap)
 
     return ap.parse_args()
@@ -36,22 +35,22 @@ def main():
                                              context_format=args.context_format,
                                              targets_format=args.targets_format,
                                              context_max_size=args.context_max_size,
-                                             k_cross_validation=int(args.cross_validation) * K_CROSS_VALIDATION,
+                                             k_cross_validation=int(args.cross_validation) * args.k_cross_validation,
                                              valid_proportion=args.valid_proportion,
                                              test_proportion=args.test_proportion,
-                                             random_seed=RANDOM_SEED,
+                                             random_seed=args.random_seed,
                                              save=not args.no_save,
                                              silent=args.silent,
-                                             results_path=MODELING_TASK_RESULTS_PATH,
-                                             annotation_task_results_path=ANNOTATION_TASK_RESULTS_PATH)
+                                             results_path=args.task_path,
+                                             annotation_task_results_path=args.annotations_path)
 
     task.process_data_loaders()
 
     if args.classification:
-        task.process_classification_task(FINETUNING_DATA_PATH)
+        task.process_classification_task(args.finetuning_data_path)
 
     if args.generation:
-        task.process_generation_task(FINETUNING_DATA_PATH)
+        task.process_generation_task(args.finetuning_data_path)
 
 
 if __name__ == '__main__':
