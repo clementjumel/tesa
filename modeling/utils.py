@@ -45,7 +45,7 @@ def format_context(ranking_or_inputs, context_format, context_max_size=None):
 
     context_items = []
 
-    if context_format == "v0":  # (no separation token) wikis, articles, entities
+    if context_format == "v0":  # (no separation token) wikis articles entities
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
                 context_items.append(wiki_article)
@@ -55,19 +55,39 @@ def format_context(ranking_or_inputs, context_format, context_max_size=None):
 
         context_items.append(', '.join(inputs['entities']))
 
-    elif context_format == "v1":  # § wiki1 § wiki2 £ article1 £ article2 µ entity1 µ entity2
+    else:  # wiki_sep wiki1 wiki_sep wiki2 article_sep article1 article_sep article2 entity_sep entity1 entity_sep ...
+        if context_format == "v1":
+            wiki_sep = "§"
+            article_sep = "£"
+            entity_sep = "µ"
+
+        elif context_format == "v2":
+            wiki_sep = "Information:"
+            article_sep = "Article:"
+            entity_sep = "Entity:"
+
+        elif context_format == "v3":
+            wiki_sep = "<w>"
+            article_sep = "<a>"
+            entity_sep = "<e>"
+
+        elif context_format == "v4":
+            wiki_sep = "W"
+            article_sep = "A"
+            entity_sep = "E"
+
+        else:
+            raise NotImplementedError("Context format not implemented: %s." % context_format)
+
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
-                context_items.extend(["§", wiki_article])
+                context_items.extend([wiki_sep, wiki_article])
 
         for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-            context_items.extend(["£", nyt_title + ":", nyt_context])
+            context_items.extend([article_sep, nyt_title + ".", nyt_context])
 
         for entity in inputs['entities']:
-            context_items.extend(["µ", entity])
-
-    else:
-        raise Exception("Context format not implemented: %s." % context_format)
+            context_items.extend([entity_sep, entity])
 
     context = " ".join(context_items)
 
