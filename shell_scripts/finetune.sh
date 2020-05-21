@@ -7,18 +7,16 @@
 #SBATCH --error=/network/tmp1/jumelcle/logs/finetune-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/finetune-%j.out
 
-# Recover the scripts arguments
+# Parameters
 TASK_TYPE=$1
-TASK=$2
-EXPERIMENT=$3
-
-# Files parameters
+EXPERIMENT=$2
+TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v1
+CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 BART=bart.large.cnn
 
@@ -57,25 +55,35 @@ cd $SLURM_TMPDIR
 if [ $TASK_TYPE == "classification" ]
 then
   # Finetuning parameters
-  MAX_EPOCHS=1  # Defautl: 10
+  MAX_EPOCHS=3  # Defautl: 10
   MAX_SENTENCES=32  # Default: 32
   UPDATE_FREQ=1  # Default: 1
   LR=1e-05
-  TOTAL_NUM_UPDATES=48246  # Default: 1018
-  WARMUP_UPDATES=4824  # Default: 61
+  WARMUP_UPDATES_PERCENT=6
+
+  if [ $TASK == "context-free-same-type" ]
+  then
+    NUM_UPDATES_PER_EPOCH=9400  # unknown
+  elif [ $TASK == "context-dependent-same-type" ]
+  then
+    NUM_UPDATES_PER_EPOCH=9400
+  fi
+
+  TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS))
+  WARMUP_UPDATES=$(($WARMUP_UPDATES_PERCENT * $TOTAL_NUM_UPDATES / 100))
 
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
       --max-epoch $MAX_EPOCHS \
       --max-sentences $MAX_SENTENCES \
       --max-tokens 1024 \
       --update-freq $UPDATE_FREQ \
+      --lr-scheduler polynomial_decay \
       --lr $LR \
       --total-num-update $TOTAL_NUM_UPDATES \
       --warmup-updates $WARMUP_UPDATES \
       --restore-file $BART/model.pt \
       --save-dir $RESULTS_PATH \
       --tensorboard-logdir $RESULTS_PATH/tensorboard_logs \
-      --no-last-checkpoints \
       --task sentence_prediction \
       --add-prev-output-tokens \
       --layernorm-embedding \
@@ -96,18 +104,20 @@ then
       --adam-betas "(0.9, 0.98)" \
       --adam-eps 1e-08 \
       --clip-norm 0.0 \
-      --lr-scheduler polynomial_decay \
       --best-checkpoint-metric accuracy \
       --maximize-best-checkpoint-metric \
       --memory-efficient-fp16 \
+      --keep-best-checkpoints 0 \
+      --no-last-checkpoints \
       --find-unused-parameters;
 
 elif [ $TASK_TYPE == "generation" ]
 then
   # Finetuning parameters
-  MAX_EPOCHS=10
-  LR=3e-05
+  MAX_EPOCHS=5
+  MAX_SENTENCES=64
   UPDATE_FREQ=4
+  LR=3e-05
   WARMUP_UPDATES_PERCENT=6
 
   if [ $TASK == "context-free-same-type" ]
@@ -121,19 +131,19 @@ then
   TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS))
   WARMUP_UPDATES=$(($WARMUP_UPDATES_PERCENT * $TOTAL_NUM_UPDATES / 100))
 
-  # Run the finetunign
+  # Run the finetuning
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
-      --restore-file $BART/model.pt \
-      --no-last-checkpoints \
-      --save-dir $RESULTS_PATH \
-      --tensorboard-logdir $RESULTS_PATH/tensorboard_logs \
       --max-epoch $MAX_EPOCHS \
+      --max-sentences $MAX_SENTENCES \
       --max-tokens 1024 \
       --update-freq $UPDATE_FREQ \
       --lr-scheduler polynomial_decay \
       --lr $LR \
       --total-num-update $TOTAL_NUM_UPDATES \
       --warmup-updates $WARMUP_UPDATES \
+      --restore-file $BART/model.pt \
+      --save-dir $RESULTS_PATH \
+      --tensorboard-logdir $RESULTS_PATH/tensorboard_logs \
       --task translation \
       --source-lang source \
       --target-lang target \
@@ -155,9 +165,11 @@ then
       --adam-betas "(0.9, 0.999)" \
       --adam-eps 1e-08 \
       --clip-norm 0.1 \
+      --keep-best-checkpoints 0 \
+      --no-last-checkpoints \
       --find-unused-parameters;
 fi
 
 echo "Done."; echo
 
-sbatch  ~/master_thesis/shell_scripts/rank.sh $1 $2 $3
+sbatch  ~/master_thesis/shell_scripts/rank.sh $1 $2

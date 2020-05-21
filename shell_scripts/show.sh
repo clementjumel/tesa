@@ -7,18 +7,16 @@
 #SBATCH --error=/network/tmp1/jumelcle/logs/show-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/show-%j.out
 
-# Recover the scripts arguments
+# Parameters
 TASK_TYPE=$1
-TASK=$2
-EXPERIMENT=$3
-
-# Files parameters
+EXPERIMENT=$2
+TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v1
+CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 BART=bart.large.cnn
 
