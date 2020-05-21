@@ -39,12 +39,13 @@ def filter_annotations(annotations, args):
     min_assignments = args.min_assignments
     min_answers = args.min_answers
 
-    length1 = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+                   for _, annotation_list in annotations.items()])
+    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
                    for _, annotation_list in annotations.items()])
 
     if not args.silent:
-        print("Filtering the annotations (annotations: all %i, n/a %i)..." % (length1, length2))
+        print("Filtering the annotations; annotations answered: %i, n/a: %i..." % (length1, length2))
 
     workers_count = defaultdict(list)
 
@@ -58,22 +59,24 @@ def filter_annotations(annotations, args):
                 annotations[annotation_id_] = [annotation for annotation in annotations[annotation_id_]
                                                if annotation.worker_id != worker_id]
 
-    length1 = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+                   for _, annotation_list in annotations.items()])
+    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
                    for _, annotation_list in annotations.items()])
 
     if not args.silent:
-        print("First filter done (number of assignments): all %i, n/a %i remaining..." % (length1, length2))
+        print("First filter done (number of assignments); annotations answered: %i, n/a: %i..." % (length1, length2))
 
     annotations = {id_: annotation_list for id_, annotation_list in annotations.items()
                    if len([annotation for annotation in annotation_list if not annotation.bug]) >= min_answers}
 
-    length1 = sum([len(annotation_list) for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+                   for _, annotation_list in annotations.items()])
+    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
                    for _, annotation_list in annotations.items()])
 
     if not args.silent:
-        print("Second filter done (number of answers): all %i, n/a %i remaining.\n" % (length1, length2))
+        print("Second filter done (number of answers); annotations answered: %i, n/a %i.\n" % (length1, length2))
 
     return annotations
 
