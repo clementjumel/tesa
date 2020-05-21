@@ -346,7 +346,8 @@ class ModelingTask:
         source_rows, target_rows = [], []
 
         source = format_context(ranking_task,
-                                context_format=self.context_format)
+                                context_format=self.context_format,
+                                context_max_size=self.context_max_size)
 
         targets = format_targets(ranking_task, targets_format=self.targets_format)
 
