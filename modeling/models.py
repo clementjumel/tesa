@@ -889,7 +889,6 @@ class GeneratorBart(BaseModel):
 
         self.pretrained_model.half()
 
-        self.context_max_size = None
         self.beam = args.bart_beam
         self.lenpen = args.bart_lenpen
         self.max_len_b = args.bart_max_len_b
@@ -934,7 +933,8 @@ class GeneratorBart(BaseModel):
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
             entities = ranking[0][0]['entities']
             source = format_context(ranking,
-                                    context_format=self.context_format)
+                                    context_format=self.context_format,
+                                    context_max_size=self.context_max_size)
             targets = format_targets(ranking,
                                      targets_format=self.targets_format)
 
@@ -972,7 +972,8 @@ class GeneratorBart(BaseModel):
 
     def pred(self, inputs):
         source = format_context(inputs,
-                                context_format=self.context_format)
+                                context_format=self.context_format,
+                                context_max_size=self.context_max_size)
 
         with torch.no_grad():
             scores = self.pretrained_model.sample_scorer([source for _ in range(len(inputs['choices']))],
