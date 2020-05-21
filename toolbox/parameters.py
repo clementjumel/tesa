@@ -37,7 +37,7 @@ SCORES_NAMES = [
     'reciprocal_average_rank',
 ]
 
-TASK_NAME = "context-free-same-type"
+TASK_NAME = "context-dependent-same-type"
 CONTEXT_MAX_SIZE = 750
 SHOW_RANKINGS = 5
 SHOW_CHOICES = 10
