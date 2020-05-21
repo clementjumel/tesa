@@ -73,11 +73,11 @@ class BaseModel:
         if not show:
             self.preview(task.train_loader)
 
-            print("Evaluation on the train_loader...")
-            self.valid(task.train_loader)
-
-            print("Evaluation on the valid_loader...")
+            print("Evaluation on the valid loader...")
             self.valid(task.valid_loader)
+
+            print("Evaluation on the test loader...")
+            self.test(task.test_loader)
 
         else:
             self.show(task, show_rankings=show_rankings, show_choices=show_choices)
@@ -904,11 +904,11 @@ class GeneratorBart(BaseModel):
         if not show:
             self.preview(task.train_loader)
 
-            print("Evaluation on the train_loader...")
-            self.valid(task.train_loader)
-
-            print("Evaluation on the valid_loader...")
+            print("Evaluation on the valid loader...")
             self.valid(task.valid_loader)
+
+            print("Evaluation on the test loader...")
+            self.test(task.test_loader)
 
         else:
             print("Generation on train and valid loaders...")
