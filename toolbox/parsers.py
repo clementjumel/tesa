@@ -101,6 +101,7 @@ def add_task_arguments(ap):
                     type=str, default=FINETUNING_DATA_PATH,
                     help="Path to the finetuning data folder.")
 
+
 def add_model_arguments(ap):
     """
     Add to the argument parser the parsing arguments relative to the model.
@@ -160,3 +161,6 @@ def add_model_arguments(ap):
     ap.add_argument("--show",
                     action="store_true",
                     help="Option to show some examples instead of ranking.")
+    ap.add_argument("--custom_examples",
+                    aciton="store_true",
+                    help="Option to show the custom examples only (if show).")
