@@ -824,9 +824,12 @@ class Annotation:
 
             preprocessed_answer = ' '.join(words)
 
-            if 'have' in preprocessed_answer.split() or 'are' in preprocessed_answer.split() \
-                    or 'and' in preprocessed_answer.split() or preprocessed_answer == 'the' \
-                    or '/' in preprocessed_answer:
+            if 'have' in preprocessed_answer.split() \
+                    or 'are' in preprocessed_answer.split() \
+                    or 'and' in preprocessed_answer.split() \
+                    or preprocessed_answer == 'the' \
+                    or '/' in preprocessed_answer \
+                    or 'na' == preprocessed_answer:
                 print('Discarding "%s"' % answer) if not silent else None
 
             elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
