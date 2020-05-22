@@ -55,7 +55,8 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
 
         context_items.append(', '.join(inputs['entities']))
 
-    else:  # wiki_sep wiki1 wiki_sep wiki2 article_sep article1 article_sep article2 entity_sep entity1 entity_sep ...
+    elif context_format in ["v1", "v2", "v3", "v4"]:
+        # wiki_sep wiki1 wiki_sep wiki2 article_sep article1 article_sep article2 entity_sep entity1 entity_sep ...
         if context_format == "v1":
             wiki_sep = "§"
             article_sep = "£"
@@ -71,13 +72,10 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
             article_sep = "<a>"
             entity_sep = "<e>"
 
-        elif context_format == "v4":
+        else:
             wiki_sep = "W"
             article_sep = "A"
             entity_sep = "E"
-
-        else:
-            raise NotImplementedError("Context format not implemented: %s." % context_format)
 
         for wiki_article in inputs['wiki_articles']:
             if wiki_article:
@@ -88,6 +86,26 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
 
         for entity in inputs['entities']:
             context_items.extend([entity_sep, entity])
+
+    else:  # ablation studies based on v0
+        if context_format == "va":  # no wikis
+            for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+                context_items.extend([nyt_title + ':', nyt_context])
+
+            context_items.append(', '.join(inputs['entities']))
+
+        if context_format == "vb":  # no article
+            for wiki_article in inputs['wiki_articles']:
+                if wiki_article:
+                    context_items.append(wiki_article)
+
+            context_items.append(', '.join(inputs['entities']))
+
+        if context_format == "vc":  # no wikis and no article
+            context_items.append(', '.join(inputs['entities']))
+
+        else:
+            raise NotImplementedError("Context format not implemented: %s." % context_format)
 
     context = " ".join(context_items)
 
