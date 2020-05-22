@@ -106,9 +106,10 @@ class BaseModel:
                     inputs, _ = ranking[0]
                     if inputs['entities'] in [["Francois Bayrou", "Nicolas Sarkozy", "Segolene Royal"],
                                               ["Chicago", "London"],
-                                              ["Microsoft Corp.", "Sony Corp"]]:
+                                              ["Microsoft Corp.", "Sony Corp."]]:
                         data_loader.append(ranking)
 
+        show_rankings = len(data_loader)
         for ranking_idx, ranking in enumerate(data_loader):
             ranking_choices, ranking_outputs, ranking_targets = [], [], []
 
