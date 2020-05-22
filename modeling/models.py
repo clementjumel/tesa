@@ -69,6 +69,7 @@ class BaseModel:
         show = args.show
         show_rankings = args.show_rankings
         show_choices = args.show_choices
+        custom_examples = args.custom_examples
 
         if not show:
             self.preview(task.train_loader)
@@ -80,9 +81,9 @@ class BaseModel:
             self.test(task.test_loader)
 
         else:
-            self.show(task, show_rankings=show_rankings, show_choices=show_choices)
+            self.show(task, show_rankings=show_rankings, show_choices=show_choices, custom_examples=custom_examples)
 
-    def show(self, task, show_rankings, show_choices):
+    def show(self, task, show_rankings, show_choices, custom_examples):
         """
         Show the model results on different rankings.
 
@@ -90,12 +91,25 @@ class BaseModel:
             task: modeling_task.ModelingTask, task to evaluate the model on.
             show_rankings: int, number of rankings to show.
             show_choices: int, number of best choices to show.
+            custom_examples: bool, whether to show the custom examples or random ones.
         """
 
-        data_loader = task.valid_loader
-        shuffle(data_loader)
+        if not custom_examples:
+            data_loader = task.valid_loader
+            shuffle(data_loader)
+            data_loader = data_loader[:show_rankings]
 
-        for ranking_idx, ranking in enumerate(data_loader[:show_rankings]):
+        else:
+            data_loader = []
+            for loader in [task.train_loader, task.valid_loader, task.test_loader]:
+                for ranking in loader:
+                    inputs, _ = ranking[0]
+                    if inputs['entities'] in [["Francois Bayrou", "Nicolas Sarkozy", "Segolene Royal"],
+                                              ["Chicago", "London"],
+                                              ["Microsoft Corp.", "Sony Corp"]]:
+                        data_loader.append(ranking)
+
+        for ranking_idx, ranking in enumerate(data_loader):
             ranking_choices, ranking_outputs, ranking_targets = [], [], []
 
             for inputs, targets in ranking:
@@ -900,6 +914,7 @@ class GeneratorBart(BaseModel):
         show = args.show
         show_rankings = args.show_rankings
         show_choices = args.show_choices
+        custom_examples = args.custom_examples
 
         if not show:
             self.preview(task.train_loader)
@@ -915,7 +930,7 @@ class GeneratorBart(BaseModel):
             self.generate(task.train_loader, fname="train")
             self.generate(task.valid_loader, fname="valid")
 
-            self.show(task, show_rankings=show_rankings, show_choices=show_choices)
+            self.show(task, show_rankings=show_rankings, show_choices=show_choices, custom_examples=custom_examples)
 
     def generate(self, data_loader, fname):
         """
