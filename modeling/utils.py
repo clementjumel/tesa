@@ -94,14 +94,14 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
 
             context_items.append(', '.join(inputs['entities']))
 
-        if context_format == "vb":  # no article
+        elif context_format == "vb":  # no article
             for wiki_article in inputs['wiki_articles']:
                 if wiki_article:
                     context_items.append(wiki_article)
 
             context_items.append(', '.join(inputs['entities']))
 
-        if context_format == "vc":  # no wikis and no article
+        elif context_format == "vc":  # no wikis and no article
             context_items.append(', '.join(inputs['entities']))
 
         else:
