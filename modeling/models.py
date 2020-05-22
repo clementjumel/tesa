@@ -145,14 +145,14 @@ class BaseModel:
                           ranking_targets.squeeze().tolist())
             results = sorted(results, key=lambda x: x[0])
 
-            print("\nGold standards (rank: choice (output/target):")
+            print("\nGold standards (rank: choice [output/target]:")
             for result in results:
                 if result[3]:
-                    print("%i: %s (%.3f/%i)" % result)
+                    print("%i: %s [%.3f/%i]" % result)
 
-            print("\nTop %i results (rank: choice (output/target):" % show_choices)
+            print("\nTop %i results (rank: choice [output/target]:" % show_choices)
             for result in results[:show_choices]:
-                print("%i: %s (%.3f/%i)" % result)
+                print("%i: %s [%.3f/%i]" % result)
 
             print()
 
@@ -893,7 +893,7 @@ class ClassifierBart(BaseModel):
         with torch.no_grad():
             logprobs = self.pretrained_model.predict('sentence_classification_head', batch_tokens)
 
-        return logprobs[:, self.idx].reshape((-1, 1))
+        return logprobs[:, self.idx].exp().reshape((-1, 1))
 
 
 class GeneratorBart(BaseModel):
@@ -927,9 +927,10 @@ class GeneratorBart(BaseModel):
             self.test(task.test_loader)
 
         else:
-            print("Generation on train and valid loaders...")
+            print("Generation on train, valid and test loaders...")
             self.generate(task.train_loader, fname="train")
             self.generate(task.valid_loader, fname="valid")
+            self.generate(task.test_loader, fname="test")
 
             self.show(task, show_rankings=show_rankings, show_choices=show_choices, custom_examples=custom_examples)
 
