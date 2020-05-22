@@ -162,5 +162,5 @@ def add_model_arguments(ap):
                     action="store_true",
                     help="Option to show some examples instead of ranking.")
     ap.add_argument("--custom_examples",
-                    aciton="store_true",
+                    action="store_true",
                     help="Option to show the custom examples only (if show).")
