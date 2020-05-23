@@ -189,7 +189,7 @@ class BaseModel:
                 for result in results[:show_choices]:
                     print("%i: %s [%.3f/%i]" % result)
 
-                print("##################################################")
+                print("################################################## \n\n")
 
         return data_loaders
 
