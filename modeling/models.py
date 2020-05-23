@@ -189,9 +189,11 @@ class BaseModel:
                 for result in results[:show_choices]:
                     print("%i: %s [%.3f/%i]" % result)
 
-                print("-------------------------------------------------- \n")
+                print("--------------------------------------------------" +
+                      "-------------------------------------------------- \n")
 
-            print("################################################## \n")
+            print("##################################################" +
+                  "################################################## \n")
 
         return data_loaders
 
@@ -1013,7 +1015,8 @@ class GeneratorBart(BaseModel):
 
         for extension in [".source", ".targets", ".entities", ".hypotheses"]:
             with open(path_join(self.results_path, fname + extension), 'a') as file:
-                file.write("################################################## \n")
+                file.write("##################################################" +
+                           "################################################## \n")
 
     def pred(self, inputs):
         source = format_context(inputs,
