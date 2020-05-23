@@ -189,7 +189,9 @@ class BaseModel:
                 for result in results[:show_choices]:
                     print("%i: %s [%.3f/%i]" % result)
 
-                print("################################################## \n\n")
+                print("-------------------------------------------------- \n")
+
+            print("################################################## \n")
 
         return data_loaders
 
@@ -949,7 +951,8 @@ class GeneratorBart(BaseModel):
         self.results_path = args.results_path
 
     def show(self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples):
-        data_loaders = super().show(task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples)
+        data_loaders = super().show(task, show_rankings, show_choices, random_examples, custom_examples,
+                                    unseen_examples)
 
         print("Generation on the examples...")
         for data_loader in data_loaders:
@@ -1010,7 +1013,7 @@ class GeneratorBart(BaseModel):
 
         for extension in [".source", ".targets", ".entities", ".hypotheses"]:
             with open(path_join(self.results_path, fname + extension), 'a') as file:
-                file.write("################################################## \n\n")
+                file.write("################################################## \n")
 
     def pred(self, inputs):
         source = format_context(inputs,
