@@ -69,7 +69,9 @@ class BaseModel:
         show = args.show
         show_rankings = args.show_rankings
         show_choices = args.show_choices
+        random_examples = args.random_examples
         custom_examples = args.custom_examples
+        unseen_examples = args.unseen_examples
 
         if not show:
             self.preview(task.train_loader)
@@ -81,9 +83,14 @@ class BaseModel:
             self.test(task.test_loader)
 
         else:
-            self.show(task, show_rankings=show_rankings, show_choices=show_choices, custom_examples=custom_examples)
+            self.show(task,
+                      show_rankings=show_rankings,
+                      show_choices=show_choices,
+                      random_examples=random_examples,
+                      custom_examples=custom_examples,
+                      unseen_examples=unseen_examples)
 
-    def show(self, task, show_rankings, show_choices, custom_examples):
+    def show(self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples):
         """
         Show the model results on different rankings.
 
@@ -91,15 +98,24 @@ class BaseModel:
             task: modeling_task.ModelingTask, task to evaluate the model on.
             show_rankings: int, number of rankings to show.
             show_choices: int, number of best choices to show.
-            custom_examples: bool, whether to show the custom examples or random ones.
+            random_examples: bool, whether to show custom examples of the validation loader or not.
+            custom_examples: bool, whether to show the custom examples or not.
+            unseen_examples: bool, whether to show random unseen examples or not
+
+        Returns:
+            list of data_loader, if needed for generation.
         """
 
-        if not custom_examples:
+        data_loaders = []
+
+        if random_examples:
             data_loader = task.valid_loader
             shuffle(data_loader)
             data_loader = data_loader[:show_rankings]
 
-        else:
+            data_loaders.append(data_loader)
+
+        if custom_examples:
             data_loader = []
             for loader in [task.train_loader, task.valid_loader, task.test_loader]:
                 for ranking in loader:
@@ -109,52 +125,73 @@ class BaseModel:
                                               ["Microsoft Corp.", "Sony Corp."]]:
                         data_loader.append(ranking)
 
-        show_rankings = len(data_loader)
-        for ranking_idx, ranking in enumerate(data_loader):
-            ranking_choices, ranking_outputs, ranking_targets = [], [], []
+            data_loaders.append(data_loader)
 
-            for inputs, targets in ranking:
-                outputs = self.pred(inputs)
+        if unseen_examples:
+            seen_entities = set()
+            for ranking in task.train_loader:
+                inputs, _ = ranking[0]
+                seen_entities.update(inputs['entities'])
 
-                ranking_choices.extend(inputs['choices'])
-                ranking_outputs.append(outputs)
-                ranking_targets.append(targets)
+            data_loader = []
+            for ranking in task.valid_loader:
+                inputs, _ = ranking[0]
+                if all([entity not in seen_entities for entity in inputs['entities']]):
+                    data_loader.append(ranking)
+                    if len(data_loader) == show_rankings:
+                        break
 
-            ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(ranking_targets)
+            data_loaders.append(data_loader)
 
-            ranking_ranks = get_ranks(ranking_outputs)
-            batch_score = self.get_score(ranks=ranking_ranks, targets=ranking_targets)
+        for data_loader in data_loaders:
+            show_rankings = len(data_loader)
+            for ranking_idx, ranking in enumerate(data_loader):
+                ranking_choices, ranking_outputs, ranking_targets = [], [], []
 
-            print("Ranking %i/%i: " % (ranking_idx + 1, show_rankings))
+                for inputs, targets in ranking:
+                    outputs = self.pred(inputs)
 
-            inputs, _ = ranking[0]
-            print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
+                    ranking_choices.extend(inputs['choices'])
+                    ranking_outputs.append(outputs)
+                    ranking_targets.append(targets)
 
-            if self.context_format is not None:
-                print("Context:\n%s" % format_context(inputs,
-                                                      context_format=self.context_format,
-                                                      context_max_size=self.context_max_size))
+                ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(ranking_targets)
 
-            print("\nScores:")
-            for score_name in self.scores_names:
-                print("%s: %.3f" % (score_name, batch_score[score_name]))
+                ranking_ranks = get_ranks(ranking_outputs)
+                batch_score = self.get_score(ranks=ranking_ranks, targets=ranking_targets)
 
-            results = zip(ranking_ranks.squeeze().tolist(),
-                          ranking_choices,
-                          ranking_outputs.squeeze().tolist(),
-                          ranking_targets.squeeze().tolist())
-            results = sorted(results, key=lambda x: x[0])
+                print("Ranking %i/%i: " % (ranking_idx + 1, show_rankings))
 
-            print("\nGold standards (rank: choice [output/target]:")
-            for result in results:
-                if result[3]:
+                inputs, _ = ranking[0]
+                print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
+
+                if self.context_format is not None:
+                    print("Context:\n%s" % format_context(inputs,
+                                                          context_format=self.context_format,
+                                                          context_max_size=self.context_max_size))
+
+                print("\nScores:")
+                for score_name in self.scores_names:
+                    print("%s: %.3f" % (score_name, batch_score[score_name]))
+
+                results = zip(ranking_ranks.squeeze().tolist(),
+                              ranking_choices,
+                              ranking_outputs.squeeze().tolist(),
+                              ranking_targets.squeeze().tolist())
+                results = sorted(results, key=lambda x: x[0])
+
+                print("\nGold standards (rank: choice [output/target]:")
+                for result in results:
+                    if result[3]:
+                        print("%i: %s [%.3f/%i]" % result)
+
+                print("\nTop %i results (rank: choice [output/target]:" % show_choices)
+                for result in results[:show_choices]:
                     print("%i: %s [%.3f/%i]" % result)
 
-            print("\nTop %i results (rank: choice [output/target]:" % show_choices)
-            for result in results[:show_choices]:
-                print("%i: %s [%.3f/%i]" % result)
+                print("####################")
 
-            print()
+        return data_loaders
 
     def preview(self, data_loader):
         """
@@ -900,7 +937,7 @@ class GeneratorBart(BaseModel):
     """ BART finetuned as a generator of aggregation. """
 
     def __init__(self, args, pretrained_model):
-        super().__init__(args=args, pretrained_model=pretrained_model)
+        super().__init__(args, pretrained_model)
 
         self.pretrained_model.half()
 
@@ -911,39 +948,23 @@ class GeneratorBart(BaseModel):
         self.no_repeat_ngram_size = args.bart_no_repeat_ngram_size
         self.results_path = args.results_path
 
-    def play(self, task, args):
-        show = args.show
-        show_rankings = args.show_rankings
-        show_choices = args.show_choices
-        custom_examples = args.custom_examples
+    def show(self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples):
+        data_loaders = super().show(task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples)
 
-        if not show:
-            self.preview(task.train_loader)
+        print("Generation on the examples...")
+        for data_loader in data_loaders:
+            self.generate(data_loader)
 
-            print("Evaluation on the valid loader...")
-            self.valid(task.valid_loader)
-
-            print("Evaluation on the test loader...")
-            self.test(task.test_loader)
-
-        else:
-            print("Generation on train, valid and test loaders...")
-            self.generate(task.train_loader, fname="train")
-            self.generate(task.valid_loader, fname="valid")
-            self.generate(task.test_loader, fname="test")
-
-            self.show(task, show_rankings=show_rankings, show_choices=show_choices, custom_examples=custom_examples)
-
-    def generate(self, data_loader, fname):
+    def generate(self, data_loader):
         """
         Generate the hypothesis of BART on the data_loader and write them in some files. Also evaluate the probabilities
         of the gold standards.
 
         Args:
             data_loader: list, list of ranking tasks, which are lists of (inputs, targets) batches.
-            fname: str, name of the file to write in.
         """
 
+        fname = "examples"
         n_rankings = len(data_loader)
         shuffle(data_loader)
 
