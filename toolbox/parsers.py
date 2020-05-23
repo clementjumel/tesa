@@ -161,6 +161,12 @@ def add_model_arguments(ap):
     ap.add_argument("--show",
                     action="store_true",
                     help="Option to show some examples instead of ranking.")
+    ap.add_argument("--random_examples",
+                    action="store_true",
+                    help="Option to show random examples (if show).")
     ap.add_argument("--custom_examples",
                     action="store_true",
-                    help="Option to show the custom examples only (if show).")
+                    help="Option to show the custom examples (if show).")
+    ap.add_argument("--unseen_examples",
+                    action="store_true",
+                    help="Option to show random unseen examples (if show).")
