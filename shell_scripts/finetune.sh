@@ -1,24 +1,41 @@
 #!/bin/bash
 #SBATCH --job-name=finetune
-#SBATCH --partition=main
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:v100:32gb:1
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=24:00:00
+#SBATCH --time=8:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/finetune-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/finetune-%j.out
 
 # Parameters
 TASK_TYPE=$1
-EXPERIMENT=$2
+CONTEXT_FORMAT=$2
 TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 BART=bart.large.cnn
+
+# Finetuning parameters
+if [ $TASK_TYPE == "classification" ]
+then
+  MAX_EPOCHS=5
+  MAX_SENTENCES=8
+  UPDATE_FREQ=4
+  LR=1e-05
+  WARMUP_UPDATES_PERCENT=6
+elif [ $TASK_TYPE == "generation" ]
+then
+  MAX_EPOCHS=10
+  MAX_SENTENCES=8
+  UPDATE_FREQ=1
+  LR=3e-05
+  WARMUP_UPDATES_PERCENT=6
+fi
+
+EXPERIMENT=ep"$MAX_EPOCHS"_sent"$MAX_SENTENCES"_freq"$UPDATE_FREQ"_lr"$LR"_warm"$WARMUP_UPDATES_PERCENT"
 
 # Paths
 MASTER_THESIS_PATH=/network/home/jumelcle/master_thesis
@@ -31,7 +48,7 @@ FULL_TASK="$TASK"_"$TRAIN_PROPORTION"-"$VALID_PROPORTION"-"$TEST_PROPORTION"_rs"
 RESULTS_PATH="$CHECKPOINTS_PATH/$TASK_TYPE/$FULL_TASK/$EXPERIMENT"
 
 # Print the parameters
-echo "Parameters:"; echo $TASK_TYPE $TASK $EXPERIMENT; echo
+echo "Parameters:"; echo $TASK_TYPE $CONTEXT_FORMAT $EXPERIMENT; echo
 echo "Results path:"; echo $RESULTS_PATH; echo
 
 # Load miniconda
@@ -54,27 +71,41 @@ cd $SLURM_TMPDIR
 
 if [ $TASK_TYPE == "classification" ]
 then
-  # Finetuning parameters
-  MAX_EPOCHS=3  # Defautl: 10
-  MAX_SENTENCES=32  # Default: 32
-  UPDATE_FREQ=1  # Default: 1
-  LR=1e-05
-  WARMUP_UPDATES_PERCENT=6
-
-  if [ $TASK == "context-free-same-type" ]
+  # Compute the number of updates
+  if [ $CONTEXT_FORMAT == "v0" ]
   then
-    NUM_UPDATES_PER_EPOCH=9400  # unknown
-  elif [ $TASK == "context-dependent-same-type" ]
+    NUM_UPDATES_PER_EPOCH=9365
+  elif [ $CONTEXT_FORMAT == "v1" ]
   then
-    NUM_UPDATES_PER_EPOCH=9400
+    NUM_UPDATES_PER_EPOCH=9435
+  elif [ $CONTEXT_FORMAT == "v2" ]
+  then
+    NUM_UPDATES_PER_EPOCH=9493
+  elif [ $CONTEXT_FORMAT == "v3" ]
+  then
+    NUM_UPDATES_PER_EPOCH=9618
+  elif [ $CONTEXT_FORMAT == "v4" ]
+  then
+    NUM_UPDATES_PER_EPOCH=9435
+  elif [ $CONTEXT_FORMAT == "va" ]
+  then
+    NUM_UPDATES_PER_EPOCH=4076
+  elif [ $CONTEXT_FORMAT == "vb" ]
+  then
+    NUM_UPDATES_PER_EPOCH=6690
+  elif [ $CONTEXT_FORMAT == "vc" ]
+  then
+    NUM_UPDATES_PER_EPOCH=2574
+  else
+    NUM_UPDATES_PER_EPOCH=9365
   fi
 
-  TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS))
+  TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS / $UPDATE_FREQ))
   WARMUP_UPDATES=$(($WARMUP_UPDATES_PERCENT * $TOTAL_NUM_UPDATES / 100))
 
   # Print the parameters
-  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_SENTENCES; echo $UPDATE_FREQ;
-  echo $LR; echo $WARMUP_UPDATES_PERCENT; echo $NUM_UPDATES_PER_EPOCH; echo
+  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_SENTENCES; echo $UPDATE_FREQ; echo $LR;
+  echo $WARMUP_UPDATES_PERCENT; echo $NUM_UPDATES_PER_EPOCH; echo $TOTAL_NUM_UPDATES; echo $WARMUP_UPDATES; echo
 
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
       --max-epoch $MAX_EPOCHS \
@@ -111,33 +142,48 @@ then
       --best-checkpoint-metric accuracy \
       --maximize-best-checkpoint-metric \
       --memory-efficient-fp16 \
-      --keep-best-checkpoints 0 \
       --no-last-checkpoints \
+      --skip-invalid-size-inputs-valid-test \
       --find-unused-parameters;
 
 elif [ $TASK_TYPE == "generation" ]
 then
-  # Finetuning parameters
-  MAX_EPOCHS=5
-  MAX_SENTENCES=64
-  UPDATE_FREQ=4
-  LR=3e-05
-  WARMUP_UPDATES_PERCENT=6
-
-  if [ $TASK == "context-free-same-type" ]
+  # Compute the number of updates
+  if [ $CONTEXT_FORMAT == "v0" ]
   then
-    NUM_UPDATES_PER_EPOCH=249
-  elif [ $TASK == "context-dependent-same-type" ]
+    NUM_UPDATES_PER_EPOCH=831
+  elif [ $CONTEXT_FORMAT == "v1" ]
   then
-    NUM_UPDATES_PER_EPOCH=210
+    NUM_UPDATES_PER_EPOCH=838
+  elif [ $CONTEXT_FORMAT == "v2" ]
+  then
+    NUM_UPDATES_PER_EPOCH=852
+  elif [ $CONTEXT_FORMAT == "v3" ]
+  then
+    NUM_UPDATES_PER_EPOCH=866
+  elif [ $CONTEXT_FORMAT == "v4" ]
+  then
+    NUM_UPDATES_PER_EPOCH=838
+  elif [ $CONTEXT_FORMAT == "va" ]
+  then
+    NUM_UPDATES_PER_EPOCH=342
+  elif [ $CONTEXT_FORMAT == "vb" ]
+  then
+    NUM_UPDATES_PER_EPOCH=538
+  elif [ $CONTEXT_FORMAT == "vc" ]
+  then
+    NUM_UPDATES_PER_EPOCH=288
+  else
+    NUM_UPDATES_PER_EPOCH=831
   fi
 
-  TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS))
+  # Compute the number of updates
+  TOTAL_NUM_UPDATES=$(($NUM_UPDATES_PER_EPOCH * $MAX_EPOCHS / $UPDATE_FREQ))
   WARMUP_UPDATES=$(($WARMUP_UPDATES_PERCENT * $TOTAL_NUM_UPDATES / 100))
 
   # Print the parameters
-  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_SENTENCES; echo $UPDATE_FREQ;
-  echo $LR; echo $WARMUP_UPDATES_PERCENT; echo $NUM_UPDATES_PER_EPOCH; echo
+  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_SENTENCES; echo $UPDATE_FREQ; echo $LR;
+  echo $WARMUP_UPDATES_PERCENT; echo $NUM_UPDATES_PER_EPOCH; echo $TOTAL_NUM_UPDATES; echo $WARMUP_UPDATES; echo
 
   # Run the finetuning
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
@@ -173,11 +219,14 @@ then
       --adam-betas "(0.9, 0.999)" \
       --adam-eps 1e-08 \
       --clip-norm 0.1 \
-      --keep-best-checkpoints 0 \
+      --fp16 \
       --no-last-checkpoints \
       --find-unused-parameters;
 fi
 
+# Remove checkpoint_best.pt
+rm $RESULTS_PATH/checkpoint_best.pt
+
 echo "Done."; echo
 
-sbatch  ~/master_thesis/shell_scripts/rank.sh $1 $2
+sbatch --partition=unkillable /network/home/jumelcle/master_thesis/shell_scripts/rank.sh $1 $2 $EXPERIMENT

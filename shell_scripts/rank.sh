@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --job-name=rank
-#SBATCH --partition=main
 #SBATCH --gres=gpu:1
 #SBATCH --mem-per-gpu=32G
 #SBATCH --time=12:00:00
@@ -9,14 +8,14 @@
 
 # Parameters
 TASK_TYPE=$1
-EXPERIMENT=$2
+CONTEXT_FORMAT=$2
+EXPERIMENT=$3
 TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 BART=bart.large.cnn
 
@@ -32,7 +31,7 @@ FULL_TASK="$TASK"_"$TRAIN_PROPORTION"-"$VALID_PROPORTION"-"$TEST_PROPORTION"_rs"
 RESULTS_PATH="$CHECKPOINTS_PATH/$TASK_TYPE/$FULL_TASK/$EXPERIMENT"
 
 # Print the parameters
-echo "Parameters:"; echo $TASK_TYPE $TASK $EXPERIMENT; echo
+echo "Parameters:"; echo $TASK_TYPE $CONTEXT_FORMAT $EXPERIMENT; echo
 echo "Results path:"; echo $RESULTS_PATH; echo
 
 # Load miniconda
@@ -88,10 +87,6 @@ do
 
   elif [ $TASK_TYPE == "generation" ]
   then
-    # Re-initialize the results folder
-    rm -rf $RESULTS_PATH/$CHECKPOINT
-    mkdir $RESULTS_PATH/$CHECKPOINT
-
     # Run the ranking
     python $MASTER_THESIS_PATH/run_model.py \
           -t $TASK \
@@ -104,9 +99,6 @@ do
           --checkpoint_file $CHECKPOINT.pt \
           --results_path $RESULTS_PATH/$CHECKPOINT;
   fi
-
-  # Remove the checkpoint file
-  rm "$BART/$CHECKPOINT.pt"
 done
 
 echo "Done."; echo

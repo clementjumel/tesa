@@ -1,22 +1,21 @@
 #!/bin/bash
 #SBATCH --job-name=show
-#SBATCH --partition=main
 #SBATCH --gres=gpu:1
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=12:00:00
+#SBATCH --time=2:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/show-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/show-%j.out
 
 # Parameters
 TASK_TYPE=$1
-EXPERIMENT=$2
+CONTEXT_FORMAT=$2
+EXPERIMENT=$3
 TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 BART=bart.large.cnn
 
@@ -32,7 +31,7 @@ FULL_TASK="$TASK"_"$TRAIN_PROPORTION"-"$VALID_PROPORTION"-"$TEST_PROPORTION"_rs"
 RESULTS_PATH="$CHECKPOINTS_PATH/$TASK_TYPE/$FULL_TASK/$EXPERIMENT"
 
 # Print the parameters
-echo "Parameters:"; echo $TASK_TYPE $TASK $EXPERIMENT; echo
+echo "Parameters:"; echo $TASK_TYPE $CONTEXT_FORMAT $EXPERIMENT; echo
 echo "Results path:"; echo $RESULTS_PATH; echo
 
 # Load miniconda
@@ -85,6 +84,9 @@ do
           --bart \
           --pretrained_path $BART \
           --checkpoint_file $CHECKPOINT.pt \
+          --random_examples \
+          --custom_examples \
+          --unseen_examples \
           --show;
 
   elif [ $TASK_TYPE == "generation" ]
@@ -104,11 +106,11 @@ do
           --pretrained_path $BART \
           --checkpoint_file $CHECKPOINT.pt \
           --results_path $RESULTS_PATH/$CHECKPOINT \
+          --random_examples \
+          --custom_examples \
+          --unseen_examples \
           --show;
   fi
-
-  # Remove the checkpoint file
-  rm "$BART/$CHECKPOINT.pt"
 done
 
 echo "Done."; echo

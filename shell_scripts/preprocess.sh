@@ -1,20 +1,18 @@
 #!/bin/bash
 #SBATCH --job-name=preprocess
-#SBATCH --partition=main
-#SBATCH --mem=16G
 #SBATCH --time=1:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/preprocess-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/preprocess-%j.out
 
 # Parameters
 TASK_TYPE=$1
+CONTEXT_FORMAT=$2
 TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
 TEST_PROPORTION=25
 RANKING_SIZE=24
 BATCH_SIZE=4
-CONTEXT_FORMAT=v0
 TARGETS_FORMAT=v0
 
 # Paths
@@ -26,7 +24,7 @@ PREPROCESSED_DATA_PATH=/network/tmp1/jumelcle/results/preprocessed_data
 FULL_TASK="$TASK"_"$TRAIN_PROPORTION"-"$VALID_PROPORTION"-"$TEST_PROPORTION"_rs"$RANKING_SIZE"_bs"$BATCH_SIZE"_cf-"$CONTEXT_FORMAT"_tf-"$TARGETS_FORMAT"
 
 # Print the parameters
-echo "Parameters:"; echo $TASK_TYPE $TASK; echo
+echo "Parameters:"; echo $TASK_TYPE; echo
 echo "Results path:"; echo "$PREPROCESSED_DATA_PATH/$TASK_TYPE/$FULL_TASK-bin"; echo
 
 # Load miniconda
