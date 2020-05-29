@@ -53,8 +53,10 @@ def filter_annotations(annotations, args):
         for annotation in annotation_list:
             workers_count[annotation.worker_id].append(annotation_id_)
 
+    worker_cmpt = 0
     for worker_id, annotation_ids in workers_count.items():
         if len(annotation_ids) < min_assignments:
+            worker_cmpt += 1
             for annotation_id_ in annotation_ids:
                 annotations[annotation_id_] = [annotation for annotation in annotations[annotation_id_]
                                                if annotation.worker_id != worker_id]
@@ -65,6 +67,7 @@ def filter_annotations(annotations, args):
                    for _, annotation_list in annotations.items()])
 
     if not args.silent:
+        print("Number of workers discarded: %i" % worker_cmpt)
         print("First filter done (number of assignments); annotations answered: %i, n/a: %i..." % (length1, length2))
 
     annotations = {id_: annotation_list for id_, annotation_list in annotations.items()

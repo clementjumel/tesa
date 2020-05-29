@@ -2,13 +2,14 @@
 #SBATCH --job-name=finetune
 #SBATCH --gres=gpu:v100:32gb:1
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=8:00:00
+#SBATCH --time=6:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/finetune-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/finetune-%j.out
 
 # Parameters
 TASK_TYPE=$1
 CONTEXT_FORMAT=$2
+PARTITION=$3
 TASK=context-dependent-same-type
 TRAIN_PROPORTION=50
 VALID_PROPORTION=25
@@ -21,21 +22,22 @@ BART=bart.large.cnn
 # Finetuning parameters
 if [ $TASK_TYPE == "classification" ]
 then
-  MAX_EPOCHS=5
+  MAX_EPOCHS=6
+  MAX_TOKENS=4400
   MAX_SENTENCES=8
-  UPDATE_FREQ=4
-  LR=1e-05
+  UPDATE_FREQ=1
+  LR=2e-05
   WARMUP_UPDATES_PERCENT=6
 elif [ $TASK_TYPE == "generation" ]
 then
-  MAX_EPOCHS=10
-  MAX_SENTENCES=8
+  MAX_EPOCHS=6
+  MAX_TOKENS=1024
   UPDATE_FREQ=1
-  LR=3e-05
-  WARMUP_UPDATES_PERCENT=6
+  LR=5e-06
+  WARMUP_UPDATES_PERCENT=3
 fi
 
-EXPERIMENT=ep"$MAX_EPOCHS"_sent"$MAX_SENTENCES"_freq"$UPDATE_FREQ"_lr"$LR"_warm"$WARMUP_UPDATES_PERCENT"
+EXPERIMENT=ep"$MAX_EPOCHS"_tok"$MAX_TOKENS"_sent"$MAX_SENTENCES"_freq"$UPDATE_FREQ"_lr"$LR"_warm"$WARMUP_UPDATES_PERCENT"
 
 # Paths
 MASTER_THESIS_PATH=/network/home/jumelcle/master_thesis
@@ -74,7 +76,9 @@ then
   # Compute the number of updates
   if [ $CONTEXT_FORMAT == "v0" ]
   then
-    NUM_UPDATES_PER_EPOCH=9365
+    #NUM_UPDATES_PER_EPOCH=2709  #for max_sentences=16 or above, max_tokens=4400
+    NUM_UPDATES_PER_EPOCH=3030  #for max_sentences=8, max_tokens=4400
+    #NUM_UPDATES_PER_EPOCH=5148  #for max_sentences=4, max_tokens=4400
   elif [ $CONTEXT_FORMAT == "v1" ]
   then
     NUM_UPDATES_PER_EPOCH=9435
@@ -110,7 +114,7 @@ then
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
       --max-epoch $MAX_EPOCHS \
       --max-sentences $MAX_SENTENCES \
-      --max-tokens 1024 \
+      --max-tokens $MAX_TOKENS \
       --update-freq $UPDATE_FREQ \
       --lr-scheduler polynomial_decay \
       --lr $LR \
@@ -151,7 +155,8 @@ then
   # Compute the number of updates
   if [ $CONTEXT_FORMAT == "v0" ]
   then
-    NUM_UPDATES_PER_EPOCH=831
+    NUM_UPDATES_PER_EPOCH=829  # for max_tokens=1024, no max_sentences
+    #NUM_UPDATES_PER_EPOCH=375  # for max_tokens=2048, no max_sentences
   elif [ $CONTEXT_FORMAT == "v1" ]
   then
     NUM_UPDATES_PER_EPOCH=838
@@ -182,14 +187,13 @@ then
   WARMUP_UPDATES=$(($WARMUP_UPDATES_PERCENT * $TOTAL_NUM_UPDATES / 100))
 
   # Print the parameters
-  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_SENTENCES; echo $UPDATE_FREQ; echo $LR;
+  echo "Finetuning parameters:"; echo $MAX_EPOCHS; echo $MAX_TOKENS; echo $UPDATE_FREQ; echo $LR;
   echo $WARMUP_UPDATES_PERCENT; echo $NUM_UPDATES_PER_EPOCH; echo $TOTAL_NUM_UPDATES; echo $WARMUP_UPDATES; echo
 
   # Run the finetuning
   CUDA_VISIBLE_DEVICES=0,1 python $MASTER_THESIS_PATH/fairseq/train.py "$FULL_TASK-bin" \
       --max-epoch $MAX_EPOCHS \
-      --max-sentences $MAX_SENTENCES \
-      --max-tokens 1024 \
+      --max-tokens $MAX_TOKENS \
       --update-freq $UPDATE_FREQ \
       --lr-scheduler polynomial_decay \
       --lr $LR \
@@ -229,4 +233,4 @@ rm $RESULTS_PATH/checkpoint_best.pt
 
 echo "Done."; echo
 
-sbatch --partition=unkillable /network/home/jumelcle/master_thesis/shell_scripts/rank.sh $1 $2 $EXPERIMENT
+sbatch --partition=$PARTITION /network/home/jumelcle/master_thesis/shell_scripts/rank.sh $1 $2 $EXPERIMENT
