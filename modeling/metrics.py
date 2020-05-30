@@ -97,3 +97,24 @@ def ndcg_at_k(ranks, targets, k):
 
 def ndcg_at_10(ranks, targets):
     return ndcg_at_k(ranks=ranks, targets=targets, k=10)
+
+
+if __name__ == '__main__':
+    from sklearn.metrics import average_precision_score
+    from numpy import zeros
+    from numpy.random import rand, choice
+
+    epsilon = 0.0000001
+
+    for _ in range(100000):
+        s = rand(24)
+        r = get_ranks(torch.Tensor(s).reshape((-1, 1)))
+        t = zeros(24)
+        for i in choice(range(24), 3):
+            t[i] = 1
+
+        a1 = average_precision(r, torch.Tensor(t).type(torch.float)).item()
+        a2 = average_precision_score(t, s)
+
+        if abs(a1 - a2) > epsilon:
+            print(a1, a2)

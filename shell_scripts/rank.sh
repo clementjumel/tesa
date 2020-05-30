@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=rank
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:v100:32gb:1
 #SBATCH --mem-per-gpu=32G
-#SBATCH --time=12:00:00
+#SBATCH --time=6:00:00
 #SBATCH --error=/network/tmp1/jumelcle/logs/rank-%j.err
 #SBATCH --output=/network/tmp1/jumelcle/logs/rank-%j.out
 

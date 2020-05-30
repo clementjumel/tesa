@@ -171,13 +171,14 @@ then
     NUM_UPDATES_PER_EPOCH=838
   elif [ $CONTEXT_FORMAT == "va" ]
   then
-    NUM_UPDATES_PER_EPOCH=342
+    NUM_UPDATES_PER_EPOCH=282
   elif [ $CONTEXT_FORMAT == "vb" ]
   then
-    NUM_UPDATES_PER_EPOCH=538
+    NUM_UPDATES_PER_EPOCH=517
   elif [ $CONTEXT_FORMAT == "vc" ]
   then
-    NUM_UPDATES_PER_EPOCH=288
+    NUM_UPDATES_PER_EPOCH=24  # for no max-sentences
+    #NUM_UPDATES_PER_EPOCH=144  # for max-sentences=16
   else
     NUM_UPDATES_PER_EPOCH=831
   fi
