@@ -2,9 +2,9 @@
 Script to run a Model on a task.
 
 Usages:
-    python run_model.py -t context_free_same_type -m random
-    python run_model.py -t context_free_same_type -m frequency --show
-    python run_model.py -t context_free_same_type -m summaries_average_embedding --word2vec
+    python run_model.py -m random
+    python run_model.py -m frequency --show
+    python run_model.py -m summaries_average_embedding --word2vec
 """
 
 from toolbox.parsers import standard_parser, add_task_arguments, add_model_arguments
