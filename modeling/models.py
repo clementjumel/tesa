@@ -1,5 +1,6 @@
 from modeling.utils import *
 from modeling import metrics
+from modeling.modules import LogisticRegression
 
 from numpy import arange, mean, std
 from numpy.random import seed, shuffle
@@ -1037,3 +1038,197 @@ class GeneratorBart(BaseModel):
         return torch.tensor([prob for _, prob in scores]).reshape((-1, 1))
 
 # endregion
+
+
+class CustomClassifier(Frequency):
+
+    def __init__(self, args, pretrained_model):
+        super().__init__(args=args, pretrained_model=pretrained_model)
+
+        self.module = LogisticRegression(input_dim=15, output_dim=2)
+        self.optimizer = torch.optim.Adam(self.module.parameters(), lr=3e-3)
+        self.criterion = torch.nn.CrossEntropyLoss()
+        self.n_epochs = 50
+        print()
+
+    def play(self, task, args):
+        """
+        Performs the preview and the evaluation of a model on the task.
+
+        Args:
+            task: modeling_task.ModelingTask, task to evaluate the model on.
+            args: argparse.ArgumentParser, arguments passed to the script.
+        """
+
+        show = args.show
+        show_rankings = args.show_rankings
+        show_choices = args.show_choices
+        random_examples = args.random_examples
+        custom_examples = args.custom_examples
+        unseen_examples = args.unseen_examples
+
+        if not show:
+            self.preview(task.train_loader)
+
+            print("Training on the train loader...")
+            self.train(task.train_loader, task.valid_loader, task.test_loader)
+
+        else:
+            self.show(task,
+                      show_rankings=show_rankings,
+                      show_choices=show_choices,
+                      random_examples=random_examples,
+                      custom_examples=custom_examples,
+                      unseen_examples=unseen_examples)
+
+    def get_batch_features(self, inputs):
+        batch_features = []
+
+        choices_words = self.get_choices_words(inputs)
+        wikis_words = self.get_wikis_words(inputs)
+        context_words = self.get_context_words(inputs)
+        other_words = self.get_other_words(inputs)
+
+        setten_choices_words = self.get_choices_words(inputs, setten=True)
+        flatten_wikis_words = self.get_wikis_words(inputs, flatten=True)
+        flatten_setten_wikis_words = self.get_wikis_words(inputs, flatten=True, setten=True)
+        setten_context_words = self.get_context_words(inputs, setten=True)
+        setten_other_words = self.get_other_words(inputs, setten=True)
+
+        overlap_wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        overlap_wikis_words = set.intersection(*overlap_wikis_words) if overlap_wikis_words else set()
+        context_overlap_wikis_words = deepcopy(overlap_wikis_words)
+        context_overlap_wikis_words.update(self.get_context_words(inputs, setten=True))
+
+        activated_wikis = [[set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
+                           for choice_words in choices_words]
+        activated_wikis = [[wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis]
+
+        for i_choice, choice in enumerate(inputs['choices']):
+            features = []
+
+            # frequency
+            feature = self.counts[choice] if choice in self.counts else 0
+            features.append(feature)
+
+            # summaries count
+            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=flatten_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries unique count
+            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]],
+                                           words=flatten_setten_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries overlap
+            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=overlap_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # activated summaries
+            feature = len(activated_wikis[i_choice])
+            features.append(feature)
+
+            # summaries average embedding
+            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
+                                                            words=flatten_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries overlap average embedding
+            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
+                                                            words=overlap_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # context count
+            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=context_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # context unique count
+            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=setten_context_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # context average embedding
+            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]], words=context_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries context count
+            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=other_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries context unique count
+            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=setten_other_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries context overlap
+            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]],
+                                           words=context_overlap_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries context average embedding
+            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]], words=other_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            # summaries context overlap average embedding
+            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
+                                                            words=context_overlap_wikis_words)
+            assert len(feature) == 1
+            feature = feature[0]
+            features.append(feature)
+
+            batch_features.append(features)
+
+        return torch.tensor(batch_features).type(torch.float)
+
+    def train(self, train_loader, valid_loader, test_loader):
+        for i_epoch in range(self.n_epochs):
+            print("Epoch %i/%i..." % (i_epoch+1, self.n_epochs))
+
+            for ranking_task in tqdm(train_loader):
+                for inputs, targets in ranking_task:
+                    if 'features' not in inputs:
+                        inputs['features'] = self.get_batch_features(inputs)
+
+                    self.optimizer.zero_grad()
+                    pred = self.module(inputs['features'])
+
+                    loss = self.criterion(pred, targets)
+                    loss.backward()
+                    self.optimizer.step()
+
+            print("Evaluation on the valid loader...")
+            self.valid(valid_loader)
+
+            print("Evaluation on the test loader...")
+            self.test(test_loader)
+
+    def pred(self, inputs):
+        if 'features' not in inputs:
+            inputs['features'] = self.get_batch_features(inputs)
+
+        with torch.no_grad():
+            pred = self.module(inputs['features'])[:, 1]
+
+        return pred.reshape((-1, 1))
