@@ -11,16 +11,16 @@ old/
 /results/annotation_task/*
 !/results/annotation_task/wikipedia/
 
-/fairseq/*
-!/fairseq/fairseq/
-/fairseq/fairseq/*
-# Don't ignore hub_interface.py
-!/fairseq/fairseq/models/
-/fairseq/fairseq/models/*
-!/fairseq/fairseq/models/bart/
-/fairseq/fairseq/models/bart/*
-!/fairseq/fairseq/models/bart/hub_interface.py
-# Don't ignore translation.py
-!/fairseq/fairseq/tasks/
-/fairseq/fairseq/tasks/*
-!/fairseq/fairseq/tasks/translation.py
+#/fairseq/*
+#!/fairseq/fairseq/
+#/fairseq/fairseq/*
+## Don't ignore hub_interface.py
+#!/fairseq/fairseq/models/
+#/fairseq/fairseq/models/*
+#!/fairseq/fairseq/models/bart/
+#/fairseq/fairseq/models/bart/*
+#!/fairseq/fairseq/models/bart/hub_interface.py
+## Don't ignore translation.py
+#!/fairseq/fairseq/tasks/
+#/fairseq/fairseq/tasks/*
+#!/fairseq/fairseq/tasks/translation.py
