@@ -1,9 +1,6 @@
 # TESA: A Task in Entity Semantic Aggregation for AbstractiveSummarization
 
-## Code
+## Dataset & task
 
+Our dataset and tasks are available through the Linguistic Data Consortium, at the following link:
 TODO
-
-## Data
-
-Our dataset is available through the Linguistic Data Consortium, at the following link:
