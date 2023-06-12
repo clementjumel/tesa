@@ -1,14 +1,6 @@
 ### Custom .gitignore ###
-# Project stuff
-old/
-
-/nyt_annotated_corpus/
-/pretrained_models/
-
-/results/*
-!/results/annotation_task/
-/results/annotation_task/*
-!/results/annotation_task/wikipedia/
+# Data stuff
+data/
 
 # Pycharm stuff
 .idea/
@@ -30,6 +22,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
 lib64/
 parts/
 sdist/
