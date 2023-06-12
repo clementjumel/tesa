@@ -1,24 +1,36 @@
-from database_creation.nyt_article import Article
-from database_creation.utils import Tuple, Wikipedia, Query, Annotation
+from collections import defaultdict
+from glob import glob
+from itertools import chain, combinations
+from pickle import PicklingError, dump, load
+from re import findall
+from time import time
+from xml.etree.ElementTree import ParseError
 
 from numpy import split as np_split
-from numpy.random import seed, choice
-from time import time
-from glob import glob
-from collections import defaultdict
-from pickle import dump, load, PicklingError
+from numpy.random import choice, seed
 from pandas import DataFrame, read_csv
 from unidecode import unidecode
-from wikipedia import search, page, WikipediaException, DisambiguationError
-from xml.etree.ElementTree import ParseError
-from itertools import chain, combinations
-from re import findall
+from wikipedia import DisambiguationError, WikipediaException, page, search
+
+from tesa.database_creation.nyt_article import Article
+from tesa.database_creation.utils import Annotation, Query, Tuple, Wikipedia
 
 
 class AnnotationTask:
-
-    def __init__(self, years, max_tuple_size, short, short_size, random, debug, random_seed, save, silent, corpus_path,
-                 results_path):
+    def __init__(
+        self,
+        years,
+        max_tuple_size,
+        short,
+        short_size,
+        random,
+        debug,
+        random_seed,
+        save,
+        silent,
+        corpus_path,
+        results_path,
+    ):
         """
         Initializes an instance of AnnotationTask, which creates the queries asked to the annotation workers and gathers
         their answers.
@@ -65,18 +77,18 @@ class AnnotationTask:
     # region Decorators
 
     class Verbose:
-        """ Decorator for the display of a simple message. """
+        """Decorator for the display of a simple message."""
 
         def __init__(self, message):
-            """ Initializes the Verbose decorator message. """
+            """Initializes the Verbose decorator message."""
 
             self.message = message
 
         def __call__(self, func):
-            """ Performs the call to the decorated function. """
+            """Performs the call to the decorated function."""
 
             def f(*args, **kwargs):
-                """ Decorated function. """
+                """Decorated function."""
 
                 slf = args[0]
 
@@ -92,18 +104,18 @@ class AnnotationTask:
             return f
 
     class Attribute:
-        """ Decorator for monitoring the length of an attribute. """
+        """Decorator for monitoring the length of an attribute."""
 
         def __init__(self, attribute):
-            """ Initializes the Attribute decorator attribute. """
+            """Initializes the Attribute decorator attribute."""
 
             self.attribute = attribute
 
         def __call__(self, func):
-            """ Performs the call to the decorated function. """
+            """Performs the call to the decorated function."""
 
             def f(*args, **kwargs):
-                """ Decorated function. """
+                """Decorated function."""
 
                 slf = args[0]
 
@@ -129,7 +141,7 @@ class AnnotationTask:
 
     @Verbose("Preprocessing the database...")
     def preprocess_database(self):
-        """ Performs the preprocessing of the database. """
+        """Performs the preprocessing of the database."""
 
         self.compute_articles()
         self.clean_articles(criterion=Article.criterion_content, to_keep=None)
@@ -140,7 +152,7 @@ class AnnotationTask:
 
     @Verbose("Preprocessing the articles...")
     def process_articles(self):
-        """ Performs the preprocessing of the articles. """
+        """Performs the preprocessing of the articles."""
 
         self.compute_corpus_annotations()
         self.compute_contexts()
@@ -157,10 +169,12 @@ class AnnotationTask:
         """
 
         if load:
-            self.load_attr_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+            self.load_attr_pkl(
+                attribute_name="wikipedia", file_name=file_name, folder_name="wikipedia"
+            )
 
         self.compute_wikipedia(load=load)
-        self.save_attr_pkl(attribute_name='wikipedia', file_name=file_name, folder_name='wikipedia')
+        self.save_attr_pkl(attribute_name="wikipedia", file_name=file_name, folder_name="wikipedia")
 
     @Verbose("Processing the aggregation queries...")
     def process_queries(self, load):
@@ -172,11 +186,11 @@ class AnnotationTask:
         """
 
         if load:
-            self.load_attr_pkl(attribute_name='queries', file_name=None, folder_name='queries')
+            self.load_attr_pkl(attribute_name="queries", file_name=None, folder_name="queries")
 
         else:
             self.compute_queries()
-            self.save_attr_pkl(attribute_name='queries', file_name=None, folder_name='queries')
+            self.save_attr_pkl(attribute_name="queries", file_name=None, folder_name="queries")
 
     @Verbose("Processing the annotations batches...")
     def process_annotation_batches(self, batches, batch_size, exclude_pilot):
@@ -192,10 +206,12 @@ class AnnotationTask:
 
         existing_ids, existing_batches = self.read_existing_batches(exclude_pilot=exclude_pilot)
 
-        self.save_annotation_batches(batches=batches,
-                                     batch_size=batch_size,
-                                     existing_ids=existing_ids,
-                                     existing_batches=existing_batches)
+        self.save_annotation_batches(
+            batches=batches,
+            batch_size=batch_size,
+            existing_ids=existing_ids,
+            existing_batches=existing_batches,
+        )
 
     @Verbose("Processing the modeling task...")
     def process_task(self, exclude_pilot):
@@ -221,31 +237,39 @@ class AnnotationTask:
             out_name: str, name of the file to write in.
         """
 
-        out_wikipedia = {'found': dict(), 'not_found': set()}
+        out_wikipedia = {"found": dict(), "not_found": set()}
 
         if current:
-            self.print("Current wikipedia information: %i found/%i not_found..." % (len(self.wikipedia['found']),
-                                                                                    len(self.wikipedia['not_found'])))
+            self.print(
+                "Current wikipedia information: %i found/%i not_found..."
+                % (len(self.wikipedia["found"]), len(self.wikipedia["not_found"]))
+            )
 
-            for type_ in ['found', 'not_found']:
+            for type_ in ["found", "not_found"]:
                 out_wikipedia[type_].update(self.wikipedia[type_])
 
-            self.print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
-                                                                          len(out_wikipedia['not_found'])))
+            self.print(
+                "Global file updated: %i found/%i not_found.\n"
+                % (len(out_wikipedia["found"]), len(out_wikipedia["not_found"]))
+            )
 
         for in_name in in_names:
-            in_wikipedia = self.load_obj_pkl(file_name=in_name, folder_name='wikipedia')
+            in_wikipedia = self.load_obj_pkl(file_name=in_name, folder_name="wikipedia")
 
-            self.print("File %s: %i found/%i not_found..." % (in_name, len(in_wikipedia['found']),
-                                                              len(in_wikipedia['not_found'])))
+            self.print(
+                "File %s: %i found/%i not_found..."
+                % (in_name, len(in_wikipedia["found"]), len(in_wikipedia["not_found"]))
+            )
 
-            for type_ in ['found', 'not_found']:
+            for type_ in ["found", "not_found"]:
                 out_wikipedia[type_].update(in_wikipedia[type_])
 
-            self.print("Global file updated: %i found/%i not_found.\n" % (len(out_wikipedia['found']),
-                                                                          len(out_wikipedia['not_found'])))
+            self.print(
+                "Global file updated: %i found/%i not_found.\n"
+                % (len(out_wikipedia["found"]), len(out_wikipedia["not_found"]))
+            )
 
-        self.save_obj_pkl(obj=out_wikipedia, file_name=out_name, folder_name='wikipedia')
+        self.save_obj_pkl(obj=out_wikipedia, file_name=out_name, folder_name="wikipedia")
         self.wikipedia = out_wikipedia
 
     @Verbose("Solving manually the wikipedia issues...")
@@ -259,24 +283,24 @@ class AnnotationTask:
         """
 
         self.correction(step=step)
-        self.save_attr_pkl(attribute_name='wikipedia', file_name=out_name, folder_name='wikipedia')
+        self.save_attr_pkl(attribute_name="wikipedia", file_name=out_name, folder_name="wikipedia")
 
     # endregion
 
     # region Methods compute_
 
     @Verbose("Computing the database' article...")
-    @Attribute('articles')
+    @Attribute("articles")
     def compute_articles(self):
-        """ Computes and initializes the articles in the database. """
+        """Computes and initializes the articles in the database."""
 
-        patterns = [self.corpus_path + 'data/' + str(year) + '/*/*/*.xml' for year in self.years]
+        patterns = [self.corpus_path + "data/" + str(year) + "/*/*/*.xml" for year in self.years]
         paths = [path for pattern in patterns for path in glob(pattern)]
 
         if self.short:
             if not self.random:
                 paths.sort()
-                paths = paths[:self.short_size]
+                paths = paths[: self.short_size]
             else:
                 paths = choice(a=paths, size=self.short_size, replace=False)
                 paths.sort()
@@ -286,68 +310,94 @@ class AnnotationTask:
         articles = {}
 
         for data_path in paths:
-            id_ = data_path.split('/')[-1].split('.')[0]
-            year = data_path.split('/')[-4]
+            id_ = data_path.split("/")[-1].split(".")[0]
+            year = data_path.split("/")[-4]
 
-            content_path = self.corpus_path + 'content_annotated/' + str(year) + 'content_annotated/' + id_ + '.txt.xml'
-            summary_path = self.corpus_path + 'summary_annotated/' + str(year) + 'summary_annotated/' + id_ + '.txt.xml'
+            content_path = (
+                self.corpus_path
+                + "content_annotated/"
+                + str(year)
+                + "content_annotated/"
+                + id_
+                + ".txt.xml"
+            )
+            summary_path = (
+                self.corpus_path
+                + "summary_annotated/"
+                + str(year)
+                + "summary_annotated/"
+                + id_
+                + ".txt.xml"
+            )
 
-            articles[id_] = Article(data_path=data_path, content_path=content_path, summary_path=summary_path)
+            articles[id_] = Article(
+                data_path=data_path, content_path=content_path, summary_path=summary_path
+            )
 
         self.articles = articles
 
-        self.write_debug(field='articles', method='articles')
+        self.write_debug(field="articles", method="articles")
 
     @Verbose("Computing the articles' metadata...")
     def compute_metadata(self):
-        """ Computes the metadata of the articles. """
+        """Computes the metadata of the articles."""
 
         count, size = 0, len(self.articles)
         for id_ in self.articles:
-            count = self.progression(count=count, modulo=self.modulo_articles, size=size, text='article')
+            count = self.progression(
+                count=count, modulo=self.modulo_articles, size=size, text="article"
+            )
 
             self.articles[id_].compute_metadata()
 
-        self.write_debug(field='articles', method='metadata')
+        self.write_debug(field="articles", method="metadata")
 
     @Verbose("Computing the database' entities...")
-    @Attribute('entities')
+    @Attribute("entities")
     def compute_entities(self):
-        """ Compute the entities of the database. """
+        """Compute the entities of the database."""
 
         self.entities = dict()
 
         count, size = 0, len(self.articles)
         for _, article in self.articles.items():
-            count = self.progression(count=count, modulo=self.modulo_articles, size=size, text='article')
+            count = self.progression(
+                count=count, modulo=self.modulo_articles, size=size, text="article"
+            )
 
             try:
                 entities = article.get_entities()
             except AssertionError:
                 entities = []
-                self.print("Several entities have the same name (%s); ignoring them..." %
-                           '; '.join(article.get_vanilla_entities()))
+                self.print(
+                    "Several entities have the same name (%s); ignoring them..."
+                    % "; ".join(article.get_vanilla_entities())
+                )
 
             for entity in entities:
                 if str(entity) in self.entities:
                     try:
                         self.entities[str(entity)].update_info(entity)
                     except AssertionError:
-                        self.print("%s corresponds to both %s and %s, ignoring the later..." %
-                                   (str(entity), entity.type_, self.entities[str(entity)].type_))
+                        self.print(
+                            "%s corresponds to both %s and %s, ignoring the later..."
+                            % (str(entity), entity.type_, self.entities[str(entity)].type_)
+                        )
 
                 else:
                     self.entities[str(entity)] = entity
 
-            article.entities = [self.entities[name] for name in [str(entity) for entity in entities]]
+            article.entities = [
+                self.entities[name] for name in [str(entity) for entity in entities]
+            ]
 
-        self.write_debug(field='articles', method='article_entities')
-        self.write_debug(field='entities', method='entities')
+        self.write_debug(field="articles", method="article_entities")
+        self.write_debug(field="entities", method="entities")
 
     @Verbose("Computing the entity tuples...")
-    @Attribute('tuples')
+    @Attribute("tuples")
     def compute_tuples(self):
-        """ Compute the Tuples of the database as a sorted list of Tuples (by number of articles). """
+        """Compute the Tuples of the database as a sorted list of Tuples (by number of articles)."""
 
         def subtuples(s, max_size):
             """
@@ -370,7 +420,9 @@ class AnnotationTask:
 
         count, size = 0, len(self.articles)
         for id_ in self.articles:
-            count = self.progression(count=count, modulo=self.modulo_articles, size=size, text='article')
+            count = self.progression(
+                count=count, modulo=self.modulo_articles, size=size, text="article"
+            )
 
             entities = defaultdict(set)
             for entity in self.articles[id_].entities:
@@ -382,20 +434,26 @@ class AnnotationTask:
 
         ranking = sorted(ids, key=lambda k: (len(ids[k]), str(k)), reverse=True)
 
-        self.tuples = [Tuple(id_=str(rank + 1),
-                             entities=tuple([self.entities[name] for name in tuple_]),
-                             article_ids=ids[tuple_])
-                       for rank, tuple_ in enumerate(ranking)]
+        self.tuples = [
+            Tuple(
+                id_=str(rank + 1),
+                entities=tuple([self.entities[name] for name in tuple_]),
+                article_ids=ids[tuple_],
+            )
+            for rank, tuple_ in enumerate(ranking)
+        ]
 
-        self.write_debug(field='tuples', method='tuples')
+        self.write_debug(field="tuples", method="tuples")
 
     @Verbose("Computing the articles' annotations from the corpus...")
     def compute_corpus_annotations(self):
-        """ Computes the corpus annotations of the articles. """
+        """Computes the corpus annotations of the articles."""
 
         count, size = 0, len(self.articles)
         for id_ in self.articles:
-            count = self.progression(count=count, modulo=self.modulo_articles, size=size, text='article')
+            count = self.progression(
+                count=count, modulo=self.modulo_articles, size=size, text="article"
+            )
 
             try:
                 self.articles[id_].compute_corpus_annotations()
@@ -403,27 +461,33 @@ class AnnotationTask:
             except ParseError:
                 raise Exception("Data is not clean, remove data %s and start again." % id_)
 
-        self.write_debug(field='articles', method='annotations')
+        self.write_debug(field="articles", method="annotations")
 
     @Verbose("Computing the contexts...")
     def compute_contexts(self):
-        """ Compute the contexts of the articles for each Tuple. """
+        """Compute the contexts of the articles for each Tuple."""
 
         count, size = 0, len(self.tuples)
         for tuple_ in self.tuples:
-            count = self.progression(count=count, modulo=self.modulo_tuples, size=size, text='tuple')
+            count = self.progression(
+                count=count, modulo=self.modulo_tuples, size=size, text="tuple"
+            )
 
             query_ids = set()
 
             for article_id_ in tuple_.article_ids:
                 self.articles[article_id_].compute_contexts(tuple_=tuple_)
 
-                query_ids.update({tuple_.id_ + '_' + article_id_ + '_' + context_id_
-                                  for context_id_ in self.articles[article_id_].contexts[str(tuple_)]})
+                query_ids.update(
+                    {
+                        tuple_.id_ + "_" + article_id_ + "_" + context_id_
+                        for context_id_ in self.articles[article_id_].contexts[str(tuple_)]
+                    }
+                )
 
             tuple_.query_ids = query_ids
 
-        self.write_debug(field='articles', method='contexts')
+        self.write_debug(field="articles", method="contexts")
 
     @Verbose("Computing the Wikipedia information...")
     def compute_wikipedia(self, load):
@@ -434,72 +498,86 @@ class AnnotationTask:
             load: bool, if True, load an existing file.
         """
 
-        wikipedia = self.wikipedia if load else {'found': dict(), 'not_found': set()}
+        wikipedia = self.wikipedia if load else {"found": dict(), "not_found": set()}
 
-        self.print("Initial entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
+        self.print(
+            "Initial entries: %i found/%i not found."
+            % (len(wikipedia["found"]), len(wikipedia["not_found"]))
+        )
 
         try:
             count, size = 0, len(self.entities)
             for name, entity in self.entities.items():
-                count = self.progression(count=count, modulo=self.modulo_entities, size=size, text='entity')
+                count = self.progression(
+                    count=count, modulo=self.modulo_entities, size=size, text="entity"
+                )
 
                 if not load:
                     wiki = entity.get_wiki()
                     if wiki.summary is not None:
-                        wikipedia['found'][name] = wiki
+                        wikipedia["found"][name] = wiki
                     else:
-                        wikipedia['not_found'].add(name)
+                        wikipedia["not_found"].add(name)
 
                 else:
-                    if name in wikipedia['found']:
-                        wiki = wikipedia['found'][name]
-                    elif name in wikipedia['not_found']:
+                    if name in wikipedia["found"]:
+                        wiki = wikipedia["found"][name]
+                    elif name in wikipedia["not_found"]:
                         wiki = Wikipedia()
                     else:
                         wiki = entity.get_wiki()
                         if wiki.summary is not None:
-                            wikipedia['found'][name] = wiki
+                            wikipedia["found"][name] = wiki
                         else:
-                            wikipedia['not_found'].add(name)
+                            wikipedia["not_found"].add(name)
 
                 entity.wiki = wiki
 
         except (KeyboardInterrupt, WikipediaException) as err:
-            self.print("An error occurred, saving the loaded information and leaving... (%s)" % str(err))
+            self.print(
+                "An error occurred, saving the loaded information and leaving... (%s)" % str(err)
+            )
 
-        self.print("Final entries: %i found/%i not found." % (len(wikipedia['found']), len(wikipedia['not_found'])))
+        self.print(
+            "Final entries: %i found/%i not found."
+            % (len(wikipedia["found"]), len(wikipedia["not_found"]))
+        )
 
         self.wikipedia = wikipedia
 
-        self.write_debug(field='wikipedia', method='wikipedia')
+        self.write_debug(field="wikipedia", method="wikipedia")
 
     @Verbose("Computing the Queries...")
-    @Attribute('queries')
+    @Attribute("queries")
     def compute_queries(self):
-        """ Compute the Queries of the database. """
+        """Compute the Queries of the database."""
 
         queries = dict()
 
         count, size = 0, len(self.tuples)
         for tuple_ in self.tuples:
-            count = self.progression(count=count, modulo=self.modulo_tuples, size=size, text='tuple')
+            count = self.progression(
+                count=count, modulo=self.modulo_tuples, size=size, text="tuple"
+            )
 
             for article_id_ in sorted(tuple_.article_ids):
                 article_contexts = self.articles[article_id_].contexts[str(tuple_)]
 
                 for context_id_, context in article_contexts.items():
-                    query_id_ = '_'.join([article_id_, tuple_.id_, context_id_])
-                    queries[query_id_] = Query(id_=query_id_,
-                                               tuple_=tuple_,
-                                               article=self.articles[article_id_],
-                                               context=context)
+                    query_id_ = "_".join([article_id_, tuple_.id_, context_id_])
+                    queries[query_id_] = Query(
+                        id_=query_id_,
+                        tuple_=tuple_,
+                        article=self.articles[article_id_],
+                        context=context,
+                    )
 
         self.queries = queries
 
-        self.write_debug(field='queries', method='queries')
+        self.write_debug(field="queries", method="queries")
 
     @Verbose("Computing the annotated queries...")
-    @Attribute('queries')
+    @Attribute("queries")
     def compute_annotated_queries(self, exclude_pilot):
         """
         Compute the queries corresponding to the annotations.
@@ -510,20 +588,20 @@ class AnnotationTask:
 
         queries = dict()
 
-        for path in sorted(glob(self.results_path + 'annotations/*/task/*.pkl')):
+        for path in sorted(glob(self.results_path + "annotations/*/task/*.pkl")):
             path = path.split(self.results_path)[1]
-            version = path.split('/')[1]
+            version = path.split("/")[1]
 
-            if not exclude_pilot or 'pilot' not in version:
-                folder_name = '/'.join(path.split('/')[:-1])
-                file_name = path.split('/')[-1].split('.pkl')[0]
+            if not exclude_pilot or "pilot" not in version:
+                folder_name = "/".join(path.split("/")[:-1])
+                file_name = path.split("/")[-1].split(".pkl")[0]
 
                 queries.update(self.load_obj_pkl(file_name=file_name, folder_name=folder_name))
 
         self.queries = queries
 
     @Verbose("Computing the annotations...")
-    @Attribute('annotations')
+    @Attribute("annotations")
     def compute_annotations(self, exclude_pilot):
         """
         Compute the annotations of the Mechanical Turks.
@@ -534,23 +612,23 @@ class AnnotationTask:
 
         annotations = defaultdict(list)
 
-        for path in sorted(glob(self.results_path + 'annotations/*/results/*.csv')):
+        for path in sorted(glob(self.results_path + "annotations/*/results/*.csv")):
             path = path.split(self.results_path)[1]
-            version = path.split('/')[1]
-            batch = path.split('/')[-1].replace('_complete.csv', '')
+            version = path.split("/")[1]
+            batch = path.split("/")[-1].replace("_complete.csv", "")
 
-            if not exclude_pilot or 'pilot' not in version:
+            if not exclude_pilot or "pilot" not in version:
                 df = read_csv(self.results_path + path)
 
                 self.print("%s loaded from %s" % (batch, path))
 
                 for _, row in df.iterrows():
-                    id_ = row.get('Input.id_')
-                    annotations[id_].append(Annotation(id_=id_,
-                                                       version=version,
-                                                       batch=batch,
-                                                       row=row,
-                                                       silent=self.silent))
+                    id_ = row.get("Input.id_")
+                    annotations[id_].append(
+                        Annotation(
+                            id_=id_, version=version, batch=batch, row=row, silent=self.silent
+                        )
+                    )
 
         self.annotations = annotations
 
@@ -559,7 +637,7 @@ class AnnotationTask:
     # region Cleaning methods
 
     @Verbose("Cleaning the database's articles...")
-    @Attribute('articles')
+    @Attribute("articles")
     def clean_articles(self, criterion, to_keep):
         """
         Removes from the database the articles which meet the Article's criterion or whose ids are not in to_keep.
@@ -572,7 +650,9 @@ class AnnotationTask:
         to_del = set()
 
         if criterion is not None and to_keep is None:
-            self.print("Criterion: %s" % [line for line in criterion.__doc__.splitlines() if line][0][8:])
+            self.print(
+                "Criterion: %s" % [line for line in criterion.__doc__.splitlines() if line][0][8:]
+            )
 
             for id_ in self.articles:
                 if criterion(self.articles[id_]):
@@ -592,7 +672,7 @@ class AnnotationTask:
             del self.articles[id_]
 
     @Verbose("Cleaning the database's tuples...")
-    @Attribute('tuples')
+    @Attribute("tuples")
     def clean_tuples(self, to_keep):
         """
         Removes from the database the tuples whose names are not in to_keep.
@@ -611,7 +691,7 @@ class AnnotationTask:
                 self.tuples.append(tuple_)
 
     @Verbose("Cleaning the database's entities...")
-    @Attribute('entities')
+    @Attribute("entities")
     def clean_entities(self, to_keep):
         """
         Removes from the database the entities whose names are not in to_keep.
@@ -633,7 +713,7 @@ class AnnotationTask:
 
     @Verbose("Filtering the articles and entities that correspond to no tuple...")
     def filter_no_tuple(self):
-        """ Filter out the articles and entities that correspond to no tuple. """
+        """Filter out the articles and entities that correspond to no tuple."""
 
         to_keep_articles, to_keep_entities = set(), set()
 
@@ -647,7 +727,7 @@ class AnnotationTask:
 
     @Verbose("Filtering the articles, tuples and entities that correspond to no query...")
     def filter_no_query(self):
-        """ Filter out the articles that correspond to no query. """
+        """Filter out the articles that correspond to no query."""
 
         to_keep_articles, to_keep_tuples, to_keep_entities = set(), set(), set()
 
@@ -673,7 +753,7 @@ class AnnotationTask:
             str, ending of the name of the file (after the basic name of the file).
         """
 
-        return '_short' if self.short else ''
+        return "_short" if self.short else ""
 
     def save_attr_pkl(self, attribute_name, file_name, folder_name):
         """
@@ -741,7 +821,7 @@ class AnnotationTask:
 
         file_name = self.results_path + folder_name + "/" + file_name + ".pkl"
 
-        with open(file_name, 'rb') as file:
+        with open(file_name, "rb") as file:
             obj = load(file)
 
         self.print("Object loaded from %s." % file_name)
@@ -769,7 +849,7 @@ class AnnotationTask:
 
             if not exclude_pilot or "pilot" not in batch:
                 df = read_csv(path)
-                df_ids = set([row.get('id_') for _, row in df.iterrows()])
+                df_ids = set([row.get("id_") for _, row in df.iterrows()])
 
                 ids.update(df_ids)
 
@@ -777,15 +857,17 @@ class AnnotationTask:
                     idx = int(batch.split("_")[-1])
                     idxs.add(idx)
 
-                self.print("Reading %s from results/queries/ folder (%i queries)." % (batch, len(df_ids)))
+                self.print(
+                    "Reading %s from results/queries/ folder (%i queries)." % (batch, len(df_ids))
+                )
 
         for path in glob(self.results_path + "annotations/*/task/*.csv"):
             version = path.split("/")[-3]
             batch = path.split("/")[-1].split(".")[0]
 
-            if not exclude_pilot or 'pilot' not in version:
+            if not exclude_pilot or "pilot" not in version:
                 df = read_csv(path)
-                df_ids = set([row.get('id_') for _, row in df.iterrows()])
+                df_ids = set([row.get("id_") for _, row in df.iterrows()])
 
                 ids.update(df_ids)
 
@@ -793,7 +875,10 @@ class AnnotationTask:
                     idx = int(batch.split("_")[-1])
                     idxs.add(idx)
 
-                self.print("Reading existing batch %s from %s (%i queries)." % (batch, version, len(df_ids)))
+                self.print(
+                    "Reading existing batch %s from %s (%i queries)."
+                    % (batch, version, len(df_ids))
+                )
 
         return ids, idxs
 
@@ -812,8 +897,10 @@ class AnnotationTask:
         all_ids = set(self.queries.keys())
         ids = all_ids.difference(existing_ids)
 
-        self.print("Removing %i existing queries from the %i total queries; %i remaining queries." %
-                   (len(existing_ids), len(all_ids), len(ids)))
+        self.print(
+            "Removing %i existing queries from the %i total queries; %i remaining queries."
+            % (len(existing_ids), len(all_ids), len(ids))
+        )
 
         batches_ids = choice(a=sorted(ids), size=batches * batch_size, replace=False)
         batches_ids = np_split(batches_ids, batches)
@@ -848,7 +935,10 @@ class AnnotationTask:
 
         if self.debug:
             if field == "articles":
-                lines = [[id_, getattr(article, "debug_" + method)()] for id_, article in self.articles.items()]
+                lines = [
+                    [id_, getattr(article, "debug_" + method)()]
+                    for id_, article in self.articles.items()
+                ]
 
             elif field == "entities":
                 lines = [[name, entity.debug_entities()] for name, entity in self.entities.items()]
@@ -857,8 +947,10 @@ class AnnotationTask:
                 lines = [[str(tuple_), tuple_.debug_tuples()] for tuple_ in self.tuples]
 
             elif field == "wikipedia":
-                lines = [[name, wikipedia.debug_wikipedia()] for name, wikipedia in self.wikipedia['found'].items()] \
-                        + [[name, ": not found"] for name in self.wikipedia['not_found']]
+                lines = [
+                    [name, wikipedia.debug_wikipedia()]
+                    for name, wikipedia in self.wikipedia["found"].items()
+                ] + [[name, ": not found"] for name in self.wikipedia["not_found"]]
 
             elif field == "queries":
                 lines = [[id_, query.debug_queries()] for id_, query in self.queries.items()]
@@ -866,7 +958,7 @@ class AnnotationTask:
             else:
                 raise Exception("Wrong field/method specified: %s/%s." % (field, method))
 
-            lines = [line[0] + line[1] + '\n' for line in lines if line[1]]
+            lines = [line[0] + line[1] + "\n" for line in lines if line[1]]
 
             if lines:
                 file_name = self.results_path + "debug/" + method + ".txt"
@@ -882,7 +974,7 @@ class AnnotationTask:
     # region Other methods
 
     def print(self, *args):
-        """ Prints only if not in silent mode. """
+        """Prints only if not in silent mode."""
 
         if not self.silent:
             print(*args)
@@ -916,17 +1008,20 @@ class AnnotationTask:
             step: int, step of the correction to perform, between 1 and 4.
         """
 
-        to_correct = set([name for name, wiki in self.wikipedia['found'].items() if not wiki.exact])
+        to_correct = set([name for name, wiki in self.wikipedia["found"].items() if not wiki.exact])
         corrected = set()
 
         if not to_correct:
-            self.print("All the %i entities are exact, no correction to be made." % len(self.wikipedia['found']))
+            self.print(
+                "All the %i entities are exact, no correction to be made."
+                % len(self.wikipedia["found"])
+            )
             return
 
         if self.silent:
             raise Exception("Remove silent mode to correct the wikipedia information.")
 
-        self.print("Entities to correct: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+        self.print("Entities to correct: %i/%i." % (len(to_correct), len(self.wikipedia["found"])))
 
         if step is None:
             raise Exception("There are entities to correct, precise a step.")
@@ -935,110 +1030,165 @@ class AnnotationTask:
             if step == 1:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
-                    count = self.progression(count=count, modulo=self.modulo_entities, size=size,
-                                             text="to correct entity")
+                    count = self.progression(
+                        count=count,
+                        modulo=self.modulo_entities,
+                        size=size,
+                        text="to correct entity",
+                    )
 
                     preprocessed_name_1 = unidecode(name).lower().replace(".", "")
-                    preprocessed_name_2 = " ".join([word for word in preprocessed_name_1.split() if len(word) > 1])
+                    preprocessed_name_2 = " ".join(
+                        [word for word in preprocessed_name_1.split() if len(word) > 1]
+                    )
 
-                    title = self.wikipedia['found'][name].title
-                    before_parenthesis = findall(r'(.*?)\s*\(', title)
-                    before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
+                    title = self.wikipedia["found"][name].title
+                    before_parenthesis = findall(r"(.*?)\s*\(", title)
+                    before_parenthesis = (
+                        before_parenthesis[0]
+                        if before_parenthesis and before_parenthesis[0]
                         else title
+                    )
 
                     preprocessed_title_1 = unidecode(before_parenthesis).lower().replace(".", "")
-                    preprocessed_title_2 = " ".join([word for word in preprocessed_title_1.split() if len(word) > 1])
+                    preprocessed_title_2 = " ".join(
+                        [word for word in preprocessed_title_1.split() if len(word) > 1]
+                    )
 
-                    if preprocessed_name_1 == preprocessed_title_1 or preprocessed_name_2 == preprocessed_title_2:
-                        self.wikipedia['found'][name].exact = True
+                    if (
+                        preprocessed_name_1 == preprocessed_title_1
+                        or preprocessed_name_2 == preprocessed_title_2
+                    ):
+                        self.wikipedia["found"][name].exact = True
                         corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                self.print("First step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print(
+                    "First step over, remaining: %i/%i."
+                    % (len(to_correct), len(self.wikipedia["found"]))
+                )
 
             elif step == 2:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
-                    count = self.progression(count=count, modulo=self.modulo_entities, size=size,
-                                             text="to correct entity")
+                    count = self.progression(
+                        count=count,
+                        modulo=self.modulo_entities,
+                        size=size,
+                        text="to correct entity",
+                    )
 
                     while True:
-                        answer = input(name + "/" + self.wikipedia['found'][name].title + ": is this good? [y/n/o/d]")
+                        answer = input(
+                            name
+                            + "/"
+                            + self.wikipedia["found"][name].title
+                            + ": is this good? [y/n/o/d]"
+                        )
                         if answer in ["y", "n", "o", "d"]:
                             break
                         else:
-                            self.print('Answer should be "y" (yes), "n" (no), "o" (open) or "d" (discard), try again.')
+                            self.print(
+                                'Answer should be "y" (yes), "n" (no), "o" (open) or "d" (discard), try again.'
+                            )
 
                     if answer == "o":
                         while True:
-                            answer = input(self.wikipedia['found'][name].get_info() + ": is this good? [y/n/d]")
+                            answer = input(
+                                self.wikipedia["found"][name].get_info() + ": is this good? [y/n/d]"
+                            )
                             if answer in ["y", "n", "d"]:
                                 break
                             else:
-                                self.print('Answer should be "y" (yes), "n" (no) or "d" (discard), try again.')
+                                self.print(
+                                    'Answer should be "y" (yes), "n" (no) or "d" (discard), try again.'
+                                )
 
                     if answer == "y":
-                        self.wikipedia['found'][name].exact = True
+                        self.wikipedia["found"][name].exact = True
                         corrected.add(name)
 
                     elif answer == "d":
-                        del self.wikipedia['found'][name]
-                        self.wikipedia['not_found'].add(name)
+                        del self.wikipedia["found"][name]
+                        self.wikipedia["not_found"].add(name)
                         corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                self.print("Second step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print(
+                    "Second step over, remaining: %i/%i."
+                    % (len(to_correct), len(self.wikipedia["found"]))
+                )
 
             elif step == 3:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
-                    count = self.progression(count=count, modulo=self.modulo_entities, size=size,
-                                             text='to correct entity')
+                    count = self.progression(
+                        count=count,
+                        modulo=self.modulo_entities,
+                        size=size,
+                        text="to correct entity",
+                    )
 
                     wiki_search = search(name)
                     self.print("Wikipedia search for %s:" % name)
                     for cmpt, title in enumerate(wiki_search):
-                        self.print("%s: %s" % (str(cmpt + 1), + title))
+                        self.print("%s: %s" % (str(cmpt + 1), +title))
 
                     while True:
                         try:
-                            answer = int(input("Which number is the good one? (0 for giving up this example)"))
+                            answer = int(
+                                input(
+                                    "Which number is the good one? (0 for giving up this example)"
+                                )
+                            )
                             if answer in range(len(wiki_search) + 1):
                                 break
                             else:
-                                self.print("Answer should be between 0 and the length of the search, try again.")
+                                self.print(
+                                    "Answer should be between 0 and the length of the search, try again."
+                                )
                         except ValueError:
                             self.print("Answer should be an int, try again.")
 
                     if answer == 0:
-                        del self.wikipedia['found'][name]
-                        self.wikipedia['not_found'].add(name)
+                        del self.wikipedia["found"][name]
+                        self.wikipedia["not_found"].add(name)
                         corrected.add(name)
                         self.print("Considered not found.")
 
                     else:
                         try:
                             p = page(wiki_search[answer - 1])
-                            self.wikipedia['found'][name] = Wikipedia(p)
+                            self.wikipedia["found"][name] = Wikipedia(p)
 
                         except DisambiguationError:
                             self.print("Search is still ambiguous, moving on to the next one...")
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                self.print("Third step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print(
+                    "Third step over, remaining: %i/%i."
+                    % (len(to_correct), len(self.wikipedia["found"]))
+                )
 
             elif step == 4:
                 count, size = 0, len(to_correct)
                 for name in sorted(to_correct):
-                    count = self.progression(count=count, modulo=self.modulo_entities, size=size,
-                                             text='to correct entity')
+                    count = self.progression(
+                        count=count,
+                        modulo=self.modulo_entities,
+                        size=size,
+                        text="to correct entity",
+                    )
 
-                    del self.wikipedia['found'][name]
-                    self.wikipedia['not_found'].add(name)
+                    del self.wikipedia["found"][name]
+                    self.wikipedia["not_found"].add(name)
                     corrected.add(name)
 
                 to_correct, corrected = to_correct.difference(corrected), set()
-                self.print("Fifth step over, remaining: %i/%i." % (len(to_correct), len(self.wikipedia['found'])))
+                self.print(
+                    "Fifth step over, remaining: %i/%i."
+                    % (len(to_correct), len(self.wikipedia["found"]))
+                )
 
             else:
                 raise Exception("Wrong step specified.")

@@ -1,10 +1,11 @@
-from pickle import load
 from os.path import join as path_join
+from pickle import load
+
 import torch
 
 
 def to_class_name(name):
-    """ For a name of the format 'abc_efg', returns the corresponding Class name, of the format 'AbcEfg'. """
+    """For a name of the format 'abc_efg', returns the corresponding Class name, of the format 'AbcEfg'."""
 
     return "".join([word.capitalize() for word in name.split("-")])
 
@@ -42,9 +43,9 @@ def load_task(args):
     suffix += "_tf-" + targets_format if targets_format is not None else ""
     suffix += "_cv" if cross_validation else ""
 
-    file_name = path_join(root, folder_path, task_name + suffix + '.pkl')
+    file_name = path_join(root, folder_path, task_name + suffix + ".pkl")
 
-    with open(file_name, 'rb') as file:
+    with open(file_name, "rb") as file:
         task = load(file)
 
     print("Task loaded from %s.\n" % file_name)
@@ -53,7 +54,7 @@ def load_task(args):
 
 
 def get_pretrained_model(args):
-    """ Returns the pretrained model (word2vec embedding or bart). """
+    """Returns the pretrained model (word2vec embedding or bart)."""
 
     use_word2vec = args.word2vec
     use_bart = args.bart
@@ -105,8 +106,9 @@ def get_bart(folder_path, checkpoint_file):
 
     from fairseq.models.bart import BARTModel
 
-    bart = BARTModel.from_pretrained(model_name_or_path=folder_path + '/',
-                                     checkpoint_file=checkpoint_file)
+    bart = BARTModel.from_pretrained(
+        model_name_or_path=folder_path + "/", checkpoint_file=checkpoint_file
+    )
 
     if torch.cuda.is_available():
         bart.cuda()

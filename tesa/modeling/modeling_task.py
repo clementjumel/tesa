@@ -1,20 +1,34 @@
-from modeling.ranking_task import RankingTask
-from modeling.utils import format_context, format_targets
-
 from collections import defaultdict
-from numpy import asarray, split, concatenate
-from numpy.random import seed, shuffle
-from pickle import dump, load
-from re import findall
 from csv import writer
 from os import makedirs
 from os.path import exists
+from pickle import dump, load
+from re import findall
+
+from numpy import asarray, concatenate, split
+from numpy.random import seed, shuffle
+
+from tesa.modeling.ranking_task import RankingTask
+from tesa.modeling.utils import format_context, format_targets
 
 
 class ModelingTask:
-    def __init__(self, ranking_size, batch_size, context_format, targets_format, context_max_size, k_cross_validation,
-                 valid_proportion, test_proportion, random_seed, save, silent, results_path,
-                 annotation_task_results_path):
+    def __init__(
+        self,
+        ranking_size,
+        batch_size,
+        context_format,
+        targets_format,
+        context_max_size,
+        k_cross_validation,
+        valid_proportion,
+        test_proportion,
+        random_seed,
+        save,
+        silent,
+        results_path,
+        annotation_task_results_path,
+    ):
         """
         Initializes an instance of the base ModelingTask.
 
@@ -56,7 +70,7 @@ class ModelingTask:
     # region Main methods
 
     def process_data_loaders(self):
-        """ Process the data of the annotations to create the data loaders. """
+        """Process the data of the annotations to create the data loaders."""
 
         self.compute_ranking_tasks()
 
@@ -93,16 +107,21 @@ class ModelingTask:
     # endregion
 
     def compute_ranking_tasks(self):
-        """ Compute the RankingTasks of the ModelingTask, and split them into the data_loaders. """
+        """Compute the RankingTasks of the ModelingTask, and split them into the data_loaders."""
 
         annotations_fname = self.annotation_task_results_path + "annotations/annotations.pkl"
         queries_fname = self.annotation_task_results_path + "annotations/queries.pkl"
 
-        with open(annotations_fname, 'rb') as annotations_file, open(queries_fname, 'rb') as queries_file:
+        with open(annotations_fname, "rb") as annotations_file, open(
+            queries_fname, "rb"
+        ) as queries_file:
             annotations = load(annotations_file)
             queries = load(queries_file)
 
-        self.print("Annotations and queries loaded from %sannotations/." % self.annotation_task_results_path)
+        self.print(
+            "Annotations and queries loaded from %sannotations/."
+            % self.annotation_task_results_path
+        )
 
         annotations = self.get_reordered_annotations(queries=queries, annotations=annotations)
 
@@ -111,15 +130,21 @@ class ModelingTask:
             sample_queries_ids = sorted(set([annotation.id_ for annotation in sample_annotations]))
             sample_queries = [queries[query_id_] for query_id_ in sample_queries_ids]
 
-            labelled_answers = self.get_labelled_answers(sample_queries=sample_queries,
-                                                         sample_annotations=sample_annotations,
-                                                         queries=queries,
-                                                         annotations=annotations)
+            labelled_answers = self.get_labelled_answers(
+                sample_queries=sample_queries,
+                sample_annotations=sample_annotations,
+                queries=queries,
+                annotations=annotations,
+            )
 
-            ranking_tasks.append(RankingTask(queries=sample_queries,
-                                             labelled_answers=labelled_answers,
-                                             ranking_size=self.ranking_size,
-                                             batch_size=self.batch_size))
+            ranking_tasks.append(
+                RankingTask(
+                    queries=sample_queries,
+                    labelled_answers=labelled_answers,
+                    ranking_size=self.ranking_size,
+                    batch_size=self.batch_size,
+                )
+            )
 
         shuffle(ranking_tasks)
 
@@ -135,14 +160,24 @@ class ModelingTask:
             n_train = n - n_test - n_valid
 
             assert 0 <= n_train <= n and 0 <= n_valid <= n and 0 <= n_test <= n
-            train_set, valid_set, test_set = split(asarray(ranking_tasks), [n_train, n_train + n_valid])
-            assert n_train == train_set.shape[0] and n_valid == valid_set.shape[0] and n_test == test_set.shape[0]
+            train_set, valid_set, test_set = split(
+                asarray(ranking_tasks), [n_train, n_train + n_valid]
+            )
+            assert (
+                n_train == train_set.shape[0]
+                and n_valid == valid_set.shape[0]
+                and n_test == test_set.shape[0]
+            )
 
             self.train_loader = [ranking_task.to_loader() for ranking_task in train_set]
             self.valid_loader = [ranking_task.to_loader() for ranking_task in valid_set]
             self.test_loader = [ranking_task.to_loader() for ranking_task in test_set]
 
-            train_loader, valid_loader, test_loader = self.train_loader, self.valid_loader, self.test_loader
+            train_loader, valid_loader, test_loader = (
+                self.train_loader,
+                self.valid_loader,
+                self.test_loader,
+            )
             self.print("Data loaders computed:")
 
         else:
@@ -168,11 +203,19 @@ class ModelingTask:
 
             n_train, n_valid = n_trains.pop(), n_valids.pop()
 
-            self.train_loader = [[ranking_task.to_loader() for ranking_task in train_set] for train_set in train_sets]
-            self.valid_loader = [[ranking_task.to_loader() for ranking_task in valid_set] for valid_set in valid_sets]
+            self.train_loader = [
+                [ranking_task.to_loader() for ranking_task in train_set] for train_set in train_sets
+            ]
+            self.valid_loader = [
+                [ranking_task.to_loader() for ranking_task in valid_set] for valid_set in valid_sets
+            ]
             self.test_loader = [ranking_task.to_loader() for ranking_task in test_set]
 
-            train_loader, valid_loader, test_loader = self.train_loader[0], self.valid_loader[0], self.test_loader
+            train_loader, valid_loader, test_loader = (
+                self.train_loader[0],
+                self.valid_loader[0],
+                self.test_loader,
+            )
 
             self.print("Data loaders for %i-fold cross validation computed:" % k)
 
@@ -180,9 +223,13 @@ class ModelingTask:
         m_valid = sum([len(ranking_task) for ranking_task in valid_loader])
         m_test = sum([len(ranking_task) for ranking_task in test_loader])
 
-        self.print("   train: %i ranking tasks (%i%%), %i batches,\n" % (n_train, 100 * n_train / n, m_train),
-                   "  valid: %i ranking tasks (%i%%), %i batches,\n" % (n_valid, 100 * n_valid / n, m_valid),
-                   "  test: %i ranking tasks (%i%%), %i batches.\n" % (n_test, 100 * n_test / n, m_test))
+        self.print(
+            "   train: %i ranking tasks (%i%%), %i batches,\n"
+            % (n_train, 100 * n_train / n, m_train),
+            "  valid: %i ranking tasks (%i%%), %i batches,\n"
+            % (n_valid, 100 * n_valid / n, m_valid),
+            "  test: %i ranking tasks (%i%%), %i batches.\n" % (n_test, 100 * n_test / n, m_test),
+        )
 
     # region Methods get_
 
@@ -322,12 +369,12 @@ class ModelingTask:
 
         rows = []
 
-        sentence1 = format_context(ranking_task,
-                                   context_format=self.context_format,
-                                   context_max_size=self.context_max_size)
+        sentence1 = format_context(
+            ranking_task, context_format=self.context_format, context_max_size=self.context_max_size
+        )
 
         for inputs, targets in ranking_task:
-            for choice, target in zip(inputs['choices'], targets):
+            for choice, target in zip(inputs["choices"], targets):
                 sentence2 = choice
                 label = "aggregation" if target else "not_aggregation"
 
@@ -345,9 +392,9 @@ class ModelingTask:
 
         source_rows, target_rows = [], []
 
-        source = format_context(ranking_task,
-                                context_format=self.context_format,
-                                context_max_size=self.context_max_size)
+        source = format_context(
+            ranking_task, context_format=self.context_format, context_max_size=self.context_max_size
+        )
 
         targets = format_targets(ranking_task, targets_format=self.targets_format)
 
@@ -361,14 +408,18 @@ class ModelingTask:
     # region Other methods
 
     def class_name(self):
-        """ Returns the standardized name of the class. """
+        """Returns the standardized name of the class."""
 
-        return "-".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', self.__class__.__name__)])
+        return "-".join(
+            [word.lower() for word in findall(r"[A-Z][^A-Z]*", self.__class__.__name__)]
+        )
 
     def suffix(self):
-        """ Returns the standard suffix of a file_name as a string. """
+        """Returns the standard suffix of a file_name as a string."""
 
-        train_proportion = ("%.2f" % (1 - self.valid_proportion - self.test_proportion)).split(".")[1]
+        train_proportion = ("%.2f" % (1 - self.valid_proportion - self.test_proportion)).split(".")[
+            1
+        ]
         valid_proportion = ("%.2f" % self.valid_proportion).split(".")[1]
         test_proportion = ("%.2f" % self.test_proportion).split(".")[1]
         suffix = "_" + "-".join([train_proportion, valid_proportion, test_proportion])
@@ -395,12 +446,12 @@ class ModelingTask:
                 self.print("Creating folder(s) %s." % folder_name)
 
     def save_pkl(self):
-        """ Save the Task using pickle in self.results_path. """
+        """Save the Task using pickle in self.results_path."""
 
-        file_name = self.results_path + self.class_name() + self.suffix() + '.pkl'
+        file_name = self.results_path + self.class_name() + self.suffix() + ".pkl"
 
         if self.save:
-            with open(file_name, 'wb') as file:
+            with open(file_name, "wb") as file:
                 dump(obj=self, file=file, protocol=-1)
 
             self.print("Task saved at %s.\n" % file_name)
@@ -431,9 +482,9 @@ class ModelingTask:
             all_rows = [[str(j)] + row for j, row in enumerate(all_rows)]
 
             if self.save:
-                with open(file_name, 'wt') as file:
-                    tsv_writer = writer(file, delimiter='\t')
-                    tsv_writer.writerow(['index', 'sentence1', 'sentence2', 'label'])
+                with open(file_name, "wt") as file:
+                    tsv_writer = writer(file, delimiter="\t")
+                    tsv_writer.writerow(["index", "sentence1", "sentence2", "label"])
 
                     for row in all_rows:
                         tsv_writer.writerow(row)
@@ -452,8 +503,10 @@ class ModelingTask:
         """
 
         data_loader_names = ["train", "valid", "test"]
-        file_name_pairs = [[path + file_name + suffix for suffix in [".source", ".target"]]
-                           for file_name in ["train", "val", "test"]]
+        file_name_pairs = [
+            [path + file_name + suffix for suffix in [".source", ".target"]]
+            for file_name in ["train", "val", "test"]
+        ]
 
         for i, data_loader_name in enumerate(data_loader_names):
             data_loader = getattr(self, data_loader_name + "_loader")
@@ -464,22 +517,30 @@ class ModelingTask:
                 source_rows, target_rows = self.get_generation_rows(ranking_task)
                 all_source_rows.extend(source_rows), all_target_rows.extend(target_rows)
 
-            all_rows = [(source_row, target_row) for source_row, target_row in zip(all_source_rows, all_target_rows)]
+            all_rows = [
+                (source_row, target_row)
+                for source_row, target_row in zip(all_source_rows, all_target_rows)
+            ]
             shuffle(all_rows)
-            all_source_rows = [source_row + '\n' for source_row, _ in all_rows]
-            all_target_rows = [target_row + '\n' for _, target_row in all_rows]
+            all_source_rows = [source_row + "\n" for source_row, _ in all_rows]
+            all_target_rows = [target_row + "\n" for _, target_row in all_rows]
 
             if self.save:
-                with open(file_name_pair[0], 'wt') as source_file, open(file_name_pair[1], 'wt') as target_file:
+                with open(file_name_pair[0], "wt") as source_file, open(
+                    file_name_pair[1], "wt"
+                ) as target_file:
                     source_file.writelines(all_source_rows), target_file.writelines(all_target_rows)
 
                 self.print("File %s and %s saved." % (file_name_pair[0], file_name_pair[1]))
 
             else:
-                self.print("File %s and %s not saved (not in save mode)." % (file_name_pair[0], file_name_pair[1]))
+                self.print(
+                    "File %s and %s not saved (not in save mode)."
+                    % (file_name_pair[0], file_name_pair[1])
+                )
 
     def print(self, *args):
-        """ Prints only if not in silent mode. """
+        """Prints only if not in silent mode."""
 
         if not self.silent:
             print(*args)
@@ -512,7 +573,9 @@ class ContextFree(ModelingTask):
 
 class ContextFreeSameType(ContextFree):
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_type(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         labelled_answers = {answer: 0 for answer in answers}
 
         answers = self.get_answers_sample(sample_annotations=sample_annotations)
@@ -536,7 +599,9 @@ class ContextDependent(ModelingTask):
 
 class ContextDependentSameType(ModelingTask):
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_type(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         labelled_answers = {answer: 0 for answer in answers}
 
         answers = self.get_answers_sample(sample_annotations=sample_annotations)
@@ -551,11 +616,15 @@ class FullHybrid(ModelingTask):
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
-        answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_type(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         for answer in answers:
             labelled_answers[answer] = 1
 
-        answers = self.get_answers_same_tuple(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_tuple(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         for answer in answers:
             labelled_answers[answer] = 2
 
@@ -571,7 +640,9 @@ class Hybrid(ModelingTask):
         answers = self.get_answers_all(annotations=annotations)
         labelled_answers = {answer: 0 for answer in answers}
 
-        answers = self.get_answers_same_tuple(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_tuple(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         for answer in answers:
             labelled_answers[answer] = 1
 
@@ -584,10 +655,14 @@ class Hybrid(ModelingTask):
 
 class HybridSameType(ModelingTask):
     def get_labelled_answers(self, sample_queries, sample_annotations, queries, annotations):
-        answers = self.get_answers_same_type(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_type(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         labelled_answers = {answer: 0 for answer in answers}
 
-        answers = self.get_answers_same_tuple(annotations=annotations, sample_queries=sample_queries, queries=queries)
+        answers = self.get_answers_same_tuple(
+            annotations=annotations, sample_queries=sample_queries, queries=queries
+        )
         for answer in answers:
             labelled_answers[answer] = 1
 

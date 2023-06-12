@@ -1,25 +1,25 @@
-from modeling.utils import *
-from modeling import metrics
-from modeling.modules import LogisticRegression
-
-from numpy import arange, mean, std
-from numpy.random import seed, shuffle
 from collections import defaultdict
 from copy import deepcopy
+from os.path import join as path_join
 from re import findall
 from string import punctuation as str_punctuation
+
+import matplotlib.pyplot as plt
 from nltk.corpus import stopwords as nltk_stopwords
 from nltk.stem import WordNetLemmatizer
-from tqdm import tqdm_notebook as tqdm
+from numpy import arange
+from numpy.random import seed, shuffle
 from torch.utils.tensorboard import SummaryWriter
+from tqdm import tqdm_notebook as tqdm
+
 from fairseq.data.data_utils import collate_tokens
-from os.path import join as path_join
-import matplotlib.pyplot as plt
-import torch
+from tesa.modeling import metrics
+from tesa.modeling.modules import LogisticRegression
+from tesa.modeling.utils import *
 
 
 class BaseModel:
-    """ Model structure. """
+    """Model structure."""
 
     def __init__(self, args, pretrained_model):
         """
@@ -41,7 +41,7 @@ class BaseModel:
         self.test_losses, self.test_scores = [], defaultdict(list)
 
         self.punctuation = str_punctuation
-        self.stopwords = set(nltk_stopwords.words('english'))
+        self.stopwords = set(nltk_stopwords.words("english"))
         self.lemmatizer = WordNetLemmatizer()
 
         self.writer = None
@@ -50,7 +50,7 @@ class BaseModel:
             root = args.root
             tensorboard_logs_path = args.tensorboard_logs_path
             model_name = self.__class__.__name__
-            model_name = "_".join([word.lower() for word in findall(r'[A-Z][^A-Z]*', model_name)])
+            model_name = "_".join([word.lower() for word in findall(r"[A-Z][^A-Z]*", model_name)])
 
             self.writer = SummaryWriter(path_join(root, tensorboard_logs_path, model_name))
 
@@ -84,14 +84,18 @@ class BaseModel:
             self.test(task.test_loader)
 
         else:
-            self.show(task,
-                      show_rankings=show_rankings,
-                      show_choices=show_choices,
-                      random_examples=random_examples,
-                      custom_examples=custom_examples,
-                      unseen_examples=unseen_examples)
+            self.show(
+                task,
+                show_rankings=show_rankings,
+                show_choices=show_choices,
+                random_examples=random_examples,
+                custom_examples=custom_examples,
+                unseen_examples=unseen_examples,
+            )
 
-    def show(self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples):
+    def show(
+        self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples
+    ):
         """
         Show the model results on different rankings.
 
@@ -121,9 +125,11 @@ class BaseModel:
             for loader in [task.train_loader, task.valid_loader, task.test_loader]:
                 for ranking in loader:
                     inputs, _ = ranking[0]
-                    if inputs['entities'] in [["Francois Bayrou", "Nicolas Sarkozy", "Segolene Royal"],
-                                              ["Chicago", "London"],
-                                              ["Microsoft Corp.", "Sony Corp."]]:
+                    if inputs["entities"] in [
+                        ["Francois Bayrou", "Nicolas Sarkozy", "Segolene Royal"],
+                        ["Chicago", "London"],
+                        ["Microsoft Corp.", "Sony Corp."],
+                    ]:
                         data_loader.append(ranking)
 
             data_loaders.append(data_loader)
@@ -132,12 +138,12 @@ class BaseModel:
             seen_entities = set()
             for ranking in task.train_loader:
                 inputs, _ = ranking[0]
-                seen_entities.update(inputs['entities'])
+                seen_entities.update(inputs["entities"])
 
             data_loader = []
             for ranking in task.valid_loader:
                 inputs, _ = ranking[0]
-                if all([entity not in seen_entities for entity in inputs['entities']]):
+                if all([entity not in seen_entities for entity in inputs["entities"]]):
                     data_loader.append(ranking)
                     if len(data_loader) == show_rankings:
                         break
@@ -152,11 +158,13 @@ class BaseModel:
                 for inputs, targets in ranking:
                     outputs = self.pred(inputs)
 
-                    ranking_choices.extend(inputs['choices'])
+                    ranking_choices.extend(inputs["choices"])
                     ranking_outputs.append(outputs)
                     ranking_targets.append(targets)
 
-                ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(ranking_targets)
+                ranking_outputs, ranking_targets = torch.cat(ranking_outputs), torch.cat(
+                    ranking_targets
+                )
 
                 ranking_ranks = get_ranks(ranking_outputs)
                 batch_score = self.get_score(ranks=ranking_ranks, targets=ranking_targets)
@@ -164,21 +172,30 @@ class BaseModel:
                 print("Ranking %i/%i: " % (ranking_idx + 1, show_rankings))
 
                 inputs, _ = ranking[0]
-                print("Entities (%s): %s" % (inputs['entities_type'], ', '.join(inputs['entities'])))
+                print(
+                    "Entities (%s): %s" % (inputs["entities_type"], ", ".join(inputs["entities"]))
+                )
 
                 if self.context_format is not None:
-                    print("Context:\n%s" % format_context(inputs,
-                                                          context_format=self.context_format,
-                                                          context_max_size=self.context_max_size))
+                    print(
+                        "Context:\n%s"
+                        % format_context(
+                            inputs,
+                            context_format=self.context_format,
+                            context_max_size=self.context_max_size,
+                        )
+                    )
 
                 print("\nScores:")
                 for score_name in self.scores_names:
                     print("%s: %.3f" % (score_name, batch_score[score_name]))
 
-                results = zip(ranking_ranks.squeeze().tolist(),
-                              ranking_choices,
-                              ranking_outputs.squeeze().tolist(),
-                              ranking_targets.squeeze().tolist())
+                results = zip(
+                    ranking_ranks.squeeze().tolist(),
+                    ranking_choices,
+                    ranking_outputs.squeeze().tolist(),
+                    ranking_targets.squeeze().tolist(),
+                )
                 results = sorted(results, key=lambda x: x[0])
 
                 print("\nGold standards (rank: choice [output/target]:")
@@ -190,11 +207,15 @@ class BaseModel:
                 for result in results[:show_choices]:
                     print("%i: %s [%.3f/%i]" % result)
 
-                print("--------------------------------------------------" +
-                      "-------------------------------------------------- \n")
+                print(
+                    "--------------------------------------------------"
+                    + "-------------------------------------------------- \n"
+                )
 
-            print("##################################################" +
-                  "################################################## \n")
+            print(
+                "##################################################"
+                + "################################################## \n"
+            )
 
         return data_loaders
 
@@ -258,7 +279,9 @@ class BaseModel:
         for ranking_idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
             ranking_loss, ranking_score = self.evaluate_ranking(ranking=ranking)
 
-            self.write_tensorboard(loss=ranking_loss, score=ranking_score, tag='test', step=ranking_idx)
+            self.write_tensorboard(
+                loss=ranking_loss, score=ranking_score, tag="test", step=ranking_idx
+            )
             epoch_losses.append(ranking_loss), dict_append(epoch_scores, ranking_score)
 
         return epoch_losses, epoch_scores
@@ -320,8 +343,7 @@ class BaseModel:
         score_dict = dict()
 
         for name in self.scores_names:
-            score = getattr(metrics, name)(ranks=ranks.clone(),
-                                           targets=targets.clone())
+            score = getattr(metrics, name)(ranks=ranks.clone(), targets=targets.clone())
 
             score_dict[name] = score.data.item()
 
@@ -363,8 +385,9 @@ class BaseModel:
             epoch_scores: dict, list of scores (float) of an epoch, mapped with the name of the score.
         """
 
-        loss_mean, loss_std, score_mean, score_std = self.get_mean_std(epoch_losses=epoch_losses,
-                                                                       epoch_scores=epoch_scores)
+        loss_mean, loss_std, score_mean, score_std = self.get_mean_std(
+            epoch_losses=epoch_losses, epoch_scores=epoch_scores
+        )
 
         if loss_mean is not None and loss_std is not None:
             print("Loss: %.5f (+/-%.5f)" % (loss_mean, loss_std))
@@ -387,12 +410,13 @@ class BaseModel:
 
         if self.writer is not None:
             if loss is not None:
-                self.writer.add_scalar(tag=tag + '/loss', scalar_value=loss, global_step=step)
+                self.writer.add_scalar(tag=tag + "/loss", scalar_value=loss, global_step=step)
 
             for name in self.scores_names:
                 if score[name] is not None:
-                    self.writer.add_scalar(tag=tag + '/' + name, scalar_value=score[name],
-                                           global_step=step)
+                    self.writer.add_scalar(
+                        tag=tag + "/" + name, scalar_value=score[name], global_step=step
+                    )
 
     # endregion
 
@@ -414,7 +438,7 @@ class BaseModel:
         """
 
         if remove_punctuation:
-            s = s.translate(str.maketrans('', '', self.punctuation))
+            s = s.translate(str.maketrans("", "", self.punctuation))
 
         words = s.split()
 
@@ -429,60 +453,97 @@ class BaseModel:
 
         return words
 
-    def get_choices_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=False,
-                          setten=False):
-        """ Returns the words from the inputs' choices as a list of list (or sets, if setten). """
+    def get_choices_words(
+        self,
+        inputs,
+        remove_stopwords=True,
+        remove_punctuation=True,
+        lower=True,
+        lemmatize=False,
+        setten=False,
+    ):
+        """Returns the words from the inputs' choices as a list of list (or sets, if setten)."""
 
         choices_words = []
 
-        for choice in inputs['choices']:
-            choices_words.append(self.get_words(s=choice,
-                                                remove_stopwords=remove_stopwords,
-                                                remove_punctuation=remove_punctuation,
-                                                lower=lower,
-                                                lemmatize=lemmatize))
+        for choice in inputs["choices"]:
+            choices_words.append(
+                self.get_words(
+                    s=choice,
+                    remove_stopwords=remove_stopwords,
+                    remove_punctuation=remove_punctuation,
+                    lower=lower,
+                    lemmatize=lemmatize,
+                )
+            )
 
         if setten:
             choices_words = [set(words) for words in choices_words]
 
         return choices_words
 
-    def get_entities_words(self, inputs, remove_stopwords=False, remove_punctuation=True, lower=True, lemmatize=False,
-                           flatten=False):
-        """ Returns the words from the inputs' entities as a list of list (or a list, if flatten). """
+    def get_entities_words(
+        self,
+        inputs,
+        remove_stopwords=False,
+        remove_punctuation=True,
+        lower=True,
+        lemmatize=False,
+        flatten=False,
+    ):
+        """Returns the words from the inputs' entities as a list of list (or a list, if flatten)."""
 
         entities_words = []
 
-        for entity in inputs['entities']:
-            entities_words.append(self.get_words(s=entity,
-                                                 remove_stopwords=remove_stopwords,
-                                                 remove_punctuation=remove_punctuation,
-                                                 lower=lower,
-                                                 lemmatize=lemmatize))
+        for entity in inputs["entities"]:
+            entities_words.append(
+                self.get_words(
+                    s=entity,
+                    remove_stopwords=remove_stopwords,
+                    remove_punctuation=remove_punctuation,
+                    lower=lower,
+                    lemmatize=lemmatize,
+                )
+            )
 
         if flatten:
             entities_words = [word for words in entities_words for word in words]
 
         return entities_words
 
-    def get_context_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
-                          setten=False):
-        """ Returns the words from the inputs' NYT titles and contexts as a list (or set, if setten). """
+    def get_context_words(
+        self,
+        inputs,
+        remove_stopwords=True,
+        remove_punctuation=True,
+        lower=True,
+        lemmatize=True,
+        setten=False,
+    ):
+        """Returns the words from the inputs' NYT titles and contexts as a list (or set, if setten)."""
 
         context_words = []
 
-        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-            context_words.extend(self.get_words(s=nyt_title,
-                                                remove_stopwords=remove_stopwords,
-                                                remove_punctuation=remove_punctuation,
-                                                lower=lower,
-                                                lemmatize=lemmatize))
+        for nyt_title, nyt_context in zip(inputs["nyt_titles"], inputs["nyt_contexts"]):
+            context_words.extend(
+                self.get_words(
+                    s=nyt_title,
+                    remove_stopwords=remove_stopwords,
+                    remove_punctuation=remove_punctuation,
+                    lower=lower,
+                    lemmatize=lemmatize,
+                )
+            )
 
-            context_words.extend(self.get_words(s=nyt_context,
-                                                remove_stopwords=remove_stopwords,
-                                                remove_punctuation=remove_punctuation,
-                                                lower=lower,
-                                                lemmatize=lemmatize))
+            context_words.extend(
+                self.get_words(
+                    s=nyt_context,
+                    remove_stopwords=remove_stopwords,
+                    remove_punctuation=remove_punctuation,
+                    lower=lower,
+                    lemmatize=lemmatize,
+                )
+            )
 
         if setten:
             context_words = set(context_words)
@@ -491,24 +552,36 @@ class BaseModel:
 
     @staticmethod
     def get_wikis_str(inputs):
-        """ Returns a string with the wikipedia articles. """
+        """Returns a string with the wikipedia articles."""
 
-        return ' '.join([wiki_article for wiki_article in inputs['wiki_articles'] if wiki_article])
+        return " ".join([wiki_article for wiki_article in inputs["wiki_articles"] if wiki_article])
 
-    def get_wikis_words(self, inputs, remove_stopwords=True, remove_punctuation=True, lower=True, lemmatize=True,
-                        flatten=False, setten=False):
-        """ Return the words from the inputs' wikipedia articles as a list of list (or a list if flatten, or a list of
-        set if setten, or a set if both). """
+    def get_wikis_words(
+        self,
+        inputs,
+        remove_stopwords=True,
+        remove_punctuation=True,
+        lower=True,
+        lemmatize=True,
+        flatten=False,
+        setten=False,
+    ):
+        """Return the words from the inputs' wikipedia articles as a list of list (or a list if flatten, or a list of
+        set if setten, or a set if both)."""
 
         wikis_words = []
 
-        for wiki_article in inputs['wiki_articles']:
+        for wiki_article in inputs["wiki_articles"]:
             if wiki_article:
-                wikis_words.append(self.get_words(s=wiki_article,
-                                                  remove_stopwords=remove_stopwords,
-                                                  remove_punctuation=remove_punctuation,
-                                                  lower=lower,
-                                                  lemmatize=lemmatize))
+                wikis_words.append(
+                    self.get_words(
+                        s=wiki_article,
+                        remove_stopwords=remove_stopwords,
+                        remove_punctuation=remove_punctuation,
+                        lower=lower,
+                        lemmatize=lemmatize,
+                    )
+                )
             else:
                 wikis_words.append([])
 
@@ -524,8 +597,8 @@ class BaseModel:
         return wikis_words
 
     def get_other_words(self, inputs, setten=False):
-        """ Return the words from the inputs' entities, NYT articles and wikipedia articles, in a list (or a set, if
-        setten). """
+        """Return the words from the inputs' entities, NYT articles and wikipedia articles, in a list (or a set, if
+        setten)."""
 
         entities_words = self.get_entities_words(inputs, flatten=True)
         context_words = self.get_context_words(inputs)
@@ -551,7 +624,9 @@ class BaseModel:
             torch.Tensor, counts of words as a column tensor.
         """
 
-        counted_words = [[word for word in words if word in words_list] for words_list in words_lists]
+        counted_words = [
+            [word for word in words if word in words_list] for words_list in words_lists
+        ]
         return torch.tensor([len(w) for w in counted_words]).reshape((-1, 1))
 
     @staticmethod
@@ -585,7 +660,11 @@ class BaseModel:
             torch.Tensor, embedding of word.
         """
 
-        return torch.tensor(self.pretrained_model[word]) if word in self.pretrained_model.vocab else None
+        return (
+            torch.tensor(self.pretrained_model[word])
+            if word in self.pretrained_model.vocab
+            else None
+        )
 
     def get_average_embedding(self, words):
         """
@@ -623,10 +702,14 @@ class BaseModel:
             torch.tensor, similarities in a column tensor.
         """
 
-        stacked_embeddings = torch.stack([self.get_average_embedding(words_list) for words_list in words_lists])
+        stacked_embeddings = torch.stack(
+            [self.get_average_embedding(words_list) for words_list in words_lists]
+        )
         embedding = self.get_average_embedding(words).reshape((1, -1))
 
-        return torch.nn.functional.cosine_similarity(stacked_embeddings, embedding, dim=1).reshape((-1, 1))
+        return torch.nn.functional.cosine_similarity(stacked_embeddings, embedding, dim=1).reshape(
+            (-1, 1)
+        )
 
     # endregion
 
@@ -645,34 +728,46 @@ class BaseModel:
         """
 
         color_idx = 0
-        colors = ['tab:red', 'tab:orange', 'tab:blue', 'tab:cyan', 'tab:green',
-                  'tab:olive', 'tab:gray', 'tab:brown', 'tab:purple', 'tab:pink']
+        colors = [
+            "tab:red",
+            "tab:orange",
+            "tab:blue",
+            "tab:cyan",
+            "tab:green",
+            "tab:olive",
+            "tab:gray",
+            "tab:brown",
+            "tab:purple",
+            "tab:pink",
+        ]
 
         fig, ax1 = plt.subplots(figsize=(14, 8))
-        ax1.set_xlabel('epochs')
+        ax1.set_xlabel("epochs")
 
         color, color_idx = colors[color_idx], color_idx + 1
-        ax1.set_ylabel('loss', color=color)
-        ax1.set_yscale('log')
-        ax1.plot(x1, train_losses, color=color, label='training loss')
-        ax1.scatter(x2, valid_losses, color=color, label='validation loss', s=50, marker='^')
-        ax1.tick_params(axis='y', labelcolor=color)
+        ax1.set_ylabel("loss", color=color)
+        ax1.set_yscale("log")
+        ax1.plot(x1, train_losses, color=color, label="training loss")
+        ax1.scatter(x2, valid_losses, color=color, label="validation loss", s=50, marker="^")
+        ax1.tick_params(axis="y", labelcolor=color)
 
         ax2 = ax1.twinx()
-        ax2.set_ylabel('scores')
+        ax2.set_ylabel("scores")
 
         for name in self.scores_names:
             color, color_idx = colors[color_idx], color_idx + 1
 
-            ax2.scatter(x2, valid_scores[name], color=color, label='validation ' + name, s=50, marker='^')
-            ax2.plot(x2, valid_scores[name], color=color, ls='--')
+            ax2.scatter(
+                x2, valid_scores[name], color=color, label="validation " + name, s=50, marker="^"
+            )
+            ax2.plot(x2, valid_scores[name], color=color, ls="--")
 
-        fig.legend(loc='upper center')
+        fig.legend(loc="upper center")
         plt.show()
 
     # TODO
     def final_plot(self):
-        """ Plot the metrics of the model. """
+        """Plot the metrics of the model."""
 
         reference = self.scores_names[0]
         n_experiments = len(self.train_scores[reference])
@@ -685,7 +780,7 @@ class BaseModel:
             n_epochs = len(self.train_scores[reference][i])
             n_points = len(self.train_scores[reference][i][0])
 
-            x1 = list(arange(offset, offset + n_epochs, 1. / n_points))
+            x1 = list(arange(offset, offset + n_epochs, 1.0 / n_points))
             x2 = list(arange(offset + 1, offset + n_epochs + 1))
             offset += n_epochs
 
@@ -698,8 +793,13 @@ class BaseModel:
             for name in self.scores_names:
                 total_valid_scores[name].extend(valid_scores[name])
 
-        self.plot(x1=total_x1, x2=total_x2, train_losses=total_train_losses, valid_losses=total_valid_losses,
-                  valid_scores=total_valid_scores)
+        self.plot(
+            x1=total_x1,
+            x2=total_x2,
+            train_losses=total_train_losses,
+            valid_losses=total_valid_losses,
+            valid_scores=total_valid_scores,
+        )
 
     # endregion
 
@@ -708,15 +808,16 @@ class BaseModel:
 
 # region Simple Baselines
 
+
 class Random(BaseModel):
-    """ Baseline with random predictions. """
+    """Baseline with random predictions."""
 
     def pred(self, inputs):
-        return torch.rand(len(inputs['choices'])).reshape((-1, 1))
+        return torch.rand(len(inputs["choices"])).reshape((-1, 1))
 
 
 class Frequency(BaseModel):
-    """ Baseline based on answers' overall frequency. """
+    """Baseline based on answers' overall frequency."""
 
     def __init__(self, args, pretrained_model):
         super().__init__(args=args, pretrained_model=pretrained_model)
@@ -728,20 +829,24 @@ class Frequency(BaseModel):
 
         for ranking_task in tqdm(data_loader, total=len(data_loader)):
             for inputs, targets in ranking_task:
-                for choice, target in zip(inputs['choices'], targets):
+                for choice, target in zip(inputs["choices"], targets):
                     self.counts[choice] += target.data.item()
 
     def pred(self, inputs):
-        grades = [self.counts[choice] if choice in self.counts else 0 for choice in inputs['choices']]
+        grades = [
+            self.counts[choice] if choice in self.counts else 0 for choice in inputs["choices"]
+        ]
         return torch.tensor(grades).reshape((-1, 1))
+
 
 # endregion
 
 
 # region Summaries-dependent baselines
 
+
 class SummariesCount(BaseModel):
-    """ Baseline based on the count of words of the summaries that are in the choice. """
+    """Baseline based on the count of words of the summaries that are in the choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -751,7 +856,7 @@ class SummariesCount(BaseModel):
 
 
 class SummariesUniqueCount(BaseModel):
-    """ Baseline based on the count of unique words of all the summaries that are in choice. """
+    """Baseline based on the count of unique words of all the summaries that are in choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
@@ -761,33 +866,39 @@ class SummariesUniqueCount(BaseModel):
 
 
 class SummariesOverlap(BaseModel):
-    """ Baseline based on the count of words from choice that are in the overlap of all the summaries. """
+    """Baseline based on the count of words from choice that are in the overlap of all the summaries."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = [
+            wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words
+        ]
         wikis_words = set.intersection(*wikis_words) if wikis_words else set()
 
         return self.get_sets_counts(words_sets=choices_words, words=wikis_words)
 
 
 class ActivatedSummaries(BaseModel):
-    """ Baseline based on the number of summaries that have words matching the answer. """
+    """Baseline based on the number of summaries that have words matching the answer."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
         wikis_words = self.get_wikis_words(inputs)
 
-        activated_wikis = [[set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
-                           for choice_words in choices_words]
-        activated_wikis = [[wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis]
+        activated_wikis = [
+            [set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
+            for choice_words in choices_words
+        ]
+        activated_wikis = [
+            [wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis
+        ]
 
         return torch.tensor([len(wikis) for wikis in activated_wikis]).reshape((-1, 1))
 
 
 class SummariesAverageEmbedding(BaseModel):
-    """ Baseline with predictions based on the average embedding proximity between the choice and all the summaries. """
+    """Baseline with predictions based on the average embedding proximity between the choice and all the summaries."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -797,24 +908,28 @@ class SummariesAverageEmbedding(BaseModel):
 
 
 class SummariesOverlapAverageEmbedding(BaseModel):
-    """ Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
-    summaries. """
+    """Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
+    summaries."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
 
-        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = [
+            wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words
+        ]
         wikis_words = set.intersection(*wikis_words) if wikis_words else set()
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=wikis_words)
+
 
 # endregion
 
 
 # region Context-only baselines
 
+
 class ContextCount(BaseModel):
-    """ Baseline based on the count of words of the context that are in the choice. """
+    """Baseline based on the count of words of the context that are in the choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -824,7 +939,7 @@ class ContextCount(BaseModel):
 
 
 class ContextUniqueCount(BaseModel):
-    """ Baseline based on the count of unique words of the context that are in choice. """
+    """Baseline based on the count of unique words of the context that are in choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
@@ -834,7 +949,7 @@ class ContextUniqueCount(BaseModel):
 
 
 class ContextAverageEmbedding(BaseModel):
-    """ Baseline with predictions based on the average embedding proximity between the choice and the context. """
+    """Baseline with predictions based on the average embedding proximity between the choice and the context."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -842,13 +957,15 @@ class ContextAverageEmbedding(BaseModel):
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=context_words)
 
+
 # endregion
 
 
 # region Summaries & context dependent baselines
 
+
 class SummariesContextCount(BaseModel):
-    """ Baseline based on the count of words of the summaries and the context that are in the choice. """
+    """Baseline based on the count of words of the summaries and the context that are in the choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -858,7 +975,7 @@ class SummariesContextCount(BaseModel):
 
 
 class SummariesContextUniqueCount(BaseModel):
-    """ Baseline based on the count of unique words of all the summaries and the context that are in choice. """
+    """Baseline based on the count of unique words of all the summaries and the context that are in choice."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
@@ -868,13 +985,15 @@ class SummariesContextUniqueCount(BaseModel):
 
 
 class SummariesContextOverlap(BaseModel):
-    """ Baseline based on the count of words from choice that are in the overlap of all the summaries or in the
-    context. """
+    """Baseline based on the count of words from choice that are in the overlap of all the summaries or in the
+    context."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs, setten=True)
 
-        wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        wikis_words = [
+            wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words
+        ]
         wikis_words = set.intersection(*wikis_words) if wikis_words else set()
         wikis_words.update(self.get_context_words(inputs, setten=True))
 
@@ -882,8 +1001,8 @@ class SummariesContextOverlap(BaseModel):
 
 
 class SummariesContextAverageEmbedding(BaseModel):
-    """ Baseline with predictions based on the average embedding proximity between the choice and all the summaries and
-    the context. """
+    """Baseline with predictions based on the average embedding proximity between the choice and all the summaries and
+    the context."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
@@ -893,17 +1012,20 @@ class SummariesContextAverageEmbedding(BaseModel):
 
 
 class SummariesContextOverlapAverageEmbedding(BaseModel):
-    """ Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
-    summaries and the context. """
+    """Baseline with predictions based on the average embedding proximity between the choice and the overlap of the
+    summaries and the context."""
 
     def pred(self, inputs):
         choices_words = self.get_choices_words(inputs)
 
-        other_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
+        other_words = [
+            wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words
+        ]
         other_words = set.intersection(*other_words) if other_words else set()
         other_words.update(self.get_context_words(inputs, setten=True))
 
         return self.get_average_embedding_similarity(words_lists=choices_words, words=other_words)
+
 
 # endregion
 
@@ -912,34 +1034,43 @@ class SummariesContextOverlapAverageEmbedding(BaseModel):
 
 # region BART
 
+
 class ClassifierBart(BaseModel):
-    """ BART finetuned as a classifier between aggregation and not_aggregation. """
+    """BART finetuned as a classifier between aggregation and not_aggregation."""
 
     def __init__(self, args, pretrained_model):
         super().__init__(args=args, pretrained_model=pretrained_model)
 
         bart = self.pretrained_model
-        labels = [bart.task.label_dictionary.string([torch.tensor([0]) + bart.task.label_dictionary.nspecial]),
-                  bart.task.label_dictionary.string([torch.tensor([1]) + bart.task.label_dictionary.nspecial])]
+        labels = [
+            bart.task.label_dictionary.string(
+                [torch.tensor([0]) + bart.task.label_dictionary.nspecial]
+            ),
+            bart.task.label_dictionary.string(
+                [torch.tensor([1]) + bart.task.label_dictionary.nspecial]
+            ),
+        ]
 
         self.idx = labels.index("aggregation")
 
     def pred(self, inputs):
-        sentence1 = format_context(inputs,
-                                   context_format=self.context_format,
-                                   context_max_size=self.context_max_size)
+        sentence1 = format_context(
+            inputs, context_format=self.context_format, context_max_size=self.context_max_size
+        )
 
-        batch_encoding = [self.pretrained_model.encode(sentence1, sentence2) for sentence2 in inputs['choices']]
+        batch_encoding = [
+            self.pretrained_model.encode(sentence1, sentence2) for sentence2 in inputs["choices"]
+        ]
         batch_tokens = collate_tokens(batch_encoding, pad_idx=1)
 
         with torch.no_grad():
-            logprobs = self.pretrained_model.predict('sentence_classification_head', batch_tokens)
+            logprobs = self.pretrained_model.predict("sentence_classification_head", batch_tokens)
 
         return logprobs[:, self.idx].exp().reshape((-1, 1))
 
 
 class GeneratorBart(BaseModel):
-    """ BART finetuned as a generator of aggregation. """
+    """BART finetuned as a generator of aggregation."""
 
     def __init__(self, args, pretrained_model):
         super().__init__(args, pretrained_model)
@@ -953,9 +1084,12 @@ class GeneratorBart(BaseModel):
         self.no_repeat_ngram_size = args.bart_no_repeat_ngram_size
         self.results_path = args.results_path
 
-    def show(self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples):
-        data_loaders = super().show(task, show_rankings, show_choices, random_examples, custom_examples,
-                                    unseen_examples)
+    def show(
+        self, task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples
+    ):
+        data_loaders = super().show(
+            task, show_rankings, show_choices, random_examples, custom_examples, unseen_examples
+        )
 
         print("Generation on the examples...")
         for data_loader in data_loaders:
@@ -975,73 +1109,88 @@ class GeneratorBart(BaseModel):
         shuffle(data_loader)
 
         for idx, ranking in tqdm(enumerate(data_loader), total=n_rankings):
-            entities = ranking[0][0]['entities']
-            source = format_context(ranking,
-                                    context_format=self.context_format,
-                                    context_max_size=self.context_max_size)
-            targets = format_targets(ranking,
-                                     targets_format=self.targets_format)
+            entities = ranking[0][0]["entities"]
+            source = format_context(
+                ranking, context_format=self.context_format, context_max_size=self.context_max_size
+            )
+            targets = format_targets(ranking, targets_format=self.targets_format)
 
             with torch.no_grad():
-                hypotheses = self.pretrained_model.sample([source],
-                                                          beam=self.beam,
-                                                          lenpen=self.lenpen,
-                                                          max_len_b=self.max_len_b,
-                                                          min_len=self.min_len,
-                                                          no_repeat_ngram_size=self.no_repeat_ngram_size)
+                hypotheses = self.pretrained_model.sample(
+                    [source],
+                    beam=self.beam,
+                    lenpen=self.lenpen,
+                    max_len_b=self.max_len_b,
+                    min_len=self.min_len,
+                    no_repeat_ngram_size=self.no_repeat_ngram_size,
+                )
 
-                scores = self.pretrained_model.sample_scorer([source for _ in range(len(targets))],
-                                                             targets,
-                                                             beam=self.beam,
-                                                             lenpen=self.lenpen,
-                                                             max_len_b=self.max_len_b,
-                                                             min_len=self.min_len,
-                                                             no_repeat_ngram_size=self.no_repeat_ngram_size)
+                scores = self.pretrained_model.sample_scorer(
+                    [source for _ in range(len(targets))],
+                    targets,
+                    beam=self.beam,
+                    lenpen=self.lenpen,
+                    max_len_b=self.max_len_b,
+                    min_len=self.min_len,
+                    no_repeat_ngram_size=self.no_repeat_ngram_size,
+                )
 
             assert targets == [target for target, _ in scores]
 
-            with open(path_join(self.results_path, fname + ".source"), 'a') as source_file:
-                source_file.write(str(idx) + ' - ' + source + '\n')
+            with open(path_join(self.results_path, fname + ".source"), "a") as source_file:
+                source_file.write(str(idx) + " - " + source + "\n")
 
-            with open(path_join(self.results_path, fname + ".targets"), 'a') as targets_file:
-                targets_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (target, prob)
-                                                                 for target, prob in scores]) + '\n')
+            with open(path_join(self.results_path, fname + ".targets"), "a") as targets_file:
+                targets_file.write(
+                    str(idx)
+                    + " - "
+                    + ", ".join(["%s [%.3f]" % (target, prob) for target, prob in scores])
+                    + "\n"
+                )
 
-            with open(path_join(self.results_path, fname + ".entities"), 'a') as entities_file:
-                entities_file.write(str(idx) + ' - ' + ', '.join(entities) + '\n')
+            with open(path_join(self.results_path, fname + ".entities"), "a") as entities_file:
+                entities_file.write(str(idx) + " - " + ", ".join(entities) + "\n")
 
-            with open(path_join(self.results_path, fname + ".hypotheses"), 'a') as hypotheses_file:
-                hypotheses_file.write(str(idx) + ' - ' + ', '.join(["%s [%.3f]" % (hypo, prob)
-                                                                    for hypo, prob in hypotheses]) + '\n')
+            with open(path_join(self.results_path, fname + ".hypotheses"), "a") as hypotheses_file:
+                hypotheses_file.write(
+                    str(idx)
+                    + " - "
+                    + ", ".join(["%s [%.3f]" % (hypo, prob) for hypo, prob in hypotheses])
+                    + "\n"
+                )
 
         for extension in [".source", ".targets", ".entities", ".hypotheses"]:
-            with open(path_join(self.results_path, fname + extension), 'a') as file:
-                file.write("##################################################" +
-                           "################################################## \n")
+            with open(path_join(self.results_path, fname + extension), "a") as file:
+                file.write(
+                    "##################################################"
+                    + "################################################## \n"
+                )
 
     def pred(self, inputs):
-        source = format_context(inputs,
-                                context_format=self.context_format,
-                                context_max_size=self.context_max_size)
+        source = format_context(
+            inputs, context_format=self.context_format, context_max_size=self.context_max_size
+        )
 
         with torch.no_grad():
-            scores = self.pretrained_model.sample_scorer([source for _ in range(len(inputs['choices']))],
-                                                         inputs['choices'],
-                                                         beam=self.beam,
-                                                         lenpen=self.lenpen,
-                                                         max_len_b=self.max_len_b,
-                                                         min_len=self.min_len,
-                                                         no_repeat_ngram_size=self.no_repeat_ngram_size)
+            scores = self.pretrained_model.sample_scorer(
+                [source for _ in range(len(inputs["choices"]))],
+                inputs["choices"],
+                beam=self.beam,
+                lenpen=self.lenpen,
+                max_len_b=self.max_len_b,
+                min_len=self.min_len,
+                no_repeat_ngram_size=self.no_repeat_ngram_size,
+            )
 
-        assert inputs['choices'] == [choice for choice, _ in scores]
+        assert inputs["choices"] == [choice for choice, _ in scores]
 
         return torch.tensor([prob for _, prob in scores]).reshape((-1, 1))
+
 
 # endregion
 
 
 class CustomClassifier(Frequency):
-
     def __init__(self, args, pretrained_model):
         super().__init__(args=args, pretrained_model=pretrained_model)
 
@@ -1074,12 +1223,14 @@ class CustomClassifier(Frequency):
             self.train(task.train_loader, task.valid_loader, task.test_loader)
 
         else:
-            self.show(task,
-                      show_rankings=show_rankings,
-                      show_choices=show_choices,
-                      random_examples=random_examples,
-                      custom_examples=custom_examples,
-                      unseen_examples=unseen_examples)
+            self.show(
+                task,
+                show_rankings=show_rankings,
+                show_choices=show_choices,
+                random_examples=random_examples,
+                custom_examples=custom_examples,
+                unseen_examples=unseen_examples,
+            )
 
     def get_batch_features(self, inputs):
         batch_features = []
@@ -1095,16 +1246,24 @@ class CustomClassifier(Frequency):
         setten_context_words = self.get_context_words(inputs, setten=True)
         setten_other_words = self.get_other_words(inputs, setten=True)
 
-        overlap_wikis_words = [wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words]
-        overlap_wikis_words = set.intersection(*overlap_wikis_words) if overlap_wikis_words else set()
+        overlap_wikis_words = [
+            wiki_words for wiki_words in self.get_wikis_words(inputs, setten=True) if wiki_words
+        ]
+        overlap_wikis_words = (
+            set.intersection(*overlap_wikis_words) if overlap_wikis_words else set()
+        )
         context_overlap_wikis_words = deepcopy(overlap_wikis_words)
         context_overlap_wikis_words.update(self.get_context_words(inputs, setten=True))
 
-        activated_wikis = [[set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
-                           for choice_words in choices_words]
-        activated_wikis = [[wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis]
+        activated_wikis = [
+            [set(choice_words).intersection(set(wiki_words)) for wiki_words in wikis_words]
+            for choice_words in choices_words
+        ]
+        activated_wikis = [
+            [wiki for wiki in activated_wiki if wiki] for activated_wiki in activated_wikis
+        ]
 
-        for i_choice, choice in enumerate(inputs['choices']):
+        for i_choice, choice in enumerate(inputs["choices"]):
             features = []
 
             # frequency
@@ -1112,20 +1271,25 @@ class CustomClassifier(Frequency):
             features.append(feature)
 
             # summaries count
-            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=flatten_wikis_words)
+            feature = self.get_lists_counts(
+                words_lists=[choices_words[i_choice]], words=flatten_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries unique count
-            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]],
-                                           words=flatten_setten_wikis_words)
+            feature = self.get_sets_counts(
+                words_sets=[setten_choices_words[i_choice]], words=flatten_setten_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries overlap
-            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=overlap_wikis_words)
+            feature = self.get_sets_counts(
+                words_sets=[setten_choices_words[i_choice]], words=overlap_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
@@ -1135,65 +1299,81 @@ class CustomClassifier(Frequency):
             features.append(feature)
 
             # summaries average embedding
-            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
-                                                            words=flatten_wikis_words)
+            feature = self.get_average_embedding_similarity(
+                words_lists=[choices_words[i_choice]], words=flatten_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries overlap average embedding
-            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
-                                                            words=overlap_wikis_words)
+            feature = self.get_average_embedding_similarity(
+                words_lists=[choices_words[i_choice]], words=overlap_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # context count
-            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=context_words)
+            feature = self.get_lists_counts(
+                words_lists=[choices_words[i_choice]], words=context_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # context unique count
-            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=setten_context_words)
+            feature = self.get_sets_counts(
+                words_sets=[setten_choices_words[i_choice]], words=setten_context_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # context average embedding
-            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]], words=context_words)
+            feature = self.get_average_embedding_similarity(
+                words_lists=[choices_words[i_choice]], words=context_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries context count
-            feature = self.get_lists_counts(words_lists=[choices_words[i_choice]], words=other_words)
+            feature = self.get_lists_counts(
+                words_lists=[choices_words[i_choice]], words=other_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries context unique count
-            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]], words=setten_other_words)
+            feature = self.get_sets_counts(
+                words_sets=[setten_choices_words[i_choice]], words=setten_other_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries context overlap
-            feature = self.get_sets_counts(words_sets=[setten_choices_words[i_choice]],
-                                           words=context_overlap_wikis_words)
+            feature = self.get_sets_counts(
+                words_sets=[setten_choices_words[i_choice]], words=context_overlap_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries context average embedding
-            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]], words=other_words)
+            feature = self.get_average_embedding_similarity(
+                words_lists=[choices_words[i_choice]], words=other_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
 
             # summaries context overlap average embedding
-            feature = self.get_average_embedding_similarity(words_lists=[choices_words[i_choice]],
-                                                            words=context_overlap_wikis_words)
+            feature = self.get_average_embedding_similarity(
+                words_lists=[choices_words[i_choice]], words=context_overlap_wikis_words
+            )
             assert len(feature) == 1
             feature = feature[0]
             features.append(feature)
@@ -1204,15 +1384,15 @@ class CustomClassifier(Frequency):
 
     def train(self, train_loader, valid_loader, test_loader):
         for i_epoch in range(self.n_epochs):
-            print("Epoch %i/%i..." % (i_epoch+1, self.n_epochs))
+            print("Epoch %i/%i..." % (i_epoch + 1, self.n_epochs))
 
             for ranking_task in tqdm(train_loader):
                 for inputs, targets in ranking_task:
-                    if 'features' not in inputs:
-                        inputs['features'] = self.get_batch_features(inputs)
+                    if "features" not in inputs:
+                        inputs["features"] = self.get_batch_features(inputs)
 
                     self.optimizer.zero_grad()
-                    pred = self.module(inputs['features'])
+                    pred = self.module(inputs["features"])
 
                     loss = self.criterion(pred, targets)
                     loss.backward()
@@ -1225,10 +1405,10 @@ class CustomClassifier(Frequency):
             self.test(test_loader)
 
     def pred(self, inputs):
-        if 'features' not in inputs:
-            inputs['features'] = self.get_batch_features(inputs)
+        if "features" not in inputs:
+            inputs["features"] = self.get_batch_features(inputs)
 
         with torch.no_grad():
-            pred = self.module(inputs['features'])[:, 1]
+            pred = self.module(inputs["features"])[:, 1]
 
         return pred.reshape((-1, 1))

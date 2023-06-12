@@ -1,14 +1,14 @@
-from database_creation.utils import Entity, Context, Mention
-
-from xml.etree import ElementTree
-from copy import deepcopy
 from collections import defaultdict
+from copy import deepcopy
 from string import punctuation as string_punctuation
+from xml.etree import ElementTree
+
 from nltk.corpus import stopwords as nltk_stopwords
+
+from tesa.database_creation.utils import Context, Entity, Mention
 
 
 class Article:
-
     def __init__(self, data_path, content_path, summary_path):
         """
         Initializes an instance of Article.
@@ -33,7 +33,7 @@ class Article:
     # region Methods compute_
 
     def compute_metadata(self):
-        """ Compute the metadata (title, date) of the article. """
+        """Compute the metadata (title, date) of the article."""
 
         root = ElementTree.parse(self.data_path).getroot()
 
@@ -44,7 +44,7 @@ class Article:
         self.date = date
 
     def compute_corpus_annotations(self):
-        """ Compute the annotated texts (content or summary) of the article from the corpus. """
+        """Compute the annotated texts (content or summary) of the article from the corpus."""
 
         content_root = ElementTree.parse(self.content_path).getroot()
         summary_root = ElementTree.parse(self.summary_path).getroot()
@@ -65,8 +65,8 @@ class Article:
 
         contexts = dict()
 
-        contexts.update(self.content.contexts_neigh_sent(tuple_=tuple_, type_='content'))
-        contexts.update(self.summary.contexts_all_sent(tuple_=tuple_, type_='summary'))
+        contexts.update(self.content.contexts_neigh_sent(tuple_=tuple_, type_="content"))
+        contexts.update(self.summary.contexts_all_sent(tuple_=tuple_, type_="summary"))
 
         self.contexts[name] = contexts
 
@@ -86,9 +86,9 @@ class Article:
             str, title of the article.
         """
 
-        element = root.find('./head/title')
+        element = root.find("./head/title")
 
-        return element.text if element is not None else 'No title.'
+        return element.text if element is not None else "No title."
 
     @staticmethod
     def get_date(root):
@@ -102,14 +102,14 @@ class Article:
             str, date of the article.
         """
 
-        d = root.find('./head/meta[@name="publication_day_of_month"]').get('content')
-        m = root.find('./head/meta[@name="publication_month"]').get('content')
-        y = root.find('./head/meta[@name="publication_year"]').get('content')
+        d = root.find('./head/meta[@name="publication_day_of_month"]').get("content")
+        m = root.find('./head/meta[@name="publication_month"]').get("content")
+        y = root.find('./head/meta[@name="publication_year"]').get("content")
 
-        d = '0' + d if len(d) == 1 else d
-        m = '0' + m if len(m) == 1 else m
+        d = "0" + d if len(d) == 1 else d
+        m = "0" + m if len(m) == 1 else m
 
-        return '/'.join([y, m, d])
+        return "/".join([y, m, d])
 
     def get_entities(self):
         """
@@ -121,15 +121,23 @@ class Article:
 
         root = ElementTree.parse(self.data_path).getroot()
 
-        person_elements = root.findall('./head/docdata/identified-content/person')
-        location_elements = root.findall('./head/docdata/identified-content/location')
-        org_elements = root.findall('./head/docdata/identified-content/org')
+        person_elements = root.findall("./head/docdata/identified-content/person")
+        location_elements = root.findall("./head/docdata/identified-content/location")
+        org_elements = root.findall("./head/docdata/identified-content/org")
 
-        elements = set([('person', e.text) for e in person_elements if e.get('class') == 'indexing_service'] +
-                       [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service'] +
-                       [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service'])
+        elements = set(
+            [("person", e.text) for e in person_elements if e.get("class") == "indexing_service"]
+            + [
+                ("location", e.text)
+                for e in location_elements
+                if e.get("class") == "indexing_service"
+            ]
+            + [("org", e.text) for e in org_elements if e.get("class") == "indexing_service"]
+        )
 
-        entities = [Entity(original_name=element[1], type_=element[0]) for element in sorted(elements)]
+        entities = [
+            Entity(original_name=element[1], type_=element[0]) for element in sorted(elements)
+        ]
         assert len(entities) == len(set([str(entity) for entity in entities]))
 
         return entities
@@ -144,15 +152,21 @@ class Article:
 
         root = ElementTree.parse(self.data_path).getroot()
 
-        person_elements = root.findall('./head/docdata/identified-content/person')
-        location_elements = root.findall('./head/docdata/identified-content/location')
-        org_elements = root.findall('./head/docdata/identified-content/org')
+        person_elements = root.findall("./head/docdata/identified-content/person")
+        location_elements = root.findall("./head/docdata/identified-content/location")
+        org_elements = root.findall("./head/docdata/identified-content/org")
 
-        entities = [('person', e.text) for e in person_elements if e.get('class') == 'indexing_service'] + \
-                   [('location', e.text) for e in location_elements if e.get('class') == 'indexing_service'] + \
-                   [('org', e.text) for e in org_elements if e.get('class') == 'indexing_service']
+        entities = (
+            [("person", e.text) for e in person_elements if e.get("class") == "indexing_service"]
+            + [
+                ("location", e.text)
+                for e in location_elements
+                if e.get("class") == "indexing_service"
+            ]
+            + [("org", e.text) for e in org_elements if e.get("class") == "indexing_service"]
+        )
 
-        entities = [pair[1] + ' (' + pair[0] + ')' for pair in sorted(entities)]
+        entities = [pair[1] + " (" + pair[0] + ")" for pair in sorted(entities)]
 
         return entities
 
@@ -167,7 +181,7 @@ class Article:
         """
 
         try:
-            f = open(self.content_path, 'r')
+            f = open(self.content_path, "r")
             f.close()
             return False
 
@@ -184,7 +198,7 @@ class Article:
             str, debugging of the article.
         """
 
-        return ' -> ' + self.data_path
+        return " -> " + self.data_path
 
     def debug_metadata(self):
         """
@@ -194,7 +208,7 @@ class Article:
             str, debugging of the article.
         """
 
-        return ' -> ' + self.title + ' (' + self.date + ')'
+        return " -> " + self.title + " (" + self.date + ")"
 
     def debug_article_entities(self):
         """
@@ -208,9 +222,9 @@ class Article:
         entities2 = [str(entity) for entity in self.entities]
 
         if len(entities1) != len(entities2):
-            return ': ' + ', '.join(entities1) + '\n      -> ' + ', '.join(entities2)
+            return ": " + ", ".join(entities1) + "\n      -> " + ", ".join(entities2)
         else:
-            return ''
+            return ""
 
     def debug_annotations(self):
         """
@@ -220,18 +234,26 @@ class Article:
             str, debugging of the article.
         """
 
-        s, empty = ': ' + ', '.join([str(entity) for entity in self.entities]) + '\n', True
+        s, empty = ": " + ", ".join([str(entity) for entity in self.entities]) + "\n", True
 
         for coreference in self.content.coreferences + self.summary.coreferences:
             mentions = [coreference.representative] + coreference.mentions
-            matches = sorted(set([str(entity) for entity in self.entities for mention in mentions
-                                  if entity.is_in(str(mention), flexible=True)]))
+            matches = sorted(
+                set(
+                    [
+                        str(entity)
+                        for entity in self.entities
+                        for mention in mentions
+                        if entity.is_in(str(mention), flexible=True)
+                    ]
+                )
+            )
 
             if matches:
-                s += str(coreference) + ' (' + ', '.join(matches) + ')' + '\n'
+                s += str(coreference) + " (" + ", ".join(matches) + ")" + "\n"
                 empty = False
 
-        return s if not empty else ''
+        return s if not empty else ""
 
     def debug_contexts(self):
         """
@@ -241,22 +263,21 @@ class Article:
             str, debugging of the article.
         """
 
-        s, empty = ':', True
+        s, empty = ":", True
 
         for tuple_name, contexts in self.contexts.items():
-            temp = '\n'.join([str(context) for _, context in contexts.items()])
+            temp = "\n".join([str(context) for _, context in contexts.items()])
 
             if temp:
-                s += '\n' + tuple_name + ':\n' + temp + '\n'
+                s += "\n" + tuple_name + ":\n" + temp + "\n"
                 empty = False
 
-        return s if not empty else ''
+        return s if not empty else ""
 
     # endregion
 
 
 class Text:
-
     def __init__(self, root, entities):
         """
         Initializes an instance of Text (content or summary).
@@ -283,8 +304,8 @@ class Text:
             dict, Sentences of the article (mapped with their indexes).
         """
 
-        elements = root.findall('./document/sentences/sentence')
-        sentences = {int(element.attrib['id']): Sentence(element) for element in elements}
+        elements = root.findall("./document/sentences/sentence")
+        sentences = {int(element.attrib["id"]): Sentence(element) for element in elements}
 
         return sentences
 
@@ -301,7 +322,7 @@ class Text:
             list, Coreferences of the article.
         """
 
-        elements = root.findall('./document/coreference/coreference')
+        elements = root.findall("./document/coreference/coreference")
         coreferences = [Coreference(element, entities) for element in elements]
 
         return coreferences
@@ -344,14 +365,20 @@ class Text:
         contexts, context_length = {}, len(tuple_.entities)
 
         # Mapping between the name of the entities and the indexes of the mentions' sentences
-        entities_sentences = dict([(str(entity), self.get_entity_sentences(entity)) for entity in tuple_.entities])
-        all_entities_sentences = set([idx for _, sentences in entities_sentences.items() for idx in sentences])
+        entities_sentences = dict(
+            [(str(entity), self.get_entity_sentences(entity)) for entity in tuple_.entities]
+        )
+        all_entities_sentences = set(
+            [idx for _, sentences in entities_sentences.items() for idx in sentences]
+        )
 
         for start_idx in all_entities_sentences:
             seen = set()
 
             for idx in range(start_idx, start_idx + context_length):
-                seen.update([name for name, sentences in entities_sentences.items() if idx in sentences])
+                seen.update(
+                    [name for name, sentences in entities_sentences.items() if idx in sentences]
+                )
 
                 if len(seen) == context_length:
                     if idx == start_idx:  # Case of one-sentence context
@@ -364,7 +391,7 @@ class Text:
                     sentences = {i: deepcopy(self.sentences[i]) for i in sentence_span}
                     self.highlight(sentences=sentences, tuple_=tuple_)
 
-                    id_ = str(start_idx) + '_' + str(idx)
+                    id_ = str(start_idx) + "_" + str(idx)
                     contexts[id_] = Context(sentences=sentences, type_=type_)
                     break
 
@@ -391,7 +418,7 @@ class Text:
         sentences = deepcopy(self.sentences)
         self.highlight(sentences=sentences, tuple_=tuple_)
 
-        contexts['0'] = Context(sentences=sentences, type_=type_)
+        contexts["0"] = Context(sentences=sentences, type_=type_)
 
         return contexts
 
@@ -416,14 +443,20 @@ class Text:
 
         for i in range(len(tuple_.entities)):
             entity = tuple_.entities[i]
-            entity_to_color[entity.name] = 'color' + str(i)
+            entity_to_color[entity.name] = "color" + str(i)
 
         for coreference in self.coreferences:
-            if coreference.entity and coreference.entity in [str(entity) for entity in tuple_.entities]:
-                entity = [entity for entity in tuple_.entities if entity.name == coreference.entity][0]
+            if coreference.entity and coreference.entity in [
+                str(entity) for entity in tuple_.entities
+            ]:
+                entity = [
+                    entity for entity in tuple_.entities if entity.name == coreference.entity
+                ][0]
                 for mention in [coreference.representative] + coreference.mentions:
                     if mention.sentence in sentences:
-                        entities_boundaries[mention.sentence].add((entity.name, mention.start, mention.end))
+                        entities_boundaries[mention.sentence].add(
+                            (entity.name, mention.start, mention.end)
+                        )
 
         for sentence_id, sentence in sentences.items():
             boundaries = sorted(entities_boundaries[sentence_id])
@@ -431,9 +464,10 @@ class Text:
 
             for boundary1 in boundaries:
                 for boundary2 in boundaries:
-                    if boundary1[0] == boundary2[0] and \
-                            ((boundary1[1] > boundary2[1] and boundary1[2] <= boundary2[2])
-                             or (boundary1[1] >= boundary2[1] and boundary1[2] < boundary2[2])):
+                    if boundary1[0] == boundary2[0] and (
+                        (boundary1[1] > boundary2[1] and boundary1[2] <= boundary2[2])
+                        or (boundary1[1] >= boundary2[1] and boundary1[2] < boundary2[2])
+                    ):
                         to_remove.add(boundary2)
 
             for boundary in to_remove:
@@ -441,8 +475,16 @@ class Text:
 
             for name, start_idx, end_idx in boundaries:
                 color = entity_to_color[name]
-                start_tag = '<div class="popup" onclick="pop(' + str(idx) + ')"><' + color + '>'
-                end_tag = '</' + color + '><span class="popuptext" id="' + str(idx) + '">' + name + '</span></div>'
+                start_tag = '<div class="popup" onclick="pop(' + str(idx) + ')"><' + color + ">"
+                end_tag = (
+                    "</"
+                    + color
+                    + '><span class="popuptext" id="'
+                    + str(idx)
+                    + '">'
+                    + name
+                    + "</span></div>"
+                )
 
                 if sentence.tokens[start_idx].start_tag is None:
                     sentence.tokens[start_idx].start_tag = start_tag
@@ -458,7 +500,6 @@ class Text:
 
 
 class Sentence:
-
     def __init__(self, sentence_element):
         """
         Initializes an instance of Sentence.
@@ -479,7 +520,7 @@ class Sentence:
             str, readable format of the instance.
         """
 
-        s, start = '', True
+        s, start = "", True
 
         for _, token in self.tokens.items():
             if start:  # Beginning of the sentence
@@ -491,7 +532,7 @@ class Sentence:
 
             else:
                 if not token.criterion_punctuation():
-                    s += ' '
+                    s += " "
 
                 s += str(token)
 
@@ -507,14 +548,13 @@ class Sentence:
 
         tokens = {}
 
-        for token_element in sentence_element.findall('./tokens/token'):
-            tokens[int(token_element.attrib['id'])] = Token(token_element)
+        for token_element in sentence_element.findall("./tokens/token"):
+            tokens[int(token_element.attrib["id"])] = Token(token_element)
 
         self.tokens = tokens
 
 
 class Coreference:
-
     def __init__(self, element, entities):
         """
         Initializes an instance of the Coreference.
@@ -541,9 +581,11 @@ class Coreference:
             str, readable format of the instance.
         """
 
-        entity = '[' + self.entity + '] ' if self.entity is not None else ''
+        entity = "[" + self.entity + "] " if self.entity is not None else ""
 
-        return entity + '; '.join([str(mention) for mention in [self.representative] + self.mentions])
+        return entity + "; ".join(
+            [str(mention) for mention in [self.representative] + self.mentions]
+        )
 
     # region Methods compute_
 
@@ -555,21 +597,31 @@ class Coreference:
             element: ElementTree.Element, annotations of the coreference.
         """
 
-        element_mentions = element.findall('./mention')
+        element_mentions = element.findall("./mention")
 
         m = element_mentions[0]
-        assert m.attrib and m.attrib['representative'] == 'true'
-        representative = Mention(text=m.find('text').text, sentence=int(m.find('sentence').text),
-                                 start=int(m.find('start').text), end=int(m.find('end').text))
+        assert m.attrib and m.attrib["representative"] == "true"
+        representative = Mention(
+            text=m.find("text").text,
+            sentence=int(m.find("sentence").text),
+            start=int(m.find("start").text),
+            end=int(m.find("end").text),
+        )
 
         mentions = []
         for i in range(1, len(element_mentions)):
             m = element_mentions[i]
 
-            text = m.find('text').text
+            text = m.find("text").text
             if len(text.split()) <= 10:
-                mentions.append(Mention(text=text, sentence=int(m.find('sentence').text),
-                                        start=int(m.find('start').text), end=int(m.find('end').text)))
+                mentions.append(
+                    Mention(
+                        text=text,
+                        sentence=int(m.find("sentence").text),
+                        start=int(m.find("start").text),
+                        end=int(m.find("end").text),
+                    )
+                )
 
         self.representative = representative
         self.mentions = mentions
@@ -582,14 +634,19 @@ class Coreference:
             entities: set, Entities of the articles.
         """
 
-        matches = set([str(entity) for entity in entities
-                       if entity.match_string(string=self.representative.text, flexible=False)])
+        matches = set(
+            [
+                str(entity)
+                for entity in entities
+                if entity.match_string(string=self.representative.text, flexible=False)
+            ]
+        )
 
         if len(matches) == 1:
             self.entity = matches.pop()
 
     def compute_sentences(self):
-        """ Compute the indexes of the sentences of the coreference chain. """
+        """Compute the indexes of the sentences of the coreference chain."""
 
         self.sentences = set([m.sentence for m in [self.representative] + self.mentions])
 
@@ -597,9 +654,8 @@ class Coreference:
 
 
 class Token:
-
-    punctuation = [p for p in string_punctuation] + ["''", '``']
-    stopwords = set(nltk_stopwords.words('english'))
+    punctuation = [p for p in string_punctuation] + ["''", "``"]
+    stopwords = set(nltk_stopwords.words("english"))
 
     def __init__(self, token_element):
         """
@@ -626,9 +682,9 @@ class Token:
             str, readable format of the instance.
         """
 
-        s = self.start_tag if self.start_tag is not None else ''
+        s = self.start_tag if self.start_tag is not None else ""
         s += self.word
-        s += self.end_tag if self.end_tag is not None else ''
+        s += self.end_tag if self.end_tag is not None else ""
 
         return s
 
@@ -640,20 +696,20 @@ class Token:
             token_element: ElementTree.Element, annotations of the token.
         """
 
-        self.word = token_element.find('word').text
-        self.lemma = token_element.find('lemma').text
-        self.pos = token_element.find('POS').text
-        self.ner = token_element.find('NER').text
+        self.word = token_element.find("word").text
+        self.lemma = token_element.find("lemma").text
+        self.pos = token_element.find("POS").text
+        self.ner = token_element.find("NER").text
 
     # region Methods criterion_
 
     def criterion_punctuation(self):
-        """ Check if a token is a punctuation mark. """
+        """Check if a token is a punctuation mark."""
 
-        return True if self.word in self.punctuation and self.word != '--' else False
+        return True if self.word in self.punctuation and self.word != "--" else False
 
     def criterion_stopwords(self):
-        """ Check if a token is a stop word. """
+        """Check if a token is a stop word."""
 
         return True if self.lemma in self.stopwords else False
 

@@ -3,9 +3,9 @@ Metrics to evaluate the performance on the ranking task. The methods take two to
 predicted and the targets), and return the corresponding score in a torch.Tensor.
 """
 
-from modeling.utils import get_ranks
-
 import torch
+
+from tesa.modeling.utils import get_ranks
 
 
 def average_precision(ranks, targets):
@@ -20,7 +20,9 @@ def average_precision(ranks, targets):
         ranks1 = ranks.expand((n, n))
         ranks2 = ranks.reshape((-1, 1)).expand((n, n))
 
-        return torch.div(torch.ge(ranks2, ranks1).sum(dim=1).type(torch.float), ranks.type(torch.float)).mean()
+        return torch.div(
+            torch.ge(ranks2, ranks1).sum(dim=1).type(torch.float), ranks.type(torch.float)
+        ).mean()
 
 
 def precision_at_k(ranks, targets, k):
@@ -99,10 +101,10 @@ def ndcg_at_10(ranks, targets):
     return ndcg_at_k(ranks=ranks, targets=targets, k=10)
 
 
-if __name__ == '__main__':
-    from sklearn.metrics import average_precision_score
+if __name__ == "__main__":
     from numpy import zeros
-    from numpy.random import rand, choice
+    from numpy.random import choice, rand
+    from sklearn.metrics import average_precision_score
 
     epsilon = 0.0000001
 

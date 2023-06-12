@@ -1,5 +1,5 @@
-from numpy import mean, std
 import torch
+from numpy import mean, std
 
 
 def get_ranks(outputs):
@@ -46,14 +46,14 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
     context_items = []
 
     if context_format == "v0":  # (no separation token) wikis articles entities
-        for wiki_article in inputs['wiki_articles']:
+        for wiki_article in inputs["wiki_articles"]:
             if wiki_article:
                 context_items.append(wiki_article)
 
-        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-            context_items.extend([nyt_title + ':', nyt_context])
+        for nyt_title, nyt_context in zip(inputs["nyt_titles"], inputs["nyt_contexts"]):
+            context_items.extend([nyt_title + ":", nyt_context])
 
-        context_items.append(', '.join(inputs['entities']))
+        context_items.append(", ".join(inputs["entities"]))
 
     elif context_format in ["v1", "v2", "v3", "v4"]:
         # wiki_sep wiki1 wiki_sep wiki2 article_sep article1 article_sep article2 entity_sep entity1 entity_sep ...
@@ -77,32 +77,32 @@ def format_context(ranking_or_inputs, context_format, context_max_size):
             article_sep = "A"
             entity_sep = "E"
 
-        for wiki_article in inputs['wiki_articles']:
+        for wiki_article in inputs["wiki_articles"]:
             if wiki_article:
                 context_items.extend([wiki_sep, wiki_article])
 
-        for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
+        for nyt_title, nyt_context in zip(inputs["nyt_titles"], inputs["nyt_contexts"]):
             context_items.extend([article_sep, nyt_title + ".", nyt_context])
 
-        for entity in inputs['entities']:
+        for entity in inputs["entities"]:
             context_items.extend([entity_sep, entity])
 
     else:  # ablation studies based on v0
         if context_format == "va":  # no wikis
-            for nyt_title, nyt_context in zip(inputs['nyt_titles'], inputs['nyt_contexts']):
-                context_items.extend([nyt_title + ':', nyt_context])
+            for nyt_title, nyt_context in zip(inputs["nyt_titles"], inputs["nyt_contexts"]):
+                context_items.extend([nyt_title + ":", nyt_context])
 
-            context_items.append(', '.join(inputs['entities']))
+            context_items.append(", ".join(inputs["entities"]))
 
         elif context_format == "vb":  # no article
-            for wiki_article in inputs['wiki_articles']:
+            for wiki_article in inputs["wiki_articles"]:
                 if wiki_article:
                     context_items.append(wiki_article)
 
-            context_items.append(', '.join(inputs['entities']))
+            context_items.append(", ".join(inputs["entities"]))
 
         elif context_format == "vc":  # no wikis and no article
-            context_items.append(', '.join(inputs['entities']))
+            context_items.append(", ".join(inputs["entities"]))
 
         else:
             raise NotImplementedError("Context format not implemented: %s." % context_format)
@@ -132,14 +132,16 @@ def format_targets(ranking, targets_format):
 
     valid_choices = []
     for inputs, targets in ranking:
-        for choice, target in zip(inputs['choices'], targets):
+        for choice, target in zip(inputs["choices"], targets):
             if target:
                 valid_choices.append(choice)
 
     if targets_format == "v0":  # one target per valid choice
         return valid_choices
 
-    elif targets_format == "v1":  # all valid choices in one target, separated with separation tokens.
+    elif (
+        targets_format == "v1"
+    ):  # all valid choices in one target, separated with separation tokens.
         return ["∂ " + " ∂ ".join(valid_choices)]
 
     else:
