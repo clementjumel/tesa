@@ -7,13 +7,13 @@ Usages:
     python run_model.py -m summaries_average_embedding --word2vec
 """
 
-from toolbox.parsers import standard_parser, add_task_arguments, add_model_arguments
-from toolbox.utils import load_task, get_pretrained_model, to_class_name
-import modeling.models as models
+import tesa.modeling.models as models
+from tesa.toolbox.parsers import add_model_arguments, add_task_arguments, standard_parser
+from tesa.toolbox.utils import get_pretrained_model, load_task, to_class_name
 
 
 def parse_arguments():
-    """ Use arparse to parse the input arguments and return it as a argparse.ArgumentParser. """
+    """Use arparse to parse the input arguments and return it as a argparse.ArgumentParser."""
 
     ap = standard_parser()
     add_task_arguments(ap)
@@ -23,7 +23,7 @@ def parse_arguments():
 
 
 def main():
-    """ Makes a model run on a task. """
+    """Makes a model run on a task."""
 
     args = parse_arguments()
 
@@ -35,5 +35,5 @@ def main():
     model.play(task=task, args=args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

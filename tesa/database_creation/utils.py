@@ -1,11 +1,11 @@
 from re import findall, sub
+
 from nltk import sent_tokenize
 from unidecode import unidecode
-from wikipedia import search, page, PageError, DisambiguationError
+from wikipedia import DisambiguationError, PageError, page, search
 
 
 class Mention:
-
     def __init__(self, text, sentence, start, end):
         """
         Initializes the Mention instance.
@@ -34,7 +34,6 @@ class Mention:
 
 
 class Context:
-
     def __init__(self, sentences, type_):
         """
         Initializes the Context instance.
@@ -55,15 +54,14 @@ class Context:
             str, readable format of the instance.
         """
 
-        s = '[...] ' if self.type_ == 'content' else ''
-        s += ' '.join([str(sentence) for _, sentence in self.sentences.items()])
-        s += ' [...]' if self.type_ == 'content' else ''
+        s = "[...] " if self.type_ == "content" else ""
+        s += " ".join([str(sentence) for _, sentence in self.sentences.items()])
+        s += " [...]" if self.type_ == "content" else ""
 
         return s
 
 
 class Entity:
-
     def __init__(self, original_name, type_):
         """
         Initializes the Entity instance.
@@ -114,51 +112,54 @@ class Entity:
         return True
 
     def compute_name(self):
-        """ Compute the names and the extra info of the entity. """
+        """Compute the names and the extra info of the entity."""
 
-        before_parenthesis = findall(r'(.*?)\s*\(', self.original_name)
-        before_parenthesis = before_parenthesis[0] if before_parenthesis and before_parenthesis[0] \
+        before_parenthesis = findall(r"(.*?)\s*\(", self.original_name)
+        before_parenthesis = (
+            before_parenthesis[0]
+            if before_parenthesis and before_parenthesis[0]
             else self.original_name
-        in_parenthesis = set(findall(r'\((.*?)\)', self.original_name))
+        )
+        in_parenthesis = set(findall(r"\((.*?)\)", self.original_name))
 
         plausible_names, possible_names = set(), set()
 
-        if self.type_ == 'person':
-            before_parenthesis = before_parenthesis.replace('.', '')
+        if self.type_ == "person":
+            before_parenthesis = before_parenthesis.replace(".", "")
             split = before_parenthesis.split()
 
-            if len(split) > 1 and split[-1].lower() in ['jr', 'sr']:
-                name = ' '.join(split[:-1])
-                suffix = ' ' + split[-1].lower().capitalize() + '.'
+            if len(split) > 1 and split[-1].lower() in ["jr", "sr"]:
+                name = " ".join(split[:-1])
+                suffix = " " + split[-1].lower().capitalize() + "."
             else:
-                name, suffix = ' '.join(split), ''
+                name, suffix = " ".join(split), ""
 
             # Inverse the words when there is a comma
-            split = name.split(', ')
-            name = ' '.join([split[1], split[0]]) if len(split) == 2 else name
+            split = name.split(", ")
+            name = " ".join([split[1], split[0]]) if len(split) == 2 else name
 
             # Add '.' to single letters
             split = name.split()
             for i in range(len(split)):
                 if len(split[i]) == 1:
-                    split[i] += '.'
-            name = ' '.join(split)
+                    split[i] += "."
+            name = " ".join(split)
 
             # Name without suffix
             plausible_names.add(name) if suffix else None
 
             # Name without single letters
-            split = [word for word in name.split() if len(word.replace('.', '')) > 1]
-            plausible_names.add(' '.join(split))
-            plausible_names.add(' '.join(split) + suffix) if suffix else None
+            split = [word for word in name.split() if len(word.replace(".", "")) > 1]
+            plausible_names.add(" ".join(split))
+            plausible_names.add(" ".join(split) + suffix) if suffix else None
 
             # Combination of pairs of words
-            split = [word for word in name.split() if len(word.replace('.', '')) > 1]
+            split = [word for word in name.split() if len(word.replace(".", "")) > 1]
             if len(split) > 2:
                 for i in range(len(split) - 1):
                     for j in range(i + 1, len(split)):
-                        plausible_names.add(split[i] + ' ' + split[j])
-                        plausible_names.add(split[i] + ' ' + split[j] + suffix) if suffix else None
+                        plausible_names.add(split[i] + " " + split[j])
+                        plausible_names.add(split[i] + " " + split[j] + suffix) if suffix else None
 
             # Last word of the name
             split = name.split()
@@ -169,45 +170,53 @@ class Entity:
             # Fist and last part of the name
             split = name.split()
             if len(split) > 2:
-                plausible_names.add(split[0] + ' ' + split[-1])
-                plausible_names.add(split[0] + ' ' + split[-1] + suffix) if suffix else None
+                plausible_names.add(split[0] + " " + split[-1])
+                plausible_names.add(split[0] + " " + split[-1] + suffix) if suffix else None
 
             # Write first letter for words in the middle
             split = name.split()
             if len(split) > 2:
-                plausible_names.add(split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1])
-                plausible_names.add(split[0] + ' ' + ' '.join([s[0] + '.' for s in split[1:-1]]) + ' ' + split[-1]
-                                    + suffix) if suffix else None
+                plausible_names.add(
+                    split[0] + " " + " ".join([s[0] + "." for s in split[1:-1]]) + " " + split[-1]
+                )
+                plausible_names.add(
+                    split[0]
+                    + " "
+                    + " ".join([s[0] + "." for s in split[1:-1]])
+                    + " "
+                    + split[-1]
+                    + suffix
+                ) if suffix else None
 
             name += suffix
 
-        elif self.type_ == 'location':
+        elif self.type_ == "location":
             split = before_parenthesis.split()
 
-            if len(split) > 1 and split[-1].lower() in ['city']:
-                name = ' '.join(split[:-1])
-                suffix = ' ' + split[-1].lower().capitalize()
+            if len(split) > 1 and split[-1].lower() in ["city"]:
+                name = " ".join(split[:-1])
+                suffix = " " + split[-1].lower().capitalize()
             else:
-                name, suffix = ' '.join(split), ''
+                name, suffix = " ".join(split), ""
 
             plausible_names.add(name)
             name += suffix
 
             if in_parenthesis:
-                info = ', '.join(in_parenthesis)
-                plausible_names.add(name + ', ' + info)
+                info = ", ".join(in_parenthesis)
+                plausible_names.add(name + ", " + info)
 
-        elif self.type_ == 'org':
+        elif self.type_ == "org":
             split = before_parenthesis.split()
 
-            if len(split) > 1 and split[-1].lower().replace('.', '') in ['co', 'corp', 'inc']:
-                name = ' '.join(split[:-1])
-                suffix = ' ' + split[-1].lower().replace('.', '').capitalize() + '.'
-            elif len(split) > 1 and split[-1].lower() in ['company', 'university']:
-                name = ' '.join(split[:-1])
-                suffix = ' ' + split[-1].lower().replace('.', '').capitalize()
+            if len(split) > 1 and split[-1].lower().replace(".", "") in ["co", "corp", "inc"]:
+                name = " ".join(split[:-1])
+                suffix = " " + split[-1].lower().replace(".", "").capitalize() + "."
+            elif len(split) > 1 and split[-1].lower() in ["company", "university"]:
+                name = " ".join(split[:-1])
+                suffix = " " + split[-1].lower().replace(".", "").capitalize()
             else:
-                name, suffix = ' '.join(split), ''
+                name, suffix = " ".join(split), ""
 
             plausible_names.add(name)
             name += suffix
@@ -251,9 +260,9 @@ class Entity:
             str, debugging of the entity.
         """
 
-        s = ' (' + self.original_name + '): '
-        s += '; '.join(self.plausible_names) + ' | ' + '; '.join(self.possible_names) + ' | '
-        s += '; '.join(self.extra_info)
+        s = " (" + self.original_name + "): "
+        s += "; ".join(self.plausible_names) + " | " + "; ".join(self.possible_names) + " | "
+        s += "; ".join(self.extra_info)
 
         return s
 
@@ -293,14 +302,14 @@ class Entity:
 
         words = string.lower().split()
 
-        if self.type_ == 'person':
-            if 'and' in words:
+        if self.type_ == "person":
+            if "and" in words:
                 return True
 
-        elif self.type_ == 'location':
+        elif self.type_ == "location":
             pass
 
-        elif self.type_ == 'org':
+        elif self.type_ == "org":
             pass
 
         else:
@@ -355,12 +364,12 @@ class Entity:
             words, strings = string.split(), [string]
 
             if len(words) > 1 and words[-1] in ["'", "'s"]:
-                s = ' '.join(words[:-1])
+                s = " ".join(words[:-1])
                 strings.append(s)
                 words = s.split()
 
             if len(words) > 1:
-                s = ' '.join(words[1:])
+                s = " ".join(words[1:])
                 strings.append(s)
 
             for s in strings:
@@ -423,9 +432,11 @@ class Entity:
         except (PageError, DisambiguationError):
             return None
 
-        if self.match_string(string=p.title, flexible=False) \
-                or self.is_in(string=p.title, flexible=False) \
-                or self.is_in(string=p.summary, flexible=False):
+        if (
+            self.match_string(string=p.title, flexible=False)
+            or self.is_in(string=p.title, flexible=False)
+            or self.is_in(string=p.summary, flexible=False)
+        ):
             return p
 
         else:
@@ -435,7 +446,6 @@ class Entity:
 
 
 class Wikipedia:
-
     info_length = 600
 
     def __init__(self, page=None):
@@ -476,7 +486,7 @@ class Wikipedia:
             str, info of the Wikipedia object.
         """
 
-        paragraph = self.summary.split('\n')[0]
+        paragraph = self.summary.split("\n")[0]
 
         if len(paragraph) <= self.info_length:
             info = paragraph
@@ -485,13 +495,13 @@ class Wikipedia:
             info = sentences[0]
 
             for sentence in sentences[1:]:
-                new_info = info + ' ' + sentence
+                new_info = info + " " + sentence
                 if len(new_info) <= self.info_length:
                     info = new_info
                 else:
                     break
 
-        info = sub(r'\([^)]*\)', '', info).replace('  ', ' ')
+        info = sub(r"\([^)]*\)", "", info).replace("  ", " ")
         info = info.encode("utf-8", errors="ignore").decode()
 
         return info
@@ -504,11 +514,10 @@ class Wikipedia:
             str, debugging of the wikipedia information.
         """
 
-        return ' (' + self.title + '): ' + str(self)[:150] + '...'
+        return " (" + self.title + "): " + str(self)[:150] + "..."
 
 
 class Tuple:
-
     def __init__(self, id_, entities, article_ids=None, query_ids=None):
         """
         Initializes the Tuple instance.
@@ -535,7 +544,11 @@ class Tuple:
             str, readable format of the instance.
         """
 
-        return ', '.join([str(entity) for entity in self.entities[:-1]]) + ' and ' + str(self.entities[-1])
+        return (
+            ", ".join([str(entity) for entity in self.entities[:-1]])
+            + " and "
+            + str(self.entities[-1])
+        )
 
     def get_type(self):
         """
@@ -546,7 +559,7 @@ class Tuple:
         """
 
         types = set([entity.type_ for entity in self.entities])
-        assert len(types) == 1 and types.issubset({'location', 'person', 'org'})
+        assert len(types) == 1 and types.issubset({"location", "person", "org"})
 
         return types.pop()
 
@@ -558,11 +571,11 @@ class Tuple:
             str, debugging of the tuple.
         """
 
-        return ' (' + self.type_ + '): in ' + str(len(self.article_ids)) + ' articles'
+        return " (" + self.type_ + "): in " + str(len(self.article_ids)) + " articles"
 
 
 class Query:
-    """ Query to gather annotations from the Mechanical Turk workers. """
+    """Query to gather annotations from the Mechanical Turk workers."""
 
     def __init__(self, id_, tuple_, article, context):
         """
@@ -598,20 +611,29 @@ class Query:
             str, generic phrase of the tuple.
         """
 
-        type_ = self.entities_type_ + 's'
-        if type_ == 'persons':
-            type_ = 'people'
-        elif type_ == 'locations':
-            type_ = 'areas'
-        elif type_ == 'orgs':
-            type_ = 'organizations'
+        type_ = self.entities_type_ + "s"
+        if type_ == "persons":
+            type_ = "people"
+        elif type_ == "locations":
+            type_ = "areas"
+        elif type_ == "orgs":
+            type_ = "organizations"
         else:
             raise Exception
 
-        int_to_str = {2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
+        int_to_str = {
+            2: "two",
+            3: "three",
+            4: "four",
+            5: "five",
+            6: "six",
+            7: "seven",
+            8: "eight",
+            9: "nine",
+        }
         number = int_to_str[len(self.entities)]
 
-        return 'The ' + number + ' ' + type_
+        return "The " + number + " " + type_
 
     def get_entities_html(self):
         """
@@ -621,20 +643,20 @@ class Query:
             str, html version of the entities.
         """
 
-        s = ''
+        s = ""
 
         for entity_name in self.entities:
             url = self.urls[entity_name]
 
-            s += '<th>'
+            s += "<th>"
             if url is not None:
                 s += '<a href="' + url + '" target="_blank">'
 
             s += entity_name
 
             if url is not None:
-                s += '</a>'
-            s += '</th>'
+                s += "</a>"
+            s += "</th>"
 
         return s
 
@@ -646,8 +668,12 @@ class Query:
             str, html version of the title.
         """
 
-        s = '<th colspan=' + str(len(self.entities)) + '><strong_blue>Title of the article:</strong_blue> '
-        s += self.title + '</th>'
+        s = (
+            "<th colspan="
+            + str(len(self.entities))
+            + "><strong_blue>Title of the article:</strong_blue> "
+        )
+        s += self.title + "</th>"
 
         return s
 
@@ -659,12 +685,12 @@ class Query:
             str, html version of the context.
         """
 
-        context = self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
-        context = context.replace('-LRB-', '(').replace('-RRB-', ')')
+        context = self.context.replace("-LRB- ", "(").replace(" -RRB-", ")")
+        context = context.replace("-LRB-", "(").replace("-RRB-", ")")
 
-        s = '<td colspan=' + str(len(self.entities)) + '>'
+        s = "<td colspan=" + str(len(self.entities)) + ">"
         s += context
-        s += '</td>'
+        s += "</td>"
 
         return s
 
@@ -676,19 +702,19 @@ class Query:
             str, readable version of the context.
         """
 
-        s = self.context.replace('-LRB- ', '(').replace(' -RRB-', ')')
-        s = s.replace('-LRB-', '(').replace('-RRB-', ')')
+        s = self.context.replace("-LRB- ", "(").replace(" -RRB-", ")")
+        s = s.replace("-LRB-", "(").replace("-RRB-", ")")
 
-        s = sub(r'<span.*?>', ' [', s)
-        s = sub(r'</span.*?>', ']', s)
-        s = sub(r'<.*?>', '', s)
+        s = sub(r"<span.*?>", " [", s)
+        s = sub(r"</span.*?>", "]", s)
+        s = sub(r"<.*?>", "", s)
 
-        s = sub(r'\[.*?\]', '', s)
-        s = s.replace('  ', ' ')
+        s = sub(r"\[.*?\]", "", s)
+        s = s.replace("  ", " ")
 
-        if s[0] == ' ':
+        if s[0] == " ":
             s = s[1:]
-        if s[-1] == ' ':
+        if s[-1] == " ":
             s = s[:-1]
 
         return s
@@ -706,13 +732,15 @@ class Query:
         """
 
         d = {
-            'id_': self.id_,
-            'entities': self.get_entities_html(),
-            'generic_phrase': self.get_entities_phrase(),
-            'context': self.get_context_html(),
-            'entities_names': ', '.join(self.entities[:-1]) + ' and ' + self.entities[-1],
-            'info': ''.join(['<td>' + self.summaries[entity_name] + '</td>' for entity_name in self.entities]),
-            'title': self.get_title_html(),
+            "id_": self.id_,
+            "entities": self.get_entities_html(),
+            "generic_phrase": self.get_entities_phrase(),
+            "context": self.get_context_html(),
+            "entities_names": ", ".join(self.entities[:-1]) + " and " + self.entities[-1],
+            "info": "".join(
+                ["<td>" + self.summaries[entity_name] + "</td>" for entity_name in self.entities]
+            ),
+            "title": self.get_title_html(),
         }
 
         return d
@@ -726,9 +754,9 @@ class Query:
         """
 
         d = {
-            'entities': ', '.join(self.entities[:-1]) + ' and ' + self.entities[-1],
-            'info': '\n'.join([self.summaries[entity_name] for entity_name in self.entities]),
-            'context': self.get_context_readable(),
+            "entities": ", ".join(self.entities[:-1]) + " and " + self.entities[-1],
+            "info": "\n".join([self.summaries[entity_name] for entity_name in self.entities]),
+            "context": self.get_context_readable(),
         }
 
         return d
@@ -745,11 +773,11 @@ class Query:
 
         d = self.to_readable()
 
-        return d['entities'] + ':\n' + d['context'] + '\n'
+        return d["entities"] + ":\n" + d["context"] + "\n"
 
 
 class Annotation:
-    """ Annotation from the Mechanical Turk workers. """
+    """Annotation from the Mechanical Turk workers."""
 
     def __init__(self, id_, version, batch, row, silent):
         """
@@ -767,9 +795,9 @@ class Annotation:
         self.version = version
         self.batch = batch
 
-        self.worker_id = str(row.get('WorkerId'))
-        self.duration = int(row.get('WorkTimeInSeconds'))
-        self.bug = bool(row.get('Answer.box_impossible.on'))
+        self.worker_id = str(row.get("WorkerId"))
+        self.duration = int(row.get("WorkTimeInSeconds"))
+        self.bug = bool(row.get("Answer.box_impossible.on"))
 
         self.answers, self.preprocessed_answers = self.get_answers(row=row, silent=silent)
 
@@ -790,56 +818,70 @@ class Annotation:
         """
 
         unpreprocessed_answers, answers, preprocessed_answers = [], [], []
-        articles, numbers = ['the'], ['two', 'three', 'four', 'five', 'six']
-        standard_answers = ['people', 'areas', 'organizations']
+        articles, numbers = ["the"], ["two", "three", "four", "five", "six"]
+        standard_answers = ["people", "areas", "organizations"]
 
-        unpreprocessed_answers.append(str(row.get('Answer.utterance_1'))) \
-            if str(row.get('Answer.utterance_1')) != 'nan' else None
-        unpreprocessed_answers.append(str(row.get('Answer.utterance_2'))) \
-            if str(row.get('Answer.utterance_2')) != 'nan' else None
+        unpreprocessed_answers.append(str(row.get("Answer.utterance_1"))) if str(
+            row.get("Answer.utterance_1")
+        ) != "nan" else None
+        unpreprocessed_answers.append(str(row.get("Answer.utterance_2"))) if str(
+            row.get("Answer.utterance_2")
+        ) != "nan" else None
 
         for unpreprocessed_answer in unpreprocessed_answers:
             old = unpreprocessed_answer
 
-            if '.' in unpreprocessed_answer and ' are discussed' in unpreprocessed_answer.lower().split('.')[0]:
-                unpreprocessed_answer = '.'.join(unpreprocessed_answer.split('.')[1:])
+            if (
+                "." in unpreprocessed_answer
+                and " are discussed" in unpreprocessed_answer.lower().split(".")[0]
+            ):
+                unpreprocessed_answer = ".".join(unpreprocessed_answer.split(".")[1:])
 
             if unpreprocessed_answer.isupper():
                 unpreprocessed_answer = unpreprocessed_answer.capitalize()
 
             if old != unpreprocessed_answer:
-                print('Correcting "%s" to "%s"' % (old, unpreprocessed_answer)) if not silent else None
+                print(
+                    'Correcting "%s" to "%s"' % (old, unpreprocessed_answer)
+                ) if not silent else None
 
-            while unpreprocessed_answer[-1] in ['.', ' ']:
+            while unpreprocessed_answer[-1] in [".", " "]:
                 unpreprocessed_answer = unpreprocessed_answer[:-1]
 
-            while unpreprocessed_answer[0] == ' ':
+            while unpreprocessed_answer[0] == " ":
                 unpreprocessed_answer = unpreprocessed_answer[1:]
 
-            answer = ' '.join([unpreprocessed_answer.split()[0].capitalize()] + unpreprocessed_answer.split()[1:])
+            answer = " ".join(
+                [unpreprocessed_answer.split()[0].capitalize()] + unpreprocessed_answer.split()[1:]
+            )
             words = answer.lower().split()
 
             words = words[1:] if words[0] in articles and len(words) > 1 else words
             words = words[1:] if words[0] in numbers and len(words) > 1 else words
 
-            preprocessed_answer = ' '.join(words)
+            preprocessed_answer = " ".join(words)
 
-            if 'have' in preprocessed_answer.split() \
-                    or 'are' in preprocessed_answer.split() \
-                    or 'and' in preprocessed_answer.split() \
-                    or preprocessed_answer == 'the' \
-                    or '/' in preprocessed_answer \
-                    or 'na' == preprocessed_answer:
+            if (
+                "have" in preprocessed_answer.split()
+                or "are" in preprocessed_answer.split()
+                or "and" in preprocessed_answer.split()
+                or preprocessed_answer == "the"
+                or "/" in preprocessed_answer
+                or "na" == preprocessed_answer
+            ):
                 print('Discarding "%s"' % answer) if not silent else None
 
-            elif preprocessed_answer not in preprocessed_answers and preprocessed_answer not in standard_answers:
+            elif (
+                preprocessed_answer not in preprocessed_answers
+                and preprocessed_answer not in standard_answers
+            ):
                 answers.append(answer)
                 preprocessed_answers.append(preprocessed_answer)
 
         return answers, preprocessed_answers
 
     def correct_inconsistencies(self):
-        """ Correct the NA reports inconsistencies by discarding answers when there is a reported bug. """
+        """Correct the NA reports inconsistencies by discarding answers when there is a reported bug."""
 
         if not self.answers and not self.bug:
             self.bug = True

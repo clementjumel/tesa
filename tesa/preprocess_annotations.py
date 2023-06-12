@@ -8,17 +8,17 @@ Usages:
         python preprocess_annotations.py
 """
 
-from database_creation.annotation_task import AnnotationTask
-from toolbox.parsers import standard_parser, add_annotations_arguments
-
 from collections import defaultdict
-from pickle import dump
 from os import makedirs
 from os.path import exists
+from pickle import dump
+
+from tesa.database_creation.annotation_task import AnnotationTask
+from tesa.toolbox.parsers import add_annotations_arguments, standard_parser
 
 
 def parse_arguments():
-    """ Use arparse to parse the input arguments and return it as a argparse.ArgumentParser. """
+    """Use arparse to parse the input arguments and return it as a argparse.ArgumentParser."""
 
     ap = standard_parser()
     add_annotations_arguments(ap)
@@ -39,13 +39,29 @@ def filter_annotations(annotations, args):
     min_assignments = args.min_assignments
     min_answers = args.min_answers
 
-    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
+    length1 = sum(
+        [
+            len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+            for _, annotation_list in annotations.items()
+        ]
+    )
+    length2 = sum(
+        [
+            len(
+                [
+                    annotation
+                    for annotation in annotation_list
+                    if not annotation.preprocessed_answers
+                ]
+            )
+            for _, annotation_list in annotations.items()
+        ]
+    )
 
     if not args.silent:
-        print("Filtering the annotations; annotations answered: %i, n/a: %i..." % (length1, length2))
+        print(
+            "Filtering the annotations; annotations answered: %i, n/a: %i..." % (length1, length2)
+        )
 
     workers_count = defaultdict(list)
 
@@ -58,28 +74,68 @@ def filter_annotations(annotations, args):
         if len(annotation_ids) < min_assignments:
             worker_cmpt += 1
             for annotation_id_ in annotation_ids:
-                annotations[annotation_id_] = [annotation for annotation in annotations[annotation_id_]
-                                               if annotation.worker_id != worker_id]
+                annotations[annotation_id_] = [
+                    annotation
+                    for annotation in annotations[annotation_id_]
+                    if annotation.worker_id != worker_id
+                ]
 
-    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
+    length1 = sum(
+        [
+            len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+            for _, annotation_list in annotations.items()
+        ]
+    )
+    length2 = sum(
+        [
+            len(
+                [
+                    annotation
+                    for annotation in annotation_list
+                    if not annotation.preprocessed_answers
+                ]
+            )
+            for _, annotation_list in annotations.items()
+        ]
+    )
 
     if not args.silent:
         print("Number of workers discarded: %i" % worker_cmpt)
-        print("First filter done (number of assignments); annotations answered: %i, n/a: %i..." % (length1, length2))
+        print(
+            "First filter done (number of assignments); annotations answered: %i, n/a: %i..."
+            % (length1, length2)
+        )
 
-    annotations = {id_: annotation_list for id_, annotation_list in annotations.items()
-                   if len([annotation for annotation in annotation_list if not annotation.bug]) >= min_answers}
+    annotations = {
+        id_: annotation_list
+        for id_, annotation_list in annotations.items()
+        if len([annotation for annotation in annotation_list if not annotation.bug]) >= min_answers
+    }
 
-    length1 = sum([len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
-    length2 = sum([len([annotation for annotation in annotation_list if not annotation.preprocessed_answers])
-                   for _, annotation_list in annotations.items()])
+    length1 = sum(
+        [
+            len([annotation for annotation in annotation_list if annotation.preprocessed_answers])
+            for _, annotation_list in annotations.items()
+        ]
+    )
+    length2 = sum(
+        [
+            len(
+                [
+                    annotation
+                    for annotation in annotation_list
+                    if not annotation.preprocessed_answers
+                ]
+            )
+            for _, annotation_list in annotations.items()
+        ]
+    )
 
     if not args.silent:
-        print("Second filter done (number of answers); annotations answered: %i, n/a %i.\n" % (length1, length2))
+        print(
+            "Second filter done (number of answers); annotations answered: %i, n/a %i.\n"
+            % (length1, length2)
+        )
 
     return annotations
 
@@ -104,7 +160,9 @@ def save_pkl(annotations, queries, args):
             if not args.silent:
                 print("Folder(s) created at %s." % path)
 
-        with open(annotations_fname, 'wb') as annotations_file, open(queries_fname, 'wb') as queries_file:
+        with open(annotations_fname, "wb") as annotations_file, open(
+            queries_fname, "wb"
+        ) as queries_file:
             dump(obj=annotations, file=annotations_file, protocol=-1)
             dump(obj=queries, file=queries_file, protocol=-1)
 
@@ -116,21 +174,23 @@ def save_pkl(annotations, queries, args):
 
 
 def main():
-    """ Save in a .pkl the annotated queries and the annotations. """
+    """Save in a .pkl the annotated queries and the annotations."""
 
     args = parse_arguments()
 
-    annotation_task = AnnotationTask(silent=args.silent,
-                                     results_path=args.annotations_path,
-                                     years=None,
-                                     max_tuple_size=None,
-                                     short=None,
-                                     short_size=None,
-                                     random=None,
-                                     debug=None,
-                                     random_seed=None,
-                                     save=None,
-                                     corpus_path=None)
+    annotation_task = AnnotationTask(
+        silent=args.silent,
+        results_path=args.annotations_path,
+        years=None,
+        max_tuple_size=None,
+        short=None,
+        short_size=None,
+        random=None,
+        debug=None,
+        random_seed=None,
+        save=None,
+        corpus_path=None,
+    )
 
     annotation_task.process_task(exclude_pilot=args.exclude_pilot)
 
@@ -142,5 +202,5 @@ def main():
     save_pkl(queries=queries, annotations=annotations, args=args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

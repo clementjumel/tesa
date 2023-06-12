@@ -1,10 +1,10 @@
-from numpy.random import shuffle, choice
-from numpy import asarray, arange, split
 import torch
+from numpy import arange, asarray, split
+from numpy.random import choice, shuffle
 
 
 class RankingTask:
-    """ Class for a single Ranking Task. """
+    """Class for a single Ranking Task."""
 
     def __init__(self, queries, labelled_answers, ranking_size, batch_size):
         """
@@ -33,46 +33,46 @@ class RankingTask:
 
     @staticmethod
     def get_entities(queries):
-        """ Return the entities of the RankingTask as a list of str. """
+        """Return the entities of the RankingTask as a list of str."""
 
-        assert len(set([', '.join(query.entities) for query in queries])) == 1
+        assert len(set([", ".join(query.entities) for query in queries])) == 1
         return queries[0].entities
 
     @staticmethod
     def get_entities_type(queries):
-        """ Return the entities_type of the RankingTask as a str. """
+        """Return the entities_type of the RankingTask as a str."""
 
         assert len(set([query.entities_type_ for query in queries])) == 1
         return queries[0].entities_type_
 
     def get_wiki_articles(self, queries):
-        """ Return the wikipedia articles of the RankingTask as a list of str ('' if no information is found). """
+        """Return the wikipedia articles of the RankingTask as a list of str ('' if no information is found)."""
 
-        assert len(set([', '.join(query.summaries) for query in queries])) == 1
+        assert len(set([", ".join(query.summaries) for query in queries])) == 1
 
         wiki_dict = queries[0].summaries
         for entity in self.entities:
             if wiki_dict[entity] == "No information found.":
-                wiki_dict[entity] = ''
+                wiki_dict[entity] = ""
 
         return [wiki_dict[entity] for entity in self.entities]
 
     @staticmethod
     def get_nyt_titles(queries):
-        """ Return the NYT titles of the RankingTask as a list of str. """
+        """Return the NYT titles of the RankingTask as a list of str."""
 
         return [query.title for query in queries]
 
     @staticmethod
     def get_nyt_contexts(queries):
-        """ Return the NYT contexts of the RankingTask as a list of str. """
+        """Return the NYT contexts of the RankingTask as a list of str."""
 
         return [query.get_context_readable() for query in queries]
 
     @staticmethod
     def get_choices_labels(labelled_answers):
-        """ Return the choices of the RankingTask as a (shuffled) list of str and their associated labels as a list of
-        int. """
+        """Return the choices of the RankingTask as a (shuffled) list of str and their associated labels as a list of
+        int."""
 
         labelled_answers = [(answer, label) for answer, label in labelled_answers.items()]
         labelled_answers = sorted(labelled_answers)
@@ -88,45 +88,61 @@ class RankingTask:
     # region Other methods
 
     def filter_answers(self, labelled_answers):
-        """ Return labelled_answers limited to self.ranking_size number of possible answers. If self.ranking_size is
-        None, don't do anything; is it is 0, compute only the positive answers (for generation task). """
+        """Return labelled_answers limited to self.ranking_size number of possible answers. If self.ranking_size is
+        None, don't do anything; is it is 0, compute only the positive answers (for generation task).
+        """
 
         if self.ranking_size is not None:
-            negative_answers = sorted([key for key, value in labelled_answers.items() if value == 0])
+            negative_answers = sorted(
+                [key for key, value in labelled_answers.items() if value == 0]
+            )
             labelled_answers = {key: value for key, value in labelled_answers.items() if value > 0}
 
             if self.ranking_size:
                 n = len(labelled_answers)
                 if n > self.ranking_size:
-                    raise Exception("Too small ranking size, some answers will be lost (should be at least %i)." % n)
+                    raise Exception(
+                        "Too small ranking size, some answers will be lost (should be at least %i)."
+                        % n
+                    )
 
-                negative_answers = {answer: 0 for answer in choice(a=negative_answers,
-                                                                   size=self.ranking_size - n,
-                                                                   replace=False)}
+                negative_answers = {
+                    answer: 0
+                    for answer in choice(
+                        a=negative_answers, size=self.ranking_size - n, replace=False
+                    )
+                }
 
                 labelled_answers.update(negative_answers)
 
         return labelled_answers
 
     def to_loader(self):
-        """ Returns the RankingTask as a list of pairs (inputs, targets) for each batch. """
+        """Returns the RankingTask as a list of pairs (inputs, targets) for each batch."""
 
-        loader = [(inputs, targets) for inputs, targets in zip(self.input_batches(), self.target_batches())]
+        loader = [
+            (inputs, targets)
+            for inputs, targets in zip(self.input_batches(), self.target_batches())
+        ]
         shuffle(loader)
 
         return loader
 
     def input_batches(self):
-        """ Returns the input batches of the RakingTask as a list of dict (one dict for each batch). """
+        """Returns the input batches of the RakingTask as a list of dict (one dict for each batch)."""
 
-        generic_inputs = {'entities': self.entities,
-                          'entities_type': self.entities_type,
-                          'wiki_articles': self.wiki_articles,
-                          'nyt_titles': self.nyt_titles,
-                          'nyt_contexts': self.nyt_contexts}
+        generic_inputs = {
+            "entities": self.entities,
+            "entities_type": self.entities_type,
+            "wiki_articles": self.wiki_articles,
+            "nyt_titles": self.nyt_titles,
+            "nyt_contexts": self.nyt_contexts,
+        }
 
         idxs = arange(self.batch_size, len(self.choices), self.batch_size)
-        input_batches = [{'choices': list(choices)} for choices in split(asarray(self.choices), idxs)]
+        input_batches = [
+            {"choices": list(choices)} for choices in split(asarray(self.choices), idxs)
+        ]
 
         for input_batch in input_batches:
             input_batch.update(generic_inputs)
@@ -134,10 +150,12 @@ class RankingTask:
         return input_batches
 
     def target_batches(self):
-        """ Returns the target batches of the RankingTask in a list of line torch.Tensors of type torch.long. """
+        """Returns the target batches of the RankingTask in a list of line torch.Tensors of type torch.long."""
 
         idxs = arange(self.batch_size, len(self.labels), self.batch_size)
-        target_batches = [torch.tensor(labels, dtype=torch.long) for labels in split(asarray(self.labels), idxs)]
+        target_batches = [
+            torch.tensor(labels, dtype=torch.long) for labels in split(asarray(self.labels), idxs)
+        ]
 
         return target_batches
 
