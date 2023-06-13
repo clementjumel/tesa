@@ -71,4 +71,4 @@ wikipedia = "1.4.0"
 
 [tool.poetry.group.notebooks.dependencies]
 jupytext = "1.14.6"
-notebook = "6.4.1"
+notebook = "6.4.12"
