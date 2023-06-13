@@ -24,8 +24,8 @@ del sys
 # %autoreload 2
 # %load_ext tensorboard
 
-from modeling.pipeline import Pipeline
-from modeling.nn import RegressionMLP, ClassificationMLP, RegressionBilinear, ClassificationBilinear
+from tesa.modeling.pipeline import Pipeline
+from tesa.modeling.nn import RegressionMLP, ClassificationMLP, RegressionBilinear, ClassificationBilinear
 import torch
 
 # %% [markdown]
@@ -68,7 +68,7 @@ n_updates = 50
 # ## Initialize the embedding
 
 # %%
-from modeling.models import BaseModel
+from tesa.modeling.models import BaseModel
 BaseModel.initialize_word2vec_embedding()
 BaseModel.initialize_bert_embedding()
 
@@ -100,7 +100,7 @@ optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer=optimizer, milestones=milestones, gamma=gamma)
 
 # %%
-from modeling.models import HalfBOWModel
+from tesa.modeling.models import HalfBOWModel
 
 model = HalfBOWModel(scores_names=scores_names, 
                      experiment_name='test_1',
@@ -257,7 +257,7 @@ optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer=optimizer, milestones=milestones, gamma=gamma)
 
 # %%
-from modeling.models import EmbeddingModel
+from tesa.modeling.models import EmbeddingModel
 
 model = EmbeddingModel(scores_names=scores_names,
                        net=net,
@@ -334,7 +334,7 @@ optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer=optimizer, milestones=milestones, gamma=gamma)
 
 # %%
-from modeling.models import EmbeddingBilinearModel
+from tesa.modeling.models import EmbeddingBilinearModel
 
 model = EmbeddingBilinearModel(scores_names=scores_names,
                                net=net,

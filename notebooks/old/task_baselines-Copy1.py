@@ -23,8 +23,8 @@ del sys
 # %reload_ext autoreload
 # %autoreload 2
 
-from modeling.pipeline import Pipeline
-import modeling.models as models
+from tesa.modeling.pipeline import Pipeline
+import tesa.modeling.models as models
 
 # %% [markdown]
 # ## Data pipeline parameters
@@ -318,7 +318,7 @@ pipeline.explain_model(model=model, scores_names=None, n_samples=5, n_answers=10
 # Grade is the cosine similarity between the average embedding of the words of an answer, and the average embedding of all the words of the wikipedia summaries.
 
 # %%
-from modeling.models import ClosestSoftOverlapEmbedding
+from tesa.modeling.models import ClosestSoftOverlapEmbedding
 
 model = ClosestSoftOverlapEmbedding(scores_names=scores_names,
                                     pretrained_model=word2vec_embedding,
@@ -366,7 +366,7 @@ pipeline.explain_model(model=model,
 # ## BERT for Next Sentence Prediction
 
 # %%
-from modeling.models import NSPBertEmbedding
+from tesa.modeling.models import NSPBertEmbedding
 
 model = NSPBertEmbedding(scores_names=scores_names)
 model.initialize_nsp_bert_embedding()
