@@ -25,9 +25,9 @@ del sys
 # %reload_ext autoreload
 # %autoreload 2
 
-from toolbox.parsers import standard_parser, add_annotations_arguments
-from database_creation.annotation_task import AnnotationTask
-from preprocess_annotations import filter_annotations
+from tesa.toolbox.parsers import standard_parser, add_annotations_arguments
+from tesa.database_creation.annotation_task import AnnotationTask
+from tesa.preprocess_annotations import filter_annotations
 from os.path import join as path_join
 
 # %% [markdown]

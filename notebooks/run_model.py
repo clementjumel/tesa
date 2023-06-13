@@ -25,9 +25,9 @@ del sys
 # %reload_ext autoreload
 # %autoreload 2
 
-from toolbox.parsers import standard_parser, add_task_arguments, add_model_arguments
-from toolbox.utils import load_task, get_pretrained_model, to_class_name
-import modeling.models as models
+from tesa.toolbox.parsers import standard_parser, add_task_arguments, add_model_arguments
+from tesa.toolbox.utils import load_task, get_pretrained_model, to_class_name
+import tesa.modeling.models as models
 
 # %% [markdown]
 # ### Notebook functions

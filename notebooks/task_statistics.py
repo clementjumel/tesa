@@ -25,9 +25,9 @@ del sys
 # %reload_ext autoreload
 # %autoreload 2
 
-from toolbox.parsers import standard_parser, add_annotations_arguments, add_task_arguments
-from toolbox.utils import load_task
-from modeling.utils import format_context
+from tesa.toolbox.parsers import standard_parser, add_annotations_arguments, add_task_arguments
+from tesa.toolbox.utils import load_task
+from tesa.modeling.utils import format_context
 
 # %% [markdown]
 # ### Parameters

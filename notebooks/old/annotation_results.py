@@ -24,7 +24,7 @@ del sys
 # %autoreload 2
 
 # %% pycharm={"is_executing": false}
-from database_creation.database import Database
+from tesa.database_creation.database import Database
 
 # %% [markdown]
 # ## Load the data
@@ -103,7 +103,7 @@ for id_ in valid_ids:
     tuple_answers[entities].append(a)
             
     print(entities, ' -> ', ', '.join(set([s+' ['+str(a.count(s))+']' if a.count(s)>1 else s for s in a])))
-    
+
 
 # %% [markdown]
 # Unique answers for each tuple:
@@ -174,7 +174,7 @@ for _, entities, _ in sorted_answers[:100]:
         print(', '.join(set([r+' ['+str(res_excluded.count(r))+']' if res_excluded.count(r)>1 else r for r in res_excluded])))
     
     print()
-    
+
 
 # %% [markdown]
 # ## Statistics

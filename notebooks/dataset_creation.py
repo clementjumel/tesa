@@ -25,11 +25,11 @@ del sys
 # %reload_ext autoreload
 # %autoreload 2
 
-from toolbox.parsers import standard_parser, add_annotations_arguments, add_task_arguments
-from database_creation.annotation_task import AnnotationTask
-from preprocess_annotations import filter_annotations
-from toolbox.utils import load_task
-from modeling.utils import format_context
+from tesa.toolbox.parsers import standard_parser, add_annotations_arguments, add_task_arguments
+from tesa.database_creation.annotation_task import AnnotationTask
+from tesa.preprocess_annotations import filter_annotations
+from tesa.toolbox.utils import load_task
+from tesa.modeling.utils import format_context
 from os.path import join as path_join
 import pandas as pd
 import os

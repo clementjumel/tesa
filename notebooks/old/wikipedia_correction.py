@@ -24,7 +24,7 @@ del sys
 # %autoreload 2
 
 # %% pycharm={"is_executing": false}
-from database_creation.database import Database
+from tesa.database_creation.database import Database
 
 # %% [markdown]
 # ## Parameters
