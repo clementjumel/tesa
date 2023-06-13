@@ -1,5 +1,6 @@
 # TESA: A Task in Entity Semantic Aggregation for Abstractive Summarization
 
+todo: rework the documentation
 Link to the paper: https://www.aclweb.org/anthology/2020.emnlp-main.646/
 
 ## Dataset & task
