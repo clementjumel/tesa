@@ -27,6 +27,7 @@ del sys
 
 import pandas as pd
 import pickle
+from tesa._path import _DATA
 
 # %% [markdown]
 # ### Load the dataset
@@ -35,14 +36,14 @@ import pickle
 # #### dataset.csv
 
 # %%
-df = pd.read_csv("../results/publication/dataset.csv")
+df = pd.read_csv(_DATA / "results" / "publication"/ "dataset.csv")
 df
 
 # %% [markdown]
 # #### dataset.pickle
 
 # %%
-data = pickle.load(open("../results/publication/dataset.pickle", "rb"))
+data = pickle.load(open(_DATA / "results" / "publication" / "dataset.pickle", "rb"))
 
 # %% [markdown]
 # Display the first "row":
@@ -65,28 +66,28 @@ for d in data[:1]:
 # #### ranking_task_train.csv
 
 # %%
-df = pd.read_csv(f"../results/publication/ranking_task_train.csv")
+df = pd.read_csv(_DATA / "results" / "publication" / "ranking_task_train.csv")
 df
 
 # %% [markdown]
 # #### ranking_task_valid.csv
 
 # %%
-df = pd.read_csv(f"../results/publication/ranking_task_valid.csv")
+df = pd.read_csv(_DATA / "results" / "publication" / "ranking_task_valid.csv")
 df
 
 # %% [markdown]
 # #### ranking_task_test.csv
 
 # %%
-df = pd.read_csv(f"../results/publication/ranking_task_test.csv")
+df = pd.read_csv(_DATA / "results" / "publication" / "ranking_task_test.csv")
 df
 
 # %% [markdown]
 # #### ranking_task_train.pickle
 
 # %%
-data = pickle.load(open("../results/publication/ranking_task_train.pickle", "rb"))
+data = pickle.load(open(_DATA / "results" / "publication" / "ranking_task_train.pickle", "rb"))
 
 # %% [markdown]
 # Display the first "row":
@@ -106,7 +107,7 @@ for d in data[:1]:
 # #### ranking_task_valid.pickle
 
 # %%
-data = pickle.load(open("../results/publication/ranking_task_valid.pickle", "rb"))
+data = pickle.load(open(_DATA / "results" / "publication" / "ranking_task_valid.pickle", "rb"))
 
 # %% [markdown]
 # Display the first "row":
@@ -126,7 +127,7 @@ for d in data[:1]:
 # #### ranking_task_test.pickle
 
 # %%
-data = pickle.load(open("../results/publication/ranking_task_test.pickle", "rb"))
+data = pickle.load(open(_DATA / "results" / "publication" / "ranking_task_test.pickle", "rb"))
 
 # %% [markdown]
 # Display the first "row":
