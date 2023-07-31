@@ -2,14 +2,13 @@
 
 Link to the paper: https://www.aclweb.org/anthology/2020.emnlp-main.646/
 
-## Dataset & task
+Our work relies heavily on the New York Times Annotated Corpus, and we don't have the
+right to publish any of its data.
+For this reason, TESA's dataset cannot be published in a public repository in its current
+state.
+Once it is re-worked to avoid including any New York Times Annotated Corpus data, it will
+be made available on this repository.
 
-Unfortunately, our work relies on the New York Times Annotated Corpus, and we don't own its copyrights. 
-For this reason, TESA's dataset and task, will be made available on the Linguistic Data Consortium's website
-(https://www.ldc.upenn.edu/).
-
-## Data creation & loading
-
-We will release TESA's dataset and task in both binary and .csv files. In 
-`notebooks/dataset_loading.ipynb`, we provide an example on how to load the data, given the 
-corresponding data files. 
+**In the meantime, you can ask for access to the dataset by sending an email to
+clement.jumel@gmail.com where you justify your access to the New York Time Annotated
+Corpus.**
